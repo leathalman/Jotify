@@ -9,36 +9,51 @@
 import UIKit
 import paper_onboarding
 
-class NoteViewController: UIViewController {
+class NoteViewController: UIViewController, UITextFieldDelegate {
     
     fileprivate let items = [
         OnboardingItemInfo(informationImage: Asset.hotels.image,
-                           title: "Hotels",
-                           description: "All hotels and hostels are sorted by hospitality rating",
+                           title: "",
+                           description: "",
                            pageIcon: Asset.key.image,
                            color: UIColor(red: 0.40, green: 0.56, blue: 0.71, alpha: 1.00),
                            titleColor: UIColor.white, descriptionColor: UIColor.white, titleFont: titleFont, descriptionFont: descriptionFont),
         
         OnboardingItemInfo(informationImage: Asset.banks.image,
-                           title: "Banks",
-                           description: "We carefully verify all banks before add them into the app",
+                           title: "",
+                           description: "",
                            pageIcon: Asset.wallet.image,
                            color: UIColor(red: 0.40, green: 0.69, blue: 0.71, alpha: 1.00),
                            titleColor: UIColor.white, descriptionColor: UIColor.white, titleFont: titleFont, descriptionFont: descriptionFont),
         
         OnboardingItemInfo(informationImage: Asset.stores.image,
-                           title: "Stores",
-                           description: "All local stores are categorized for your convenience",
+                           title: "",
+                           description: "",
                            pageIcon: Asset.shoppingCart.image,
                            color: UIColor(red: 0.61, green: 0.56, blue: 0.74, alpha: 1.00),
                            titleColor: UIColor.white, descriptionColor: UIColor.white, titleFont: titleFont, descriptionFont: descriptionFont),
-        
+
         ]
+    
+    lazy var inputTextField: UITextField = {
+        let textField =  UITextField(frame: CGRect(x: 20, y: 100, width: 300, height: 40))
+        textField.placeholder = "Enter text here"
+        textField.font = UIFont.systemFont(ofSize: 15)
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.autocorrectionType = UITextAutocorrectionType.no
+        textField.keyboardType = UIKeyboardType.default
+        textField.clearButtonMode = UITextField.ViewMode.whileEditing
+        textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        return textField
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupPaperOnboardingView()
+        
+//        self.inputTextField.delegate = self
+//        self.view.addSubview(inputTextField)
     }
     
     private func setupPaperOnboardingView() {
@@ -47,6 +62,7 @@ class NoteViewController: UIViewController {
         onboarding.dataSource = self
         onboarding.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(onboarding)
+//        onboarding.currentIndex(1, animated: false)
         
         // Add constraints
         for attribute: NSLayoutConstraint.Attribute in [.left, .right, .top, .bottom] {

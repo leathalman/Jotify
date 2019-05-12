@@ -131,8 +131,8 @@
 		F698FCFC2283B5D3000B69E5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F60DE619228396B7008701E9 /* RootController.swift */,
 				F639A3242287B3F000F922A0 /* NoteViewController.swift */,
+				F60DE619228396B7008701E9 /* RootController.swift */,
 				F60DE61D228397C1008701E9 /* LeftViewContoller.swift */,
 				F60DE61B2283974A008701E9 /* MiddleViewController.swift */,
 				F60DE61F228397CD008701E9 /* RightViewController.swift */,
