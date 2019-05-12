@@ -16,6 +16,11 @@
 		F60DE61C2283974A008701E9 /* MiddleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60DE61B2283974A008701E9 /* MiddleViewController.swift */; };
 		F60DE61E228397C1008701E9 /* LeftViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60DE61D228397C1008701E9 /* LeftViewContoller.swift */; };
 		F60DE620228397CD008701E9 /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60DE61F228397CD008701E9 /* RightViewController.swift */; };
+		F639A3252287B3F000F922A0 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F639A3242287B3F000F922A0 /* NoteViewController.swift */; };
+		F639A32B2287B4E000F922A0 /* Nunito-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F639A3272287B4E000F922A0 /* Nunito-Light.ttf */; };
+		F639A32C2287B4E000F922A0 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F639A3282287B4E000F922A0 /* Nunito-Regular.ttf */; };
+		F639A32D2287B4E000F922A0 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F639A3292287B4E000F922A0 /* Nunito-Bold.ttf */; };
+		F639A32E2287B4E000F922A0 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F639A32A2287B4E000F922A0 /* OpenSans-Regular.ttf */; };
 		F698FD012283B6AD000B69E5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F698FD002283B6AD000B69E5 /* Extensions.swift */; };
 		F698FD032283B6CA000B69E5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F698FD022283B6CA000B69E5 /* Constants.swift */; };
 		F6C0C4462284CD79004490FA /* LoginController+handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C0C4442284CD79004490FA /* LoginController+handlers.swift */; };
@@ -37,6 +42,11 @@
 		F60DE61B2283974A008701E9 /* MiddleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleViewController.swift; sourceTree = "<group>"; };
 		F60DE61D228397C1008701E9 /* LeftViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftViewContoller.swift; sourceTree = "<group>"; };
 		F60DE61F228397CD008701E9 /* RightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightViewController.swift; sourceTree = "<group>"; };
+		F639A3242287B3F000F922A0 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
+		F639A3272287B4E000F922A0 /* Nunito-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Light.ttf"; sourceTree = "<group>"; };
+		F639A3282287B4E000F922A0 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
+		F639A3292287B4E000F922A0 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
+		F639A32A2287B4E000F922A0 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		F698FD002283B6AD000B69E5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F698FD022283B6CA000B69E5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F6C0C4442284CD79004490FA /* LoginController+handlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoginController+handlers.swift"; sourceTree = "<group>"; };
@@ -94,7 +104,7 @@
 		F60DE60222838F69008701E9 /* Sticky Notes */ = {
 			isa = PBXGroup;
 			children = (
-				F698FCF72283B520000B69E5 /* Cells */,
+				F639A3262287B4E000F922A0 /* Fonts */,
 				F698FCFC2283B5D3000B69E5 /* Controllers */,
 				F698FCFF2283B697000B69E5 /* Helpers */,
 				F60DE60322838F69008701E9 /* AppDelegate.swift */,
@@ -107,17 +117,22 @@
 			path = "Sticky Notes";
 			sourceTree = "<group>";
 		};
-		F698FCF72283B520000B69E5 /* Cells */ = {
+		F639A3262287B4E000F922A0 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				F639A3272287B4E000F922A0 /* Nunito-Light.ttf */,
+				F639A3282287B4E000F922A0 /* Nunito-Regular.ttf */,
+				F639A3292287B4E000F922A0 /* Nunito-Bold.ttf */,
+				F639A32A2287B4E000F922A0 /* OpenSans-Regular.ttf */,
 			);
-			path = Cells;
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		F698FCFC2283B5D3000B69E5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				F60DE619228396B7008701E9 /* RootController.swift */,
+				F639A3242287B3F000F922A0 /* NoteViewController.swift */,
 				F60DE61D228397C1008701E9 /* LeftViewContoller.swift */,
 				F60DE61B2283974A008701E9 /* MiddleViewController.swift */,
 				F60DE61F228397CD008701E9 /* RightViewController.swift */,
@@ -196,9 +211,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F639A32D2287B4E000F922A0 /* Nunito-Bold.ttf in Resources */,
+				F639A32C2287B4E000F922A0 /* Nunito-Regular.ttf in Resources */,
 				F60DE60E22838F6A008701E9 /* LaunchScreen.storyboard in Resources */,
+				F639A32B2287B4E000F922A0 /* Nunito-Light.ttf in Resources */,
 				F6C0C44B2284CE5C004490FA /* GoogleService-Info.plist in Resources */,
 				F60DE60B22838F6A008701E9 /* Assets.xcassets in Resources */,
+				F639A32E2287B4E000F922A0 /* OpenSans-Regular.ttf in Resources */,
 				F60DE60922838F69008701E9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,10 +258,10 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Sticky Notes/Pods-Sticky Notes-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/LBTATools/LBTATools.framework",
 				"${BUILT_PRODUCTS_DIR}/SwipeViewController/SwipeViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/paper-onboarding/paper_onboarding.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -250,10 +269,10 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LBTATools.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/paper_onboarding.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -275,6 +294,7 @@
 				F60DE620228397CD008701E9 /* RightViewController.swift in Sources */,
 				F60DE61E228397C1008701E9 /* LeftViewContoller.swift in Sources */,
 				F60DE61C2283974A008701E9 /* MiddleViewController.swift in Sources */,
+				F639A3252287B3F000F922A0 /* NoteViewController.swift in Sources */,
 				F6C0C4472284CD79004490FA /* LoginController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
