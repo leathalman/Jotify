@@ -1,15 +1,15 @@
 //
-//  NoteViewController.swift
+//  WelcomeViewController.swift
 //  Sticky Notes
 //
-//  Created by Harrison Leath on 5/11/19.
+//  Created by Harrison Leath on 5/12/19.
 //  Copyright © 2019 Harrison Leath. All rights reserved.
 //
 
 import UIKit
 import paper_onboarding
 
-class NoteViewController: UIViewController, UITextFieldDelegate {
+class WelcomeViewController: UIViewController, UITextFieldDelegate {
     
     fileprivate let items = [
         OnboardingItemInfo(informationImage: Asset.hotels.image,
@@ -32,7 +32,7 @@ class NoteViewController: UIViewController, UITextFieldDelegate {
                            pageIcon: Asset.shoppingCart.image,
                            color: UIColor(red: 0.61, green: 0.56, blue: 0.74, alpha: 1.00),
                            titleColor: UIColor.white, descriptionColor: UIColor.white, titleFont: titleFont, descriptionFont: descriptionFont),
-
+        
         ]
     
     lazy var inputTextField: UITextField = {
@@ -49,11 +49,11 @@ class NoteViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupPaperOnboardingView()
         
-//        self.inputTextField.delegate = self
-//        self.view.addSubview(inputTextField)
+        //        self.inputTextField.delegate = self
+        //        self.view.addSubview(inputTextField)
     }
     
     private func setupPaperOnboardingView() {
@@ -62,7 +62,7 @@ class NoteViewController: UIViewController, UITextFieldDelegate {
         onboarding.dataSource = self
         onboarding.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(onboarding)
-//        onboarding.currentIndex(1, animated: false)
+        //        onboarding.currentIndex(1, animated: false)
         
         // Add constraints
         for attribute: NSLayoutConstraint.Attribute in [.left, .right, .top, .bottom] {
@@ -80,7 +80,7 @@ class NoteViewController: UIViewController, UITextFieldDelegate {
 
 // MARK: Actions
 
-extension  NoteViewController {
+extension  WelcomeViewController {
     
     func example() {
         print("example")
@@ -89,7 +89,7 @@ extension  NoteViewController {
 
 // MARK: PaperOnboardingDelegate
 
-extension NoteViewController: PaperOnboardingDelegate {
+extension WelcomeViewController: PaperOnboardingDelegate {
     
     //    func onboardingWillTransitonToIndex(_ index: Int) {
     //        skipButton.isHidden = index == 2 ? false : true
@@ -109,7 +109,7 @@ extension NoteViewController: PaperOnboardingDelegate {
 
 // MARK: PaperOnboardingDataSource
 
-extension NoteViewController: PaperOnboardingDataSource {
+extension WelcomeViewController: PaperOnboardingDataSource {
     
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
         return items[index]
@@ -138,9 +138,10 @@ extension NoteViewController: PaperOnboardingDataSource {
 
 
 //MARK: Constants
-extension NoteViewController {
+extension WelcomeViewController {
     
     private static let titleFont = UIFont(name: "Nunito-Bold", size: 36.0) ?? UIFont.boldSystemFont(ofSize: 36.0)
     private static let descriptionFont = UIFont(name: "OpenSans-Regular", size: 14.0) ?? UIFont.systemFont(ofSize: 14.0)
 }
+
 

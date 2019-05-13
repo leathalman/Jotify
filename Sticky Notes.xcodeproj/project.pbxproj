@@ -13,16 +13,12 @@
 		F60DE60B22838F6A008701E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F60DE60A22838F6A008701E9 /* Assets.xcassets */; };
 		F60DE60E22838F6A008701E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F60DE60C22838F6A008701E9 /* LaunchScreen.storyboard */; };
 		F60DE61A228396B7008701E9 /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60DE619228396B7008701E9 /* RootController.swift */; };
-		F60DE61C2283974A008701E9 /* MiddleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60DE61B2283974A008701E9 /* MiddleViewController.swift */; };
 		F60DE61E228397C1008701E9 /* LeftViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60DE61D228397C1008701E9 /* LeftViewContoller.swift */; };
-		F60DE620228397CD008701E9 /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60DE61F228397CD008701E9 /* RightViewController.swift */; };
-		F639A3252287B3F000F922A0 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F639A3242287B3F000F922A0 /* NoteViewController.swift */; };
-		F639A32B2287B4E000F922A0 /* Nunito-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F639A3272287B4E000F922A0 /* Nunito-Light.ttf */; };
-		F639A32C2287B4E000F922A0 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F639A3282287B4E000F922A0 /* Nunito-Regular.ttf */; };
-		F639A32D2287B4E000F922A0 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F639A3292287B4E000F922A0 /* Nunito-Bold.ttf */; };
-		F639A32E2287B4E000F922A0 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F639A32A2287B4E000F922A0 /* OpenSans-Regular.ttf */; };
 		F698FD012283B6AD000B69E5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F698FD002283B6AD000B69E5 /* Extensions.swift */; };
 		F698FD032283B6CA000B69E5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F698FD022283B6CA000B69E5 /* Constants.swift */; };
+		F69DBAC62288EBF4006888C9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69DBAC52288EBF4006888C9 /* WelcomeViewController.swift */; };
+		F69DBAC82289016E006888C9 /* WriteNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69DBAC72289016E006888C9 /* WriteNoteController.swift */; };
+		F69DBACC22890272006888C9 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69DBACB22890272006888C9 /* SettingsController.swift */; };
 		F6C0C4462284CD79004490FA /* LoginController+handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C0C4442284CD79004490FA /* LoginController+handlers.swift */; };
 		F6C0C4472284CD79004490FA /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C0C4452284CD79004490FA /* LoginController.swift */; };
 		F6C0C44B2284CE5C004490FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F6C0C44A2284CE5C004490FA /* GoogleService-Info.plist */; };
@@ -39,16 +35,12 @@
 		F60DE60D22838F6A008701E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F60DE60F22838F6A008701E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F60DE619228396B7008701E9 /* RootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootController.swift; sourceTree = "<group>"; };
-		F60DE61B2283974A008701E9 /* MiddleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleViewController.swift; sourceTree = "<group>"; };
 		F60DE61D228397C1008701E9 /* LeftViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftViewContoller.swift; sourceTree = "<group>"; };
-		F60DE61F228397CD008701E9 /* RightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightViewController.swift; sourceTree = "<group>"; };
-		F639A3242287B3F000F922A0 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
-		F639A3272287B4E000F922A0 /* Nunito-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Light.ttf"; sourceTree = "<group>"; };
-		F639A3282287B4E000F922A0 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
-		F639A3292287B4E000F922A0 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
-		F639A32A2287B4E000F922A0 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		F698FD002283B6AD000B69E5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F698FD022283B6CA000B69E5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F69DBAC52288EBF4006888C9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		F69DBAC72289016E006888C9 /* WriteNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteController.swift; sourceTree = "<group>"; };
+		F69DBACB22890272006888C9 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		F6C0C4442284CD79004490FA /* LoginController+handlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoginController+handlers.swift"; sourceTree = "<group>"; };
 		F6C0C4452284CD79004490FA /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		F6C0C44A2284CE5C004490FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -104,7 +96,6 @@
 		F60DE60222838F69008701E9 /* Sticky Notes */ = {
 			isa = PBXGroup;
 			children = (
-				F639A3262287B4E000F922A0 /* Fonts */,
 				F698FCFC2283B5D3000B69E5 /* Controllers */,
 				F698FCFF2283B697000B69E5 /* Helpers */,
 				F60DE60322838F69008701E9 /* AppDelegate.swift */,
@@ -117,27 +108,16 @@
 			path = "Sticky Notes";
 			sourceTree = "<group>";
 		};
-		F639A3262287B4E000F922A0 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				F639A3272287B4E000F922A0 /* Nunito-Light.ttf */,
-				F639A3282287B4E000F922A0 /* Nunito-Regular.ttf */,
-				F639A3292287B4E000F922A0 /* Nunito-Bold.ttf */,
-				F639A32A2287B4E000F922A0 /* OpenSans-Regular.ttf */,
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
 		F698FCFC2283B5D3000B69E5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F639A3242287B3F000F922A0 /* NoteViewController.swift */,
-				F60DE619228396B7008701E9 /* RootController.swift */,
 				F60DE61D228397C1008701E9 /* LeftViewContoller.swift */,
-				F60DE61B2283974A008701E9 /* MiddleViewController.swift */,
-				F60DE61F228397CD008701E9 /* RightViewController.swift */,
+				F69DBAC72289016E006888C9 /* WriteNoteController.swift */,
+				F69DBACB22890272006888C9 /* SettingsController.swift */,
 				F6C0C4452284CD79004490FA /* LoginController.swift */,
 				F6C0C4442284CD79004490FA /* LoginController+handlers.swift */,
+				F60DE619228396B7008701E9 /* RootController.swift */,
+				F69DBAC52288EBF4006888C9 /* WelcomeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -211,13 +191,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F639A32D2287B4E000F922A0 /* Nunito-Bold.ttf in Resources */,
-				F639A32C2287B4E000F922A0 /* Nunito-Regular.ttf in Resources */,
 				F60DE60E22838F6A008701E9 /* LaunchScreen.storyboard in Resources */,
-				F639A32B2287B4E000F922A0 /* Nunito-Light.ttf in Resources */,
 				F6C0C44B2284CE5C004490FA /* GoogleService-Info.plist in Resources */,
 				F60DE60B22838F6A008701E9 /* Assets.xcassets in Resources */,
-				F639A32E2287B4E000F922A0 /* OpenSans-Regular.ttf in Resources */,
 				F60DE60922838F69008701E9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,14 +263,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F60DE60422838F69008701E9 /* AppDelegate.swift in Sources */,
+				F69DBAC62288EBF4006888C9 /* WelcomeViewController.swift in Sources */,
 				F698FD012283B6AD000B69E5 /* Extensions.swift in Sources */,
 				F6C0C4462284CD79004490FA /* LoginController+handlers.swift in Sources */,
 				F60DE61A228396B7008701E9 /* RootController.swift in Sources */,
+				F69DBAC82289016E006888C9 /* WriteNoteController.swift in Sources */,
+				F69DBACC22890272006888C9 /* SettingsController.swift in Sources */,
 				F698FD032283B6CA000B69E5 /* Constants.swift in Sources */,
-				F60DE620228397CD008701E9 /* RightViewController.swift in Sources */,
 				F60DE61E228397C1008701E9 /* LeftViewContoller.swift in Sources */,
-				F60DE61C2283974A008701E9 /* MiddleViewController.swift in Sources */,
-				F639A3252287B3F000F922A0 /* NoteViewController.swift in Sources */,
 				F6C0C4472284CD79004490FA /* LoginController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

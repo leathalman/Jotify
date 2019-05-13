@@ -24,7 +24,20 @@ struct Colors {
     
     static var offWhite = UIColor(red: 247, green: 247, blue: 247, alpha: 1)
     
+    var blueGradient:CAGradientLayer!
+    
+    init() {
+        let startBlue = UIColor(red: 164 / 255.0, green: 237 / 255.0, blue: 221 / 255.0, alpha: 1.0).cgColor
+        let endBlue = UIColor(red: 108 / 255.0, green: 209 / 255.0, blue: 221 / 255.0, alpha: 1.0).cgColor
+        
+        self.blueGradient = CAGradientLayer()
+        self.blueGradient.colors = [startBlue, endBlue]
+        self.blueGradient.locations = [0.0, 1.0]
+    }
+    
 }
+
+//only use following if WelcomeViewController is used
 
 #if os(OSX)
 import AppKit.NSImage
