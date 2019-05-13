@@ -12,8 +12,6 @@ import Firebase
 class SettingsController: UIViewController {
     
     override func viewDidLoad() {
-        print("Settings Loaded")
-        
         view.backgroundColor = .red
         
         let button = UIButton()
@@ -40,7 +38,7 @@ class SettingsController: UIViewController {
         button3.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         button3.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 100).isActive = true
         
-        setupSwiftDown()
+//        setupSwiftDown()
     }
     
     @objc private func logoutTapped() {
@@ -69,7 +67,6 @@ class SettingsController: UIViewController {
     
     @objc func handleSwipeDown(_ sender: UITapGestureRecognizer) {
         dismiss(animated: false, completion: nil)
-        print("Swipe down activated")
     }
     
     @objc func handleLogout() {

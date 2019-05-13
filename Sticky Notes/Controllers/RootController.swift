@@ -36,7 +36,7 @@ class ViewController: SwipeViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let VC1 = LeftViewController()
+        let VC1 = SavedNoteController()
         VC1.view.backgroundColor = UIColor.white
         VC1.title = "Saved"
         let VC2 = WriteNoteController()

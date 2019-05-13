@@ -13,7 +13,7 @@
 		F60DE60B22838F6A008701E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F60DE60A22838F6A008701E9 /* Assets.xcassets */; };
 		F60DE60E22838F6A008701E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F60DE60C22838F6A008701E9 /* LaunchScreen.storyboard */; };
 		F60DE61A228396B7008701E9 /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60DE619228396B7008701E9 /* RootController.swift */; };
-		F60DE61E228397C1008701E9 /* LeftViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60DE61D228397C1008701E9 /* LeftViewContoller.swift */; };
+		F68F6857228A16FE00EEC9D9 /* SavedNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68F6856228A16FE00EEC9D9 /* SavedNoteController.swift */; };
 		F698FD012283B6AD000B69E5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F698FD002283B6AD000B69E5 /* Extensions.swift */; };
 		F698FD032283B6CA000B69E5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F698FD022283B6CA000B69E5 /* Constants.swift */; };
 		F69DBAC62288EBF4006888C9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69DBAC52288EBF4006888C9 /* WelcomeViewController.swift */; };
@@ -35,7 +35,7 @@
 		F60DE60D22838F6A008701E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F60DE60F22838F6A008701E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F60DE619228396B7008701E9 /* RootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootController.swift; sourceTree = "<group>"; };
-		F60DE61D228397C1008701E9 /* LeftViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftViewContoller.swift; sourceTree = "<group>"; };
+		F68F6856228A16FE00EEC9D9 /* SavedNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedNoteController.swift; sourceTree = "<group>"; };
 		F698FD002283B6AD000B69E5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F698FD022283B6CA000B69E5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F69DBAC52288EBF4006888C9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -111,8 +111,8 @@
 		F698FCFC2283B5D3000B69E5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F60DE61D228397C1008701E9 /* LeftViewContoller.swift */,
 				F69DBAC72289016E006888C9 /* WriteNoteController.swift */,
+				F68F6856228A16FE00EEC9D9 /* SavedNoteController.swift */,
 				F69DBACB22890272006888C9 /* SettingsController.swift */,
 				F6C0C4452284CD79004490FA /* LoginController.swift */,
 				F6C0C4442284CD79004490FA /* LoginController+handlers.swift */,
@@ -232,6 +232,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Sticky Notes/Pods-Sticky Notes-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/DrawerView/DrawerView.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/SwipeViewController/SwipeViewController.framework",
@@ -243,6 +244,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DrawerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeViewController.framework",
@@ -267,10 +269,10 @@
 				F698FD012283B6AD000B69E5 /* Extensions.swift in Sources */,
 				F6C0C4462284CD79004490FA /* LoginController+handlers.swift in Sources */,
 				F60DE61A228396B7008701E9 /* RootController.swift in Sources */,
+				F68F6857228A16FE00EEC9D9 /* SavedNoteController.swift in Sources */,
 				F69DBAC82289016E006888C9 /* WriteNoteController.swift in Sources */,
 				F69DBACC22890272006888C9 /* SettingsController.swift in Sources */,
 				F698FD032283B6CA000B69E5 /* Constants.swift in Sources */,
-				F60DE61E228397C1008701E9 /* LeftViewContoller.swift in Sources */,
 				F6C0C4472284CD79004490FA /* LoginController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

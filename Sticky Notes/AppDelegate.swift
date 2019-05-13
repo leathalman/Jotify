@@ -24,10 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.window?.rootViewController = navigationController
 //        self.window?.makeKeyAndVisible()
         
-        self.window?.rootViewController = WriteNoteController()
+        self.window?.rootViewController = SavedNoteController()
 
-        let leftViewController = LeftViewController()
-        leftViewController.fetchNotes()
+        SavedNoteController().fetchNotes()
         
         return true
     }

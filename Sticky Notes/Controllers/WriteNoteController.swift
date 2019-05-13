@@ -75,11 +75,10 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print ("Write note view loaded")
         
         checkIfUserIsLoggedIn()
         setupView()
-        setupSwiftDown()
+//        setupSwiftDown()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -95,12 +94,13 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
     
     @objc func handleSwipeDown(_ sender: UITapGestureRecognizer) {
         present(SettingsController(), animated: false, completion: nil)
-        print("Swipe down activated")
     }
     
     func setupView() {
 //        self.inputTextView.delegate = self
         
+        self.view.clipsToBounds = true
+        self.view.layer.cornerRadius = 10
         self.inputTextField.delegate = self
 
 //        self.view.addSubview(inputTextView)
