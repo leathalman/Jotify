@@ -1,0 +1,6 @@
+framework module paper_onboarding {
+  umbrella header "paper-onboarding-umbrella.h"
+
+  export *
+  module * { export * }
+}
