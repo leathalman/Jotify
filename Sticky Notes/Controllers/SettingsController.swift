@@ -54,8 +54,8 @@ class SettingsController: UIViewController {
     }
     
     @objc private func removeTapped() {
-        let ref = Database.database().reference().child("notes")
-        ref.removeValue()
+//        let ref = Database.database().reference().child("notes")
+//        ref.removeValue()
     }
     
     func setupSwiftDown() {

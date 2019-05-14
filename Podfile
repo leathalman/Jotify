@@ -6,11 +6,10 @@ target 'Sticky Notes' do
   use_frameworks!
 
   # Pods for Sticky Notes
-pod'SwipeViewController'
 pod'paper-onboarding'
 pod'DrawerView'
 pod'MultilineTextField'
-pod'Firebase/Database'
+pod'Firebase/Firestore'
 pod'Firebase/Auth'
 pod'Firebase/Storage'
 pod'Firebase/Core'

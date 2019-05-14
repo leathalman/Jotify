@@ -10,20 +10,9 @@ import UIKit
 import Firebase
 import MultilineTextField
 
-extension UITextField {
-    func setLeftPaddingPoints(_ amount:CGFloat){
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
-        self.leftView = paddingView
-        self.leftViewMode = .always
-    }
-    func setRightPaddingPoints(_ amount:CGFloat) {
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
-        self.rightView = paddingView
-        self.rightViewMode = .always
-    }
-}
-
 class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
+    
+    let db = Firestore.firestore()
     
     public var screenWidth: CGFloat {
         return UIScreen.main.bounds.width
@@ -88,26 +77,24 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         if inputTextView.text == "" {
             
         } else {
-            let properties = ["text": inputTextView.text!]
-            saveNote(properties: properties)
+            saveNote(text: inputTextView.text)
             inputTextView.text = ""
         }
     }
     
-    private func saveNote(properties: [String: Any]) {
-        let ref = Database.database().reference().child("notes")
-        let childRef = ref.childByAutoId()
-        let userId = Auth.auth().currentUser!.uid
-        let timestamp = (NSDate().timeIntervalSince1970)
-        
-        var values: [String: Any] = ["userId": userId, "timestamp": timestamp] as [String : Any]
-        
-        properties.forEach({values[$0.0] = $0.1})
-        
-        childRef.updateChildValues(values) { (error, ref ) in
-            if error != nil {
-                print(error ?? "error updating child values")
-                return
+    func saveNote(text: String) {
+        // Add a new document with a generated ID
+        var ref: DocumentReference? = nil
+        ref = db.collection("notes").addDocument(data: [
+            "text": text,
+            "timestamp": "Timestamp",
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+                let savedNoteController = SavedNoteController()
+                savedNoteController.fetchNotes()
             }
         }
     }
@@ -117,7 +104,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
             return true
         }
         //dismiss keyboard on return key
-//        textView.resignFirstResponder()
+        textView.resignFirstResponder()
         handleSend()
 //        self.inputTextView.text = ""
         return false
@@ -138,8 +125,8 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
     }
     
     @objc private func removeTapped() {
-        let ref = Database.database().reference().child("notes")
-        ref.removeValue()
+//        let ref = Database.database().reference().child("notes")
+//        ref.removeValue()
     }
     
     func checkIfUserIsLoggedIn() {

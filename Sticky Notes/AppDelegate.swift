@@ -19,14 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
-//        let pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-//        let navigationController = ViewController(rootViewController: pageController)
-//        self.window?.rootViewController = navigationController
-//        self.window?.makeKeyAndVisible()
-        
         self.window?.rootViewController = SavedNoteController()
 
-        SavedNoteController().fetchNotes()
+//        SavedNoteController().fetchNotes()
         
         return true
     }

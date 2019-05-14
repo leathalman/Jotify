@@ -52,33 +52,33 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
                         } else {
                             let profileImageUrl = url?.absoluteString
                             let values = ["profileImageUrl": profileImageUrl]
-                            self.registerUerIntoDatabaseWithUID(uid: uid!, values: values as [String : AnyObject])
+//                            self.registerUerIntoDatabaseWithUID(uid: uid!, values: values as [String : AnyObject])
                             print(profileImageUrl ?? "profile url")
                         }
                     }
                     let values = ["name":name, "email": email]
-                    self.registerUerIntoDatabaseWithUID(uid: uid!, values: values as [String : AnyObject])
+//                    self.registerUerIntoDatabaseWithUID(uid: uid!, values: values as [String : AnyObject])
                     
                 })
             }
         }
     }
     
-    private func registerUerIntoDatabaseWithUID(uid: String, values: [String: AnyObject]) {
-        //insert your own database reference source here
-        let ref = Database.database().reference()
-        let usersReference = ref.child("users").child(uid)
-        usersReference.updateChildValues(values, withCompletionBlock: { (error2, ref) in
-            
-            if error2 != nil {
-                print("error2")
-                return
-            }
-            
-            self.dismiss(animated: true, completion: nil)
-            print("Saved User successfully into firebase")
-        })
-    }
+//    private func registerUerIntoDatabaseWithUID(uid: String, values: [String: AnyObject]) {
+//        //insert your own database reference source here
+//        let ref = Database.database().reference()
+//        let usersReference = ref.child("users").child(uid)
+//        usersReference.updateChildValues(values, withCompletionBlock: { (error2, ref) in
+//            
+//            if error2 != nil {
+//                print("error2")
+//                return
+//            }
+//            
+//            self.dismiss(animated: true, completion: nil)
+//            print("Saved User successfully into firebase")
+//        })
+//    }
     
     func checkPermission() {
         let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus()

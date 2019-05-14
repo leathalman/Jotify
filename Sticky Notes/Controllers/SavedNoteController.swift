@@ -16,6 +16,8 @@ struct Note {
 
 class SavedNoteController: UIViewController, UICollectionViewDelegateFlowLayout {
     
+    let db = Firestore.firestore()
+    
     public var screenWidth: CGFloat {
         return UIScreen.main.bounds.width
     }
@@ -34,6 +36,18 @@ class SavedNoteController: UIViewController, UICollectionViewDelegateFlowLayout 
         fetchNotes()
     }
     
+    func fetchNotes() {
+        db.collection("notes").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                }
+            }
+        }
+    }
+    
     func setupView() {
         view.backgroundColor = .white
         
@@ -47,25 +61,25 @@ class SavedNoteController: UIViewController, UICollectionViewDelegateFlowLayout 
         drawer.position = .open
     }
     
-    func fetchNotes() {
-        let ref = Database.database().reference()
-        let query = ref.child("notes").queryOrdered(byChild: "userId")
-        query.observe(.value) { (snapshot) in
-            for child in snapshot.children.allObjects as! [DataSnapshot] {
-                if let value = child.value as? NSDictionary {
-                    //                    let timestamp = value["timestamp"] as? String ?? "Timestamp not found"
-                    //                    let userId = value["userId"] as? String ?? "UserId not found"
-                    let text = value["text"] as? String ?? "Text not found"
-                    print(text)
-                    //                    Note.init(text: text)
-                    
-                    //                    self.items.removeAll()
-                    //                    self.items.append(Note.init(text: text))
-                    
-                }
-            }
-        }
-    }
+//    func fetchNotes() {
+//        let ref = Database.database().reference()
+//        let query = ref.child("notes").queryOrdered(byChild: "userId")
+//        query.observe(.value) { (snapshot) in
+//            for child in snapshot.children.allObjects as! [DataSnapshot] {
+//                if let value = child.value as? NSDictionary {
+//                    //                    let timestamp = value["timestamp"] as? String ?? "Timestamp not found"
+//                    //                    let userId = value["userId"] as? String ?? "UserId not found"
+//                    let text = value["text"] as? String ?? "Text not found"
+//                    print(text)
+//                    //                    Note.init(text: text)
+//                    
+//                    //                    self.items.removeAll()
+//                    //                    self.items.append(Note.init(text: text))
+//                    
+//                }
+//            }
+//        }
+//    }
     
 }
 
