@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import MultilineTextField
 
 extension UITextField {
     func setLeftPaddingPoints(_ amount:CGFloat){
@@ -32,44 +33,22 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         return UIScreen.main.bounds.height
     }
     
-//    lazy var inputTextView: UITextView = {
-//        let textView =  UITextView(frame: CGRect(x: 0, y: 100, width: screenWidth, height: screenHeight))
-//
-//        if screenWidth < 650 {
-//            textView.text = "Write it down..."
-//        } else {
-//            textView.text = "What's on your mind..."
-//        }
-//
-//        textView.textContainerInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-//        textView.isEditable = false
-//        textView.clearsOnInsertion = true
-//        textView.textColor = UIColor.lightGray
-//        textView.font = UIFont.boldSystemFont(ofSize: 32)
-//        textView.autocorrectionType = UITextAutocorrectionType.no
-//        textView.backgroundColor = UIColor.clear
-//        return textView
-//    }()
-    
-    lazy var inputTextField: UITextField = {
-        let textField =  UITextField(frame: CGRect(x: 0, y: screenHeight - screenHeight*1.35, width: screenWidth, height: screenHeight))
-    
+    lazy var inputTextView: MultilineTextField = {
+        let frame = CGRect(x: 0, y: 100, width: screenWidth, height: screenHeight)
+        let textField = MultilineTextField(frame: frame)
+        textField.backgroundColor = .clear
+        
         if screenWidth < 650 {
             textField.placeholder = "Write it down..."
         } else {
             textField.placeholder = "What's on your mind..."
         }
-    
-        textField.clearsOnInsertion = true
-        textField.textColor = UIColor.white
-        textField.borderStyle = .none
+        
+        textField.placeholderColor = Colors.gray
+        textField.textColor = .white
+        textField.isPlaceholderScrollEnabled = true
+        textField.leftViewOrigin = CGPoint(x: 8, y: 8)
         textField.font = UIFont.boldSystemFont(ofSize: 32)
-        textField.autocorrectionType = UITextAutocorrectionType.no
-        textField.clearButtonMode = UITextField.ViewMode.whileEditing
-        textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
-        textField.backgroundColor = UIColor.clear
-        textField.setLeftPaddingPoints(20)
-        textField.setRightPaddingPoints(20)
         return textField
     }()
     
@@ -78,18 +57,9 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         
         checkIfUserIsLoggedIn()
         setupView()
-//        setupSwiftDown()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        inputTextView.isEditable = true
-    }
-    
-    func setupSwiftDown() {
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeDown(_:)))
-        swipeDown.direction = .down
-        view.addGestureRecognizer(swipeDown)
-        view.isUserInteractionEnabled = true
     }
     
     @objc func handleSwipeDown(_ sender: UITapGestureRecognizer) {
@@ -97,14 +67,12 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
     }
     
     func setupView() {
-//        self.inputTextView.delegate = self
         
-        self.view.clipsToBounds = true
-        self.view.layer.cornerRadius = 10
-        self.inputTextField.delegate = self
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 10
+        inputTextView.delegate = self
 
-//        self.view.addSubview(inputTextView)
-        self.view.addSubview(inputTextField)
+        self.view.addSubview(inputTextView)
         addGradient()
     }
     
@@ -117,12 +85,12 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
     
     @objc func handleSend() {
         
-        if inputTextField.text == "" {
+        if inputTextView.text == "" {
             
         } else {
-//            let properties = ["text": inputTextView.text!]
-            let properties = ["text": inputTextField.text!]
+            let properties = ["text": inputTextView.text!]
             saveNote(properties: properties)
+            inputTextView.text = ""
         }
     }
     
@@ -149,7 +117,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
             return true
         }
         //dismiss keyboard on return key
-        textView.resignFirstResponder()
+//        textView.resignFirstResponder()
         handleSend()
 //        self.inputTextView.text = ""
         return false
@@ -157,16 +125,8 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         handleSend()
-        inputTextField.text = ""
+        inputTextView.text = ""
         return true
-    }
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        //spoofing placeholder text for UITextView
-        if textView.textColor == UIColor.lightGray {
-            textView.text = nil
-            textView.textColor = UIColor.white
-        }
     }
     
     @objc private func logoutTapped() {

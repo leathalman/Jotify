@@ -24,6 +24,8 @@ struct Colors {
     
     static var offWhite = UIColor(red: 247, green: 247, blue: 247, alpha: 1)
     
+    static var placeholder = UIColor(red: 136, green: 180, blue: 177, alpha: 1)
+    
     var blueGradient:CAGradientLayer!
     
     init() {

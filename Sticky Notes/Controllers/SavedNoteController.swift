@@ -16,18 +16,35 @@ struct Note {
 
 class SavedNoteController: UIViewController, UICollectionViewDelegateFlowLayout {
     
+    public var screenWidth: CGFloat {
+        return UIScreen.main.bounds.width
+    }
+    
+    public var screenHeight: CGFloat {
+        return UIScreen.main.bounds.height
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let text = UITextView()
-        text.text = "Note Collection"
-        view.backgroundColor = .white
-        let drawer = addDrawerView(withViewController: WriteNoteController(), parentView: view)
-        drawer.position = .open
+        setupView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         fetchNotes()
+    }
+    
+    func setupView() {
+        view.backgroundColor = .white
+        
+//        let text = UITextView(frame: CGRect(x: 0, y: 100, width: screenWidth, height: screenHeight))
+//        text.text = "Note Collection"
+//        text.textColor = .black
+//        text.isEditable = false
+//        view.addSubview(text)
+//
+        let drawer = addDrawerView(withViewController: WriteNoteController(), parentView: view)
+        drawer.position = .open
     }
     
     func fetchNotes() {
