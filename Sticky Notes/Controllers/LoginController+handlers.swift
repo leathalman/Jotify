@@ -37,7 +37,7 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
             //WILL CRASH APP IF NO IMAGE IS AVAILABLE: using !
             if let uploadData = self.profileImageView.image!.jpegData(compressionQuality: 0.1) {
                 
-                let uid = user?.user.uid
+//                let uid = user?.user.uid
                 
                 storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
                     
@@ -51,12 +51,12 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
                             print(error)
                         } else {
                             let profileImageUrl = url?.absoluteString
-                            let values = ["profileImageUrl": profileImageUrl]
+//                            let values = ["profileImageUrl": profileImageUrl]
 //                            self.registerUerIntoDatabaseWithUID(uid: uid!, values: values as [String : AnyObject])
                             print(profileImageUrl ?? "profile url")
                         }
                     }
-                    let values = ["name":name, "email": email]
+//                    let values = ["name":name, "email": email]
 //                    self.registerUerIntoDatabaseWithUID(uid: uid!, values: values as [String : AnyObject])
                     
                 })

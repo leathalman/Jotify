@@ -16,16 +16,14 @@ struct Colors {
     
     static var white = UIColor(red:255/255, green: 255/255, blue: 255/255, alpha: 1)
     
-    static var darkBlue = UIColor(red: 36/255, green: 39/225, blue: 47/55, alpha: 1)
+    static var darkBlue = UIColor(red: 36/255, green: 69/225, blue: 35/55, alpha: 1)
     
     static var lighterDarkBlue = UIColor(red: 36, green: 41, blue: 50, alpha: 1)
     
     static var gray = UIColor(red: 50, green: 54, blue: 63, alpha: 1)
     
     static var offWhite = UIColor(red: 247, green: 247, blue: 247, alpha: 1)
-    
-    static var placeholder = UIColor(red: 136, green: 180, blue: 177, alpha: 1)
-    
+        
     var blueGradient:CAGradientLayer!
     
     init() {
@@ -64,6 +62,7 @@ internal enum Asset {
     internal static let shoppingCart = ImageAsset(name: "Shopping-cart")
     internal static let stores = ImageAsset(name: "Stores")
     internal static let wallet = ImageAsset(name: "Wallet")
+    internal static let tab = ImageAsset(name: "Tab")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

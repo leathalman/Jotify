@@ -109,8 +109,8 @@
 		F698FCFC2283B5D3000B69E5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F69DBAC72289016E006888C9 /* WriteNoteController.swift */,
 				F68F6856228A16FE00EEC9D9 /* SavedNoteController.swift */,
+				F69DBAC72289016E006888C9 /* WriteNoteController.swift */,
 				F69DBACB22890272006888C9 /* SettingsController.swift */,
 				F6C0C4452284CD79004490FA /* LoginController.swift */,
 				F6C0C4442284CD79004490FA /* LoginController+handlers.swift */,
