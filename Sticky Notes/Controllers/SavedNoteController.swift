@@ -9,13 +9,16 @@
 import UIKit
 import Firebase
 import DrawerView
+import VegaScrollFlowLayout
 
 struct Note {
     let text: String
 }
 
-class SavedNoteController: UIViewController, UICollectionViewDelegateFlowLayout {
+class SavedNoteController: UIViewController, UICollectionViewDelegate, UINavigationBarDelegate {
     
+    let cellId = "SavedNoteCell"
+
     let db = Firestore.firestore()
     
     public var screenWidth: CGFloat {
@@ -28,12 +31,11 @@ class SavedNoteController: UIViewController, UICollectionViewDelegateFlowLayout 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        fetchNotes()
+//        fetchNotes()
     }
     
     func fetchNotes() {
@@ -51,39 +53,32 @@ class SavedNoteController: UIViewController, UICollectionViewDelegateFlowLayout 
     func setupView() {
         view.backgroundColor = .white
         
-//        let text = UITextView(frame: CGRect(x: 0, y: 100, width: screenWidth, height: screenHeight))
-//        text.text = "Note Collection"
-//        text.textColor = .black
-//        text.isEditable = false
-//        view.addSubview(text)
+        let layout = VegaScrollFlowLayout()
+        layout.minimumLineSpacing = 20
+        layout.sectionInset = UIEdgeInsets(top: 110, left: 0, bottom: 10, right: 0)
         
-        let button = UIButton()
-        button.addTarget(self, action: #selector(removeTapped), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Logout", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.heightAnchor.constraint(equalToConstant: screenHeight*0.5).isActive = true
-        button.widthAnchor.constraint(equalToConstant: screenWidth*0.5).isActive = true
-//        let button2 = UIButton()
-//        button2.addTarget(self, action: #selector(removeTapped), for: .touchUpInside)
-//        button2.translatesAutoresizingMaskIntoConstraints = false
-//        button2.setTitle("Back", for: .normal)
-//        button2.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        button2.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100).isActive = true
-//
-//        let button3 = UIButton()
-//        button3.addTarget(self, action: #selector(removeTapped), for: .touchUpInside)
-//        button3.translatesAutoresizingMaskIntoConstraints = false
-//        button3.setTitle("Remove ALL", for: .normal)
-//        button3.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        button3.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 100).isActive = true
+        let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        layout.itemSize = CGSize(width: collectionView.frame.width, height: 87)
+        collectionView.backgroundColor = .white
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        self.view.addSubview(collectionView)
         
-//        view.addSubview(button2)
-//        view.addSubview(button3)
-        view.addSubview(button)
+        let frame = CGRect(x: 0, y: 0, width: screenWidth, height: 100)
+        let navbar = UINavigationBar(frame: frame)
+        navbar.backgroundColor = .white
+        navbar.delegate = self
+        navbar.prefersLargeTitles = true
         
-        let drawer = addDrawerView(withViewController: WriteNoteController(), parentView: view)
-        drawer.position = .open
+        let navItem = UINavigationItem()
+        navItem.title = "Saved Notes"
+        navbar.items = [navItem]
+        
+        view.addSubview(navbar)
+
+//        let drawer = addDrawerView(withViewController: WriteNoteController(), parentView: view)
+//        drawer.position = .open
     }
     
     @objc func removeTapped () {
@@ -118,3 +113,28 @@ class SavedNoteController: UIViewController, UICollectionViewDelegateFlowLayout 
     
 }
 
+extension SavedNoteController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 12
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        
+        cell.contentView.backgroundColor = .white
+        cell.contentView.layer.cornerRadius = 10
+        cell.contentView.layer.borderWidth = 1
+        cell.contentView.layer.borderColor = UIColor.lightGray.cgColor
+        cell.contentView.layer.masksToBounds = true
+        
+        cell.layer.shadowColor = UIColor.lightGray.cgColor
+        cell.layer.shadowOffset = CGSize(width:0,height: 2)
+        cell.layer.shadowRadius = 2
+        cell.layer.shadowOpacity = 1
+        cell.layer.masksToBounds = false
+        cell.layer.shadowPath = UIBezierPath(roundedRect:cell.bounds, cornerRadius:cell.contentView.layer.cornerRadius).cgPath
+        
+        return cell
+    }
+    
+}

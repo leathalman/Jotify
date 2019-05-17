@@ -110,8 +110,8 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
-  - paper-onboarding (6.1.3)
   - Protobuf (3.7.0)
+  - VegaScrollFlowLayout (1.1)
 
 DEPENDENCIES:
   - DrawerView
@@ -120,7 +120,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Storage
   - MultilineTextField
-  - paper-onboarding
+  - VegaScrollFlowLayout
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -142,8 +142,8 @@ SPEC REPOS:
     - leveldb-library
     - MultilineTextField
     - nanopb
-    - paper-onboarding
     - Protobuf
+    - VegaScrollFlowLayout
 
 SPEC CHECKSUMS:
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
@@ -164,9 +164,9 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   MultilineTextField: 10965d9c3e05a182181bd7971eb009c7607001ae
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  paper-onboarding: 47ded9ede6ae9dd7ec135dddd8bd3e170b79d799
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
+  VegaScrollFlowLayout: 9158061f29179147755f937c2b21693fc5dbbac3
 
-PODFILE CHECKSUM: 1e5c027abffac7f23bea17d59999a046510da408
+PODFILE CHECKSUM: cc6f449f570135fdc445cde9be9e35b5fe8583ad
 
 COCOAPODS: 1.5.3

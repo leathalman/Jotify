@@ -37,6 +37,7 @@ struct Colors {
     
 }
 
+
 //only use following if WelcomeViewController is used
 
 #if os(OSX)

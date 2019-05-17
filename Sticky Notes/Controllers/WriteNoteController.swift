@@ -56,13 +56,18 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         
         checkIfUserIsLoggedIn()
         setupView()
+        setupSwipeDown()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    func setupSwipeDown() {
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeDown(_:)))
+        swipeDown.direction = .down
+        view.addGestureRecognizer(swipeDown)
+        view.isUserInteractionEnabled = true
     }
     
     @objc func handleSwipeDown(_ sender: UITapGestureRecognizer) {
-        present(SettingsController(), animated: false, completion: nil)
+        present(SavedNoteController(), animated: true, completion: nil)
     }
     
     func setupView() {

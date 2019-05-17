@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         self.window?.rootViewController = SavedNoteController()
+//        self.window?.rootViewController = WriteNoteController()
+
 
 //        SavedNoteController().fetchNotes()
         
