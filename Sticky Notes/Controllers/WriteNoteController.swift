@@ -10,6 +10,11 @@ import UIKit
 import Firebase
 import MultilineTextField
 
+struct Note {
+    static var text: String = "Default Text"
+    static var noteId: String = "Default Id"
+}
+
 class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     
     let db = Firestore.firestore()
@@ -104,39 +109,26 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         }
     }
     
-    //this kind of function that overwrites itself could be useful for name, or account settings
     func saveNote(text: String) {
-        let uid = Auth.auth().currentUser?.uid ?? "No UID Found"
-        let data = [
-                        "text": text,
-                        "timestamp": "Timestamp",
-                    ]
-        db.collection("notes2").document(uid).setData(data) { err in
-                        if let err = err {
-                            print("Error adding document: \(err)")
-                        } else {
-                            print("Document added!)")
-                            let savedNoteController = SavedNoteController()
-                            savedNoteController.fetchNotes()
-                        }
+        
+        var ref: DocumentReference? = nil
+        ref = db.collection("notes").addDocument(data: [
+            "text": text,
+            "timestamp": "Timestamp",
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+         //This is where you would make a struct and add the DocumentID to retrieve later
+                Note.text = text
+                Note.noteId = ref!.documentID
+                print("This is note text: \(Note.text)")
+                print("This is note id: \(Note.noteId)")
+                let savedNoteController = SavedNoteController()
+                savedNoteController.fetchNotes()
+            }
         }
-        
-        
-        
-//        var ref: DocumentReference? = nil
-//        ref = db.collection("notes").addDocument(data: [
-//            "text": text,
-//            "timestamp": "Timestamp",
-//        ]) { err in
-//            if let err = err {
-//                print("Error adding document: \(err)")
-//            } else {
-//                print("Document added with ID: \(ref!.documentID)")
-        // //This is where you would make a struct and add the DocumentID to retrieve later
-//                let savedNoteController = SavedNoteController()
-//                savedNoteController.fetchNotes()
-//            }
-//        }
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

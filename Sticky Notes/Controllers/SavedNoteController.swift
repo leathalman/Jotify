@@ -11,14 +11,8 @@ import Firebase
 import DrawerView
 import VegaScrollFlowLayout
 
-struct Note {
-    let text: String
-}
-
-class SavedNoteController: UIViewController, UICollectionViewDelegate, UINavigationBarDelegate {
+class SavedNoteController: UIViewController, UICollectionViewDelegate, UINavigationBarDelegate, UICollectionViewDelegateFlowLayout {
     
-    let cellId = "SavedNoteCell"
-
     let db = Firestore.firestore()
     
     public var screenWidth: CGFloat {
@@ -44,7 +38,7 @@ class SavedNoteController: UIViewController, UICollectionViewDelegate, UINavigat
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
+//                    print("\(document.documentID) => \(document.data())")
                 }
             }
         }
@@ -58,11 +52,11 @@ class SavedNoteController: UIViewController, UICollectionViewDelegate, UINavigat
         layout.sectionInset = UIEdgeInsets(top: 110, left: 0, bottom: 10, right: 0)
         
         let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        layout.itemSize = CGSize(width: collectionView.frame.width, height: 87)
+        layout.itemSize = CGSize(width: collectionView.frame.width - 20, height: 87)
         collectionView.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
         self.view.addSubview(collectionView)
         
         let frame = CGRect(x: 0, y: 0, width: screenWidth, height: 100)
@@ -119,12 +113,12 @@ extension SavedNoteController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedNoteCell", for: indexPath) as? SavedNoteCell else {fatalError("Wrong cell class dequeued")}
         
         cell.contentView.backgroundColor = .white
         cell.contentView.layer.cornerRadius = 10
         cell.contentView.layer.borderWidth = 1
-        cell.contentView.layer.borderColor = UIColor.lightGray.cgColor
+        cell.contentView.layer.borderColor = UIColor.clear.cgColor
         cell.contentView.layer.masksToBounds = true
         
         cell.layer.shadowColor = UIColor.lightGray.cgColor
@@ -136,5 +130,4 @@ extension SavedNoteController: UICollectionViewDataSource {
         
         return cell
     }
-    
 }

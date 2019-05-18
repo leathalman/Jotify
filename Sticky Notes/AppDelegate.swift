@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
-        self.window?.rootViewController = SavedNoteController()
-//        self.window?.rootViewController = WriteNoteController()
+//        self.window?.rootViewController = SavedNoteController()
+        self.window?.rootViewController = WriteNoteController()
 
 
 //        SavedNoteController().fetchNotes()
