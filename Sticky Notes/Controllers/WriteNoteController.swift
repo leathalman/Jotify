@@ -10,15 +10,10 @@ import UIKit
 import Firebase
 import MultilineTextField
 
-struct Note {
-    static var text: String = "Default Text"
-    static var noteId: String = "Default Id"
-}
-
 class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     
     let db = Firestore.firestore()
-    
+        
     public var screenWidth: CGFloat {
         return UIScreen.main.bounds.width
     }
@@ -111,20 +106,27 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
     
     func saveNote(text: String) {
         
+        let uid = Auth.auth().currentUser?.uid
+        let timestamp = (NSDate().timeIntervalSince1970)
         var ref: DocumentReference? = nil
         ref = db.collection("notes").addDocument(data: [
             "text": text,
-            "timestamp": "Timestamp",
+            "timestamp": timestamp,
+            "userId": uid!
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
             } else {
                 print("Document added with ID: \(ref!.documentID)")
-         //This is where you would make a struct and add the DocumentID to retrieve later
-                Note.text = text
-                Note.noteId = ref!.documentID
-                print("This is note text: \(Note.text)")
-                print("This is note id: \(Note.noteId)")
+                
+//                let note = Note()
+//                note.text = text
+//                note.noteId = ref!.documentID
+//                note.userId = uid!
+//
+//                self.notes.append(note)
+//                print(self.notes)
+                
                 let savedNoteController = SavedNoteController()
                 savedNoteController.fetchNotes()
             }
