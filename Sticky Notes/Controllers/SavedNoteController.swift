@@ -10,7 +10,6 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 import FirebaseAuth
-import VegaScrollFlowLayout
 
 struct Note {
     static var text: String = "Default Text"
@@ -71,9 +70,9 @@ class SavedNoteController: UIViewController, UICollectionViewDelegate, UINavigat
         view.backgroundColor = .white
         title = "Saved Notes"
         
-        let layout = VegaScrollFlowLayout()
+        let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 20
-        layout.sectionInset = UIEdgeInsets(top: 30, left: 0, bottom: 10, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 25, left: 0, bottom: 10, right: 0)
         
         let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         layout.itemSize = CGSize(width: collectionView.frame.width - 20, height: 87)

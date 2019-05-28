@@ -14,13 +14,14 @@ class SettingsController: UIViewController {
     override func viewDidLoad() {
         title = "Settings"
         
-        view.backgroundColor = .red
+        view.backgroundColor = .white
         
         let button = UIButton()
         button.addTarget(self, action: #selector(logoutTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button)
         button.setTitle("Logout", for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         button.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
@@ -29,6 +30,7 @@ class SettingsController: UIViewController {
         button2.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button2)
         button2.setTitle("Back", for: .normal)
+        button2.setTitleColor(.black, for: .normal)
         button2.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         button2.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100).isActive = true
         
@@ -37,6 +39,7 @@ class SettingsController: UIViewController {
         button3.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button3)
         button3.setTitle("Remove ALL", for: .normal)
+        button3.setTitleColor(.black, for: .normal)
         button3.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         button3.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 100).isActive = true
         

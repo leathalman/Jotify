@@ -86,6 +86,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.0.0):
     - GoogleUtilities/Logger
+  - GradientAnimator (1.0.1)
   - "gRPC-C++ (0.0.8)":
     - "gRPC-C++/Implementation (= 0.0.8)"
     - "gRPC-C++/Interface (= 0.0.8)"
@@ -119,6 +120,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Firestore
   - Firebase/Storage
+  - GradientAnimator (~> 1.0)
   - MultilineTextField
   - VegaScrollFlowLayout
 
@@ -136,6 +138,7 @@ SPEC REPOS:
     - FirebaseStorage
     - GoogleAppMeasurement
     - GoogleUtilities
+    - GradientAnimator
     - "gRPC-C++"
     - gRPC-Core
     - GTMSessionFetcher
@@ -158,6 +161,7 @@ SPEC CHECKSUMS:
   FirebaseStorage: ff1e8f1f6cf1557a8694b0ef39d3e72cb60c42ac
   GoogleAppMeasurement: 7f028ea162b72c8f326daec74afc95d94f7a47d6
   GoogleUtilities: f1faafc033ea203adf1783ce00af455bb99d0e5b
+  GradientAnimator: 67bdeef9d3ac80e2bac85cbbc0f9816cfe9dfbd2
   "gRPC-C++": 98be881723177d8c4faf5fdffacb582c7b4971a2
   gRPC-Core: bd9472c8daa2e414b9f8038ba667bf56ce0e02b8
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
@@ -167,6 +171,6 @@ SPEC CHECKSUMS:
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
   VegaScrollFlowLayout: 9158061f29179147755f937c2b21693fc5dbbac3
 
-PODFILE CHECKSUM: a919787326765b789f2d4e04aca01830d81198f4
+PODFILE CHECKSUM: c58465628b082287d58e25e0608f77a9c899c5f6
 
 COCOAPODS: 1.5.3

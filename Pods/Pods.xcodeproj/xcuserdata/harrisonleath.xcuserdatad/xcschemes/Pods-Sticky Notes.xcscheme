@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1020"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5B74F2B28D594C065202A6B6167D409B"
+               BlueprintIdentifier = "B6DD1683374FF63AE66FCC9A4F107AC8"
                BuildableName = "Pods_Sticky_Notes.framework"
                BlueprintName = "Pods-Sticky Notes"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5B74F2B28D594C065202A6B6167D409B"
+            BlueprintIdentifier = "B6DD1683374FF63AE66FCC9A4F107AC8"
             BuildableName = "Pods_Sticky_Notes.framework"
             BlueprintName = "Pods-Sticky Notes"
             ReferencedContainer = "container:Pods.xcodeproj">

@@ -9,6 +9,7 @@ target 'Sticky Notes' do
 pod'VegaScrollFlowLayout'
 pod'MultilineTextField'
 pod'BubbleTabBar'
+pod'GradientAnimator', '~> 1.0'
 
 pod'Firebase/Firestore'
 pod'Firebase/Auth'

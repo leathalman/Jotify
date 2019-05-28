@@ -11,6 +11,7 @@ import Firebase
 import FirebaseFirestore
 import FirebaseAuth
 import MultilineTextField
+import GradientAnimator
 
 class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     
@@ -28,7 +29,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         let frame = CGRect(x: 0, y: 100, width: screenWidth, height: screenHeight)
         let textField = MultilineTextField(frame: frame)
         textField.backgroundColor = .clear
-        textField.placeholderColor = Colors.darkBlue
+        textField.placeholderColor = Colors.white
         textField.textColor = .white
         textField.isPlaceholderScrollEnabled = true
         textField.leftViewOrigin = CGPoint(x: 8, y: 8)
@@ -76,9 +77,13 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         
         view.clipsToBounds = true
         inputTextView.delegate = self
+        
+        let gradientView = GradientAnimator(frame: self.view.frame, theme: GradientThemes.Sunrise, _startPoint: GradientPoints.bottomLeft, _endPoint: GradientPoints.topRight, _animationDuration: 3.0)
+        self.view.insertSubview(gradientView, at: 0)
+        gradientView.startAnimate()
 
         view.addSubview(inputTextView)
-        addGradient()
+//        addGradient()
     }
     
     func addGradient() {
