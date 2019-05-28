@@ -6,8 +6,7 @@ target 'Sticky Notes' do
   use_frameworks!
 
   # Pods for Sticky Notes
-pod'DrawerView'
-pod 'VegaScrollFlowLayout'
+pod'VegaScrollFlowLayout'
 pod'MultilineTextField'
 pod'Firebase/Firestore'
 pod'Firebase/Auth'

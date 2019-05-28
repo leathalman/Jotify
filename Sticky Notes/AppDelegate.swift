@@ -18,11 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-//        SavedNoteController().fetchNotes()
+
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = UINavigationController(rootViewController: TabBarController())
+        window?.makeKeyAndVisible()
         
-//        self.window?.rootViewController = SavedNoteController()
-        self.window?.rootViewController = WriteNoteController()
-        
+        TabBarController().tabBarController?.selectedIndex = 1
         return true
     }
 

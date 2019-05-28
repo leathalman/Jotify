@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import FirebaseFirestore
+import FirebaseAuth
 import MultilineTextField
 
 class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
@@ -56,18 +58,26 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         
         checkIfUserIsLoggedIn()
         setupView()
-        setupSwipeDown()
+        setupSwipes()
     }
     
-    func setupSwipeDown() {
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeDown(_:)))
-        swipeDown.direction = .down
-        view.addGestureRecognizer(swipeDown)
+    func setupSwipes() {
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipes(_:)))
+        swipeLeft.direction = .left
+        view.addGestureRecognizer(swipeLeft)
+        view.isUserInteractionEnabled = true
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipes(_:)))
+        swipeRight.direction = .right
+        view.addGestureRecognizer(swipeRight)
         view.isUserInteractionEnabled = true
     }
     
-    @objc func handleSwipeDown(_ sender: UITapGestureRecognizer) {
-        present(SavedNoteController(), animated: true, completion: nil)
+    @objc func handleSwipes(_ gesture: UISwipeGestureRecognizer) {
+        if gesture.direction == .left {
+            tabBarController?.selectedIndex = 2
+        } else if gesture.direction == .right {
+            tabBarController?.selectedIndex = 0
+        }
     }
     
     func setupView() {

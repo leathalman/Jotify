@@ -10,7 +10,6 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 import FirebaseAuth
-import DrawerView
 import VegaScrollFlowLayout
 
 struct Note {
@@ -43,6 +42,7 @@ class SavedNoteController: UIViewController, UICollectionViewDelegate, UINavigat
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleDismiss))
 
         setupView()
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -77,7 +77,7 @@ class SavedNoteController: UIViewController, UICollectionViewDelegate, UINavigat
         
         let layout = VegaScrollFlowLayout()
         layout.minimumLineSpacing = 20
-        layout.sectionInset = UIEdgeInsets(top: 110, left: 0, bottom: 10, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 30, left: 0, bottom: 10, right: 0)
         
         let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         layout.itemSize = CGSize(width: collectionView.frame.width - 20, height: 87)
@@ -99,12 +99,9 @@ class SavedNoteController: UIViewController, UICollectionViewDelegate, UINavigat
 //        navbar.items = [navItem]
 //
 //        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped))
-
-        
+//
+//
 //        view.addSubview(navbar)
-        
-        //        let drawer = addDrawerView(withViewController: WriteNoteController(), parentView: view)
-        //        drawer.position = .open
     }
     
 //    @objc func removeTapped () {
@@ -129,7 +126,7 @@ class SavedNoteController: UIViewController, UICollectionViewDelegate, UINavigat
 
 extension SavedNoteController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return notes.count
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

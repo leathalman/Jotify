@@ -15,6 +15,11 @@
 		F68F6857228A16FE00EEC9D9 /* SavedNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68F6856228A16FE00EEC9D9 /* SavedNoteController.swift */; };
 		F698FD012283B6AD000B69E5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F698FD002283B6AD000B69E5 /* Extensions.swift */; };
 		F698FD032283B6CA000B69E5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F698FD022283B6CA000B69E5 /* Constants.swift */; };
+		F69C91A6229CC3A000DB0A61 /* BubbleTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69C91A2229CC3A000DB0A61 /* BubbleTabBar.swift */; };
+		F69C91A7229CC3A000DB0A61 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = F69C91A3229CC3A000DB0A61 /* .gitkeep */; };
+		F69C91A8229CC3A000DB0A61 /* BubbleTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69C91A4229CC3A000DB0A61 /* BubbleTabBarController.swift */; };
+		F69C91A9229CC3A000DB0A61 /* CBTabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69C91A5229CC3A000DB0A61 /* CBTabBarButton.swift */; };
+		F69C91AB229CCC0400DB0A61 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69C91AA229CCC0400DB0A61 /* TabBarController.swift */; };
 		F69DBAC82289016E006888C9 /* WriteNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69DBAC72289016E006888C9 /* WriteNoteController.swift */; };
 		F69DBACC22890272006888C9 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69DBACB22890272006888C9 /* SettingsController.swift */; };
 		F6B906D4228CF61700FC0123 /* SavedNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B906D3228CF61700FC0123 /* SavedNoteCell.swift */; };
@@ -36,6 +41,11 @@
 		F68F6856228A16FE00EEC9D9 /* SavedNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedNoteController.swift; sourceTree = "<group>"; };
 		F698FD002283B6AD000B69E5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F698FD022283B6CA000B69E5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F69C91A2229CC3A000DB0A61 /* BubbleTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTabBar.swift; sourceTree = "<group>"; };
+		F69C91A3229CC3A000DB0A61 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		F69C91A4229CC3A000DB0A61 /* BubbleTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTabBarController.swift; sourceTree = "<group>"; };
+		F69C91A5229CC3A000DB0A61 /* CBTabBarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBTabBarButton.swift; sourceTree = "<group>"; };
+		F69C91AA229CCC0400DB0A61 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F69DBAC72289016E006888C9 /* WriteNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteController.swift; sourceTree = "<group>"; };
 		F69DBACB22890272006888C9 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		F6B906D3228CF61700FC0123 /* SavedNoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedNoteCell.swift; sourceTree = "<group>"; };
@@ -94,6 +104,7 @@
 		F60DE60222838F69008701E9 /* Sticky Notes */ = {
 			isa = PBXGroup;
 			children = (
+				F69C91A1229CC3A000DB0A61 /* Classes */,
 				F6B906D2228CF60200FC0123 /* Cells */,
 				F698FCFC2283B5D3000B69E5 /* Controllers */,
 				F698FCFF2283B697000B69E5 /* Helpers */,
@@ -110,6 +121,7 @@
 		F698FCFC2283B5D3000B69E5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F69C91AA229CCC0400DB0A61 /* TabBarController.swift */,
 				F68F6856228A16FE00EEC9D9 /* SavedNoteController.swift */,
 				F69DBAC72289016E006888C9 /* WriteNoteController.swift */,
 				F69DBACB22890272006888C9 /* SettingsController.swift */,
@@ -126,6 +138,17 @@
 				F698FD022283B6CA000B69E5 /* Constants.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F69C91A1229CC3A000DB0A61 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F69C91A2229CC3A000DB0A61 /* BubbleTabBar.swift */,
+				F69C91A3229CC3A000DB0A61 /* .gitkeep */,
+				F69C91A4229CC3A000DB0A61 /* BubbleTabBarController.swift */,
+				F69C91A5229CC3A000DB0A61 /* CBTabBarButton.swift */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		F6B906D2228CF60200FC0123 /* Cells */ = {
@@ -198,6 +221,7 @@
 			files = (
 				F60DE60E22838F6A008701E9 /* LaunchScreen.storyboard in Resources */,
 				F6C0C44B2284CE5C004490FA /* GoogleService-Info.plist in Resources */,
+				F69C91A7229CC3A000DB0A61 /* .gitkeep in Resources */,
 				F60DE60B22838F6A008701E9 /* Assets.xcassets in Resources */,
 				F60DE60922838F69008701E9 /* Main.storyboard in Resources */,
 			);
@@ -279,11 +303,15 @@
 			files = (
 				F60DE60422838F69008701E9 /* AppDelegate.swift in Sources */,
 				F6B906D4228CF61700FC0123 /* SavedNoteCell.swift in Sources */,
+				F69C91A6229CC3A000DB0A61 /* BubbleTabBar.swift in Sources */,
 				F698FD012283B6AD000B69E5 /* Extensions.swift in Sources */,
 				F6C0C4462284CD79004490FA /* LoginController+handlers.swift in Sources */,
 				F68F6857228A16FE00EEC9D9 /* SavedNoteController.swift in Sources */,
 				F69DBAC82289016E006888C9 /* WriteNoteController.swift in Sources */,
+				F69C91A9229CC3A000DB0A61 /* CBTabBarButton.swift in Sources */,
+				F69C91A8229CC3A000DB0A61 /* BubbleTabBarController.swift in Sources */,
 				F69DBACC22890272006888C9 /* SettingsController.swift in Sources */,
+				F69C91AB229CCC0400DB0A61 /* TabBarController.swift in Sources */,
 				F698FD032283B6CA000B69E5 /* Constants.swift in Sources */,
 				F6C0C4472284CD79004490FA /* LoginController.swift in Sources */,
 			);
@@ -435,7 +463,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8CAAH9J56M;
 				INFOPLIST_FILE = "Sticky Notes/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -455,7 +483,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8CAAH9J56M;
 				INFOPLIST_FILE = "Sticky Notes/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
