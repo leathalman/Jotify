@@ -8,6 +8,8 @@ target 'Sticky Notes' do
   # Pods for Sticky Notes
 pod'VegaScrollFlowLayout'
 pod'MultilineTextField'
+pod'BubbleTabBar'
+
 pod'Firebase/Firestore'
 pod'Firebase/Auth'
 pod'Firebase/Storage'

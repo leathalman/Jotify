@@ -5,7 +5,7 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
-  - DrawerView (1.1.1)
+  - BubbleTabBar (0.8.3)
   - Firebase/Auth (6.0.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.0.0)
@@ -114,7 +114,7 @@ PODS:
   - VegaScrollFlowLayout (1.1)
 
 DEPENDENCIES:
-  - DrawerView
+  - BubbleTabBar
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
@@ -125,7 +125,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - BoringSSL-GRPC
-    - DrawerView
+    - BubbleTabBar
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -147,7 +147,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
-  DrawerView: 7872496eb534bddc9d4eac4cc882bee84402a305
+  BubbleTabBar: 44384a54025345f40f19f10447f42f6e2b9e4ce9
   Firebase: fa80b9d987ca014a1ba9357496ef2a0178b28b12
   FirebaseAnalytics: 1743c5f4de3687d0745709dfdc4b1dea1484f44c
   FirebaseAuth: efc72b0f6fe075d2a6de8d81a6d9de83ef2b47eb
@@ -167,6 +167,6 @@ SPEC CHECKSUMS:
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
   VegaScrollFlowLayout: 9158061f29179147755f937c2b21693fc5dbbac3
 
-PODFILE CHECKSUM: cc6f449f570135fdc445cde9be9e35b5fe8583ad
+PODFILE CHECKSUM: a919787326765b789f2d4e04aca01830d81198f4
 
 COCOAPODS: 1.5.3

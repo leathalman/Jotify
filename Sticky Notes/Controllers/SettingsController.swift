@@ -9,18 +9,11 @@
 import UIKit
 import Firebase
 
-
-// CURRENTLY UNUSED!!!!!!!!
-
-
-
-
-
-
-
 class SettingsController: UIViewController {
     
     override func viewDidLoad() {
+        title = "Settings"
+        
         view.backgroundColor = .red
         
         let button = UIButton()
@@ -47,7 +40,6 @@ class SettingsController: UIViewController {
         button3.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         button3.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 100).isActive = true
         
-//        setupSwiftDown()
     }
     
     @objc private func logoutTapped() {
@@ -63,19 +55,7 @@ class SettingsController: UIViewController {
     }
     
     @objc private func removeTapped() {
-//        let ref = Database.database().reference().child("notes")
-//        ref.removeValue()
-    }
-    
-    func setupSwiftDown() {
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeDown(_:)))
-        swipeDown.direction = .down
-        view.addGestureRecognizer(swipeDown)
-        view.isUserInteractionEnabled = true
-    }
-    
-    @objc func handleSwipeDown(_ sender: UITapGestureRecognizer) {
-        dismiss(animated: false, completion: nil)
+        //test removing messages from Firestore database
     }
     
     @objc func handleLogout() {

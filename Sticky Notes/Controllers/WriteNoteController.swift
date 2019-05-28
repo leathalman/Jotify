@@ -44,18 +44,9 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         return textField
     }()
     
-    lazy var tabImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "Tab")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
-        imageView.isUserInteractionEnabled = false
-        return imageView
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         checkIfUserIsLoggedIn()
         setupView()
         setupSwipes()
@@ -81,20 +72,13 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
     }
     
     func setupView() {
+        title = "Write"
+        
         view.clipsToBounds = true
-        view.layer.cornerRadius = 10
         inputTextView.delegate = self
 
         view.addSubview(inputTextView)
-        view.addSubview(tabImageView)
-        setupContraints()
         addGradient()
-    }
-    
-    func setupContraints() {
-//        tabImageView.heightAnchor.constraint(equalToConstant: 0).isActive = true
-        tabImageView.centerYAnchor.constraint(equalTo: inputTextView.topAnchor, constant: -85).isActive = true
-        tabImageView.centerXAnchor.constraint(equalTo: inputTextView.centerXAnchor).isActive = true
     }
     
     func addGradient() {
@@ -147,35 +131,12 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         if (text as NSString).rangeOfCharacter(from: CharacterSet.newlines).location == NSNotFound {
             return true
         }
+        
         //dismiss keyboard on return key
         textView.resignFirstResponder()
         handleSend()
-//        self.inputTextView.text = ""
+        
         return false
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        handleSend()
-        inputTextView.text = ""
-        return true
-    }
-    
-    @objc private func logoutTapped() {
-        handleLogout()
-    }
-    
-    @objc private func sendTapped() {
-        handleSend()
-    }
-    
-    @objc private func removeTapped() {
-        db.collection("notes").document("DC").delete() { err in
-            if let err = err {
-                print("Error removing document: \(err)")
-            } else {
-                print("Document successfully removed!")
-            }
-        }
     }
     
     func checkIfUserIsLoggedIn() {

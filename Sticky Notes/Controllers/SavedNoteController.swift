@@ -35,14 +35,9 @@ class SavedNoteController: UIViewController, UICollectionViewDelegate, UINavigat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchNotes()
         
-        navigationItem.title = "Settings"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(handleDismiss))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleDismiss))
-
+        fetchNotes()
         setupView()
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -74,6 +69,7 @@ class SavedNoteController: UIViewController, UICollectionViewDelegate, UINavigat
     
     func setupView() {
         view.backgroundColor = .white
+        title = "Saved Notes"
         
         let layout = VegaScrollFlowLayout()
         layout.minimumLineSpacing = 20
@@ -86,40 +82,6 @@ class SavedNoteController: UIViewController, UICollectionViewDelegate, UINavigat
         collectionView.dataSource = self
         collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
         self.view.addSubview(collectionView)
-        
-        
-//        let frame = CGRect(x: 0, y: 0, width: screenWidth, height: 100)
-//        let navbar = UINavigationBar(frame: frame)
-//        navbar.backgroundColor = .white
-//        navbar.delegate = self
-//        navbar.prefersLargeTitles = true
-//
-//        let navItem = UINavigationItem()
-//        navItem.title = "Saved Notes"
-//        navbar.items = [navItem]
-//
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped))
-//
-//
-//        view.addSubview(navbar)
-    }
-    
-//    @objc func removeTapped () {
-//        db.collection("notes").document("ref").delete() { err in
-//            if let err = err {
-//                print("Error removing document: \(err)")
-//            } else {
-//                print("Document successfully removed!")
-//            }
-//        }
-//    }
-    
-    @objc func cancelTapped() {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @objc func handleDismiss() {
-        dismiss(animated: true, completion: nil)
     }
     
 }
@@ -144,7 +106,7 @@ extension SavedNoteController: UICollectionViewDataSource {
         cell.layer.shadowOpacity = 1
         cell.layer.masksToBounds = false
         cell.layer.shadowPath = UIBezierPath(roundedRect:cell.bounds, cornerRadius:cell.contentView.layer.cornerRadius).cgPath
-    
+        
         
         cell.textLabel.text = Note.text
         
