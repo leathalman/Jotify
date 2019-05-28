@@ -10,8 +10,7 @@
 #endif
 #endif
 
-#import "DrawerView.h"
 
-FOUNDATION_EXPORT double DrawerViewVersionNumber;
-FOUNDATION_EXPORT const unsigned char DrawerViewVersionString[];
+FOUNDATION_EXPORT double BubbleTabBarVersionNumber;
+FOUNDATION_EXPORT const unsigned char BubbleTabBarVersionString[];
 

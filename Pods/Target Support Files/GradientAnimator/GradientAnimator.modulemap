@@ -1,0 +1,6 @@
+framework module GradientAnimator {
+  umbrella header "GradientAnimator-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -73,12 +73,16 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
     }
     
     func setupView() {
-        title = "Write"
+//        title = "Write"
+//
+//        self.navigationController?.navigationBar.prefersLargeTitles = true
+//        self.navigationController?.navigationBar.backgroundColor = .white
         
+
         view.clipsToBounds = true
         inputTextView.delegate = self
         
-        let gradientView = GradientAnimator(frame: self.view.frame, theme: GradientThemes.Sunrise, _startPoint: GradientPoints.bottomLeft, _endPoint: GradientPoints.topRight, _animationDuration: 3.0)
+        let gradientView = GradientAnimator(frame: self.view.frame, theme: GradientThemes.Sunrise, _startPoint: GradientPoints.bottomLeft, _endPoint: GradientPoints.topRight, _animationDuration: 5.0)
         self.view.insertSubview(gradientView, at: 0)
         gradientView.startAnimate()
 
@@ -167,5 +171,9 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         let loginController = LoginController()
         loginController.writeNoteContoller = self
         present(loginController, animated: true, completion: nil)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 }

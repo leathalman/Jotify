@@ -18,12 +18,12 @@ class TabBarController: BubbleTabBarController {
         
         let savedNotesVC = UINavigationController(rootViewController: SavedNoteController())
         //title must match navigation controller title set in viewDidLoad() for each viewcontroller
-        let savedItem = CBTabBarItem(title: "Saved Notes", image: #imageLiteral(resourceName: "dashboard"), tag: 0)
+        let savedItem = CBTabBarItem(title: "Notes", image: #imageLiteral(resourceName: "dashboard"), tag: 0)
         savedNotesVC.tabBarItem = savedItem
         
-        let writeNoteVC = UINavigationController(rootViewController: WriteNoteController())
+        let writeNoteVC = WriteNoteController()
         let writeItem = CBTabBarItem(title: "Write", image: #imageLiteral(resourceName: "menu"), tag: 1)
-        writeItem.tintColor = UIColor.init(r: 247, g: 123, b: 54)
+        writeItem.tintColor = UIColor.init(r: 250, g: 77, b: 77)
         writeNoteVC.tabBarItem = writeItem
         
         let settingsVC = UINavigationController(rootViewController: SettingsController())

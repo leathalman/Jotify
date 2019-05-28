@@ -40,7 +40,7 @@ class SavedNoteController: UIViewController, UICollectionViewDelegate, UINavigat
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        fetchNotes()
+//        fetchNotes()
     }
     
     func fetchNotes() {
@@ -66,10 +66,32 @@ class SavedNoteController: UIViewController, UICollectionViewDelegate, UINavigat
         }
     }
     
+    @objc func handleSwipes(_ gesture: UISwipeGestureRecognizer) {
+        if gesture.direction == .left {
+            tabBarController?.selectedIndex = 1
+            
+        } else if gesture.direction == .right {
+        }
+    }
+    
+    func setupSwipes() {
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipes(_:)))
+        swipeLeft.direction = .left
+        view.addGestureRecognizer(swipeLeft)
+        view.isUserInteractionEnabled = true
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipes(_:)))
+        swipeRight.direction = .right
+        view.addGestureRecognizer(swipeRight)
+        view.isUserInteractionEnabled = true
+    }
+    
     func setupView() {
         view.backgroundColor = .white
-        title = "Saved Notes"
         
+        title = "Notes"
+        
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 20
         layout.sectionInset = UIEdgeInsets(top: 25, left: 0, bottom: 10, right: 0)
@@ -81,6 +103,10 @@ class SavedNoteController: UIViewController, UICollectionViewDelegate, UINavigat
         collectionView.dataSource = self
         collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
         self.view.addSubview(collectionView)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
 }

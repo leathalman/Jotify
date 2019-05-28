@@ -43,6 +43,25 @@ class SettingsController: UIViewController {
         button3.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         button3.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 100).isActive = true
         
+        setupSwipes()
+    }
+    
+    @objc func handleSwipes(_ gesture: UISwipeGestureRecognizer) {
+        if gesture.direction == .left {
+        } else if gesture.direction == .right {
+            tabBarController?.selectedIndex = 1
+        }
+    }
+    
+    func setupSwipes() {
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipes(_:)))
+        swipeLeft.direction = .left
+        view.addGestureRecognizer(swipeLeft)
+        view.isUserInteractionEnabled = true
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipes(_:)))
+        swipeRight.direction = .right
+        view.addGestureRecognizer(swipeRight)
+        view.isUserInteractionEnabled = true
     }
     
     @objc private func logoutTapped() {
