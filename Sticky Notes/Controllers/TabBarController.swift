@@ -16,7 +16,7 @@ class TabBarController: BubbleTabBarController {
         
         view.backgroundColor = .white
         
-        let savedNotesVC = UINavigationController(rootViewController: SavedNoteController())
+        let savedNotesVC = UINavigationController(rootViewController: SavedNoteController(collectionViewLayout: UICollectionViewFlowLayout()))
         //title must match navigation controller title set in viewDidLoad() for each viewcontroller
         let savedItem = CBTabBarItem(title: "Notes", image: #imageLiteral(resourceName: "dashboard"), tag: 0)
         savedNotesVC.tabBarItem = savedItem

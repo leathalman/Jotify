@@ -15,7 +15,8 @@ class SettingsController: UIViewController {
         title = "Settings"
         
         view.backgroundColor = .white
-        
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+
         let button = UIButton()
         button.addTarget(self, action: #selector(logoutTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false

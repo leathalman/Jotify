@@ -15,7 +15,7 @@ class SavedNoteCell: UICollectionViewCell {
         label.textAlignment = .left
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
-        label.text = "Loading... this is a string of example text that should show the maximum length for a note in the SavedNoteCell, I guess we will see if it can go this far"
+        label.text = ""
         return label
     }()
 
@@ -36,5 +36,3 @@ class SavedNoteCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-

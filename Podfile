@@ -10,6 +10,7 @@ pod'VegaScrollFlowLayout'
 pod'MultilineTextField'
 pod'BubbleTabBar'
 pod'GradientAnimator', '~> 1.0'
+pod'Blueprints'
 
 pod'Firebase/Firestore'
 pod'Firebase/Auth'

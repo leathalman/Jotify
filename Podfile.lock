@@ -1,4 +1,5 @@
 PODS:
+  - Blueprints (0.10.5)
   - BoringSSL-GRPC (0.0.3):
     - BoringSSL-GRPC/Implementation (= 0.0.3)
     - BoringSSL-GRPC/Interface (= 0.0.3)
@@ -115,6 +116,7 @@ PODS:
   - VegaScrollFlowLayout (1.1)
 
 DEPENDENCIES:
+  - Blueprints
   - BubbleTabBar
   - Firebase/Auth
   - Firebase/Core
@@ -126,6 +128,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Blueprints
     - BoringSSL-GRPC
     - BubbleTabBar
     - Firebase
@@ -149,6 +152,7 @@ SPEC REPOS:
     - VegaScrollFlowLayout
 
 SPEC CHECKSUMS:
+  Blueprints: 0cd68556432de83fa3937108ee959d0afffd455e
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
   BubbleTabBar: 44384a54025345f40f19f10447f42f6e2b9e4ce9
   Firebase: fa80b9d987ca014a1ba9357496ef2a0178b28b12
@@ -171,6 +175,6 @@ SPEC CHECKSUMS:
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
   VegaScrollFlowLayout: 9158061f29179147755f937c2b21693fc5dbbac3
 
-PODFILE CHECKSUM: c58465628b082287d58e25e0608f77a9c899c5f6
+PODFILE CHECKSUM: 713ac45d99e45563857a8ce1e6cf1ffb00f0033c
 
 COCOAPODS: 1.5.3

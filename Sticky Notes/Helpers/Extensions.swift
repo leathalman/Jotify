@@ -10,6 +10,7 @@ import UIKit
 
 let imageCache = NSCache<AnyObject, AnyObject>()
 
+//when logincontroller is fixed, remove photo download part, also check that photo library access is not required for app, in build settings/capabilities
 extension UIImageView {
     
     func loadImageUsingCacheWithUrlString(urlString: String) {
@@ -47,26 +48,67 @@ extension String {
     }
 }
 
-extension Notification.Name {
-    static let darkModeEnabled = Notification.Name("com.chat.notifications.darkModeEnabled")
-    static let darkModeDisabled = Notification.Name("com.chat.notifications.darkModeDisabled")
-}
-
-extension UIViewController {
-    func darkTheme(tableView: UITableView) {
-        view.backgroundColor = Colors.lighterDarkBlue
-        tableView.backgroundColor = Colors.lighterDarkBlue
-        navigationController?.navigationBar.barTintColor = Colors.lighterDarkBlue
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-//        UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: true)
+public extension CALayer {
+    
+    func addShadow(color: UIColor) {
+        self.shadowOffset = .zero
+        self.shadowOpacity = 0.3
+        self.shadowRadius = 5
+        self.shadowColor = color.cgColor
+        self.masksToBounds = false
+        if cornerRadius != 0 {
+            addShadowWithRoundedCorners()
+        }
     }
     
-    func lightTheme(tableView: UITableView) {
-        view.backgroundColor = UIColor.white
-        tableView.backgroundColor = UIColor.white
-        navigationController?.navigationBar.barTintColor = Colors.white
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-//        UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.default, animated: true)
-        
+    func roundCorners(radius: CGFloat) {
+        self.cornerRadius = radius
+        if shadowOpacity != 0 {
+            addShadowWithRoundedCorners()
+        }
+    }
+    
+    func showShadow(duration: CFTimeInterval?) {
+        let animation = CABasicAnimation(keyPath: "shadowOpacity")
+        animation.fromValue = self.shadowOpacity
+        animation.toValue = 0.3
+        animation.duration = (duration) ?? (0)
+        self.add(animation, forKey: animation.keyPath)
+        self.shadowOpacity = 0.3
+    }
+    
+    func hideShadow(duration: CFTimeInterval?) {
+        let animation = CABasicAnimation(keyPath: "shadowOpacity")
+        animation.fromValue = self.shadowOpacity
+        animation.toValue = 0.0
+        animation.duration = (duration) ?? (0)
+        self.add(animation, forKey: animation.keyPath)
+        self.shadowOpacity = 0.0
     }
 }
+
+extension CALayer {
+    
+    private func addShadowWithRoundedCorners() {
+        if let contents = self.contents {
+            let contentLayerName = "contentLayer"
+            masksToBounds = false
+            sublayers?.filter { $0.frame.equalTo(self.bounds) }.forEach {
+                $0.roundCorners(radius: self.cornerRadius)
+            }
+            self.contents = nil
+            if let sublayer = sublayers?.first,
+                sublayer.name == contentLayerName {
+                sublayer.removeFromSuperlayer()
+            }
+            let contentLayer = CALayer()
+            contentLayer.name = contentLayerName
+            contentLayer.contents = contents
+            contentLayer.frame = bounds
+            contentLayer.cornerRadius = cornerRadius
+            contentLayer.masksToBounds = true
+            insertSublayer(contentLayer, at: 0)
+        }
+    }
+}
+

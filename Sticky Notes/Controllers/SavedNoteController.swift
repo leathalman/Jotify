@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 import FirebaseAuth
+import Blueprints
 
 struct Note {
     static var text: String = "Default Text"
@@ -19,7 +20,16 @@ struct Note {
 
 //need to put all of the texts into an array and then can call the cell with IndexPath to get them to spit out in an order instead of overwriting each other, not sure how to use dictionaries but should probably figure out how to... need to get data, add it to struct and array as a single dictionary action and then use this array to create number of cells and text of cells... ugh, passing data is actually really hard, more to learn I guess
 
-class SavedNoteController: UIViewController, UICollectionViewDelegate, UINavigationBarDelegate, UICollectionViewDelegateFlowLayout {
+class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
+    
+    let blueprintLayout = VerticalBlueprintLayout(
+        itemsPerRow: 1.0,
+        height: 87,
+        minimumInteritemSpacing: 10,
+        minimumLineSpacing: 15,
+        sectionInset: EdgeInsets(top: 10, left: 10, bottom: 84, right: 10),
+        stickyHeaders: true,
+        stickyFooters: false)
     
     let db = Firestore.firestore()
     var notes = [Any]()
@@ -35,12 +45,25 @@ class SavedNoteController: UIViewController, UICollectionViewDelegate, UINavigat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .white
+        
+        title = "Notes"
+        
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        
+        collectionView.frame = self.view.frame
+        collectionView.setCollectionViewLayout(blueprintLayout, animated: true)
+        collectionView.backgroundColor = .white
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
+        view.addSubview(collectionView)
+        
         fetchNotes()
-        setupView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        fetchNotes()
+        //        fetchNotes()
     }
     
     func fetchNotes() {
@@ -86,52 +109,23 @@ class SavedNoteController: UIViewController, UICollectionViewDelegate, UINavigat
     }
     
     func setupView() {
-        view.backgroundColor = .white
-        
-        title = "Notes"
-        
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 20
-        layout.sectionInset = UIEdgeInsets(top: 25, left: 0, bottom: 10, right: 0)
-        
-        let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        layout.itemSize = CGSize(width: collectionView.frame.width - 20, height: 87)
-        collectionView.backgroundColor = .white
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
-        self.view.addSubview(collectionView)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
-}
 
-extension SavedNoteController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 15
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedNoteCell", for: indexPath) as? SavedNoteCell else {fatalError("Wrong cell class dequeued")}
         
         cell.contentView.backgroundColor = .white
         cell.contentView.layer.cornerRadius = 10
-        cell.contentView.layer.borderWidth = 1
-        cell.contentView.layer.borderColor = UIColor.clear.cgColor
-        cell.contentView.layer.masksToBounds = true
         
-        cell.layer.shadowColor = UIColor.lightGray.cgColor
-        cell.layer.shadowOffset = CGSize(width:0,height: 2)
-        cell.layer.shadowRadius = 2
-        cell.layer.shadowOpacity = 1
-        cell.layer.masksToBounds = false
-        cell.layer.shadowPath = UIBezierPath(roundedRect:cell.bounds, cornerRadius:cell.contentView.layer.cornerRadius).cgPath
-        
+        cell.layer.addShadow(color: UIColor.darkGray)
         
         cell.textLabel.text = Note.text
         
