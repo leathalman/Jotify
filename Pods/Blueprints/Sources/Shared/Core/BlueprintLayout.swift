@@ -274,7 +274,7 @@
     case .vertical:
       allCachedAttributes = allCachedAttributes.sorted(by: { $0.frame.minY < $1.frame.minY })
     @unknown default:
-        fatalError("Scroll direction fatalError, check Blueprint podfile in BlueprintLayout.swift")
+        fatalError("Somehow you scrolled incorrectly, check BlueprintLayout.swift")
     }
 
     cachedSupplementaryAttributes = Array(cachedSupplementaryAttributesBySection.joined())
@@ -379,7 +379,7 @@
       case .horizontal:
         return (visibleRect.origin.x >= $0.min && visibleRect.origin.x <= $0.max) || $0.frame.intersects(visibleRect)
       @unknown default:
-        fatalError("Scroll direction fatalError, check Blueprint podfile in BlueprintLayout.swift")
+        fatalError("BlueprintLayout.swift")
         }
     })
 
@@ -403,7 +403,7 @@
             header.frame.origin.x = collectionView.contentOffset.x + sectionInset.left + sectionInset.right
           }
         @unknown default:
-            fatalError("Scroll direction fatalError, check Blueprint podfile in BlueprintLayout.swift")
+            fatalError("BlueprintLayout.swift")
         }
 
         if let invalidationContext = context as? BlueprintInvalidationContext {
@@ -425,7 +425,7 @@
         case .horizontal:
           footer.frame.origin.x = min(max(collectionView.contentOffset.x, footer.min), footer.max - footer.frame.size.width)
         @unknown default:
-            fatalError("Scroll direction fatalError, check Blueprint podfile in BlueprintLayout.swift")
+            fatalError("BlueprintLayout.swift")
         }
 
         // Adjust the X-origin if the content offset exceeds the width of the content size.

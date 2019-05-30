@@ -1,0 +1,486 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		71012784B2671B58DCA8E6AD /* Pods_Jotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946DBBF7BD08962895A6AFD5 /* Pods_Jotify.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		F60DE60422838F69008701E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60DE60322838F69008701E9 /* AppDelegate.swift */; };
+		F60DE60922838F69008701E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F60DE60722838F69008701E9 /* Main.storyboard */; };
+		F60DE60B22838F6A008701E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F60DE60A22838F6A008701E9 /* Assets.xcassets */; };
+		F60DE60E22838F6A008701E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F60DE60C22838F6A008701E9 /* LaunchScreen.storyboard */; };
+		F67949A122A05A1900BCC979 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67949A022A05A1900BCC979 /* SettingsCell.swift */; };
+		F67949A622A05B8500BCC979 /* UserInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67949A522A05B8500BCC979 /* UserInfoHeader.swift */; };
+		F68F6857228A16FE00EEC9D9 /* SavedNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68F6856228A16FE00EEC9D9 /* SavedNoteController.swift */; };
+		F698FD032283B6CA000B69E5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F698FD022283B6CA000B69E5 /* Constants.swift */; };
+		F69C91AB229CCC0400DB0A61 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69C91AA229CCC0400DB0A61 /* TabBarController.swift */; };
+		F69DBAC82289016E006888C9 /* WriteNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69DBAC72289016E006888C9 /* WriteNoteController.swift */; };
+		F69DBACC22890272006888C9 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69DBACB22890272006888C9 /* SettingsController.swift */; };
+		F69FC3AF22A08FA400E6455E /* GradientAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69FC3AE22A08FA300E6455E /* GradientAnimator.swift */; };
+		F6B906D4228CF61700FC0123 /* SavedNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B906D3228CF61700FC0123 /* SavedNoteCell.swift */; };
+		F6F30A2A22A087D4009D601B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F30A2922A087D4009D601B /* Extensions.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		110E82A218747DD7752608D3 /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Jotify/Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
+		946DBBF7BD08962895A6AFD5 /* Pods_Jotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F60DE60022838F69008701E9 /* Jotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F60DE60322838F69008701E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F60DE60822838F69008701E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F60DE60A22838F6A008701E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F60DE60D22838F6A008701E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F60DE60F22838F6A008701E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F67949A022A05A1900BCC979 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		F67949A522A05B8500BCC979 /* UserInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoHeader.swift; sourceTree = "<group>"; };
+		F68F6856228A16FE00EEC9D9 /* SavedNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedNoteController.swift; sourceTree = "<group>"; };
+		F694B6252CC016D2B7CF8D00 /* Pods-Jotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Jotify/Pods-Jotify.release.xcconfig"; sourceTree = "<group>"; };
+		F698FD022283B6CA000B69E5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F69C91AA229CCC0400DB0A61 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		F69DBAC72289016E006888C9 /* WriteNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteController.swift; sourceTree = "<group>"; };
+		F69DBACB22890272006888C9 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		F69FC3AE22A08FA300E6455E /* GradientAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientAnimator.swift; sourceTree = "<group>"; };
+		F6B906D3228CF61700FC0123 /* SavedNoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedNoteCell.swift; sourceTree = "<group>"; };
+		F6F30A2922A087D4009D601B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Jotify/Model/Extensions.swift; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F60DE5FD22838F69008701E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71012784B2671B58DCA8E6AD /* Pods_Jotify.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		61ADBA6B684CB0332A152197 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				110E82A218747DD7752608D3 /* Pods-Jotify.debug.xcconfig */,
+				F694B6252CC016D2B7CF8D00 /* Pods-Jotify.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9040D59945FA6C7D4E70C1CD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				946DBBF7BD08962895A6AFD5 /* Pods_Jotify.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F60DE5F722838F69008701E9 = {
+			isa = PBXGroup;
+			children = (
+				F60DE60222838F69008701E9 /* Jotify */,
+				F60DE60122838F69008701E9 /* Products */,
+				61ADBA6B684CB0332A152197 /* Pods */,
+				9040D59945FA6C7D4E70C1CD /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F60DE60122838F69008701E9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F60DE60022838F69008701E9 /* Jotify.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F60DE60222838F69008701E9 /* Jotify */ = {
+			isa = PBXGroup;
+			children = (
+				F67949A222A05B3300BCC979 /* Model */,
+				F67949A322A05B3A00BCC979 /* View */,
+				F67949A422A05B4100BCC979 /* Controller */,
+				F60DE60322838F69008701E9 /* AppDelegate.swift */,
+				F60DE60722838F69008701E9 /* Main.storyboard */,
+				F60DE60A22838F6A008701E9 /* Assets.xcassets */,
+				F60DE60C22838F6A008701E9 /* LaunchScreen.storyboard */,
+				F60DE60F22838F6A008701E9 /* Info.plist */,
+			);
+			path = Jotify;
+			sourceTree = "<group>";
+		};
+		F67949A222A05B3300BCC979 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F6F30A2922A087D4009D601B /* Extensions.swift */,
+				F698FD022283B6CA000B69E5 /* Constants.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F67949A322A05B3A00BCC979 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F6B906D3228CF61700FC0123 /* SavedNoteCell.swift */,
+				F67949A022A05A1900BCC979 /* SettingsCell.swift */,
+				F67949A522A05B8500BCC979 /* UserInfoHeader.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F67949A422A05B4100BCC979 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F68F6856228A16FE00EEC9D9 /* SavedNoteController.swift */,
+				F69DBAC72289016E006888C9 /* WriteNoteController.swift */,
+				F69DBACB22890272006888C9 /* SettingsController.swift */,
+				F69C91AA229CCC0400DB0A61 /* TabBarController.swift */,
+				F69FC3AE22A08FA300E6455E /* GradientAnimator.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F60DE5FF22838F69008701E9 /* Jotify */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F60DE61222838F6A008701E9 /* Build configuration list for PBXNativeTarget "Jotify" */;
+			buildPhases = (
+				7AA12DF25D3B9088AD19D561 /* [CP] Check Pods Manifest.lock */,
+				F60DE5FC22838F69008701E9 /* Sources */,
+				F60DE5FD22838F69008701E9 /* Frameworks */,
+				F60DE5FE22838F69008701E9 /* Resources */,
+				7B876FE83353810C5C226823 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Jotify;
+			productName = "Sticky Notes";
+			productReference = F60DE60022838F69008701E9 /* Jotify.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F60DE5F822838F69008701E9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = "Harrison Leath";
+				TargetAttributes = {
+					F60DE5FF22838F69008701E9 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+				};
+			};
+			buildConfigurationList = F60DE5FB22838F69008701E9 /* Build configuration list for PBXProject "Jotify" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F60DE5F722838F69008701E9;
+			productRefGroup = F60DE60122838F69008701E9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F60DE5FF22838F69008701E9 /* Jotify */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F60DE5FE22838F69008701E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F60DE60E22838F6A008701E9 /* LaunchScreen.storyboard in Resources */,
+				F60DE60B22838F6A008701E9 /* Assets.xcassets in Resources */,
+				F60DE60922838F69008701E9 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7AA12DF25D3B9088AD19D561 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Jotify-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7B876FE83353810C5C226823 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Jotify/Pods-Jotify-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Blueprints/Blueprints.framework",
+				"${BUILT_PRODUCTS_DIR}/BubbleTabBar/BubbleTabBar.framework",
+				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
+				"${BUILT_PRODUCTS_DIR}/MultilineTextField/MultilineTextField.framework",
+				"${BUILT_PRODUCTS_DIR}/VegaScrollFlowLayout/VegaScrollFlowLayout.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Blueprints.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BubbleTabBar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MultilineTextField.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VegaScrollFlowLayout.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Jotify/Pods-Jotify-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F60DE5FC22838F69008701E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F60DE60422838F69008701E9 /* AppDelegate.swift in Sources */,
+				F6B906D4228CF61700FC0123 /* SavedNoteCell.swift in Sources */,
+				F68F6857228A16FE00EEC9D9 /* SavedNoteController.swift in Sources */,
+				F69DBAC82289016E006888C9 /* WriteNoteController.swift in Sources */,
+				F69DBACC22890272006888C9 /* SettingsController.swift in Sources */,
+				F6F30A2A22A087D4009D601B /* Extensions.swift in Sources */,
+				F67949A622A05B8500BCC979 /* UserInfoHeader.swift in Sources */,
+				F69FC3AF22A08FA400E6455E /* GradientAnimator.swift in Sources */,
+				F69C91AB229CCC0400DB0A61 /* TabBarController.swift in Sources */,
+				F698FD032283B6CA000B69E5 /* Constants.swift in Sources */,
+				F67949A122A05A1900BCC979 /* SettingsCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F60DE60722838F69008701E9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F60DE60822838F69008701E9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F60DE60C22838F6A008701E9 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F60DE60D22838F6A008701E9 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F60DE61022838F6A008701E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F60DE61122838F6A008701E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F60DE61322838F6A008701E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 110E82A218747DD7752608D3 /* Pods-Jotify.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8CAAH9J56M;
+				INFOPLIST_FILE = Jotify/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.HarrisonLeath.Jotify;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F60DE61422838F6A008701E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F694B6252CC016D2B7CF8D00 /* Pods-Jotify.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8CAAH9J56M;
+				INFOPLIST_FILE = Jotify/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.HarrisonLeath.Jotify;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F60DE5FB22838F69008701E9 /* Build configuration list for PBXProject "Jotify" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F60DE61022838F6A008701E9 /* Debug */,
+				F60DE61122838F6A008701E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F60DE61222838F6A008701E9 /* Build configuration list for PBXNativeTarget "Jotify" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F60DE61322838F6A008701E9 /* Debug */,
+				F60DE61422838F6A008701E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F60DE5F822838F69008701E9 /* Project object */;
+}

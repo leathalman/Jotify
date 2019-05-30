@@ -7,179 +7,226 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09483A2C963DB6FF3DB343BCA62E6D7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFB40531CB700ADF867FEEE78561E78 /* Foundation.framework */; };
-		095ABCBFEAB9905E2DA742F516489C31 /* Pods-Sticky Notes-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E551ABBE6DD39DE15225DADAF3405 /* Pods-Sticky Notes-dummy.m */; };
-		09E19E660A11B3C8A74765E1360FEBFE /* SupplementaryLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29C5DA0A96EE72F4414C32DCB227021 /* SupplementaryLayoutAttributes.swift */; };
-		13D94EC100076CE9726E7C4B2CF8B0F7 /* VegaScrollFlowLayout-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A644A35914E750492C115B57085B832 /* VegaScrollFlowLayout-dummy.m */; };
-		144586081E292FE0D66D36373DCD9932 /* GradientAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FCA7DD1FF47230EEC949687960B45C /* GradientAnimator.swift */; };
-		14BC20F30791B9CAC849332C1AED9D32 /* BlueprintLayout+iOS+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F482A35BBD2A15126AA9F35AD0AB2082 /* BlueprintLayout+iOS+tvOS.swift */; };
-		1A1B37043B30B6DCF2F42880BB93A905 /* MosaicBlueprintPatternController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDF0C265850AE6B7347D0A339AB3270 /* MosaicBlueprintPatternController.swift */; };
-		1F4CA35BD0D684567B37BA3571C253B3 /* BinarySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ED94AC07E3748DD1FB1B300C269D56 /* BinarySearch.swift */; };
-		241AB97DC4F71C94B1B9EC9A83F6A420 /* BlueprintLayoutAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F905BEC68B7DFC79A18180B352FE860 /* BlueprintLayoutAnimation.swift */; };
-		2C8C10612FC0ED3C65403CC07DFD75A2 /* BubbleTabBar-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E41F974B132B6F41846B97E9843C2161 /* BubbleTabBar-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		30A2DC80306AEE4ACDC65A1EDF656539 /* GradientAnimator-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3220C3CC16B10D6BEB60E4827AE15DF2 /* GradientAnimator-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		521C0CD9071BB110DC250B41BE8DEB2C /* TypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D8940570023A2089FCF0B750414B3 /* TypeAlias.swift */; };
-		5248120187CD106B66599AB33F1E540D /* BlueprintLayoutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A204064FDF0CDFFC474624C722630F0A /* BlueprintLayoutAnimator.swift */; };
-		52DB7BB262CEE2B66C6A41F94BBA9078 /* MultilineTextField-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E7A41EDFE5D2586C4213C502DB8EE47C /* MultilineTextField-dummy.m */; };
-		550574D9819246FE43B320442A9580FF /* MosaicPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC83936B876524AC23EA50B88E11A01 /* MosaicPattern.swift */; };
-		58604CFB1D5AE1ADD4F1CE7587D99B33 /* BlueprintLayoutAnimator+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC0257E0E32127B0BC11F0A4586591A /* BlueprintLayoutAnimator+Extensions.swift */; };
-		616A9A32EE77B1EAF1A4E65FA8753499 /* VerticalBlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F24DECA7FE85C6B339C23E1416FA993 /* VerticalBlueprintLayout.swift */; };
-		62BA1F1CD9FB488F93A850EA12E615EA /* VegaScrollFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC160745E00EFFDDF5DFB4C318088FD3 /* VegaScrollFlowLayout.swift */; };
-		64C9579BDEE334FA956528A3FB6D916F /* contents.xcworkspacedata in Sources */ = {isa = PBXBuildFile; fileRef = 183C4171264706FA21B3B9E8BA627950 /* contents.xcworkspacedata */; };
-		64E1E14AB438C3A8DFE0E275E605EF46 /* Podfile in Sources */ = {isa = PBXBuildFile; fileRef = 09284147D0E61470A04011D47F7D08A4 /* Podfile */; };
-		68094A77B29DCF0134B5D26B7A6B78CB /* CBTabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1061D141E31F653D8E924EC9FC6F14C /* CBTabBarButton.swift */; };
-		69037462BD4DB1C0373FA88F26CFAE41 /* VegaScrollFlowLayout-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DB0EFDB5B4A58919F6274246724944B1 /* VegaScrollFlowLayout-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6E40262142F1C6287A0C2A29D7E6FF5B /* BlueprintLayoutAnimator+iOS+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A82868DBAFEE3E396AB0E4A1DB6C9F /* BlueprintLayoutAnimator+iOS+tvOS.swift */; };
-		7021302E5089484E95959DA5AFC61875 /* MultilineTextField-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F46D0CED5ABB5CF3FAD338EF18A990AC /* MultilineTextField-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		784EEEA9BF994F0974FBE7648182BC22 /* GradientAnimator.podspec in Sources */ = {isa = PBXBuildFile; fileRef = B7AA7A7BF4A5EA0A9C1EB73B5A6C52E0 /* GradientAnimator.podspec */; };
-		7AFC6B0690644C128751BEF06FFC8DD0 /* BlueprintSupplementaryKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D3599A8CF3C3C2CA18C312E4A53D43 /* BlueprintSupplementaryKind.swift */; };
-		7E7CB42FA0AA2B85537DCCC5C6C06D4D /* Blueprints-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E783B3745AF1561671D0A566961669FB /* Blueprints-dummy.m */; };
-		825C264F68FF5771DF06654C03408799 /* IDEWorkspaceChecks.plist in Sources */ = {isa = PBXBuildFile; fileRef = 41A5C8A1CD96C3D52D63AA943B108B29 /* IDEWorkspaceChecks.plist */; };
-		82EF93DBFA541D1767DC108A17B92322 /* BlueprintLayoutAnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACC57AF4A448132F271A6EB0CBBD9F /* BlueprintLayoutAnimationType.swift */; };
-		8598BCD5BEF99AD7ED6275B1C5D41CDA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFB40531CB700ADF867FEEE78561E78 /* Foundation.framework */; };
-		87E44DB275395172E6719191E0C3BE32 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFB40531CB700ADF867FEEE78561E78 /* Foundation.framework */; };
-		8895D06E60B31C29DDA8868EA033A6E7 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E8787446164AAC6AC5B39DB7705EF6 /* MultilineTextField.swift */; };
-		896A3FA4EBF2CEAD3D9E401DF2D5D874 /* GradientAnimator-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D5A8DB22DFF4AA54BDFC43BA7E48601F /* GradientAnimator-dummy.m */; };
-		897A8E34822224A31B5DFF41837296B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E404AA6957590324067E330E0EC533 /* UIKit.framework */; };
-		95833A26FAA08E1EF54B510A28F44BDF /* GradientAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = C1091F2328698075C90AA1878CC808A7 /* GradientAnimator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9B769C7F1563EF59785F100A32F87586 /* BubbleTabBar-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FABB75C0DF24433355D2E7BF28DA922 /* BubbleTabBar-dummy.m */; };
-		9C68AB4958C187B89A5B82C6CEB094B7 /* BubbleTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E425D3D5039A3728DC32FD1F57829B0 /* BubbleTabBar.swift */; };
-		A94EA9B89CCFC1A15896BF8D90F35571 /* VerticalMosaicBlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A76949818F614B9DDF49B73830606E /* VerticalMosaicBlueprintLayout.swift */; };
-		AC73048F9AA3F79F9777D2A9B58A46FB /* DefaultLayoutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491FB55A486A1BA3396AD1CA65D7D34E /* DefaultLayoutAnimator.swift */; };
-		BC0357DD23951238AEF6DA77D56ECF23 /* MosaicLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280D7D457AC76C147EFEC30281EB711B /* MosaicLayoutAttributes.swift */; };
-		BE0A040803171DE02AF7D110B2272B7C /* BubbleTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8528CC929FE51738433D136E4A9F597 /* BubbleTabBarController.swift */; };
-		C29C078D3ECF6E60E88EFFD70A98CABA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFB40531CB700ADF867FEEE78561E78 /* Foundation.framework */; };
-		D6A5AD80CFC6D63BD04912CDC71B1163 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFB40531CB700ADF867FEEE78561E78 /* Foundation.framework */; };
-		EE5C58926F887CE3948A3259CC878412 /* Pods-Sticky Notes-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A8C7DB7A54483571EC5627CDC2057D72 /* Pods-Sticky Notes-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EF3F9D6CD751D15F3369F463E6FA424A /* HorizontalBlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED879F947FD460802494098E43EDC8E /* HorizontalBlueprintLayout.swift */; };
-		EF4F799E0E51F084F0C074C40B179767 /* Blueprints-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F490CA0E5E74793A520E4F2B7BAAC49 /* Blueprints-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F33A245C527001EAAEAD4B70F7A9515C /* project.pbxproj in Sources */ = {isa = PBXBuildFile; fileRef = 39E9BEDF0DF9D8A3FD29BF95BCE5C22C /* project.pbxproj */; };
-		F3E89B739E94CA3C1FDE23BD3C57DF18 /* BlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B7A7E8CAE4CF18C5E235258DEDD2D6 /* BlueprintLayout.swift */; };
-		F453D758981ADFCB8437FCF42A33C61B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFB40531CB700ADF867FEEE78561E78 /* Foundation.framework */; };
-		FE255B7CF39257049DD6D4A250B9E654 /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DB64FFA86DD3159CAC003D8155DCD7 /* UICollectionView+Extensions.swift */; };
-		FE73C8A27263F7589194FFB14A65ABE2 /* BlueprintInvalidationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF5740A5CF125DD19A38AC585080BF4 /* BlueprintInvalidationContext.swift */; };
+		040F1D05E493CAE80CC98002B9A427C8 /* Pods-Jotify-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA58E0871C71C57E9598A229E964080 /* Pods-Jotify-dummy.m */; };
+		04108AFD9F170803BFE3724EB8AA219D /* UIViewController+Chameleon.h in Headers */ = {isa = PBXBuildFile; fileRef = 82A511156E127FA2CC8B663BD4E19000 /* UIViewController+Chameleon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		06675AC28CE8D535168324F5294A9A64 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8205DCE243CEBCEAAFFDB2563B65CD4 /* QuartzCore.framework */; };
+		09483A2C963DB6FF3DB343BCA62E6D7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749ADD089E805C2D7E7DF8BD44F537E3 /* Foundation.framework */; };
+		09E19E660A11B3C8A74765E1360FEBFE /* SupplementaryLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4180D26D2DB19C46D0CFF61F29CEE0 /* SupplementaryLayoutAttributes.swift */; };
+		0D9F7EDC8CF4CCC4B2CBA71F2F9181D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749ADD089E805C2D7E7DF8BD44F537E3 /* Foundation.framework */; };
+		10570F50E7A022E58345B2E87379FC47 /* ChameleonFramework-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 579AD660F672A531CB1F6B0633791E3E /* ChameleonFramework-dummy.m */; };
+		14BC20F30791B9CAC849332C1AED9D32 /* BlueprintLayout+iOS+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DF6D332CBF0F1BA114A1654DD507D9 /* BlueprintLayout+iOS+tvOS.swift */; };
+		16BA4CE6DDEA9E85EB39C2297D55E70C /* VegaScrollFlowLayout-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC3DA2CFA0D6450DAC7B6EBA487C9D6 /* VegaScrollFlowLayout-dummy.m */; };
+		1A1B37043B30B6DCF2F42880BB93A905 /* MosaicBlueprintPatternController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DE5DA667BAD422DB44ED73A65A2F1 /* MosaicBlueprintPatternController.swift */; };
+		1F4CA35BD0D684567B37BA3571C253B3 /* BinarySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07B90BF2BDFE49E86339BC7834C6F3D /* BinarySearch.swift */; };
+		241AB97DC4F71C94B1B9EC9A83F6A420 /* BlueprintLayoutAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E204B6B4BE9E4884C58CB0368DA30E4 /* BlueprintLayoutAnimation.swift */; };
+		25FB0E8A4A63BDB5F7C6181B13936240 /* ChameleonConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = C30716C4A04887222D5E9C3C9EE8D337 /* ChameleonConstants.m */; };
+		276892DF04E0F27F4A2EF38BC852B246 /* NSArray+Chameleon.h in Headers */ = {isa = PBXBuildFile; fileRef = C42E57BF70B1363C5F1A71714172B0A7 /* NSArray+Chameleon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2A0A97C72C990D2155DF03AC8AA6B8AB /* UILabel+Chameleon.h in Headers */ = {isa = PBXBuildFile; fileRef = 759E8B745C8B6C4F4685D6E3CA99C881 /* UILabel+Chameleon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2AFDAA3340C7ABA4499F143DB6A9CF82 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE2CE86CEAA9896D6244DE9999C4B48 /* UIKit.framework */; };
+		2C088933755BD99468BB3D0BC3898A08 /* Pods-Jotify-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4269ABE7EE4C574F2DCD0BB108816D31 /* Pods-Jotify-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C8C10612FC0ED3C65403CC07DFD75A2 /* BubbleTabBar-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 03CD6B9B6C0101A2E44DE9382BE58F99 /* BubbleTabBar-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3271C01ADFEB74E8BC01498626FA8FF5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8E886B8A5323A225031593C734420F7 /* CoreGraphics.framework */; };
+		3CC7EEAA4241BFF54BA79EE6E4958486 /* ChameleonMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = FCFBCBD6C77E19FBC6298649062F2FCF /* ChameleonMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4334B1A88F7630138E65EA4E3C990793 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749ADD089E805C2D7E7DF8BD44F537E3 /* Foundation.framework */; };
+		4363699449110B3C00BB8DEB599ECDC8 /* ChameleonFramework-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6768E4B0357651D84CC5C2FB814A266B /* ChameleonFramework-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		47A93ED912575A29583FF2F22030FD2B /* UIButton+Chameleon.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A85BA2E6DD9C56A240677EE5B5E86E4 /* UIButton+Chameleon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		521C0CD9071BB110DC250B41BE8DEB2C /* TypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542821AA14DC00756D5F4A5B681D5609 /* TypeAlias.swift */; };
+		5248120187CD106B66599AB33F1E540D /* BlueprintLayoutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84C7755F1EC431DC1FA45A59FA7DD88 /* BlueprintLayoutAnimator.swift */; };
+		52DB7BB262CEE2B66C6A41F94BBA9078 /* MultilineTextField-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDC2BEB90B5C2E94CAD73A4DAAEBC6F /* MultilineTextField-dummy.m */; };
+		5354A57F40250C5923036E9213767267 /* UILabel+Chameleon.m in Sources */ = {isa = PBXBuildFile; fileRef = EC008CF76D42FAF17E18C70D5187C0CF /* UILabel+Chameleon.m */; };
+		550574D9819246FE43B320442A9580FF /* MosaicPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7DFA994450006474CD796B5097270C /* MosaicPattern.swift */; };
+		58604CFB1D5AE1ADD4F1CE7587D99B33 /* BlueprintLayoutAnimator+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E438CEC5DBAB9B688E4583ED5AC080F7 /* BlueprintLayoutAnimator+Extensions.swift */; };
+		5C07A8E1608D2C5193D9059911B68094 /* UIAppearance+Swift.m in Sources */ = {isa = PBXBuildFile; fileRef = DF1136780E2D70645875C035F2D91E7C /* UIAppearance+Swift.m */; };
+		5DE6E17FE4E3E7D68BAD9260ADEC9593 /* UIView+ChameleonPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 12CD5F16480228AD24E8192ED2CF2BA4 /* UIView+ChameleonPrivate.m */; };
+		616A9A32EE77B1EAF1A4E65FA8753499 /* VerticalBlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596283255F25A42D589E1C4D7A4DCB3 /* VerticalBlueprintLayout.swift */; };
+		649565F0B33703A32BCF4A5D30D1981B /* Chameleon.h in Headers */ = {isa = PBXBuildFile; fileRef = A47CDB1D809BCF9AB3A7FDF953B19444 /* Chameleon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		68094A77B29DCF0134B5D26B7A6B78CB /* CBTabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4B22D5E26C58509BBA4A6D166B17C1 /* CBTabBarButton.swift */; };
+		6E40262142F1C6287A0C2A29D7E6FF5B /* BlueprintLayoutAnimator+iOS+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25084941690808F2B2994B2B844D6510 /* BlueprintLayoutAnimator+iOS+tvOS.swift */; };
+		7021302E5089484E95959DA5AFC61875 /* MultilineTextField-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4586EB368360FD7644C9E877E582A840 /* MultilineTextField-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		74ED9FC65A400648D16C1FD9247FB27E /* UIColor+Chameleon.m in Sources */ = {isa = PBXBuildFile; fileRef = 8219FA974F3C567D9D1D138C25AB3DA4 /* UIColor+Chameleon.m */; };
+		7AFC6B0690644C128751BEF06FFC8DD0 /* BlueprintSupplementaryKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C68D68D33DAB1566655AA461A1E4D9 /* BlueprintSupplementaryKind.swift */; };
+		7E7CB42FA0AA2B85537DCCC5C6C06D4D /* Blueprints-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0558765CCD437D81B85E9123784B9F11 /* Blueprints-dummy.m */; };
+		82EF93DBFA541D1767DC108A17B92322 /* BlueprintLayoutAnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098E31BBB6AC04F98992912994759BA5 /* BlueprintLayoutAnimationType.swift */; };
+		846C3650CC9EDC269D0DAFC7D85AD9DD /* UIColor+ChameleonPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = EA6BEA2BC8B278D695365F5596680A9F /* UIColor+ChameleonPrivate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8895D06E60B31C29DDA8868EA033A6E7 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA63729F8D1E36E1101BAFCE0E000DC /* MultilineTextField.swift */; };
+		897A8E34822224A31B5DFF41837296B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE2CE86CEAA9896D6244DE9999C4B48 /* UIKit.framework */; };
+		8BE8E49FF96D45C33ABF40360A08F83C /* Chameleon_.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A76D0F1F5909223F6FB5AC7369334AA /* Chameleon_.m */; };
+		8C9959782FFB4C255C8A47D856A9B78D /* VegaScrollFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44408C76BF20EE1CF3FBCD91D5E41786 /* VegaScrollFlowLayout.swift */; };
+		95DE1CE06439FEE759501298C0436E4D /* UIButton+Chameleon.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD3E5E89B9F3FB53892FFC850BD1366 /* UIButton+Chameleon.m */; };
+		98F84F015C053E2028F539E51E996BF9 /* VegaScrollFlowLayout-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C687F0C4410E113E78AA9AE2501A5DB3 /* VegaScrollFlowLayout-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B769C7F1563EF59785F100A32F87586 /* BubbleTabBar-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F1DCCF96CF0D68428D9D581664E8B54F /* BubbleTabBar-dummy.m */; };
+		9C68AB4958C187B89A5B82C6CEB094B7 /* BubbleTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63AB2D4B7DE7C68E8E87C85B504523C /* BubbleTabBar.swift */; };
+		9E9DB644D0AAC35A33C068400E84ECBF /* UIImage+ChameleonPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = B36FD1FE5B9A78AF98D3D4F1F4E09C68 /* UIImage+ChameleonPrivate.m */; };
+		A00C64F2FAEF1AEF193A06A852F7519C /* UIAppearance+Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 3650BA974E6E929E4F6C0FCBA22C228E /* UIAppearance+Swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A36C06A28CDE0AED55995E7998B293D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749ADD089E805C2D7E7DF8BD44F537E3 /* Foundation.framework */; };
+		A94EA9B89CCFC1A15896BF8D90F35571 /* VerticalMosaicBlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110053094B03410F13FDC3F7828CD125 /* VerticalMosaicBlueprintLayout.swift */; };
+		AA23FF822AC1CFC7FC07F8D9C882813B /* UINavigationController+Chameleon.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F373D4F52D3AA0691849A3E989645F /* UINavigationController+Chameleon.m */; };
+		AC73048F9AA3F79F9777D2A9B58A46FB /* DefaultLayoutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE93864E772DF552CCDFA0EF03104DBA /* DefaultLayoutAnimator.swift */; };
+		AC89BDBF1B01A09F8F40F4278B3D8188 /* UIImage+ChameleonPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F0F16312BB384FFF18A63F15125F7F4 /* UIImage+ChameleonPrivate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B02260FB437A7E63B5BAEE54D97E35A9 /* NSArray+Chameleon.m in Sources */ = {isa = PBXBuildFile; fileRef = C6839D2AB59BC86873243058D31DC5A4 /* NSArray+Chameleon.m */; };
+		B2259DE2D05014CA92AF2AFF146ACDA1 /* ChameleonConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = A69B7F417D4A2F2C76583B40E94543BF /* ChameleonConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B84536EB9A282A3161E70A3B38E22601 /* Chameleon_.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EFBF1939A8151F0E8173ED4D9470AC0 /* Chameleon_.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BC0357DD23951238AEF6DA77D56ECF23 /* MosaicLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D6A64BF000B6775083686EC190CC7C /* MosaicLayoutAttributes.swift */; };
+		BE0A040803171DE02AF7D110B2272B7C /* BubbleTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42675A1086C220CA6F7E6234698D645D /* BubbleTabBarController.swift */; };
+		BE81BF1D8A6FA485AA575DBE296A7F3F /* UIColor+Chameleon.h in Headers */ = {isa = PBXBuildFile; fileRef = 70E25087A5C29CF2EDA5B13BA23CF246 /* UIColor+Chameleon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CF0C1E295B8DC00BCB39851171B6BD50 /* UIColor+ChameleonPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = B118A716E617B44D0C7B4FEDCAAF45CB /* UIColor+ChameleonPrivate.m */; };
+		D4EBFFD4220ADF1964E17F53621EEEB1 /* UIViewController+Chameleon.m in Sources */ = {isa = PBXBuildFile; fileRef = C28B57BC3F0E1C8B73C3C9F82E7F83E1 /* UIViewController+Chameleon.m */; };
+		D6A5AD80CFC6D63BD04912CDC71B1163 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749ADD089E805C2D7E7DF8BD44F537E3 /* Foundation.framework */; };
+		DE1388ABE89EB9B3FD648BB25689B689 /* UINavigationController+Chameleon.h in Headers */ = {isa = PBXBuildFile; fileRef = DAE55DBB44F1FF91D679008172B9FE3F /* UINavigationController+Chameleon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E4465F0C05B4A08F3913D5C9497D0572 /* ChameleonShorthand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A101E4FF45565544B620C1D524943D /* ChameleonShorthand.swift */; };
+		EF3F9D6CD751D15F3369F463E6FA424A /* HorizontalBlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820846843B9C36E13C59E99A013159E /* HorizontalBlueprintLayout.swift */; };
+		EF4F799E0E51F084F0C074C40B179767 /* Blueprints-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 666C48405C2CA784E3C165E74822A991 /* Blueprints-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F3E89B739E94CA3C1FDE23BD3C57DF18 /* BlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1FDA7A7CB8FB0769419A6EA4AB7E11 /* BlueprintLayout.swift */; };
+		F453D758981ADFCB8437FCF42A33C61B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749ADD089E805C2D7E7DF8BD44F537E3 /* Foundation.framework */; };
+		F497D1CFC5804A3299EE3F5CCF4EA56C /* UIView+ChameleonPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5294226685778BC880836CAAB4A4980E /* UIView+ChameleonPrivate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FE255B7CF39257049DD6D4A250B9E654 /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1259A65262CB3DAF7742F75F702698F0 /* UICollectionView+Extensions.swift */; };
+		FE73C8A27263F7589194FFB14A65ABE2 /* BlueprintInvalidationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EE7BDCFE47F888893070D97939F12C /* BlueprintInvalidationContext.swift */; };
+		FED73668AC7DCE22C74924256D771408 /* ChameleonEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = 92A2000EAFE9C955D13237B35B4D7E4A /* ChameleonEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3D8EC6FE7B709319B8CAD9321A2AA1B9 /* PBXContainerItemProxy */ = {
+		1A2E474CB59078A14DF905928E914699 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = C42A5DFCED6FF849E904F0F0D9C715B5;
-			remoteInfo = GradientAnimator;
-		};
-		584B61C315E9ABC6C64FC7AB35849851 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BDA75D4C5E3F988D0C5431728CDD2478;
-			remoteInfo = BubbleTabBar;
-		};
-		A556D8DE9094238BF0E75F160B01A5E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 000C7EB1CEF2266F040F3E56D1FFBE1B;
+			remoteGlobalIDString = 15C914A408BC5E5F6D295CC9FD563DC3;
 			remoteInfo = VegaScrollFlowLayout;
 		};
-		CCF8AF9C8E5160BDBC5C4F0D824E3A34 /* PBXContainerItemProxy */ = {
+		1EECB62D969FFC6F688DAF502FED2AB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 53E27C8B2F18EAE70D2EE4415FD50D48;
+			remoteInfo = ChameleonFramework;
+		};
+		3C0DCACBD042D6DE60682B08A8135026 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 38608DDE67F92B4FD0EE1E2E69BE7B0E;
 			remoteInfo = MultilineTextField;
 		};
-		D0020A8B005E0C7D8FA3534F53FC38DD /* PBXContainerItemProxy */ = {
+		590781726C124DD0FCA974B23420954E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = F09F1CF179EB9A6CA47856CB07A6EB68;
 			remoteInfo = Blueprints;
 		};
+		C5DDCD398DCFD64478A6B01D43D03AD1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BDA75D4C5E3F988D0C5431728CDD2478;
+			remoteInfo = BubbleTabBar;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		02BBF618C917029093B214282EFFDB89 /* Pods-Sticky Notes-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Sticky Notes-frameworks.sh"; sourceTree = "<group>"; };
-		03E4CBF447A04771D5F628DD0374F58D /* MultilineTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MultilineTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		088CCA213FFBB4EAC9D631BBE3EF9390 /* BubbleTabBar-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BubbleTabBar-prefix.pch"; sourceTree = "<group>"; };
-		09284147D0E61470A04011D47F7D08A4 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = GradientAnimator/Podfile; sourceTree = "<group>"; };
-		0A644A35914E750492C115B57085B832 /* VegaScrollFlowLayout-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "VegaScrollFlowLayout-dummy.m"; sourceTree = "<group>"; };
-		0E425D3D5039A3728DC32FD1F57829B0 /* BubbleTabBar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BubbleTabBar.swift; path = BubbleTabBar/Classes/BubbleTabBar.swift; sourceTree = "<group>"; };
-		101D28AC67F74190358360EF60DABD36 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		183C4171264706FA21B3B9E8BA627950 /* contents.xcworkspacedata */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = contents.xcworkspacedata; path = GradientAnimator/GradientAnimator.xcodeproj/project.xcworkspace/contents.xcworkspacedata; sourceTree = "<group>"; };
-		1CC0257E0E32127B0BC11F0A4586591A /* BlueprintLayoutAnimator+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BlueprintLayoutAnimator+Extensions.swift"; path = "Sources/Shared/Core/BlueprintLayoutAnimator+Extensions.swift"; sourceTree = "<group>"; };
-		1F2DFFD224BA6CF59E6E4C774C4B281A /* Pods-Sticky Notes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Sticky Notes.debug.xcconfig"; sourceTree = "<group>"; };
-		2536FA7FD8B2DDA03FA2EFFC9813A5C3 /* Blueprints.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Blueprints.xcconfig; sourceTree = "<group>"; };
-		280D7D457AC76C147EFEC30281EB711B /* MosaicLayoutAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MosaicLayoutAttributes.swift; path = Sources/Shared/Mosaic/MosaicLayoutAttributes.swift; sourceTree = "<group>"; };
-		2ADDC4070A3026885A7FC80171E4FA87 /* VegaScrollFlowLayout-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "VegaScrollFlowLayout-prefix.pch"; sourceTree = "<group>"; };
-		2BDF0C265850AE6B7347D0A339AB3270 /* MosaicBlueprintPatternController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MosaicBlueprintPatternController.swift; path = Sources/Shared/Mosaic/MosaicBlueprintPatternController.swift; sourceTree = "<group>"; };
-		2DFA2ACE9ED9877E282D51454569B4CD /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2EFB40531CB700ADF867FEEE78561E78 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		2F905BEC68B7DFC79A18180B352FE860 /* BlueprintLayoutAnimation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayoutAnimation.swift; path = Sources/Shared/Core/BlueprintLayoutAnimation.swift; sourceTree = "<group>"; };
-		3029B6A47DABD98EF744078FC967A20C /* VegaScrollFlowLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VegaScrollFlowLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		30627C1F597712615251D9139AEF8442 /* Pods-Sticky Notes-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Sticky Notes-resources.sh"; sourceTree = "<group>"; };
-		30DB64FFA86DD3159CAC003D8155DCD7 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UICollectionView+Extensions.swift"; path = "Sources/iOS+tvOS/Extensions/UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
-		3220C3CC16B10D6BEB60E4827AE15DF2 /* GradientAnimator-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GradientAnimator-umbrella.h"; sourceTree = "<group>"; };
-		3639A99375FEF88A5D77ED39B34FAB0D /* BubbleTabBar.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = BubbleTabBar.modulemap; sourceTree = "<group>"; };
-		39E9BEDF0DF9D8A3FD29BF95BCE5C22C /* project.pbxproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.pbxproject; name = project.pbxproj; path = GradientAnimator/GradientAnimator.xcodeproj/project.pbxproj; sourceTree = "<group>"; };
-		40D3599A8CF3C3C2CA18C312E4A53D43 /* BlueprintSupplementaryKind.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintSupplementaryKind.swift; path = Sources/Shared/Core/BlueprintSupplementaryKind.swift; sourceTree = "<group>"; };
-		41A5C8A1CD96C3D52D63AA943B108B29 /* IDEWorkspaceChecks.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = IDEWorkspaceChecks.plist; path = GradientAnimator/GradientAnimator.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist; sourceTree = "<group>"; };
-		491FB55A486A1BA3396AD1CA65D7D34E /* DefaultLayoutAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultLayoutAnimator.swift; path = Sources/Shared/Core/DefaultLayoutAnimator.swift; sourceTree = "<group>"; };
-		4AC4B029A48347DDEDA4A8C5AEA034F7 /* GradientAnimator.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GradientAnimator.xcconfig; sourceTree = "<group>"; };
-		4F490CA0E5E74793A520E4F2B7BAAC49 /* Blueprints-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Blueprints-umbrella.h"; sourceTree = "<group>"; };
-		4FABB75C0DF24433355D2E7BF28DA922 /* BubbleTabBar-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BubbleTabBar-dummy.m"; sourceTree = "<group>"; };
-		52A82868DBAFEE3E396AB0E4A1DB6C9F /* BlueprintLayoutAnimator+iOS+tvOS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BlueprintLayoutAnimator+iOS+tvOS.swift"; path = "Sources/iOS+tvOS/Extensions/BlueprintLayoutAnimator+iOS+tvOS.swift"; sourceTree = "<group>"; };
-		537CBF689416633F40C7BBD39B87C33B /* Pods_Sticky_Notes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sticky_Notes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5F24DECA7FE85C6B339C23E1416FA993 /* VerticalBlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VerticalBlueprintLayout.swift; path = Sources/Shared/Core/VerticalBlueprintLayout.swift; sourceTree = "<group>"; };
-		5F5BBD2E7A51EE2747EB824AE3B062A3 /* MultilineTextField-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MultilineTextField-prefix.pch"; sourceTree = "<group>"; };
-		614A1C2AE8A28C65848CA611874486D5 /* Pods-Sticky Notes-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Sticky Notes-acknowledgements.markdown"; sourceTree = "<group>"; };
-		6404FA7E6D63AF50225917BCE5A4ACF8 /* GradientAnimator-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GradientAnimator-prefix.pch"; sourceTree = "<group>"; };
-		64ED94AC07E3748DD1FB1B300C269D56 /* BinarySearch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BinarySearch.swift; path = Sources/Shared/Core/BinarySearch.swift; sourceTree = "<group>"; };
-		707C310334B316DC31F3452FF2B8672D /* VegaScrollFlowLayout.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = VegaScrollFlowLayout.modulemap; sourceTree = "<group>"; };
-		74E404AA6957590324067E330E0EC533 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		7A8E551ABBE6DD39DE15225DADAF3405 /* Pods-Sticky Notes-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Sticky Notes-dummy.m"; sourceTree = "<group>"; };
-		7ED879F947FD460802494098E43EDC8E /* HorizontalBlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HorizontalBlueprintLayout.swift; path = Sources/Shared/Core/HorizontalBlueprintLayout.swift; sourceTree = "<group>"; };
-		800695FD46C429BFD88D1DBD7B399F97 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8305457C759BA95E128BCC21A06ABEC1 /* MultilineTextField.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MultilineTextField.xcconfig; sourceTree = "<group>"; };
-		844D8940570023A2089FCF0B750414B3 /* TypeAlias.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TypeAlias.swift; path = Sources/Shared/Core/TypeAlias.swift; sourceTree = "<group>"; };
-		87996F7925541F9B6790AE22F14EA044 /* GradientAnimator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GradientAnimator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		03CD6B9B6C0101A2E44DE9382BE58F99 /* BubbleTabBar-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BubbleTabBar-umbrella.h"; sourceTree = "<group>"; };
+		03FAF465DC7A0DED23931DF3E84E160E /* ChameleonFramework.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ChameleonFramework.modulemap; sourceTree = "<group>"; };
+		0558765CCD437D81B85E9123784B9F11 /* Blueprints-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Blueprints-dummy.m"; sourceTree = "<group>"; };
+		0820846843B9C36E13C59E99A013159E /* HorizontalBlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HorizontalBlueprintLayout.swift; path = Sources/Shared/Core/HorizontalBlueprintLayout.swift; sourceTree = "<group>"; };
+		098E31BBB6AC04F98992912994759BA5 /* BlueprintLayoutAnimationType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayoutAnimationType.swift; path = Sources/Shared/Core/BlueprintLayoutAnimationType.swift; sourceTree = "<group>"; };
+		0A76D0F1F5909223F6FB5AC7369334AA /* Chameleon_.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = Chameleon_.m; path = "Pod/Classes/Objective-C/Chameleon_.m"; sourceTree = "<group>"; };
+		0DA58E0871C71C57E9598A229E964080 /* Pods-Jotify-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Jotify-dummy.m"; sourceTree = "<group>"; };
+		10DBE8818C7EB12FFED6211336C70854 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		110053094B03410F13FDC3F7828CD125 /* VerticalMosaicBlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VerticalMosaicBlueprintLayout.swift; path = Sources/Shared/Mosaic/VerticalMosaicBlueprintLayout.swift; sourceTree = "<group>"; };
+		1259A65262CB3DAF7742F75F702698F0 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UICollectionView+Extensions.swift"; path = "Sources/iOS+tvOS/Extensions/UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
+		12CD5F16480228AD24E8192ED2CF2BA4 /* UIView+ChameleonPrivate.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+ChameleonPrivate.m"; path = "Pod/Classes/Objective-C/UIView+ChameleonPrivate.m"; sourceTree = "<group>"; };
+		20CD675D245D48E46042DA49931579B5 /* Blueprints.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Blueprints.xcconfig; sourceTree = "<group>"; };
+		21082DCA2C862F434FF8BE392FDB97EA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		24E0F73ED8BDF73A0BA85CF256D51BB7 /* Blueprints.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Blueprints.modulemap; sourceTree = "<group>"; };
+		25084941690808F2B2994B2B844D6510 /* BlueprintLayoutAnimator+iOS+tvOS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BlueprintLayoutAnimator+iOS+tvOS.swift"; path = "Sources/iOS+tvOS/Extensions/BlueprintLayoutAnimator+iOS+tvOS.swift"; sourceTree = "<group>"; };
+		26EE7BDCFE47F888893070D97939F12C /* BlueprintInvalidationContext.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintInvalidationContext.swift; path = Sources/Shared/Core/BlueprintInvalidationContext.swift; sourceTree = "<group>"; };
+		2A85BA2E6DD9C56A240677EE5B5E86E4 /* UIButton+Chameleon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIButton+Chameleon.h"; path = "Pod/Classes/Objective-C/UIButton+Chameleon.h"; sourceTree = "<group>"; };
+		2FC3DA2CFA0D6450DAC7B6EBA487C9D6 /* VegaScrollFlowLayout-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "VegaScrollFlowLayout-dummy.m"; sourceTree = "<group>"; };
+		33166CCB26DEF7FC4658D14DBB2C7421 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3650BA974E6E929E4F6C0FCBA22C228E /* UIAppearance+Swift.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIAppearance+Swift.h"; path = "Pod/Classes/Objective-C/UIAppearance+Swift.h"; sourceTree = "<group>"; };
+		3BDC2BEB90B5C2E94CAD73A4DAAEBC6F /* MultilineTextField-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MultilineTextField-dummy.m"; sourceTree = "<group>"; };
+		42675A1086C220CA6F7E6234698D645D /* BubbleTabBarController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BubbleTabBarController.swift; path = BubbleTabBar/Classes/BubbleTabBarController.swift; sourceTree = "<group>"; };
+		4269ABE7EE4C574F2DCD0BB108816D31 /* Pods-Jotify-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Jotify-umbrella.h"; sourceTree = "<group>"; };
+		44408C76BF20EE1CF3FBCD91D5E41786 /* VegaScrollFlowLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VegaScrollFlowLayout.swift; path = VegaScroll/Classes/VegaScrollFlowLayout.swift; sourceTree = "<group>"; };
+		4586EB368360FD7644C9E877E582A840 /* MultilineTextField-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MultilineTextField-umbrella.h"; sourceTree = "<group>"; };
+		4A1DE5DA667BAD422DB44ED73A65A2F1 /* MosaicBlueprintPatternController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MosaicBlueprintPatternController.swift; path = Sources/Shared/Mosaic/MosaicBlueprintPatternController.swift; sourceTree = "<group>"; };
+		4E204B6B4BE9E4884C58CB0368DA30E4 /* BlueprintLayoutAnimation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayoutAnimation.swift; path = Sources/Shared/Core/BlueprintLayoutAnimation.swift; sourceTree = "<group>"; };
+		5294226685778BC880836CAAB4A4980E /* UIView+ChameleonPrivate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+ChameleonPrivate.h"; path = "Pod/Classes/Objective-C/UIView+ChameleonPrivate.h"; sourceTree = "<group>"; };
+		542821AA14DC00756D5F4A5B681D5609 /* TypeAlias.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TypeAlias.swift; path = Sources/Shared/Core/TypeAlias.swift; sourceTree = "<group>"; };
+		579AD660F672A531CB1F6B0633791E3E /* ChameleonFramework-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ChameleonFramework-dummy.m"; sourceTree = "<group>"; };
+		57D6A64BF000B6775083686EC190CC7C /* MosaicLayoutAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MosaicLayoutAttributes.swift; path = Sources/Shared/Mosaic/MosaicLayoutAttributes.swift; sourceTree = "<group>"; };
+		5BD3E5E89B9F3FB53892FFC850BD1366 /* UIButton+Chameleon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIButton+Chameleon.m"; path = "Pod/Classes/Objective-C/UIButton+Chameleon.m"; sourceTree = "<group>"; };
+		666C48405C2CA784E3C165E74822A991 /* Blueprints-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Blueprints-umbrella.h"; sourceTree = "<group>"; };
+		6768E4B0357651D84CC5C2FB814A266B /* ChameleonFramework-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ChameleonFramework-umbrella.h"; sourceTree = "<group>"; };
+		69A101E4FF45565544B620C1D524943D /* ChameleonShorthand.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChameleonShorthand.swift; path = Pod/Classes/Swift/ChameleonShorthand.swift; sourceTree = "<group>"; };
+		6A78540339E4155DC94213421DE0C29B /* Blueprints.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Blueprints.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C5315BE5CAEA52862FF2922216BC6DA /* Pods_Jotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EA6943876FAA987017CF83504BDFB2E /* BubbleTabBar.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = BubbleTabBar.modulemap; sourceTree = "<group>"; };
+		6F0F16312BB384FFF18A63F15125F7F4 /* UIImage+ChameleonPrivate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+ChameleonPrivate.h"; path = "Pod/Classes/Objective-C/UIImage+ChameleonPrivate.h"; sourceTree = "<group>"; };
+		6F4B22D5E26C58509BBA4A6D166B17C1 /* CBTabBarButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CBTabBarButton.swift; path = BubbleTabBar/Classes/CBTabBarButton.swift; sourceTree = "<group>"; };
+		70E21E76E7A68590255B3061BC1AF087 /* MultilineTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MultilineTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		70E25087A5C29CF2EDA5B13BA23CF246 /* UIColor+Chameleon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+Chameleon.h"; path = "Pod/Classes/Objective-C/UIColor+Chameleon.h"; sourceTree = "<group>"; };
+		749ADD089E805C2D7E7DF8BD44F537E3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		759E8B745C8B6C4F4685D6E3CA99C881 /* UILabel+Chameleon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UILabel+Chameleon.h"; path = "Pod/Classes/Objective-C/UILabel+Chameleon.h"; sourceTree = "<group>"; };
+		76B863EFC9FAACFD82C100BC8519F4A3 /* Pods-Jotify.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Jotify.modulemap"; sourceTree = "<group>"; };
+		76E0EA129B266314D5956620947E7DBA /* Pods-Jotify-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Jotify-acknowledgements.plist"; sourceTree = "<group>"; };
+		7E1FDA7A7CB8FB0769419A6EA4AB7E11 /* BlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayout.swift; path = Sources/Shared/Core/BlueprintLayout.swift; sourceTree = "<group>"; };
+		80C4E070AE1D49FCABAD5CE13E054FE9 /* ChameleonFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ChameleonFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8219FA974F3C567D9D1D138C25AB3DA4 /* UIColor+Chameleon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Chameleon.m"; path = "Pod/Classes/Objective-C/UIColor+Chameleon.m"; sourceTree = "<group>"; };
+		82A511156E127FA2CC8B663BD4E19000 /* UIViewController+Chameleon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Chameleon.h"; path = "Pod/Classes/Objective-C/UIViewController+Chameleon.h"; sourceTree = "<group>"; };
+		84C5D3E77AA77B6DF3E3F6D05FBD694F /* Pods-Jotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Jotify.release.xcconfig"; sourceTree = "<group>"; };
+		85D940BEA3A192D9F82BF17B5FE7441B /* Pods-Jotify-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Jotify-resources.sh"; sourceTree = "<group>"; };
+		8B7DFA994450006474CD796B5097270C /* MosaicPattern.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MosaicPattern.swift; path = Sources/Shared/Mosaic/MosaicPattern.swift; sourceTree = "<group>"; };
+		9182E147979CECE58600073EA6BFC28E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92A2000EAFE9C955D13237B35B4D7E4A /* ChameleonEnums.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ChameleonEnums.h; path = "Pod/Classes/Objective-C/ChameleonEnums.h"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		96871D5C15CBAEBA78659DF25DF959CA /* BubbleTabBar.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BubbleTabBar.xcconfig; sourceTree = "<group>"; };
-		98906F397B8AEB13F6D215B363D8DE65 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		99B7A7E8CAE4CF18C5E235258DEDD2D6 /* BlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayout.swift; path = Sources/Shared/Core/BlueprintLayout.swift; sourceTree = "<group>"; };
-		A05DD0D8574766542208CE8FDB372285 /* GradientAnimator.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = GradientAnimator.modulemap; sourceTree = "<group>"; };
-		A204064FDF0CDFFC474624C722630F0A /* BlueprintLayoutAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayoutAnimator.swift; path = Sources/Shared/Core/BlueprintLayoutAnimator.swift; sourceTree = "<group>"; };
-		A5A76949818F614B9DDF49B73830606E /* VerticalMosaicBlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VerticalMosaicBlueprintLayout.swift; path = Sources/Shared/Mosaic/VerticalMosaicBlueprintLayout.swift; sourceTree = "<group>"; };
-		A6F286F24C56E1F3F41451032F2130D5 /* VegaScrollFlowLayout.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = VegaScrollFlowLayout.xcconfig; sourceTree = "<group>"; };
-		A8C7DB7A54483571EC5627CDC2057D72 /* Pods-Sticky Notes-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Sticky Notes-umbrella.h"; sourceTree = "<group>"; };
-		ABF5740A5CF125DD19A38AC585080BF4 /* BlueprintInvalidationContext.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintInvalidationContext.swift; path = Sources/Shared/Core/BlueprintInvalidationContext.swift; sourceTree = "<group>"; };
-		AC53AB1B4DC395E0F81CBC8E088321E6 /* Blueprints-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Blueprints-prefix.pch"; sourceTree = "<group>"; };
-		B1061D141E31F653D8E924EC9FC6F14C /* CBTabBarButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CBTabBarButton.swift; path = BubbleTabBar/Classes/CBTabBarButton.swift; sourceTree = "<group>"; };
-		B7AA7A7BF4A5EA0A9C1EB73B5A6C52E0 /* GradientAnimator.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = GradientAnimator.podspec; path = GradientAnimator/GradientAnimator.podspec; sourceTree = "<group>"; };
-		B8528CC929FE51738433D136E4A9F597 /* BubbleTabBarController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BubbleTabBarController.swift; path = BubbleTabBar/Classes/BubbleTabBarController.swift; sourceTree = "<group>"; };
-		C1091F2328698075C90AA1878CC808A7 /* GradientAnimator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GradientAnimator.h; path = GradientAnimator/GradientAnimator/GradientAnimator.h; sourceTree = "<group>"; };
-		C7FCA7DD1FF47230EEC949687960B45C /* GradientAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GradientAnimator.swift; path = GradientAnimator/GradientAnimator/GradientAnimator.swift; sourceTree = "<group>"; };
-		C9E8787446164AAC6AC5B39DB7705EF6 /* MultilineTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultilineTextField.swift; path = MultilineTextField/Classes/MultilineTextField.swift; sourceTree = "<group>"; };
-		CA1D6EF0A1BCC7E7230E233DE2F28056 /* Pods-Sticky Notes.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Sticky Notes.modulemap"; sourceTree = "<group>"; };
-		CA4DC3E1F958AFA3F72C77134492848F /* BubbleTabBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BubbleTabBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CBD95957C50C721CA151795A663B75E5 /* Blueprints.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Blueprints.modulemap; sourceTree = "<group>"; };
-		CCC83936B876524AC23EA50B88E11A01 /* MosaicPattern.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MosaicPattern.swift; path = Sources/Shared/Mosaic/MosaicPattern.swift; sourceTree = "<group>"; };
-		CFACC57AF4A448132F271A6EB0CBBD9F /* BlueprintLayoutAnimationType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayoutAnimationType.swift; path = Sources/Shared/Core/BlueprintLayoutAnimationType.swift; sourceTree = "<group>"; };
-		D1008518ADDF80C146A1C6FFB5BB64AA /* Blueprints.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Blueprints.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D29C5DA0A96EE72F4414C32DCB227021 /* SupplementaryLayoutAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SupplementaryLayoutAttributes.swift; path = Sources/Shared/Core/SupplementaryLayoutAttributes.swift; sourceTree = "<group>"; };
-		D5A8DB22DFF4AA54BDFC43BA7E48601F /* GradientAnimator-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GradientAnimator-dummy.m"; sourceTree = "<group>"; };
-		DB0EFDB5B4A58919F6274246724944B1 /* VegaScrollFlowLayout-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "VegaScrollFlowLayout-umbrella.h"; sourceTree = "<group>"; };
-		DC160745E00EFFDDF5DFB4C318088FD3 /* VegaScrollFlowLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VegaScrollFlowLayout.swift; path = VegaScroll/Classes/VegaScrollFlowLayout.swift; sourceTree = "<group>"; };
-		E41F974B132B6F41846B97E9843C2161 /* BubbleTabBar-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BubbleTabBar-umbrella.h"; sourceTree = "<group>"; };
-		E783B3745AF1561671D0A566961669FB /* Blueprints-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Blueprints-dummy.m"; sourceTree = "<group>"; };
-		E7A41EDFE5D2586C4213C502DB8EE47C /* MultilineTextField-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MultilineTextField-dummy.m"; sourceTree = "<group>"; };
-		EF5F94A934C2A1596321F66CD336295F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F092A2D1094C5C370D50408A67BFF4C8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F41A9E1158B7BE79A4C21C0E2EC143B4 /* MultilineTextField.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MultilineTextField.modulemap; sourceTree = "<group>"; };
-		F46D0CED5ABB5CF3FAD338EF18A990AC /* MultilineTextField-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MultilineTextField-umbrella.h"; sourceTree = "<group>"; };
-		F482A35BBD2A15126AA9F35AD0AB2082 /* BlueprintLayout+iOS+tvOS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BlueprintLayout+iOS+tvOS.swift"; path = "Sources/iOS+tvOS/Extensions/BlueprintLayout+iOS+tvOS.swift"; sourceTree = "<group>"; };
-		F79ECB85139F8A4796771BC86310143A /* Pods-Sticky Notes-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Sticky Notes-acknowledgements.plist"; sourceTree = "<group>"; };
-		F7E9E088AB219A9D98043BF2D17CB356 /* Pods-Sticky Notes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Sticky Notes.release.xcconfig"; sourceTree = "<group>"; };
+		9B6F35DD7D4C6EF00A80BF36FCDA4C8F /* Pods-Jotify-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Jotify-acknowledgements.markdown"; sourceTree = "<group>"; };
+		9BFDB6177241B7E13AAA4E7B048F2886 /* VegaScrollFlowLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VegaScrollFlowLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9EFBF1939A8151F0E8173ED4D9470AC0 /* Chameleon_.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Chameleon_.h; path = "Pod/Classes/Objective-C/Chameleon_.h"; sourceTree = "<group>"; };
+		A47CDB1D809BCF9AB3A7FDF953B19444 /* Chameleon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Chameleon.h; path = "Pod/Classes/Objective-C/Chameleon.h"; sourceTree = "<group>"; };
+		A69B7F417D4A2F2C76583B40E94543BF /* ChameleonConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ChameleonConstants.h; path = "Pod/Classes/Objective-C/ChameleonConstants.h"; sourceTree = "<group>"; };
+		A84C7755F1EC431DC1FA45A59FA7DD88 /* BlueprintLayoutAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayoutAnimator.swift; path = Sources/Shared/Core/BlueprintLayoutAnimator.swift; sourceTree = "<group>"; };
+		ACDE902AE09AD3F59E4031864F2B3743 /* MultilineTextField.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MultilineTextField.xcconfig; sourceTree = "<group>"; };
+		B0BC7B59CD35975C38F28FBC29071DB5 /* ChameleonFramework.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ChameleonFramework.xcconfig; sourceTree = "<group>"; };
+		B118A716E617B44D0C7B4FEDCAAF45CB /* UIColor+ChameleonPrivate.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+ChameleonPrivate.m"; path = "Pod/Classes/Objective-C/UIColor+ChameleonPrivate.m"; sourceTree = "<group>"; };
+		B36FD1FE5B9A78AF98D3D4F1F4E09C68 /* UIImage+ChameleonPrivate.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ChameleonPrivate.m"; path = "Pod/Classes/Objective-C/UIImage+ChameleonPrivate.m"; sourceTree = "<group>"; };
+		B4137236465AEDE05EBCABF70A2173D8 /* BubbleTabBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BubbleTabBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B63AB2D4B7DE7C68E8E87C85B504523C /* BubbleTabBar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BubbleTabBar.swift; path = BubbleTabBar/Classes/BubbleTabBar.swift; sourceTree = "<group>"; };
+		B73CE32AF263687ED67CCD7F865093D0 /* Pods-Jotify-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Jotify-frameworks.sh"; sourceTree = "<group>"; };
+		B8E886B8A5323A225031593C734420F7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		BE93864E772DF552CCDFA0EF03104DBA /* DefaultLayoutAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultLayoutAnimator.swift; path = Sources/Shared/Core/DefaultLayoutAnimator.swift; sourceTree = "<group>"; };
+		C28B57BC3F0E1C8B73C3C9F82E7F83E1 /* UIViewController+Chameleon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Chameleon.m"; path = "Pod/Classes/Objective-C/UIViewController+Chameleon.m"; sourceTree = "<group>"; };
+		C30716C4A04887222D5E9C3C9EE8D337 /* ChameleonConstants.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ChameleonConstants.m; path = "Pod/Classes/Objective-C/ChameleonConstants.m"; sourceTree = "<group>"; };
+		C42E57BF70B1363C5F1A71714172B0A7 /* NSArray+Chameleon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+Chameleon.h"; path = "Pod/Classes/Objective-C/NSArray+Chameleon.h"; sourceTree = "<group>"; };
+		C4DF6D332CBF0F1BA114A1654DD507D9 /* BlueprintLayout+iOS+tvOS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BlueprintLayout+iOS+tvOS.swift"; path = "Sources/iOS+tvOS/Extensions/BlueprintLayout+iOS+tvOS.swift"; sourceTree = "<group>"; };
+		C596283255F25A42D589E1C4D7A4DCB3 /* VerticalBlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VerticalBlueprintLayout.swift; path = Sources/Shared/Core/VerticalBlueprintLayout.swift; sourceTree = "<group>"; };
+		C6839D2AB59BC86873243058D31DC5A4 /* NSArray+Chameleon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Chameleon.m"; path = "Pod/Classes/Objective-C/NSArray+Chameleon.m"; sourceTree = "<group>"; };
+		C687F0C4410E113E78AA9AE2501A5DB3 /* VegaScrollFlowLayout-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "VegaScrollFlowLayout-umbrella.h"; sourceTree = "<group>"; };
+		CE4180D26D2DB19C46D0CFF61F29CEE0 /* SupplementaryLayoutAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SupplementaryLayoutAttributes.swift; path = Sources/Shared/Core/SupplementaryLayoutAttributes.swift; sourceTree = "<group>"; };
+		CEA04A4ACE3D327A56362AA3E9AEC1E6 /* VegaScrollFlowLayout.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = VegaScrollFlowLayout.modulemap; sourceTree = "<group>"; };
+		D2F373D4F52D3AA0691849A3E989645F /* UINavigationController+Chameleon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+Chameleon.m"; path = "Pod/Classes/Objective-C/UINavigationController+Chameleon.m"; sourceTree = "<group>"; };
+		D462A9BDEA99C818C5EE6989FFB0BB06 /* BubbleTabBar.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BubbleTabBar.xcconfig; sourceTree = "<group>"; };
+		DAE55DBB44F1FF91D679008172B9FE3F /* UINavigationController+Chameleon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+Chameleon.h"; path = "Pod/Classes/Objective-C/UINavigationController+Chameleon.h"; sourceTree = "<group>"; };
+		DC3DDDB6AE9AD74FF21641FFCD6C6BA3 /* MultilineTextField-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MultilineTextField-prefix.pch"; sourceTree = "<group>"; };
+		DDA63729F8D1E36E1101BAFCE0E000DC /* MultilineTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultilineTextField.swift; path = MultilineTextField/Classes/MultilineTextField.swift; sourceTree = "<group>"; };
+		DEA3FCF7686510B04D6457113FC49F59 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF1136780E2D70645875C035F2D91E7C /* UIAppearance+Swift.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIAppearance+Swift.m"; path = "Pod/Classes/Objective-C/UIAppearance+Swift.m"; sourceTree = "<group>"; };
+		E1B87F74000818FE7AD1E2482AB5FBE5 /* MultilineTextField.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MultilineTextField.modulemap; sourceTree = "<group>"; };
+		E438CEC5DBAB9B688E4583ED5AC080F7 /* BlueprintLayoutAnimator+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BlueprintLayoutAnimator+Extensions.swift"; path = "Sources/Shared/Core/BlueprintLayoutAnimator+Extensions.swift"; sourceTree = "<group>"; };
+		E8066F178D00897BB346841DA63DD1FC /* Blueprints-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Blueprints-prefix.pch"; sourceTree = "<group>"; };
+		EA6BEA2BC8B278D695365F5596680A9F /* UIColor+ChameleonPrivate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+ChameleonPrivate.h"; path = "Pod/Classes/Objective-C/UIColor+ChameleonPrivate.h"; sourceTree = "<group>"; };
+		EBD21B36D4CB8ABD9B016AACA41B6450 /* VegaScrollFlowLayout.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = VegaScrollFlowLayout.xcconfig; sourceTree = "<group>"; };
+		EBE2CE86CEAA9896D6244DE9999C4B48 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		EC008CF76D42FAF17E18C70D5187C0CF /* UILabel+Chameleon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UILabel+Chameleon.m"; path = "Pod/Classes/Objective-C/UILabel+Chameleon.m"; sourceTree = "<group>"; };
+		EC1CA122FDB911B5CB323FB89886BEC9 /* ChameleonFramework-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ChameleonFramework-prefix.pch"; sourceTree = "<group>"; };
+		ECC1CF2645FCF7455AC24F518E143281 /* BubbleTabBar-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BubbleTabBar-prefix.pch"; sourceTree = "<group>"; };
+		EDFF1D35055CD344EF49810D5CB5E219 /* VegaScrollFlowLayout-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "VegaScrollFlowLayout-prefix.pch"; sourceTree = "<group>"; };
+		F07B90BF2BDFE49E86339BC7834C6F3D /* BinarySearch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BinarySearch.swift; path = Sources/Shared/Core/BinarySearch.swift; sourceTree = "<group>"; };
+		F1DCCF96CF0D68428D9D581664E8B54F /* BubbleTabBar-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BubbleTabBar-dummy.m"; sourceTree = "<group>"; };
+		F3C68D68D33DAB1566655AA461A1E4D9 /* BlueprintSupplementaryKind.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintSupplementaryKind.swift; path = Sources/Shared/Core/BlueprintSupplementaryKind.swift; sourceTree = "<group>"; };
+		F78D2142767FA6AFDDCEB86318DCF2DB /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F8205DCE243CEBCEAAFFDB2563B65CD4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		FA729C5CDB203D2DC20F71D7F9747068 /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
+		FCFBCBD6C77E19FBC6298649062F2FCF /* ChameleonMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ChameleonMacros.h; path = "Pod/Classes/Objective-C/ChameleonMacros.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,22 +238,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		672A8CAA1901CE1DC64098454C2DF03F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8598BCD5BEF99AD7ED6275B1C5D41CDA /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8C9EE9612297E32F299168E392AFD7D2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C29C078D3ECF6E60E88EFFD70A98CABA /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		A38051F7371173556CC87647255C3860 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -215,11 +246,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CFF8A597A1A7D6B966F29DFB9416CDF7 /* Frameworks */ = {
+		B6E0266A1CDD0DFB1A50CCAAE1E2F10B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87E44DB275395172E6719191E0C3BE32 /* Foundation.framework in Frameworks */,
+				3271C01ADFEB74E8BC01498626FA8FF5 /* CoreGraphics.framework in Frameworks */,
+				A36C06A28CDE0AED55995E7998B293D2 /* Foundation.framework in Frameworks */,
+				06675AC28CE8D535168324F5294A9A64 /* QuartzCore.framework in Frameworks */,
+				2AFDAA3340C7ABA4499F143DB6A9CF82 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC48EDA807BF932814679494A7B674D5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4334B1A88F7630138E65EA4E3C990793 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,238 +274,316 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F463859F6FFD74911E01AA41BD4DE798 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D9F7EDC8CF4CCC4B2CBA71F2F9181D6 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		03BBFB8BC8170A0A660605439B50D111 /* Support Files */ = {
+		14B8B9B15ECBE87983FF987239AB2D7B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				98906F397B8AEB13F6D215B363D8DE65 /* Info.plist */,
-				F41A9E1158B7BE79A4C21C0E2EC143B4 /* MultilineTextField.modulemap */,
-				8305457C759BA95E128BCC21A06ABEC1 /* MultilineTextField.xcconfig */,
-				E7A41EDFE5D2586C4213C502DB8EE47C /* MultilineTextField-dummy.m */,
-				5F5BBD2E7A51EE2747EB824AE3B062A3 /* MultilineTextField-prefix.pch */,
-				F46D0CED5ABB5CF3FAD338EF18A990AC /* MultilineTextField-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/MultilineTextField";
-			sourceTree = "<group>";
-		};
-		06CDD10DE71306278CF89108B3036DFD /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				2EFB40531CB700ADF867FEEE78561E78 /* Foundation.framework */,
-				74E404AA6957590324067E330E0EC533 /* UIKit.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		1C66766A4EF25257B214F37E625BED8D /* GradientAnimator */ = {
-			isa = PBXGroup;
-			children = (
-				183C4171264706FA21B3B9E8BA627950 /* contents.xcworkspacedata */,
-				C1091F2328698075C90AA1878CC808A7 /* GradientAnimator.h */,
-				B7AA7A7BF4A5EA0A9C1EB73B5A6C52E0 /* GradientAnimator.podspec */,
-				C7FCA7DD1FF47230EEC949687960B45C /* GradientAnimator.swift */,
-				41A5C8A1CD96C3D52D63AA943B108B29 /* IDEWorkspaceChecks.plist */,
-				09284147D0E61470A04011D47F7D08A4 /* Podfile */,
-				39E9BEDF0DF9D8A3FD29BF95BCE5C22C /* project.pbxproj */,
-				217444CDCC09B3562BB33D72F0F76328 /* Support Files */,
-			);
-			path = GradientAnimator;
-			sourceTree = "<group>";
-		};
-		217444CDCC09B3562BB33D72F0F76328 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				A05DD0D8574766542208CE8FDB372285 /* GradientAnimator.modulemap */,
-				4AC4B029A48347DDEDA4A8C5AEA034F7 /* GradientAnimator.xcconfig */,
-				D5A8DB22DFF4AA54BDFC43BA7E48601F /* GradientAnimator-dummy.m */,
-				6404FA7E6D63AF50225917BCE5A4ACF8 /* GradientAnimator-prefix.pch */,
-				3220C3CC16B10D6BEB60E4827AE15DF2 /* GradientAnimator-umbrella.h */,
-				F092A2D1094C5C370D50408A67BFF4C8 /* Info.plist */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/GradientAnimator";
-			sourceTree = "<group>";
-		};
-		3525BC7C3A5DB684C3D805C55D832CD1 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				5DA5733F20C4452B9C919C660B84618D /* Pods-Sticky Notes */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				06CDD10DE71306278CF89108B3036DFD /* iOS */,
+				4725EC43CB891FB958E82D265451CEF5 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		51459F49A832204C035AF78B3399FBA7 /* Support Files */ = {
+		356E60B607602866131BA2962F24DD62 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				CBD95957C50C721CA151795A663B75E5 /* Blueprints.modulemap */,
-				2536FA7FD8B2DDA03FA2EFFC9813A5C3 /* Blueprints.xcconfig */,
-				E783B3745AF1561671D0A566961669FB /* Blueprints-dummy.m */,
-				AC53AB1B4DC395E0F81CBC8E088321E6 /* Blueprints-prefix.pch */,
-				4F490CA0E5E74793A520E4F2B7BAAC49 /* Blueprints-umbrella.h */,
-				EF5F94A934C2A1596321F66CD336295F /* Info.plist */,
+				03FAF465DC7A0DED23931DF3E84E160E /* ChameleonFramework.modulemap */,
+				B0BC7B59CD35975C38F28FBC29071DB5 /* ChameleonFramework.xcconfig */,
+				579AD660F672A531CB1F6B0633791E3E /* ChameleonFramework-dummy.m */,
+				EC1CA122FDB911B5CB323FB89886BEC9 /* ChameleonFramework-prefix.pch */,
+				6768E4B0357651D84CC5C2FB814A266B /* ChameleonFramework-umbrella.h */,
+				10DBE8818C7EB12FFED6211336C70854 /* Info.plist */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/Blueprints";
+			path = "../Target Support Files/ChameleonFramework";
 			sourceTree = "<group>";
 		};
-		5DA5733F20C4452B9C919C660B84618D /* Pods-Sticky Notes */ = {
+		4055BCD68370FFFCF2B711D67716D146 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				2DFA2ACE9ED9877E282D51454569B4CD /* Info.plist */,
-				CA1D6EF0A1BCC7E7230E233DE2F28056 /* Pods-Sticky Notes.modulemap */,
-				614A1C2AE8A28C65848CA611874486D5 /* Pods-Sticky Notes-acknowledgements.markdown */,
-				F79ECB85139F8A4796771BC86310143A /* Pods-Sticky Notes-acknowledgements.plist */,
-				7A8E551ABBE6DD39DE15225DADAF3405 /* Pods-Sticky Notes-dummy.m */,
-				02BBF618C917029093B214282EFFDB89 /* Pods-Sticky Notes-frameworks.sh */,
-				30627C1F597712615251D9139AEF8442 /* Pods-Sticky Notes-resources.sh */,
-				A8C7DB7A54483571EC5627CDC2057D72 /* Pods-Sticky Notes-umbrella.h */,
-				1F2DFFD224BA6CF59E6E4C774C4B281A /* Pods-Sticky Notes.debug.xcconfig */,
-				F7E9E088AB219A9D98043BF2D17CB356 /* Pods-Sticky Notes.release.xcconfig */,
+				F78D2142767FA6AFDDCEB86318DCF2DB /* Info.plist */,
+				CEA04A4ACE3D327A56362AA3E9AEC1E6 /* VegaScrollFlowLayout.modulemap */,
+				EBD21B36D4CB8ABD9B016AACA41B6450 /* VegaScrollFlowLayout.xcconfig */,
+				2FC3DA2CFA0D6450DAC7B6EBA487C9D6 /* VegaScrollFlowLayout-dummy.m */,
+				EDFF1D35055CD344EF49810D5CB5E219 /* VegaScrollFlowLayout-prefix.pch */,
+				C687F0C4410E113E78AA9AE2501A5DB3 /* VegaScrollFlowLayout-umbrella.h */,
 			);
-			name = "Pods-Sticky Notes";
-			path = "Target Support Files/Pods-Sticky Notes";
+			name = "Support Files";
+			path = "../Target Support Files/VegaScrollFlowLayout";
 			sourceTree = "<group>";
 		};
-		5DB5C09430D98DB6DFAFF3D5DB823FB0 /* Products */ = {
+		46C706139FC3C4078376D333EB3BA533 /* Blueprints */ = {
 			isa = PBXGroup;
 			children = (
-				D1008518ADDF80C146A1C6FFB5BB64AA /* Blueprints.framework */,
-				CA4DC3E1F958AFA3F72C77134492848F /* BubbleTabBar.framework */,
-				87996F7925541F9B6790AE22F14EA044 /* GradientAnimator.framework */,
-				03E4CBF447A04771D5F628DD0374F58D /* MultilineTextField.framework */,
-				537CBF689416633F40C7BBD39B87C33B /* Pods_Sticky_Notes.framework */,
-				3029B6A47DABD98EF744078FC967A20C /* VegaScrollFlowLayout.framework */,
+				F07B90BF2BDFE49E86339BC7834C6F3D /* BinarySearch.swift */,
+				26EE7BDCFE47F888893070D97939F12C /* BlueprintInvalidationContext.swift */,
+				7E1FDA7A7CB8FB0769419A6EA4AB7E11 /* BlueprintLayout.swift */,
+				C4DF6D332CBF0F1BA114A1654DD507D9 /* BlueprintLayout+iOS+tvOS.swift */,
+				4E204B6B4BE9E4884C58CB0368DA30E4 /* BlueprintLayoutAnimation.swift */,
+				098E31BBB6AC04F98992912994759BA5 /* BlueprintLayoutAnimationType.swift */,
+				A84C7755F1EC431DC1FA45A59FA7DD88 /* BlueprintLayoutAnimator.swift */,
+				E438CEC5DBAB9B688E4583ED5AC080F7 /* BlueprintLayoutAnimator+Extensions.swift */,
+				25084941690808F2B2994B2B844D6510 /* BlueprintLayoutAnimator+iOS+tvOS.swift */,
+				F3C68D68D33DAB1566655AA461A1E4D9 /* BlueprintSupplementaryKind.swift */,
+				BE93864E772DF552CCDFA0EF03104DBA /* DefaultLayoutAnimator.swift */,
+				0820846843B9C36E13C59E99A013159E /* HorizontalBlueprintLayout.swift */,
+				4A1DE5DA667BAD422DB44ED73A65A2F1 /* MosaicBlueprintPatternController.swift */,
+				57D6A64BF000B6775083686EC190CC7C /* MosaicLayoutAttributes.swift */,
+				8B7DFA994450006474CD796B5097270C /* MosaicPattern.swift */,
+				CE4180D26D2DB19C46D0CFF61F29CEE0 /* SupplementaryLayoutAttributes.swift */,
+				542821AA14DC00756D5F4A5B681D5609 /* TypeAlias.swift */,
+				1259A65262CB3DAF7742F75F702698F0 /* UICollectionView+Extensions.swift */,
+				C596283255F25A42D589E1C4D7A4DCB3 /* VerticalBlueprintLayout.swift */,
+				110053094B03410F13FDC3F7828CD125 /* VerticalMosaicBlueprintLayout.swift */,
+				D4BD8F270C0A569C76DE5BA646E5A143 /* Support Files */,
 			);
-			name = Products;
+			path = Blueprints;
 			sourceTree = "<group>";
 		};
-		6A62D3BFE99CA1793E848DF6765AECF2 /* MultilineTextField */ = {
+		4725EC43CB891FB958E82D265451CEF5 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				C9E8787446164AAC6AC5B39DB7705EF6 /* MultilineTextField.swift */,
-				03BBFB8BC8170A0A660605439B50D111 /* Support Files */,
+				B8E886B8A5323A225031593C734420F7 /* CoreGraphics.framework */,
+				749ADD089E805C2D7E7DF8BD44F537E3 /* Foundation.framework */,
+				F8205DCE243CEBCEAAFFDB2563B65CD4 /* QuartzCore.framework */,
+				EBE2CE86CEAA9896D6244DE9999C4B48 /* UIKit.framework */,
 			);
-			path = MultilineTextField;
+			name = iOS;
 			sourceTree = "<group>";
 		};
-		6B290BF0E6BED3351D5BEE9FA592B7FA /* Pods */ = {
+		49C6F94EB34796A880CF495960622CC5 /* Default */ = {
 			isa = PBXGroup;
 			children = (
-				E23527BA4887F11D131D3306D70FB930 /* Blueprints */,
-				E0593D7B2039712529035CAB50BAEB17 /* BubbleTabBar */,
-				1C66766A4EF25257B214F37E625BED8D /* GradientAnimator */,
-				6A62D3BFE99CA1793E848DF6765AECF2 /* MultilineTextField */,
-				C576916265BF595C6FB9B1F332FFC8B8 /* VegaScrollFlowLayout */,
+				A47CDB1D809BCF9AB3A7FDF953B19444 /* Chameleon.h */,
+				9EFBF1939A8151F0E8173ED4D9470AC0 /* Chameleon_.h */,
+				0A76D0F1F5909223F6FB5AC7369334AA /* Chameleon_.m */,
+				A69B7F417D4A2F2C76583B40E94543BF /* ChameleonConstants.h */,
+				C30716C4A04887222D5E9C3C9EE8D337 /* ChameleonConstants.m */,
+				92A2000EAFE9C955D13237B35B4D7E4A /* ChameleonEnums.h */,
+				FCFBCBD6C77E19FBC6298649062F2FCF /* ChameleonMacros.h */,
+				C42E57BF70B1363C5F1A71714172B0A7 /* NSArray+Chameleon.h */,
+				C6839D2AB59BC86873243058D31DC5A4 /* NSArray+Chameleon.m */,
+				3650BA974E6E929E4F6C0FCBA22C228E /* UIAppearance+Swift.h */,
+				DF1136780E2D70645875C035F2D91E7C /* UIAppearance+Swift.m */,
+				2A85BA2E6DD9C56A240677EE5B5E86E4 /* UIButton+Chameleon.h */,
+				5BD3E5E89B9F3FB53892FFC850BD1366 /* UIButton+Chameleon.m */,
+				70E25087A5C29CF2EDA5B13BA23CF246 /* UIColor+Chameleon.h */,
+				8219FA974F3C567D9D1D138C25AB3DA4 /* UIColor+Chameleon.m */,
+				EA6BEA2BC8B278D695365F5596680A9F /* UIColor+ChameleonPrivate.h */,
+				B118A716E617B44D0C7B4FEDCAAF45CB /* UIColor+ChameleonPrivate.m */,
+				6F0F16312BB384FFF18A63F15125F7F4 /* UIImage+ChameleonPrivate.h */,
+				B36FD1FE5B9A78AF98D3D4F1F4E09C68 /* UIImage+ChameleonPrivate.m */,
+				759E8B745C8B6C4F4685D6E3CA99C881 /* UILabel+Chameleon.h */,
+				EC008CF76D42FAF17E18C70D5187C0CF /* UILabel+Chameleon.m */,
+				DAE55DBB44F1FF91D679008172B9FE3F /* UINavigationController+Chameleon.h */,
+				D2F373D4F52D3AA0691849A3E989645F /* UINavigationController+Chameleon.m */,
+				5294226685778BC880836CAAB4A4980E /* UIView+ChameleonPrivate.h */,
+				12CD5F16480228AD24E8192ED2CF2BA4 /* UIView+ChameleonPrivate.m */,
+				82A511156E127FA2CC8B663BD4E19000 /* UIViewController+Chameleon.h */,
+				C28B57BC3F0E1C8B73C3C9F82E7F83E1 /* UIViewController+Chameleon.m */,
 			);
-			name = Pods;
+			name = Default;
+			sourceTree = "<group>";
+		};
+		569325182A43616FD1CC01591CE5C774 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				6EA6943876FAA987017CF83504BDFB2E /* BubbleTabBar.modulemap */,
+				D462A9BDEA99C818C5EE6989FFB0BB06 /* BubbleTabBar.xcconfig */,
+				F1DCCF96CF0D68428D9D581664E8B54F /* BubbleTabBar-dummy.m */,
+				ECC1CF2645FCF7455AC24F518E143281 /* BubbleTabBar-prefix.pch */,
+				03CD6B9B6C0101A2E44DE9382BE58F99 /* BubbleTabBar-umbrella.h */,
+				33166CCB26DEF7FC4658D14DBB2C7421 /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/BubbleTabBar";
+			sourceTree = "<group>";
+		};
+		56A5D608A7203894136E29B153B5FB5F /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				69A101E4FF45565544B620C1D524943D /* ChameleonShorthand.swift */,
+			);
+			name = Swift;
+			sourceTree = "<group>";
+		};
+		5752573C79F215D8169046C3855B8D43 /* Pods-Jotify */ = {
+			isa = PBXGroup;
+			children = (
+				DEA3FCF7686510B04D6457113FC49F59 /* Info.plist */,
+				76B863EFC9FAACFD82C100BC8519F4A3 /* Pods-Jotify.modulemap */,
+				9B6F35DD7D4C6EF00A80BF36FCDA4C8F /* Pods-Jotify-acknowledgements.markdown */,
+				76E0EA129B266314D5956620947E7DBA /* Pods-Jotify-acknowledgements.plist */,
+				0DA58E0871C71C57E9598A229E964080 /* Pods-Jotify-dummy.m */,
+				B73CE32AF263687ED67CCD7F865093D0 /* Pods-Jotify-frameworks.sh */,
+				85D940BEA3A192D9F82BF17B5FE7441B /* Pods-Jotify-resources.sh */,
+				4269ABE7EE4C574F2DCD0BB108816D31 /* Pods-Jotify-umbrella.h */,
+				FA729C5CDB203D2DC20F71D7F9747068 /* Pods-Jotify.debug.xcconfig */,
+				84C5D3E77AA77B6DF3E3F6D05FBD694F /* Pods-Jotify.release.xcconfig */,
+			);
+			name = "Pods-Jotify";
+			path = "Target Support Files/Pods-Jotify";
+			sourceTree = "<group>";
+		};
+		6659AD0C07106ECCE23D2CFFE1DE9030 /* ChameleonFramework */ = {
+			isa = PBXGroup;
+			children = (
+				49C6F94EB34796A880CF495960622CC5 /* Default */,
+				356E60B607602866131BA2962F24DD62 /* Support Files */,
+				56A5D608A7203894136E29B153B5FB5F /* Swift */,
+			);
+			path = ChameleonFramework;
+			sourceTree = "<group>";
+		};
+		6C0DDAF849F0A9593591BAD2FB041DAB /* VegaScrollFlowLayout */ = {
+			isa = PBXGroup;
+			children = (
+				44408C76BF20EE1CF3FBCD91D5E41786 /* VegaScrollFlowLayout.swift */,
+				4055BCD68370FFFCF2B711D67716D146 /* Support Files */,
+			);
+			path = VegaScrollFlowLayout;
+			sourceTree = "<group>";
+		};
+		745BDFF341F3455B861564470039687E /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				9182E147979CECE58600073EA6BFC28E /* Info.plist */,
+				E1B87F74000818FE7AD1E2482AB5FBE5 /* MultilineTextField.modulemap */,
+				ACDE902AE09AD3F59E4031864F2B3743 /* MultilineTextField.xcconfig */,
+				3BDC2BEB90B5C2E94CAD73A4DAAEBC6F /* MultilineTextField-dummy.m */,
+				DC3DDDB6AE9AD74FF21641FFCD6C6BA3 /* MultilineTextField-prefix.pch */,
+				4586EB368360FD7644C9E877E582A840 /* MultilineTextField-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/MultilineTextField";
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
-				6B290BF0E6BED3351D5BEE9FA592B7FA /* Pods */,
-				5DB5C09430D98DB6DFAFF3D5DB823FB0 /* Products */,
-				3525BC7C3A5DB684C3D805C55D832CD1 /* Targets Support Files */,
+				14B8B9B15ECBE87983FF987239AB2D7B /* Frameworks */,
+				F1E34B90D0C94C884A8388F943F5C76C /* Pods */,
+				FA6435BC3C28B1B1AFD920BE47C06596 /* Products */,
+				AE72F4FF0FDBC2A471B9249A20291E3F /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		C576916265BF595C6FB9B1F332FFC8B8 /* VegaScrollFlowLayout */ = {
+		97F95E48DDCEDA61F7BC8BAA112584B3 /* BubbleTabBar */ = {
 			isa = PBXGroup;
 			children = (
-				DC160745E00EFFDDF5DFB4C318088FD3 /* VegaScrollFlowLayout.swift */,
-				EA77655152CC6A4409DA7FBA3DF70DF0 /* Support Files */,
-			);
-			path = VegaScrollFlowLayout;
-			sourceTree = "<group>";
-		};
-		C8BB7F15643FEDF44CA8E06164EE0B61 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				3639A99375FEF88A5D77ED39B34FAB0D /* BubbleTabBar.modulemap */,
-				96871D5C15CBAEBA78659DF25DF959CA /* BubbleTabBar.xcconfig */,
-				4FABB75C0DF24433355D2E7BF28DA922 /* BubbleTabBar-dummy.m */,
-				088CCA213FFBB4EAC9D631BBE3EF9390 /* BubbleTabBar-prefix.pch */,
-				E41F974B132B6F41846B97E9843C2161 /* BubbleTabBar-umbrella.h */,
-				800695FD46C429BFD88D1DBD7B399F97 /* Info.plist */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/BubbleTabBar";
-			sourceTree = "<group>";
-		};
-		E0593D7B2039712529035CAB50BAEB17 /* BubbleTabBar */ = {
-			isa = PBXGroup;
-			children = (
-				0E425D3D5039A3728DC32FD1F57829B0 /* BubbleTabBar.swift */,
-				B8528CC929FE51738433D136E4A9F597 /* BubbleTabBarController.swift */,
-				B1061D141E31F653D8E924EC9FC6F14C /* CBTabBarButton.swift */,
-				C8BB7F15643FEDF44CA8E06164EE0B61 /* Support Files */,
+				B63AB2D4B7DE7C68E8E87C85B504523C /* BubbleTabBar.swift */,
+				42675A1086C220CA6F7E6234698D645D /* BubbleTabBarController.swift */,
+				6F4B22D5E26C58509BBA4A6D166B17C1 /* CBTabBarButton.swift */,
+				569325182A43616FD1CC01591CE5C774 /* Support Files */,
 			);
 			path = BubbleTabBar;
 			sourceTree = "<group>";
 		};
-		E23527BA4887F11D131D3306D70FB930 /* Blueprints */ = {
+		AE72F4FF0FDBC2A471B9249A20291E3F /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				64ED94AC07E3748DD1FB1B300C269D56 /* BinarySearch.swift */,
-				ABF5740A5CF125DD19A38AC585080BF4 /* BlueprintInvalidationContext.swift */,
-				99B7A7E8CAE4CF18C5E235258DEDD2D6 /* BlueprintLayout.swift */,
-				F482A35BBD2A15126AA9F35AD0AB2082 /* BlueprintLayout+iOS+tvOS.swift */,
-				2F905BEC68B7DFC79A18180B352FE860 /* BlueprintLayoutAnimation.swift */,
-				CFACC57AF4A448132F271A6EB0CBBD9F /* BlueprintLayoutAnimationType.swift */,
-				A204064FDF0CDFFC474624C722630F0A /* BlueprintLayoutAnimator.swift */,
-				1CC0257E0E32127B0BC11F0A4586591A /* BlueprintLayoutAnimator+Extensions.swift */,
-				52A82868DBAFEE3E396AB0E4A1DB6C9F /* BlueprintLayoutAnimator+iOS+tvOS.swift */,
-				40D3599A8CF3C3C2CA18C312E4A53D43 /* BlueprintSupplementaryKind.swift */,
-				491FB55A486A1BA3396AD1CA65D7D34E /* DefaultLayoutAnimator.swift */,
-				7ED879F947FD460802494098E43EDC8E /* HorizontalBlueprintLayout.swift */,
-				2BDF0C265850AE6B7347D0A339AB3270 /* MosaicBlueprintPatternController.swift */,
-				280D7D457AC76C147EFEC30281EB711B /* MosaicLayoutAttributes.swift */,
-				CCC83936B876524AC23EA50B88E11A01 /* MosaicPattern.swift */,
-				D29C5DA0A96EE72F4414C32DCB227021 /* SupplementaryLayoutAttributes.swift */,
-				844D8940570023A2089FCF0B750414B3 /* TypeAlias.swift */,
-				30DB64FFA86DD3159CAC003D8155DCD7 /* UICollectionView+Extensions.swift */,
-				5F24DECA7FE85C6B339C23E1416FA993 /* VerticalBlueprintLayout.swift */,
-				A5A76949818F614B9DDF49B73830606E /* VerticalMosaicBlueprintLayout.swift */,
-				51459F49A832204C035AF78B3399FBA7 /* Support Files */,
+				5752573C79F215D8169046C3855B8D43 /* Pods-Jotify */,
 			);
-			path = Blueprints;
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		EA77655152CC6A4409DA7FBA3DF70DF0 /* Support Files */ = {
+		D4BD8F270C0A569C76DE5BA646E5A143 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				101D28AC67F74190358360EF60DABD36 /* Info.plist */,
-				707C310334B316DC31F3452FF2B8672D /* VegaScrollFlowLayout.modulemap */,
-				A6F286F24C56E1F3F41451032F2130D5 /* VegaScrollFlowLayout.xcconfig */,
-				0A644A35914E750492C115B57085B832 /* VegaScrollFlowLayout-dummy.m */,
-				2ADDC4070A3026885A7FC80171E4FA87 /* VegaScrollFlowLayout-prefix.pch */,
-				DB0EFDB5B4A58919F6274246724944B1 /* VegaScrollFlowLayout-umbrella.h */,
+				24E0F73ED8BDF73A0BA85CF256D51BB7 /* Blueprints.modulemap */,
+				20CD675D245D48E46042DA49931579B5 /* Blueprints.xcconfig */,
+				0558765CCD437D81B85E9123784B9F11 /* Blueprints-dummy.m */,
+				E8066F178D00897BB346841DA63DD1FC /* Blueprints-prefix.pch */,
+				666C48405C2CA784E3C165E74822A991 /* Blueprints-umbrella.h */,
+				21082DCA2C862F434FF8BE392FDB97EA /* Info.plist */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/VegaScrollFlowLayout";
+			path = "../Target Support Files/Blueprints";
+			sourceTree = "<group>";
+		};
+		DDCC3DC7421F8802D779F147462A85D8 /* MultilineTextField */ = {
+			isa = PBXGroup;
+			children = (
+				DDA63729F8D1E36E1101BAFCE0E000DC /* MultilineTextField.swift */,
+				745BDFF341F3455B861564470039687E /* Support Files */,
+			);
+			path = MultilineTextField;
+			sourceTree = "<group>";
+		};
+		F1E34B90D0C94C884A8388F943F5C76C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				46C706139FC3C4078376D333EB3BA533 /* Blueprints */,
+				97F95E48DDCEDA61F7BC8BAA112584B3 /* BubbleTabBar */,
+				6659AD0C07106ECCE23D2CFFE1DE9030 /* ChameleonFramework */,
+				DDCC3DC7421F8802D779F147462A85D8 /* MultilineTextField */,
+				6C0DDAF849F0A9593591BAD2FB041DAB /* VegaScrollFlowLayout */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		FA6435BC3C28B1B1AFD920BE47C06596 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6A78540339E4155DC94213421DE0C29B /* Blueprints.framework */,
+				B4137236465AEDE05EBCABF70A2173D8 /* BubbleTabBar.framework */,
+				80C4E070AE1D49FCABAD5CE13E054FE9 /* ChameleonFramework.framework */,
+				70E21E76E7A68590255B3061BC1AF087 /* MultilineTextField.framework */,
+				6C5315BE5CAEA52862FF2922216BC6DA /* Pods_Jotify.framework */,
+				9BFDB6177241B7E13AAA4E7B048F2886 /* VegaScrollFlowLayout.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		106B61D27D8A67436E422C69A20CAB2D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C088933755BD99468BB3D0BC3898A08 /* Pods-Jotify-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		83030827992DA72A362B9A122AB76720 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				7021302E5089484E95959DA5AFC61875 /* MultilineTextField-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9477E1C247F389CAD234C8ACC63588D0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				649565F0B33703A32BCF4A5D30D1981B /* Chameleon.h in Headers */,
+				B84536EB9A282A3161E70A3B38E22601 /* Chameleon_.h in Headers */,
+				B2259DE2D05014CA92AF2AFF146ACDA1 /* ChameleonConstants.h in Headers */,
+				FED73668AC7DCE22C74924256D771408 /* ChameleonEnums.h in Headers */,
+				4363699449110B3C00BB8DEB599ECDC8 /* ChameleonFramework-umbrella.h in Headers */,
+				3CC7EEAA4241BFF54BA79EE6E4958486 /* ChameleonMacros.h in Headers */,
+				276892DF04E0F27F4A2EF38BC852B246 /* NSArray+Chameleon.h in Headers */,
+				A00C64F2FAEF1AEF193A06A852F7519C /* UIAppearance+Swift.h in Headers */,
+				47A93ED912575A29583FF2F22030FD2B /* UIButton+Chameleon.h in Headers */,
+				BE81BF1D8A6FA485AA575DBE296A7F3F /* UIColor+Chameleon.h in Headers */,
+				846C3650CC9EDC269D0DAFC7D85AD9DD /* UIColor+ChameleonPrivate.h in Headers */,
+				AC89BDBF1B01A09F8F40F4278B3D8188 /* UIImage+ChameleonPrivate.h in Headers */,
+				2A0A97C72C990D2155DF03AC8AA6B8AB /* UILabel+Chameleon.h in Headers */,
+				DE1388ABE89EB9B3FD648BB25689B689 /* UINavigationController+Chameleon.h in Headers */,
+				F497D1CFC5804A3299EE3F5CCF4EA56C /* UIView+ChameleonPrivate.h in Headers */,
+				04108AFD9F170803BFE3724EB8AA219D /* UIViewController+Chameleon.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,19 +595,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AEAB4E33B2AFA643B3AA2EB17380C173 /* Headers */ = {
+		9F4DBA3924222F24A6063CDC7EE0B5FD /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE5C58926F887CE3948A3259CC878412 /* Pods-Sticky Notes-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D1317916BDBB36707AA6171DD0CBC5F3 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				69037462BD4DB1C0373FA88F26CFAE41 /* VegaScrollFlowLayout-umbrella.h in Headers */,
+				98F84F015C053E2028F539E51E996BF9 /* VegaScrollFlowLayout-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,26 +611,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F8399E3882D1ED868AB186A3FB38DE32 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				30A2DC80306AEE4ACDC65A1EDF656539 /* GradientAnimator-umbrella.h in Headers */,
-				95833A26FAA08E1EF54B510A28F44BDF /* GradientAnimator.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		000C7EB1CEF2266F040F3E56D1FFBE1B /* VegaScrollFlowLayout */ = {
+		15C914A408BC5E5F6D295CC9FD563DC3 /* VegaScrollFlowLayout */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5F7F335674FA73A3667188321BBBB4B7 /* Build configuration list for PBXNativeTarget "VegaScrollFlowLayout" */;
+			buildConfigurationList = 6D759A60661BB75C38353F1827645E49 /* Build configuration list for PBXNativeTarget "VegaScrollFlowLayout" */;
 			buildPhases = (
-				D1317916BDBB36707AA6171DD0CBC5F3 /* Headers */,
-				EBFD7170DB795DF3B023531A996F6D5F /* Sources */,
-				CFF8A597A1A7D6B966F29DFB9416CDF7 /* Frameworks */,
-				9BC7FD9757A4B5FF81031B8A4C1929A7 /* Resources */,
+				9F4DBA3924222F24A6063CDC7EE0B5FD /* Headers */,
+				10B78A680CB0AE93CCD4598928E1B403 /* Sources */,
+				F463859F6FFD74911E01AA41BD4DE798 /* Frameworks */,
+				62CF10EF185EA213194BB8F9E155121D /* Resources */,
 			);
 			buildRules = (
 			);
@@ -526,7 +629,7 @@
 			);
 			name = VegaScrollFlowLayout;
 			productName = VegaScrollFlowLayout;
-			productReference = 3029B6A47DABD98EF744078FC967A20C /* VegaScrollFlowLayout.framework */;
+			productReference = 9BFDB6177241B7E13AAA4E7B048F2886 /* VegaScrollFlowLayout.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		38608DDE67F92B4FD0EE1E2E69BE7B0E /* MultilineTextField */ = {
@@ -544,7 +647,48 @@
 			);
 			name = MultilineTextField;
 			productName = MultilineTextField;
-			productReference = 03E4CBF447A04771D5F628DD0374F58D /* MultilineTextField.framework */;
+			productReference = 70E21E76E7A68590255B3061BC1AF087 /* MultilineTextField.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		53E27C8B2F18EAE70D2EE4415FD50D48 /* ChameleonFramework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A4EF71FAEB8FBE24DD603B06669D8DC5 /* Build configuration list for PBXNativeTarget "ChameleonFramework" */;
+			buildPhases = (
+				9477E1C247F389CAD234C8ACC63588D0 /* Headers */,
+				34D2C682C5D6C040E2550F15F8430A2B /* Sources */,
+				B6E0266A1CDD0DFB1A50CCAAE1E2F10B /* Frameworks */,
+				868287D51D90630C4191525BC65F2635 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChameleonFramework;
+			productName = ChameleonFramework;
+			productReference = 80C4E070AE1D49FCABAD5CE13E054FE9 /* ChameleonFramework.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		8D6135DEC33ECA7EBA4D44E3C092BEA6 /* Pods-Jotify */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 913EFA06FD299DFE98C3A05C94F085A9 /* Build configuration list for PBXNativeTarget "Pods-Jotify" */;
+			buildPhases = (
+				106B61D27D8A67436E422C69A20CAB2D /* Headers */,
+				B32F74288F058CF5DE546FAE09E0CD92 /* Sources */,
+				BC48EDA807BF932814679494A7B674D5 /* Frameworks */,
+				EB748837A2E3EF41FCFDBACA740D98B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				89B144E3643C8503FBE716A9FDCF0BAE /* PBXTargetDependency */,
+				3DA2444EB171CA9B6859F6EEA5EA4962 /* PBXTargetDependency */,
+				AB304D9020A2E2B6AAE4ADF25ED7EBE3 /* PBXTargetDependency */,
+				DC2BE7CE5D7C81E9A684D281FC70A97B /* PBXTargetDependency */,
+				B3FDBDBCD2C7558EFC15D7224328EDEB /* PBXTargetDependency */,
+			);
+			name = "Pods-Jotify";
+			productName = "Pods-Jotify";
+			productReference = 6C5315BE5CAEA52862FF2922216BC6DA /* Pods_Jotify.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		BDA75D4C5E3F988D0C5431728CDD2478 /* BubbleTabBar */ = {
@@ -562,48 +706,7 @@
 			);
 			name = BubbleTabBar;
 			productName = BubbleTabBar;
-			productReference = CA4DC3E1F958AFA3F72C77134492848F /* BubbleTabBar.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		C42A5DFCED6FF849E904F0F0D9C715B5 /* GradientAnimator */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 23BA39D5A8C6499F4E9003D8665F5F04 /* Build configuration list for PBXNativeTarget "GradientAnimator" */;
-			buildPhases = (
-				F8399E3882D1ED868AB186A3FB38DE32 /* Headers */,
-				49327E42CBA5F8922EBE02FA9FA5C674 /* Sources */,
-				672A8CAA1901CE1DC64098454C2DF03F /* Frameworks */,
-				F95D102830C4486E6F45CC8C3587782D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = GradientAnimator;
-			productName = GradientAnimator;
-			productReference = 87996F7925541F9B6790AE22F14EA044 /* GradientAnimator.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		D416E1A832360F8FE400497ABDE87576 /* Pods-Sticky Notes */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A549B4E85433467AAE9D607836552BD3 /* Build configuration list for PBXNativeTarget "Pods-Sticky Notes" */;
-			buildPhases = (
-				AEAB4E33B2AFA643B3AA2EB17380C173 /* Headers */,
-				46A2866E253B3BFCA15F398A234AFCC5 /* Sources */,
-				8C9EE9612297E32F299168E392AFD7D2 /* Frameworks */,
-				5118F74DF3506393631A496FDEFE1EC6 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				645BB2F669ABF5C5A7A205F29A1892F3 /* PBXTargetDependency */,
-				4F0A594727278113DE6A4F6D528EA667 /* PBXTargetDependency */,
-				7DC17FAE797AC71756DDEFC59DD08491 /* PBXTargetDependency */,
-				428C9702D73FA6A8E6FE7973EA3CBB20 /* PBXTargetDependency */,
-				6390B4EB72EB8CD5ED6CA79585ED0CAD /* PBXTargetDependency */,
-			);
-			name = "Pods-Sticky Notes";
-			productName = "Pods-Sticky Notes";
-			productReference = 537CBF689416633F40C7BBD39B87C33B /* Pods_Sticky_Notes.framework */;
+			productReference = B4137236465AEDE05EBCABF70A2173D8 /* BubbleTabBar.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		F09F1CF179EB9A6CA47856CB07A6EB68 /* Blueprints */ = {
@@ -621,7 +724,7 @@
 			);
 			name = Blueprints;
 			productName = Blueprints;
-			productReference = D1008518ADDF80C146A1C6FFB5BB64AA /* Blueprints.framework */;
+			productReference = 6A78540339E4155DC94213421DE0C29B /* Blueprints.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -647,29 +750,29 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 5DB5C09430D98DB6DFAFF3D5DB823FB0 /* Products */;
+			productRefGroup = FA6435BC3C28B1B1AFD920BE47C06596 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				F09F1CF179EB9A6CA47856CB07A6EB68 /* Blueprints */,
 				BDA75D4C5E3F988D0C5431728CDD2478 /* BubbleTabBar */,
-				C42A5DFCED6FF849E904F0F0D9C715B5 /* GradientAnimator */,
+				53E27C8B2F18EAE70D2EE4415FD50D48 /* ChameleonFramework */,
 				38608DDE67F92B4FD0EE1E2E69BE7B0E /* MultilineTextField */,
-				D416E1A832360F8FE400497ABDE87576 /* Pods-Sticky Notes */,
-				000C7EB1CEF2266F040F3E56D1FFBE1B /* VegaScrollFlowLayout */,
+				8D6135DEC33ECA7EBA4D44E3C092BEA6 /* Pods-Jotify */,
+				15C914A408BC5E5F6D295CC9FD563DC3 /* VegaScrollFlowLayout */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		5118F74DF3506393631A496FDEFE1EC6 /* Resources */ = {
+		62CF10EF185EA213194BB8F9E155121D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9BC7FD9757A4B5FF81031B8A4C1929A7 /* Resources */ = {
+		868287D51D90630C4191525BC65F2635 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -697,7 +800,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F95D102830C4486E6F45CC8C3587782D /* Resources */ = {
+		EB748837A2E3EF41FCFDBACA740D98B3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -707,6 +810,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		10B78A680CB0AE93CCD4598928E1B403 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16BA4CE6DDEA9E85EB39C2297D55E70C /* VegaScrollFlowLayout-dummy.m in Sources */,
+				8C9959782FFB4C255C8A47D856A9B78D /* VegaScrollFlowLayout.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34D2C682C5D6C040E2550F15F8430A2B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BE8E49FF96D45C33ABF40360A08F83C /* Chameleon_.m in Sources */,
+				25FB0E8A4A63BDB5F7C6181B13936240 /* ChameleonConstants.m in Sources */,
+				10570F50E7A022E58345B2E87379FC47 /* ChameleonFramework-dummy.m in Sources */,
+				E4465F0C05B4A08F3913D5C9497D0572 /* ChameleonShorthand.swift in Sources */,
+				B02260FB437A7E63B5BAEE54D97E35A9 /* NSArray+Chameleon.m in Sources */,
+				5C07A8E1608D2C5193D9059911B68094 /* UIAppearance+Swift.m in Sources */,
+				95DE1CE06439FEE759501298C0436E4D /* UIButton+Chameleon.m in Sources */,
+				74ED9FC65A400648D16C1FD9247FB27E /* UIColor+Chameleon.m in Sources */,
+				CF0C1E295B8DC00BCB39851171B6BD50 /* UIColor+ChameleonPrivate.m in Sources */,
+				9E9DB644D0AAC35A33C068400E84ECBF /* UIImage+ChameleonPrivate.m in Sources */,
+				5354A57F40250C5923036E9213767267 /* UILabel+Chameleon.m in Sources */,
+				AA23FF822AC1CFC7FC07F8D9C882813B /* UINavigationController+Chameleon.m in Sources */,
+				5DE6E17FE4E3E7D68BAD9260ADEC9593 /* UIView+ChameleonPrivate.m in Sources */,
+				D4EBFFD4220ADF1964E17F53621EEEB1 /* UIViewController+Chameleon.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		40DEA805FFF0FF2EEA0B8874BBFA53D9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -718,25 +851,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		46A2866E253B3BFCA15F398A234AFCC5 /* Sources */ = {
+		B32F74288F058CF5DE546FAE09E0CD92 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				095ABCBFEAB9905E2DA742F516489C31 /* Pods-Sticky Notes-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		49327E42CBA5F8922EBE02FA9FA5C674 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				64C9579BDEE334FA956528A3FB6D916F /* contents.xcworkspacedata in Sources */,
-				896A3FA4EBF2CEAD3D9E401DF2D5D874 /* GradientAnimator-dummy.m in Sources */,
-				784EEEA9BF994F0974FBE7648182BC22 /* GradientAnimator.podspec in Sources */,
-				144586081E292FE0D66D36373DCD9932 /* GradientAnimator.swift in Sources */,
-				825C264F68FF5771DF06654C03408799 /* IDEWorkspaceChecks.plist in Sources */,
-				64E1E14AB438C3A8DFE0E275E605EF46 /* Podfile in Sources */,
-				F33A245C527001EAAEAD4B70F7A9515C /* project.pbxproj in Sources */,
+				040F1D05E493CAE80CC98002B9A427C8 /* Pods-Jotify-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -746,15 +865,6 @@
 			files = (
 				52DB7BB262CEE2B66C6A41F94BBA9078 /* MultilineTextField-dummy.m in Sources */,
 				8895D06E60B31C29DDA8868EA033A6E7 /* MultilineTextField.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EBFD7170DB795DF3B023531A996F6D5F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				13D94EC100076CE9726E7C4B2CF8B0F7 /* VegaScrollFlowLayout-dummy.m in Sources */,
-				62BA1F1CD9FB488F93A850EA12E615EA /* VegaScrollFlowLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -789,45 +899,43 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		428C9702D73FA6A8E6FE7973EA3CBB20 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MultilineTextField;
-			target = 38608DDE67F92B4FD0EE1E2E69BE7B0E /* MultilineTextField */;
-			targetProxy = CCF8AF9C8E5160BDBC5C4F0D824E3A34 /* PBXContainerItemProxy */;
-		};
-		4F0A594727278113DE6A4F6D528EA667 /* PBXTargetDependency */ = {
+		3DA2444EB171CA9B6859F6EEA5EA4962 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = BubbleTabBar;
 			target = BDA75D4C5E3F988D0C5431728CDD2478 /* BubbleTabBar */;
-			targetProxy = 584B61C315E9ABC6C64FC7AB35849851 /* PBXContainerItemProxy */;
+			targetProxy = C5DDCD398DCFD64478A6B01D43D03AD1 /* PBXContainerItemProxy */;
 		};
-		6390B4EB72EB8CD5ED6CA79585ED0CAD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = VegaScrollFlowLayout;
-			target = 000C7EB1CEF2266F040F3E56D1FFBE1B /* VegaScrollFlowLayout */;
-			targetProxy = A556D8DE9094238BF0E75F160B01A5E9 /* PBXContainerItemProxy */;
-		};
-		645BB2F669ABF5C5A7A205F29A1892F3 /* PBXTargetDependency */ = {
+		89B144E3643C8503FBE716A9FDCF0BAE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Blueprints;
 			target = F09F1CF179EB9A6CA47856CB07A6EB68 /* Blueprints */;
-			targetProxy = D0020A8B005E0C7D8FA3534F53FC38DD /* PBXContainerItemProxy */;
+			targetProxy = 590781726C124DD0FCA974B23420954E /* PBXContainerItemProxy */;
 		};
-		7DC17FAE797AC71756DDEFC59DD08491 /* PBXTargetDependency */ = {
+		AB304D9020A2E2B6AAE4ADF25ED7EBE3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = GradientAnimator;
-			target = C42A5DFCED6FF849E904F0F0D9C715B5 /* GradientAnimator */;
-			targetProxy = 3D8EC6FE7B709319B8CAD9321A2AA1B9 /* PBXContainerItemProxy */;
+			name = ChameleonFramework;
+			target = 53E27C8B2F18EAE70D2EE4415FD50D48 /* ChameleonFramework */;
+			targetProxy = 1EECB62D969FFC6F688DAF502FED2AB0 /* PBXContainerItemProxy */;
+		};
+		B3FDBDBCD2C7558EFC15D7224328EDEB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = VegaScrollFlowLayout;
+			target = 15C914A408BC5E5F6D295CC9FD563DC3 /* VegaScrollFlowLayout */;
+			targetProxy = 1A2E474CB59078A14DF905928E914699 /* PBXContainerItemProxy */;
+		};
+		DC2BE7CE5D7C81E9A684D281FC70A97B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MultilineTextField;
+			target = 38608DDE67F92B4FD0EE1E2E69BE7B0E /* MultilineTextField */;
+			targetProxy = 3C0DCACBD042D6DE60682B08A8135026 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0F45C54788E6A598A0B836680FBFCBC2 /* Release */ = {
+		12BA81D82566A6304B625D65E54BFF5F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F7E9E088AB219A9D98043BF2D17CB356 /* Pods-Sticky Notes.release.xcconfig */;
+			baseConfigurationReference = B0BC7B59CD35975C38F28FBC29071DB5 /* ChameleonFramework.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -837,19 +945,18 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Sticky Notes/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/ChameleonFramework/ChameleonFramework-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ChameleonFramework/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Sticky Notes/Pods-Sticky Notes.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				MODULEMAP_FILE = "Target Support Files/ChameleonFramework/ChameleonFramework.modulemap";
+				PRODUCT_MODULE_NAME = ChameleonFramework;
+				PRODUCT_NAME = ChameleonFramework;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -859,7 +966,7 @@
 		};
 		3548E43894F4DA226373D2A368B09E8F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2536FA7FD8B2DDA03FA2EFFC9813A5C3 /* Blueprints.xcconfig */;
+			baseConfigurationReference = 20CD675D245D48E46042DA49931579B5 /* Blueprints.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -888,9 +995,44 @@
 			};
 			name = Debug;
 		};
+		41EE0BB1BD899B382C57C12A4B576EDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 84C5D3E77AA77B6DF3E3F6D05FBD694F /* Pods-Jotify.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Jotify/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Jotify/Pods-Jotify.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		500838125AE9813EAEF84C11DADF7DD4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8305457C759BA95E128BCC21A06ABEC1 /* MultilineTextField.xcconfig */;
+			baseConfigurationReference = ACDE902AE09AD3F59E4031864F2B3743 /* MultilineTextField.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -922,7 +1064,7 @@
 		};
 		51E524EFB22F2F4A58493E04BF0DF3E7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2536FA7FD8B2DDA03FA2EFFC9813A5C3 /* Blueprints.xcconfig */;
+			baseConfigurationReference = 20CD675D245D48E46042DA49931579B5 /* Blueprints.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -952,140 +1094,9 @@
 			};
 			name = Release;
 		};
-		5C395C0F05AB01266144F1F6966BFD47 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F2DFFD224BA6CF59E6E4C774C4B281A /* Pods-Sticky Notes.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Sticky Notes/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Sticky Notes/Pods-Sticky Notes.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		675F7DEFD85555466D61F9FB70419F15 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4AC4B029A48347DDEDA4A8C5AEA034F7 /* GradientAnimator.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/GradientAnimator/GradientAnimator-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/GradientAnimator/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/GradientAnimator/GradientAnimator.modulemap";
-				PRODUCT_MODULE_NAME = GradientAnimator;
-				PRODUCT_NAME = GradientAnimator;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		89D308FF80D4A94FE7AB91CDB92A8E58 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A6F286F24C56E1F3F41451032F2130D5 /* VegaScrollFlowLayout.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/VegaScrollFlowLayout/VegaScrollFlowLayout-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/VegaScrollFlowLayout/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/VegaScrollFlowLayout/VegaScrollFlowLayout.modulemap";
-				PRODUCT_MODULE_NAME = VegaScrollFlowLayout;
-				PRODUCT_NAME = VegaScrollFlowLayout;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		9794A33764EA0A7561A74B69B3A095D0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4AC4B029A48347DDEDA4A8C5AEA034F7 /* GradientAnimator.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/GradientAnimator/GradientAnimator-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/GradientAnimator/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/GradientAnimator/GradientAnimator.modulemap";
-				PRODUCT_MODULE_NAME = GradientAnimator;
-				PRODUCT_NAME = GradientAnimator;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		97ABE6AA9DA636597263F2BEB6F37AB6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8305457C759BA95E128BCC21A06ABEC1 /* MultilineTextField.xcconfig */;
+			baseConfigurationReference = ACDE902AE09AD3F59E4031864F2B3743 /* MultilineTextField.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1181,6 +1192,37 @@
 			};
 			name = Debug;
 		};
+		9D31200752F6F906BC2B9A577CCA02DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B0BC7B59CD35975C38F28FBC29071DB5 /* ChameleonFramework.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/ChameleonFramework/ChameleonFramework-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ChameleonFramework/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ChameleonFramework/ChameleonFramework.modulemap";
+				PRODUCT_MODULE_NAME = ChameleonFramework;
+				PRODUCT_NAME = ChameleonFramework;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		B97A7F6ACE1216BB5A2307CA83FC93C5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1245,7 +1287,7 @@
 		};
 		BC1835547B73FC7ACC0270DB1F26B6E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96871D5C15CBAEBA78659DF25DF959CA /* BubbleTabBar.xcconfig */;
+			baseConfigurationReference = D462A9BDEA99C818C5EE6989FFB0BB06 /* BubbleTabBar.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1274,9 +1316,9 @@
 			};
 			name = Debug;
 		};
-		C0CF700E0522AD3B41FDE83F07D4F490 /* Debug */ = {
+		BD4A730469BDAF2A71CC24F3A8236B78 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A6F286F24C56E1F3F41451032F2130D5 /* VegaScrollFlowLayout.xcconfig */;
+			baseConfigurationReference = EBD21B36D4CB8ABD9B016AACA41B6450 /* VegaScrollFlowLayout.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1305,9 +1347,41 @@
 			};
 			name = Debug;
 		};
+		D381E461495039A1F7ADF129698A125A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBD21B36D4CB8ABD9B016AACA41B6450 /* VegaScrollFlowLayout.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/VegaScrollFlowLayout/VegaScrollFlowLayout-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/VegaScrollFlowLayout/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/VegaScrollFlowLayout/VegaScrollFlowLayout.modulemap";
+				PRODUCT_MODULE_NAME = VegaScrollFlowLayout;
+				PRODUCT_NAME = VegaScrollFlowLayout;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		E08D4E07262053B8E5BFA82EAFD789C1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96871D5C15CBAEBA78659DF25DF959CA /* BubbleTabBar.xcconfig */;
+			baseConfigurationReference = D462A9BDEA99C818C5EE6989FFB0BB06 /* BubbleTabBar.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1337,6 +1411,40 @@
 			};
 			name = Release;
 		};
+		FB8390510D3AF576534D1D2DC4009991 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA729C5CDB203D2DC20F71D7F9747068 /* Pods-Jotify.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Jotify/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Jotify/Pods-Jotify.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1345,15 +1453,6 @@
 			buildConfigurations = (
 				3548E43894F4DA226373D2A368B09E8F /* Debug */,
 				51E524EFB22F2F4A58493E04BF0DF3E7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		23BA39D5A8C6499F4E9003D8665F5F04 /* Build configuration list for PBXNativeTarget "GradientAnimator" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				675F7DEFD85555466D61F9FB70419F15 /* Debug */,
-				9794A33764EA0A7561A74B69B3A095D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1367,11 +1466,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5F7F335674FA73A3667188321BBBB4B7 /* Build configuration list for PBXNativeTarget "VegaScrollFlowLayout" */ = {
+		6D759A60661BB75C38353F1827645E49 /* Build configuration list for PBXNativeTarget "VegaScrollFlowLayout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C0CF700E0522AD3B41FDE83F07D4F490 /* Debug */,
-				89D308FF80D4A94FE7AB91CDB92A8E58 /* Release */,
+				BD4A730469BDAF2A71CC24F3A8236B78 /* Debug */,
+				D381E461495039A1F7ADF129698A125A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		913EFA06FD299DFE98C3A05C94F085A9 /* Build configuration list for PBXNativeTarget "Pods-Jotify" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB8390510D3AF576534D1D2DC4009991 /* Debug */,
+				41EE0BB1BD899B382C57C12A4B576EDE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1385,11 +1493,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A549B4E85433467AAE9D607836552BD3 /* Build configuration list for PBXNativeTarget "Pods-Sticky Notes" */ = {
+		A4EF71FAEB8FBE24DD603B06669D8DC5 /* Build configuration list for PBXNativeTarget "ChameleonFramework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5C395C0F05AB01266144F1F6966BFD47 /* Debug */,
-				0F45C54788E6A598A0B836680FBFCBC2 /* Release */,
+				9D31200752F6F906BC2B9A577CCA02DD /* Debug */,
+				12BA81D82566A6304B625D65E54BFF5F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

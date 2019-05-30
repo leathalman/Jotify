@@ -15,7 +15,7 @@ private let transformIdentity = CATransform3D(m11: 1, m12: 0, m13: 0, m14: 0,
 
 open class VegaScrollFlowLayout: UICollectionViewFlowLayout {
     
-    open var springsHardness: CGFloat = 15
+    open var springHardness: CGFloat = 15
     open var isPagingEnabled: Bool = true
     
     private var dynamicAnimator: UIDynamicAnimator!
@@ -154,8 +154,8 @@ open class VegaScrollFlowLayout: UICollectionViewFlowLayout {
             let springBehaviour = UIAttachmentBehavior(item: item, attachedToAnchor: item.center)
             
             springBehaviour.length = 0.0
-//            springBehaviour.damping = 0.8
-//            springBehaviour.frequency = 1.0
+            springBehaviour.damping = 0.8
+            springBehaviour.frequency = 1.0
             
             if !CGPoint.zero.equalTo(touchLocation) {
                 item.center = getUpdatedBehaviorItemCenter(behavior: springBehaviour, touchLocation: touchLocation)
@@ -168,16 +168,16 @@ open class VegaScrollFlowLayout: UICollectionViewFlowLayout {
     
     private func getUpdatedBehaviorItemCenter(behavior: UIAttachmentBehavior,
                                               touchLocation: CGPoint) -> CGPoint {
-//        let yDistanceFromTouch = abs(touchLocation.y - behavior.anchorPoint.y)
-//        let xDistanceFromTouch = abs(touchLocation.x - behavior.anchorPoint.x)
-//        let scrollResistance = (yDistanceFromTouch + xDistanceFromTouch) / (springHardness * 100)
+        let yDistanceFromTouch = abs(touchLocation.y - behavior.anchorPoint.y)
+        let xDistanceFromTouch = abs(touchLocation.x - behavior.anchorPoint.x)
+        let scrollResistance = (yDistanceFromTouch + xDistanceFromTouch) / (springHardness * 100)
         
         let attrs = behavior.items.first as! UICollectionViewLayoutAttributes
         var center = attrs.center
         if latestDelta < 0 {
-            center.y += max(latestDelta, latestDelta)
+            center.y += max(latestDelta, latestDelta * scrollResistance)
         } else {
-            center.y += min(latestDelta, latestDelta)
+            center.y += min(latestDelta, latestDelta * scrollResistance)
         }
         return center
     }

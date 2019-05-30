@@ -1,6 +1,0 @@
-framework module Pods_Sticky_Notes {
-  umbrella header "Pods-Sticky Notes-umbrella.h"
-
-  export *
-  module * { export * }
-}

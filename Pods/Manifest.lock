@@ -1,14 +1,16 @@
 PODS:
   - Blueprints (0.10.5)
   - BubbleTabBar (0.8.3)
-  - GradientAnimator (1.0.1)
+  - ChameleonFramework/Default (2.1.0)
+  - ChameleonFramework/Swift (2.1.0):
+    - ChameleonFramework/Default
   - MultilineTextField (0.2.3)
   - VegaScrollFlowLayout (1.1)
 
 DEPENDENCIES:
   - Blueprints
   - BubbleTabBar
-  - GradientAnimator (~> 1.0)
+  - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - MultilineTextField
   - VegaScrollFlowLayout
 
@@ -16,17 +18,25 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Blueprints
     - BubbleTabBar
-    - GradientAnimator
     - MultilineTextField
     - VegaScrollFlowLayout
+
+EXTERNAL SOURCES:
+  ChameleonFramework:
+    :git: https://github.com/ViccAlexander/Chameleon.git
+
+CHECKOUT OPTIONS:
+  ChameleonFramework:
+    :commit: 6dd284bde21ea2e7f9fd89bc36f40df16e16369d
+    :git: https://github.com/ViccAlexander/Chameleon.git
 
 SPEC CHECKSUMS:
   Blueprints: 0cd68556432de83fa3937108ee959d0afffd455e
   BubbleTabBar: 44384a54025345f40f19f10447f42f6e2b9e4ce9
-  GradientAnimator: 67bdeef9d3ac80e2bac85cbbc0f9816cfe9dfbd2
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   MultilineTextField: 10965d9c3e05a182181bd7971eb009c7607001ae
   VegaScrollFlowLayout: 9158061f29179147755f937c2b21693fc5dbbac3
 
-PODFILE CHECKSUM: 4d438f2ff3d23133595c94e265733c8f85918890
+PODFILE CHECKSUM: 00d67605d8f334c1a93e33867dbc32e172dd2e52
 
 COCOAPODS: 1.5.3

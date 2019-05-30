@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "15C914A408BC5E5F6D295CC9FD563DC3"
-               BuildableName = "VegaScrollFlowLayout.framework"
-               BlueprintName = "VegaScrollFlowLayout"
+               BlueprintIdentifier = "8D6135DEC33ECA7EBA4D44E3C092BEA6"
+               BuildableName = "Pods_Jotify.framework"
+               BlueprintName = "Pods-Jotify"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "15C914A408BC5E5F6D295CC9FD563DC3"
-            BuildableName = "VegaScrollFlowLayout.framework"
-            BlueprintName = "VegaScrollFlowLayout"
+            BlueprintIdentifier = "8D6135DEC33ECA7EBA4D44E3C092BEA6"
+            BuildableName = "Pods_Jotify.framework"
+            BlueprintName = "Pods-Jotify"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
