@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9AF0EB3A1634D24DC36FF10E5D35D778"
+               BlueprintIdentifier = "000C7EB1CEF2266F040F3E56D1FFBE1B"
                BuildableName = "VegaScrollFlowLayout.framework"
                BlueprintName = "VegaScrollFlowLayout"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9AF0EB3A1634D24DC36FF10E5D35D778"
+            BlueprintIdentifier = "000C7EB1CEF2266F040F3E56D1FFBE1B"
             BuildableName = "VegaScrollFlowLayout.framework"
             BlueprintName = "VegaScrollFlowLayout"
             ReferencedContainer = "container:Pods.xcodeproj">

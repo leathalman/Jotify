@@ -12,9 +12,4 @@ pod'BubbleTabBar'
 pod'GradientAnimator', '~> 1.0'
 pod'Blueprints'
 
-pod'Firebase/Firestore'
-pod'Firebase/Auth'
-pod'Firebase/Storage'
-pod'Firebase/Core'
-
 end
