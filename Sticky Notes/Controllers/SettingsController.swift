@@ -14,7 +14,7 @@ class SettingsController: UIViewController {
     override func viewDidLoad() {
         title = "Settings"
         
-        view.backgroundColor = .white
+        view.backgroundColor = Colors.lightGray
         self.navigationController?.navigationBar.prefersLargeTitles = true
 
         let button = UIButton()

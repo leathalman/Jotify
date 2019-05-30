@@ -27,7 +27,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         height: 87,
         minimumInteritemSpacing: 10,
         minimumLineSpacing: 15,
-        sectionInset: EdgeInsets(top: 10, left: 10, bottom: 84, right: 10),
+        sectionInset: EdgeInsets(top: 10, left: 10, bottom: 10, right: 10),
         stickyHeaders: true,
         stickyFooters: false)
     
@@ -45,7 +45,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        view.backgroundColor = Colors.lightGray
         
         title = "Notes"
         
@@ -127,7 +127,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         
         cell.layer.addShadow(color: UIColor.darkGray)
         
-        cell.textLabel.text = Note.text
+//        cell.textLabel.text = Note.text
         
         return cell
     }

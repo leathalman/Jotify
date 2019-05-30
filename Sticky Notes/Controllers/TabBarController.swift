@@ -33,6 +33,7 @@ class TabBarController: BubbleTabBarController {
         
         viewControllers = [savedNotesVC, writeNoteVC, settingsVC]
         
-        self.selectedIndex = 1
+        //set back to 1 when testing is done
+        self.selectedIndex = 0
     }
 }

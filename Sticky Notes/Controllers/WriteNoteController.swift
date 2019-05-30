@@ -29,7 +29,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         let frame = CGRect(x: 0, y: 100, width: screenWidth, height: screenHeight)
         let textField = MultilineTextField(frame: frame)
         textField.backgroundColor = .clear
-        textField.placeholderColor = Colors.white
+        textField.placeholderColor = .white
         textField.textColor = .white
         textField.isPlaceholderScrollEnabled = true
         textField.leftViewOrigin = CGPoint(x: 8, y: 8)
