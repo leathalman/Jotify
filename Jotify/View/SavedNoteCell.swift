@@ -15,7 +15,7 @@ class SavedNoteCell: UICollectionViewCell {
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textColor = UIColor.darkGray
-        label.text = "Default Text! Another one here we go22 Default Text! Another one here we go22 Default Text! Another one here we go22"
+        label.text = "Default Text! Another one here we go!"
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -47,7 +47,7 @@ class SavedNoteCell: UICollectionViewCell {
         textLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -10).isActive = true
         
         dateLabel.leftAnchor.constraint(equalTo: textLabel.leftAnchor).isActive = true
-        dateLabel.topAnchor.constraint(equalTo: textLabel.bottomAnchor).isActive = true
+        dateLabel.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: -10).isActive = true
         dateLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         dateLabel.widthAnchor.constraint(equalTo: textLabel.widthAnchor).isActive = true
     }

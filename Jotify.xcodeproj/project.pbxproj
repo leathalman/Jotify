@@ -12,6 +12,8 @@
 		F60DE60922838F69008701E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F60DE60722838F69008701E9 /* Main.storyboard */; };
 		F60DE60B22838F6A008701E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F60DE60A22838F6A008701E9 /* Assets.xcassets */; };
 		F60DE60E22838F6A008701E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F60DE60C22838F6A008701E9 /* LaunchScreen.storyboard */; };
+		F661D4B122A1E77400FC6E1B /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F661D4B022A1E77400FC6E1B /* SettingsSwitchCell.swift */; };
+		F661D4B322A2066500FC6E1B /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F661D4B222A2066500FC6E1B /* Styles.swift */; };
 		F67949A122A05A1900BCC979 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67949A022A05A1900BCC979 /* SettingsCell.swift */; };
 		F67949A622A05B8500BCC979 /* UserInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67949A522A05B8500BCC979 /* UserInfoHeader.swift */; };
 		F68F6857228A16FE00EEC9D9 /* SavedNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68F6856228A16FE00EEC9D9 /* SavedNoteController.swift */; };
@@ -33,6 +35,8 @@
 		F60DE60A22838F6A008701E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F60DE60D22838F6A008701E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F60DE60F22838F6A008701E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F661D4B022A1E77400FC6E1B /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
+		F661D4B222A2066500FC6E1B /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		F67949A022A05A1900BCC979 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		F67949A522A05B8500BCC979 /* UserInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoHeader.swift; sourceTree = "<group>"; };
 		F68F6856228A16FE00EEC9D9 /* SavedNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedNoteController.swift; sourceTree = "<group>"; };
@@ -113,6 +117,7 @@
 			children = (
 				F6F30A2922A087D4009D601B /* Extensions.swift */,
 				F698FD022283B6CA000B69E5 /* Constants.swift */,
+				F661D4B222A2066500FC6E1B /* Styles.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -122,6 +127,7 @@
 			children = (
 				F6B906D3228CF61700FC0123 /* SavedNoteCell.swift */,
 				F67949A022A05A1900BCC979 /* SettingsCell.swift */,
+				F661D4B022A1E77400FC6E1B /* SettingsSwitchCell.swift */,
 				F67949A522A05B8500BCC979 /* UserInfoHeader.swift */,
 			);
 			path = View;
@@ -269,6 +275,7 @@
 			files = (
 				F60DE60422838F69008701E9 /* AppDelegate.swift in Sources */,
 				F6B906D4228CF61700FC0123 /* SavedNoteCell.swift in Sources */,
+				F661D4B322A2066500FC6E1B /* Styles.swift in Sources */,
 				F68F6857228A16FE00EEC9D9 /* SavedNoteController.swift in Sources */,
 				F69DBAC82289016E006888C9 /* WriteNoteController.swift in Sources */,
 				F69DBACC22890272006888C9 /* SettingsController.swift in Sources */,
@@ -277,6 +284,7 @@
 				F69FC3AF22A08FA400E6455E /* GradientAnimator.swift in Sources */,
 				F69C91AB229CCC0400DB0A61 /* TabBarController.swift in Sources */,
 				F698FD032283B6CA000B69E5 /* Constants.swift in Sources */,
+				F661D4B122A1E77400FC6E1B /* SettingsSwitchCell.swift in Sources */,
 				F67949A122A05A1900BCC979 /* SettingsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -120,10 +120,10 @@ extension SavedNoteController: CollectionViewFlowLayoutDelegate {
         let line = 38
         
         if numChars <= line {
-            print("Less than or equal to 38 char")
+//            print("Less than or equal to 38 char")
             size = CGSize(width: 0, height: 87)
         } else if numChars <= line*2 {
-            print("Less than or equal to 76")
+//            print("Less than or equal to 76")
             size = CGSize(width: 0, height: 87)
             
         } else if numChars <= line*3 {
