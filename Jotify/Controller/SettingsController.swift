@@ -12,23 +12,23 @@ class SettingsController: UITableViewController {
     
     var userInfoHeader: UserInfoHeader!
     var darkModeEnabled = Bool()
-//    let defaults = UserDefaults.standard
+    //    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         setupView()
         
-//        self.tableView.backgroundColor = UIColor.flatBlue
-//        view.backgroundColor = UIColor.flatRedDark
+        //        self.tableView.backgroundColor = UIColor.flatBlue
+        //        view.backgroundColor = UIColor.flatRedDark
         navigationController?.navigationBar.isTranslucent = false
-//        navigationController?.navigationBar.tintColor = UIColor.flatBlue
-//        navigationController?.navigationBar.backgroundColor = UIColor.flatBlue
+        //        navigationController?.navigationBar.tintColor = UIColor.flatBlue
+        //        navigationController?.navigationBar.backgroundColor = UIColor.flatBlue
     }
     
     func setupView() {
         title = "Settings"
         
-//        darkModeEnabled = defaults.bool(forKey: "DarkDefault")
-//        print(darkModeEnabled)
+        //        darkModeEnabled = defaults.bool(forKey: "DarkDefault")
+        //        print(darkModeEnabled)
         
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
@@ -55,7 +55,7 @@ class SettingsController: UITableViewController {
         switch section {
         case 0:
             //number of cells in 1st section
-            return 2
+            return 1
         case 1:
             return 3
         default:
@@ -93,7 +93,7 @@ class SettingsController: UITableViewController {
             if indexPath.row == 0 {
                 cell.switchButton.addTarget(self, action: #selector(self.darkModeSwitchClicked(_:)), for: .valueChanged)
             } else if indexPath.row == 1 {
-//                cell.switchButton.addTarget(self, action: #selector(self.switchChanged2(_:)), for: .valueChanged)
+                //                cell.switchButton.addTarget(self, action: #selector(self.switchChanged2(_:)), for: .valueChanged)
             } else {
                 print("out of bounds")
             }
@@ -113,9 +113,9 @@ class SettingsController: UITableViewController {
     }
     
     @objc func darkModeSwitchClicked (_ sender : UISwitch!){
-//        Theme.darkTheme()
-//        let indexPath = tableView.indexPathsForVisibleRows
-//        tableView.reloadRows(at: indexPath!, with: .fade)
+        //        Theme.darkTheme()
+        //        let indexPath = tableView.indexPathsForVisibleRows
+        //        tableView.reloadRows(at: indexPath!, with: .fade)
         print("Switch flipped")
     }
     

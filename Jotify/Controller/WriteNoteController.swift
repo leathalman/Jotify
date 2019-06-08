@@ -26,6 +26,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         textField.backgroundColor = .clear
         textField.placeholderColor = .white
         textField.textColor = .white
+        textField.isEditable = true
         textField.isPlaceholderScrollEnabled = true
         textField.leftViewOrigin = CGPoint(x: 8, y: 8)
         textField.font = UIFont.boldSystemFont(ofSize: 32)
@@ -42,26 +43,20 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupView()
     }
     
     func setupView() {
-//        title = "Write"
-//
-//        self.navigationController?.navigationBar.prefersLargeTitles = true
-//        self.navigationController?.navigationBar.backgroundColor = .white
-        
-
         view.clipsToBounds = true
         inputTextView.delegate = self
         
         let gradientView = GradientAnimator(frame: self.view.frame, theme: GradientThemes.BlueLagoon, _startPoint: GradientPoints.bottomLeft, _endPoint: GradientPoints.topRight, _animationDuration: 2.0)
         self.view.insertSubview(gradientView, at: 0)
         gradientView.startAnimate()
-
+        
         view.addSubview(inputTextView)
-//        addGradient()
+        //        addGradient()
     }
     
     func addGradient() {

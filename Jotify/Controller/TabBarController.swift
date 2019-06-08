@@ -20,21 +20,22 @@ class TabBarController: BubbleTabBarController {
         let savedNotesVC = UINavigationController(rootViewController: SavedNoteController(collectionViewLayout: UICollectionViewFlowLayout()))
         //title must match navigation controller title set in viewDidLoad() for each viewcontroller
         let savedItem = CBTabBarItem(title: "Notes", image: #imageLiteral(resourceName: "dashboard"), tag: 0)
+        savedItem.tintColor = UIColor.flatRedDark
         savedNotesVC.tabBarItem = savedItem
-
+        
         let writeNoteVC = WriteNoteController()
         let writeItem = CBTabBarItem(title: "Write", image: #imageLiteral(resourceName: "menu"), tag: 1)
-        writeItem.tintColor = UIColor.flatRed
+        writeItem.tintColor = UIColor.flatBlueDark
         writeNoteVC.tabBarItem = writeItem
         
         let settingsVC = UINavigationController(rootViewController: SettingsController())
         let settingsItem = CBTabBarItem(title: "Settings", image: #imageLiteral(resourceName: "settings"), tag: 2)
-        settingsItem.tintColor = .gray
+        settingsItem.tintColor = .black
         settingsVC.tabBarItem = settingsItem
         
         viewControllers = [savedNotesVC, writeNoteVC, settingsVC]
         
         //set back to 1 when testing is done
-        self.selectedIndex = 2
+        self.selectedIndex = 1
     }
 }

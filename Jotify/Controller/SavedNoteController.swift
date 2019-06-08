@@ -90,20 +90,26 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 15
+        notes = ["World", "Second", "Third"]
+        
+        return notes.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedNoteCell", for: indexPath) as? SavedNoteCell else {fatalError("Wrong cell class dequeued")}
         
+        notes = ["World", "Second", "Third"]
+        
+        
         cell.contentView.backgroundColor = .white
         cell.contentView.layer.cornerRadius = 10
+        cell.textLabel.text = notes[indexPath.row] as? String
         
         cell.layer.addShadow(color: UIColor.darkGray)
         
-//        cell.textLabel.text = Note.text
+        //        cell.textLabel.text = Note.text
         
         return cell
     }
@@ -120,10 +126,10 @@ extension SavedNoteController: CollectionViewFlowLayoutDelegate {
         let line = 38
         
         if numChars <= line {
-//            print("Less than or equal to 38 char")
+            //            print("Less than or equal to 38 char")
             size = CGSize(width: 0, height: 87)
         } else if numChars <= line*2 {
-//            print("Less than or equal to 76")
+            //            print("Less than or equal to 76")
             size = CGSize(width: 0, height: 87)
             
         } else if numChars <= line*3 {
@@ -169,7 +175,7 @@ extension SavedNoteController: CollectionViewFlowLayoutDelegate {
             size = CGSize(width: 0, height: 360)
         }
         
-//        print(size)
+        //        print(size)
         return size
     }
 }
