@@ -1,0 +1,3 @@
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Blueprints.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BubbleTabBar.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MultilineTextField.framework
