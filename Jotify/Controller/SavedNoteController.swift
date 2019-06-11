@@ -8,7 +8,7 @@
 
 import UIKit
 import Blueprints
-import ChameleonFramework
+//import ChameleonFramework
 
 struct Note {
     static var text: String = "Default Text"

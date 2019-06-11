@@ -3,11 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		71012784B2671B58DCA8E6AD /* Pods_Jotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946DBBF7BD08962895A6AFD5 /* Pods_Jotify.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		8A3616620EB3AA84904D91D7 /* Pods_Jotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72A64575C745F52BE3F8D26B /* Pods_Jotify.framework */; };
 		F60DE60422838F69008701E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60DE60322838F69008701E9 /* AppDelegate.swift */; };
 		F60DE60922838F69008701E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F60DE60722838F69008701E9 /* Main.storyboard */; };
 		F60DE60B22838F6A008701E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F60DE60A22838F6A008701E9 /* Assets.xcassets */; };
@@ -27,8 +27,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		110E82A218747DD7752608D3 /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Jotify/Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
-		946DBBF7BD08962895A6AFD5 /* Pods_Jotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FA1B5CBB0856B4D22B6A40C /* Pods-Jotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.release.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.release.xcconfig"; sourceTree = "<group>"; };
+		72A64575C745F52BE3F8D26B /* Pods_Jotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3DAAD2AF421D3A1B2C4A295 /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.debug.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
 		F60DE60022838F69008701E9 /* Jotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F60DE60322838F69008701E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F60DE60822838F69008701E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -40,7 +41,6 @@
 		F67949A022A05A1900BCC979 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		F67949A522A05B8500BCC979 /* UserInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoHeader.swift; sourceTree = "<group>"; };
 		F68F6856228A16FE00EEC9D9 /* SavedNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedNoteController.swift; sourceTree = "<group>"; };
-		F694B6252CC016D2B7CF8D00 /* Pods-Jotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Jotify/Pods-Jotify.release.xcconfig"; sourceTree = "<group>"; };
 		F698FD022283B6CA000B69E5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F69C91AA229CCC0400DB0A61 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F69DBAC72289016E006888C9 /* WriteNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteController.swift; sourceTree = "<group>"; };
@@ -55,26 +55,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71012784B2671B58DCA8E6AD /* Pods_Jotify.framework in Frameworks */,
+				8A3616620EB3AA84904D91D7 /* Pods_Jotify.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		61ADBA6B684CB0332A152197 /* Pods */ = {
+		B58C5F20232321A0720F319E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				110E82A218747DD7752608D3 /* Pods-Jotify.debug.xcconfig */,
-				F694B6252CC016D2B7CF8D00 /* Pods-Jotify.release.xcconfig */,
+				F3DAAD2AF421D3A1B2C4A295 /* Pods-Jotify.debug.xcconfig */,
+				3FA1B5CBB0856B4D22B6A40C /* Pods-Jotify.release.xcconfig */,
 			);
-			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
-		9040D59945FA6C7D4E70C1CD /* Frameworks */ = {
+		BCA234E13F708EDA0F8A5449 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				946DBBF7BD08962895A6AFD5 /* Pods_Jotify.framework */,
+				72A64575C745F52BE3F8D26B /* Pods_Jotify.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -84,8 +84,8 @@
 			children = (
 				F60DE60222838F69008701E9 /* Jotify */,
 				F60DE60122838F69008701E9 /* Products */,
-				61ADBA6B684CB0332A152197 /* Pods */,
-				9040D59945FA6C7D4E70C1CD /* Frameworks */,
+				B58C5F20232321A0720F319E /* Pods */,
+				BCA234E13F708EDA0F8A5449 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -152,11 +152,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F60DE61222838F6A008701E9 /* Build configuration list for PBXNativeTarget "Jotify" */;
 			buildPhases = (
-				7AA12DF25D3B9088AD19D561 /* [CP] Check Pods Manifest.lock */,
+				C4C58737500F3DAAADC98B85 /* [CP] Check Pods Manifest.lock */,
 				F60DE5FC22838F69008701E9 /* Sources */,
 				F60DE5FD22838F69008701E9 /* Frameworks */,
 				F60DE5FE22838F69008701E9 /* Resources */,
-				7B876FE83353810C5C226823 /* [CP] Embed Pods Frameworks */,
+				0A17D7E81D3032A041BE8C93 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -214,7 +214,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7AA12DF25D3B9088AD19D561 /* [CP] Check Pods Manifest.lock */ = {
+		0A17D7E81D3032A041BE8C93 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Jotify/Pods-Jotify-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Jotify/Pods-Jotify-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Jotify/Pods-Jotify-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C4C58737500F3DAAADC98B85 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -234,36 +251,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7B876FE83353810C5C226823 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Jotify/Pods-Jotify-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Blueprints/Blueprints.framework",
-				"${BUILT_PRODUCTS_DIR}/BubbleTabBar/BubbleTabBar.framework",
-				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
-				"${BUILT_PRODUCTS_DIR}/MultilineTextField/MultilineTextField.framework",
-				"${BUILT_PRODUCTS_DIR}/VegaScrollFlowLayout/VegaScrollFlowLayout.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Blueprints.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BubbleTabBar.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MultilineTextField.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VegaScrollFlowLayout.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Jotify/Pods-Jotify-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -429,7 +416,7 @@
 		};
 		F60DE61322838F6A008701E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 110E82A218747DD7752608D3 /* Pods-Jotify.debug.xcconfig */;
+			baseConfigurationReference = F3DAAD2AF421D3A1B2C4A295 /* Pods-Jotify.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -442,6 +429,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.HarrisonLeath.Jotify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -449,7 +437,7 @@
 		};
 		F60DE61422838F6A008701E9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F694B6252CC016D2B7CF8D00 /* Pods-Jotify.release.xcconfig */;
+			baseConfigurationReference = 3FA1B5CBB0856B4D22B6A40C /* Pods-Jotify.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -462,6 +450,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.HarrisonLeath.Jotify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

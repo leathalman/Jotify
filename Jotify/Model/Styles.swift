@@ -23,9 +23,9 @@ struct Theme {
     }
     
     static public func darkTheme() {
-        self.backgroundColor = UIColor.flatBlueDark
+        self.backgroundColor = UIColor.blue
         self.textColor = UIColor.white
-        self.navigationColor = UIColor.flatBlueDark
+        self.navigationColor = UIColor.blue
         updateDisplay()
     }
     

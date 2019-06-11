@@ -26,6 +26,7 @@
   public var cachedItemAttributesBySection = [[LayoutAttributes]]()
   public var allCachedAttributes = [LayoutAttributes]()
   var binarySearch = BinarySearch()
+  var prepareAllowed = true
 
   /// The content size of the layout, should be set using the `prepare` method of any subclass.
   public var contentSize: CGSize = .zero
@@ -274,7 +275,7 @@
     case .vertical:
       allCachedAttributes = allCachedAttributes.sorted(by: { $0.frame.minY < $1.frame.minY })
     @unknown default:
-        fatalError("Somehow you scrolled incorrectly, check BlueprintLayout.swift")
+      fatalError("Case not implemented in current implementation")
     }
 
     cachedSupplementaryAttributes = Array(cachedSupplementaryAttributesBySection.joined())
@@ -332,6 +333,8 @@
   }
 
   open override func invalidateLayout(with context: LayoutInvalidationContext) {
+    prepareAllowed = true
+
     if context.invalidateEverything == false {
       positionHeadersAndFooters(with: context)
 
@@ -379,8 +382,8 @@
       case .horizontal:
         return (visibleRect.origin.x >= $0.min && visibleRect.origin.x <= $0.max) || $0.frame.intersects(visibleRect)
       @unknown default:
-        fatalError("BlueprintLayout.swift")
-        }
+        fatalError("Case not implemented in current implementation")
+      }
     })
 
     if stickyHeaders {
@@ -403,7 +406,7 @@
             header.frame.origin.x = collectionView.contentOffset.x + sectionInset.left + sectionInset.right
           }
         @unknown default:
-            fatalError("BlueprintLayout.swift")
+          fatalError("Case not implemented in current implementation")
         }
 
         if let invalidationContext = context as? BlueprintInvalidationContext {
@@ -425,7 +428,7 @@
         case .horizontal:
           footer.frame.origin.x = min(max(collectionView.contentOffset.x, footer.min), footer.max - footer.frame.size.width)
         @unknown default:
-            fatalError("BlueprintLayout.swift")
+          fatalError("Case not implemented in current implementation")
         }
 
         // Adjust the X-origin if the content offset exceeds the width of the content size.

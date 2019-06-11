@@ -8,7 +8,7 @@
 
 import UIKit
 import BubbleTabBar
-import ChameleonFramework
+//import ChameleonFramework
 
 class TabBarController: BubbleTabBarController {
     
@@ -20,12 +20,12 @@ class TabBarController: BubbleTabBarController {
         let savedNotesVC = UINavigationController(rootViewController: SavedNoteController(collectionViewLayout: UICollectionViewFlowLayout()))
         //title must match navigation controller title set in viewDidLoad() for each viewcontroller
         let savedItem = CBTabBarItem(title: "Notes", image: #imageLiteral(resourceName: "dashboard"), tag: 0)
-        savedItem.tintColor = UIColor.flatRedDark
+        savedItem.tintColor = UIColor.red
         savedNotesVC.tabBarItem = savedItem
         
         let writeNoteVC = WriteNoteController()
         let writeItem = CBTabBarItem(title: "Write", image: #imageLiteral(resourceName: "menu"), tag: 1)
-        writeItem.tintColor = UIColor.flatBlueDark
+        writeItem.tintColor = UIColor.blue
         writeNoteVC.tabBarItem = writeItem
         
         let settingsVC = UINavigationController(rootViewController: SettingsController())
