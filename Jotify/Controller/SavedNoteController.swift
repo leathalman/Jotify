@@ -8,17 +8,16 @@
 
 import UIKit
 import Blueprints
-//import ChameleonFramework
+import CloudKit
 
-struct Note {
-    static var text: String = "Default Text"
-    static var noteId: String = "Default NoteId"
-    static var timestamp: NSNumber = 0
+class Note: NSObject {
+    var recordID: CKRecord.ID!
+    var content: String!
 }
 
-//need to put all of the texts into an array and then can call the cell with IndexPath to get them to spit out in an order instead of overwriting each other, not sure how to use dictionaries but should probably figure out how to... need to get data, add it to struct and array as a single dictionary action and then use this array to create number of cells and text of cells... ugh, passing data is actually really hard, more to learn I guess
-
 class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
+    
+    var notes = [Note]()
     
     let blueprintLayout = VerticalBlueprintLayout(
         itemsPerRow: 1.0,
@@ -27,8 +26,6 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         sectionInset: EdgeInsets(top: 10, left: 10, bottom: 10, right: 10),
         stickyHeaders: true,
         stickyFooters: false)
-    
-    var notes = [Any]()
     
     public var screenWidth: CGFloat {
         return UIScreen.main.bounds.width
@@ -54,15 +51,45 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         collectionView.dataSource = self
         collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
         view.addSubview(collectionView)
-        
-        fetchNotes()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //        fetchNotes()
+        fetchNotes()
     }
     
     func fetchNotes() {
+        let pred = NSPredicate(value: true)
+        let sort = NSSortDescriptor(key: "creationDate", ascending: false)
+        let query = CKQuery(recordType: "note", predicate: pred)
+        query.sortDescriptors = [sort]
+        
+        let operation = CKQueryOperation(query: query)
+        operation.desiredKeys = ["content"]
+        operation.resultsLimit = 50
+        
+        var newNotes = [Note]()
+        
+        operation.recordFetchedBlock = { record in
+            let note = Note()
+            note.recordID = record.recordID
+            note.content = record["content"]
+            newNotes.append(note)
+//            print(newNotes.count)
+        }
+        
+        operation.queryCompletionBlock = { [unowned self] (cursor, error) in
+            DispatchQueue.main.async {
+                if error == nil {
+                    self.notes = newNotes
+                    self.collectionView.reloadData()
+                } else {
+                    let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of notes; please try again: \(error!.localizedDescription)", preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .default))
+                    self.present(ac, animated: true)
+                }
+            }
+        }
+        CKContainer.default().privateCloudDatabase.add(operation)
     }
     
     @objc func handleSwipes(_ gesture: UISwipeGestureRecognizer) {
@@ -92,20 +119,19 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        notes = ["World", "Second", "Third"]
         
         return notes.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedNoteCell", for: indexPath) as? SavedNoteCell else {fatalError("Wrong cell class dequeued")}
-        
-        notes = ["World", "Second", "Third"]
-        
-        
+    
+        let content = notes[indexPath.row]
+        let text = content.content
+
         cell.contentView.backgroundColor = .white
         cell.contentView.layer.cornerRadius = 10
-        cell.textLabel.text = notes[indexPath.row] as? String
+        cell.textLabel.text = text
         
         cell.layer.addShadow(color: UIColor.darkGray)
         
@@ -118,64 +144,64 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
 extension SavedNoteController: CollectionViewFlowLayoutDelegate {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedNoteCell", for: indexPath) as? SavedNoteCell else {fatalError("Wrong cell class dequeued")}
+//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedNoteCell", for: indexPath) as? SavedNoteCell else {fatalError("Wrong cell class dequeued")}
         
         //TODO find more elegant soultion for sizing of cells... hard coding is not recommended
-        var size = CGSize(width: 0, height: 0)
-        let numChars = cell.textLabel.text?.count ?? 38
-        let line = 38
+        let size = CGSize(width: 0, height: 87)
+//        let numChars = cell.textLabel.text?.count ?? 38
+//        let line = 38
         
-        if numChars <= line {
-            //            print("Less than or equal to 38 char")
-            size = CGSize(width: 0, height: 87)
-        } else if numChars <= line*2 {
-            //            print("Less than or equal to 76")
-            size = CGSize(width: 0, height: 87)
-            
-        } else if numChars <= line*3 {
-            size = CGSize(width: 0, height: 87)
-            
-        } else if numChars <= line*4 {
-            size = CGSize(width: 0, height: 120)
-            
-        } else if numChars <= line*5 {
-            size = CGSize(width: 0, height: 140)
-            
-        } else if numChars <= line*6 {
-            size = CGSize(width: 0, height: 160)
-            
-        } else if numChars <= line*7 {
-            size = CGSize(width: 0, height: 180)
-            
-        } else if numChars <= line*8 {
-            size = CGSize(width: 0, height: 200)
-            
-        } else if numChars <= line*9 {
-            size = CGSize(width: 0, height: 220)
-            
-        } else if numChars <= line*10 {
-            size = CGSize(width: 0, height: 240)
-            
-        } else if numChars <= line*11 {
-            size = CGSize(width: 0, height: 260)
-            
-        } else if numChars <= line*12 {
-            size = CGSize(width: 0, height: 280)
-            
-        } else if numChars <= line*13 {
-            size = CGSize(width: 0, height: 300)
-            
-        } else if numChars <= line*14 {
-            size = CGSize(width: 0, height: 320)
-            
-        } else if numChars <= line*15 {
-            size = CGSize(width: 0, height: 340)
-            
-        } else {
-            size = CGSize(width: 0, height: 360)
-        }
-        
-        //        print(size)
+//        if numChars <= line {
+//            //            print("Less than or equal to 38 char")
+//            size = CGSize(width: 0, height: 87)
+//        } else if numChars <= line*2 {
+//            //            print("Less than or equal to 76")
+//            size = CGSize(width: 0, height: 87)
+//
+//        } else if numChars <= line*3 {
+//            size = CGSize(width: 0, height: 87)
+//
+//        } else if numChars <= line*4 {
+//            size = CGSize(width: 0, height: 120)
+//
+//        } else if numChars <= line*5 {
+//            size = CGSize(width: 0, height: 140)
+//
+//        } else if numChars <= line*6 {
+//            size = CGSize(width: 0, height: 160)
+//
+//        } else if numChars <= line*7 {
+//            size = CGSize(width: 0, height: 180)
+//
+//        } else if numChars <= line*8 {
+//            size = CGSize(width: 0, height: 200)
+//
+//        } else if numChars <= line*9 {
+//            size = CGSize(width: 0, height: 220)
+//
+//        } else if numChars <= line*10 {
+//            size = CGSize(width: 0, height: 240)
+//
+//        } else if numChars <= line*11 {
+//            size = CGSize(width: 0, height: 260)
+//
+//        } else if numChars <= line*12 {
+//            size = CGSize(width: 0, height: 280)
+//
+//        } else if numChars <= line*13 {
+//            size = CGSize(width: 0, height: 300)
+//
+//        } else if numChars <= line*14 {
+//            size = CGSize(width: 0, height: 320)
+//
+//        } else if numChars <= line*15 {
+//            size = CGSize(width: 0, height: 340)
+//
+//        } else {
+//            size = CGSize(width: 0, height: 360)
+//        }
+//
+//        //        print(size)
         return size
     }
 }
