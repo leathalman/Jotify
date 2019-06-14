@@ -21,7 +21,8 @@ class UserInfoHeader: UIView {
     
     let usernameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Harrison Leath"
+        let name = UserDefaults.standard.string(forKey: "name") ?? ""
+        label.text = name
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

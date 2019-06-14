@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class SettingsController: UITableViewController {
     
@@ -15,20 +16,13 @@ class SettingsController: UITableViewController {
     //    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
+        getUserInfo()
         setupView()
-        
-        //        self.tableView.backgroundColor = UIColor.flatBlue
-        //        view.backgroundColor = UIColor.flatRedDark
         navigationController?.navigationBar.isTranslucent = false
-        //        navigationController?.navigationBar.tintColor = UIColor.flatBlue
-        //        navigationController?.navigationBar.backgroundColor = UIColor.flatBlue
     }
     
     func setupView() {
         title = "Settings"
-        
-        //        darkModeEnabled = defaults.bool(forKey: "DarkDefault")
-        //        print(darkModeEnabled)
         
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
@@ -44,6 +38,20 @@ class SettingsController: UITableViewController {
         userInfoHeader = UserInfoHeader(frame: frame)
         tableView.tableHeaderView = userInfoHeader
         tableView.tableFooterView = UIView()
+    }
+    
+    func getUserInfo() {
+        CKContainer.default().requestApplicationPermission(.userDiscoverability) { (status, error) in
+            CKContainer.default().fetchUserRecordID { (record, error) in
+                CKContainer.default().discoverUserIdentity(withUserRecordID: record!, completionHandler: { (userID, error) in
+                    let email = userID?.lookupInfo?.emailAddress
+                    print(email)
+                    let name = ((userID?.nameComponents?.givenName)! + " " + (userID?.nameComponents?.familyName)!)
+                    UserDefaults.standard.set(name, forKey: "name")
+                    print(name)
+                })
+            }
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -113,9 +121,6 @@ class SettingsController: UITableViewController {
     }
     
     @objc func darkModeSwitchClicked (_ sender : UISwitch!){
-        //        Theme.darkTheme()
-        //        let indexPath = tableView.indexPathsForVisibleRows
-        //        tableView.reloadRows(at: indexPath!, with: .fade)
         print("Switch flipped")
     }
     

@@ -13,6 +13,7 @@ import CloudKit
 class Note: NSObject {
     var recordID: CKRecord.ID!
     var content: String!
+    var timeCreated: Double!
 }
 
 class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
@@ -64,7 +65,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         query.sortDescriptors = [sort]
         
         let operation = CKQueryOperation(query: query)
-        operation.desiredKeys = ["content"]
+        operation.desiredKeys = ["content", "timeCreated"]
         operation.resultsLimit = 50
         
         var newNotes = [Note]()
@@ -73,19 +74,19 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
             let note = Note()
             note.recordID = record.recordID
             note.content = record["content"]
+            note.timeCreated = record["timeCreated"]
             newNotes.append(note)
-//            print(newNotes.count)
         }
         
-        operation.queryCompletionBlock = { [unowned self] (cursor, error) in
+        operation.queryCompletionBlock = { [weak self] (cursor, error) in
             DispatchQueue.main.async {
                 if error == nil {
-                    self.notes = newNotes
-                    self.collectionView.reloadData()
+                    self?.notes = newNotes
+                    self?.collectionView.reloadData()
                 } else {
                     let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of notes; please try again: \(error!.localizedDescription)", preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "OK", style: .default))
-                    self.present(ac, animated: true)
+                    self?.present(ac, animated: true)
                 }
             }
         }
@@ -100,42 +101,34 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         }
     }
     
-    func setupSwipes() {
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipes(_:)))
-        swipeLeft.direction = .left
-        view.addGestureRecognizer(swipeLeft)
-        view.isUserInteractionEnabled = true
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipes(_:)))
-        swipeRight.direction = .right
-        view.addGestureRecognizer(swipeRight)
-        view.isUserInteractionEnabled = true
-    }
-    
-    func setupView() {
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return notes.count
     }
     
+    //TODO use instruments to find out how to optimize loading, this is a temporary fix
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedNoteCell", for: indexPath) as? SavedNoteCell else {fatalError("Wrong cell class dequeued")}
     
-        let content = notes[indexPath.row]
-        let text = content.content
+        let notesData = notes[indexPath.row]
+        let noteText = notesData.content
+        cell.textLabel.text = noteText
+        
+        let rawTime = notesData.timeCreated!
+        let date = Date(timeIntervalSince1970: rawTime)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = DateFormatter.Style.medium //Set time style
+        dateFormatter.dateStyle = DateFormatter.Style.medium //Set date style
+        dateFormatter.timeZone = .current
+        let localDate = dateFormatter.string(from: date)
+        cell.dateLabel.text = localDate
 
         cell.contentView.backgroundColor = .white
         cell.contentView.layer.cornerRadius = 10
-        cell.textLabel.text = text
-        
         cell.layer.addShadow(color: UIColor.darkGray)
-        
-        //        cell.textLabel.text = Note.text
         
         return cell
     }

@@ -22,24 +22,18 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
     
     let database = CKContainer.default().privateCloudDatabase
         
-    lazy var inputTextView: UITextView = {
+    lazy var inputTextView: MultilineTextField = {
         let frame = CGRect(x: 0, y: 100, width: screenWidth, height: screenHeight)
-        let textField = UITextView(frame: frame)
+        let textField = MultilineTextField(frame: frame)
         textField.backgroundColor = .clear
-        textField.isScrollEnabled = true
-//        textField.placeholderColor = .white
+        textField.placeholderColor = .white
         textField.textColor = .white
         textField.isEditable = true
-//        textField.isPlaceholderScrollEnabled = true
-//        textField.leftViewOrigin = CGPoint(x: 8, y: 8)
+        textField.isPlaceholderScrollEnabled = true
+        textField.leftViewOrigin = CGPoint(x: 8, y: 8)
         textField.font = UIFont.boldSystemFont(ofSize: 32)
         textField.textContainerInset = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
-        
-//        if screenWidth < 650 {
-//            textField.placeholder = "Write it down..."
-//        } else {
-//            textField.placeholder = "What's on your mind..."
-//        }
+        textField.placeholder = "Write it down..."
         
         return textField
     }()
@@ -73,20 +67,25 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         if inputTextView.text == "" {
             
         } else {
-            saveNote(note: inputTextView.text)
+            let timeCreated = Date.timeIntervalSinceReferenceDate
+            saveNote(note: inputTextView.text, timeCreated: timeCreated)
             inputTextView.text = ""
         }
     }
     
-    func saveNote(note: String) {
+    func saveNote(note: String, timeCreated: Double) {
         let newNote = CKRecord(recordType: "note")
         newNote.setValue(note, forKey: "content")
+        newNote.setValue(timeCreated, forKey: "timeCreated")
         
         database.save(newNote) { (record, error) in
             guard record != nil else { return }
             print("saved record with note \(String(describing: record?.object(forKey: "content")))")
-//            print(record?.recordID)
+            print("saved record with time \(String(describing: record?.object(forKey: "timeCreated")))")
         }
+        
+//        let savedNoteController = SavedNoteController()
+//        savedNoteController.fetchNotes()
     }
     
 //    func deleteRecords() {

@@ -15,7 +15,7 @@ class SavedNoteCell: UICollectionViewCell {
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textColor = UIColor.darkGray
-        label.text = "Default Text! Another one here we go!"
+        label.text = "Loading..."
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false

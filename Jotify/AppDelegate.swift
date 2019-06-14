@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,8 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = TabBarController()
         window?.makeKeyAndVisible()
 
-//        Theme.defaultTheme()
-        
+        let savedNoteController = SavedNoteController()
+        savedNoteController.fetchNotes()
+
         return true
     }
 
