@@ -136,65 +136,29 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
 
 extension SavedNoteController: CollectionViewFlowLayoutDelegate {
     
+    private func estimateFrameForText(text: String) -> CGRect {
+        //we make the height arbitrarily large so we don't undershoot height in calculation
+        let height: CGFloat = 0
+        
+        let size = CGSize(width: screenWidth, height: height)
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.bold)]
+        
+        return NSString(string: text).boundingRect(with: size, options: options, attributes: attributes, context: nil)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedNoteCell", for: indexPath) as? SavedNoteCell else {fatalError("Wrong cell class dequeued")}
         
-        //TODO find more elegant soultion for sizing of cells... hard coding is not recommended
-        let size = CGSize(width: 0, height: 87)
-//        let numChars = cell.textLabel.text?.count ?? 38
-//        let line = 38
+        var height: CGFloat = 0
         
-//        if numChars <= line {
-//            //            print("Less than or equal to 38 char")
-//            size = CGSize(width: 0, height: 87)
-//        } else if numChars <= line*2 {
-//            //            print("Less than or equal to 76")
-//            size = CGSize(width: 0, height: 87)
-//
-//        } else if numChars <= line*3 {
-//            size = CGSize(width: 0, height: 87)
-//
-//        } else if numChars <= line*4 {
-//            size = CGSize(width: 0, height: 120)
-//
-//        } else if numChars <= line*5 {
-//            size = CGSize(width: 0, height: 140)
-//
-//        } else if numChars <= line*6 {
-//            size = CGSize(width: 0, height: 160)
-//
-//        } else if numChars <= line*7 {
-//            size = CGSize(width: 0, height: 180)
-//
-//        } else if numChars <= line*8 {
-//            size = CGSize(width: 0, height: 200)
-//
-//        } else if numChars <= line*9 {
-//            size = CGSize(width: 0, height: 220)
-//
-//        } else if numChars <= line*10 {
-//            size = CGSize(width: 0, height: 240)
-//
-//        } else if numChars <= line*11 {
-//            size = CGSize(width: 0, height: 260)
-//
-//        } else if numChars <= line*12 {
-//            size = CGSize(width: 0, height: 280)
-//
-//        } else if numChars <= line*13 {
-//            size = CGSize(width: 0, height: 300)
-//
-//        } else if numChars <= line*14 {
-//            size = CGSize(width: 0, height: 320)
-//
-//        } else if numChars <= line*15 {
-//            size = CGSize(width: 0, height: 340)
-//
-//        } else {
-//            size = CGSize(width: 0, height: 360)
-//        }
-//
-//        //        print(size)
-        return size
+        //we are just measuring height so we add a padding constant to give the label some room to breathe!
+        var padding: CGFloat = 60
+        
+        //estimate each cell's height
+        if let text = notes[indexPath.item].content {
+            height = estimateFrameForText(text: text).height + padding
+        }
+        return CGSize(width: screenWidth, height: height)
+
     }
 }
