@@ -118,10 +118,9 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         cell.textLabel.text = noteText
         
         let rawTime = notesData.timeCreated!
-        let date = Date(timeIntervalSince1970: rawTime)
+        let date = Date(timeIntervalSinceReferenceDate: rawTime)
         let dateFormatter = DateFormatter()
-        dateFormatter.timeStyle = DateFormatter.Style.medium //Set time style
-        dateFormatter.dateStyle = DateFormatter.Style.medium //Set date style
+        dateFormatter.dateStyle = DateFormatter.Style.long //Set date style
         dateFormatter.timeZone = .current
         let localDate = dateFormatter.string(from: date)
         cell.dateLabel.text = localDate
@@ -152,7 +151,7 @@ extension SavedNoteController: CollectionViewFlowLayoutDelegate {
         var height: CGFloat = 0
         
         //we are just measuring height so we add a padding constant to give the label some room to breathe!
-        var padding: CGFloat = 60
+        let padding: CGFloat = 60
         
         //estimate each cell's height
         if let text = notes[indexPath.item].content {
