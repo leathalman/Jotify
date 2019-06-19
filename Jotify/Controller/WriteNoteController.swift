@@ -53,7 +53,41 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
     }
     
     func addGradient() {
-        Colors.shared.themeColor = GradientThemes.NeonLife
+        //add userdefaults toggle for SettingsController
+        let theme = UserDefaults.standard.string(forKey: "gradientTheme")
+        
+        if theme == "Sunrise" {
+            Colors.shared.themeColor = GradientThemes.Sunrise
+
+        } else if theme == "Amin" {
+            Colors.shared.themeColor = GradientThemes.Amin
+
+        } else if theme == "BlueLagoon" {
+            Colors.shared.themeColor = GradientThemes.BlueLagoon
+
+        } else if theme == "Celestial" {
+            Colors.shared.themeColor = GradientThemes.Celestial
+
+        } else if theme == "DIMIGO" {
+            Colors.shared.themeColor = GradientThemes.DIMIGO
+
+        } else if theme == "GentleCare" {
+            Colors.shared.themeColor = GradientThemes.GentleCare
+
+        } else if theme == "Kyoopal" {
+            Colors.shared.themeColor = GradientThemes.Kyoopal
+
+        } else if theme == "Maldives" {
+            Colors.shared.themeColor = GradientThemes.Maldives
+
+        } else if theme == "NeonLife" {
+            Colors.shared.themeColor = GradientThemes.NeonLife
+
+        } else if theme == "SolidStone" {
+            Colors.shared.themeColor = GradientThemes.SolidStone
+
+        }
+        
         self.view.setGradient()
     }
     
@@ -81,9 +115,6 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
             print("saved record with note \(String(describing: record?.object(forKey: "content")))")
             print("saved record with time \(String(describing: record?.object(forKey: "timeCreated")))")
         }
-        
-//        let savedNoteController = SavedNoteController()
-//        savedNoteController.fetchNotes()
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

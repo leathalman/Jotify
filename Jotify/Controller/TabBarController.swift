@@ -25,7 +25,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         savedNotesVC.tabBarItem = savedItem
         
         let writeNoteVC = WriteNoteController()
-        let writeItem = CBTabBarItem(title: "Write", image: #imageLiteral(resourceName: "menu"), tag: 1)
+        let writeItem = CBTabBarItem(title: "Write", image: UIImage(systemName: "pencil.circle"), tag: 1)
         writeItem.tintColor = UIColor.blue
         writeNoteVC.tabBarItem = writeItem
         
@@ -36,7 +36,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         viewControllers = [savedNotesVC, writeNoteVC, settingsVC]
         
-        //set back to 1 when testing is done
         self.selectedIndex = 1
     }
     

@@ -169,3 +169,8 @@ extension GradientAnimator:CAAnimationDelegate{
         }
     }
 }
+
+class Colors {
+    var themeColor : GradientThemes = GradientThemes.Celestial
+    static let shared = Colors()
+}
