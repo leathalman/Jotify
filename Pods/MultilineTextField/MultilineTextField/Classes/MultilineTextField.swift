@@ -145,7 +145,7 @@ public class MultilineTextField: UITextView {
       NotificationCenter.default.addObserver(
          self,
          selector: #selector(textViewDidChange(notification:)),
-         name: UITextField.textDidChangeNotification,
+         name: UITextView.textDidChangeNotification,
          object: self
       )
       

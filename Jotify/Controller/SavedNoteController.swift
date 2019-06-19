@@ -21,7 +21,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     var notes = [Note]()
     
     let blueprintLayout = VerticalBlueprintLayout(
-        itemsPerRow: 1.0,
+        itemsPerRow: 2.0,
         minimumInteritemSpacing: 10,
         minimumLineSpacing: 15,
         sectionInset: EdgeInsets(top: 10, left: 10, bottom: 10, right: 10),
@@ -38,7 +38,14 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        fetchNotes()
+    }
+    
+    func setupView() {
         view.backgroundColor = Colors.lightGray
         
         title = "Notes"
@@ -54,10 +61,6 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         view.addSubview(collectionView)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        fetchNotes()
-    }
-    
     func fetchNotes() {
         let pred = NSPredicate(value: true)
         let sort = NSSortDescriptor(key: "creationDate", ascending: false)
@@ -70,27 +73,63 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         
         var newNotes = [Note]()
         
-        operation.recordFetchedBlock = { record in
-            let note = Note()
-            note.recordID = record.recordID
-            note.content = record["content"]
-            note.timeCreated = record["timeCreated"]
-            newNotes.append(note)
-        }
-        
-        operation.queryCompletionBlock = { [weak self] (cursor, error) in
-            DispatchQueue.main.async {
-                if error == nil {
-                    self?.notes = newNotes
-                    self?.collectionView.reloadData()
-                } else {
-                    let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of notes; please try again: \(error!.localizedDescription)", preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: "OK", style: .default))
-                    self?.present(ac, animated: true)
+        if newNotes.count == 0 {
+         //do all of the code
+            
+            operation.recordFetchedBlock = { record in
+                let note = Note()
+                note.recordID = record.recordID
+                note.content = record["content"]
+                note.timeCreated = record["timeCreated"]
+                newNotes.append(note)
+            }
+            
+            operation.queryCompletionBlock = { [weak self] (cursor, error) in
+                DispatchQueue.main.sync {
+                    if error == nil {
+                        self?.notes = newNotes
+                        self?.collectionView.reloadData()
+                    } else {
+                        let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of notes; please try again: \(error!.localizedDescription)", preferredStyle: .alert)
+                        ac.addAction(UIAlertAction(title: "OK", style: .default))
+                        self?.present(ac, animated: true)
+                    }
                 }
             }
+            CKContainer.default().privateCloudDatabase.add(operation)
+            
+        } else {
+            print("notes already fetched")
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
-        CKContainer.default().privateCloudDatabase.add(operation)
+    }
+    
+    func deleteRecord(recordID: CKRecord.ID) {
+        
+        let recordID = recordID
+        CKContainer.default().privateCloudDatabase.delete(withRecordID: recordID) { (recordID, error) in
+            guard let recordID = recordID else {
+                print(error!.localizedDescription)
+                return
+            }
+            print("Record \(recordID) was successfully deleted")
+        }
+    }
+    
+    @objc func tap(_ sender: UITapGestureRecognizer) {
+        
+        let location = sender.location(in: self.collectionView)
+        let indexPath = self.collectionView.indexPathForItem(at: location)
+        let notesData = notes[indexPath?.row ?? 0]
+        guard let recordID = notesData.recordID else { return }
+        
+        if let index = indexPath {
+            print("Got clicked on index: \(index)!")
+            deleteRecord(recordID: recordID)
+            //will not actually refresh the view correctly because the array still contains the value even though the record is deleted
+        }
     }
     
     @objc func handleSwipes(_ gesture: UISwipeGestureRecognizer) {
@@ -117,7 +156,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         let noteText = notesData.content
         cell.textLabel.text = noteText
         
-        let rawTime = notesData.timeCreated!
+        let rawTime = notesData.timeCreated ?? 0
         let date = Date(timeIntervalSinceReferenceDate: rawTime)
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.long //Set date style
@@ -128,6 +167,8 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         cell.contentView.backgroundColor = .white
         cell.contentView.layer.cornerRadius = 10
         cell.layer.addShadow(color: UIColor.darkGray)
+        
+        cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap(_:))))
         
         return cell
     }

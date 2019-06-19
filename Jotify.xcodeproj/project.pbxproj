@@ -122,6 +122,7 @@
 				F6F30A2922A087D4009D601B /* Extensions.swift */,
 				F698FD022283B6CA000B69E5 /* Constants.swift */,
 				F661D4B222A2066500FC6E1B /* Styles.swift */,
+				F69FC3AE22A08FA300E6455E /* GradientAnimator.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -144,7 +145,6 @@
 				F69DBAC72289016E006888C9 /* WriteNoteController.swift */,
 				F69DBACB22890272006888C9 /* SettingsController.swift */,
 				F69C91AA229CCC0400DB0A61 /* TabBarController.swift */,
-				F69FC3AE22A08FA300E6455E /* GradientAnimator.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

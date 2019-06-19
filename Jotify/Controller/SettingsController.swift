@@ -13,7 +13,6 @@ class SettingsController: UITableViewController {
     
     var userInfoHeader: UserInfoHeader!
     var darkModeEnabled = Bool()
-    //    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         getUserInfo()
@@ -45,7 +44,8 @@ class SettingsController: UITableViewController {
             CKContainer.default().fetchUserRecordID { (record, error) in
                 CKContainer.default().discoverUserIdentity(withUserRecordID: record!, completionHandler: { (userID, error) in
                     let email = userID?.lookupInfo?.emailAddress
-                    print(email)
+                    //cannot retrieve email of cloudkit user... always returns nil
+                    print(email as Any)
                     let name = ((userID?.nameComponents?.givenName)! + " " + (userID?.nameComponents?.familyName)!)
                     UserDefaults.standard.set(name, forKey: "name")
                     print(name)

@@ -88,18 +88,6 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
 //        savedNoteController.fetchNotes()
     }
     
-//    func deleteRecords() {
-//
-//        let recordID = record.recordID
-//        database.delete(withRecordID: recordID) { (recordID, error) in
-//            guard let recordID = recordID else {
-//                print(error!.localizedDescription)
-//                return
-//            }
-//            print("Record \(recordID) was successfully deleted")
-//        }
-//    }
-    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if (text as NSString).rangeOfCharacter(from: CharacterSet.newlines).location == NSNotFound {
             return true

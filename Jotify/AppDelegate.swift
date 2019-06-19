@@ -20,9 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = TabBarController()
         window?.makeKeyAndVisible()
-
-        let savedNoteController = SavedNoteController()
-        savedNoteController.fetchNotes()
+        
+        DispatchQueue.main.async {
+            let savedNoteController = SavedNoteController()
+            savedNoteController.fetchNotes()
+        }
 
         return true
     }
