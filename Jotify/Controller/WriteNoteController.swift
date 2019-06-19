@@ -40,7 +40,8 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        addGradient()
         setupView()
     }
     
@@ -48,18 +49,12 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         view.clipsToBounds = true
         inputTextView.delegate = self
         
-        let gradientView = GradientAnimator(frame: self.view.frame, theme: GradientThemes.BlueLagoon, _startPoint: GradientPoints.bottomLeft, _endPoint: GradientPoints.topRight, _animationDuration: 2.0)
-        self.view.insertSubview(gradientView, at: 0)
-        gradientView.startAnimate()
-        
         view.addSubview(inputTextView)
     }
     
     func addGradient() {
-        view.backgroundColor = UIColor.clear
-        let backgroundLayer = Colors().blueGradient
-        backgroundLayer?.frame = view.frame
-        view.layer.insertSublayer(backgroundLayer!, at: 0)
+        Colors.shared.themeColor = GradientThemes.NeonLife
+        self.view.setGradient()
     }
     
     @objc func handleSend() {
@@ -67,16 +62,19 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         if inputTextView.text == "" {
             
         } else {
+            let colorNameArray = ["systemRed", "systemBlue", "systemGreen", "systemPink", "systemOrange", "systemPurple", "systemTeal", "systemYellow"]
+            let color = colorNameArray.randomElement()!
             let timeCreated = Date.timeIntervalSinceReferenceDate
-            saveNote(note: inputTextView.text, timeCreated: timeCreated)
+            saveNote(note: inputTextView.text, timeCreated: timeCreated, color: color)
             inputTextView.text = ""
         }
     }
     
-    func saveNote(note: String, timeCreated: Double) {
+    func saveNote(note: String, timeCreated: Double, color: String) {
         let newNote = CKRecord(recordType: "note")
         newNote.setValue(note, forKey: "content")
         newNote.setValue(timeCreated, forKey: "timeCreated")
+        newNote.setValue(color, forKey: "color")
         
         database.save(newNote) { (record, error) in
             guard record != nil else { return }

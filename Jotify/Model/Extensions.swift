@@ -24,59 +24,6 @@ public extension CALayer {
         self.shadowRadius = 5
         self.shadowColor = color.cgColor
         self.masksToBounds = false
-        if cornerRadius != 0 {
-            addShadowWithRoundedCorners()
-        }
-    }
-    
-    func roundCorners(radius: CGFloat) {
-        self.cornerRadius = radius
-        if shadowOpacity != 0 {
-            addShadowWithRoundedCorners()
-        }
-    }
-    
-    func showShadow(duration: CFTimeInterval?) {
-        let animation = CABasicAnimation(keyPath: "shadowOpacity")
-        animation.fromValue = self.shadowOpacity
-        animation.toValue = 0.3
-        animation.duration = (duration) ?? (0)
-        self.add(animation, forKey: animation.keyPath)
-        self.shadowOpacity = 0.3
-    }
-    
-    func hideShadow(duration: CFTimeInterval?) {
-        let animation = CABasicAnimation(keyPath: "shadowOpacity")
-        animation.fromValue = self.shadowOpacity
-        animation.toValue = 0.0
-        animation.duration = (duration) ?? (0)
-        self.add(animation, forKey: animation.keyPath)
-        self.shadowOpacity = 0.0
-    }
-}
-
-extension CALayer {
-    
-    private func addShadowWithRoundedCorners() {
-        if let contents = self.contents {
-            let contentLayerName = "contentLayer"
-            masksToBounds = false
-            sublayers?.filter { $0.frame.equalTo(self.bounds) }.forEach {
-                $0.roundCorners(radius: self.cornerRadius)
-            }
-            self.contents = nil
-            if let sublayer = sublayers?.first,
-                sublayer.name == contentLayerName {
-                sublayer.removeFromSuperlayer()
-            }
-            let contentLayer = CALayer()
-            contentLayer.name = contentLayerName
-            contentLayer.contents = contents
-            contentLayer.frame = bounds
-            contentLayer.cornerRadius = cornerRadius
-            contentLayer.masksToBounds = true
-            insertSublayer(contentLayer, at: 0)
-        }
     }
 }
 
@@ -89,5 +36,22 @@ extension String {
         label.sizeToFit()
         
         return label.frame.height
+    }
+}
+
+extension UIView {
+    func setGradient(){
+        self.removeGradient()
+        
+        let gradientView = GradientAnimator(frame: self.frame, theme: Colors.shared.themeColor, _startPoint: GradientPoints.bottomLeft, _endPoint: GradientPoints.topRight, _animationDuration: 3.0)
+        gradientView.tag = 007
+        self.insertSubview(gradientView, at: 0)
+        gradientView.startAnimate()
+        
+    }
+    func removeGradient(){
+        if let gradView : GradientAnimator = self.subviews.filter({$0.tag == 007}).first as? GradientAnimator{
+            gradView.removeFromSuperview()
+        }
     }
 }

@@ -14,6 +14,7 @@ class Note: NSObject {
     var recordID: CKRecord.ID!
     var content: String!
     var timeCreated: Double!
+    var color: String!
 }
 
 class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
@@ -42,11 +43,12 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         fetchNotes()
     }
     
     func setupView() {
-        view.backgroundColor = Colors.lightGray
+        view.backgroundColor = UIColor.white
         
         title = "Notes"
         
@@ -68,19 +70,19 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         query.sortDescriptors = [sort]
         
         let operation = CKQueryOperation(query: query)
-        operation.desiredKeys = ["content", "timeCreated"]
+        operation.desiredKeys = ["content", "timeCreated", "color"]
         operation.resultsLimit = 50
         
         var newNotes = [Note]()
         
         if newNotes.count == 0 {
-         //do all of the code
             
             operation.recordFetchedBlock = { record in
                 let note = Note()
                 note.recordID = record.recordID
                 note.content = record["content"]
                 note.timeCreated = record["timeCreated"]
+                note.color = record["color"]
                 newNotes.append(note)
             }
             
@@ -89,10 +91,12 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
                     if error == nil {
                         self?.notes = newNotes
                         self?.collectionView.reloadData()
+                        self?.collectionView.collectionViewLayout.invalidateLayout()
+                        self?.collectionView.layoutSubviews()
                     } else {
-                        let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of notes; please try again: \(error!.localizedDescription)", preferredStyle: .alert)
-                        ac.addAction(UIAlertAction(title: "OK", style: .default))
-                        self?.present(ac, animated: true)
+                        let alert = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of notes; please try again: \(error!.localizedDescription)", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default))
+                        self?.present(alert, animated: true)
                     }
                 }
             }
@@ -106,7 +110,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         }
     }
     
-    func deleteRecord(recordID: CKRecord.ID) {
+    func deleteNote(recordID: CKRecord.ID) {
         
         let recordID = recordID
         CKContainer.default().privateCloudDatabase.delete(withRecordID: recordID) { (recordID, error) in
@@ -127,7 +131,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         
         if let index = indexPath {
             print("Got clicked on index: \(index)!")
-            deleteRecord(recordID: recordID)
+            deleteNote(recordID: recordID)
             //will not actually refresh the view correctly because the array still contains the value even though the record is deleted
         }
     }
@@ -155,6 +159,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         let notesData = notes[indexPath.row]
         let noteText = notesData.content
         cell.textLabel.text = noteText
+        cell.textLabel.textColor = UIColor.white
         
         let rawTime = notesData.timeCreated ?? 0
         let date = Date(timeIntervalSinceReferenceDate: rawTime)
@@ -163,9 +168,40 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         dateFormatter.timeZone = .current
         let localDate = dateFormatter.string(from: date)
         cell.dateLabel.text = localDate
-
-        cell.contentView.backgroundColor = .white
-        cell.contentView.layer.cornerRadius = 10
+        cell.dateLabel.textColor = UIColor.white
+        let color = notesData.color
+        var cellColor = UIColor.white
+        
+        if color == "systemTeal" {
+            cellColor = UIColor.systemTeal
+        
+        } else if color == "systemGreen" {
+            cellColor = UIColor.systemGreen
+            
+        } else if color == "systemRed" {
+            cellColor = UIColor.systemRed
+            
+        } else if color == "systemBlue" {
+            cellColor = UIColor.systemBlue
+            
+        } else if color == "systemPink" {
+            cellColor = UIColor.systemPink
+            
+        } else if color == "systemOrange" {
+            cellColor = UIColor.systemOrange
+            
+        } else if color == "systemPurple" {
+            cellColor = UIColor.systemPurple
+            
+        } else if color == "systemTeal" {
+            cellColor = UIColor.systemTeal
+            
+        } else if color == "systemYellow" {
+            cellColor = UIColor.systemYellow
+        }
+        
+        cell.contentView.layer.cornerRadius = 5
+        cell.contentView.backgroundColor = cellColor
         cell.layer.addShadow(color: UIColor.darkGray)
         
         cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap(_:))))
@@ -179,21 +215,21 @@ extension SavedNoteController: CollectionViewFlowLayoutDelegate {
     private func estimateFrameForText(text: String) -> CGRect {
         //we make the height arbitrarily large so we don't undershoot height in calculation
         let height: CGFloat = 0
-        
+
         let size = CGSize(width: screenWidth, height: height)
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
         let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.bold)]
-        
+
         return NSString(string: text).boundingRect(with: size, options: options, attributes: attributes, context: nil)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
+
         var height: CGFloat = 0
-        
+
         //we are just measuring height so we add a padding constant to give the label some room to breathe!
-        let padding: CGFloat = 60
-        
+        let padding: CGFloat = 100
+
         //estimate each cell's height
         if let text = notes[indexPath.item].content {
             height = estimateFrameForText(text: text).height + padding
