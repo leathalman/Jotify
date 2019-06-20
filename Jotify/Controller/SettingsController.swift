@@ -23,13 +23,8 @@ class SettingsController: QuickTableViewController {
             
             Section(title: "Appearance", rows: [
                 NavigationRow(text: "Themes", detailText: .value1(""), icon: .named("NAME OF IMAGE HERE"), action: { _ in }),
-                ], footer: ""),
+                ], footer: "Select color for gradient."),
             
-            RadioSection(title: "Radio Buttons", options: [
-                OptionRow(text: "Option 1", isSelected: true, action: didToggleSelection()),
-                OptionRow(text: "Option 2", isSelected: false, action: didToggleSelection()),
-                OptionRow(text: "Option 3", isSelected: false, action: didToggleSelection())
-                ], footer: "See RadioSection for more details.")
         ]
     }
     
@@ -67,12 +62,6 @@ class SettingsController: QuickTableViewController {
         // ...
         
         print("hello")
-    }
-    
-    private func didToggleSelection() -> (Row) -> Void {
-        return { [weak self] row in
-            // ...
-        }
     }
     
 }

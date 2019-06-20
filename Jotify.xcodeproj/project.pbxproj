@@ -13,6 +13,7 @@
 		F60DE60B22838F6A008701E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F60DE60A22838F6A008701E9 /* Assets.xcassets */; };
 		F60DE60E22838F6A008701E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F60DE60C22838F6A008701E9 /* LaunchScreen.storyboard */; };
 		F6123B4722BB2A08007184CB /* ThemeSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6123B4622BB2A08007184CB /* ThemeSelectionController.swift */; };
+		F6123B6D22BC3C4F007184CB /* Jotify.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F6123B6B22BC3C4F007184CB /* Jotify.xcdatamodeld */; };
 		F661D4B122A1E77400FC6E1B /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F661D4B022A1E77400FC6E1B /* SettingsSwitchCell.swift */; };
 		F67949A122A05A1900BCC979 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67949A022A05A1900BCC979 /* SettingsCell.swift */; };
 		F67949A622A05B8500BCC979 /* UserInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67949A522A05B8500BCC979 /* UserInfoHeader.swift */; };
@@ -37,6 +38,7 @@
 		F60DE60D22838F6A008701E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F60DE60F22838F6A008701E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6123B4622BB2A08007184CB /* ThemeSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectionController.swift; sourceTree = "<group>"; };
+		F6123B6C22BC3C4F007184CB /* Jotify.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Jotify.xcdatamodel; sourceTree = "<group>"; };
 		F661D4B022A1E77400FC6E1B /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
 		F67949A022A05A1900BCC979 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		F67949A522A05B8500BCC979 /* UserInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoHeader.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				F67949A322A05B3A00BCC979 /* View */,
 				F67949A422A05B4100BCC979 /* Controller */,
 				F60DE60322838F69008701E9 /* AppDelegate.swift */,
+				F6123B6B22BC3C4F007184CB /* Jotify.xcdatamodeld */,
 				F60DE60722838F69008701E9 /* Main.storyboard */,
 				F60DE60A22838F6A008701E9 /* Assets.xcassets */,
 				F60DE60C22838F6A008701E9 /* LaunchScreen.storyboard */,
@@ -262,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F60DE60422838F69008701E9 /* AppDelegate.swift in Sources */,
+				F6123B6D22BC3C4F007184CB /* Jotify.xcdatamodeld in Sources */,
 				F6B906D4228CF61700FC0123 /* SavedNoteCell.swift in Sources */,
 				F68F6857228A16FE00EEC9D9 /* SavedNoteController.swift in Sources */,
 				F69DBAC82289016E006888C9 /* WriteNoteController.swift in Sources */,
@@ -480,6 +484,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F6123B6B22BC3C4F007184CB /* Jotify.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F6123B6C22BC3C4F007184CB /* Jotify.xcdatamodel */,
+			);
+			currentVersion = F6123B6C22BC3C4F007184CB /* Jotify.xcdatamodel */;
+			path = Jotify.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F60DE5F822838F69008701E9 /* Project object */;
 }

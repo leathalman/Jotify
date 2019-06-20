@@ -37,7 +37,7 @@ class ThemeSelectionController: QuickTableViewController {
             OptionRow(text: "Maldives", isSelected: selectedMaldives, action: didToggleSelection()),
             OptionRow(text: "Neon", isSelected: selectedNeonLife, action: didToggleSelection()),
             OptionRow(text: "Solid Stone", isSelected: selectedSolidStone, action: didToggleSelection()),
-            OptionRow(text: "Sunrise", isSelected: selectedSunrise, action: didToggleSelection())], footer: "Select color for gradient")
+            OptionRow(text: "Sunrise", isSelected: selectedSunrise, action: didToggleSelection())], footer: "")
         themeSelection.alwaysSelectsOneOption = true
         
         tableContents = [themeSelection]
@@ -83,7 +83,6 @@ class ThemeSelectionController: QuickTableViewController {
             selectedSolidStone = true
 
         }
-        
     }
  
     private func didToggleSelection() -> (Row) -> Void {

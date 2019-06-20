@@ -20,6 +20,9 @@ class Note: NSObject {
 class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     
     var notes = [Note]()
+    var filteredNotes = [Note]()
+    
+    let searchController = UISearchController(searchResultsController: nil)
     
     let blueprintLayout = VerticalBlueprintLayout(
         itemsPerRow: 2.0,
@@ -54,10 +57,45 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         collectionView.frame = self.view.frame
         collectionView.backgroundColor = UIColor(named: "viewBackgroundColor")
         collectionView.setCollectionViewLayout(blueprintLayout, animated: true)
+        
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        //TODO: add prefetching for better loading experience
+        collectionView.prefetchDataSource = self
+        collectionView.isPrefetchingEnabled = true
+        
         collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
         view.addSubview(collectionView)
+        
+        setupSearchBar()
+    }
+    
+    func setupSearchBar() {
+        searchController.searchResultsUpdater = self as UISearchResultsUpdating
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Notes"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
+    func searchBarIsEmpty() -> Bool {
+        // Returns true if the text is empty or nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    // MARK: - Filter Search Results
+    // MARK: - Current Rule "Content"
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        filteredNotes = notes.filter({( note : Note) -> Bool in
+            return note.content.lowercased().contains(searchText.lowercased())
+        })
+        
+        collectionView.reloadData()
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
     }
     
     func fetchNotes() {
@@ -142,8 +180,11 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return notes.count
+        if isFiltering() {
+            return filteredNotes.count
+        } else {
+            return notes.count
+        }
     }
     
     //TODO use instruments to find out how to optimize loading, this is a temporary fix
@@ -153,7 +194,14 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedNoteCell", for: indexPath) as? SavedNoteCell else {fatalError("Wrong cell class dequeued")}
     
-        let notesData = notes[indexPath.row]
+        let notesData: Note
+        
+        if isFiltering() {
+            notesData = filteredNotes[indexPath.row]
+        } else {
+            notesData = notes[indexPath.row]
+        }
+
         let noteText = notesData.content
         cell.textLabel.text = noteText
         cell.textLabel.textColor = UIColor.white
@@ -207,7 +255,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     }
 }
 
-extension SavedNoteController: CollectionViewFlowLayoutDelegate {
+extension SavedNoteController: CollectionViewFlowLayoutDelegate, UICollectionViewDataSourcePrefetching{
     
     private func estimateFrameForText(text: String) -> CGRect {
         //we make the height arbitrarily large so we don't undershoot height in calculation
@@ -233,5 +281,17 @@ extension SavedNoteController: CollectionViewFlowLayoutDelegate {
         }
         return CGSize(width: screenWidth, height: height)
 
+    }
+
+    //TODO: add prefetching for a better loading experience
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+
+    }
+}
+
+extension SavedNoteController: UISearchResultsUpdating {
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
     }
 }
