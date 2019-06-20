@@ -12,6 +12,7 @@
 		F60DE60922838F69008701E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F60DE60722838F69008701E9 /* Main.storyboard */; };
 		F60DE60B22838F6A008701E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F60DE60A22838F6A008701E9 /* Assets.xcassets */; };
 		F60DE60E22838F6A008701E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F60DE60C22838F6A008701E9 /* LaunchScreen.storyboard */; };
+		F6123B4722BB2A08007184CB /* ThemeSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6123B4622BB2A08007184CB /* ThemeSelectionController.swift */; };
 		F661D4B122A1E77400FC6E1B /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F661D4B022A1E77400FC6E1B /* SettingsSwitchCell.swift */; };
 		F67949A122A05A1900BCC979 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67949A022A05A1900BCC979 /* SettingsCell.swift */; };
 		F67949A622A05B8500BCC979 /* UserInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67949A522A05B8500BCC979 /* UserInfoHeader.swift */; };
@@ -35,6 +36,7 @@
 		F60DE60A22838F6A008701E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F60DE60D22838F6A008701E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F60DE60F22838F6A008701E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F6123B4622BB2A08007184CB /* ThemeSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectionController.swift; sourceTree = "<group>"; };
 		F661D4B022A1E77400FC6E1B /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
 		F67949A022A05A1900BCC979 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		F67949A522A05B8500BCC979 /* UserInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoHeader.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				F68F6856228A16FE00EEC9D9 /* SavedNoteController.swift */,
 				F69DBAC72289016E006888C9 /* WriteNoteController.swift */,
 				F69DBACB22890272006888C9 /* SettingsController.swift */,
+				F6123B4622BB2A08007184CB /* ThemeSelectionController.swift */,
 				F69C91AA229CCC0400DB0A61 /* TabBarController.swift */,
 			);
 			path = Controller;
@@ -264,6 +267,7 @@
 				F69DBAC82289016E006888C9 /* WriteNoteController.swift in Sources */,
 				F69DBACC22890272006888C9 /* SettingsController.swift in Sources */,
 				F6F30A2A22A087D4009D601B /* Extensions.swift in Sources */,
+				F6123B4722BB2A08007184CB /* ThemeSelectionController.swift in Sources */,
 				F67949A622A05B8500BCC979 /* UserInfoHeader.swift in Sources */,
 				F69FC3AF22A08FA400E6455E /* GradientAnimator.swift in Sources */,
 				F69C91AB229CCC0400DB0A61 /* TabBarController.swift in Sources */,
@@ -419,7 +423,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				INFOPLIST_FILE = Jotify/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -441,7 +445,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				INFOPLIST_FILE = Jotify/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

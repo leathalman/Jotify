@@ -164,11 +164,13 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Blueprints/Blueprints.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/BubbleTabBar/BubbleTabBar.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MultilineTextField/MultilineTextField.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/QuickTableViewController/QuickTableViewController.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Blueprints/Blueprints.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/BubbleTabBar/BubbleTabBar.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MultilineTextField/MultilineTextField.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/QuickTableViewController/QuickTableViewController.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

@@ -21,11 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = TabBarController()
         window?.makeKeyAndVisible()
         
-        DispatchQueue.main.async {
-            let savedNoteController = SavedNoteController()
-            savedNoteController.fetchNotes()
-        }
-
         return true
     }
 

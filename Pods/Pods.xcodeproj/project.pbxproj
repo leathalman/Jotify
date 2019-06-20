@@ -7,136 +7,189 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		05C1B50F57738FF5E24C943C72ABCA82 /* Pods-Jotify-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2558455B3F853B3F5215D278D594F8B3 /* Pods-Jotify-dummy.m */; };
+		02CFC06F7AEE7B7A35A30B7D2464CFF0 /* Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B357C2B2E609C826965887B879A1E6 /* Deprecated.swift */; };
+		0676EEBB9B834742E7B5BFA19DAA2309 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFF96DBDE00924ECB271558F2AC874F /* SwitchCell.swift */; };
 		0CCBD3BE0AF06EA368ACDF702E12D9FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */; };
-		0E79C59A63BF447BC6D9B63F62A14369 /* BubbleTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5CCDBB0AA30DB0E3CB2EAFB43D228 /* BubbleTabBarController.swift */; };
-		10F7EC358D160218EA5951D2C69C531D /* BubbleTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67E487D76F9FAC441E5E80BB7C5348F /* BubbleTabBar.swift */; };
-		32F08989C22C8450DD292EE1D8ECB11F /* BlueprintLayoutAnimator+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EC95CB9311798A1128C5A1624C970D /* BlueprintLayoutAnimator+Extensions.swift */; };
-		5076DDF5F13C270FC5BF6CBBD4EDE366 /* BinarySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEDFB82364B8FB4FFD4637F6593C6CB /* BinarySearch.swift */; };
-		51880C96C730F27AF553C1A18DB5428D /* BlueprintLayout+iOS+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899F1D3452D56FE0CE6296FCC5F0CCD0 /* BlueprintLayout+iOS+tvOS.swift */; };
+		0E79C59A63BF447BC6D9B63F62A14369 /* BubbleTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2454DE3F706EBDD1F4A6A8B89EAD521 /* BubbleTabBarController.swift */; };
+		0F3530ECE873501F5F3182597E625432 /* RowCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C46E765A9E46981719245F72FFA7D4 /* RowCompatible.swift */; };
+		10F7EC358D160218EA5951D2C69C531D /* BubbleTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59CF26DE1B44075DF0E750638354A09 /* BubbleTabBar.swift */; };
+		1606B4ED7B563B6F60467F5BF6677EEA /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC9ACE859EB5385EA22E6873258DDBE /* Reusable.swift */; };
+		1B3548159CFBD3BDC0253A82C8DDA00D /* NavigationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2552025C3ECB2966B3C81E3CB4919D /* NavigationRow.swift */; };
+		2195820B365C81802926D8F7F3B910F6 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D612EE51E6121CA8C803208528187F6 /* Section.swift */; };
+		32F08989C22C8450DD292EE1D8ECB11F /* BlueprintLayoutAnimator+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABF749FFED8B9DD7A04CD048780661A /* BlueprintLayoutAnimator+Extensions.swift */; };
+		35A02584E8A55C8219907433ACCA3F43 /* SwitchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F8CDE6738D28398721CB22AAEACE63 /* SwitchRow.swift */; };
+		35C917767C62C3B53EACA418485BFA49 /* QuickTableViewController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FA1B86266DD9563AB6F0C1730C2B701 /* QuickTableViewController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3CE9D86398BB207A53E0A3F575B12C88 /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168C8DC3BDC063275198D434517E60FB /* Configurable.swift */; };
+		40BCB7451337E701361435F86226573C /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5DA603298F0F42460F6326D1FC5D15 /* Row.swift */; };
+		490C751F9283906A9C9844A980D4E57C /* Pods-Jotify-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BA93A38D09C3E9F2BA612107FD28142 /* Pods-Jotify-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5076DDF5F13C270FC5BF6CBBD4EDE366 /* BinarySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A62D6C0BF81550CADD31E5764B05BA /* BinarySearch.swift */; };
+		51880C96C730F27AF553C1A18DB5428D /* BlueprintLayout+iOS+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA879C76D75F89D0940ED7EA5DB4491 /* BlueprintLayout+iOS+tvOS.swift */; };
 		573A10EED3691C2414EEC6FE622DD641 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */; };
-		586EA3300FE9BECBC0555E4BA370246A /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65C5F255AA2FF9C2DF76E224BB4C9F2 /* UICollectionView+Extensions.swift */; };
-		5B9DFA5FA219B5F97F8326E700A1CF65 /* MosaicPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26247D58EFB079ECF20956AF97C648F /* MosaicPattern.swift */; };
-		63B866C2EFB96A6D1B3A8B800F62C1C1 /* BlueprintSupplementaryKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347BE021F7050F67E4EF53831CDB838 /* BlueprintSupplementaryKind.swift */; };
+		586EA3300FE9BECBC0555E4BA370246A /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48E1774B04E0EBF16A99E553F1261C0 /* UICollectionView+Extensions.swift */; };
+		5B9DFA5FA219B5F97F8326E700A1CF65 /* MosaicPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA729F5F9C0BD246E2805F1BE1E4B62 /* MosaicPattern.swift */; };
+		61132925D0E0E1EAEA8C5E1CA3188341 /* QuickTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446AB3A9356D35F06AF4B588CE16CC94 /* QuickTableViewController.swift */; };
+		63B866C2EFB96A6D1B3A8B800F62C1C1 /* BlueprintSupplementaryKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A81F753D051DA1B18FFD11DB3F29416 /* BlueprintSupplementaryKind.swift */; };
+		665E76B7912184A135A6614A32EA15A3 /* Pods-Jotify-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2558455B3F853B3F5215D278D594F8B3 /* Pods-Jotify-dummy.m */; };
 		68586C027F3415537FE8AFB6759CF7C4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */; };
-		7BF409C2EEBDB20C0B95F0260F96FF0A /* BubbleTabBar-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B56FE657E170458AA7B67AA1F6585986 /* BubbleTabBar-dummy.m */; };
-		7D282297C299BF268079389FA2AADB72 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6255E1A06AA6B24632C51EC2C6BBD8 /* MultilineTextField.swift */; };
-		910B1C419E9C0E92C3ED62FBB271CCE9 /* HorizontalBlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F83F2813BD4F79D83F13717752B39C /* HorizontalBlueprintLayout.swift */; };
-		960FEF51F07C9BD695D29CC687011509 /* VerticalBlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C406EA7F036D986D2596F1B354140E /* VerticalBlueprintLayout.swift */; };
-		98142F612E148B095F9D2E09CE6C66F6 /* TypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E5DDBD3E73777D3BABC26CE3BAFC21 /* TypeAlias.swift */; };
-		A224190ED8F2390F9380A85DCF3846A4 /* BlueprintLayoutAnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5B00EE4EFE4D893D758EC0B3C20D5 /* BlueprintLayoutAnimationType.swift */; };
-		A3B699D5F6EF7CE748964DED86C9C846 /* MosaicLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5B8320B1DAF71B7B674A4D57DC8D4B /* MosaicLayoutAttributes.swift */; };
-		A3DCFF50480DB478BDC7BE1CB48BB51D /* BlueprintInvalidationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7DD00277009ECEE31D268F98DFCCBE /* BlueprintInvalidationContext.swift */; };
-		B000A22953301526AE02F3B1B846A96F /* BlueprintLayoutAnimator+iOS+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D65AA929EF2E933318830D7C062257 /* BlueprintLayoutAnimator+iOS+tvOS.swift */; };
-		B350C9573879EDC616C91A69B86B173D /* MosaicBlueprintPatternController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FC3174F3013C2D93893811C228E82F /* MosaicBlueprintPatternController.swift */; };
-		B47AAA89A3EF45341EC90826168607BE /* Blueprints-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 22AB4ED2162C92715A26D44AFD421ED0 /* Blueprints-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C2F70AFBC2CFDF2FEA2195E43C62452F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */; };
-		C487C82512C1D6C4F93416618207D995 /* MultilineTextField-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 449622C7AF07CDB325E7008D5738A03D /* MultilineTextField-dummy.m */; };
-		C6B1392EA122D5F71F591509E493AC37 /* SupplementaryLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6E386877DF2E9DDD1AF3BF8A467B4F /* SupplementaryLayoutAttributes.swift */; };
-		C88BA138AA383A8300B818C1CB46901D /* Blueprints-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D510DB0FEC39C01B1EF149E9507793DA /* Blueprints-dummy.m */; };
-		CFB0C28518AEFB686AD307327A1284E2 /* VerticalMosaicBlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0455C629CD1417310B2F27CEFFE769ED /* VerticalMosaicBlueprintLayout.swift */; };
-		D52D1077C6AF8731A18BC033BDE8859E /* DefaultLayoutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295F66E88AB42200CF8F7376387692AD /* DefaultLayoutAnimator.swift */; };
-		D75D597036E3B45F464C28CD356F1D8B /* BlueprintLayoutAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F395F3D860E74B8DD3AF9C9843A2D1 /* BlueprintLayoutAnimation.swift */; };
-		DCB0A806D43C6AF319873F0174121F81 /* BubbleTabBar-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AC30512CBA2C44A9D15374A0A11680E /* BubbleTabBar-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E472EC6F09659AE8D1BDA39868E12FF1 /* CBTabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39097394B775ED96CFAFEB4F6FFA6594 /* CBTabBarButton.swift */; };
-		E61ED2A6F72DC02CF2DF6FB2020BB701 /* BlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55211283DDE1286C52655B3F40C1110C /* BlueprintLayout.swift */; };
-		E88C82C7878EC3348D9AC96DC73EF05E /* BlueprintLayoutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26645E26AC0B1D80F811A3952DC9141 /* BlueprintLayoutAnimator.swift */; };
-		F03571FBE1A8715E0CBB8961C2F9CCC3 /* Pods-Jotify-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BA93A38D09C3E9F2BA612107FD28142 /* Pods-Jotify-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7BF409C2EEBDB20C0B95F0260F96FF0A /* BubbleTabBar-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2C0FEC36DAE023E7FE254CABB160FB /* BubbleTabBar-dummy.m */; };
+		7D282297C299BF268079389FA2AADB72 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E56CC7F0EB4B9B88D6CE026BD93B8E /* MultilineTextField.swift */; };
+		8F750841F6509D69126AB5CD95F57E6C /* TapActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221D9ED49F4D452946359C516B6D07A /* TapActionCell.swift */; };
+		910B1C419E9C0E92C3ED62FBB271CCE9 /* HorizontalBlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D18AE320A969E6E470EEF64DB4EE9 /* HorizontalBlueprintLayout.swift */; };
+		960FEF51F07C9BD695D29CC687011509 /* VerticalBlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67332F076A20F5923AD763BAC38BF381 /* VerticalBlueprintLayout.swift */; };
+		98142F612E148B095F9D2E09CE6C66F6 /* TypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC79188CEE6DA6433BAACA6285FF445 /* TypeAlias.swift */; };
+		A224190ED8F2390F9380A85DCF3846A4 /* BlueprintLayoutAnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31785070AC66DF33DAB55E7EE29E044 /* BlueprintLayoutAnimationType.swift */; };
+		A28D6E185DC2493AD06ECCB055B1713B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */; };
+		A3B699D5F6EF7CE748964DED86C9C846 /* MosaicLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7568B6931E9C6B7968E0BA66935B3FB5 /* MosaicLayoutAttributes.swift */; };
+		A3DCFF50480DB478BDC7BE1CB48BB51D /* BlueprintInvalidationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0229CC24DF602952C3D7ABA9D1438013 /* BlueprintInvalidationContext.swift */; };
+		A5B5CECB0D0EB7BED2B02139EB187FE4 /* Subtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4BD82E1FF8C3849A6FE3C6EACDDA17 /* Subtitle.swift */; };
+		A8545EA573AACE3EED6107B6C990560E /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E66AE71EF4878B35CC41953A8172BC /* Icon.swift */; };
+		B000A22953301526AE02F3B1B846A96F /* BlueprintLayoutAnimator+iOS+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D8D746C99B00599829DD0867FF9318 /* BlueprintLayoutAnimator+iOS+tvOS.swift */; };
+		B350C9573879EDC616C91A69B86B173D /* MosaicBlueprintPatternController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625CF38FFDBE2078DAB06A8F24348EE1 /* MosaicBlueprintPatternController.swift */; };
+		B47AAA89A3EF45341EC90826168607BE /* Blueprints-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D14317E183B2BFA2143508A04B5A0C80 /* Blueprints-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BD8298A0B82D57EF5549A401ED98765D /* RadioSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD1C00BA2DBAB87949A949143169DBD /* RadioSection.swift */; };
+		C43412CA07B94055B9693593CF35F442 /* TapActionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF744F033C7B2E99385B87018FB3E7FA /* TapActionRow.swift */; };
+		C487C82512C1D6C4F93416618207D995 /* MultilineTextField-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 774F6554E7E9B99872C32C2E7AE1AE26 /* MultilineTextField-dummy.m */; };
+		C6B1392EA122D5F71F591509E493AC37 /* SupplementaryLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5056A32F8F49C918BDC90A238059B845 /* SupplementaryLayoutAttributes.swift */; };
+		C88BA138AA383A8300B818C1CB46901D /* Blueprints-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8388633BFE7FD91A68841B8A37D9C282 /* Blueprints-dummy.m */; };
+		CFB0C28518AEFB686AD307327A1284E2 /* VerticalMosaicBlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BDEB5001961A6B3027467880B71A0C /* VerticalMosaicBlueprintLayout.swift */; };
+		D52D1077C6AF8731A18BC033BDE8859E /* DefaultLayoutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD357ECC8B6C78F7189155B0F936E4E9 /* DefaultLayoutAnimator.swift */; };
+		D75D597036E3B45F464C28CD356F1D8B /* BlueprintLayoutAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7F31088AC06FCB60D91B54B7C92813 /* BlueprintLayoutAnimation.swift */; };
+		D7E0AF6967643A9A268DA01A3F64DEAC /* DetailText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA323B3A5F10758353114F1974945030 /* DetailText.swift */; };
+		DC6220FC53DE3A9E190FC1B8886D6FC4 /* QuickTableViewController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6163A8A40D415E5708909722D6EBB0E6 /* QuickTableViewController-dummy.m */; };
+		DCB0A806D43C6AF319873F0174121F81 /* BubbleTabBar-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DEE26B03B1E297CD0436FC30DEE1A78 /* BubbleTabBar-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E472EC6F09659AE8D1BDA39868E12FF1 /* CBTabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DDA37CE0E146E25112CBF97B15091D /* CBTabBarButton.swift */; };
+		E61ED2A6F72DC02CF2DF6FB2020BB701 /* BlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D58338EF2744A77C75EF6155649D53E /* BlueprintLayout.swift */; };
+		E88C82C7878EC3348D9AC96DC73EF05E /* BlueprintLayoutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC80F368370DF956CB030B7DC57249C /* BlueprintLayoutAnimator.swift */; };
+		EABD6929DC920B96A8F2500C0D9C170B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */; };
+		EB7F884018C7C55B9C138BEA43DCFAFB /* RowStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA681C419E39BB7FF97E5B6F34CC6259 /* RowStyle.swift */; };
+		F14F1B7A184BC02AD5F4DA58E044BB0B /* OptionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAC1E50B32593CBC9126CDC1F2F98D4 /* OptionRow.swift */; };
 		F38F4B4384E11F956907AB00EF6D8E4E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 312B988EF117AE4DE76A268D970131FE /* UIKit.framework */; };
-		FFDAAC9F1F505EFBD44C935AAD5FE8DA /* MultilineTextField-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AC2B13EC3A4170BE1E2C92B8B694F543 /* MultilineTextField-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FFDAAC9F1F505EFBD44C935AAD5FE8DA /* MultilineTextField-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A3A82DE5518958E3ED9206C51C479B3E /* MultilineTextField-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		03FA827F079434AFFF4F4859203CA82E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DC6FC4C42CCE924FF1D3887F9FA7BB75;
-			remoteInfo = Blueprints;
-		};
-		29D879CF48C30397738CA20EA40D67B1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FF26EB4EF56366592310C32DAE33E3DE;
-			remoteInfo = BubbleTabBar;
-		};
-		A2A485A9C8BF8E3CC1E4ACDE2742BC0C /* PBXContainerItemProxy */ = {
+		6E6127969572DF3C180A443F2F38B0FA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 6E4C5518BF19B2CB8B0A5DC22C926A11;
 			remoteInfo = MultilineTextField;
 		};
+		A5308C2CC0E8F632F1447055C307DFA0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FF26EB4EF56366592310C32DAE33E3DE;
+			remoteInfo = BubbleTabBar;
+		};
+		E684E94379BDC392B37CEB8179F62628 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E7D16F6260A6FAB7F88EB5ACC56D911D;
+			remoteInfo = QuickTableViewController;
+		};
+		E688652C8D2CD2380FBA41E0649CFE39 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DC6FC4C42CCE924FF1D3887F9FA7BB75;
+			remoteInfo = Blueprints;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0455C629CD1417310B2F27CEFFE769ED /* VerticalMosaicBlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VerticalMosaicBlueprintLayout.swift; path = Sources/Shared/Mosaic/VerticalMosaicBlueprintLayout.swift; sourceTree = "<group>"; };
-		04F5CCDBB0AA30DB0E3CB2EAFB43D228 /* BubbleTabBarController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BubbleTabBarController.swift; path = BubbleTabBar/Classes/BubbleTabBarController.swift; sourceTree = "<group>"; };
-		0C9627782A3EC4D5E9E9D605115212F4 /* BubbleTabBar-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BubbleTabBar-prefix.pch"; sourceTree = "<group>"; };
+		0229CC24DF602952C3D7ABA9D1438013 /* BlueprintInvalidationContext.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintInvalidationContext.swift; path = Sources/Shared/Core/BlueprintInvalidationContext.swift; sourceTree = "<group>"; };
+		04407C1502A3DAB1CBA4A34F76AFB6A8 /* Blueprints.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Blueprints.xcconfig; sourceTree = "<group>"; };
+		08B357C2B2E609C826965887B879A1E6 /* Deprecated.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Deprecated.swift; path = Source/Model/Deprecated.swift; sourceTree = "<group>"; };
+		09DB5A8238D049BB4DAE96CB694FBA8E /* MultilineTextField-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MultilineTextField-Info.plist"; sourceTree = "<group>"; };
+		0A2552025C3ECB2966B3C81E3CB4919D /* NavigationRow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NavigationRow.swift; path = Source/Rows/NavigationRow.swift; sourceTree = "<group>"; };
 		0D04501C97E68E376442A07241A66134 /* MultilineTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MultilineTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		11772AE84D803549A1259750E8433409 /* Blueprints-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Blueprints-Info.plist"; sourceTree = "<group>"; };
-		13E5DDBD3E73777D3BABC26CE3BAFC21 /* TypeAlias.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TypeAlias.swift; path = Sources/Shared/Core/TypeAlias.swift; sourceTree = "<group>"; };
-		14EC95CB9311798A1128C5A1624C970D /* BlueprintLayoutAnimator+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BlueprintLayoutAnimator+Extensions.swift"; path = "Sources/Shared/Core/BlueprintLayoutAnimator+Extensions.swift"; sourceTree = "<group>"; };
-		1655F4B180A9637671A1387D5370EFFF /* BubbleTabBar.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = BubbleTabBar.modulemap; sourceTree = "<group>"; };
+		1150726756E93ED942CE536BDDAB85A6 /* MultilineTextField.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MultilineTextField.xcconfig; sourceTree = "<group>"; };
+		168C8DC3BDC063275198D434517E60FB /* Configurable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Configurable.swift; path = Source/Protocol/Configurable.swift; sourceTree = "<group>"; };
 		18AD745B4E64DD0B1A8A83DBA5787E73 /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
-		22AB4ED2162C92715A26D44AFD421ED0 /* Blueprints-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Blueprints-umbrella.h"; sourceTree = "<group>"; };
+		1A81F753D051DA1B18FFD11DB3F29416 /* BlueprintSupplementaryKind.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintSupplementaryKind.swift; path = Sources/Shared/Core/BlueprintSupplementaryKind.swift; sourceTree = "<group>"; };
+		1B404C6BD5ABFF7C3C518EFD235BF1BD /* QuickTableViewController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = QuickTableViewController.xcconfig; sourceTree = "<group>"; };
+		1DEE26B03B1E297CD0436FC30DEE1A78 /* BubbleTabBar-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BubbleTabBar-umbrella.h"; sourceTree = "<group>"; };
+		1FA89163971C9751850A2C3EFD313884 /* QuickTableViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QuickTableViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		21F8CDE6738D28398721CB22AAEACE63 /* SwitchRow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwitchRow.swift; path = Source/Rows/SwitchRow.swift; sourceTree = "<group>"; };
 		2558455B3F853B3F5215D278D594F8B3 /* Pods-Jotify-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Jotify-dummy.m"; sourceTree = "<group>"; };
-		295F66E88AB42200CF8F7376387692AD /* DefaultLayoutAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultLayoutAnimator.swift; path = Sources/Shared/Core/DefaultLayoutAnimator.swift; sourceTree = "<group>"; };
+		25DDA37CE0E146E25112CBF97B15091D /* CBTabBarButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CBTabBarButton.swift; path = BubbleTabBar/Classes/CBTabBarButton.swift; sourceTree = "<group>"; };
+		2D612EE51E6121CA8C803208528187F6 /* Section.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Section.swift; path = Source/Model/Section.swift; sourceTree = "<group>"; };
+		2FA1B86266DD9563AB6F0C1730C2B701 /* QuickTableViewController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QuickTableViewController-umbrella.h"; sourceTree = "<group>"; };
 		312B988EF117AE4DE76A268D970131FE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		33B07200C76EAA35AA1FC7810ADF1051 /* BubbleTabBar-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "BubbleTabBar-Info.plist"; sourceTree = "<group>"; };
-		33FC3174F3013C2D93893811C228E82F /* MosaicBlueprintPatternController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MosaicBlueprintPatternController.swift; path = Sources/Shared/Mosaic/MosaicBlueprintPatternController.swift; sourceTree = "<group>"; };
-		39097394B775ED96CFAFEB4F6FFA6594 /* CBTabBarButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CBTabBarButton.swift; path = BubbleTabBar/Classes/CBTabBarButton.swift; sourceTree = "<group>"; };
-		3AC30512CBA2C44A9D15374A0A11680E /* BubbleTabBar-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BubbleTabBar-umbrella.h"; sourceTree = "<group>"; };
+		32E56CC7F0EB4B9B88D6CE026BD93B8E /* MultilineTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultilineTextField.swift; path = MultilineTextField/Classes/MultilineTextField.swift; sourceTree = "<group>"; };
+		34D8D746C99B00599829DD0867FF9318 /* BlueprintLayoutAnimator+iOS+tvOS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BlueprintLayoutAnimator+iOS+tvOS.swift"; path = "Sources/iOS+tvOS/Extensions/BlueprintLayoutAnimator+iOS+tvOS.swift"; sourceTree = "<group>"; };
+		3AAC8C8AF9E3EE0D2F960126431175F3 /* BubbleTabBar.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BubbleTabBar.xcconfig; sourceTree = "<group>"; };
+		3C7F31088AC06FCB60D91B54B7C92813 /* BlueprintLayoutAnimation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayoutAnimation.swift; path = Sources/Shared/Core/BlueprintLayoutAnimation.swift; sourceTree = "<group>"; };
 		436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		449622C7AF07CDB325E7008D5738A03D /* MultilineTextField-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MultilineTextField-dummy.m"; sourceTree = "<group>"; };
-		48C406EA7F036D986D2596F1B354140E /* VerticalBlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VerticalBlueprintLayout.swift; path = Sources/Shared/Core/VerticalBlueprintLayout.swift; sourceTree = "<group>"; };
-		513EF32284AC41E733C2906BC20BF376 /* MultilineTextField.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MultilineTextField.modulemap; sourceTree = "<group>"; };
-		55211283DDE1286C52655B3F40C1110C /* BlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayout.swift; path = Sources/Shared/Core/BlueprintLayout.swift; sourceTree = "<group>"; };
+		446AB3A9356D35F06AF4B588CE16CC94 /* QuickTableViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QuickTableViewController.swift; path = Source/QuickTableViewController.swift; sourceTree = "<group>"; };
+		49EB16B8A60D6A44846939F4EA295893 /* BubbleTabBar-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "BubbleTabBar-Info.plist"; sourceTree = "<group>"; };
+		4CD1C00BA2DBAB87949A949143169DBD /* RadioSection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RadioSection.swift; path = Source/Model/RadioSection.swift; sourceTree = "<group>"; };
+		4D58338EF2744A77C75EF6155649D53E /* BlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayout.swift; path = Sources/Shared/Core/BlueprintLayout.swift; sourceTree = "<group>"; };
+		4F2C0FEC36DAE023E7FE254CABB160FB /* BubbleTabBar-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BubbleTabBar-dummy.m"; sourceTree = "<group>"; };
+		5056A32F8F49C918BDC90A238059B845 /* SupplementaryLayoutAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SupplementaryLayoutAttributes.swift; path = Sources/Shared/Core/SupplementaryLayoutAttributes.swift; sourceTree = "<group>"; };
+		54E1FDBDF6C29D4E76F1EF644F70D70A /* BubbleTabBar.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = BubbleTabBar.modulemap; sourceTree = "<group>"; };
+		55F41830C1B4BA62AEFC7AC8D4E0362B /* QuickTableViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QuickTableViewController-prefix.pch"; sourceTree = "<group>"; };
 		5BA93A38D09C3E9F2BA612107FD28142 /* Pods-Jotify-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Jotify-umbrella.h"; sourceTree = "<group>"; };
-		63F83F2813BD4F79D83F13717752B39C /* HorizontalBlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HorizontalBlueprintLayout.swift; path = Sources/Shared/Core/HorizontalBlueprintLayout.swift; sourceTree = "<group>"; };
-		6E54B6316F251F5BDD39C2938133BBCB /* Blueprints.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Blueprints.xcconfig; sourceTree = "<group>"; };
-		7183B271C89C59CD9BB7F4EA7EA4F96C /* Blueprints-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Blueprints-prefix.pch"; sourceTree = "<group>"; };
-		7A25378DD173B06FDA4E47CB6206883F /* MultilineTextField.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MultilineTextField.xcconfig; sourceTree = "<group>"; };
-		7AA1635F5979894D8E6306DC1C7C6BCE /* Blueprints.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Blueprints.modulemap; sourceTree = "<group>"; };
-		86D65AA929EF2E933318830D7C062257 /* BlueprintLayoutAnimator+iOS+tvOS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BlueprintLayoutAnimator+iOS+tvOS.swift"; path = "Sources/iOS+tvOS/Extensions/BlueprintLayoutAnimator+iOS+tvOS.swift"; sourceTree = "<group>"; };
-		899F1D3452D56FE0CE6296FCC5F0CCD0 /* BlueprintLayout+iOS+tvOS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BlueprintLayout+iOS+tvOS.swift"; path = "Sources/iOS+tvOS/Extensions/BlueprintLayout+iOS+tvOS.swift"; sourceTree = "<group>"; };
+		6163A8A40D415E5708909722D6EBB0E6 /* QuickTableViewController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "QuickTableViewController-dummy.m"; sourceTree = "<group>"; };
+		6221D9ED49F4D452946359C516B6D07A /* TapActionCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TapActionCell.swift; path = Source/Views/TapActionCell.swift; sourceTree = "<group>"; };
+		625CF38FFDBE2078DAB06A8F24348EE1 /* MosaicBlueprintPatternController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MosaicBlueprintPatternController.swift; path = Sources/Shared/Mosaic/MosaicBlueprintPatternController.swift; sourceTree = "<group>"; };
+		67332F076A20F5923AD763BAC38BF381 /* VerticalBlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VerticalBlueprintLayout.swift; path = Sources/Shared/Core/VerticalBlueprintLayout.swift; sourceTree = "<group>"; };
+		7568B6931E9C6B7968E0BA66935B3FB5 /* MosaicLayoutAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MosaicLayoutAttributes.swift; path = Sources/Shared/Mosaic/MosaicLayoutAttributes.swift; sourceTree = "<group>"; };
+		774F6554E7E9B99872C32C2E7AE1AE26 /* MultilineTextField-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MultilineTextField-dummy.m"; sourceTree = "<group>"; };
+		7CA729F5F9C0BD246E2805F1BE1E4B62 /* MosaicPattern.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MosaicPattern.swift; path = Sources/Shared/Mosaic/MosaicPattern.swift; sourceTree = "<group>"; };
+		8388633BFE7FD91A68841B8A37D9C282 /* Blueprints-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Blueprints-dummy.m"; sourceTree = "<group>"; };
+		847D18AE320A969E6E470EEF64DB4EE9 /* HorizontalBlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HorizontalBlueprintLayout.swift; path = Sources/Shared/Core/HorizontalBlueprintLayout.swift; sourceTree = "<group>"; };
+		86C377808553BCF4182BAA2A2FFA6F2C /* MultilineTextField.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MultilineTextField.modulemap; sourceTree = "<group>"; };
 		8A3786932D65044C9386124FF89579BD /* Pods-Jotify-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Jotify-acknowledgements.plist"; sourceTree = "<group>"; };
+		8ABF749FFED8B9DD7A04CD048780661A /* BlueprintLayoutAnimator+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BlueprintLayoutAnimator+Extensions.swift"; path = "Sources/Shared/Core/BlueprintLayoutAnimator+Extensions.swift"; sourceTree = "<group>"; };
+		8FC79188CEE6DA6433BAACA6285FF445 /* TypeAlias.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TypeAlias.swift; path = Sources/Shared/Core/TypeAlias.swift; sourceTree = "<group>"; };
 		9929FDEC1F03F5EE9C6961F15B0DBDA9 /* Pods_Jotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AC9ACE859EB5385EA22E6873258DDBE /* Reusable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Reusable.swift; path = Source/Protocol/Reusable.swift; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9E3958FCE7CAEAFF1532B40042706937 /* MultilineTextField-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MultilineTextField-Info.plist"; sourceTree = "<group>"; };
-		9E6E386877DF2E9DDD1AF3BF8A467B4F /* SupplementaryLayoutAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SupplementaryLayoutAttributes.swift; path = Sources/Shared/Core/SupplementaryLayoutAttributes.swift; sourceTree = "<group>"; };
-		9FEDFB82364B8FB4FFD4637F6593C6CB /* BinarySearch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BinarySearch.swift; path = Sources/Shared/Core/BinarySearch.swift; sourceTree = "<group>"; };
-		A347BE021F7050F67E4EF53831CDB838 /* BlueprintSupplementaryKind.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintSupplementaryKind.swift; path = Sources/Shared/Core/BlueprintSupplementaryKind.swift; sourceTree = "<group>"; };
+		9E72FF39172B04A1FE40ABA7A4EF016A /* Blueprints.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Blueprints.modulemap; sourceTree = "<group>"; };
+		9F4BD82E1FF8C3849A6FE3C6EACDDA17 /* Subtitle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Subtitle.swift; path = Source/Model/Subtitle.swift; sourceTree = "<group>"; };
+		9FAC1E50B32593CBC9126CDC1F2F98D4 /* OptionRow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptionRow.swift; path = Source/Rows/OptionRow.swift; sourceTree = "<group>"; };
+		A3A82DE5518958E3ED9206C51C479B3E /* MultilineTextField-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MultilineTextField-umbrella.h"; sourceTree = "<group>"; };
+		A425AC5997B43C794D6F041EAC6593E7 /* QuickTableViewController-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "QuickTableViewController-Info.plist"; sourceTree = "<group>"; };
 		A5684C4B6F93F54ACA555E3F3C002A23 /* Pods-Jotify-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Jotify-frameworks.sh"; sourceTree = "<group>"; };
-		AC2B13EC3A4170BE1E2C92B8B694F543 /* MultilineTextField-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MultilineTextField-umbrella.h"; sourceTree = "<group>"; };
+		A9C46E765A9E46981719245F72FFA7D4 /* RowCompatible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RowCompatible.swift; path = Source/Protocol/RowCompatible.swift; sourceTree = "<group>"; };
+		AA681C419E39BB7FF97E5B6F34CC6259 /* RowStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RowStyle.swift; path = Source/Protocol/RowStyle.swift; sourceTree = "<group>"; };
 		AE086BDDD89DEB8CE1B229A41B81B717 /* Pods-Jotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Jotify.release.xcconfig"; sourceTree = "<group>"; };
-		B56FE657E170458AA7B67AA1F6585986 /* BubbleTabBar-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BubbleTabBar-dummy.m"; sourceTree = "<group>"; };
-		BE5B8320B1DAF71B7B674A4D57DC8D4B /* MosaicLayoutAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MosaicLayoutAttributes.swift; path = Sources/Shared/Mosaic/MosaicLayoutAttributes.swift; sourceTree = "<group>"; };
-		C67E487D76F9FAC441E5E80BB7C5348F /* BubbleTabBar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BubbleTabBar.swift; path = BubbleTabBar/Classes/BubbleTabBar.swift; sourceTree = "<group>"; };
-		CAA5B00EE4EFE4D893D758EC0B3C20D5 /* BlueprintLayoutAnimationType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayoutAnimationType.swift; path = Sources/Shared/Core/BlueprintLayoutAnimationType.swift; sourceTree = "<group>"; };
+		AF744F033C7B2E99385B87018FB3E7FA /* TapActionRow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TapActionRow.swift; path = Source/Rows/TapActionRow.swift; sourceTree = "<group>"; };
+		B0BDEB5001961A6B3027467880B71A0C /* VerticalMosaicBlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VerticalMosaicBlueprintLayout.swift; path = Sources/Shared/Mosaic/VerticalMosaicBlueprintLayout.swift; sourceTree = "<group>"; };
+		B48E1774B04E0EBF16A99E553F1261C0 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UICollectionView+Extensions.swift"; path = "Sources/iOS+tvOS/Extensions/UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
+		BA323B3A5F10758353114F1974945030 /* DetailText.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DetailText.swift; path = Source/Model/DetailText.swift; sourceTree = "<group>"; };
+		BD357ECC8B6C78F7189155B0F936E4E9 /* DefaultLayoutAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultLayoutAnimator.swift; path = Sources/Shared/Core/DefaultLayoutAnimator.swift; sourceTree = "<group>"; };
+		C31785070AC66DF33DAB55E7EE29E044 /* BlueprintLayoutAnimationType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayoutAnimationType.swift; path = Sources/Shared/Core/BlueprintLayoutAnimationType.swift; sourceTree = "<group>"; };
+		C4EE37B71F6E50C05CEBC62A5D191F36 /* Blueprints-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Blueprints-Info.plist"; sourceTree = "<group>"; };
 		CE50FB49FE7EE6A951151310F30A9539 /* Pods-Jotify-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Jotify-Info.plist"; sourceTree = "<group>"; };
-		CF7DD00277009ECEE31D268F98DFCCBE /* BlueprintInvalidationContext.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintInvalidationContext.swift; path = Sources/Shared/Core/BlueprintInvalidationContext.swift; sourceTree = "<group>"; };
-		D26247D58EFB079ECF20956AF97C648F /* MosaicPattern.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MosaicPattern.swift; path = Sources/Shared/Mosaic/MosaicPattern.swift; sourceTree = "<group>"; };
-		D510DB0FEC39C01B1EF149E9507793DA /* Blueprints-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Blueprints-dummy.m"; sourceTree = "<group>"; };
-		D8F395F3D860E74B8DD3AF9C9843A2D1 /* BlueprintLayoutAnimation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayoutAnimation.swift; path = Sources/Shared/Core/BlueprintLayoutAnimation.swift; sourceTree = "<group>"; };
-		DF6255E1A06AA6B24632C51EC2C6BBD8 /* MultilineTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultilineTextField.swift; path = MultilineTextField/Classes/MultilineTextField.swift; sourceTree = "<group>"; };
+		D14317E183B2BFA2143508A04B5A0C80 /* Blueprints-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Blueprints-umbrella.h"; sourceTree = "<group>"; };
+		D3DAA14C8574443D1DBE35B50661FB68 /* QuickTableViewController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = QuickTableViewController.modulemap; sourceTree = "<group>"; };
+		D7E66AE71EF4878B35CC41953A8172BC /* Icon.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Icon.swift; path = Source/Model/Icon.swift; sourceTree = "<group>"; };
+		D8A62D6C0BF81550CADD31E5764B05BA /* BinarySearch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BinarySearch.swift; path = Sources/Shared/Core/BinarySearch.swift; sourceTree = "<group>"; };
+		DD5DA603298F0F42460F6326D1FC5D15 /* Row.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Row.swift; path = Source/Protocol/Row.swift; sourceTree = "<group>"; };
+		DF6814503AF943E258272FF61AE20373 /* MultilineTextField-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MultilineTextField-prefix.pch"; sourceTree = "<group>"; };
+		E2454DE3F706EBDD1F4A6A8B89EAD521 /* BubbleTabBarController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BubbleTabBarController.swift; path = BubbleTabBar/Classes/BubbleTabBarController.swift; sourceTree = "<group>"; };
 		E3D4F55A323EFF248A7A3DC7BA61BCC5 /* Blueprints.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Blueprints.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E9F4CEA426D140A502B200DB852D91BE /* BubbleTabBar.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BubbleTabBar.xcconfig; sourceTree = "<group>"; };
+		E59CF26DE1B44075DF0E750638354A09 /* BubbleTabBar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BubbleTabBar.swift; path = BubbleTabBar/Classes/BubbleTabBar.swift; sourceTree = "<group>"; };
+		EBA879C76D75F89D0940ED7EA5DB4491 /* BlueprintLayout+iOS+tvOS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BlueprintLayout+iOS+tvOS.swift"; path = "Sources/iOS+tvOS/Extensions/BlueprintLayout+iOS+tvOS.swift"; sourceTree = "<group>"; };
+		ECC80F368370DF956CB030B7DC57249C /* BlueprintLayoutAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayoutAnimator.swift; path = Sources/Shared/Core/BlueprintLayoutAnimator.swift; sourceTree = "<group>"; };
+		ECFF96DBDE00924ECB271558F2AC874F /* SwitchCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwitchCell.swift; path = Source/Views/SwitchCell.swift; sourceTree = "<group>"; };
 		F04FA9B71BD7F28EDBB1DAE646F09CD5 /* Pods-Jotify.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Jotify.modulemap"; sourceTree = "<group>"; };
 		F12ED1B72CB071773D5516BF54E5D7B2 /* Pods-Jotify-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Jotify-acknowledgements.markdown"; sourceTree = "<group>"; };
-		F26645E26AC0B1D80F811A3952DC9141 /* BlueprintLayoutAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayoutAnimator.swift; path = Sources/Shared/Core/BlueprintLayoutAnimator.swift; sourceTree = "<group>"; };
 		F3CB3C0F3D8EEAF86BFA2CCF4C48A7AE /* BubbleTabBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BubbleTabBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F65C5F255AA2FF9C2DF76E224BB4C9F2 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UICollectionView+Extensions.swift"; path = "Sources/iOS+tvOS/Extensions/UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
-		F721C9BBEF052046215A6489065ECDAD /* MultilineTextField-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MultilineTextField-prefix.pch"; sourceTree = "<group>"; };
+		F413EB937D70FB8F894EBD9FBE9C1328 /* BubbleTabBar-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BubbleTabBar-prefix.pch"; sourceTree = "<group>"; };
+		F6528D45DD5C8BD65E145B7FF56B2DA5 /* Blueprints-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Blueprints-prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3E8801865BA0F13098098F5F67512415 /* Frameworks */ = {
+		27DA83AE857546F69D466E7E9B926B67 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2F70AFBC2CFDF2FEA2195E43C62452F /* Foundation.framework in Frameworks */,
+				EABD6929DC920B96A8F2500C0D9C170B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +210,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DE079CDC1E239B071E8788AFC03A551C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A28D6E185DC2493AD06ECCB055B1713B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EC7FFE45D1CD807C7C502E18F09F15F7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -168,12 +229,80 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E4111A7B8D46740FE5545AF568410F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E3D4F55A323EFF248A7A3DC7BA61BCC5 /* Blueprints.framework */,
+				F3CB3C0F3D8EEAF86BFA2CCF4C48A7AE /* BubbleTabBar.framework */,
+				0D04501C97E68E376442A07241A66134 /* MultilineTextField.framework */,
+				9929FDEC1F03F5EE9C6961F15B0DBDA9 /* Pods_Jotify.framework */,
+				1FA89163971C9751850A2C3EFD313884 /* QuickTableViewController.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1136615161FA1A4742360919CC4856DE /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				9E72FF39172B04A1FE40ABA7A4EF016A /* Blueprints.modulemap */,
+				04407C1502A3DAB1CBA4A34F76AFB6A8 /* Blueprints.xcconfig */,
+				8388633BFE7FD91A68841B8A37D9C282 /* Blueprints-dummy.m */,
+				C4EE37B71F6E50C05CEBC62A5D191F36 /* Blueprints-Info.plist */,
+				F6528D45DD5C8BD65E145B7FF56B2DA5 /* Blueprints-prefix.pch */,
+				D14317E183B2BFA2143508A04B5A0C80 /* Blueprints-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Blueprints";
+			sourceTree = "<group>";
+		};
 		1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				E2983683FD097A93297E2F5D4E382B36 /* iOS */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		18026B859FACAA346C47542E8C364F41 /* Blueprints */ = {
+			isa = PBXGroup;
+			children = (
+				D8A62D6C0BF81550CADD31E5764B05BA /* BinarySearch.swift */,
+				0229CC24DF602952C3D7ABA9D1438013 /* BlueprintInvalidationContext.swift */,
+				4D58338EF2744A77C75EF6155649D53E /* BlueprintLayout.swift */,
+				EBA879C76D75F89D0940ED7EA5DB4491 /* BlueprintLayout+iOS+tvOS.swift */,
+				3C7F31088AC06FCB60D91B54B7C92813 /* BlueprintLayoutAnimation.swift */,
+				C31785070AC66DF33DAB55E7EE29E044 /* BlueprintLayoutAnimationType.swift */,
+				ECC80F368370DF956CB030B7DC57249C /* BlueprintLayoutAnimator.swift */,
+				8ABF749FFED8B9DD7A04CD048780661A /* BlueprintLayoutAnimator+Extensions.swift */,
+				34D8D746C99B00599829DD0867FF9318 /* BlueprintLayoutAnimator+iOS+tvOS.swift */,
+				1A81F753D051DA1B18FFD11DB3F29416 /* BlueprintSupplementaryKind.swift */,
+				BD357ECC8B6C78F7189155B0F936E4E9 /* DefaultLayoutAnimator.swift */,
+				847D18AE320A969E6E470EEF64DB4EE9 /* HorizontalBlueprintLayout.swift */,
+				625CF38FFDBE2078DAB06A8F24348EE1 /* MosaicBlueprintPatternController.swift */,
+				7568B6931E9C6B7968E0BA66935B3FB5 /* MosaicLayoutAttributes.swift */,
+				7CA729F5F9C0BD246E2805F1BE1E4B62 /* MosaicPattern.swift */,
+				5056A32F8F49C918BDC90A238059B845 /* SupplementaryLayoutAttributes.swift */,
+				8FC79188CEE6DA6433BAACA6285FF445 /* TypeAlias.swift */,
+				B48E1774B04E0EBF16A99E553F1261C0 /* UICollectionView+Extensions.swift */,
+				67332F076A20F5923AD763BAC38BF381 /* VerticalBlueprintLayout.swift */,
+				B0BDEB5001961A6B3027467880B71A0C /* VerticalMosaicBlueprintLayout.swift */,
+				1136615161FA1A4742360919CC4856DE /* Support Files */,
+			);
+			path = Blueprints;
+			sourceTree = "<group>";
+		};
+		3DCA2846B4920AD6EA74445B4F6B378F /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				D3DAA14C8574443D1DBE35B50661FB68 /* QuickTableViewController.modulemap */,
+				1B404C6BD5ABFF7C3C518EFD235BF1BD /* QuickTableViewController.xcconfig */,
+				6163A8A40D415E5708909722D6EBB0E6 /* QuickTableViewController-dummy.m */,
+				A425AC5997B43C794D6F041EAC6593E7 /* QuickTableViewController-Info.plist */,
+				55F41830C1B4BA62AEFC7AC8D4E0362B /* QuickTableViewController-prefix.pch */,
+				2FA1B86266DD9563AB6F0C1730C2B701 /* QuickTableViewController-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/QuickTableViewController";
 			sourceTree = "<group>";
 		};
 		4FA3F5E6FA44DBF3A38AC9C8BEF2A1DB /* Pods-Jotify */ = {
@@ -193,20 +322,6 @@
 			path = "Target Support Files/Pods-Jotify";
 			sourceTree = "<group>";
 		};
-		504F2D47386399AF539CE04C6EF37CB0 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				1655F4B180A9637671A1387D5370EFFF /* BubbleTabBar.modulemap */,
-				E9F4CEA426D140A502B200DB852D91BE /* BubbleTabBar.xcconfig */,
-				B56FE657E170458AA7B67AA1F6585986 /* BubbleTabBar-dummy.m */,
-				33B07200C76EAA35AA1FC7810ADF1051 /* BubbleTabBar-Info.plist */,
-				0C9627782A3EC4D5E9E9D605115212F4 /* BubbleTabBar-prefix.pch */,
-				3AC30512CBA2C44A9D15374A0A11680E /* BubbleTabBar-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/BubbleTabBar";
-			sourceTree = "<group>";
-		};
 		597D2EBD27A2EC852F7A99F0423A76C6 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,78 +330,64 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		61CDE945C440EE3921465D671DD67668 /* Blueprints */ = {
+		6126536ECCC22A8A1DDF2C485EFC2F19 /* MultilineTextField */ = {
 			isa = PBXGroup;
 			children = (
-				9FEDFB82364B8FB4FFD4637F6593C6CB /* BinarySearch.swift */,
-				CF7DD00277009ECEE31D268F98DFCCBE /* BlueprintInvalidationContext.swift */,
-				55211283DDE1286C52655B3F40C1110C /* BlueprintLayout.swift */,
-				899F1D3452D56FE0CE6296FCC5F0CCD0 /* BlueprintLayout+iOS+tvOS.swift */,
-				D8F395F3D860E74B8DD3AF9C9843A2D1 /* BlueprintLayoutAnimation.swift */,
-				CAA5B00EE4EFE4D893D758EC0B3C20D5 /* BlueprintLayoutAnimationType.swift */,
-				F26645E26AC0B1D80F811A3952DC9141 /* BlueprintLayoutAnimator.swift */,
-				14EC95CB9311798A1128C5A1624C970D /* BlueprintLayoutAnimator+Extensions.swift */,
-				86D65AA929EF2E933318830D7C062257 /* BlueprintLayoutAnimator+iOS+tvOS.swift */,
-				A347BE021F7050F67E4EF53831CDB838 /* BlueprintSupplementaryKind.swift */,
-				295F66E88AB42200CF8F7376387692AD /* DefaultLayoutAnimator.swift */,
-				63F83F2813BD4F79D83F13717752B39C /* HorizontalBlueprintLayout.swift */,
-				33FC3174F3013C2D93893811C228E82F /* MosaicBlueprintPatternController.swift */,
-				BE5B8320B1DAF71B7B674A4D57DC8D4B /* MosaicLayoutAttributes.swift */,
-				D26247D58EFB079ECF20956AF97C648F /* MosaicPattern.swift */,
-				9E6E386877DF2E9DDD1AF3BF8A467B4F /* SupplementaryLayoutAttributes.swift */,
-				13E5DDBD3E73777D3BABC26CE3BAFC21 /* TypeAlias.swift */,
-				F65C5F255AA2FF9C2DF76E224BB4C9F2 /* UICollectionView+Extensions.swift */,
-				48C406EA7F036D986D2596F1B354140E /* VerticalBlueprintLayout.swift */,
-				0455C629CD1417310B2F27CEFFE769ED /* VerticalMosaicBlueprintLayout.swift */,
-				A9DC1F51587AB5BCB0BCD5D414E2AD86 /* Support Files */,
+				32E56CC7F0EB4B9B88D6CE026BD93B8E /* MultilineTextField.swift */,
+				B506939FCBB99450121F330B20D0977C /* Support Files */,
 			);
-			path = Blueprints;
+			path = MultilineTextField;
 			sourceTree = "<group>";
 		};
-		65DFE3C1904D44CC87D24D14C721AEC4 /* BubbleTabBar */ = {
+		A03A59DA38A913BA4185EE67FCA93070 /* QuickTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				C67E487D76F9FAC441E5E80BB7C5348F /* BubbleTabBar.swift */,
-				04F5CCDBB0AA30DB0E3CB2EAFB43D228 /* BubbleTabBarController.swift */,
-				39097394B775ED96CFAFEB4F6FFA6594 /* CBTabBarButton.swift */,
-				504F2D47386399AF539CE04C6EF37CB0 /* Support Files */,
+				168C8DC3BDC063275198D434517E60FB /* Configurable.swift */,
+				08B357C2B2E609C826965887B879A1E6 /* Deprecated.swift */,
+				BA323B3A5F10758353114F1974945030 /* DetailText.swift */,
+				D7E66AE71EF4878B35CC41953A8172BC /* Icon.swift */,
+				0A2552025C3ECB2966B3C81E3CB4919D /* NavigationRow.swift */,
+				9FAC1E50B32593CBC9126CDC1F2F98D4 /* OptionRow.swift */,
+				446AB3A9356D35F06AF4B588CE16CC94 /* QuickTableViewController.swift */,
+				4CD1C00BA2DBAB87949A949143169DBD /* RadioSection.swift */,
+				9AC9ACE859EB5385EA22E6873258DDBE /* Reusable.swift */,
+				DD5DA603298F0F42460F6326D1FC5D15 /* Row.swift */,
+				A9C46E765A9E46981719245F72FFA7D4 /* RowCompatible.swift */,
+				AA681C419E39BB7FF97E5B6F34CC6259 /* RowStyle.swift */,
+				2D612EE51E6121CA8C803208528187F6 /* Section.swift */,
+				9F4BD82E1FF8C3849A6FE3C6EACDDA17 /* Subtitle.swift */,
+				ECFF96DBDE00924ECB271558F2AC874F /* SwitchCell.swift */,
+				21F8CDE6738D28398721CB22AAEACE63 /* SwitchRow.swift */,
+				6221D9ED49F4D452946359C516B6D07A /* TapActionCell.swift */,
+				AF744F033C7B2E99385B87018FB3E7FA /* TapActionRow.swift */,
+				3DCA2846B4920AD6EA74445B4F6B378F /* Support Files */,
 			);
-			path = BubbleTabBar;
+			path = QuickTableViewController;
 			sourceTree = "<group>";
 		};
-		A9DC1F51587AB5BCB0BCD5D414E2AD86 /* Support Files */ = {
+		AC704C3B1A69D733DD5A3484FCE03386 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7AA1635F5979894D8E6306DC1C7C6BCE /* Blueprints.modulemap */,
-				6E54B6316F251F5BDD39C2938133BBCB /* Blueprints.xcconfig */,
-				D510DB0FEC39C01B1EF149E9507793DA /* Blueprints-dummy.m */,
-				11772AE84D803549A1259750E8433409 /* Blueprints-Info.plist */,
-				7183B271C89C59CD9BB7F4EA7EA4F96C /* Blueprints-prefix.pch */,
-				22AB4ED2162C92715A26D44AFD421ED0 /* Blueprints-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Blueprints";
-			sourceTree = "<group>";
-		};
-		B6D20E53A67D2E57832C18B4FF898EC9 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				61CDE945C440EE3921465D671DD67668 /* Blueprints */,
-				65DFE3C1904D44CC87D24D14C721AEC4 /* BubbleTabBar */,
-				F0B236561B82085A7BE453BC5D7E0BDC /* MultilineTextField */,
+				18026B859FACAA346C47542E8C364F41 /* Blueprints */,
+				E7D0919740EB83185FEA952E921C8DC1 /* BubbleTabBar */,
+				6126536ECCC22A8A1DDF2C485EFC2F19 /* MultilineTextField */,
+				A03A59DA38A913BA4185EE67FCA93070 /* QuickTableViewController */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		CA3521ED13124F47AA524691A300C925 /* Products */ = {
+		B506939FCBB99450121F330B20D0977C /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				E3D4F55A323EFF248A7A3DC7BA61BCC5 /* Blueprints.framework */,
-				F3CB3C0F3D8EEAF86BFA2CCF4C48A7AE /* BubbleTabBar.framework */,
-				0D04501C97E68E376442A07241A66134 /* MultilineTextField.framework */,
-				9929FDEC1F03F5EE9C6961F15B0DBDA9 /* Pods_Jotify.framework */,
+				86C377808553BCF4182BAA2A2FFA6F2C /* MultilineTextField.modulemap */,
+				1150726756E93ED942CE536BDDAB85A6 /* MultilineTextField.xcconfig */,
+				774F6554E7E9B99872C32C2E7AE1AE26 /* MultilineTextField-dummy.m */,
+				09DB5A8238D049BB4DAE96CB694FBA8E /* MultilineTextField-Info.plist */,
+				DF6814503AF943E258272FF61AE20373 /* MultilineTextField-prefix.pch */,
+				A3A82DE5518958E3ED9206C51C479B3E /* MultilineTextField-umbrella.h */,
 			);
-			name = Products;
+			name = "Support Files";
+			path = "../Target Support Files/MultilineTextField";
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -294,8 +395,8 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */,
-				B6D20E53A67D2E57832C18B4FF898EC9 /* Pods */,
-				CA3521ED13124F47AA524691A300C925 /* Products */,
+				AC704C3B1A69D733DD5A3484FCE03386 /* Pods */,
+				0E4111A7B8D46740FE5545AF568410F9 /* Products */,
 				597D2EBD27A2EC852F7A99F0423A76C6 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
@@ -309,27 +410,29 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		F0B236561B82085A7BE453BC5D7E0BDC /* MultilineTextField */ = {
+		E7D0919740EB83185FEA952E921C8DC1 /* BubbleTabBar */ = {
 			isa = PBXGroup;
 			children = (
-				DF6255E1A06AA6B24632C51EC2C6BBD8 /* MultilineTextField.swift */,
-				F1087561F6BF161344ECAE1491E9098A /* Support Files */,
+				E59CF26DE1B44075DF0E750638354A09 /* BubbleTabBar.swift */,
+				E2454DE3F706EBDD1F4A6A8B89EAD521 /* BubbleTabBarController.swift */,
+				25DDA37CE0E146E25112CBF97B15091D /* CBTabBarButton.swift */,
+				ECD29C032818B777424281548FC4F97C /* Support Files */,
 			);
-			path = MultilineTextField;
+			path = BubbleTabBar;
 			sourceTree = "<group>";
 		};
-		F1087561F6BF161344ECAE1491E9098A /* Support Files */ = {
+		ECD29C032818B777424281548FC4F97C /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				513EF32284AC41E733C2906BC20BF376 /* MultilineTextField.modulemap */,
-				7A25378DD173B06FDA4E47CB6206883F /* MultilineTextField.xcconfig */,
-				449622C7AF07CDB325E7008D5738A03D /* MultilineTextField-dummy.m */,
-				9E3958FCE7CAEAFF1532B40042706937 /* MultilineTextField-Info.plist */,
-				F721C9BBEF052046215A6489065ECDAD /* MultilineTextField-prefix.pch */,
-				AC2B13EC3A4170BE1E2C92B8B694F543 /* MultilineTextField-umbrella.h */,
+				54E1FDBDF6C29D4E76F1EF644F70D70A /* BubbleTabBar.modulemap */,
+				3AAC8C8AF9E3EE0D2F960126431175F3 /* BubbleTabBar.xcconfig */,
+				4F2C0FEC36DAE023E7FE254CABB160FB /* BubbleTabBar-dummy.m */,
+				49EB16B8A60D6A44846939F4EA295893 /* BubbleTabBar-Info.plist */,
+				F413EB937D70FB8F894EBD9FBE9C1328 /* BubbleTabBar-prefix.pch */,
+				1DEE26B03B1E297CD0436FC30DEE1A78 /* BubbleTabBar-umbrella.h */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/MultilineTextField";
+			path = "../Target Support Files/BubbleTabBar";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -351,6 +454,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		662E968BF0F82DD4E1CA236FF515D905 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				35C917767C62C3B53EACA418485BFA49 /* QuickTableViewController-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84D52AB8F1D43EC8C983BE8E9393EF8B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -359,11 +470,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B806B0B807DA2FF523B839BD1FC7A7A9 /* Headers */ = {
+		E4657AB78A9F144BD96338724E55434E /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F03571FBE1A8715E0CBB8961C2F9CCC3 /* Pods-Jotify-umbrella.h in Headers */,
+				490C751F9283906A9C9844A980D4E57C /* Pods-Jotify-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,19 +483,20 @@
 /* Begin PBXNativeTarget section */
 		44B5BBE9ABE10FD7980E4945FB7C27BE /* Pods-Jotify */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6646FEDAE7EABADB2FBD48BD734443B6 /* Build configuration list for PBXNativeTarget "Pods-Jotify" */;
+			buildConfigurationList = B8885C67B6982F3F54A5C0D12DFB62D8 /* Build configuration list for PBXNativeTarget "Pods-Jotify" */;
 			buildPhases = (
-				B806B0B807DA2FF523B839BD1FC7A7A9 /* Headers */,
-				AA5BAD9040346B730705CC85E8B5F5C7 /* Sources */,
-				3E8801865BA0F13098098F5F67512415 /* Frameworks */,
-				D4476B521405EF7CEA254EB7807A47DD /* Resources */,
+				E4657AB78A9F144BD96338724E55434E /* Headers */,
+				0CBED07A4480770B5882F449B3A9AE53 /* Sources */,
+				DE079CDC1E239B071E8788AFC03A551C /* Frameworks */,
+				5A4D869BF870A63069747B1201B007AC /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4039A480D0F8FAFD17D52893A74F5F70 /* PBXTargetDependency */,
-				107F372D644A2EC332E2CE7C466B3CCB /* PBXTargetDependency */,
-				770B239EAF45E4BCCCAE676E317CFF58 /* PBXTargetDependency */,
+				47CA36AAB2D152B9BBE924E123AA5806 /* PBXTargetDependency */,
+				E01209F0452BCDCDBF782E2ABD6F4CF5 /* PBXTargetDependency */,
+				2B66E79CDF18003B97E6F8E34FD31457 /* PBXTargetDependency */,
+				8F6DFE8ABF69004AF9B5CC3A8589D03B /* PBXTargetDependency */,
 			);
 			name = "Pods-Jotify";
 			productName = "Pods-Jotify";
@@ -427,6 +539,24 @@
 			productReference = E3D4F55A323EFF248A7A3DC7BA61BCC5 /* Blueprints.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		E7D16F6260A6FAB7F88EB5ACC56D911D /* QuickTableViewController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 57C50B49C9E8E57E0B133AF0498BF5A4 /* Build configuration list for PBXNativeTarget "QuickTableViewController" */;
+			buildPhases = (
+				662E968BF0F82DD4E1CA236FF515D905 /* Headers */,
+				7CE3D1D0F8E8B72A3D392CC775FEE39E /* Sources */,
+				27DA83AE857546F69D466E7E9B926B67 /* Frameworks */,
+				7F17C9EA259790640DB5C1392E6B7BE0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QuickTableViewController;
+			productName = QuickTableViewController;
+			productReference = 1FA89163971C9751850A2C3EFD313884 /* QuickTableViewController.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		FF26EB4EF56366592310C32DAE33E3DE /* BubbleTabBar */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0FFF42B8E4C0E29B10AA92A96A5CC54B /* Build configuration list for PBXNativeTarget "BubbleTabBar" */;
@@ -454,6 +584,9 @@
 				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 1020;
 				TargetAttributes = {
+					E7D16F6260A6FAB7F88EB5ACC56D911D = {
+						LastSwiftMigration = 1100;
+					};
 					FF26EB4EF56366592310C32DAE33E3DE = {
 						LastSwiftMigration = 1100;
 					};
@@ -465,10 +598,9 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = CA3521ED13124F47AA524691A300C925 /* Products */;
+			productRefGroup = 0E4111A7B8D46740FE5545AF568410F9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -476,11 +608,26 @@
 				FF26EB4EF56366592310C32DAE33E3DE /* BubbleTabBar */,
 				6E4C5518BF19B2CB8B0A5DC22C926A11 /* MultilineTextField */,
 				44B5BBE9ABE10FD7980E4945FB7C27BE /* Pods-Jotify */,
+				E7D16F6260A6FAB7F88EB5ACC56D911D /* QuickTableViewController */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5A4D869BF870A63069747B1201B007AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F17C9EA259790640DB5C1392E6B7BE0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8865641C4A6ACF320C31AEEF2AE78DFD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -489,13 +636,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A2C09F3F829435F2879C27682DE3F833 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D4476B521405EF7CEA254EB7807A47DD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -512,6 +652,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0CBED07A4480770B5882F449B3A9AE53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				665E76B7912184A135A6614A32EA15A3 /* Pods-Jotify-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1F9E74FF1595BEC1CE4332429BD0C83D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -549,6 +697,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7CE3D1D0F8E8B72A3D392CC775FEE39E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CE9D86398BB207A53E0A3F575B12C88 /* Configurable.swift in Sources */,
+				02CFC06F7AEE7B7A35A30B7D2464CFF0 /* Deprecated.swift in Sources */,
+				D7E0AF6967643A9A268DA01A3F64DEAC /* DetailText.swift in Sources */,
+				A8545EA573AACE3EED6107B6C990560E /* Icon.swift in Sources */,
+				1B3548159CFBD3BDC0253A82C8DDA00D /* NavigationRow.swift in Sources */,
+				F14F1B7A184BC02AD5F4DA58E044BB0B /* OptionRow.swift in Sources */,
+				DC6220FC53DE3A9E190FC1B8886D6FC4 /* QuickTableViewController-dummy.m in Sources */,
+				61132925D0E0E1EAEA8C5E1CA3188341 /* QuickTableViewController.swift in Sources */,
+				BD8298A0B82D57EF5549A401ED98765D /* RadioSection.swift in Sources */,
+				1606B4ED7B563B6F60467F5BF6677EEA /* Reusable.swift in Sources */,
+				40BCB7451337E701361435F86226573C /* Row.swift in Sources */,
+				0F3530ECE873501F5F3182597E625432 /* RowCompatible.swift in Sources */,
+				EB7F884018C7C55B9C138BEA43DCFAFB /* RowStyle.swift in Sources */,
+				2195820B365C81802926D8F7F3B910F6 /* Section.swift in Sources */,
+				A5B5CECB0D0EB7BED2B02139EB187FE4 /* Subtitle.swift in Sources */,
+				0676EEBB9B834742E7B5BFA19DAA2309 /* SwitchCell.swift in Sources */,
+				35A02584E8A55C8219907433ACCA3F43 /* SwitchRow.swift in Sources */,
+				8F750841F6509D69126AB5CD95F57E6C /* TapActionCell.swift in Sources */,
+				C43412CA07B94055B9693593CF35F442 /* TapActionRow.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A3DBE2CA744321FBC102A32E18E7B41A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -560,387 +734,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AA5BAD9040346B730705CC85E8B5F5C7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				05C1B50F57738FF5E24C943C72ABCA82 /* Pods-Jotify-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		107F372D644A2EC332E2CE7C466B3CCB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = BubbleTabBar;
-			target = FF26EB4EF56366592310C32DAE33E3DE /* BubbleTabBar */;
-			targetProxy = 29D879CF48C30397738CA20EA40D67B1 /* PBXContainerItemProxy */;
-		};
-		4039A480D0F8FAFD17D52893A74F5F70 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Blueprints;
-			target = DC6FC4C42CCE924FF1D3887F9FA7BB75 /* Blueprints */;
-			targetProxy = 03FA827F079434AFFF4F4859203CA82E /* PBXContainerItemProxy */;
-		};
-		770B239EAF45E4BCCCAE676E317CFF58 /* PBXTargetDependency */ = {
+		2B66E79CDF18003B97E6F8E34FD31457 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = MultilineTextField;
 			target = 6E4C5518BF19B2CB8B0A5DC22C926A11 /* MultilineTextField */;
-			targetProxy = A2A485A9C8BF8E3CC1E4ACDE2742BC0C /* PBXContainerItemProxy */;
+			targetProxy = 6E6127969572DF3C180A443F2F38B0FA /* PBXContainerItemProxy */;
+		};
+		47CA36AAB2D152B9BBE924E123AA5806 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Blueprints;
+			target = DC6FC4C42CCE924FF1D3887F9FA7BB75 /* Blueprints */;
+			targetProxy = E688652C8D2CD2380FBA41E0649CFE39 /* PBXContainerItemProxy */;
+		};
+		8F6DFE8ABF69004AF9B5CC3A8589D03B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = QuickTableViewController;
+			target = E7D16F6260A6FAB7F88EB5ACC56D911D /* QuickTableViewController */;
+			targetProxy = E684E94379BDC392B37CEB8179F62628 /* PBXContainerItemProxy */;
+		};
+		E01209F0452BCDCDBF782E2ABD6F4CF5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BubbleTabBar;
+			target = FF26EB4EF56366592310C32DAE33E3DE /* BubbleTabBar */;
+			targetProxy = A5308C2CC0E8F632F1447055C307DFA0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		1422B121EAEAEA11307496903FA623C6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Release;
-		};
-		2A8789C0F2CB7BF3B2FBFF7091D6B8BE /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE086BDDD89DEB8CE1B229A41B81B717 /* Pods-Jotify.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Jotify/Pods-Jotify-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Jotify/Pods-Jotify.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		3BFB48991C750B2E087E40B01F097A46 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E9F4CEA426D140A502B200DB852D91BE /* BubbleTabBar.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/BubbleTabBar/BubbleTabBar-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BubbleTabBar/BubbleTabBar-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/BubbleTabBar/BubbleTabBar.modulemap";
-				PRODUCT_MODULE_NAME = BubbleTabBar;
-				PRODUCT_NAME = BubbleTabBar;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		6CFB6B03281B7E7504A3D1EE63788C0E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 18AD745B4E64DD0B1A8A83DBA5787E73 /* Pods-Jotify.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Jotify/Pods-Jotify-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Jotify/Pods-Jotify.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		6E94C4AB2A50894C1B6747AE5040C3B8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6E54B6316F251F5BDD39C2938133BBCB /* Blueprints.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Blueprints/Blueprints-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Blueprints/Blueprints-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/Blueprints/Blueprints.modulemap";
-				PRODUCT_MODULE_NAME = Blueprints;
-				PRODUCT_NAME = Blueprints;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		898F02CB219D6EDA18D36286CFBFC6C7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7A25378DD173B06FDA4E47CB6206883F /* MultilineTextField.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/MultilineTextField/MultilineTextField-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/MultilineTextField/MultilineTextField-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/MultilineTextField/MultilineTextField.modulemap";
-				PRODUCT_MODULE_NAME = MultilineTextField;
-				PRODUCT_NAME = MultilineTextField;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		8E59AE2321916022058B2927ADA52B9A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6E54B6316F251F5BDD39C2938133BBCB /* Blueprints.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Blueprints/Blueprints-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Blueprints/Blueprints-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/Blueprints/Blueprints.modulemap";
-				PRODUCT_MODULE_NAME = Blueprints;
-				PRODUCT_NAME = Blueprints;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		A8427EFC3ACEF0458FAEFD617748F782 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E9F4CEA426D140A502B200DB852D91BE /* BubbleTabBar.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/BubbleTabBar/BubbleTabBar-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BubbleTabBar/BubbleTabBar-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/BubbleTabBar/BubbleTabBar.modulemap";
-				PRODUCT_MODULE_NAME = BubbleTabBar;
-				PRODUCT_NAME = BubbleTabBar;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		E7223BA5C49BF0FCF1B382506A0DBE43 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7A25378DD173B06FDA4E47CB6206883F /* MultilineTextField.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/MultilineTextField/MultilineTextField-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/MultilineTextField/MultilineTextField-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/MultilineTextField/MultilineTextField.modulemap";
-				PRODUCT_MODULE_NAME = MultilineTextField;
-				PRODUCT_NAME = MultilineTextField;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		ED7888FA6713EABBF66D26A8003AD1CA /* Debug */ = {
+		131356BE54884448CA49C07BEDF4BB2A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -991,7 +815,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1003,6 +827,425 @@
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
+		};
+		382DBBFBA468D17BEAAE8BF138405F6B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 18AD745B4E64DD0B1A8A83DBA5787E73 /* Pods-Jotify.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Jotify/Pods-Jotify-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Jotify/Pods-Jotify.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3BFB48991C750B2E087E40B01F097A46 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3AAC8C8AF9E3EE0D2F960126431175F3 /* BubbleTabBar.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/BubbleTabBar/BubbleTabBar-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BubbleTabBar/BubbleTabBar-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/BubbleTabBar/BubbleTabBar.modulemap";
+				PRODUCT_MODULE_NAME = BubbleTabBar;
+				PRODUCT_NAME = BubbleTabBar;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		6E94C4AB2A50894C1B6747AE5040C3B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04407C1502A3DAB1CBA4A34F76AFB6A8 /* Blueprints.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Blueprints/Blueprints-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Blueprints/Blueprints-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Blueprints/Blueprints.modulemap";
+				PRODUCT_MODULE_NAME = Blueprints;
+				PRODUCT_NAME = Blueprints;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		898F02CB219D6EDA18D36286CFBFC6C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1150726756E93ED942CE536BDDAB85A6 /* MultilineTextField.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/MultilineTextField/MultilineTextField-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MultilineTextField/MultilineTextField-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/MultilineTextField/MultilineTextField.modulemap";
+				PRODUCT_MODULE_NAME = MultilineTextField;
+				PRODUCT_NAME = MultilineTextField;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8E59AE2321916022058B2927ADA52B9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04407C1502A3DAB1CBA4A34F76AFB6A8 /* Blueprints.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Blueprints/Blueprints-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Blueprints/Blueprints-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Blueprints/Blueprints.modulemap";
+				PRODUCT_MODULE_NAME = Blueprints;
+				PRODUCT_NAME = Blueprints;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		932EE3F953EBC977544072F6AFA2ABE9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE086BDDD89DEB8CE1B229A41B81B717 /* Pods-Jotify.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Jotify/Pods-Jotify-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Jotify/Pods-Jotify.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A8427EFC3ACEF0458FAEFD617748F782 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3AAC8C8AF9E3EE0D2F960126431175F3 /* BubbleTabBar.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/BubbleTabBar/BubbleTabBar-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BubbleTabBar/BubbleTabBar-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/BubbleTabBar/BubbleTabBar.modulemap";
+				PRODUCT_MODULE_NAME = BubbleTabBar;
+				PRODUCT_NAME = BubbleTabBar;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		CEF933C20CF652BB70FB59F1E64BB961 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B404C6BD5ABFF7C3C518EFD235BF1BD /* QuickTableViewController.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/QuickTableViewController/QuickTableViewController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/QuickTableViewController/QuickTableViewController-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/QuickTableViewController/QuickTableViewController.modulemap";
+				PRODUCT_MODULE_NAME = QuickTableViewController;
+				PRODUCT_NAME = QuickTableViewController;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		DEC5B446F167D5DA31C166BE5B542311 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B404C6BD5ABFF7C3C518EFD235BF1BD /* QuickTableViewController.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/QuickTableViewController/QuickTableViewController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/QuickTableViewController/QuickTableViewController-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/QuickTableViewController/QuickTableViewController.modulemap";
+				PRODUCT_MODULE_NAME = QuickTableViewController;
+				PRODUCT_NAME = QuickTableViewController;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E7223BA5C49BF0FCF1B382506A0DBE43 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1150726756E93ED942CE536BDDAB85A6 /* MultilineTextField.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/MultilineTextField/MultilineTextField-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MultilineTextField/MultilineTextField-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/MultilineTextField/MultilineTextField.modulemap";
+				PRODUCT_MODULE_NAME = MultilineTextField;
+				PRODUCT_NAME = MultilineTextField;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F090CD07A80273D5A73C8EA19224ADDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -1028,17 +1271,17 @@
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				ED7888FA6713EABBF66D26A8003AD1CA /* Debug */,
-				1422B121EAEAEA11307496903FA623C6 /* Release */,
+				131356BE54884448CA49C07BEDF4BB2A /* Debug */,
+				F090CD07A80273D5A73C8EA19224ADDB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6646FEDAE7EABADB2FBD48BD734443B6 /* Build configuration list for PBXNativeTarget "Pods-Jotify" */ = {
+		57C50B49C9E8E57E0B133AF0498BF5A4 /* Build configuration list for PBXNativeTarget "QuickTableViewController" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6CFB6B03281B7E7504A3D1EE63788C0E /* Debug */,
-				2A8789C0F2CB7BF3B2FBFF7091D6B8BE /* Release */,
+				CEF933C20CF652BB70FB59F1E64BB961 /* Debug */,
+				DEC5B446F167D5DA31C166BE5B542311 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1048,6 +1291,15 @@
 			buildConfigurations = (
 				E7223BA5C49BF0FCF1B382506A0DBE43 /* Debug */,
 				898F02CB219D6EDA18D36286CFBFC6C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B8885C67B6982F3F54A5C0D12DFB62D8 /* Build configuration list for PBXNativeTarget "Pods-Jotify" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				382DBBFBA468D17BEAAE8BF138405F6B /* Debug */,
+				932EE3F953EBC977544072F6AFA2ABE9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
- platform :ios, '13.0'
+ platform :ios, '12.0'
 
 target 'Jotify' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -9,5 +9,6 @@ target 'Jotify' do
 pod'MultilineTextField'
 pod'BubbleTabBar'
 pod'Blueprints'
+pod'QuickTableViewController'
 
 end

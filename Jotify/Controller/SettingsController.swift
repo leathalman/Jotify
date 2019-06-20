@@ -7,125 +7,72 @@
 //
 
 import UIKit
-import CloudKit
+import QuickTableViewController
 
-class SettingsController: UITableViewController {
-    
-    var userInfoHeader: UserInfoHeader!
-    var darkModeEnabled = Bool()
-    
+class SettingsController: QuickTableViewController {
+
     override func viewDidLoad() {
-        getUserInfo()
+        super.viewDidLoad()
         setupView()
-        navigationController?.navigationBar.isTranslucent = false
+        
+        tableContents = [
+            Section(title: "Switch", rows: [
+                SwitchRow(text: "Setting 1", switchValue: true, action: { _ in }),
+                SwitchRow(text: "Use Static Gradient", switchValue: false, action: { _ in })
+                ]),
+            
+            Section(title: "Appearance", rows: [
+                NavigationRow(text: "Themes", detailText: .value1(""), icon: .named("NAME OF IMAGE HERE"), action: { _ in }),
+                ], footer: ""),
+            
+            RadioSection(title: "Radio Buttons", options: [
+                OptionRow(text: "Option 1", isSelected: true, action: didToggleSelection()),
+                OptionRow(text: "Option 2", isSelected: false, action: didToggleSelection()),
+                OptionRow(text: "Option 3", isSelected: false, action: didToggleSelection())
+                ], footer: "See RadioSection for more details.")
+        ]
     }
     
     func setupView() {
-        title = "Settings"
+        navigationItem.title = "Settings"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.isTranslucent = false
         
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        //this is a bad implementation of this because it updates slowly, fix before release
+        navigationController?.navigationBar.backgroundColor = UIColor(named: "viewBackgroundColor")
+        navigationController?.view.backgroundColor = UIColor(named: "viewBackgroundColor")
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 80
-        
-        tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
-        tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
-        tableView.frame = view.frame
-        
-        let frame = CGRect(x: 0, y: 88, width: view.frame.width, height: 100)
-        userInfoHeader = UserInfoHeader(frame: frame)
-        tableView.tableHeaderView = userInfoHeader
-        tableView.tableFooterView = UIView()
+        tableView.isUserInteractionEnabled = true
     }
     
-    func getUserInfo() {
-        CKContainer.default().requestApplicationPermission(.userDiscoverability) { (status, error) in
-            CKContainer.default().fetchUserRecordID { (record, error) in
-                CKContainer.default().discoverUserIdentity(withUserRecordID: record!, completionHandler: { (userID, error) in
-                    let email = userID?.lookupInfo?.emailAddress
-                    //cannot retrieve email of cloudkit user... always returns nil
-                    print(email as Any)
-                    let name = ((userID?.nameComponents?.givenName)! + " " + (userID?.nameComponents?.familyName)!)
-                    UserDefaults.standard.set(name, forKey: "name")
-                    print(name)
-                })
-            }
-        }
-    }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        switch section {
-        case 0:
-            //number of cells in 1st section
-            return 1
-        case 1:
-            return 3
-        default:
-            return 0
-        }
-        
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            //number of cells in 1st section
-            return "General"
-        case 1:
-            return "Theme"
-        default:
-            return "Other"
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = UITableViewCell()
-        let section1 = ["Dark Mode", "Setting 2"]
-        let section2 = ["Setting 3", "Setting 4", "Setting 5"]
-        
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
-            
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
-            cell.backgroundColor = .white
-            cell.labelText.text = section1[indexPath.row]
-            cell.selectionStyle = .none
-            
-            if indexPath.row == 0 {
-                cell.switchButton.addTarget(self, action: #selector(self.darkModeSwitchClicked(_:)), for: .valueChanged)
-            } else if indexPath.row == 1 {
-                //                cell.switchButton.addTarget(self, action: #selector(self.switchChanged2(_:)), for: .valueChanged)
-            } else {
-                print("out of bounds")
-            }
-            
-            return cell
-            
+            print("1")
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-            cell.backgroundColor = .white
-            cell.textLabel?.text = section2[indexPath.row]
-            return cell
-            
+            let themeSelectionViewController = ThemeSelectionController()
+//            present(UINavigationController(rootViewController: themeSelectionViewController), animated: true)
+            navigationController?.pushViewController(themeSelectionViewController, animated: true)
+        case 2:
+            print("3")
         default:
             break
         }
-        return cell
+        
     }
     
-    @objc func darkModeSwitchClicked (_ sender : UISwitch!){
-        print("Switch flipped")
+    private func showAlert(_ sender: Row) {
+        // ...
+        
+        print("hello")
     }
     
-    @objc func switchChanged2 (_ sender : UISwitch!){
-        print("switch clicked2")
+    private func didToggleSelection() -> (Row) -> Void {
+        return { [weak self] row in
+            // ...
+        }
     }
     
 }

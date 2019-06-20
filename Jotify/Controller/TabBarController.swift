@@ -16,40 +16,43 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         self.delegate = self
         
-        view.backgroundColor = .white
+        let savedNotesViewController = UINavigationController(rootViewController: SavedNoteController(collectionViewLayout: UICollectionViewFlowLayout()))
+        let savedItem = UITabBarItem()
+        savedItem.title = "Notes"
+        savedItem.tag = 0
+        if #available(iOS 13.0, *) {
+            savedItem.image = UIImage(systemName: "square.grid.2x2")
+        } else {
+            savedItem.image = UIImage(named: "dashboard")
+        }
+        savedNotesViewController.tabBarItem = savedItem
         
-        let savedNotesVC = UINavigationController(rootViewController: SavedNoteController(collectionViewLayout: UICollectionViewFlowLayout()))
-        //title must match navigation controller title set in viewDidLoad() for each viewcontroller
-        let savedItem = CBTabBarItem(title: "Notes", image: UIImage(systemName: "square.grid.2x2"), tag: 0)
-        savedItem.tintColor = UIColor.red
-        savedNotesVC.tabBarItem = savedItem
+        let writeNoteViewController = WriteNoteController()
+        let writeItem = UITabBarItem()
+        writeItem.title = "Write"
+        writeItem.tag = 1
+        if #available(iOS 13.0, *) {
+            writeItem.image = UIImage(systemName: "pencil.circle")
+        } else {
+            writeItem.image = UIImage(named: "menu")
+        }
+        writeNoteViewController.tabBarItem = writeItem
         
-        let writeNoteVC = WriteNoteController()
-        let writeItem = CBTabBarItem(title: "Write", image: UIImage(systemName: "pencil.circle"), tag: 1)
-        writeItem.tintColor = UIColor.blue
-        writeNoteVC.tabBarItem = writeItem
+        let settingsViewController = UINavigationController(rootViewController: SettingsController(style: .grouped))
+        let settingsItem = UITabBarItem()
+        settingsItem.title = "Settings"
+        settingsItem.tag = 2
+        if #available(iOS 13.0, *) {
+            settingsItem.image = UIImage(systemName: "gear")
+        } else {
+            settingsItem.image = UIImage(named: "settings")
+        }
+        settingsViewController.tabBarItem = settingsItem
         
-        let settingsVC = UINavigationController(rootViewController: SettingsController())
-        let settingsItem = CBTabBarItem(title: "Settings", image: UIImage(systemName: "gear"), tag: 2)
-        settingsItem.tintColor = .black
-        settingsVC.tabBarItem = settingsItem
-        
-        viewControllers = [savedNotesVC, writeNoteVC, settingsVC]
+        viewControllers = [savedNotesViewController, writeNoteViewController, settingsViewController]
         
         self.selectedIndex = 1
     }
-    
-//    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-//        if item.tag == 0 {
-//            print("Saved Notes")
-//            let savedNotesController = SavedNoteController()
-//            savedNotesController.fetchNotes()
-//        } else if item.tag == 1 {
-//            print("Write")
-//        } else if item.tag == 2 {
-//            print("Settings")
-//        }
-//    }
     
     func tabBarController(_ tabBarController: UITabBarController, animationControllerForTransitionFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return TabBarTransition(viewControllers: tabBarController.viewControllers)

@@ -40,9 +40,12 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        addGradient()
         setupView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        addGradient()
     }
     
     func setupView() {

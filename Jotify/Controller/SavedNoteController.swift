@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import Blueprints
 import CloudKit
+import Blueprints
 
 class Note: NSObject {
     var recordID: CKRecord.ID!
@@ -48,15 +48,12 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     }
     
     func setupView() {
-        view.backgroundColor = UIColor.white
-        
-        title = "Notes"
-        
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "Saved Notes"
+        navigationController?.navigationBar.prefersLargeTitles = true
         
         collectionView.frame = self.view.frame
+        collectionView.backgroundColor = UIColor(named: "viewBackgroundColor")
         collectionView.setCollectionViewLayout(blueprintLayout, animated: true)
-        collectionView.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
@@ -228,7 +225,7 @@ extension SavedNoteController: CollectionViewFlowLayoutDelegate {
         var height: CGFloat = 0
 
         //we are just measuring height so we add a padding constant to give the label some room to breathe!
-        let padding: CGFloat = 100
+        let padding: CGFloat = 80
 
         //estimate each cell's height
         if let text = notes[indexPath.item].content {
