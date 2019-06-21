@@ -29,8 +29,15 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         minimumInteritemSpacing: 10,
         minimumLineSpacing: 15,
         sectionInset: EdgeInsets(top: 10, left: 10, bottom: 10, right: 10),
-        stickyHeaders: true,
+        stickyHeaders: false,
         stickyFooters: false)
+    
+    var layout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        let width = UIScreen.main.bounds.size.width
+        layout.estimatedItemSize = CGSize(width: width, height: 10)        
+        return layout
+    }()
     
     public var screenWidth: CGFloat {
         return UIScreen.main.bounds.width
@@ -56,7 +63,8 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         
         collectionView.frame = self.view.frame
         collectionView.backgroundColor = UIColor(named: "viewBackgroundColor")
-        collectionView.setCollectionViewLayout(blueprintLayout, animated: true)
+//        collectionView.setCollectionViewLayout(blueprintLayout, animated: true)
+        collectionView.setCollectionViewLayout(layout, animated: true)
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -69,6 +77,17 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         view.addSubview(collectionView)
         
         setupSearchBar()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        layout.estimatedItemSize = CGSize(width: view.bounds.size.width, height: 10)
+        super.traitCollectionDidChange(previousTraitCollection)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        layout.estimatedItemSize = CGSize(width: view.bounds.size.width, height: 10)
+        layout.invalidateLayout()
+        super.viewWillTransition(to: size, with: coordinator)
     }
     
     func setupSearchBar() {
@@ -90,7 +109,6 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         filteredNotes = notes.filter({( note : Note) -> Bool in
             return note.content.lowercased().contains(searchText.lowercased())
         })
-        
         collectionView.reloadData()
     }
     
@@ -256,32 +274,15 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
 }
 
 extension SavedNoteController: CollectionViewFlowLayoutDelegate, UICollectionViewDataSourcePrefetching{
-    
-    private func estimateFrameForText(text: String) -> CGRect {
-        //we make the height arbitrarily large so we don't undershoot height in calculation
-        let height: CGFloat = 0
 
-        let size = CGSize(width: screenWidth, height: height)
-        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-        let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.bold)]
-
-        return NSString(string: text).boundingRect(with: size, options: options, attributes: attributes, context: nil)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        var height: CGFloat = 0
-
-        //we are just measuring height so we add a padding constant to give the label some room to breathe!
-        let padding: CGFloat = 80
-
-        //estimate each cell's height
-        if let text = notes[indexPath.item].content {
-            height = estimateFrameForText(text: text).height + padding
-        }
-        return CGSize(width: screenWidth, height: height)
-
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//
+//        let padding: CGFloat =  50
+//        let collectionViewSize = collectionView.frame.size.width - padding
+//
+//        return CGSize(width: collectionViewSize/2, height: collectionViewSize/2)
+//
+//    }
 
     //TODO: add prefetching for a better loading experience
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {

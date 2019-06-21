@@ -28,6 +28,11 @@ class SettingsController: QuickTableViewController {
         ]
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     func setupView() {
         navigationItem.title = "Settings"
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -48,6 +53,9 @@ class SettingsController: QuickTableViewController {
             print("1")
         case 1:
             let themeSelectionViewController = ThemeSelectionController()
+//            let navController = UINavigationController()
+//            let backButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(actionEdit)) // actionEdit is your Action Method for this button
+//            navController.navigationItem.leftBarButtonItem = backButton
 //            present(UINavigationController(rootViewController: themeSelectionViewController), animated: true)
             navigationController?.pushViewController(themeSelectionViewController, animated: true)
         case 2:
@@ -55,13 +63,10 @@ class SettingsController: QuickTableViewController {
         default:
             break
         }
-        
     }
     
-    private func showAlert(_ sender: Row) {
-        // ...
-        
-        print("hello")
+    @objc func actionEdit() {
+        dismiss(animated: true, completion: nil)
     }
     
 }

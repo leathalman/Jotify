@@ -121,6 +121,7 @@ class ThemeSelectionController: QuickTableViewController {
                         UserDefaults.standard.set("SolidStone", forKey: "gradientTheme")
 
                     }
+                    print(self?.selectedAmin ?? false)
                 }
             }
         }
