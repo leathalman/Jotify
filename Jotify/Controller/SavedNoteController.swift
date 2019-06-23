@@ -32,13 +32,6 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         stickyHeaders: false,
         stickyFooters: false)
     
-    var layout: UICollectionViewFlowLayout = {
-        let layout = UICollectionViewFlowLayout()
-        let width = UIScreen.main.bounds.size.width
-        layout.estimatedItemSize = CGSize(width: width, height: 10)        
-        return layout
-    }()
-    
     public var screenWidth: CGFloat {
         return UIScreen.main.bounds.width
     }
@@ -63,8 +56,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         
         collectionView.frame = self.view.frame
         collectionView.backgroundColor = UIColor(named: "viewBackgroundColor")
-//        collectionView.setCollectionViewLayout(blueprintLayout, animated: true)
-        collectionView.setCollectionViewLayout(layout, animated: true)
+        collectionView.setCollectionViewLayout(blueprintLayout, animated: true)
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -77,17 +69,6 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         view.addSubview(collectionView)
         
         setupSearchBar()
-    }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        layout.estimatedItemSize = CGSize(width: view.bounds.size.width, height: 10)
-        super.traitCollectionDidChange(previousTraitCollection)
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        layout.estimatedItemSize = CGSize(width: view.bounds.size.width, height: 10)
-        layout.invalidateLayout()
-        super.viewWillTransition(to: size, with: coordinator)
     }
     
     func setupSearchBar() {
@@ -221,7 +202,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         }
 
         let noteText = notesData.content
-        cell.textLabel.text = noteText
+        cell.textLabel.text = noteText?.trunc(length: 50)
         cell.textLabel.textColor = UIColor.white
         
         let rawTime = notesData.timeCreated ?? 0
@@ -275,14 +256,12 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
 
 extension SavedNoteController: CollectionViewFlowLayoutDelegate, UICollectionViewDataSourcePrefetching{
 
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//        let padding: CGFloat =  50
-//        let collectionViewSize = collectionView.frame.size.width - padding
-//
-//        return CGSize(width: collectionViewSize/2, height: collectionViewSize/2)
-//
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let height: CGFloat = 110
+        
+        return CGSize(width: screenWidth, height: height)
+    }
 
     //TODO: add prefetching for a better loading experience
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {

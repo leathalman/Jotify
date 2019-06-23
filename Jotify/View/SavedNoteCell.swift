@@ -9,16 +9,17 @@
 import UIKit
 
 class SavedNoteCell: UICollectionViewCell {
-
-    var textLabel: UILabel = {
-        let label = UILabel()
+    
+    var textLabel: UITextView = {
+        let label = UITextView()
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         label.textColor = UIColor.darkGray
         label.text = "Loading..."
-        label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 0
+//        label.lineBreakMode = .byWordWrapping
+//        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = UIColor.clear
         return label
     }()
     
@@ -31,43 +32,29 @@ class SavedNoteCell: UICollectionViewCell {
         return label
     }()
     
-    lazy var width: NSLayoutConstraint = {
-        let width = contentView.widthAnchor.constraint(equalToConstant: bounds.size.width)
-        width.isActive = true
-        return width
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.backgroundColor = UIColor.white
-        setupViews()
-    }
-    
-    override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
-        width.constant = bounds.size.width
-        return contentView.systemLayoutSizeFitting(CGSize(width: targetSize.width, height: 1))
-    }
-    
-    fileprivate func setupViews() {
-        contentView.addSubview(textLabel)
-        textLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-        textLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
-        textLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+    override init(frame : CGRect) {
+        super.init(frame : frame)
         
+        addViews()
+    }
+    
+    func addViews(){
+        contentView.addSubview(textLabel)
         contentView.addSubview(dateLabel)
-        dateLabel.leftAnchor.constraint(equalTo: textLabel.leftAnchor).isActive = true
-        dateLabel.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 15).isActive = true
+        
+        textLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 5).isActive = true
+        textLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0).isActive = true
+        textLabel.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+        textLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: 0).isActive = true
+        textLabel.bottomAnchor.constraint(equalTo: dateLabel.topAnchor, constant: 35).isActive = true
+        
+        dateLabel.leftAnchor.constraint(equalTo: textLabel.leftAnchor, constant: 5).isActive = true
+        dateLabel.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 10).isActive = true
         dateLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         dateLabel.widthAnchor.constraint(equalTo: textLabel.widthAnchor).isActive = true
-        
-        if let lastSubview = contentView.subviews.last {
-            contentView.bottomAnchor.constraint(equalTo: lastSubview.bottomAnchor, constant: 10).isActive = true
-        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
