@@ -13,8 +13,8 @@ import Blueprints
 
 class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     
-    var notes = [NSManagedObject]()
-    var filteredNotes = [NSManagedObject]()
+    var notes: [Note] = []
+    var filteredNotes: [Note] = []
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -62,7 +62,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     }
     
     func setupSearchBar() {
-        searchController.searchResultsUpdater = self as? UISearchResultsUpdating
+        searchController.searchResultsUpdater = self as UISearchResultsUpdating
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Notes"
         navigationItem.searchController = searchController
@@ -70,19 +70,15 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     }
     
     func searchBarIsEmpty() -> Bool {
-        // Returns true if the text is empty or nil
         return searchController.searchBar.text?.isEmpty ?? true
     }
     
-    // MARK: - Filter Search Results
-    // MARK: - Current Rule "Content"
-//    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-//        filteredNotes = notes.filter({( note : Note) -> Bool in
-//
-//            return note.content?.lowercased().contains(searchText.lowercased())
-//        })
-//        collectionView.reloadData()
-//    }
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        filteredNotes = notes.filter({( note : Note) -> Bool in
+            return (note.content?.lowercased().contains(searchText.lowercased()) ?? false)
+        })
+        collectionView.reloadData()
+    }
     
     func isFiltering() -> Bool {
         return searchController.isActive && !searchBarIsEmpty()
@@ -103,7 +99,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         
         do {
-            notes = try managedContext.fetch(fetchRequest)
+            notes = try managedContext.fetch(fetchRequest) as! [Note]
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
@@ -112,37 +108,6 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         }
     }
     
-//    func deleteNote(recordID: CKRecord.ID) {
-//
-//        let recordID = recordID
-//        CKContainer.default().privateCloudDatabase.delete(withRecordID: recordID) { (recordID, error) in
-//            guard let recordID = recordID else {
-//                print(error!.localizedDescription)
-//                return
-//            }
-//            print("Record \(recordID) was successfully deleted")
-//        }
-//    }
-    
-    func deleteNote(_ note: NSManagedObject, at indexPath: IndexPath) {
-        
-    }
-    
-    func delete(cell: SavedNoteCell) {
-        
-        if let indexPath = collectionView?.indexPath(for: cell) {
-            
-            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-            let context = appDelegate.persistentContainer.viewContext
-            let itemToDelete = notes[indexPath.item]
-            notes.remove(at: indexPath.item)
-            context.delete(itemToDelete)
-            collectionView!.deleteItems(at: [indexPath])
-            appDelegate.saveContext()
-        }
-    }
-
-    
     @objc func tap(_ sender: UITapGestureRecognizer) {
         
         let location = sender.location(in: self.collectionView)
@@ -150,15 +115,6 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
 
         if let index = indexPath {
             print("Got clicked on index: \(index)!")
-            //will not actually refresh the view correctly because the array still contains the value even though the record is deleted
-        }
-    }
-    
-    @objc func handleSwipes(_ gesture: UISwipeGestureRecognizer) {
-        if gesture.direction == .left {
-            tabBarController?.selectedIndex = 1
-            
-        } else if gesture.direction == .right {
         }
     }
     
@@ -173,16 +129,17 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedNoteCell", for: indexPath) as? SavedNoteCell else {fatalError("Wrong cell class dequeued")}
         
-        let note = notes[indexPath.row]
+        var note = notes[indexPath.row]
+        
+        if isFiltering() {
+            note = filteredNotes[indexPath.row]
+        } else {
+            note = notes[indexPath.row]
+        }
+        
         let content = note.value(forKey: "content") as? String
         let color = note.value(forKey: "color") as? String
         let date = note.value(forKey: "date") as? Double ?? 0
-        
-//        if isFiltering() {
-//            notesData = filteredNotes[indexPath.row]
-//        } else {
-//            notesData = notes[indexPath.row]
-//        }
 
         cell.textLabel.text = content?.trunc(length: 50)
         cell.textLabel.textColor = UIColor.white
@@ -245,9 +202,9 @@ extension SavedNoteController: CollectionViewFlowLayoutDelegate {
     }
 }
 
-//extension SavedNoteController: UISearchResultsUpdating {
-//    // MARK: - UISearchResultsUpdating Delegate
-//    func updateSearchResults(for searchController: UISearchController) {
-//        filterContentForSearchText(searchController.searchBar.text!)
-//    }
-//}
+extension SavedNoteController: UISearchResultsUpdating {
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+}

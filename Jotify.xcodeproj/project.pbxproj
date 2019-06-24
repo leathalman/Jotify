@@ -17,7 +17,6 @@
 		F650E15D22BFFB19008D29AD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E15B22BFFB19008D29AD /* Extensions.swift */; };
 		F650E15E22BFFB19008D29AD /* GradientAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E15C22BFFB19008D29AD /* GradientAnimator.swift */; };
 		F650E16422BFFB20008D29AD /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E16022BFFB20008D29AD /* SettingsCell.swift */; };
-		F650E16522BFFB20008D29AD /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E16122BFFB20008D29AD /* SettingsSwitchCell.swift */; };
 		F650E16622BFFB20008D29AD /* UserInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E16222BFFB20008D29AD /* UserInfoHeader.swift */; };
 		F650E16722BFFB20008D29AD /* SavedNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E16322BFFB20008D29AD /* SavedNoteCell.swift */; };
 		F650E16A22C001A8008D29AD /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F650E14922BFF36D008D29AD /* CloudKit.framework */; };
@@ -50,7 +49,6 @@
 		F650E15B22BFFB19008D29AD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F650E15C22BFFB19008D29AD /* GradientAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientAnimator.swift; sourceTree = "<group>"; };
 		F650E16022BFFB20008D29AD /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
-		F650E16122BFFB20008D29AD /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
 		F650E16222BFFB20008D29AD /* UserInfoHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoHeader.swift; sourceTree = "<group>"; };
 		F650E16322BFFB20008D29AD /* SavedNoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedNoteCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,13 +99,13 @@
 				F650E15A22BFFB19008D29AD /* Model */,
 				F650E15F22BFFB20008D29AD /* View */,
 				F650E14F22BFFB12008D29AD /* Controller */,
+				F650E13922BFF35A008D29AD /* Jotify.xcdatamodeld */,
 				F650E14722BFF36C008D29AD /* Jotify.entitlements */,
 				F650E13022BFF35A008D29AD /* AppDelegate.swift */,
 				F650E13222BFF35A008D29AD /* SceneDelegate.swift */,
 				F650E13C22BFF35C008D29AD /* Assets.xcassets */,
 				F650E13E22BFF35C008D29AD /* LaunchScreen.storyboard */,
 				F650E14122BFF35C008D29AD /* Info.plist */,
-				F650E13922BFF35A008D29AD /* Jotify.xcdatamodeld */,
 			);
 			path = Jotify;
 			sourceTree = "<group>";
@@ -146,9 +144,8 @@
 		F650E15F22BFFB20008D29AD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F650E16022BFFB20008D29AD /* SettingsCell.swift */,
-				F650E16122BFFB20008D29AD /* SettingsSwitchCell.swift */,
 				F650E16222BFFB20008D29AD /* UserInfoHeader.swift */,
+				F650E16022BFFB20008D29AD /* SettingsCell.swift */,
 				F650E16322BFFB20008D29AD /* SavedNoteCell.swift */,
 			);
 			path = View;
@@ -281,7 +278,6 @@
 				F650E13322BFF35A008D29AD /* SceneDelegate.swift in Sources */,
 				F607AC0722C05C37006CB4FD /* IconSelectionController.swift in Sources */,
 				F650E16622BFFB20008D29AD /* UserInfoHeader.swift in Sources */,
-				F650E16522BFFB20008D29AD /* SettingsSwitchCell.swift in Sources */,
 				F650E16422BFFB20008D29AD /* SettingsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

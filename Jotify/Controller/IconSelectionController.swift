@@ -51,6 +51,7 @@ class IconSelectionController: QuickTableViewController {
     
     func getCurrentGradient() {
         let theme = UserDefaults.standard.string(forKey: "gradientTheme")
+        let defaults: UserDefaults = UserDefaults.standard
         
         if theme == "Sunrise" {
             selectedSunrise = true
@@ -81,8 +82,9 @@ class IconSelectionController: QuickTableViewController {
             
         } else if theme == "SolidStone" {
             selectedSolidStone = true
-            
         }
+        
+        defaults.synchronize()
     }
     
     private func didToggleSelection() -> (Row) -> Void {
