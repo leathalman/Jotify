@@ -46,6 +46,7 @@ class ThemeSelectionController: QuickTableViewController {
     func setupView() {
         navigationItem.title = "Themes"
         navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
         tableView.isUserInteractionEnabled = true
     }
     
@@ -82,8 +83,6 @@ class ThemeSelectionController: QuickTableViewController {
         } else if theme == "SolidStone" {
             selectedSolidStone = true
         }
-        
-        UserDefaults.standard.synchronize()
     }
  
     private func didToggleSelection() -> (Row) -> Void {

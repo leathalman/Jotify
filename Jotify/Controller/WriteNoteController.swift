@@ -48,7 +48,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         super.viewWillAppear(true)
         addGradient()
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
         addGradient()

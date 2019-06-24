@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CCA2075428B5EBEB84ED2A2E /* Pods_Jotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B8F964DDB4D74E2C63C9A89 /* Pods_Jotify.framework */; };
 		F607AC0722C05C37006CB4FD /* IconSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F607AC0622C05C37006CB4FD /* IconSelectionController.swift */; };
+		F644968622C16422009CC386 /* NoteDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F644968522C16422009CC386 /* NoteDetailController.swift */; };
 		F650E13322BFF35A008D29AD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E13222BFF35A008D29AD /* SceneDelegate.swift */; };
 		F650E13D22BFF35C008D29AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F650E13C22BFF35C008D29AD /* Assets.xcassets */; };
 		F650E14022BFF35C008D29AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F650E13E22BFF35C008D29AD /* LaunchScreen.storyboard */; };
@@ -32,6 +33,7 @@
 		41E2FDF85BC497262A635D0E /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.debug.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
 		68BA33A7CFF9D1EED38C4CD0 /* Pods-Jotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.release.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.release.xcconfig"; sourceTree = "<group>"; };
 		F607AC0622C05C37006CB4FD /* IconSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectionController.swift; sourceTree = "<group>"; };
+		F644968522C16422009CC386 /* NoteDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailController.swift; sourceTree = "<group>"; };
 		F650E12D22BFF35A008D29AD /* Jotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F650E13022BFF35A008D29AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F650E13222BFF35A008D29AD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -122,12 +124,13 @@
 		F650E14F22BFFB12008D29AD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				F644968522C16422009CC386 /* NoteDetailController.swift */,
 				F650E15022BFFB12008D29AD /* SavedNoteController.swift */,
 				F650E15322BFFB12008D29AD /* WriteNoteController.swift */,
 				F650E15122BFFB12008D29AD /* SettingsController.swift */,
+				F650E15422BFFB12008D29AD /* TabBarController.swift */,
 				F650E15222BFFB12008D29AD /* ThemeSelectionController.swift */,
 				F607AC0622C05C37006CB4FD /* IconSelectionController.swift */,
-				F650E15422BFFB12008D29AD /* TabBarController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				F650E15D22BFFB19008D29AD /* Extensions.swift in Sources */,
 				F650E15622BFFB12008D29AD /* SettingsController.swift in Sources */,
 				F650E16722BFFB20008D29AD /* SavedNoteCell.swift in Sources */,
+				F644968622C16422009CC386 /* NoteDetailController.swift in Sources */,
 				F650E13322BFF35A008D29AD /* SceneDelegate.swift in Sources */,
 				F607AC0722C05C37006CB4FD /* IconSelectionController.swift in Sources */,
 				F650E16622BFFB20008D29AD /* UserInfoHeader.swift in Sources */,

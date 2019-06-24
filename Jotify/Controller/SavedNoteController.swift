@@ -26,14 +26,6 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         stickyHeaders: false,
         stickyFooters: false)
     
-    public var screenWidth: CGFloat {
-        return UIScreen.main.bounds.width
-    }
-    
-    public var screenHeight: CGFloat {
-        return UIScreen.main.bounds.height
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -112,10 +104,37 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         
         let location = sender.location(in: self.collectionView)
         let indexPath = self.collectionView.indexPathForItem(at: location)
+//        print(indexPath)
+        
+//        var indexPath : NSIndexPath = self.collectionView.indexPathForItemAtPoint(location)!
+        
+        let rowNumber : Int = indexPath?.row ?? 0
 
-        if let index = indexPath {
-            print("Got clicked on index: \(index)!")
-        }
+        let noteDetailController = NoteDetailController()
+        
+        let note = notes[indexPath?.row ?? 0]
+        let date = note.value(forKey: "date")
+        let color = note.value(forKey: "color") as! String
+        let content = note.value(forKey: "content") as! String
+        
+        let updateDate = Date(timeIntervalSinceReferenceDate: date as! TimeInterval)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.long //Set date style
+        dateFormatter.timeZone = .current
+        let dateString = dateFormatter.string(from: updateDate)
+        
+        noteDetailController.navigationController?.navigationItem.title = dateString
+        
+        noteDetailController.navigationTitle = dateString
+        
+        var cellColor: UIColor = .white
+        
+        colorFromString(color, &cellColor)
+        noteDetailController.backgroundColor = cellColor
+        noteDetailController.detailText = content
+        noteDetailController.index = rowNumber
+        
+        navigationController?.pushViewController(noteDetailController, animated: true)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -138,7 +157,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         }
         
         let content = note.value(forKey: "content") as? String
-        let color = note.value(forKey: "color") as? String
+        let color = note.value(forKey: "color") as? String ?? "systemTeal"
         let date = note.value(forKey: "date") as? Double ?? 0
 
         cell.textLabel.text = content?.trunc(length: 50)
@@ -154,9 +173,21 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         
         var cellColor = UIColor.white
         
+        colorFromString(color, &cellColor)
+        
+        cell.contentView.layer.cornerRadius = 5
+        cell.contentView.backgroundColor = cellColor
+        cell.layer.addShadow(color: UIColor.darkGray)
+        
+        cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap(_:))))
+        
+        return cell
+    }
+    
+    fileprivate func colorFromString(_ color: String, _ cellColor: inout UIColor) {
         if color == "systemTeal" {
             cellColor = UIColor.systemTeal
-        
+            
         } else if color == "systemGreen" {
             cellColor = UIColor.systemGreen
             
@@ -181,14 +212,6 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         } else if color == "systemYellow" {
             cellColor = UIColor.systemYellow
         }
-        
-        cell.contentView.layer.cornerRadius = 5
-        cell.contentView.backgroundColor = cellColor
-        cell.layer.addShadow(color: UIColor.darkGray)
-        
-        cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap(_:))))
-        
-        return cell
     }
 }
 
@@ -198,7 +221,7 @@ extension SavedNoteController: CollectionViewFlowLayoutDelegate {
         
         let height: CGFloat = 110
         
-        return CGSize(width: screenWidth, height: height)
+        return CGSize(width: UIScreen.main.bounds.width, height: height)
     }
 }
 

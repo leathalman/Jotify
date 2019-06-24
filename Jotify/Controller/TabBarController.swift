@@ -19,33 +19,21 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         let savedItem = UITabBarItem()
         savedItem.title = "Notes"
         savedItem.tag = 0
-        if #available(iOS 13.0, *) {
-            savedItem.image = UIImage(systemName: "square.grid.2x2")
-        } else {
-            savedItem.image = UIImage(named: "dashboard")
-        }
+        savedItem.image = UIImage(systemName: "square.grid.2x2")
         savedNotesViewController.tabBarItem = savedItem
         
         let writeNoteViewController = WriteNoteController()
         let writeItem = UITabBarItem()
         writeItem.title = "Write"
         writeItem.tag = 1
-        if #available(iOS 13.0, *) {
-            writeItem.image = UIImage(systemName: "pencil.circle")
-        } else {
-            writeItem.image = UIImage(named: "menu")
-        }
+        writeItem.image = UIImage(systemName: "pencil.circle")
         writeNoteViewController.tabBarItem = writeItem
         
         let settingsViewController = UINavigationController(rootViewController: SettingsController(style: .grouped))
         let settingsItem = UITabBarItem()
         settingsItem.title = "Settings"
         settingsItem.tag = 2
-        if #available(iOS 13.0, *) {
-            settingsItem.image = UIImage(systemName: "gear")
-        } else {
-            settingsItem.image = UIImage(named: "settings")
-        }
+        settingsItem.image = UIImage(systemName: "gear")
         settingsViewController.tabBarItem = settingsItem
         
         viewControllers = [savedNotesViewController, writeNoteViewController, settingsViewController]

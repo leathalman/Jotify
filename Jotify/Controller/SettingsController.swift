@@ -31,13 +31,13 @@ class SettingsController: QuickTableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     func setupView() {
         navigationItem.title = "Settings"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.isTranslucent = false
+        navigationItem.largeTitleDisplayMode = .always
         
         //this is a bad implementation of this because it updates slowly, fix before release
         navigationController?.navigationBar.backgroundColor = UIColor(named: "viewBackgroundColor")
