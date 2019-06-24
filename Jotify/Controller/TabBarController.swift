@@ -7,13 +7,12 @@
 //
 
 import UIKit
-import BubbleTabBar
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.delegate = self
         
         let savedNotesViewController = UINavigationController(rootViewController: SavedNoteController(collectionViewLayout: UICollectionViewFlowLayout()))

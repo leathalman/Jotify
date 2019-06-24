@@ -18,6 +18,7 @@ class SavedNoteCell: UICollectionViewCell {
         label.text = "Loading..."
 //        label.lineBreakMode = .byWordWrapping
 //        label.numberOfLines = 0
+        label.isUserInteractionEnabled = false
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = UIColor.clear
         return label

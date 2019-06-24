@@ -7,7 +7,6 @@ target 'Jotify' do
 
   # Pods for Sticky Notes
 pod'MultilineTextField'
-pod'BubbleTabBar'
 pod'Blueprints'
 pod'QuickTableViewController'
 

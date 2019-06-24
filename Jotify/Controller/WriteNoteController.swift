@@ -9,6 +9,7 @@
 import UIKit
 import MultilineTextField
 import CloudKit
+import CoreData
 
 class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     
@@ -43,8 +44,13 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         setupView()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        addGradient()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
         addGradient()
     }
     
@@ -101,22 +107,30 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         } else {
             let colorNameArray = ["systemRed", "systemBlue", "systemGreen", "systemPink", "systemOrange", "systemPurple", "systemTeal", "systemYellow"]
             let color = colorNameArray.randomElement()!
-            let timeCreated = Date.timeIntervalSinceReferenceDate
-            saveNote(note: inputTextView.text, timeCreated: timeCreated, color: color)
+            let date = Date.timeIntervalSinceReferenceDate
+            saveNote(content: inputTextView.text, color: color, date: date)
             inputTextView.text = ""
         }
     }
     
-    func saveNote(note: String, timeCreated: Double, color: String) {
-        let newNote = CKRecord(recordType: "note")
-        newNote.setValue(note, forKey: "content")
-        newNote.setValue(timeCreated, forKey: "timeCreated")
-        newNote.setValue(color, forKey: "color")
+    func saveNote(content: String, color: String, date: Double) {
         
-        database.save(newNote) { (record, error) in
-            guard record != nil else { return }
-            print("saved record with note \(String(describing: record?.object(forKey: "content")))")
-            print("saved record with time \(String(describing: record?.object(forKey: "timeCreated")))")
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "Note", in: managedContext)!
+        let note = NSManagedObject(entity: entity, insertInto: managedContext)
+        
+        note.setValue(content, forKeyPath: "content")
+        note.setValue(color, forKey: "color")
+        note.setValue(date, forKey: "date")
+        
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
         }
     }
     

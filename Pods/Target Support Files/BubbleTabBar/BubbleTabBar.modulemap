@@ -1,6 +1,0 @@
-framework module BubbleTabBar {
-  umbrella header "BubbleTabBar-umbrella.h"
-
-  export *
-  module * { export * }
-}

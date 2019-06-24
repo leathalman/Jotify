@@ -8,19 +8,13 @@
 
 import UIKit
 import CloudKit
+import CoreData
 import Blueprints
-
-class Note: NSObject {
-    var recordID: CKRecord.ID!
-    var content: String!
-    var timeCreated: Double!
-    var color: String!
-}
 
 class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     
-    var notes = [Note]()
-    var filteredNotes = [Note]()
+    var notes = [NSManagedObject]()
+    var filteredNotes = [NSManagedObject]()
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -47,9 +41,9 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        fetchNotes()
+        fetchNotesFromCoreData()
     }
-    
+ 
     func setupView() {
         navigationItem.title = "Saved Notes"
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -61,10 +55,6 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        //TODO: add prefetching for better loading experience
-        collectionView.prefetchDataSource = self
-        collectionView.isPrefetchingEnabled = true
-        
         collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
         view.addSubview(collectionView)
         
@@ -72,7 +62,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     }
     
     func setupSearchBar() {
-        searchController.searchResultsUpdater = self as UISearchResultsUpdating
+        searchController.searchResultsUpdater = self as? UISearchResultsUpdating
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Notes"
         navigationItem.searchController = searchController
@@ -86,86 +76,80 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     
     // MARK: - Filter Search Results
     // MARK: - Current Rule "Content"
-    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        filteredNotes = notes.filter({( note : Note) -> Bool in
-            return note.content.lowercased().contains(searchText.lowercased())
-        })
-        collectionView.reloadData()
-    }
+//    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+//        filteredNotes = notes.filter({( note : Note) -> Bool in
+//
+//            return note.content?.lowercased().contains(searchText.lowercased())
+//        })
+//        collectionView.reloadData()
+//    }
     
     func isFiltering() -> Bool {
         return searchController.isActive && !searchBarIsEmpty()
     }
     
-    func fetchNotes() {
-        let pred = NSPredicate(value: true)
-        let sort = NSSortDescriptor(key: "creationDate", ascending: false)
-        let query = CKQuery(recordType: "note", predicate: pred)
-        query.sortDescriptors = [sort]
+    func fetchNotesFromCoreData() {
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
         
-        let operation = CKQueryOperation(query: query)
-        operation.desiredKeys = ["content", "timeCreated", "color"]
-        operation.resultsLimit = 50
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
         
-        var newNotes = [Note]()
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Note")
+        fetchRequest.returnsObjectsAsFaults = false
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         
-        if newNotes.count == 0 {
-            
-            operation.recordFetchedBlock = { record in
-                let note = Note()
-                note.recordID = record.recordID
-                note.content = record["content"]
-                note.timeCreated = record["timeCreated"]
-                note.color = record["color"]
-                newNotes.append(note)
-            }
-            
-            operation.queryCompletionBlock = { [weak self] (cursor, error) in
-                DispatchQueue.main.sync {
-                    if error == nil {
-                        self?.notes = newNotes
-                        self?.collectionView.reloadData()
-                        self?.collectionView.collectionViewLayout.invalidateLayout()
-                        self?.collectionView.layoutSubviews()
-                    } else {
-                        let alert = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of notes; please try again: \(error!.localizedDescription)", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default))
-                        self?.present(alert, animated: true)
-                    }
-                }
-            }
-            CKContainer.default().privateCloudDatabase.add(operation)
-            
-        } else {
-            print("notes already fetched")
+        do {
+            notes = try managedContext.fetch(fetchRequest)
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
         }
     }
     
-    func deleteNote(recordID: CKRecord.ID) {
+//    func deleteNote(recordID: CKRecord.ID) {
+//
+//        let recordID = recordID
+//        CKContainer.default().privateCloudDatabase.delete(withRecordID: recordID) { (recordID, error) in
+//            guard let recordID = recordID else {
+//                print(error!.localizedDescription)
+//                return
+//            }
+//            print("Record \(recordID) was successfully deleted")
+//        }
+//    }
+    
+    func deleteNote(_ note: NSManagedObject, at indexPath: IndexPath) {
         
-        let recordID = recordID
-        CKContainer.default().privateCloudDatabase.delete(withRecordID: recordID) { (recordID, error) in
-            guard let recordID = recordID else {
-                print(error!.localizedDescription)
-                return
-            }
-            print("Record \(recordID) was successfully deleted")
+    }
+    
+    func delete(cell: SavedNoteCell) {
+        
+        if let indexPath = collectionView?.indexPath(for: cell) {
+            
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+            let context = appDelegate.persistentContainer.viewContext
+            let itemToDelete = notes[indexPath.item]
+            notes.remove(at: indexPath.item)
+            context.delete(itemToDelete)
+            collectionView!.deleteItems(at: [indexPath])
+            appDelegate.saveContext()
         }
     }
+
     
     @objc func tap(_ sender: UITapGestureRecognizer) {
         
         let location = sender.location(in: self.collectionView)
         let indexPath = self.collectionView.indexPathForItem(at: location)
-        let notesData = notes[indexPath?.row ?? 0]
-        guard let recordID = notesData.recordID else { return }
-        
+
         if let index = indexPath {
             print("Got clicked on index: \(index)!")
-            deleteNote(recordID: recordID)
             //will not actually refresh the view correctly because the array still contains the value even though the record is deleted
         }
     }
@@ -186,34 +170,31 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         }
     }
     
-    //TODO use instruments to find out how to optimize loading, this is a temporary fix
-    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-    }
-    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedNoteCell", for: indexPath) as? SavedNoteCell else {fatalError("Wrong cell class dequeued")}
-    
-        let notesData: Note
         
-        if isFiltering() {
-            notesData = filteredNotes[indexPath.row]
-        } else {
-            notesData = notes[indexPath.row]
-        }
+        let note = notes[indexPath.row]
+        let content = note.value(forKey: "content") as? String
+        let color = note.value(forKey: "color") as? String
+        let date = note.value(forKey: "date") as? Double ?? 0
+        
+//        if isFiltering() {
+//            notesData = filteredNotes[indexPath.row]
+//        } else {
+//            notesData = notes[indexPath.row]
+//        }
 
-        let noteText = notesData.content
-        cell.textLabel.text = noteText?.trunc(length: 50)
+        cell.textLabel.text = content?.trunc(length: 50)
         cell.textLabel.textColor = UIColor.white
-        
-        let rawTime = notesData.timeCreated ?? 0
-        let date = Date(timeIntervalSinceReferenceDate: rawTime)
+        cell.dateLabel.textColor = UIColor.white
+
+        let updateDate = Date(timeIntervalSinceReferenceDate: date)
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.long //Set date style
         dateFormatter.timeZone = .current
-        let localDate = dateFormatter.string(from: date)
-        cell.dateLabel.text = localDate
-        cell.dateLabel.textColor = UIColor.white
-        let color = notesData.color
+        let dateString = dateFormatter.string(from: updateDate)
+        cell.dateLabel.text = dateString
+        
         var cellColor = UIColor.white
         
         if color == "systemTeal" {
@@ -254,7 +235,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     }
 }
 
-extension SavedNoteController: CollectionViewFlowLayoutDelegate, UICollectionViewDataSourcePrefetching{
+extension SavedNoteController: CollectionViewFlowLayoutDelegate {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -262,16 +243,11 @@ extension SavedNoteController: CollectionViewFlowLayoutDelegate, UICollectionVie
         
         return CGSize(width: screenWidth, height: height)
     }
-
-    //TODO: add prefetching for a better loading experience
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-
-    }
 }
 
-extension SavedNoteController: UISearchResultsUpdating {
-    // MARK: - UISearchResultsUpdating Delegate
-    func updateSearchResults(for searchController: UISearchController) {
-        filterContentForSearchText(searchController.searchBar.text!)
-    }
-}
+//extension SavedNoteController: UISearchResultsUpdating {
+//    // MARK: - UISearchResultsUpdating Delegate
+//    func updateSearchResults(for searchController: UISearchController) {
+//        filterContentForSearchText(searchController.searchBar.text!)
+//    }
+//}

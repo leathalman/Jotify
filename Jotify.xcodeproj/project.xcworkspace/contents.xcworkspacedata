@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Sticky Notes.xcodeproj">
+      location = "self:Jotify.xcodeproj">
    </FileRef>
 </Workspace>

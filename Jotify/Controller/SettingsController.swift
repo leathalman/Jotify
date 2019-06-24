@@ -22,6 +22,7 @@ class SettingsController: QuickTableViewController {
                 ]),
             
             Section(title: "Appearance", rows: [
+                NavigationRow(text: "App Icon", detailText: .value1(""), icon: .named("NAME OF IMAGE HERE"), action: { _ in }),
                 NavigationRow(text: "Themes", detailText: .value1(""), icon: .named("NAME OF IMAGE HERE"), action: { _ in }),
                 ], footer: "Select color for gradient."),
             
@@ -48,9 +49,10 @@ class SettingsController: QuickTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.section {
+        switch indexPath.row {
         case 0:
-            print("1")
+            let iconSelectionController = IconSelectionController()
+            navigationController?.pushViewController(iconSelectionController, animated: true)
         case 1:
             let themeSelectionViewController = ThemeSelectionController()
 //            let navController = UINavigationController()
