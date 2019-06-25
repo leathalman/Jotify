@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Blueprints
+import ViewAnimator
 
 class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     
@@ -17,6 +18,8 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     
     let searchController = UISearchController(searchResultsController: nil)
     
+    let loadingAnimations = [AnimationType.from(direction: .bottom, offset: 30.0)]
+
     let blueprintLayout = VerticalBlueprintLayout(
         itemsPerRow: 2.0,
         minimumInteritemSpacing: 10,
@@ -33,12 +36,12 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         fetchNotesFromCoreData()
-        print(notes.count)
+        animateCells()
     }
  
     func setupView() {
         navigationItem.title = "Saved Notes"
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.prefersLargeTitles = false
         
         collectionView.frame = self.view.frame
         collectionView.backgroundColor = UIColor(named: "viewBackgroundColor")
@@ -127,49 +130,57 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         }
     }
     
+    func animateCells() {
+        collectionView?.reloadData()
+        collectionView?.performBatchUpdates({
+            UIView.animate(views: self.collectionView!.orderedVisibleCells, animations: loadingAnimations, completion: {
+            })
+        }, completion: nil)
+    }
+    
     @objc func tapHandler(_ sender: UITapGestureRecognizer) {
         print("Tap triggered")
-        
+
         let location = sender.location(in: self.collectionView)
         let indexPath = self.collectionView.indexPathForItem(at: location)
         let rowNumber : Int = indexPath?.row ?? 0
-        
+
         let noteDetailController = NoteDetailController()
-        
+
         var note = notes[indexPath?.row ?? 0]
-        
+
         if isFiltering() {
             note = filteredNotes[indexPath?.row ?? 0]
             noteDetailController.filteredNotes = filteredNotes
             noteDetailController.isFiltering = true
-            
+
         } else {
             note = notes[indexPath?.row ?? 0]
             noteDetailController.notes = notes
         }
-        
+
         let date = note.value(forKey: "date")
         let color = note.value(forKey: "color") as! String
         let content = note.value(forKey: "content") as! String
-        
+
         let updateDate = Date(timeIntervalSinceReferenceDate: date as! TimeInterval)
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.long //Set date style
         dateFormatter.timeZone = .current
         let dateString = dateFormatter.string(from: updateDate)
-        
+
         noteDetailController.navigationController?.navigationItem.title = dateString
-        
+
         noteDetailController.navigationTitle = dateString
-        
+
         var cellColor: UIColor = .white
-        
+
         colorFromString(color, &cellColor)
         noteDetailController.backgroundColor = cellColor
         noteDetailController.detailText = content
         noteDetailController.index = rowNumber
-     
-        
+
+//        present(noteDetailController, animated: true, completion: nil)
         navigationController?.pushViewController(noteDetailController, animated: true)
     }
     
@@ -189,24 +200,6 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         
         deleteNote(indexPath: indexPath ?? [0, 0], int: rowNumber)
     }
-    
-//    override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-//        UIView.animate(withDuration: 0.5) {
-//            if let cell = collectionView.cellForItem(at: indexPath) as? SavedNoteCell {
-//                cell.textLabel.transform = .init(scaleX: 0.95, y: 0.95)
-//                cell.contentView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
-//            }
-//        }
-//    }
-//
-//    override func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-//        UIView.animate(withDuration: 0.5) {
-//            if let cell = collectionView.cellForItem(at: indexPath) as? SavedNoteCell {
-//                cell.textLabel.transform = .identity
-//                cell.contentView.backgroundColor = .clear
-//            }
-//        }
-//    }
     
     func deleteNote(indexPath: IndexPath, int: Int) {
         let note = notes[indexPath.row]

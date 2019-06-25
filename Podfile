@@ -9,5 +9,6 @@ target 'Jotify' do
 pod'MultilineTextField'
 pod'Blueprints'
 pod'QuickTableViewController'
+pod'ViewAnimator'
 
 end

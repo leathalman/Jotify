@@ -22,7 +22,7 @@ class NoteDetailController: UIViewController {
     var isFiltering: Bool = false
 
     lazy var textView: UITextView = {
-        let frame = CGRect(x: 0, y: 100, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        let frame = CGRect(x: 0, y: 30, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         let textField = UITextView(frame: frame)
         textField.backgroundColor = .clear
         textField.textColor = .white
@@ -46,7 +46,9 @@ class NoteDetailController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
-        updateContent(index: index, newContent: textView.text)
+        
+        let newDate = Date.timeIntervalSinceReferenceDate
+        updateContent(index: index, newContent: textView.text, newDate: newDate)
         
         if textView.text.contains("remind") || textView.text.contains("Remind") {
             print("remind written down!")
@@ -54,6 +56,25 @@ class NoteDetailController: UIViewController {
             scheduleNotification(notificationType: "REMINDER!")
 
         }
+    }
+
+    func updateContent(index: Int, newContent: String, newDate: Double){
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        if isFiltering == false {
+            notes[index].content = newContent
+            notes[index].date = newDate
+            
+        } else if isFiltering == true {
+            filteredNotes[index].content = newContent
+            filteredNotes[index].date = newDate
+
+        }
+        
+        appDelegate.saveContext()
     }
     
     func scheduleNotification(notificationType: String) {
@@ -90,23 +111,6 @@ class NoteDetailController: UIViewController {
                 
             }
         }
-        
-        
-    }
-
-    func updateContent(index: Int, newContent: String){
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-
-        if isFiltering == false {
-            notes[index].content = newContent
-        } else if isFiltering == true {
-            filteredNotes[index].content = newContent
-        }
-        
-        appDelegate.saveContext()
     }
     
 }

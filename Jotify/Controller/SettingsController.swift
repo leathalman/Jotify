@@ -35,9 +35,9 @@ class SettingsController: QuickTableViewController {
     
     func setupView() {
         navigationItem.title = "Settings"
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.navigationBar.isTranslucent = false
-        navigationItem.largeTitleDisplayMode = .always
+//        navigationItem.largeTitleDisplayMode = .always
         
         //this is a bad implementation of this because it updates slowly, fix before release
         navigationController?.navigationBar.backgroundColor = UIColor(named: "viewBackgroundColor")
