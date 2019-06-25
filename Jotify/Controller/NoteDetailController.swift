@@ -17,6 +17,8 @@ class NoteDetailController: UIViewController {
     var index: Int = 0
     
     var notes: [Note] = []
+    var filteredNotes: [Note] = []
+    var isFiltering: Bool = false
 
     lazy var textView: UITextView = {
         let frame = CGRect(x: 0, y: 100, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
@@ -38,6 +40,7 @@ class NoteDetailController: UIViewController {
         navigationItem.title = navigationTitle
         navigationController?.navigationBar.prefersLargeTitles = false
         view.addSubview(textView)
+        print(backgroundColor)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -51,7 +54,12 @@ class NoteDetailController: UIViewController {
                 return
         }
 
-        notes[index].content = newContent
+        if isFiltering == false {
+            notes[index].content = newContent
+        } else if isFiltering == true {
+            filteredNotes[index].content = newContent
+        }
+        
         appDelegate.saveContext()
     }
     

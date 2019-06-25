@@ -33,7 +33,6 @@ class SavedNoteCell: UICollectionViewCell {
     
     override init(frame : CGRect) {
         super.init(frame : frame)
-        
         addViews()
     }
     
@@ -44,7 +43,7 @@ class SavedNoteCell: UICollectionViewCell {
         textLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 5).isActive = true
         textLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0).isActive = true
         textLabel.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
-        textLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: 0).isActive = true
+        textLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -10).isActive = true
         textLabel.bottomAnchor.constraint(equalTo: dateLabel.topAnchor, constant: 35).isActive = true
         
         dateLabel.leftAnchor.constraint(equalTo: textLabel.leftAnchor, constant: 5).isActive = true

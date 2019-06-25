@@ -7,16 +7,10 @@
 //
 
 import UIKit
-import CloudKit
 import CoreData
 import Blueprints
 
 class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
-    
-    //maybe delete object in core data and then make a new one when NoteDetail controller is dismissed, so that the array updates from the top, and merge conflicts don't happen because the first object no longer exists
-    
-    
-    //could also pass the data in the notes array from this controller ot the other controller and then manipulate the data that way, but dont look for data twice, causes errors....
     
     var notes: [Note] = []
     var filteredNotes: [Note] = []
@@ -93,7 +87,14 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         let fetchRequest =
             NSFetchRequest<NSManagedObject>(entityName: "Note")
         fetchRequest.returnsObjectsAsFaults = false
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        
+        // MARK: - Sort Rules for CollectionView
+        // implement sort by button with support for these sorting rules
+        let sortDescriptorByDate = NSSortDescriptor(key: "date", ascending: false)
+//        let sortDescriptorByColor = NSSortDescriptor(key: "color", ascending: false)
+//        let sortDescriptorByContent = NSSortDescriptor(key: "content", ascending: true)
+
+        fetchRequest.sortDescriptors = [sortDescriptorByDate]
         
         do {
             notes = try managedContext.fetch(fetchRequest) as! [Note]
@@ -105,47 +106,80 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         }
     }
     
-    @objc func tap(_ sender: UITapGestureRecognizer) {
-
+    @objc func tapHandler(_ sender: UITapGestureRecognizer) {
+        print("Tap triggered")
+        
         let location = sender.location(in: self.collectionView)
         let indexPath = self.collectionView.indexPathForItem(at: location)
         let rowNumber : Int = indexPath?.row ?? 0
-
+        
         let noteDetailController = NoteDetailController()
-
-        let note = notes[indexPath?.row ?? 0]
-
-//        if isFiltering() {
-//            note = filteredNotes[indexPath?.row ?? 0]
-//
-//        } else {
-//            note = notes[indexPath?.row ?? 0]
-//        }
-
+        
+        var note = notes[indexPath?.row ?? 0]
+        
+        if isFiltering() {
+            note = filteredNotes[indexPath?.row ?? 0]
+            noteDetailController.filteredNotes = filteredNotes
+            noteDetailController.isFiltering = true
+            
+        } else {
+            note = notes[indexPath?.row ?? 0]
+            noteDetailController.notes = notes
+        }
+        
         let date = note.value(forKey: "date")
         let color = note.value(forKey: "color") as! String
         let content = note.value(forKey: "content") as! String
-
+        
         let updateDate = Date(timeIntervalSinceReferenceDate: date as! TimeInterval)
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.long //Set date style
         dateFormatter.timeZone = .current
         let dateString = dateFormatter.string(from: updateDate)
-
+        
         noteDetailController.navigationController?.navigationItem.title = dateString
-
+        
         noteDetailController.navigationTitle = dateString
-
+        
         var cellColor: UIColor = .white
-
+        
         colorFromString(color, &cellColor)
         noteDetailController.backgroundColor = cellColor
         noteDetailController.detailText = content
         noteDetailController.index = rowNumber
-        noteDetailController.notes = notes
-
+     
+        
         navigationController?.pushViewController(noteDetailController, animated: true)
     }
+    
+    @objc func forceTouchHandler(_ sender: ForceTouchGestureRecognizer) {
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
+        print("Force touch triggered")
+        
+        let location = sender.location(in: self.collectionView)
+        let indexPath = self.collectionView.indexPathForItem(at: location)
+        let rowNumber : Int = indexPath?.row ?? 0
+        
+        deleteNote(indexPath: indexPath ?? [0, 0], int: rowNumber)
+    }
+    
+//    override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+//        UIView.animate(withDuration: 0.5) {
+//            if let cell = collectionView.cellForItem(at: indexPath) as? SavedNoteCell {
+//                cell.textLabel.transform = .init(scaleX: 0.95, y: 0.95)
+//                cell.contentView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+//            }
+//        }
+//    }
+//
+//    override func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+//        UIView.animate(withDuration: 0.5) {
+//            if let cell = collectionView.cellForItem(at: indexPath) as? SavedNoteCell {
+//                cell.textLabel.transform = .identity
+//                cell.contentView.backgroundColor = .clear
+//            }
+//        }
+//    }
     
     func deleteNote(indexPath: IndexPath, int: Int) {
         let note = notes[indexPath.row]
@@ -210,7 +244,8 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         cell.contentView.backgroundColor = cellColor
         cell.layer.addShadow(color: UIColor.darkGray)
         
-        cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap(_:))))
+        cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapHandler(_:))))
+        cell.addGestureRecognizer(ForceTouchGestureRecognizer(target: self, action: #selector(forceTouchHandler(_:))))
         
         return cell
     }
@@ -257,7 +292,7 @@ extension SavedNoteController: CollectionViewFlowLayoutDelegate {
 }
 
 extension SavedNoteController: UISearchResultsUpdating {
-    // MARK: - UISearchResultsUpdating Delegate
+    
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
     }

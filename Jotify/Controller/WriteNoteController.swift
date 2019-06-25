@@ -8,7 +8,6 @@
 
 import UIKit
 import MultilineTextField
-import CloudKit
 import CoreData
 
 class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
@@ -21,8 +20,6 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         return UIScreen.main.bounds.height
     }
     
-    let database = CKContainer.default().privateCloudDatabase
-        
     lazy var inputTextView: MultilineTextField = {
         let frame = CGRect(x: 0, y: 100, width: screenWidth, height: screenHeight)
         let textField = MultilineTextField(frame: frame)
@@ -64,6 +61,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
     func addGradient() {
         //add userdefaults toggle for SettingsController
         let theme = UserDefaults.standard.string(forKey: "gradientTheme")
+        print(theme ?? "Sunrise")
         
         if theme == "Sunrise" {
             Colors.shared.themeColor = GradientThemes.Sunrise
