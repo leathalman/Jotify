@@ -33,6 +33,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         fetchNotesFromCoreData()
+        print(notes.count)
     }
  
     func setupView() {
@@ -42,6 +43,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         collectionView.frame = self.view.frame
         collectionView.backgroundColor = UIColor(named: "viewBackgroundColor")
         collectionView.setCollectionViewLayout(blueprintLayout, animated: true)
+        collectionView.alwaysBounceVertical = true
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -50,6 +52,26 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         view.addSubview(collectionView)
         
         setupSearchBar()
+        setupSwipes()
+    }
+    
+    @objc func handleSwipes(_ gesture: UISwipeGestureRecognizer) {
+        if gesture.direction == .left {
+            tabBarController?.selectedIndex = 1
+            
+        } else if gesture.direction == .right {
+        }
+    }
+    
+    func setupSwipes() {
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipes(_:)))
+        swipeLeft.direction = .left
+        view.addGestureRecognizer(swipeLeft)
+        view.isUserInteractionEnabled = true
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipes(_:)))
+        swipeRight.direction = .right
+        view.addGestureRecognizer(swipeRight)
+        view.isUserInteractionEnabled = true
     }
     
     func setupSearchBar() {
@@ -76,19 +98,17 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     }
     
     func fetchNotesFromCoreData() {
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
                 return
         }
         
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
+        let managedContext = appDelegate.persistentContainer.viewContext
         
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "Note")
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Note")
         fetchRequest.returnsObjectsAsFaults = false
         
         // MARK: - Sort Rules for CollectionView
+        
         // implement sort by button with support for these sorting rules
         let sortDescriptorByDate = NSSortDescriptor(key: "date", ascending: false)
 //        let sortDescriptorByColor = NSSortDescriptor(key: "color", ascending: false)
@@ -101,6 +121,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
+            
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
@@ -152,6 +173,10 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         navigationController?.pushViewController(noteDetailController, animated: true)
     }
     
+    func longTouchHandler(sender: UILongPressGestureRecognizer) {
+        print("Long Pressed")
+    }
+    
     @objc func forceTouchHandler(_ sender: ForceTouchGestureRecognizer) {
         UINotificationFeedbackGenerator().notificationOccurred(.success)
         print("Force touch triggered")
@@ -159,6 +184,8 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         let location = sender.location(in: self.collectionView)
         let indexPath = self.collectionView.indexPathForItem(at: location)
         let rowNumber : Int = indexPath?.row ?? 0
+        
+        //implement 3d touch with pressure here
         
         deleteNote(indexPath: indexPath ?? [0, 0], int: rowNumber)
     }

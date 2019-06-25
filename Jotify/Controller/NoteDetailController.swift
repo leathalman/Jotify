@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 class NoteDetailController: UIViewController {
     
@@ -46,6 +47,51 @@ class NoteDetailController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
         updateContent(index: index, newContent: textView.text)
+        
+        if textView.text.contains("remind") || textView.text.contains("Remind") {
+            print("remind written down!")
+            
+            scheduleNotification(notificationType: "REMINDER!")
+
+        }
+    }
+    
+    func scheduleNotification(notificationType: String) {
+        
+        let notificationCenter = UNUserNotificationCenter.current()
+        
+        notificationCenter.getNotificationSettings { (settings) in
+            if settings.authorizationStatus != .authorized {
+                // Notifications not allowed
+            } else {
+                // Notifcations enabled
+                
+                let content = UNMutableNotificationContent()
+                
+                content.title = notificationType
+                content.body = "This is example how to create Notifications"
+                content.sound = UNNotificationSound.default
+                content.badge = 1
+                
+                //        let date = Date(timeIntervalSinceNow: 3600)
+                //        let triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second,], from: date)
+                //        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+                
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+                
+                let identifier = "Local Notification"
+                let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+                
+                notificationCenter.add(request) { (error) in
+                    if let error = error {
+                        print("Error \(error.localizedDescription)")
+                    }
+                }
+                
+            }
+        }
+        
+        
     }
 
     func updateContent(index: Int, newContent: String){
