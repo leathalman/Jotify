@@ -44,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     lazy var persistentContainer: NSPersistentCloudKitContainer = {
         let container = NSPersistentCloudKitContainer(name: "Jotify")
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         
         // get the store description
         guard let description = container.persistentStoreDescriptions.first else {

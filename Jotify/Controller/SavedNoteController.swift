@@ -13,6 +13,11 @@ import Blueprints
 
 class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     
+    //maybe delete object in core data and then make a new one when NoteDetail controller is dismissed, so that the array updates from the top, and merge conflicts don't happen because the first object no longer exists
+    
+    
+    //could also pass the data in the notes array from this controller ot the other controller and then manipulate the data that way, but dont look for data twice, causes errors....
+    
     var notes: [Note] = []
     var filteredNotes: [Note] = []
     
@@ -101,40 +106,66 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     }
     
     @objc func tap(_ sender: UITapGestureRecognizer) {
-        
+
         let location = sender.location(in: self.collectionView)
         let indexPath = self.collectionView.indexPathForItem(at: location)
-//        print(indexPath)
-        
-//        var indexPath : NSIndexPath = self.collectionView.indexPathForItemAtPoint(location)!
-        
         let rowNumber : Int = indexPath?.row ?? 0
 
         let noteDetailController = NoteDetailController()
-        
+
         let note = notes[indexPath?.row ?? 0]
+
+//        if isFiltering() {
+//            note = filteredNotes[indexPath?.row ?? 0]
+//
+//        } else {
+//            note = notes[indexPath?.row ?? 0]
+//        }
+
         let date = note.value(forKey: "date")
         let color = note.value(forKey: "color") as! String
         let content = note.value(forKey: "content") as! String
-        
+
         let updateDate = Date(timeIntervalSinceReferenceDate: date as! TimeInterval)
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.long //Set date style
         dateFormatter.timeZone = .current
         let dateString = dateFormatter.string(from: updateDate)
-        
+
         noteDetailController.navigationController?.navigationItem.title = dateString
-        
+
         noteDetailController.navigationTitle = dateString
-        
+
         var cellColor: UIColor = .white
-        
+
         colorFromString(color, &cellColor)
         noteDetailController.backgroundColor = cellColor
         noteDetailController.detailText = content
         noteDetailController.index = rowNumber
-        
+        noteDetailController.notes = notes
+
         navigationController?.pushViewController(noteDetailController, animated: true)
+    }
+    
+    func deleteNote(indexPath: IndexPath, int: Int) {
+        let note = notes[indexPath.row]
+        
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        //delete from Core Data storage
+        managedContext.delete(note)
+        
+        //delete from array so that UICollectionView displays cells correctly
+        notes.remove(at: int)
+        
+        appDelegate.saveContext()
+        
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

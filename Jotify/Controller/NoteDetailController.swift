@@ -17,17 +17,9 @@ class NoteDetailController: UIViewController {
     var index: Int = 0
     
     var notes: [Note] = []
-    
-    public var screenWidth: CGFloat {
-        return UIScreen.main.bounds.width
-    }
-    
-    public var screenHeight: CGFloat {
-        return UIScreen.main.bounds.height
-    }
-    
+
     lazy var textView: UITextView = {
-        let frame = CGRect(x: 0, y: 100, width: screenWidth, height: screenHeight)
+        let frame = CGRect(x: 0, y: 100, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         let textField = UITextView(frame: frame)
         textField.backgroundColor = .clear
         textField.textColor = .white
@@ -46,34 +38,11 @@ class NoteDetailController: UIViewController {
         navigationItem.title = navigationTitle
         navigationController?.navigationBar.prefersLargeTitles = false
         view.addSubview(textView)
-        
-        fetchNotesFromCoreData()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
         updateContent(index: index, newContent: textView.text)
-    }
-    
-    func fetchNotesFromCoreData() {
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "Note")
-        fetchRequest.returnsObjectsAsFaults = false
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-        
-        do {
-            notes = try managedContext.fetch(fetchRequest) as! [Note]
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
     }
 
     func updateContent(index: Int, newContent: String){
