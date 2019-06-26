@@ -84,7 +84,6 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
     func addGradient() {
         //add userdefaults toggle for SettingsController
         let theme = UserDefaults.standard.string(forKey: "gradientTheme")
-        print(theme ?? "Sunrise")
         
         if theme == "Sunrise" {
             Colors.shared.themeColor = GradientThemes.Sunrise
@@ -161,7 +160,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         }
         
         //dismiss keyboard on return key
-//        textView.resignFirstResponder()
+        textView.resignFirstResponder()
         handleSend()
         
         return false

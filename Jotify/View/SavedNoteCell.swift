@@ -13,7 +13,7 @@ class SavedNoteCell: UICollectionViewCell {
     var textLabel: UITextView = {
         let label = UITextView()
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         label.textColor = UIColor.darkGray
         label.text = "Loading..."
         label.isUserInteractionEnabled = false
@@ -26,7 +26,7 @@ class SavedNoteCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = UIColor.darkGray
-        label.text = "May 26, 2019"
+        label.text = "January 1, 2019"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

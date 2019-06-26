@@ -16,9 +16,12 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     var notes: [Note] = []
     var filteredNotes: [Note] = []
     
+    var firstLaunch: Int = 0
+    var pressed: Int = 0
+    
     let searchController = UISearchController(searchResultsController: nil)
     
-    let loadingAnimations = [AnimationType.from(direction: .bottom, offset: 30.0)]
+    let loadingAnimations = [AnimationType.from(direction: .top, offset: 30.0)]
 
     let blueprintLayout = VerticalBlueprintLayout(
         itemsPerRow: 2.0,
@@ -31,17 +34,24 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        firstLaunch = 1
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         fetchNotesFromCoreData()
-        animateCells()
+        
+        if firstLaunch == 1{
+            animateCells()
+            firstLaunch = 2
+        }
     }
  
     func setupView() {
         navigationItem.title = "Saved Notes"
         navigationController?.navigationBar.prefersLargeTitles = false
+        let rightItem = UIBarButtonItem(image: UIImage(systemName: "arrow.up.arrow.down.circle"), style: .plain, target: self, action: #selector(handleRightButton))
+        navigationItem.rightBarButtonItem  = rightItem
         
         collectionView.frame = self.view.frame
         collectionView.backgroundColor = UIColor(named: "viewBackgroundColor")
@@ -56,6 +66,28 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         
         setupSearchBar()
         setupSwipes()
+    }
+    
+    @objc func handleRightButton() {
+        
+        if pressed == 0 {
+            print("Sort by content")
+            UserDefaults.standard.set("content", forKey: "sortBy")
+            pressed += 1
+            
+        } else if pressed == 1 {
+            print("Sort by color")
+            UserDefaults.standard.set("color", forKey: "sortBy")
+            pressed += 1
+            
+        } else if pressed == 2 {
+            print("Sort by date")
+            UserDefaults.standard.set("date", forKey: "sortBy")
+            pressed = 0
+            
+        }
+        fetchNotesFromCoreData()
+        animateCells()
     }
     
     @objc func handleSwipes(_ gesture: UISwipeGestureRecognizer) {
@@ -110,14 +142,21 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Note")
         fetchRequest.returnsObjectsAsFaults = false
         
-        // MARK: - Sort Rules for CollectionView
+        let sortBy = UserDefaults.standard.string(forKey: "sortBy")
+        var sortDescriptor: NSSortDescriptor?
         
-        // implement sort by button with support for these sorting rules
-        let sortDescriptorByDate = NSSortDescriptor(key: "date", ascending: false)
-//        let sortDescriptorByColor = NSSortDescriptor(key: "color", ascending: false)
-//        let sortDescriptorByContent = NSSortDescriptor(key: "content", ascending: true)
+        if sortBy == "content" {
+            sortDescriptor = NSSortDescriptor(key: "content", ascending: true)
+            
+        } else if sortBy == "date" {
+            sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+            
+        } else if sortBy == "color" {
+            sortDescriptor = NSSortDescriptor(key: "color", ascending: false)
+            
+        }
 
-        fetchRequest.sortDescriptors = [sortDescriptorByDate]
+        fetchRequest.sortDescriptors = [sortDescriptor] as? [NSSortDescriptor]
         
         do {
             notes = try managedContext.fetch(fetchRequest) as! [Note]
@@ -245,7 +284,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         let color = note.value(forKey: "color") as? String ?? "systemTeal"
         let date = note.value(forKey: "date") as? Double ?? 0
 
-        cell.textLabel.text = content?.trunc(length: 50)
+        cell.textLabel.text = content?.trunc(length: 55)
         cell.textLabel.textColor = UIColor.white
         cell.dateLabel.textColor = UIColor.white
 
