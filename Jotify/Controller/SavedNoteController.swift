@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import Blueprints
 import ViewAnimator
+import AudioToolbox
 
 class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     
@@ -20,7 +21,6 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     var pressed: Int = 0
     
     let searchController = UISearchController(searchResultsController: nil)
-    
     let loadingAnimations = [AnimationType.from(direction: .top, offset: 30.0)]
 
     let blueprintLayout = VerticalBlueprintLayout(
@@ -223,8 +223,10 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         navigationController?.pushViewController(noteDetailController, animated: true)
     }
     
-    func longTouchHandler(sender: UILongPressGestureRecognizer) {
+    @objc func longTouchHandler(sender: UILongPressGestureRecognizer) {
         print("Long Pressed")
+        
+        //add functionality for devices that don't have taptic or haptic
     }
     
     @objc func forceTouchHandler(_ sender: ForceTouchGestureRecognizer) {
@@ -235,9 +237,18 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         let indexPath = self.collectionView.indexPathForItem(at: location)
         let rowNumber : Int = indexPath?.row ?? 0
         
-        //implement 3d touch with pressure here
+        if UIDevice.current.hasTapticEngine == true {
+            //iPhone 6s and iPhone 6s Plus
+            let peek = SystemSoundID(1519)
+            AudioServicesPlaySystemSoundWithCompletion(peek, nil)
+            
+        } else if UIDevice.current.hasHapticFeedback == true {
+            //iPhone 7 and newer
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
+        }
         
-        deleteNote(indexPath: indexPath ?? [0, 0], int: rowNumber)
+//        deleteNote(indexPath: indexPath ?? [0, 0], int: rowNumber)
     }
     
     func deleteNote(indexPath: IndexPath, int: Int) {
@@ -303,10 +314,23 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         cell.contentView.backgroundColor = cellColor
         cell.layer.addShadow(color: UIColor.darkGray)
         
+        
+        if UIDevice.current.hasTapticEngine {
+            //Supported
+            cell.addGestureRecognizer(ForceTouchGestureRecognizer(target: self, action: #selector(forceTouchHandler(_:))))
+
+        } else {
+            //Unsupported
+            cell.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTouchHandler(sender:))))
+        }
+        
         cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapHandler(_:))))
-        cell.addGestureRecognizer(ForceTouchGestureRecognizer(target: self, action: #selector(forceTouchHandler(_:))))
         
         return cell
+    }
+    
+    func is3DTouchAvailable(traitCollection: UITraitCollection) -> Bool {
+        return traitCollection.forceTouchCapability == UIForceTouchCapability.available
     }
     
     fileprivate func colorFromString(_ color: String, _ cellColor: inout UIColor) {
