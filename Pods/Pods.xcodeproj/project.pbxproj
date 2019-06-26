@@ -7,93 +7,114 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02CFC06F7AEE7B7A35A30B7D2464CFF0 /* Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A6AE0B8D6AFDF31BF0A36CCA40DF38 /* Deprecated.swift */; };
-		0676EEBB9B834742E7B5BFA19DAA2309 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC9C2ED2C307486304DFE76352D06D9 /* SwitchCell.swift */; };
-		0CCBD3BE0AF06EA368ACDF702E12D9FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */; };
-		0F3530ECE873501F5F3182597E625432 /* RowCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE378FBDA6EA8378A93727D76D7E04 /* RowCompatible.swift */; };
-		1606B4ED7B563B6F60467F5BF6677EEA /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A2C490B250994E2749DDF8E7790AD1 /* Reusable.swift */; };
-		1B3548159CFBD3BDC0253A82C8DDA00D /* NavigationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423584F03829C1554F8DF48BFCFF86BD /* NavigationRow.swift */; };
-		1FDC412370B25F43498A74B66C32BE58 /* ViewAnimator-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B462B1D7BB2F3077FF220996298B9 /* ViewAnimator-dummy.m */; };
-		2195820B365C81802926D8F7F3B910F6 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9DAA4D75D234B2CE600C5137298923 /* Section.swift */; };
-		2C6C756A24736E3A135AF4E10C913381 /* Pods-Jotify-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2558455B3F853B3F5215D278D594F8B3 /* Pods-Jotify-dummy.m */; };
-		32F08989C22C8450DD292EE1D8ECB11F /* BlueprintLayoutAnimator+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811E78D2A696F10663F68C15847C544 /* BlueprintLayoutAnimator+Extensions.swift */; };
-		35A02584E8A55C8219907433ACCA3F43 /* SwitchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF152ADC88C222A9137969018653D65 /* SwitchRow.swift */; };
-		35C917767C62C3B53EACA418485BFA49 /* QuickTableViewController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FB500CC2C64410643B8189D8320FD70E /* QuickTableViewController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3979AF6C2B168C2A96855D4F353B1CBE /* ViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F57B3EC44CA640EA75AB611C1B691E /* ViewAnimator.swift */; };
-		3CE9D86398BB207A53E0A3F575B12C88 /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B11CC00FC6925778C881311A176DE80 /* Configurable.swift */; };
-		40BCB7451337E701361435F86226573C /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4E755D195112A92F49F7D69D368C4 /* Row.swift */; };
-		44FEDB5BA6CD8DEA4FA3527DD3150FB5 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F225AC51D20AFA5505F09D775710CEF /* Direction.swift */; };
-		5076DDF5F13C270FC5BF6CBBD4EDE366 /* BinarySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C01C9006F20D14D9D99F2811E02C464 /* BinarySearch.swift */; };
-		51880C96C730F27AF553C1A18DB5428D /* BlueprintLayout+iOS+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB8719264736E3615896EB193E15DFF /* BlueprintLayout+iOS+tvOS.swift */; };
-		586EA3300FE9BECBC0555E4BA370246A /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572969B925720B0FCE299DF7DE1C3A83 /* UICollectionView+Extensions.swift */; };
-		5B9DFA5FA219B5F97F8326E700A1CF65 /* MosaicPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0FCEF00EB8C6343C201BBB7712CC7E /* MosaicPattern.swift */; };
-		61132925D0E0E1EAEA8C5E1CA3188341 /* QuickTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D16079BE7B37C768BB88D37B944EB9 /* QuickTableViewController.swift */; };
-		63B866C2EFB96A6D1B3A8B800F62C1C1 /* BlueprintSupplementaryKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D38A5135E2E387D7538D5FBA6E73A28 /* BlueprintSupplementaryKind.swift */; };
-		68586C027F3415537FE8AFB6759CF7C4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */; };
-		7D282297C299BF268079389FA2AADB72 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A5FD106714ABBEB8381EF6F8EEE36 /* MultilineTextField.swift */; };
-		7E4A535D281E7C4660F8ED87A746BA25 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */; };
-		8F2DEB67CE8770CBBD6A1DBE62814560 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */; };
-		8F750841F6509D69126AB5CD95F57E6C /* TapActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B01FE202C5F0132A988CE6D3F68816 /* TapActionCell.swift */; };
-		90A7D73C9F540C522A058C3BEAA78B74 /* UICollectionView + ViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3B4FFD3A4133085CE579D2FF9A60E8 /* UICollectionView + ViewAnimator.swift */; };
-		910B1C419E9C0E92C3ED62FBB271CCE9 /* HorizontalBlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755D5BA9CC0F0D1F64FE727D20F9E22A /* HorizontalBlueprintLayout.swift */; };
-		960FEF51F07C9BD695D29CC687011509 /* VerticalBlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C63CFE1A221BDE4979E272F50C7FB /* VerticalBlueprintLayout.swift */; };
-		98142F612E148B095F9D2E09CE6C66F6 /* TypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69902015A90CD3A81B2A2D10585633A6 /* TypeAlias.swift */; };
-		A224190ED8F2390F9380A85DCF3846A4 /* BlueprintLayoutAnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AE7EC1ECBC077526F8169DEF551148 /* BlueprintLayoutAnimationType.swift */; };
-		A37D711953D2A52F77B693E7120F9FC8 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFDE9E41527DB1651043DC28F4C32BD /* Animation.swift */; };
-		A3B699D5F6EF7CE748964DED86C9C846 /* MosaicLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EF640E74F821074624F87386D6E5F5 /* MosaicLayoutAttributes.swift */; };
-		A3DCFF50480DB478BDC7BE1CB48BB51D /* BlueprintInvalidationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2190F41C9D84083844D6B65BD9FAAAE0 /* BlueprintInvalidationContext.swift */; };
-		A5B5CECB0D0EB7BED2B02139EB187FE4 /* Subtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73BA71D4313998D423D8AA4C4A2A092 /* Subtitle.swift */; };
-		A65B28AC350360284F8E57BE3AB0967B /* ViewAnimatorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86921488659EFA076D2F1FD72D8D1FC3 /* ViewAnimatorConfig.swift */; };
-		A8545EA573AACE3EED6107B6C990560E /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB01C9A2E1CBA9117106B8358B5B76D9 /* Icon.swift */; };
-		B000A22953301526AE02F3B1B846A96F /* BlueprintLayoutAnimator+iOS+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61933A03E96DC62CA0F5BB43ED81A4E2 /* BlueprintLayoutAnimator+iOS+tvOS.swift */; };
-		B350C9573879EDC616C91A69B86B173D /* MosaicBlueprintPatternController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3CB3560F48AFAC9330A37E2288D261 /* MosaicBlueprintPatternController.swift */; };
-		B47AAA89A3EF45341EC90826168607BE /* Blueprints-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DDDEA630ED599437141A5EC34CBF164 /* Blueprints-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B960F741D12D63FAA8A14587C1B10DB0 /* AnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CEC60BF1447D84352F1E422F748150 /* AnimationType.swift */; };
-		BB449EFBE474255D97B6B0C458715099 /* UITableView + ViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7074BBBBE960F81D73FD4A998254D5D8 /* UITableView + ViewAnimator.swift */; };
-		BD8298A0B82D57EF5549A401ED98765D /* RadioSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD46AF92EB6AFC40A8CDE848EFCEFF3 /* RadioSection.swift */; };
-		C43412CA07B94055B9693593CF35F442 /* TapActionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6705CC74B7FD79C0D431F7412D5450 /* TapActionRow.swift */; };
-		C487C82512C1D6C4F93416618207D995 /* MultilineTextField-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9CF26FBC9AA34DCF621321D6FC9DB1 /* MultilineTextField-dummy.m */; };
-		C6B1392EA122D5F71F591509E493AC37 /* SupplementaryLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F91B23DA2DFA0CEDA6CABC0DB80394 /* SupplementaryLayoutAttributes.swift */; };
-		C88BA138AA383A8300B818C1CB46901D /* Blueprints-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B5555DCFEDE36F8B0673A1BB60152F /* Blueprints-dummy.m */; };
-		CFB0C28518AEFB686AD307327A1284E2 /* VerticalMosaicBlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB1D7CF7A782B9CF12DC531D1B0F728 /* VerticalMosaicBlueprintLayout.swift */; };
-		D52D1077C6AF8731A18BC033BDE8859E /* DefaultLayoutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B13F47B31DE8E43C7AD8A9CEBF65D94 /* DefaultLayoutAnimator.swift */; };
-		D75D597036E3B45F464C28CD356F1D8B /* BlueprintLayoutAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59812289C5ACB7FC74ECC0B6D2733FAC /* BlueprintLayoutAnimation.swift */; };
-		D7E0AF6967643A9A268DA01A3F64DEAC /* DetailText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F692F6FCAB23F4EBA01A3BC821B011 /* DetailText.swift */; };
-		DC6220FC53DE3A9E190FC1B8886D6FC4 /* QuickTableViewController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEB64779F4C48EE5C2E5D39FBCDFD6F /* QuickTableViewController-dummy.m */; };
-		E61ED2A6F72DC02CF2DF6FB2020BB701 /* BlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38BA9F7CE05AC8FF474A48426558E4C /* BlueprintLayout.swift */; };
-		E88C82C7878EC3348D9AC96DC73EF05E /* BlueprintLayoutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03370BC2A3A4A7A75705064D42EF193 /* BlueprintLayoutAnimator.swift */; };
-		EABD6929DC920B96A8F2500C0D9C170B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */; };
-		EB7F884018C7C55B9C138BEA43DCFAFB /* RowStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85156AB9A0F8DE39FEB097D26C6539F /* RowStyle.swift */; };
-		ECE319DB6D24D0F22D32D02BFD2A8E72 /* ViewAnimator-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C77F2E2ED361877A648A9651B0073C8 /* ViewAnimator-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F14F1B7A184BC02AD5F4DA58E044BB0B /* OptionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBDB04D3993B9C61F7C3EECC7C27EE0 /* OptionRow.swift */; };
-		F38F4B4384E11F956907AB00EF6D8E4E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 312B988EF117AE4DE76A268D970131FE /* UIKit.framework */; };
-		FF27E6F0866AE84A317AF9CBDA2927A2 /* Pods-Jotify-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BA93A38D09C3E9F2BA612107FD28142 /* Pods-Jotify-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FFDAAC9F1F505EFBD44C935AAD5FE8DA /* MultilineTextField-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D2FA8DB1B4BE0E7D31CD95647685D21A /* MultilineTextField-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		02CFC06F7AEE7B7A35A30B7D2464CFF0 /* Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813FB2288FB276AAEA430ADB9843F69B /* Deprecated.swift */; };
+		0676EEBB9B834742E7B5BFA19DAA2309 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52AB84418ADB74FE0A5879E5298D962 /* SwitchCell.swift */; };
+		0A0132BFEF899C1111AE99348A0419FB /* ActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC31971E3F78111D8B0350B116CE969 /* ActionCell.swift */; };
+		0CCBD3BE0AF06EA368ACDF702E12D9FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD608BCCF279B1277BB911F33106997F /* Foundation.framework */; };
+		0F3530ECE873501F5F3182597E625432 /* RowCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F461D528D72BB6629CE21AD02E0116C0 /* RowCompatible.swift */; };
+		1606B4ED7B563B6F60467F5BF6677EEA /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F509CFF4D4D78743332CA88371CAD6 /* Reusable.swift */; };
+		1B3548159CFBD3BDC0253A82C8DDA00D /* NavigationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7BE8F0F658FC3FECD3896EB59B0A61 /* NavigationRow.swift */; };
+		1FDC412370B25F43498A74B66C32BE58 /* ViewAnimator-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4CA151A4E0C5EB32950EA0424BA6EE /* ViewAnimator-dummy.m */; };
+		2195820B365C81802926D8F7F3B910F6 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CC6D77E2FE7C156D6DD6C57EE5E5AE /* Section.swift */; };
+		32F08989C22C8450DD292EE1D8ECB11F /* BlueprintLayoutAnimator+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF613D3120115F4862A24AE0B457F33 /* BlueprintLayoutAnimator+Extensions.swift */; };
+		33C5F0B1316B18D22B9C594BDB36F331 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4123075620C046AD7D822EE591DA2F5A /* Action.swift */; };
+		35A02584E8A55C8219907433ACCA3F43 /* SwitchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBB4C42846B9810F72B9BB969BEEC00 /* SwitchRow.swift */; };
+		35C917767C62C3B53EACA418485BFA49 /* QuickTableViewController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 203BCC4C5C3A337F606FE40FA971B136 /* QuickTableViewController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3979AF6C2B168C2A96855D4F353B1CBE /* ViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEA4E569E6DD99A94AAED1B8C2732EF /* ViewAnimator.swift */; };
+		3CE9D86398BB207A53E0A3F575B12C88 /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F9ED64D256DB8B0CFC896D587B5521 /* Configurable.swift */; };
+		40BCB7451337E701361435F86226573C /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9950D61CEB22A597619AC168B93E3B /* Row.swift */; };
+		44FEDB5BA6CD8DEA4FA3527DD3150FB5 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709D0118590DCCD761257AFFAD371B30 /* Direction.swift */; };
+		4ACC5A46C085463B66C6F56CA12CEF74 /* ActionControllerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD6989AEBCAE9595074DD73B89DF751 /* ActionControllerSettings.swift */; };
+		5076DDF5F13C270FC5BF6CBBD4EDE366 /* BinarySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2BB48F3AEF7EAB3AE185CFD9EEA268 /* BinarySearch.swift */; };
+		51880C96C730F27AF553C1A18DB5428D /* BlueprintLayout+iOS+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C097DCF2934C758BB32766B229DD7E2 /* BlueprintLayout+iOS+tvOS.swift */; };
+		586EA3300FE9BECBC0555E4BA370246A /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C73888205287B7D01B815A369E53A3A /* UICollectionView+Extensions.swift */; };
+		5B9DFA5FA219B5F97F8326E700A1CF65 /* MosaicPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319C564B8F68A8BD6A66C64E1A2E470 /* MosaicPattern.swift */; };
+		5E79BB455DE87C831B82A1DBBF668A96 /* Skype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F75DDF658B39AFFB3A47C51760A09F1 /* Skype.swift */; };
+		5F5082C9CDE002A288B0892FA67A671C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD608BCCF279B1277BB911F33106997F /* Foundation.framework */; };
+		610CC0659420ECDA6EA576182EAFC1F1 /* ActionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E21ED7A404CA2C035D7CA7B5F6026A /* ActionData.swift */; };
+		61132925D0E0E1EAEA8C5E1CA3188341 /* QuickTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167C7644C525FCC716723742F6E54CAB /* QuickTableViewController.swift */; };
+		63B866C2EFB96A6D1B3A8B800F62C1C1 /* BlueprintSupplementaryKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47DCC53E6C1D42D30D8022976A8FC1B /* BlueprintSupplementaryKind.swift */; };
+		68496CAE465CD1B5F6E3A41B692E6E42 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01BDA658338AD3813D969D7011B56B8D /* UIKit.framework */; };
+		68586C027F3415537FE8AFB6759CF7C4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD608BCCF279B1277BB911F33106997F /* Foundation.framework */; };
+		7D282297C299BF268079389FA2AADB72 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2BF4C37D120D2C1967D56363AF328C /* MultilineTextField.swift */; };
+		8A3DADF654F761D537AA16A7992A903B /* ActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61523B004AB310EA96BCCBDC78B6BCE9 /* ActionCell.xib */; };
+		8F2DEB67CE8770CBBD6A1DBE62814560 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD608BCCF279B1277BB911F33106997F /* Foundation.framework */; };
+		8F750841F6509D69126AB5CD95F57E6C /* TapActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB8470B4FD55E72A379CAE4F9A8239 /* TapActionCell.swift */; };
+		90A7D73C9F540C522A058C3BEAA78B74 /* UICollectionView + ViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE75352E7D4BFD866113A99C56D1856E /* UICollectionView + ViewAnimator.swift */; };
+		910B1C419E9C0E92C3ED62FBB271CCE9 /* HorizontalBlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BE8075A04EE5B5A5DE1BED06CA47BC /* HorizontalBlueprintLayout.swift */; };
+		960FEF51F07C9BD695D29CC687011509 /* VerticalBlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6740B35832FDF7B067908E987D375D08 /* VerticalBlueprintLayout.swift */; };
+		98142F612E148B095F9D2E09CE6C66F6 /* TypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178E5A3983CC20BAFE2AEE6FB2D1333 /* TypeAlias.swift */; };
+		9AE03F27611DFD2A73F420E5350D192A /* DynamicCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6572680BFAD21853A5DB608C86789753 /* DynamicCollectionViewFlowLayout.swift */; };
+		9E7F70732A01301EA635240420F3E3EA /* XLActionController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AA7D4DA25EA323FC691C3A859EFF4D /* XLActionController-dummy.m */; };
+		A224190ED8F2390F9380A85DCF3846A4 /* BlueprintLayoutAnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2804DBAF8B73B1EB4D964CD4AA390BC4 /* BlueprintLayoutAnimationType.swift */; };
+		A2F5BD0CC95467A2F81759108C5A85DF /* SkypeCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 78B8FE1454F6E9B23CF140E530B16657 /* SkypeCell.xib */; };
+		A37D711953D2A52F77B693E7120F9FC8 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA721673305E9077F0C6004F2F11FFA0 /* Animation.swift */; };
+		A3B699D5F6EF7CE748964DED86C9C846 /* MosaicLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4696619020F2A0D0D04A59AA8FA890 /* MosaicLayoutAttributes.swift */; };
+		A3DCFF50480DB478BDC7BE1CB48BB51D /* BlueprintInvalidationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085D5CB9F0FF3F8BA16EA8DC2A30F5F /* BlueprintInvalidationContext.swift */; };
+		A58D5FA87B358B76466A5ACFF37F02EF /* Pods-Jotify-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2558455B3F853B3F5215D278D594F8B3 /* Pods-Jotify-dummy.m */; };
+		A5B5CECB0D0EB7BED2B02139EB187FE4 /* Subtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D676D23AE58857916145017CA8B55E4A /* Subtitle.swift */; };
+		A65B28AC350360284F8E57BE3AB0967B /* ViewAnimatorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07025495C2DA9647F790CD201FB8FE6D /* ViewAnimatorConfig.swift */; };
+		A8545EA573AACE3EED6107B6C990560E /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8893F2B502022F28FB2E903A4901DC04 /* Icon.swift */; };
+		B000A22953301526AE02F3B1B846A96F /* BlueprintLayoutAnimator+iOS+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5341CBA89EF26A0FFDAFA22548F0A89B /* BlueprintLayoutAnimator+iOS+tvOS.swift */; };
+		B350C9573879EDC616C91A69B86B173D /* MosaicBlueprintPatternController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C031E6DCBB396E82A5DA8C403E5438C /* MosaicBlueprintPatternController.swift */; };
+		B47AAA89A3EF45341EC90826168607BE /* Blueprints-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 13DF2E05FED0A85B89DA69F759FA6F41 /* Blueprints-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B71A5681A1D044E14C8D4A0D78A09B63 /* Pods-Jotify-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BA93A38D09C3E9F2BA612107FD28142 /* Pods-Jotify-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B960F741D12D63FAA8A14587C1B10DB0 /* AnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D31E9E2759B4F670E66036B2C0CC2A3 /* AnimationType.swift */; };
+		BB449EFBE474255D97B6B0C458715099 /* UITableView + ViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3483527AE42A380A04D311D5477F626 /* UITableView + ViewAnimator.swift */; };
+		BD8298A0B82D57EF5549A401ED98765D /* RadioSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360AA75FCBA3672E22F4421A86F374F4 /* RadioSection.swift */; };
+		C43412CA07B94055B9693593CF35F442 /* TapActionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA2377B76FB972F95724DCDCEC713C /* TapActionRow.swift */; };
+		C487C82512C1D6C4F93416618207D995 /* MultilineTextField-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E6FF29944B31FBE50171C0CB6D4686 /* MultilineTextField-dummy.m */; };
+		C6B1392EA122D5F71F591509E493AC37 /* SupplementaryLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47415FD539533623B296C3A49EE7654 /* SupplementaryLayoutAttributes.swift */; };
+		C88BA138AA383A8300B818C1CB46901D /* Blueprints-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F1842E2EC1C7A0AB6508B10FFAD20BFB /* Blueprints-dummy.m */; };
+		CFB0C28518AEFB686AD307327A1284E2 /* VerticalMosaicBlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE780DB095948B8260745C956ABC66B /* VerticalMosaicBlueprintLayout.swift */; };
+		D52D1077C6AF8731A18BC033BDE8859E /* DefaultLayoutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A783788413D00B32FBC8BF42CC9B8E35 /* DefaultLayoutAnimator.swift */; };
+		D75D597036E3B45F464C28CD356F1D8B /* BlueprintLayoutAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADEB244D7A139C90F079B682388EACE /* BlueprintLayoutAnimation.swift */; };
+		D792B7AD9A92C6E9CE4412041225B5B6 /* XLActionController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CFA4A0F8542F74B2F2F9978C156F7D3A /* XLActionController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D7E0AF6967643A9A268DA01A3F64DEAC /* DetailText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEDF754D4389EBFF141B187E30597 /* DetailText.swift */; };
+		DB783FB9634FCBC4CBE54253A2206287 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276842F3A283EE87124FE6C3EAAFD184 /* CoreGraphics.framework */; };
+		DC6220FC53DE3A9E190FC1B8886D6FC4 /* QuickTableViewController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B5E7E8F10D972D96D3902EA70C8D45A /* QuickTableViewController-dummy.m */; };
+		E61ED2A6F72DC02CF2DF6FB2020BB701 /* BlueprintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05035CCA8462CC170604DFFA3775D2 /* BlueprintLayout.swift */; };
+		E88C82C7878EC3348D9AC96DC73EF05E /* BlueprintLayoutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1239CC965F0CA6BF59A70C181D79AD0E /* BlueprintLayoutAnimator.swift */; };
+		EABD6929DC920B96A8F2500C0D9C170B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD608BCCF279B1277BB911F33106997F /* Foundation.framework */; };
+		EB7F884018C7C55B9C138BEA43DCFAFB /* RowStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7ACDB8E2F3D744CCACD6FBE3839B95B /* RowStyle.swift */; };
+		ECE319DB6D24D0F22D32D02BFD2A8E72 /* ViewAnimator-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E9C0A66C5268BA19EC933BBA6F36184E /* ViewAnimator-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F14F1B7A184BC02AD5F4DA58E044BB0B /* OptionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539D83939AC7BD7CC9EA8BABB9060414 /* OptionRow.swift */; };
+		F38F4B4384E11F956907AB00EF6D8E4E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01BDA658338AD3813D969D7011B56B8D /* UIKit.framework */; };
+		F94B20BD091135A843AC1E750EB4250D /* ActionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B155C9838293C531559FDD0D4268F50F /* ActionController.swift */; };
+		FA3F48428074CEEEE5503E92762CA78F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD608BCCF279B1277BB911F33106997F /* Foundation.framework */; };
+		FFDAAC9F1F505EFBD44C935AAD5FE8DA /* MultilineTextField-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B3EF3E4D74E21E20C2C20400BF9F0262 /* MultilineTextField-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		20016D663727CF1E884BF6ABF750AAEA /* PBXContainerItemProxy */ = {
+		48E9DE0347FDD09168BE543F618BFC4F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = E7D16F6260A6FAB7F88EB5ACC56D911D;
-			remoteInfo = QuickTableViewController;
+			remoteGlobalIDString = 0B8CA00DBD1349A00128A00324035CA5;
+			remoteInfo = XLActionController;
 		};
-		5212FF3DDF45ECBCB93B628216C5A325 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DC6FC4C42CCE924FF1D3887F9FA7BB75;
-			remoteInfo = Blueprints;
-		};
-		59B353986D955BA0F05D124FB17DBE7C /* PBXContainerItemProxy */ = {
+		67256B87AD4B4EAC215E56A30E6555E2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 6E4C5518BF19B2CB8B0A5DC22C926A11;
 			remoteInfo = MultilineTextField;
 		};
-		A6CAF3DA705F8842475F4F33F115B86F /* PBXContainerItemProxy */ = {
+		7BF19523CE02B5EC3B9340C1C8068EED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E7D16F6260A6FAB7F88EB5ACC56D911D;
+			remoteInfo = QuickTableViewController;
+		};
+		8ACDF4A2030655E343B5AA004F1B257E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DC6FC4C42CCE924FF1D3887F9FA7BB75;
+			remoteInfo = Blueprints;
+		};
+		F86A46FF02763D1C19ED919A3EA9EB48 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -103,109 +124,128 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00C4E755D195112A92F49F7D69D368C4 /* Row.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Row.swift; path = Source/Protocol/Row.swift; sourceTree = "<group>"; };
-		0B11CC00FC6925778C881311A176DE80 /* Configurable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Configurable.swift; path = Source/Protocol/Configurable.swift; sourceTree = "<group>"; };
+		01BDA658338AD3813D969D7011B56B8D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		07025495C2DA9647F790CD201FB8FE6D /* ViewAnimatorConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ViewAnimatorConfig.swift; path = ViewAnimator/Classes/ViewAnimatorConfig.swift; sourceTree = "<group>"; };
+		08EB8470B4FD55E72A379CAE4F9A8239 /* TapActionCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TapActionCell.swift; path = Source/Views/TapActionCell.swift; sourceTree = "<group>"; };
+		0A7BE8F0F658FC3FECD3896EB59B0A61 /* NavigationRow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NavigationRow.swift; path = Source/Rows/NavigationRow.swift; sourceTree = "<group>"; };
+		0C031E6DCBB396E82A5DA8C403E5438C /* MosaicBlueprintPatternController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MosaicBlueprintPatternController.swift; path = Sources/Shared/Mosaic/MosaicBlueprintPatternController.swift; sourceTree = "<group>"; };
 		0D04501C97E68E376442A07241A66134 /* MultilineTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MultilineTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DBB4C42846B9810F72B9BB969BEEC00 /* SwitchRow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwitchRow.swift; path = Source/Rows/SwitchRow.swift; sourceTree = "<group>"; };
+		0E4696619020F2A0D0D04A59AA8FA890 /* MosaicLayoutAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MosaicLayoutAttributes.swift; path = Sources/Shared/Mosaic/MosaicLayoutAttributes.swift; sourceTree = "<group>"; };
+		1239CC965F0CA6BF59A70C181D79AD0E /* BlueprintLayoutAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayoutAnimator.swift; path = Sources/Shared/Core/BlueprintLayoutAnimator.swift; sourceTree = "<group>"; };
+		12BE8075A04EE5B5A5DE1BED06CA47BC /* HorizontalBlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HorizontalBlueprintLayout.swift; path = Sources/Shared/Core/HorizontalBlueprintLayout.swift; sourceTree = "<group>"; };
+		13DF2E05FED0A85B89DA69F759FA6F41 /* Blueprints-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Blueprints-umbrella.h"; sourceTree = "<group>"; };
+		167C7644C525FCC716723742F6E54CAB /* QuickTableViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QuickTableViewController.swift; path = Source/QuickTableViewController.swift; sourceTree = "<group>"; };
+		17AA7D4DA25EA323FC691C3A859EFF4D /* XLActionController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "XLActionController-dummy.m"; sourceTree = "<group>"; };
 		18AD745B4E64DD0B1A8A83DBA5787E73 /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
-		1A6705CC74B7FD79C0D431F7412D5450 /* TapActionRow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TapActionRow.swift; path = Source/Rows/TapActionRow.swift; sourceTree = "<group>"; };
-		1B6C63CFE1A221BDE4979E272F50C7FB /* VerticalBlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VerticalBlueprintLayout.swift; path = Sources/Shared/Core/VerticalBlueprintLayout.swift; sourceTree = "<group>"; };
+		1F05035CCA8462CC170604DFFA3775D2 /* BlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayout.swift; path = Sources/Shared/Core/BlueprintLayout.swift; sourceTree = "<group>"; };
 		1FA89163971C9751850A2C3EFD313884 /* QuickTableViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QuickTableViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2190F41C9D84083844D6B65BD9FAAAE0 /* BlueprintInvalidationContext.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintInvalidationContext.swift; path = Sources/Shared/Core/BlueprintInvalidationContext.swift; sourceTree = "<group>"; };
-		232FA996EAF07D1910580BFD340A9219 /* MultilineTextField.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MultilineTextField.xcconfig; sourceTree = "<group>"; };
-		23C4EBB6EFFB71B8F640B18C4745C4B0 /* MultilineTextField-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MultilineTextField-Info.plist"; sourceTree = "<group>"; };
+		203BCC4C5C3A337F606FE40FA971B136 /* QuickTableViewController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QuickTableViewController-umbrella.h"; sourceTree = "<group>"; };
+		22F509CFF4D4D78743332CA88371CAD6 /* Reusable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Reusable.swift; path = Source/Protocol/Reusable.swift; sourceTree = "<group>"; };
 		2558455B3F853B3F5215D278D594F8B3 /* Pods-Jotify-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Jotify-dummy.m"; sourceTree = "<group>"; };
-		257B462B1D7BB2F3077FF220996298B9 /* ViewAnimator-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ViewAnimator-dummy.m"; sourceTree = "<group>"; };
-		27B5555DCFEDE36F8B0673A1BB60152F /* Blueprints-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Blueprints-dummy.m"; sourceTree = "<group>"; };
-		2C0FCEF00EB8C6343C201BBB7712CC7E /* MosaicPattern.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MosaicPattern.swift; path = Sources/Shared/Mosaic/MosaicPattern.swift; sourceTree = "<group>"; };
-		2CAA2AA3ABE3EFA4B1E2DADFCCFE36DD /* Blueprints-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Blueprints-prefix.pch"; sourceTree = "<group>"; };
-		3095458B137F784CC6214E3B8EAD651E /* ViewAnimator-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ViewAnimator-prefix.pch"; sourceTree = "<group>"; };
-		30F57B3EC44CA640EA75AB611C1B691E /* ViewAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ViewAnimator.swift; path = ViewAnimator/Classes/ViewAnimator.swift; sourceTree = "<group>"; };
-		312B988EF117AE4DE76A268D970131FE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		34EF640E74F821074624F87386D6E5F5 /* MosaicLayoutAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MosaicLayoutAttributes.swift; path = Sources/Shared/Mosaic/MosaicLayoutAttributes.swift; sourceTree = "<group>"; };
-		3C3B4FFD3A4133085CE579D2FF9A60E8 /* UICollectionView + ViewAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UICollectionView + ViewAnimator.swift"; path = "ViewAnimator/Classes/Extensions/UICollectionView + ViewAnimator.swift"; sourceTree = "<group>"; };
-		423584F03829C1554F8DF48BFCFF86BD /* NavigationRow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NavigationRow.swift; path = Source/Rows/NavigationRow.swift; sourceTree = "<group>"; };
-		436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		44A2C490B250994E2749DDF8E7790AD1 /* Reusable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Reusable.swift; path = Source/Protocol/Reusable.swift; sourceTree = "<group>"; };
-		49F91B23DA2DFA0CEDA6CABC0DB80394 /* SupplementaryLayoutAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SupplementaryLayoutAttributes.swift; path = Sources/Shared/Core/SupplementaryLayoutAttributes.swift; sourceTree = "<group>"; };
-		4D1041364005D92C6B6002FA6ADD60C5 /* Blueprints-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Blueprints-Info.plist"; sourceTree = "<group>"; };
-		4FD46AF92EB6AFC40A8CDE848EFCEFF3 /* RadioSection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RadioSection.swift; path = Source/Model/RadioSection.swift; sourceTree = "<group>"; };
-		52D16079BE7B37C768BB88D37B944EB9 /* QuickTableViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QuickTableViewController.swift; path = Source/QuickTableViewController.swift; sourceTree = "<group>"; };
-		53804F796E0B60439BE78317473A5F82 /* Blueprints.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Blueprints.modulemap; sourceTree = "<group>"; };
-		572969B925720B0FCE299DF7DE1C3A83 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UICollectionView+Extensions.swift"; path = "Sources/iOS+tvOS/Extensions/UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
-		59812289C5ACB7FC74ECC0B6D2733FAC /* BlueprintLayoutAnimation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayoutAnimation.swift; path = Sources/Shared/Core/BlueprintLayoutAnimation.swift; sourceTree = "<group>"; };
+		25E21ED7A404CA2C035D7CA7B5F6026A /* ActionData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ActionData.swift; path = Example/CustomActionControllers/ActionData.swift; sourceTree = "<group>"; };
+		276842F3A283EE87124FE6C3EAAFD184 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		2804DBAF8B73B1EB4D964CD4AA390BC4 /* BlueprintLayoutAnimationType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayoutAnimationType.swift; path = Sources/Shared/Core/BlueprintLayoutAnimationType.swift; sourceTree = "<group>"; };
+		2C897A892ED6B2AC697A049C27601607 /* Blueprints.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Blueprints.modulemap; sourceTree = "<group>"; };
+		2E824133CDD9CD5BAF9A8C324EED3B18 /* QuickTableViewController-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "QuickTableViewController-Info.plist"; sourceTree = "<group>"; };
+		2F75DDF658B39AFFB3A47C51760A09F1 /* Skype.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Skype.swift; path = Example/CustomActionControllers/Skype.swift; sourceTree = "<group>"; };
+		360AA75FCBA3672E22F4421A86F374F4 /* RadioSection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RadioSection.swift; path = Source/Model/RadioSection.swift; sourceTree = "<group>"; };
+		3658F30A3FF927268216D940C53C07F2 /* QuickTableViewController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = QuickTableViewController.modulemap; sourceTree = "<group>"; };
+		399F67D316B5F220587181FFADEAFA55 /* Blueprints.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Blueprints.xcconfig; sourceTree = "<group>"; };
+		3ADEB244D7A139C90F079B682388EACE /* BlueprintLayoutAnimation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayoutAnimation.swift; path = Sources/Shared/Core/BlueprintLayoutAnimation.swift; sourceTree = "<group>"; };
+		3C097DCF2934C758BB32766B229DD7E2 /* BlueprintLayout+iOS+tvOS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BlueprintLayout+iOS+tvOS.swift"; path = "Sources/iOS+tvOS/Extensions/BlueprintLayout+iOS+tvOS.swift"; sourceTree = "<group>"; };
+		4123075620C046AD7D822EE591DA2F5A /* Action.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Action.swift; path = Source/Action.swift; sourceTree = "<group>"; };
+		43BAA2A869B139707738A7ABE951D9E4 /* MultilineTextField.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MultilineTextField.modulemap; sourceTree = "<group>"; };
+		46CC6D77E2FE7C156D6DD6C57EE5E5AE /* Section.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Section.swift; path = Source/Model/Section.swift; sourceTree = "<group>"; };
+		5341CBA89EF26A0FFDAFA22548F0A89B /* BlueprintLayoutAnimator+iOS+tvOS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BlueprintLayoutAnimator+iOS+tvOS.swift"; path = "Sources/iOS+tvOS/Extensions/BlueprintLayoutAnimator+iOS+tvOS.swift"; sourceTree = "<group>"; };
+		539D83939AC7BD7CC9EA8BABB9060414 /* OptionRow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptionRow.swift; path = Source/Rows/OptionRow.swift; sourceTree = "<group>"; };
+		548DFC8EBFDF3858A83CD0A39AA7CD3A /* ViewAnimator-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ViewAnimator-Info.plist"; sourceTree = "<group>"; };
+		5B5E7E8F10D972D96D3902EA70C8D45A /* QuickTableViewController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "QuickTableViewController-dummy.m"; sourceTree = "<group>"; };
 		5BA93A38D09C3E9F2BA612107FD28142 /* Pods-Jotify-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Jotify-umbrella.h"; sourceTree = "<group>"; };
-		5CEB64779F4C48EE5C2E5D39FBCDFD6F /* QuickTableViewController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "QuickTableViewController-dummy.m"; sourceTree = "<group>"; };
-		5EB1D7CF7A782B9CF12DC531D1B0F728 /* VerticalMosaicBlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VerticalMosaicBlueprintLayout.swift; path = Sources/Shared/Mosaic/VerticalMosaicBlueprintLayout.swift; sourceTree = "<group>"; };
-		61933A03E96DC62CA0F5BB43ED81A4E2 /* BlueprintLayoutAnimator+iOS+tvOS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BlueprintLayoutAnimator+iOS+tvOS.swift"; path = "Sources/iOS+tvOS/Extensions/BlueprintLayoutAnimator+iOS+tvOS.swift"; sourceTree = "<group>"; };
-		68AF37C6A59ACAE411C5409BEB35DBCA /* QuickTableViewController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = QuickTableViewController.xcconfig; sourceTree = "<group>"; };
-		69902015A90CD3A81B2A2D10585633A6 /* TypeAlias.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TypeAlias.swift; path = Sources/Shared/Core/TypeAlias.swift; sourceTree = "<group>"; };
-		6F225AC51D20AFA5505F09D775710CEF /* Direction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Direction.swift; path = ViewAnimator/Classes/Models/Direction.swift; sourceTree = "<group>"; };
-		7074BBBBE960F81D73FD4A998254D5D8 /* UITableView + ViewAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UITableView + ViewAnimator.swift"; path = "ViewAnimator/Classes/Extensions/UITableView + ViewAnimator.swift"; sourceTree = "<group>"; };
-		70D9AAFD221CFA93D27802E150320351 /* QuickTableViewController-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "QuickTableViewController-Info.plist"; sourceTree = "<group>"; };
-		755D5BA9CC0F0D1F64FE727D20F9E22A /* HorizontalBlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HorizontalBlueprintLayout.swift; path = Sources/Shared/Core/HorizontalBlueprintLayout.swift; sourceTree = "<group>"; };
-		795BB586DA6FE9C2D5F22C0180D807DF /* Blueprints.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Blueprints.xcconfig; sourceTree = "<group>"; };
-		7C01C9006F20D14D9D99F2811E02C464 /* BinarySearch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BinarySearch.swift; path = Sources/Shared/Core/BinarySearch.swift; sourceTree = "<group>"; };
-		821F1BA15724E32D3262C6564B6BC486 /* QuickTableViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QuickTableViewController-prefix.pch"; sourceTree = "<group>"; };
-		86921488659EFA076D2F1FD72D8D1FC3 /* ViewAnimatorConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ViewAnimatorConfig.swift; path = ViewAnimator/Classes/ViewAnimatorConfig.swift; sourceTree = "<group>"; };
-		88AE7EC1ECBC077526F8169DEF551148 /* BlueprintLayoutAnimationType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayoutAnimationType.swift; path = Sources/Shared/Core/BlueprintLayoutAnimationType.swift; sourceTree = "<group>"; };
-		89F692F6FCAB23F4EBA01A3BC821B011 /* DetailText.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DetailText.swift; path = Source/Model/DetailText.swift; sourceTree = "<group>"; };
+		5EEA4E569E6DD99A94AAED1B8C2732EF /* ViewAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ViewAnimator.swift; path = ViewAnimator/Classes/ViewAnimator.swift; sourceTree = "<group>"; };
+		61523B004AB310EA96BCCBDC78B6BCE9 /* ActionCell.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = ActionCell.xib; path = Resource/ActionCell.xib; sourceTree = "<group>"; };
+		6572680BFAD21853A5DB608C86789753 /* DynamicCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DynamicCollectionViewFlowLayout.swift; path = Source/DynamicCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		6740B35832FDF7B067908E987D375D08 /* VerticalBlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VerticalBlueprintLayout.swift; path = Sources/Shared/Core/VerticalBlueprintLayout.swift; sourceTree = "<group>"; };
+		6B42618B6F5EA17B6ECFD8F6814B8B91 /* MultilineTextField-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MultilineTextField-Info.plist"; sourceTree = "<group>"; };
+		6BF613D3120115F4862A24AE0B457F33 /* BlueprintLayoutAnimator+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BlueprintLayoutAnimator+Extensions.swift"; path = "Sources/Shared/Core/BlueprintLayoutAnimator+Extensions.swift"; sourceTree = "<group>"; };
+		6C58F3D4C0797D5AC884EBB6272928FD /* Blueprints-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Blueprints-prefix.pch"; sourceTree = "<group>"; };
+		6C73888205287B7D01B815A369E53A3A /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UICollectionView+Extensions.swift"; path = "Sources/iOS+tvOS/Extensions/UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
+		6D31E9E2759B4F670E66036B2C0CC2A3 /* AnimationType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnimationType.swift; path = ViewAnimator/Classes/Models/AnimationType.swift; sourceTree = "<group>"; };
+		709D0118590DCCD761257AFFAD371B30 /* Direction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Direction.swift; path = ViewAnimator/Classes/Models/Direction.swift; sourceTree = "<group>"; };
+		7319C564B8F68A8BD6A66C64E1A2E470 /* MosaicPattern.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MosaicPattern.swift; path = Sources/Shared/Mosaic/MosaicPattern.swift; sourceTree = "<group>"; };
+		78B8FE1454F6E9B23CF140E530B16657 /* SkypeCell.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = SkypeCell.xib; path = Example/CustomActionControllers/SkypeCell.xib; sourceTree = "<group>"; };
+		7B2BF4C37D120D2C1967D56363AF328C /* MultilineTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultilineTextField.swift; path = MultilineTextField/Classes/MultilineTextField.swift; sourceTree = "<group>"; };
+		7CBA2377B76FB972F95724DCDCEC713C /* TapActionRow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TapActionRow.swift; path = Source/Rows/TapActionRow.swift; sourceTree = "<group>"; };
+		813FB2288FB276AAEA430ADB9843F69B /* Deprecated.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Deprecated.swift; path = Source/Model/Deprecated.swift; sourceTree = "<group>"; };
+		8178E5A3983CC20BAFE2AEE6FB2D1333 /* TypeAlias.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TypeAlias.swift; path = Sources/Shared/Core/TypeAlias.swift; sourceTree = "<group>"; };
+		841FEDF754D4389EBFF141B187E30597 /* DetailText.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DetailText.swift; path = Source/Model/DetailText.swift; sourceTree = "<group>"; };
+		86BE780EEB1150724AA97907A2FB390A /* ViewAnimator.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ViewAnimator.xcconfig; sourceTree = "<group>"; };
+		876714C097FFE30F94DDA99B0A1F34F4 /* QuickTableViewController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = QuickTableViewController.xcconfig; sourceTree = "<group>"; };
+		8893F2B502022F28FB2E903A4901DC04 /* Icon.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Icon.swift; path = Source/Model/Icon.swift; sourceTree = "<group>"; };
 		8A3786932D65044C9386124FF89579BD /* Pods-Jotify-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Jotify-acknowledgements.plist"; sourceTree = "<group>"; };
-		8AFDE9E41527DB1651043DC28F4C32BD /* Animation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Animation.swift; path = ViewAnimator/Classes/Protocols/Animation.swift; sourceTree = "<group>"; };
-		8B13F47B31DE8E43C7AD8A9CEBF65D94 /* DefaultLayoutAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultLayoutAnimator.swift; path = Sources/Shared/Core/DefaultLayoutAnimator.swift; sourceTree = "<group>"; };
-		8D38A5135E2E387D7538D5FBA6E73A28 /* BlueprintSupplementaryKind.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintSupplementaryKind.swift; path = Sources/Shared/Core/BlueprintSupplementaryKind.swift; sourceTree = "<group>"; };
-		91BE378FBDA6EA8378A93727D76D7E04 /* RowCompatible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RowCompatible.swift; path = Source/Protocol/RowCompatible.swift; sourceTree = "<group>"; };
-		9372926A61D5C49DF720B3D880FE4435 /* MultilineTextField.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MultilineTextField.modulemap; sourceTree = "<group>"; };
-		95CEC60BF1447D84352F1E422F748150 /* AnimationType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnimationType.swift; path = ViewAnimator/Classes/Models/AnimationType.swift; sourceTree = "<group>"; };
+		8BD6989AEBCAE9595074DD73B89DF751 /* ActionControllerSettings.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ActionControllerSettings.swift; path = Source/ActionControllerSettings.swift; sourceTree = "<group>"; };
+		9085D5CB9F0FF3F8BA16EA8DC2A30F5F /* BlueprintInvalidationContext.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintInvalidationContext.swift; path = Sources/Shared/Core/BlueprintInvalidationContext.swift; sourceTree = "<group>"; };
 		9929FDEC1F03F5EE9C6961F15B0DBDA9 /* Pods_Jotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9C77F2E2ED361877A648A9651B0073C8 /* ViewAnimator-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ViewAnimator-umbrella.h"; sourceTree = "<group>"; };
+		9A2BB48F3AEF7EAB3AE185CFD9EEA268 /* BinarySearch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BinarySearch.swift; path = Sources/Shared/Core/BinarySearch.swift; sourceTree = "<group>"; };
+		9A4CA151A4E0C5EB32950EA0424BA6EE /* ViewAnimator-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ViewAnimator-dummy.m"; sourceTree = "<group>"; };
+		9B9950D61CEB22A597619AC168B93E3B /* Row.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Row.swift; path = Source/Protocol/Row.swift; sourceTree = "<group>"; };
+		9D22C4CE482B274A4922FE106AF43769 /* XLActionController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "XLActionController-prefix.pch"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9DA355DD4845C40CEC45389F67AA7000 /* ViewAnimator.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ViewAnimator.xcconfig; sourceTree = "<group>"; };
-		9DBDB04D3993B9C61F7C3EECC7C27EE0 /* OptionRow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptionRow.swift; path = Source/Rows/OptionRow.swift; sourceTree = "<group>"; };
-		9DDDEA630ED599437141A5EC34CBF164 /* Blueprints-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Blueprints-umbrella.h"; sourceTree = "<group>"; };
-		9EF152ADC88C222A9137969018653D65 /* SwitchRow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwitchRow.swift; path = Source/Rows/SwitchRow.swift; sourceTree = "<group>"; };
+		A33D742289E3DC0F5D61443B4F58364F /* MultilineTextField.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MultilineTextField.xcconfig; sourceTree = "<group>"; };
 		A5684C4B6F93F54ACA555E3F3C002A23 /* Pods-Jotify-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Jotify-frameworks.sh"; sourceTree = "<group>"; };
 		A76921F7329D552AD6FA723972B6337A /* ViewAnimator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ViewAnimator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A85156AB9A0F8DE39FEB097D26C6539F /* RowStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RowStyle.swift; path = Source/Protocol/RowStyle.swift; sourceTree = "<group>"; };
-		AB01C9A2E1CBA9117106B8358B5B76D9 /* Icon.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Icon.swift; path = Source/Model/Icon.swift; sourceTree = "<group>"; };
+		A783788413D00B32FBC8BF42CC9B8E35 /* DefaultLayoutAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultLayoutAnimator.swift; path = Sources/Shared/Core/DefaultLayoutAnimator.swift; sourceTree = "<group>"; };
+		A8F91D2314000538218EE87FED2ADFD7 /* XLActionController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = XLActionController.modulemap; sourceTree = "<group>"; };
 		AE086BDDD89DEB8CE1B229A41B81B717 /* Pods-Jotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Jotify.release.xcconfig"; sourceTree = "<group>"; };
-		B0E2654286E237520352FFA3E3212C58 /* MultilineTextField-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MultilineTextField-prefix.pch"; sourceTree = "<group>"; };
-		B73BA71D4313998D423D8AA4C4A2A092 /* Subtitle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Subtitle.swift; path = Source/Model/Subtitle.swift; sourceTree = "<group>"; };
-		BB9CF26FBC9AA34DCF621321D6FC9DB1 /* MultilineTextField-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MultilineTextField-dummy.m"; sourceTree = "<group>"; };
-		BDB8719264736E3615896EB193E15DFF /* BlueprintLayout+iOS+tvOS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BlueprintLayout+iOS+tvOS.swift"; path = "Sources/iOS+tvOS/Extensions/BlueprintLayout+iOS+tvOS.swift"; sourceTree = "<group>"; };
-		C03370BC2A3A4A7A75705064D42EF193 /* BlueprintLayoutAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayoutAnimator.swift; path = Sources/Shared/Core/BlueprintLayoutAnimator.swift; sourceTree = "<group>"; };
-		CD1A5FD106714ABBEB8381EF6F8EEE36 /* MultilineTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultilineTextField.swift; path = MultilineTextField/Classes/MultilineTextField.swift; sourceTree = "<group>"; };
+		AFC52F7C6302C9DB6F6442CB512B12A1 /* XLActionController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XLActionController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B155C9838293C531559FDD0D4268F50F /* ActionController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ActionController.swift; path = Source/ActionController.swift; sourceTree = "<group>"; };
+		B3EF3E4D74E21E20C2C20400BF9F0262 /* MultilineTextField-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MultilineTextField-umbrella.h"; sourceTree = "<group>"; };
+		B47415FD539533623B296C3A49EE7654 /* SupplementaryLayoutAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SupplementaryLayoutAttributes.swift; path = Sources/Shared/Core/SupplementaryLayoutAttributes.swift; sourceTree = "<group>"; };
+		B61885D1E7B1CAB3ACF113D4A0C216DC /* XLActionController-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "XLActionController-Info.plist"; sourceTree = "<group>"; };
+		BA721673305E9077F0C6004F2F11FFA0 /* Animation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Animation.swift; path = ViewAnimator/Classes/Protocols/Animation.swift; sourceTree = "<group>"; };
+		BE73E6716B3CD7DE29BB01717BAE4FCA /* ViewAnimator.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ViewAnimator.modulemap; sourceTree = "<group>"; };
+		C3483527AE42A380A04D311D5477F626 /* UITableView + ViewAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UITableView + ViewAnimator.swift"; path = "ViewAnimator/Classes/Extensions/UITableView + ViewAnimator.swift"; sourceTree = "<group>"; };
+		C47DCC53E6C1D42D30D8022976A8FC1B /* BlueprintSupplementaryKind.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintSupplementaryKind.swift; path = Sources/Shared/Core/BlueprintSupplementaryKind.swift; sourceTree = "<group>"; };
+		C7ACDB8E2F3D744CCACD6FBE3839B95B /* RowStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RowStyle.swift; path = Source/Protocol/RowStyle.swift; sourceTree = "<group>"; };
+		CBC31971E3F78111D8B0350B116CE969 /* ActionCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ActionCell.swift; path = Source/ActionCell.swift; sourceTree = "<group>"; };
 		CE50FB49FE7EE6A951151310F30A9539 /* Pods-Jotify-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Jotify-Info.plist"; sourceTree = "<group>"; };
-		CFACD1AC0630A2985186B1FD3B775230 /* ViewAnimator-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ViewAnimator-Info.plist"; sourceTree = "<group>"; };
-		D1B01FE202C5F0132A988CE6D3F68816 /* TapActionCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TapActionCell.swift; path = Source/Views/TapActionCell.swift; sourceTree = "<group>"; };
-		D2FA8DB1B4BE0E7D31CD95647685D21A /* MultilineTextField-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MultilineTextField-umbrella.h"; sourceTree = "<group>"; };
-		D811E78D2A696F10663F68C15847C544 /* BlueprintLayoutAnimator+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BlueprintLayoutAnimator+Extensions.swift"; path = "Sources/Shared/Core/BlueprintLayoutAnimator+Extensions.swift"; sourceTree = "<group>"; };
-		DA1CED719BA665F8987726149AE6E7E7 /* ViewAnimator.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ViewAnimator.modulemap; sourceTree = "<group>"; };
-		DB3CB3560F48AFAC9330A37E2288D261 /* MosaicBlueprintPatternController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MosaicBlueprintPatternController.swift; path = Sources/Shared/Mosaic/MosaicBlueprintPatternController.swift; sourceTree = "<group>"; };
-		E2A6AE0B8D6AFDF31BF0A36CCA40DF38 /* Deprecated.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Deprecated.swift; path = Source/Model/Deprecated.swift; sourceTree = "<group>"; };
-		E38BA9F7CE05AC8FF474A48426558E4C /* BlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayout.swift; path = Sources/Shared/Core/BlueprintLayout.swift; sourceTree = "<group>"; };
+		CFA4A0F8542F74B2F2F9978C156F7D3A /* XLActionController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "XLActionController-umbrella.h"; sourceTree = "<group>"; };
+		CFE780DB095948B8260745C956ABC66B /* VerticalMosaicBlueprintLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VerticalMosaicBlueprintLayout.swift; path = Sources/Shared/Mosaic/VerticalMosaicBlueprintLayout.swift; sourceTree = "<group>"; };
+		D676D23AE58857916145017CA8B55E4A /* Subtitle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Subtitle.swift; path = Source/Model/Subtitle.swift; sourceTree = "<group>"; };
+		DBDA0A3B66BFE4CAD1C818F1A240295A /* ViewAnimator-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ViewAnimator-prefix.pch"; sourceTree = "<group>"; };
+		DD99D40A2B51FAA5F97A15A2C4A79D45 /* MultilineTextField-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MultilineTextField-prefix.pch"; sourceTree = "<group>"; };
+		DE75352E7D4BFD866113A99C56D1856E /* UICollectionView + ViewAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UICollectionView + ViewAnimator.swift"; path = "ViewAnimator/Classes/Extensions/UICollectionView + ViewAnimator.swift"; sourceTree = "<group>"; };
+		E15AA8E033BD64F9584AB2DE90EBF02A /* XLActionController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = XLActionController.xcconfig; sourceTree = "<group>"; };
 		E3D4F55A323EFF248A7A3DC7BA61BCC5 /* Blueprints.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Blueprints.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EFC9C2ED2C307486304DFE76352D06D9 /* SwitchCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwitchCell.swift; path = Source/Views/SwitchCell.swift; sourceTree = "<group>"; };
+		E6E6FF29944B31FBE50171C0CB6D4686 /* MultilineTextField-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MultilineTextField-dummy.m"; sourceTree = "<group>"; };
+		E9C0A66C5268BA19EC933BBA6F36184E /* ViewAnimator-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ViewAnimator-umbrella.h"; sourceTree = "<group>"; };
+		E9D3F9CAB4AD7C3B8370855A6B65B3B0 /* QuickTableViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QuickTableViewController-prefix.pch"; sourceTree = "<group>"; };
 		F04FA9B71BD7F28EDBB1DAE646F09CD5 /* Pods-Jotify.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Jotify.modulemap"; sourceTree = "<group>"; };
 		F12ED1B72CB071773D5516BF54E5D7B2 /* Pods-Jotify-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Jotify-acknowledgements.markdown"; sourceTree = "<group>"; };
-		FB500CC2C64410643B8189D8320FD70E /* QuickTableViewController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QuickTableViewController-umbrella.h"; sourceTree = "<group>"; };
-		FB9DAA4D75D234B2CE600C5137298923 /* Section.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Section.swift; path = Source/Model/Section.swift; sourceTree = "<group>"; };
-		FF7DDEDE5C4CCDB3BD96AEC9F647A90D /* QuickTableViewController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = QuickTableViewController.modulemap; sourceTree = "<group>"; };
+		F1842E2EC1C7A0AB6508B10FFAD20BFB /* Blueprints-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Blueprints-dummy.m"; sourceTree = "<group>"; };
+		F1F9ED64D256DB8B0CFC896D587B5521 /* Configurable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Configurable.swift; path = Source/Protocol/Configurable.swift; sourceTree = "<group>"; };
+		F461D528D72BB6629CE21AD02E0116C0 /* RowCompatible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RowCompatible.swift; path = Source/Protocol/RowCompatible.swift; sourceTree = "<group>"; };
+		F52AB84418ADB74FE0A5879E5298D962 /* SwitchCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwitchCell.swift; path = Source/Views/SwitchCell.swift; sourceTree = "<group>"; };
+		FA5E21830B2B868BD7B861FDE68C9535 /* Blueprints-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Blueprints-Info.plist"; sourceTree = "<group>"; };
+		FD608BCCF279B1277BB911F33106997F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		140EE866C367ED80B492B5E1D7EC4750 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7E4A535D281E7C4660F8ED87A746BA25 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		27DA83AE857546F69D466E7E9B926B67 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				EABD6929DC920B96A8F2500C0D9C170B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		508FFF314946AD718F0C0F89D8C04BC1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB783FB9634FCBC4CBE54253A2206287 /* CoreGraphics.framework in Frameworks */,
+				FA3F48428074CEEEE5503E92762CA78F /* Foundation.framework in Frameworks */,
+				68496CAE465CD1B5F6E3A41B692E6E42 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +266,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B10580F3653458211FE5B551B991C332 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F5082C9CDE002A288B0892FA67A671C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EC7FFE45D1CD807C7C502E18F09F15F7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -237,55 +285,68 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */ = {
+		03C5C200A0787E300053CFA8F53CA094 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E2983683FD097A93297E2F5D4E382B36 /* iOS */,
+				ABE8076CBFEE71A3B199C34F20F66745 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2896ADC3D212889A7FDFCC43A37F7821 /* Support Files */ = {
+		078E01610459884C162389E9E005DC02 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FF7DDEDE5C4CCDB3BD96AEC9F647A90D /* QuickTableViewController.modulemap */,
-				68AF37C6A59ACAE411C5409BEB35DBCA /* QuickTableViewController.xcconfig */,
-				5CEB64779F4C48EE5C2E5D39FBCDFD6F /* QuickTableViewController-dummy.m */,
-				70D9AAFD221CFA93D27802E150320351 /* QuickTableViewController-Info.plist */,
-				821F1BA15724E32D3262C6564B6BC486 /* QuickTableViewController-prefix.pch */,
-				FB500CC2C64410643B8189D8320FD70E /* QuickTableViewController-umbrella.h */,
+				E3D4F55A323EFF248A7A3DC7BA61BCC5 /* Blueprints.framework */,
+				0D04501C97E68E376442A07241A66134 /* MultilineTextField.framework */,
+				9929FDEC1F03F5EE9C6961F15B0DBDA9 /* Pods_Jotify.framework */,
+				1FA89163971C9751850A2C3EFD313884 /* QuickTableViewController.framework */,
+				A76921F7329D552AD6FA723972B6337A /* ViewAnimator.framework */,
+				AFC52F7C6302C9DB6F6442CB512B12A1 /* XLActionController.framework */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/QuickTableViewController";
+			name = Products;
 			sourceTree = "<group>";
 		};
-		2B24C083C4A78D27A85C42842BB925AC /* Support Files */ = {
+		096F4B7EF145D6569BC84A80CCEB3D6F /* QuickTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				53804F796E0B60439BE78317473A5F82 /* Blueprints.modulemap */,
-				795BB586DA6FE9C2D5F22C0180D807DF /* Blueprints.xcconfig */,
-				27B5555DCFEDE36F8B0673A1BB60152F /* Blueprints-dummy.m */,
-				4D1041364005D92C6B6002FA6ADD60C5 /* Blueprints-Info.plist */,
-				2CAA2AA3ABE3EFA4B1E2DADFCCFE36DD /* Blueprints-prefix.pch */,
-				9DDDEA630ED599437141A5EC34CBF164 /* Blueprints-umbrella.h */,
+				F1F9ED64D256DB8B0CFC896D587B5521 /* Configurable.swift */,
+				813FB2288FB276AAEA430ADB9843F69B /* Deprecated.swift */,
+				841FEDF754D4389EBFF141B187E30597 /* DetailText.swift */,
+				8893F2B502022F28FB2E903A4901DC04 /* Icon.swift */,
+				0A7BE8F0F658FC3FECD3896EB59B0A61 /* NavigationRow.swift */,
+				539D83939AC7BD7CC9EA8BABB9060414 /* OptionRow.swift */,
+				167C7644C525FCC716723742F6E54CAB /* QuickTableViewController.swift */,
+				360AA75FCBA3672E22F4421A86F374F4 /* RadioSection.swift */,
+				22F509CFF4D4D78743332CA88371CAD6 /* Reusable.swift */,
+				9B9950D61CEB22A597619AC168B93E3B /* Row.swift */,
+				F461D528D72BB6629CE21AD02E0116C0 /* RowCompatible.swift */,
+				C7ACDB8E2F3D744CCACD6FBE3839B95B /* RowStyle.swift */,
+				46CC6D77E2FE7C156D6DD6C57EE5E5AE /* Section.swift */,
+				D676D23AE58857916145017CA8B55E4A /* Subtitle.swift */,
+				F52AB84418ADB74FE0A5879E5298D962 /* SwitchCell.swift */,
+				0DBB4C42846B9810F72B9BB969BEEC00 /* SwitchRow.swift */,
+				08EB8470B4FD55E72A379CAE4F9A8239 /* TapActionCell.swift */,
+				7CBA2377B76FB972F95724DCDCEC713C /* TapActionRow.swift */,
+				E57D31F75180192F4293761466C2EB03 /* Support Files */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/Blueprints";
+			path = QuickTableViewController;
 			sourceTree = "<group>";
 		};
-		2C299053A105E92229D8F1F7B51A05CA /* ViewAnimator */ = {
+		445E702FA84466732424767653D541A3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8AFDE9E41527DB1651043DC28F4C32BD /* Animation.swift */,
-				95CEC60BF1447D84352F1E422F748150 /* AnimationType.swift */,
-				6F225AC51D20AFA5505F09D775710CEF /* Direction.swift */,
-				3C3B4FFD3A4133085CE579D2FF9A60E8 /* UICollectionView + ViewAnimator.swift */,
-				7074BBBBE960F81D73FD4A998254D5D8 /* UITableView + ViewAnimator.swift */,
-				30F57B3EC44CA640EA75AB611C1B691E /* ViewAnimator.swift */,
-				86921488659EFA076D2F1FD72D8D1FC3 /* ViewAnimatorConfig.swift */,
-				E51D21E27366E810BDE778C8FB3D600F /* Support Files */,
+				61523B004AB310EA96BCCBDC78B6BCE9 /* ActionCell.xib */,
 			);
-			path = ViewAnimator;
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		49A0594A530FB6F46AF36B587FE46D17 /* MultilineTextField */ = {
+			isa = PBXGroup;
+			children = (
+				7B2BF4C37D120D2C1967D56363AF328C /* MultilineTextField.swift */,
+				57D7466E6E7EDBC3EA2E6AD44B2EB4C1 /* Support Files */,
+			);
+			path = MultilineTextField;
 			sourceTree = "<group>";
 		};
 		4FA3F5E6FA44DBF3A38AC9C8BEF2A1DB /* Pods-Jotify */ = {
@@ -305,6 +366,20 @@
 			path = "Target Support Files/Pods-Jotify";
 			sourceTree = "<group>";
 		};
+		57D7466E6E7EDBC3EA2E6AD44B2EB4C1 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				43BAA2A869B139707738A7ABE951D9E4 /* MultilineTextField.modulemap */,
+				A33D742289E3DC0F5D61443B4F58364F /* MultilineTextField.xcconfig */,
+				E6E6FF29944B31FBE50171C0CB6D4686 /* MultilineTextField-dummy.m */,
+				6B42618B6F5EA17B6ECFD8F6814B8B91 /* MultilineTextField-Info.plist */,
+				DD99D40A2B51FAA5F97A15A2C4A79D45 /* MultilineTextField-prefix.pch */,
+				B3EF3E4D74E21E20C2C20400BF9F0262 /* MultilineTextField-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/MultilineTextField";
+			sourceTree = "<group>";
+		};
 		597D2EBD27A2EC852F7A99F0423A76C6 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -313,138 +388,169 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		59EF67603D43A8B20A61A2E7321612BE /* QuickTableViewController */ = {
+		85548C97331F544745E5F42372B4DDC4 /* XLActionController */ = {
 			isa = PBXGroup;
 			children = (
-				0B11CC00FC6925778C881311A176DE80 /* Configurable.swift */,
-				E2A6AE0B8D6AFDF31BF0A36CCA40DF38 /* Deprecated.swift */,
-				89F692F6FCAB23F4EBA01A3BC821B011 /* DetailText.swift */,
-				AB01C9A2E1CBA9117106B8358B5B76D9 /* Icon.swift */,
-				423584F03829C1554F8DF48BFCFF86BD /* NavigationRow.swift */,
-				9DBDB04D3993B9C61F7C3EECC7C27EE0 /* OptionRow.swift */,
-				52D16079BE7B37C768BB88D37B944EB9 /* QuickTableViewController.swift */,
-				4FD46AF92EB6AFC40A8CDE848EFCEFF3 /* RadioSection.swift */,
-				44A2C490B250994E2749DDF8E7790AD1 /* Reusable.swift */,
-				00C4E755D195112A92F49F7D69D368C4 /* Row.swift */,
-				91BE378FBDA6EA8378A93727D76D7E04 /* RowCompatible.swift */,
-				A85156AB9A0F8DE39FEB097D26C6539F /* RowStyle.swift */,
-				FB9DAA4D75D234B2CE600C5137298923 /* Section.swift */,
-				B73BA71D4313998D423D8AA4C4A2A092 /* Subtitle.swift */,
-				EFC9C2ED2C307486304DFE76352D06D9 /* SwitchCell.swift */,
-				9EF152ADC88C222A9137969018653D65 /* SwitchRow.swift */,
-				D1B01FE202C5F0132A988CE6D3F68816 /* TapActionCell.swift */,
-				1A6705CC74B7FD79C0D431F7412D5450 /* TapActionRow.swift */,
-				2896ADC3D212889A7FDFCC43A37F7821 /* Support Files */,
+				FFC12D89E4A1599F490BBB088DC209E9 /* Core */,
+				AD64B1E1849340B16329CB51CC598111 /* Skype */,
+				BBE2F60AA0B3177F6C0E4F0FB66DAD3E /* Support Files */,
 			);
-			path = QuickTableViewController;
+			path = XLActionController;
 			sourceTree = "<group>";
 		};
-		986569719F2EFA2A87E043ED05643EA8 /* MultilineTextField */ = {
+		87422235D26635EAA5507198341FE136 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				CD1A5FD106714ABBEB8381EF6F8EEE36 /* MultilineTextField.swift */,
-				BC9B1FDE6F5F24B9A3D93FEE9B454771 /* Support Files */,
+				2C897A892ED6B2AC697A049C27601607 /* Blueprints.modulemap */,
+				399F67D316B5F220587181FFADEAFA55 /* Blueprints.xcconfig */,
+				F1842E2EC1C7A0AB6508B10FFAD20BFB /* Blueprints-dummy.m */,
+				FA5E21830B2B868BD7B861FDE68C9535 /* Blueprints-Info.plist */,
+				6C58F3D4C0797D5AC884EBB6272928FD /* Blueprints-prefix.pch */,
+				13DF2E05FED0A85B89DA69F759FA6F41 /* Blueprints-umbrella.h */,
 			);
-			path = MultilineTextField;
+			name = "Support Files";
+			path = "../Target Support Files/Blueprints";
 			sourceTree = "<group>";
 		};
-		A6C33091FC1F089C88DB6ECBE6D64903 /* Blueprints */ = {
+		8D7E671D37AC35D2F8301C03D345C763 /* Blueprints */ = {
 			isa = PBXGroup;
 			children = (
-				7C01C9006F20D14D9D99F2811E02C464 /* BinarySearch.swift */,
-				2190F41C9D84083844D6B65BD9FAAAE0 /* BlueprintInvalidationContext.swift */,
-				E38BA9F7CE05AC8FF474A48426558E4C /* BlueprintLayout.swift */,
-				BDB8719264736E3615896EB193E15DFF /* BlueprintLayout+iOS+tvOS.swift */,
-				59812289C5ACB7FC74ECC0B6D2733FAC /* BlueprintLayoutAnimation.swift */,
-				88AE7EC1ECBC077526F8169DEF551148 /* BlueprintLayoutAnimationType.swift */,
-				C03370BC2A3A4A7A75705064D42EF193 /* BlueprintLayoutAnimator.swift */,
-				D811E78D2A696F10663F68C15847C544 /* BlueprintLayoutAnimator+Extensions.swift */,
-				61933A03E96DC62CA0F5BB43ED81A4E2 /* BlueprintLayoutAnimator+iOS+tvOS.swift */,
-				8D38A5135E2E387D7538D5FBA6E73A28 /* BlueprintSupplementaryKind.swift */,
-				8B13F47B31DE8E43C7AD8A9CEBF65D94 /* DefaultLayoutAnimator.swift */,
-				755D5BA9CC0F0D1F64FE727D20F9E22A /* HorizontalBlueprintLayout.swift */,
-				DB3CB3560F48AFAC9330A37E2288D261 /* MosaicBlueprintPatternController.swift */,
-				34EF640E74F821074624F87386D6E5F5 /* MosaicLayoutAttributes.swift */,
-				2C0FCEF00EB8C6343C201BBB7712CC7E /* MosaicPattern.swift */,
-				49F91B23DA2DFA0CEDA6CABC0DB80394 /* SupplementaryLayoutAttributes.swift */,
-				69902015A90CD3A81B2A2D10585633A6 /* TypeAlias.swift */,
-				572969B925720B0FCE299DF7DE1C3A83 /* UICollectionView+Extensions.swift */,
-				1B6C63CFE1A221BDE4979E272F50C7FB /* VerticalBlueprintLayout.swift */,
-				5EB1D7CF7A782B9CF12DC531D1B0F728 /* VerticalMosaicBlueprintLayout.swift */,
-				2B24C083C4A78D27A85C42842BB925AC /* Support Files */,
+				9A2BB48F3AEF7EAB3AE185CFD9EEA268 /* BinarySearch.swift */,
+				9085D5CB9F0FF3F8BA16EA8DC2A30F5F /* BlueprintInvalidationContext.swift */,
+				1F05035CCA8462CC170604DFFA3775D2 /* BlueprintLayout.swift */,
+				3C097DCF2934C758BB32766B229DD7E2 /* BlueprintLayout+iOS+tvOS.swift */,
+				3ADEB244D7A139C90F079B682388EACE /* BlueprintLayoutAnimation.swift */,
+				2804DBAF8B73B1EB4D964CD4AA390BC4 /* BlueprintLayoutAnimationType.swift */,
+				1239CC965F0CA6BF59A70C181D79AD0E /* BlueprintLayoutAnimator.swift */,
+				6BF613D3120115F4862A24AE0B457F33 /* BlueprintLayoutAnimator+Extensions.swift */,
+				5341CBA89EF26A0FFDAFA22548F0A89B /* BlueprintLayoutAnimator+iOS+tvOS.swift */,
+				C47DCC53E6C1D42D30D8022976A8FC1B /* BlueprintSupplementaryKind.swift */,
+				A783788413D00B32FBC8BF42CC9B8E35 /* DefaultLayoutAnimator.swift */,
+				12BE8075A04EE5B5A5DE1BED06CA47BC /* HorizontalBlueprintLayout.swift */,
+				0C031E6DCBB396E82A5DA8C403E5438C /* MosaicBlueprintPatternController.swift */,
+				0E4696619020F2A0D0D04A59AA8FA890 /* MosaicLayoutAttributes.swift */,
+				7319C564B8F68A8BD6A66C64E1A2E470 /* MosaicPattern.swift */,
+				B47415FD539533623B296C3A49EE7654 /* SupplementaryLayoutAttributes.swift */,
+				8178E5A3983CC20BAFE2AEE6FB2D1333 /* TypeAlias.swift */,
+				6C73888205287B7D01B815A369E53A3A /* UICollectionView+Extensions.swift */,
+				6740B35832FDF7B067908E987D375D08 /* VerticalBlueprintLayout.swift */,
+				CFE780DB095948B8260745C956ABC66B /* VerticalMosaicBlueprintLayout.swift */,
+				87422235D26635EAA5507198341FE136 /* Support Files */,
 			);
 			path = Blueprints;
 			sourceTree = "<group>";
 		};
-		BC9B1FDE6F5F24B9A3D93FEE9B454771 /* Support Files */ = {
+		ABE8076CBFEE71A3B199C34F20F66745 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				9372926A61D5C49DF720B3D880FE4435 /* MultilineTextField.modulemap */,
-				232FA996EAF07D1910580BFD340A9219 /* MultilineTextField.xcconfig */,
-				BB9CF26FBC9AA34DCF621321D6FC9DB1 /* MultilineTextField-dummy.m */,
-				23C4EBB6EFFB71B8F640B18C4745C4B0 /* MultilineTextField-Info.plist */,
-				B0E2654286E237520352FFA3E3212C58 /* MultilineTextField-prefix.pch */,
-				D2FA8DB1B4BE0E7D31CD95647685D21A /* MultilineTextField-umbrella.h */,
+				276842F3A283EE87124FE6C3EAAFD184 /* CoreGraphics.framework */,
+				FD608BCCF279B1277BB911F33106997F /* Foundation.framework */,
+				01BDA658338AD3813D969D7011B56B8D /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		AD64B1E1849340B16329CB51CC598111 /* Skype */ = {
+			isa = PBXGroup;
+			children = (
+				25E21ED7A404CA2C035D7CA7B5F6026A /* ActionData.swift */,
+				2F75DDF658B39AFFB3A47C51760A09F1 /* Skype.swift */,
+				78B8FE1454F6E9B23CF140E530B16657 /* SkypeCell.xib */,
+			);
+			name = Skype;
+			sourceTree = "<group>";
+		};
+		BBE2F60AA0B3177F6C0E4F0FB66DAD3E /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				A8F91D2314000538218EE87FED2ADFD7 /* XLActionController.modulemap */,
+				E15AA8E033BD64F9584AB2DE90EBF02A /* XLActionController.xcconfig */,
+				17AA7D4DA25EA323FC691C3A859EFF4D /* XLActionController-dummy.m */,
+				B61885D1E7B1CAB3ACF113D4A0C216DC /* XLActionController-Info.plist */,
+				9D22C4CE482B274A4922FE106AF43769 /* XLActionController-prefix.pch */,
+				CFA4A0F8542F74B2F2F9978C156F7D3A /* XLActionController-umbrella.h */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/MultilineTextField";
+			path = "../Target Support Files/XLActionController";
+			sourceTree = "<group>";
+		};
+		C5854EDD47EE7C0433073FD3E64A16F0 /* ViewAnimator */ = {
+			isa = PBXGroup;
+			children = (
+				BA721673305E9077F0C6004F2F11FFA0 /* Animation.swift */,
+				6D31E9E2759B4F670E66036B2C0CC2A3 /* AnimationType.swift */,
+				709D0118590DCCD761257AFFAD371B30 /* Direction.swift */,
+				DE75352E7D4BFD866113A99C56D1856E /* UICollectionView + ViewAnimator.swift */,
+				C3483527AE42A380A04D311D5477F626 /* UITableView + ViewAnimator.swift */,
+				5EEA4E569E6DD99A94AAED1B8C2732EF /* ViewAnimator.swift */,
+				07025495C2DA9647F790CD201FB8FE6D /* ViewAnimatorConfig.swift */,
+				E2A2DD3E8B80530484F67BEF27F691CC /* Support Files */,
+			);
+			path = ViewAnimator;
+			sourceTree = "<group>";
+		};
+		C8B5842C7C9169A95AFD14B285EA9D90 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8D7E671D37AC35D2F8301C03D345C763 /* Blueprints */,
+				49A0594A530FB6F46AF36B587FE46D17 /* MultilineTextField */,
+				096F4B7EF145D6569BC84A80CCEB3D6F /* QuickTableViewController */,
+				C5854EDD47EE7C0433073FD3E64A16F0 /* ViewAnimator */,
+				85548C97331F544745E5F42372B4DDC4 /* XLActionController */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */,
-				ED7AF393802EE6AED923F4C7DFB4BEC6 /* Pods */,
-				D4CE60B43D7649D8EE8E7240256AE874 /* Products */,
+				03C5C200A0787E300053CFA8F53CA094 /* Frameworks */,
+				C8B5842C7C9169A95AFD14B285EA9D90 /* Pods */,
+				078E01610459884C162389E9E005DC02 /* Products */,
 				597D2EBD27A2EC852F7A99F0423A76C6 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		D4CE60B43D7649D8EE8E7240256AE874 /* Products */ = {
+		E2A2DD3E8B80530484F67BEF27F691CC /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				E3D4F55A323EFF248A7A3DC7BA61BCC5 /* Blueprints.framework */,
-				0D04501C97E68E376442A07241A66134 /* MultilineTextField.framework */,
-				9929FDEC1F03F5EE9C6961F15B0DBDA9 /* Pods_Jotify.framework */,
-				1FA89163971C9751850A2C3EFD313884 /* QuickTableViewController.framework */,
-				A76921F7329D552AD6FA723972B6337A /* ViewAnimator.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		E2983683FD097A93297E2F5D4E382B36 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */,
-				312B988EF117AE4DE76A268D970131FE /* UIKit.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		E51D21E27366E810BDE778C8FB3D600F /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				DA1CED719BA665F8987726149AE6E7E7 /* ViewAnimator.modulemap */,
-				9DA355DD4845C40CEC45389F67AA7000 /* ViewAnimator.xcconfig */,
-				257B462B1D7BB2F3077FF220996298B9 /* ViewAnimator-dummy.m */,
-				CFACD1AC0630A2985186B1FD3B775230 /* ViewAnimator-Info.plist */,
-				3095458B137F784CC6214E3B8EAD651E /* ViewAnimator-prefix.pch */,
-				9C77F2E2ED361877A648A9651B0073C8 /* ViewAnimator-umbrella.h */,
+				BE73E6716B3CD7DE29BB01717BAE4FCA /* ViewAnimator.modulemap */,
+				86BE780EEB1150724AA97907A2FB390A /* ViewAnimator.xcconfig */,
+				9A4CA151A4E0C5EB32950EA0424BA6EE /* ViewAnimator-dummy.m */,
+				548DFC8EBFDF3858A83CD0A39AA7CD3A /* ViewAnimator-Info.plist */,
+				DBDA0A3B66BFE4CAD1C818F1A240295A /* ViewAnimator-prefix.pch */,
+				E9C0A66C5268BA19EC933BBA6F36184E /* ViewAnimator-umbrella.h */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/ViewAnimator";
 			sourceTree = "<group>";
 		};
-		ED7AF393802EE6AED923F4C7DFB4BEC6 /* Pods */ = {
+		E57D31F75180192F4293761466C2EB03 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				A6C33091FC1F089C88DB6ECBE6D64903 /* Blueprints */,
-				986569719F2EFA2A87E043ED05643EA8 /* MultilineTextField */,
-				59EF67603D43A8B20A61A2E7321612BE /* QuickTableViewController */,
-				2C299053A105E92229D8F1F7B51A05CA /* ViewAnimator */,
+				3658F30A3FF927268216D940C53C07F2 /* QuickTableViewController.modulemap */,
+				876714C097FFE30F94DDA99B0A1F34F4 /* QuickTableViewController.xcconfig */,
+				5B5E7E8F10D972D96D3902EA70C8D45A /* QuickTableViewController-dummy.m */,
+				2E824133CDD9CD5BAF9A8C324EED3B18 /* QuickTableViewController-Info.plist */,
+				E9D3F9CAB4AD7C3B8370855A6B65B3B0 /* QuickTableViewController-prefix.pch */,
+				203BCC4C5C3A337F606FE40FA971B136 /* QuickTableViewController-umbrella.h */,
 			);
-			name = Pods;
+			name = "Support Files";
+			path = "../Target Support Files/QuickTableViewController";
+			sourceTree = "<group>";
+		};
+		FFC12D89E4A1599F490BBB088DC209E9 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				4123075620C046AD7D822EE591DA2F5A /* Action.swift */,
+				CBC31971E3F78111D8B0350B116CE969 /* ActionCell.swift */,
+				B155C9838293C531559FDD0D4268F50F /* ActionController.swift */,
+				8BD6989AEBCAE9595074DD73B89DF751 /* ActionControllerSettings.swift */,
+				6572680BFAD21853A5DB608C86789753 /* DynamicCollectionViewFlowLayout.swift */,
+				445E702FA84466732424767653D541A3 /* Resources */,
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -474,11 +580,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		765110F6A3F65FAB95ED9CD7FE11C642 /* Headers */ = {
+		7EBD76CAD8F74D8EB4707E05BF73EC86 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF27E6F0866AE84A317AF9CBDA2927A2 /* Pods-Jotify-umbrella.h in Headers */,
+				D792B7AD9A92C6E9CE4412041225B5B6 /* XLActionController-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,25 +596,52 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AB28C58249F926A0F7FBA657A43A1C21 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B71A5681A1D044E14C8D4A0D78A09B63 /* Pods-Jotify-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		44B5BBE9ABE10FD7980E4945FB7C27BE /* Pods-Jotify */ = {
+		0B8CA00DBD1349A00128A00324035CA5 /* XLActionController */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 59D3B86C71BE976CB5FA4AB7CEE05FE8 /* Build configuration list for PBXNativeTarget "Pods-Jotify" */;
+			buildConfigurationList = 5C14236F01E84EA288A951B15FCCD7F6 /* Build configuration list for PBXNativeTarget "XLActionController" */;
 			buildPhases = (
-				765110F6A3F65FAB95ED9CD7FE11C642 /* Headers */,
-				953A8F6E25FB39744A44DC5BEE18D858 /* Sources */,
-				140EE866C367ED80B492B5E1D7EC4750 /* Frameworks */,
-				AC99938B5226AFE2AFDE76EF1E982DEC /* Resources */,
+				7EBD76CAD8F74D8EB4707E05BF73EC86 /* Headers */,
+				2EA1414913E14C87E19A8473453FBC84 /* Sources */,
+				508FFF314946AD718F0C0F89D8C04BC1 /* Frameworks */,
+				03BF6A542F6A8FD27D7704BE38FE6EF2 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D81A7F5E812EC6F0EC93DEEAEE4E0071 /* PBXTargetDependency */,
-				8A75AEC66A928D45E834645AB6F0F2FD /* PBXTargetDependency */,
-				0CF2F671E428F0001C9F7F36E205D55C /* PBXTargetDependency */,
-				B992CE86AD6C923FBB10CF28C57640DF /* PBXTargetDependency */,
+			);
+			name = XLActionController;
+			productName = XLActionController;
+			productReference = AFC52F7C6302C9DB6F6442CB512B12A1 /* XLActionController.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		44B5BBE9ABE10FD7980E4945FB7C27BE /* Pods-Jotify */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 078F663955D7817D3849506598753D9B /* Build configuration list for PBXNativeTarget "Pods-Jotify" */;
+			buildPhases = (
+				AB28C58249F926A0F7FBA657A43A1C21 /* Headers */,
+				B4428B4F31B318C4592B8B538513BD74 /* Sources */,
+				B10580F3653458211FE5B551B991C332 /* Frameworks */,
+				CD3DBBA1414301B7A6C3CD0112BA88BB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4CC2A61BFDBF4FC59A7509E7F0933F22 /* PBXTargetDependency */,
+				022CF1B8B03AB3CEEC0FC936E51D3AE8 /* PBXTargetDependency */,
+				E09491EC0C0A58915C2114C4B1F6E385 /* PBXTargetDependency */,
+				1F58E839CE336E4FA1621D30AF9B7648 /* PBXTargetDependency */,
+				31EA2C74791707C18302B4E9AB9BE268 /* PBXTargetDependency */,
 			);
 			name = "Pods-Jotify";
 			productName = "Pods-Jotify";
@@ -609,7 +742,7 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = D4CE60B43D7649D8EE8E7240256AE874 /* Products */;
+			productRefGroup = 078E01610459884C162389E9E005DC02 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -618,11 +751,20 @@
 				44B5BBE9ABE10FD7980E4945FB7C27BE /* Pods-Jotify */,
 				E7D16F6260A6FAB7F88EB5ACC56D911D /* QuickTableViewController */,
 				91BFC2827E7E6E2B51AB2CFF58AC6317 /* ViewAnimator */,
+				0B8CA00DBD1349A00128A00324035CA5 /* XLActionController */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		03BF6A542F6A8FD27D7704BE38FE6EF2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A3DADF654F761D537AA16A7992A903B /* ActionCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		57AEB1C9ADCB290E6667DB2D637B2A5B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -651,7 +793,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AC99938B5226AFE2AFDE76EF1E982DEC /* Resources */ = {
+		CD3DBBA1414301B7A6C3CD0112BA88BB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -667,6 +809,22 @@
 			files = (
 				C487C82512C1D6C4F93416618207D995 /* MultilineTextField-dummy.m in Sources */,
 				7D282297C299BF268079389FA2AADB72 /* MultilineTextField.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EA1414913E14C87E19A8473453FBC84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33C5F0B1316B18D22B9C594BDB36F331 /* Action.swift in Sources */,
+				0A0132BFEF899C1111AE99348A0419FB /* ActionCell.swift in Sources */,
+				F94B20BD091135A843AC1E750EB4250D /* ActionController.swift in Sources */,
+				4ACC5A46C085463B66C6F56CA12CEF74 /* ActionControllerSettings.swift in Sources */,
+				610CC0659420ECDA6EA576182EAFC1F1 /* ActionData.swift in Sources */,
+				9AE03F27611DFD2A73F420E5350D192A /* DynamicCollectionViewFlowLayout.swift in Sources */,
+				5E79BB455DE87C831B82A1DBBF668A96 /* Skype.swift in Sources */,
+				A2F5BD0CC95467A2F81759108C5A85DF /* SkypeCell.xib in Sources */,
+				9E7F70732A01301EA635240420F3E3EA /* XLActionController-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -724,11 +882,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		953A8F6E25FB39744A44DC5BEE18D858 /* Sources */ = {
+		B4428B4F31B318C4592B8B538513BD74 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C6C756A24736E3A135AF4E10C913381 /* Pods-Jotify-dummy.m in Sources */,
+				A58D5FA87B358B76466A5ACFF37F02EF /* Pods-Jotify-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -750,29 +908,35 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0CF2F671E428F0001C9F7F36E205D55C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = QuickTableViewController;
-			target = E7D16F6260A6FAB7F88EB5ACC56D911D /* QuickTableViewController */;
-			targetProxy = 20016D663727CF1E884BF6ABF750AAEA /* PBXContainerItemProxy */;
-		};
-		8A75AEC66A928D45E834645AB6F0F2FD /* PBXTargetDependency */ = {
+		022CF1B8B03AB3CEEC0FC936E51D3AE8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = MultilineTextField;
 			target = 6E4C5518BF19B2CB8B0A5DC22C926A11 /* MultilineTextField */;
-			targetProxy = 59B353986D955BA0F05D124FB17DBE7C /* PBXContainerItemProxy */;
+			targetProxy = 67256B87AD4B4EAC215E56A30E6555E2 /* PBXContainerItemProxy */;
 		};
-		B992CE86AD6C923FBB10CF28C57640DF /* PBXTargetDependency */ = {
+		1F58E839CE336E4FA1621D30AF9B7648 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = ViewAnimator;
 			target = 91BFC2827E7E6E2B51AB2CFF58AC6317 /* ViewAnimator */;
-			targetProxy = A6CAF3DA705F8842475F4F33F115B86F /* PBXContainerItemProxy */;
+			targetProxy = F86A46FF02763D1C19ED919A3EA9EB48 /* PBXContainerItemProxy */;
 		};
-		D81A7F5E812EC6F0EC93DEEAEE4E0071 /* PBXTargetDependency */ = {
+		31EA2C74791707C18302B4E9AB9BE268 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = XLActionController;
+			target = 0B8CA00DBD1349A00128A00324035CA5 /* XLActionController */;
+			targetProxy = 48E9DE0347FDD09168BE543F618BFC4F /* PBXContainerItemProxy */;
+		};
+		4CC2A61BFDBF4FC59A7509E7F0933F22 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Blueprints;
 			target = DC6FC4C42CCE924FF1D3887F9FA7BB75 /* Blueprints */;
-			targetProxy = 5212FF3DDF45ECBCB93B628216C5A325 /* PBXContainerItemProxy */;
+			targetProxy = 8ACDF4A2030655E343B5AA004F1B257E /* PBXContainerItemProxy */;
+		};
+		E09491EC0C0A58915C2114C4B1F6E385 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = QuickTableViewController;
+			target = E7D16F6260A6FAB7F88EB5ACC56D911D /* QuickTableViewController */;
+			targetProxy = 7BF19523CE02B5EC3B9340C1C8068EED /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -841,48 +1005,9 @@
 			};
 			name = Debug;
 		};
-		2070340215C1A1BBDD9F31643B98E8A3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE086BDDD89DEB8CE1B229A41B81B717 /* Pods-Jotify.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Jotify/Pods-Jotify-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Jotify/Pods-Jotify.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		31882322ABC99FC433B2634F2CE768C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9DA355DD4845C40CEC45389F67AA7000 /* ViewAnimator.xcconfig */;
+			baseConfigurationReference = 86BE780EEB1150724AA97907A2FB390A /* ViewAnimator.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -917,7 +1042,7 @@
 		};
 		3B3F7B2D74218CCB85C19B2E11D2484A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9DA355DD4845C40CEC45389F67AA7000 /* ViewAnimator.xcconfig */;
+			baseConfigurationReference = 86BE780EEB1150724AA97907A2FB390A /* ViewAnimator.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -951,183 +1076,7 @@
 			};
 			name = Release;
 		};
-		6E94C4AB2A50894C1B6747AE5040C3B8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 795BB586DA6FE9C2D5F22C0180D807DF /* Blueprints.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Blueprints/Blueprints-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Blueprints/Blueprints-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/Blueprints/Blueprints.modulemap";
-				PRODUCT_MODULE_NAME = Blueprints;
-				PRODUCT_NAME = Blueprints;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		898F02CB219D6EDA18D36286CFBFC6C7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 232FA996EAF07D1910580BFD340A9219 /* MultilineTextField.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/MultilineTextField/MultilineTextField-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/MultilineTextField/MultilineTextField-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/MultilineTextField/MultilineTextField.modulemap";
-				PRODUCT_MODULE_NAME = MultilineTextField;
-				PRODUCT_NAME = MultilineTextField;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		8E59AE2321916022058B2927ADA52B9A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 795BB586DA6FE9C2D5F22C0180D807DF /* Blueprints.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Blueprints/Blueprints-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Blueprints/Blueprints-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/Blueprints/Blueprints.modulemap";
-				PRODUCT_MODULE_NAME = Blueprints;
-				PRODUCT_NAME = Blueprints;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		CEF933C20CF652BB70FB59F1E64BB961 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 68AF37C6A59ACAE411C5409BEB35DBCA /* QuickTableViewController.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/QuickTableViewController/QuickTableViewController-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/QuickTableViewController/QuickTableViewController-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/QuickTableViewController/QuickTableViewController.modulemap";
-				PRODUCT_MODULE_NAME = QuickTableViewController;
-				PRODUCT_NAME = QuickTableViewController;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		DEC5B446F167D5DA31C166BE5B542311 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 68AF37C6A59ACAE411C5409BEB35DBCA /* QuickTableViewController.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/QuickTableViewController/QuickTableViewController-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/QuickTableViewController/QuickTableViewController-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/QuickTableViewController/QuickTableViewController.modulemap";
-				PRODUCT_MODULE_NAME = QuickTableViewController;
-				PRODUCT_NAME = QuickTableViewController;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		E3ABFDBD69406641FD55872D26B81D4C /* Debug */ = {
+		68690A96FE2485CA4333C2A55E2F1B0A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 18AD745B4E64DD0B1A8A83DBA5787E73 /* Pods-Jotify.debug.xcconfig */;
 			buildSettings = {
@@ -1165,9 +1114,256 @@
 			};
 			name = Debug;
 		};
+		6E94C4AB2A50894C1B6747AE5040C3B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 399F67D316B5F220587181FFADEAFA55 /* Blueprints.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Blueprints/Blueprints-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Blueprints/Blueprints-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Blueprints/Blueprints.modulemap";
+				PRODUCT_MODULE_NAME = Blueprints;
+				PRODUCT_NAME = Blueprints;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		79233F22A06CBEC346A0153FC4533F29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E15AA8E033BD64F9584AB2DE90EBF02A /* XLActionController.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/XLActionController/XLActionController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/XLActionController/XLActionController-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/XLActionController/XLActionController.modulemap";
+				PRODUCT_MODULE_NAME = XLActionController;
+				PRODUCT_NAME = XLActionController;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7A512A6DEBCE6C36208A0838F22FB30C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E15AA8E033BD64F9584AB2DE90EBF02A /* XLActionController.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/XLActionController/XLActionController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/XLActionController/XLActionController-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/XLActionController/XLActionController.modulemap";
+				PRODUCT_MODULE_NAME = XLActionController;
+				PRODUCT_NAME = XLActionController;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		898F02CB219D6EDA18D36286CFBFC6C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A33D742289E3DC0F5D61443B4F58364F /* MultilineTextField.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/MultilineTextField/MultilineTextField-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MultilineTextField/MultilineTextField-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/MultilineTextField/MultilineTextField.modulemap";
+				PRODUCT_MODULE_NAME = MultilineTextField;
+				PRODUCT_NAME = MultilineTextField;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8E59AE2321916022058B2927ADA52B9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 399F67D316B5F220587181FFADEAFA55 /* Blueprints.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Blueprints/Blueprints-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Blueprints/Blueprints-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Blueprints/Blueprints.modulemap";
+				PRODUCT_MODULE_NAME = Blueprints;
+				PRODUCT_NAME = Blueprints;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		CEF933C20CF652BB70FB59F1E64BB961 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 876714C097FFE30F94DDA99B0A1F34F4 /* QuickTableViewController.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/QuickTableViewController/QuickTableViewController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/QuickTableViewController/QuickTableViewController-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/QuickTableViewController/QuickTableViewController.modulemap";
+				PRODUCT_MODULE_NAME = QuickTableViewController;
+				PRODUCT_NAME = QuickTableViewController;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		DEC5B446F167D5DA31C166BE5B542311 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 876714C097FFE30F94DDA99B0A1F34F4 /* QuickTableViewController.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/QuickTableViewController/QuickTableViewController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/QuickTableViewController/QuickTableViewController-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/QuickTableViewController/QuickTableViewController.modulemap";
+				PRODUCT_MODULE_NAME = QuickTableViewController;
+				PRODUCT_NAME = QuickTableViewController;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		E7223BA5C49BF0FCF1B382506A0DBE43 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 232FA996EAF07D1910580BFD340A9219 /* MultilineTextField.xcconfig */;
+			baseConfigurationReference = A33D742289E3DC0F5D61443B4F58364F /* MultilineTextField.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1260,9 +1456,57 @@
 			};
 			name = Release;
 		};
+		F097C10D2A7020684DEDFE690F81F5A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE086BDDD89DEB8CE1B229A41B81B717 /* Pods-Jotify.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Jotify/Pods-Jotify-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Jotify/Pods-Jotify.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		078F663955D7817D3849506598753D9B /* Build configuration list for PBXNativeTarget "Pods-Jotify" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68690A96FE2485CA4333C2A55E2F1B0A /* Debug */,
+				F097C10D2A7020684DEDFE690F81F5A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3530097CDF4CFB896A5A977314987438 /* Build configuration list for PBXNativeTarget "Blueprints" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1299,11 +1543,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		59D3B86C71BE976CB5FA4AB7CEE05FE8 /* Build configuration list for PBXNativeTarget "Pods-Jotify" */ = {
+		5C14236F01E84EA288A951B15FCCD7F6 /* Build configuration list for PBXNativeTarget "XLActionController" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E3ABFDBD69406641FD55872D26B81D4C /* Debug */,
-				2070340215C1A1BBDD9F31643B98E8A3 /* Release */,
+				7A512A6DEBCE6C36208A0838F22FB30C /* Debug */,
+				79233F22A06CBEC346A0153FC4533F29 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

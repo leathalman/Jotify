@@ -8,9 +8,10 @@
 
 import UIKit
 import CoreData
+import AudioToolbox
 import Blueprints
 import ViewAnimator
-import AudioToolbox
+import XLActionController
 
 class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     
@@ -69,6 +70,8 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     }
     
     @objc func handleRightButton() {
+        
+        //change this to based on UserDefualts instead of pressed, because you can start with sort by content and then the button doesnt to anything
         
         if pressed == 0 {
             print("Sort by content")
@@ -248,7 +251,25 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
             generator.impactOccurred()
         }
         
-//        deleteNote(indexPath: indexPath ?? [0, 0], int: rowNumber)
+        let note = notes[indexPath?.row ?? 0]
+        let color = note.value(forKey: "color") as! String
+        var cellColor = UIColor(red: 18/255.0, green: 165/255.0, blue: 244/255.0, alpha: 1.0)
+        colorFromString(color, &cellColor)
+
+        let actionController = SkypeActionController()
+        actionController.backgroundColor = cellColor
+        
+        actionController.addAction(Action("Take photo", style: .default, handler: { action in
+        }))
+        actionController.addAction(Action("Delete Note", style: .default, handler: { action in
+            print("1")
+            self.deleteNote(indexPath: indexPath ?? [0, 0], int: rowNumber)
+        }))
+        actionController.addAction(Action("Remove profile picture", style: .default, handler: { action in
+        }))
+        actionController.addAction(Action("Cancel", style: .cancel, handler: nil))
+        
+        present(actionController, animated: true, completion: nil)
     }
     
     func deleteNote(indexPath: IndexPath, int: Int) {
@@ -325,6 +346,10 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         }
         
         cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapHandler(_:))))
+        
+        
+        //fix gestures are applied to cells
+        print(cell.gestureRecognizers)
         
         return cell
     }

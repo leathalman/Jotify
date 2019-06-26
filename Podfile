@@ -10,5 +10,7 @@ pod'MultilineTextField'
 pod'Blueprints'
 pod'QuickTableViewController'
 pod'ViewAnimator'
+pod'XLActionController'
+pod'XLActionController/Skype'
 
 end
