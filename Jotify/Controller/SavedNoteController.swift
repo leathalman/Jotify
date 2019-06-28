@@ -46,6 +46,8 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
             animateCells()
             firstLaunch = 2
         }
+        
+        self.navigationController?.delegate = self
     }
  
     func setupView() {
@@ -89,6 +91,18 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
             pressed = 0
             
         }
+        
+        if UIDevice.current.hasTapticEngine == true {
+            //iPhone 6s and iPhone 6s Plus
+            let peek = SystemSoundID(1519)
+            AudioServicesPlaySystemSoundWithCompletion(peek, nil)
+            
+        } else if UIDevice.current.hasHapticFeedback == true {
+            //iPhone 7 and newer
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
+        }
+        
         fetchNotesFromCoreData()
         animateCells()
     }
@@ -212,7 +226,6 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         let dateString = dateFormatter.string(from: updateDate)
 
         noteDetailController.navigationController?.navigationItem.title = dateString
-
         noteDetailController.navigationTitle = dateString
 
         var cellColor: UIColor = .white
@@ -221,41 +234,36 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         noteDetailController.backgroundColor = cellColor
         noteDetailController.detailText = content
         noteDetailController.index = rowNumber
+        
+        noteDetailController.hidesBottomBarWhenPushed = true
 
 //        present(noteDetailController, animated: true, completion: nil)
         navigationController?.pushViewController(noteDetailController, animated: true)
+        
     }
     
     @objc func longTouchHandler(sender: UILongPressGestureRecognizer) {
-        print("Long Pressed")
-        
-        //add functionality for devices that don't have taptic or haptic
-    }
-    
-    @objc func forceTouchHandler(_ sender: ForceTouchGestureRecognizer) {
-        UINotificationFeedbackGenerator().notificationOccurred(.success)
-        print("Force touch triggered")
         
         let location = sender.location(in: self.collectionView)
         let indexPath = self.collectionView.indexPathForItem(at: location)
         let rowNumber : Int = indexPath?.row ?? 0
         
-        if UIDevice.current.hasTapticEngine == true {
-            //iPhone 6s and iPhone 6s Plus
-            let peek = SystemSoundID(1519)
-            AudioServicesPlaySystemSoundWithCompletion(peek, nil)
-            
-        } else if UIDevice.current.hasHapticFeedback == true {
-            //iPhone 7 and newer
-            let generator = UIImpactFeedbackGenerator(style: .medium)
-            generator.impactOccurred()
-        }
-        
         let note = notes[indexPath?.row ?? 0]
         let color = note.value(forKey: "color") as! String
         var cellColor = UIColor(red: 18/255.0, green: 165/255.0, blue: 244/255.0, alpha: 1.0)
         colorFromString(color, &cellColor)
-
+        
+//        if UIDevice.current.hasTapticEngine == true {
+//            //iPhone 6s and iPhone 6s Plus
+//            let peek = SystemSoundID(1519)
+//            AudioServicesPlaySystemSoundWithCompletion(peek, nil)
+//
+//        } else if UIDevice.current.hasHapticFeedback == true {
+//            //iPhone 7 and newer
+//            let generator = UIImpactFeedbackGenerator(style: .medium)
+//            generator.impactOccurred()
+//        }
+        
         let actionController = SkypeActionController()
         actionController.backgroundColor = cellColor
         
@@ -335,27 +343,10 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         cell.contentView.backgroundColor = cellColor
         cell.layer.addShadow(color: UIColor.darkGray)
         
-        
-        if UIDevice.current.hasTapticEngine {
-            //Supported
-            cell.addGestureRecognizer(ForceTouchGestureRecognizer(target: self, action: #selector(forceTouchHandler(_:))))
-
-        } else {
-            //Unsupported
-            cell.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTouchHandler(sender:))))
-        }
-        
-        cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapHandler(_:))))
-        
-        
-        //fix gestures are applied to cells
-        print(cell.gestureRecognizers)
+        cell.contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapHandler(_:))))
+        cell.contentView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTouchHandler(sender:))))
         
         return cell
-    }
-    
-    func is3DTouchAvailable(traitCollection: UITraitCollection) -> Bool {
-        return traitCollection.forceTouchCapability == UIForceTouchCapability.available
     }
     
     fileprivate func colorFromString(_ color: String, _ cellColor: inout UIColor) {
@@ -405,3 +396,22 @@ extension SavedNoteController: UISearchResultsUpdating {
         filterContentForSearchText(searchController.searchBar.text!)
     }
 }
+
+extension SavedNoteController: UINavigationControllerDelegate {
+    
+    internal func navigationController(_ navigationController: UINavigationController,
+                                      animationControllerFor operation: UINavigationController.Operation,
+                              from fromVC: UIViewController,
+                              to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        switch operation {
+        case .push:
+            return PopAnimator()
+        case .pop:
+            return SystemPopAnimator(type: .navigation)
+        default:
+            return nil
+        }
+    }
+}
+
+

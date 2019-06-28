@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 import UserNotifications
 
 class NoteDetailController: UIViewController {
@@ -20,7 +19,7 @@ class NoteDetailController: UIViewController {
     var notes: [Note] = []
     var filteredNotes: [Note] = []
     var isFiltering: Bool = false
-
+    
     lazy var textView: UITextView = {
         let frame = CGRect(x: 0, y: 30, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         let textField = UITextView(frame: frame)
@@ -30,51 +29,32 @@ class NoteDetailController: UIViewController {
         textField.font = UIFont.boldSystemFont(ofSize: 32)
         textField.textContainerInset = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
         textField.text = detailText
-        
         return textField
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        navigationController?.navigationBar.isHidden = true
+        
         view.backgroundColor = backgroundColor
         navigationItem.title = navigationTitle
         navigationController?.navigationBar.prefersLargeTitles = false
         view.addSubview(textView)
-        print(backgroundColor)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
         
+        navigationController?.navigationBar.isHidden = false
+        
         let newDate = Date.timeIntervalSinceReferenceDate
         updateContent(index: index, newContent: textView.text, newDate: newDate)
         
-        if textView.text.contains("remind") || textView.text.contains("Remind") {
-            print("remind written down!")
-            
-            scheduleNotification(notificationType: "REMINDER!")
-
-        }
-    }
-
-    func updateContent(index: Int, newContent: String, newDate: Double){
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        if isFiltering == false {
-            notes[index].content = newContent
-            notes[index].date = newDate
-            
-        } else if isFiltering == true {
-            filteredNotes[index].content = newContent
-            filteredNotes[index].date = newDate
-
-        }
-        
-        appDelegate.saveContext()
+//        if textView.text.contains("remind") || textView.text.contains("Remind") {
+//            print("remind written down!")
+//            scheduleNotification(notificationType: "Reminder")
+//        }
     }
     
     func scheduleNotification(notificationType: String) {
@@ -90,7 +70,7 @@ class NoteDetailController: UIViewController {
                 let content = UNMutableNotificationContent()
                 
                 content.title = notificationType
-                content.body = "This is example how to create Notifications"
+                content.body = self.textView.text
                 content.sound = UNNotificationSound.default
                 content.badge = 1
                 
@@ -111,6 +91,25 @@ class NoteDetailController: UIViewController {
                 
             }
         }
+    }
+    
+    func updateContent(index: Int, newContent: String, newDate: Double){
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        if isFiltering == false {
+            notes[index].content = newContent
+            notes[index].date = newDate
+            
+        } else if isFiltering == true {
+            filteredNotes[index].content = newContent
+            filteredNotes[index].date = newDate
+            
+        }
+        
+        appDelegate.saveContext()
     }
     
 }
