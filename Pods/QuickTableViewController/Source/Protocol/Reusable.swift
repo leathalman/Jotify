@@ -46,7 +46,7 @@ internal extension Reusable {
 
 internal extension String {
 
-  static var typeDescriptionPattern: String {
+    static var typeDescriptionPattern: String {
     // For the types in the format of "(CustomCell in _B5334F301B8CC6AA00C64A6D)"
     return "^\\(([\\w\\d]+)\\sin\\s_[0-9A-F]+\\)$"
   }

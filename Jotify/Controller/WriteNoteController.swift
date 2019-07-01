@@ -38,17 +38,23 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        addGradient()
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(true)
-        addGradient()
+    func addColoredBackground() {
+        let colorView = UIView()
+        let frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
+        colorView.frame = frame
+        colorView.tag = 100
+        
+        let randomColor = Colors.softColors.randomElement()
+        
+        //set global value to equal generated value
+        StoredColors.noteColor = randomColor!
+        
+        colorView.backgroundColor = randomColor
+        view.insertSubview(colorView, belowSubview: inputTextView)
     }
     
     func setupView() {
@@ -57,6 +63,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         
         view.addSubview(inputTextView)
         
+        addColoredBackground()
         setupSwipes()
     }
     
@@ -81,55 +88,22 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         view.isUserInteractionEnabled = true
     }
     
-    func addGradient() {
-        //add userdefaults toggle for SettingsController
-        let theme = UserDefaults.standard.string(forKey: "gradientTheme")
-        
-        if theme == "Sunrise" {
-            Colors.shared.themeColor = GradientThemes.Sunrise
-
-        } else if theme == "Amin" {
-            Colors.shared.themeColor = GradientThemes.Amin
-
-        } else if theme == "BlueLagoon" {
-            Colors.shared.themeColor = GradientThemes.BlueLagoon
-
-        } else if theme == "Celestial" {
-            Colors.shared.themeColor = GradientThemes.Celestial
-
-        } else if theme == "DIMIGO" {
-            Colors.shared.themeColor = GradientThemes.DIMIGO
-
-        } else if theme == "GentleCare" {
-            Colors.shared.themeColor = GradientThemes.GentleCare
-
-        } else if theme == "Kyoopal" {
-            Colors.shared.themeColor = GradientThemes.Kyoopal
-
-        } else if theme == "Maldives" {
-            Colors.shared.themeColor = GradientThemes.Maldives
-
-        } else if theme == "NeonLife" {
-            Colors.shared.themeColor = GradientThemes.NeonLife
-
-        } else if theme == "SolidStone" {
-            Colors.shared.themeColor = GradientThemes.SolidStone
-
-        }
-        
-        self.view.setGradient()
-    }
-    
     @objc func handleSend() {
         
         if inputTextView.text == "" {
             
         } else {
-            let colorNameArray = ["systemRed", "systemBlue", "systemGreen", "systemPink", "systemOrange", "systemPurple", "systemTeal", "systemYellow"]
-            let color = colorNameArray.randomElement()!
+            
+            StoredColors.noteColorString = Colors.stringFromColor(color: StoredColors.noteColor)
+            
             let date = Date.timeIntervalSinceReferenceDate
-            saveNote(content: inputTextView.text, color: color, date: date)
+            saveNote(content: inputTextView.text, color: StoredColors.noteColorString, date: date)
             inputTextView.text = ""
+            
+            let colorView = self.view.viewWithTag(100)
+            colorView?.removeFromSuperview()
+            
+            addColoredBackground()
         }
     }
     

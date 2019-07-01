@@ -31,7 +31,7 @@ extension UIView {
     func setGradient(){
         self.removeGradient()
         
-        let gradientView = GradientAnimator(frame: self.frame, theme: Colors.shared.themeColor, _startPoint: GradientPoints.bottomLeft, _endPoint: GradientPoints.topRight, _animationDuration: 3.0)
+        let gradientView = GradientAnimator(frame: self.frame, theme: GradientColors.shared.themeColor, _startPoint: GradientPoints.bottomLeft, _endPoint: GradientPoints.topRight, _animationDuration: 3.0)
         gradientView.tag = 007
         self.insertSubview(gradientView, at: 0)
         gradientView.startAnimate()

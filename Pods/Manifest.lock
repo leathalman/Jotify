@@ -1,6 +1,7 @@
 PODS:
   - Blueprints (0.11.1)
   - MultilineTextField (0.2.3)
+  - Pageboy (3.2.2)
   - QuickTableViewController (1.1.1)
   - ViewAnimator (2.5.1)
   - XLActionController (5.0.0):
@@ -12,6 +13,7 @@ PODS:
 DEPENDENCIES:
   - Blueprints
   - MultilineTextField
+  - Pageboy (~> 3.2)
   - QuickTableViewController
   - ViewAnimator
   - XLActionController
@@ -21,6 +23,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Blueprints
     - MultilineTextField
+    - Pageboy
     - QuickTableViewController
     - ViewAnimator
     - XLActionController
@@ -28,10 +31,11 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Blueprints: 97e61f353b7836e6183b7ded19ed44d90a13b82e
   MultilineTextField: 10965d9c3e05a182181bd7971eb009c7607001ae
+  Pageboy: b6e8f5082c23ef2490ddf21339fb6e19673d1453
   QuickTableViewController: 30f689d314a7c1fb726c6dab6fa5ad53c6bc9e94
   ViewAnimator: 173932c659a43c5a15c665878750d92801ae2cf1
   XLActionController: d7dea0b162bd3977311bcba7d377b88d6b87a7b4
 
-PODFILE CHECKSUM: e11b9e4d239cb102f1ed482dfdc2e39b56256d3c
+PODFILE CHECKSUM: 7cd1391295f0e4593206ad96bc676084f183e35d
 
 COCOAPODS: 1.7.1

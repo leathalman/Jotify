@@ -166,3 +166,23 @@ class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     }
 }
 
+class customAnimation2: NSObject, UIViewControllerAnimatedTransitioning {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return 1.0
+    }
+    
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        
+        let containerView = transitionContext.containerView
+        let toView = transitionContext.view(forKey: .to)
+        toView?.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
+        containerView.addSubview(toView!)
+        containerView.bringSubviewToFront(toView!)
+        UIView.animate(withDuration: 1.0, animations: {
+            toView?.transform = .identity
+        })
+        transitionContext.completeTransition(true)
+    }
+    
+    
+}

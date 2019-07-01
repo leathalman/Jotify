@@ -151,8 +151,6 @@ private extension UITableViewCell.CellStyle {
     case .subtitle: return ".subtitle"
     case .value1:   return ".value1"
     case .value2:   return ".value2"
-    @unknown default:
-        return ".default"
     }
   }
 

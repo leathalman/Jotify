@@ -8,7 +8,15 @@
 
 import UIKit
 
-class SavedNoteCell: UICollectionViewCell {
+protocol Expandable {
+    func collapse()
+    func expand(in collectionView: UICollectionView)
+}
+
+class SavedNoteCell: UICollectionViewCell, Expandable {
+    
+    private var initialFrame: CGRect?
+    private var initialCornerRadius: CGFloat?
     
     var textLabel: UITextView = {
         let label = UITextView()
@@ -50,6 +58,57 @@ class SavedNoteCell: UICollectionViewCell {
         dateLabel.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 10).isActive = true
         dateLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         dateLabel.widthAnchor.constraint(equalTo: textLabel.widthAnchor).isActive = true
+    }
+    
+    // MARK: - Showing/Hiding Logic
+    
+    func hide(in collectionView: UICollectionView, frameOfSelectedCell: CGRect) {
+        initialFrame = self.frame
+        
+        let currentY = self.frame.origin.y
+        let newY: CGFloat
+        
+        if currentY < frameOfSelectedCell.origin.y {
+            let offset = frameOfSelectedCell.origin.y - currentY
+            newY = collectionView.contentOffset.y - offset
+        } else {
+            let offset = currentY - frameOfSelectedCell.maxY
+            newY = collectionView.contentOffset.y + collectionView.frame.height + offset
+        }
+        
+        self.frame.origin.y = newY
+        
+        layoutIfNeeded()
+    }
+    
+    func show() {
+        self.frame = initialFrame ?? self.frame
+        
+        initialFrame = nil
+        
+        layoutIfNeeded()
+    }
+    
+    // MARK: - Expanding/Collapsing Logic
+    
+    func expand(in collectionView: UICollectionView) {
+        initialFrame = self.frame
+        initialCornerRadius = self.contentView.layer.cornerRadius
+        
+        self.contentView.layer.cornerRadius = 0
+        self.frame = CGRect(x: 0, y: collectionView.contentOffset.y, width: collectionView.frame.width, height: collectionView.frame.height)
+        
+        layoutIfNeeded()
+    }
+    
+    func collapse() {
+        self.contentView.layer.cornerRadius = initialCornerRadius ?? self.contentView.layer.cornerRadius
+        self.frame = initialFrame ?? self.frame
+        
+        initialFrame = nil
+        initialCornerRadius = nil
+        
+        layoutIfNeeded()
     }
     
     required init?(coder aDecoder: NSCoder) {

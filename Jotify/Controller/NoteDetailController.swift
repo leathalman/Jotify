@@ -35,7 +35,7 @@ class NoteDetailController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.isHidden = true
+//        navigationController?.navigationBar.isHidden = true
         
         view.backgroundColor = backgroundColor
         navigationItem.title = navigationTitle
@@ -46,7 +46,7 @@ class NoteDetailController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
         
-        navigationController?.navigationBar.isHidden = false
+//        navigationController?.navigationBar.isHidden = false
         
         let newDate = Date.timeIntervalSinceReferenceDate
         updateContent(index: index, newContent: textView.text, newDate: newDate)

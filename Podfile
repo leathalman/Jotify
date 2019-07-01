@@ -12,5 +12,6 @@ pod'QuickTableViewController'
 pod'ViewAnimator'
 pod'XLActionController'
 pod'XLActionController/Skype'
+pod 'Pageboy', '~> 3.2'
 
 end

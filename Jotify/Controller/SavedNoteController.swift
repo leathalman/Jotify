@@ -47,7 +47,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
             firstLaunch = 2
         }
         
-        self.navigationController?.delegate = self
+//        self.navigationController?.delegate = self
     }
  
     func setupView() {
@@ -229,13 +229,13 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         noteDetailController.navigationTitle = dateString
 
         var cellColor: UIColor = .white
-
-        colorFromString(color, &cellColor)
+        cellColor = Colors.colorFromString(string: color)
+        
         noteDetailController.backgroundColor = cellColor
         noteDetailController.detailText = content
         noteDetailController.index = rowNumber
         
-        noteDetailController.hidesBottomBarWhenPushed = true
+//        noteDetailController.hidesBottomBarWhenPushed = true
 
 //        present(noteDetailController, animated: true, completion: nil)
         navigationController?.pushViewController(noteDetailController, animated: true)
@@ -251,8 +251,8 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         let note = notes[indexPath?.row ?? 0]
         let color = note.value(forKey: "color") as! String
         var cellColor = UIColor(red: 18/255.0, green: 165/255.0, blue: 244/255.0, alpha: 1.0)
-        colorFromString(color, &cellColor)
-        
+        cellColor = Colors.colorFromString(string: color)
+
 //        if UIDevice.current.hasTapticEngine == true {
 //            //iPhone 6s and iPhone 6s Plus
 //            let peek = SystemSoundID(1519)
@@ -321,7 +321,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         }
         
         let content = note.value(forKey: "content") as? String
-        let color = note.value(forKey: "color") as? String ?? "systemTeal"
+        let color = note.value(forKey: "color") as? String ?? "white"
         let date = note.value(forKey: "date") as? Double ?? 0
 
         cell.textLabel.text = content?.trunc(length: 55)
@@ -335,9 +335,12 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         let dateString = dateFormatter.string(from: updateDate)
         cell.dateLabel.text = dateString
         
-        var cellColor = UIColor.white
+        let cellColor = Colors.colorFromString(string: color)
         
-        colorFromString(color, &cellColor)
+        if cellColor == UIColor.white {
+            cell.textLabel.textColor = .black
+            cell.dateLabel.textColor = .black
+        }
         
         cell.contentView.layer.cornerRadius = 5
         cell.contentView.backgroundColor = cellColor
@@ -347,36 +350,6 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         cell.contentView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTouchHandler(sender:))))
         
         return cell
-    }
-    
-    fileprivate func colorFromString(_ color: String, _ cellColor: inout UIColor) {
-        if color == "systemTeal" {
-            cellColor = UIColor.systemTeal
-            
-        } else if color == "systemGreen" {
-            cellColor = UIColor.systemGreen
-            
-        } else if color == "systemRed" {
-            cellColor = UIColor.systemRed
-            
-        } else if color == "systemBlue" {
-            cellColor = UIColor.systemBlue
-            
-        } else if color == "systemPink" {
-            cellColor = UIColor.systemPink
-            
-        } else if color == "systemOrange" {
-            cellColor = UIColor.systemOrange
-            
-        } else if color == "systemPurple" {
-            cellColor = UIColor.systemPurple
-            
-        } else if color == "systemTeal" {
-            cellColor = UIColor.systemTeal
-            
-        } else if color == "systemYellow" {
-            cellColor = UIColor.systemYellow
-        }
     }
 }
 
@@ -397,21 +370,19 @@ extension SavedNoteController: UISearchResultsUpdating {
     }
 }
 
-extension SavedNoteController: UINavigationControllerDelegate {
-    
-    internal func navigationController(_ navigationController: UINavigationController,
-                                      animationControllerFor operation: UINavigationController.Operation,
-                              from fromVC: UIViewController,
-                              to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        switch operation {
-        case .push:
-            return PopAnimator()
-        case .pop:
-            return SystemPopAnimator(type: .navigation)
-        default:
-            return nil
-        }
-    }
-}
-
-
+//extension SavedNoteController: UINavigationControllerDelegate {
+//
+//    internal func navigationController(_ navigationController: UINavigationController,
+//                                      animationControllerFor operation: UINavigationController.Operation,
+//                              from fromVC: UIViewController,
+//                              to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        switch operation {
+//        case .push:
+//            return PopAnimator()
+//        case .pop:
+//            return SystemPopAnimator(type: .navigation)
+//        default:
+//            return nil
+//        }
+//    }
+//}
