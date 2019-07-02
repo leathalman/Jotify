@@ -8,8 +8,6 @@
 
 import UIKit
 
-let imageCache = NSCache<AnyObject, AnyObject>()
-
 extension String {
     func trunc(length: Int, trailing: String = "…") -> String {
         return (self.count > length) ? self.prefix(length) + trailing : self

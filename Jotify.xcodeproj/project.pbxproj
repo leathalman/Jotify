@@ -26,10 +26,10 @@
 		F650E17022C00AE3008D29AD /* SavedNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E15022BFFB12008D29AD /* SavedNoteController.swift */; };
 		F650E17122C00AE3008D29AD /* WriteNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E15322BFFB12008D29AD /* WriteNoteController.swift */; };
 		F650E17222C00AE3008D29AD /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E15422BFFB12008D29AD /* TabBarController.swift */; };
-		F686D84422C919F600C6F555 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F686D84322C919F600C6F555 /* Colors.swift */; };
 		F686D84D22C9269D00C6F555 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F686D84C22C9269D00C6F555 /* PageViewController.swift */; };
 		F686D85222C9B10900C6F555 /* Colors+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F686D85122C9B10900C6F555 /* Colors+Handlers.swift */; };
 		F6B6A79B22C5C15D00AAE178 /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B6A79A22C5C15D00AAE178 /* PopAnimator.swift */; };
+		F6EEBF8C22CBCF7C0087A1D3 /* WriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEBF8B22CBCF7C0087A1D3 /* WriteView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,10 +57,10 @@
 		F650E16022BFFB20008D29AD /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		F650E16222BFFB20008D29AD /* UserInfoHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoHeader.swift; sourceTree = "<group>"; };
 		F650E16322BFFB20008D29AD /* SavedNoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedNoteCell.swift; sourceTree = "<group>"; };
-		F686D84322C919F600C6F555 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		F686D84C22C9269D00C6F555 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		F686D85122C9B10900C6F555 /* Colors+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+Handlers.swift"; sourceTree = "<group>"; };
 		F6B6A79A22C5C15D00AAE178 /* PopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopAnimator.swift; sourceTree = "<group>"; };
+		F6EEBF8B22CBCF7C0087A1D3 /* WriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,7 +150,6 @@
 				F650E15B22BFFB19008D29AD /* Extensions.swift */,
 				F650E15C22BFFB19008D29AD /* GradientAnimator.swift */,
 				F6B6A79A22C5C15D00AAE178 /* PopAnimator.swift */,
-				F686D84322C919F600C6F555 /* Colors.swift */,
 				F686D85122C9B10900C6F555 /* Colors+Handlers.swift */,
 			);
 			path = Model;
@@ -162,6 +161,7 @@
 				F650E16222BFFB20008D29AD /* UserInfoHeader.swift */,
 				F650E16022BFFB20008D29AD /* SettingsCell.swift */,
 				F650E16322BFFB20008D29AD /* SavedNoteCell.swift */,
+				F6EEBF8B22CBCF7C0087A1D3 /* WriteView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -283,7 +283,6 @@
 				F650E17022C00AE3008D29AD /* SavedNoteController.swift in Sources */,
 				F650E17122C00AE3008D29AD /* WriteNoteController.swift in Sources */,
 				F650E17222C00AE3008D29AD /* TabBarController.swift in Sources */,
-				F686D84422C919F600C6F555 /* Colors.swift in Sources */,
 				F650E16F22C003A9008D29AD /* Jotify.xcdatamodeld in Sources */,
 				F650E16D22C00381008D29AD /* AppDelegate.swift in Sources */,
 				F650E15E22BFFB19008D29AD /* GradientAnimator.swift in Sources */,
@@ -292,6 +291,7 @@
 				F650E15D22BFFB19008D29AD /* Extensions.swift in Sources */,
 				F650E15622BFFB12008D29AD /* SettingsController.swift in Sources */,
 				F650E16722BFFB20008D29AD /* SavedNoteCell.swift in Sources */,
+				F6EEBF8C22CBCF7C0087A1D3 /* WriteView.swift in Sources */,
 				F644968622C16422009CC386 /* NoteDetailController.swift in Sources */,
 				F650E13322BFF35A008D29AD /* SceneDelegate.swift in Sources */,
 				F607AC0722C05C37006CB4FD /* IconSelectionController.swift in Sources */,
