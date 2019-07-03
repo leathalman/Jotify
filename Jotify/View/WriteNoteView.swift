@@ -1,5 +1,5 @@
 //
-//  WriteView.swift
+//  WriteNoteView.swift
 //  Jotify
 //
 //  Created by Harrison Leath on 7/2/19.
@@ -9,11 +9,9 @@
 import UIKit
 import MultilineTextField
 
-struct ViewElements {
-    static var inputTextField = MultilineTextField()
-}
-
-class WriteView: UIView, UITextViewDelegate {
+class WriteNoteView: UIView {
+    
+    let iconSize: CGFloat = 50
     
     public var screenWidth: CGFloat {
         return UIScreen.main.bounds.width
@@ -22,8 +20,6 @@ class WriteView: UIView, UITextViewDelegate {
     public var screenHeight: CGFloat {
         return UIScreen.main.bounds.height
     }
-    
-    let iconSize: CGFloat = 50
     
     lazy var inputTextView: MultilineTextField = {
         let frame = CGRect(x: 0, y: 100, width: screenWidth, height: screenHeight)
@@ -40,6 +36,15 @@ class WriteView: UIView, UITextViewDelegate {
         
         return textField
     }()
+    
+    lazy var colorView: UIView = {
+        let view = UIView()
+        let frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
+        view.frame = frame
+        
+        return view
+    }()
+    
     
     lazy var collectionButton: UIButton = {
         let button = UIButton()
@@ -64,45 +69,20 @@ class WriteView: UIView, UITextViewDelegate {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
-        ViewElements.inputTextField = inputTextView
-        ViewElements.inputTextField.delegate = self
-        
-        addColoredBackground()
+        clipsToBounds = true
+        getRandomColor()
         
         addSubview(inputTextView)
-//        addSubview(collectionButton)
-//        addSubview(settingButton)
+        insertSubview(colorView, belowSubview: inputTextView)
+        //        addSubview(collectionButton)
+        //        addSubview(settingButton)
     }
     
-    func addColoredBackground() {
-        let colorView = UIView()
-        let frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        colorView.frame = frame
-        colorView.tag = 100
-        
+    func getRandomColor() {
         let randomColor = Colors.softColors.randomElement()
-        
         //set global value to equal generated value
         StoredColors.noteColor = randomColor!
-        
         colorView.backgroundColor = randomColor
-        insertSubview(colorView, belowSubview: ViewElements.inputTextField)
-    }
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if (text as NSString).rangeOfCharacter(from: CharacterSet.newlines).location == NSNotFound {
-            return true
-        }
-        
-        //dismiss keyboard on return key
-        textView.resignFirstResponder()
-        let writeNoteController = WriteNoteController()
-        writeNoteController.handleSend()
-        
-        //find a way to get rid of multiple color views
-        addColoredBackground()
-        
-        return false
     }
     
     required init?(coder: NSCoder) {
@@ -110,4 +90,5 @@ class WriteView: UIView, UITextViewDelegate {
     }
     
 }
+
 

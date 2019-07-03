@@ -10,28 +10,28 @@ import UIKit
 import MultilineTextField
 import CoreData
 
-class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
+class WriteNoteController: UIViewController, UITextViewDelegate {
     
-    let inputTextView = ViewElements.inputTextField
+    let writeNoteView = WriteNoteView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view = WriteView()
+        view = writeNoteView
         
-        view.clipsToBounds = true
+        writeNoteView.inputTextView.delegate = self
     }
     
     @objc func handleSend() {
         
-        if inputTextView.text == "" {
+        if writeNoteView.inputTextView.text == "" {
             
         } else {
             StoredColors.noteColorString = Colors.stringFromColor(color: StoredColors.noteColor)
             
             let date = Date.timeIntervalSinceReferenceDate
-            saveNote(content: inputTextView.text, color: StoredColors.noteColorString, date: date)
-            inputTextView.text = ""
+            saveNote(content: writeNoteView.inputTextView.text, color: StoredColors.noteColorString, date: date)
+            writeNoteView.inputTextView.text = ""
         }
     }
     
@@ -54,6 +54,20 @@ class WriteNoteController: UIViewController, UITextViewDelegate, UITextFieldDele
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if (text as NSString).rangeOfCharacter(from: CharacterSet.newlines).location == NSNotFound {
+            return true
+        }
+        
+        //dismiss keyboard on return key
+        textView.resignFirstResponder()
+        handleSend()
+        
+        writeNoteView.getRandomColor()
+        
+        return false
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

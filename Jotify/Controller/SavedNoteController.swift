@@ -18,7 +18,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     var notes: [Note] = []
     var filteredNotes: [Note] = []
     
-    var firstLaunch: Int = 0
+    var firstLaunch: Bool = true
     var pressed: Int = 0
     
     let searchController = UISearchController(searchResultsController: nil)
@@ -32,22 +32,27 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         stickyHeaders: false,
         stickyFooters: false)
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        fetchNotesFromCoreData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        firstLaunch = 1
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        fetchNotesFromCoreData()
-        
-        if firstLaunch == 1{
-            animateCells()
-            firstLaunch = 2
-        }
-        
+//        animateIfFirstLaunch()
 //        self.navigationController?.delegate = self
+    }
+    
+    func animateIfFirstLaunch() {
+        if firstLaunch == true {
+            animateCells()
+            firstLaunch = false
+        }
     }
  
     func setupView() {
@@ -68,7 +73,6 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         view.addSubview(collectionView)
         
         setupSearchBar()
-        setupSwipes()
     }
     
     @objc func handleRightButton() {
@@ -107,29 +111,11 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         animateCells()
     }
     
-    @objc func handleSwipes(_ gesture: UISwipeGestureRecognizer) {
-        if gesture.direction == .left {
-            tabBarController?.selectedIndex = 1
-            
-        } else if gesture.direction == .right {
-        }
-    }
-    
-    func setupSwipes() {
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipes(_:)))
-        swipeLeft.direction = .left
-        view.addGestureRecognizer(swipeLeft)
-        view.isUserInteractionEnabled = true
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipes(_:)))
-        swipeRight.direction = .right
-        view.addGestureRecognizer(swipeRight)
-        view.isUserInteractionEnabled = true
-    }
-    
     func setupSearchBar() {
         searchController.searchResultsUpdater = self as UISearchResultsUpdating
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Notes"
+        searchController.hidesNavigationBarDuringPresentation = true
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
@@ -345,6 +331,9 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         cell.contentView.layer.cornerRadius = 5
         cell.contentView.backgroundColor = cellColor
         cell.layer.addShadow(color: UIColor.darkGray)
+        //work on scrolling performance
+        cell.layer.shouldRasterize = true
+        cell.layer.rasterizationScale = UIScreen.main.scale
         
         cell.contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapHandler(_:))))
         cell.contentView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTouchHandler(sender:))))

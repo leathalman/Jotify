@@ -31,6 +31,11 @@ class SettingsController: QuickTableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+//        navigationController?.navigationBar.backgroundColor = StoredColors.noteColor
+//        navigationController?.navigationBar.tintColor = StoredColors.noteColor
+//        navigationController?.navigationBar.barTintColor = StoredColors.noteColor
+
     }
     
     func setupView() {
