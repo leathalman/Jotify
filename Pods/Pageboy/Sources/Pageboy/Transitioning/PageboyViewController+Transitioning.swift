@@ -61,7 +61,7 @@ internal extension PageboyViewController {
         #if swift(>=4.2)
         displayLink.add(to: .main, forMode: .common)
         #else
-        displayLink.add(to: .main, forMode: .commonModes)
+        displayLink.add(to: .main, forMode: RunLoop.Mode.common)
         #endif
         transitionDisplayLink = displayLink
     }
@@ -170,7 +170,12 @@ internal extension CATransition {
         #if swift(>=4.2)
         type = CATransitionType(rawValue: from.style.rawValue)
         #else
-        type = from.style.rawValue
+        type = convertToCATransitionType(from.style.rawValue)
         #endif
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToCATransitionType(_ input: String) -> CATransitionType {
+	return CATransitionType(rawValue: input)
 }

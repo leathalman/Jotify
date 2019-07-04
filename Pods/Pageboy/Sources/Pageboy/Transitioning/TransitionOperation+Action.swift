@@ -66,20 +66,25 @@ internal extension TransitionOperation.Action {
             switch semanticDirection {
                 
             case .reverse:
-                return kCATransitionFromLeft
+                return convertFromCATransitionSubtype(CATransitionSubtype.fromLeft)
             default:
-                return kCATransitionFromRight
+                return convertFromCATransitionSubtype(CATransitionSubtype.fromRight)
             }
             
         case .vertical:
             switch semanticDirection {
                 
             case .reverse:
-                return kCATransitionFromBottom
+                return convertFromCATransitionSubtype(CATransitionSubtype.fromBottom)
             default:
-                return kCATransitionFromTop
+                return convertFromCATransitionSubtype(CATransitionSubtype.fromTop)
             }
         }
     }
     #endif
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromCATransitionSubtype(_ input: CATransitionSubtype) -> String {
+	return input.rawValue
 }
