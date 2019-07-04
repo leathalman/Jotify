@@ -22,60 +22,59 @@ class NoteDetailController: UIViewController {
     var filteredNotes: [Note] = []
     var isFiltering: Bool = false
     
-    lazy var textView: UITextView = {
-        let frame = CGRect(x: 0, y: 30, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        let textField = UITextView(frame: frame)
-        textField.backgroundColor = .clear
-        textField.textColor = .white
-        textField.isEditable = true
-        textField.font = UIFont.boldSystemFont(ofSize: 32)
-        textField.textContainerInset = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
-        textField.text = detailText
-        return textField
-    }()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard self.navigationController?.topViewController === self else { return }
+        self.transitionCoordinator?.animate(alongsideTransition: { [weak self](context) in
+            self?.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            self?.navigationController?.navigationBar.shadowImage = UIImage()
+            self?.navigationController?.navigationBar.backgroundColor = .clear
+            self?.navigationController?.navigationBar.barTintColor = .clear
+            self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            }, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //hide back button
-        navigationItem.setHidesBackButton(true, animated:true)
-
-        self.navigationController?.view.backgroundColor = backgroundColor
-        self.navigationController?.navigationBar.tintColor = backgroundColor
-        self.navigationController?.navigationBar.barTintColor = backgroundColor
-        self.navigationController?.navigationBar.backgroundColor = backgroundColor
-
-        //set title to white color
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        
-        //set image for right item
-        var image = UIImage(systemName: "xmark.circle.fill")
-        image = image?.withRenderingMode(.alwaysOriginal)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style:.plain, target: self, action: #selector(handleCancel))
-        
-        self.hideKeyboardWhenTappedAround()
-        
-        view.backgroundColor = backgroundColor
-        navigationItem.title = navigationTitle
-        navigationController?.navigationBar.prefersLargeTitles = false
-        view.addSubview(textView)
-        
-//        view = writeNoteView
-//        writeNoteView.colorView.backgroundColor = backgroundColor
-//        writeNoteView.inputTextView.text = detailText
-//        writeNoteView.inputTextView.font = UIFont.boldSystemFont(ofSize: 13)
+        setupView()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
         
         let newDate = Date.timeIntervalSinceReferenceDate
-        updateContent(index: index, newContent: textView.text, newDate: newDate)
+        updateContent(index: index, newContent: writeNoteView.inputTextView.text, newDate: newDate)
+        
+        self.transitionCoordinator?.animate(alongsideTransition: { [weak self](context) in
+            self?.navigationController?.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
+            self?.navigationController?.navigationBar.backgroundColor = .white
+            self?.navigationController?.navigationBar.barTintColor = .white
+            self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+            }, completion: nil)
         
 //        if textView.text.contains("remind") || textView.text.contains("Remind") {
 //            print("remind written down!")
 //            scheduleNotification(notificationType: "Reminder")
 //        }
+    }
+    
+    func setupView() {
+        view = writeNoteView
+        writeNoteView.inputTextView.frame = CGRect(x: 0, y: 100, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
+        writeNoteView.colorView.backgroundColor = backgroundColor
+        writeNoteView.inputTextView.text = detailText
+        writeNoteView.inputTextView.font = UIFont.boldSystemFont(ofSize: 18)
+        
+        navigationItem.title = navigationTitle
+        navigationItem.setHidesBackButton(true, animated:true)
+        
+        var image = UIImage(named: "cancel")
+        image = image?.withRenderingMode(.alwaysOriginal)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style:.plain, target: self, action: #selector(handleCancel))
+        
+        self.hideKeyboardWhenTappedAround()
     }
     
     @objc func handleCancel() {
@@ -96,7 +95,7 @@ class NoteDetailController: UIViewController {
                 let content = UNMutableNotificationContent()
                 
                 content.title = notificationType
-                content.body = self.textView.text
+                content.body = self.writeNoteView.inputTextView.text
                 content.sound = UNNotificationSound.default
                 content.badge = 1
                 

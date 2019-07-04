@@ -22,7 +22,7 @@ class WriteNoteView: UIView {
     }
     
     lazy var inputTextView: MultilineTextField = {
-        let frame = CGRect(x: 0, y: 100, width: screenWidth, height: screenHeight)
+        let frame = CGRect(x: 0, y: 75, width: screenWidth, height: screenHeight)
         let textField = MultilineTextField(frame: frame)
         textField.backgroundColor = .clear
         textField.placeholderColor = .white

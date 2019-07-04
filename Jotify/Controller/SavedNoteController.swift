@@ -39,6 +39,8 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
             fetchNotesFromCoreData()
             firstLaunch = false
         }
+        
+        setupPersistentNavigationBar()
     }
     
     override func viewDidLoad() {
@@ -73,6 +75,14 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         view.addSubview(collectionView)
         
         setupSearchBar()
+    }
+    
+    func setupPersistentNavigationBar() {
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.barTintColor = .white
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
     }
     
     @objc func handleRightButton() {
