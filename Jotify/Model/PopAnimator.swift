@@ -147,7 +147,7 @@ class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         UIView.animate(
             withDuration: duration,
             delay:0.0,
-            usingSpringWithDamping: 0.5,
+            usingSpringWithDamping: 0.2,
             initialSpringVelocity: 0.2,
             animations: {
                 recipeView.transform = self.presenting ? .identity : scaleTransform
@@ -164,25 +164,4 @@ class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     private func handleRadius(recipeView: UIView, hasRadius: Bool) {
         recipeView.layer.cornerRadius = hasRadius ? 20.0 : 0.0
     }
-}
-
-class customAnimation2: NSObject, UIViewControllerAnimatedTransitioning {
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 1.0
-    }
-    
-    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        
-        let containerView = transitionContext.containerView
-        let toView = transitionContext.view(forKey: .to)
-        toView?.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
-        containerView.addSubview(toView!)
-        containerView.bringSubviewToFront(toView!)
-        UIView.animate(withDuration: 1.0, animations: {
-            toView?.transform = .identity
-        })
-        transitionContext.completeTransition(true)
-    }
-    
-    
 }

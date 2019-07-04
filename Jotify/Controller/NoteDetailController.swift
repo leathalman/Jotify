@@ -16,6 +16,8 @@ class NoteDetailController: UIViewController {
     var detailText: String = ""
     var index: Int = 0
     
+    let writeNoteView = WriteNoteView()
+    
     var notes: [Note] = []
     var filteredNotes: [Note] = []
     var isFiltering: Bool = false
@@ -35,18 +37,37 @@ class NoteDetailController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        navigationController?.navigationBar.isHidden = true
+        //hide back button
+        navigationItem.setHidesBackButton(true, animated:true)
+
+        self.navigationController?.view.backgroundColor = backgroundColor
+        self.navigationController?.navigationBar.tintColor = backgroundColor
+        self.navigationController?.navigationBar.barTintColor = backgroundColor
+        self.navigationController?.navigationBar.backgroundColor = backgroundColor
+
+        //set title to white color
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
+        //set image for right item
+        var image = UIImage(systemName: "xmark.circle.fill")
+        image = image?.withRenderingMode(.alwaysOriginal)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style:.plain, target: self, action: #selector(handleCancel))
+        
+        self.hideKeyboardWhenTappedAround()
         
         view.backgroundColor = backgroundColor
         navigationItem.title = navigationTitle
         navigationController?.navigationBar.prefersLargeTitles = false
         view.addSubview(textView)
+        
+//        view = writeNoteView
+//        writeNoteView.colorView.backgroundColor = backgroundColor
+//        writeNoteView.inputTextView.text = detailText
+//        writeNoteView.inputTextView.font = UIFont.boldSystemFont(ofSize: 13)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
-        
-//        navigationController?.navigationBar.isHidden = false
         
         let newDate = Date.timeIntervalSinceReferenceDate
         updateContent(index: index, newContent: textView.text, newDate: newDate)
@@ -55,6 +76,11 @@ class NoteDetailController: UIViewController {
 //            print("remind written down!")
 //            scheduleNotification(notificationType: "Reminder")
 //        }
+    }
+    
+    @objc func handleCancel() {
+        print("STUFF")
+        navigationController?.popViewController(animated: true)
     }
     
     func scheduleNotification(notificationType: String) {

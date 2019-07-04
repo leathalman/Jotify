@@ -34,7 +34,11 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        fetchNotesFromCoreData()
+        
+        if firstLaunch == true {
+            fetchNotesFromCoreData()
+            firstLaunch = false
+        }
     }
     
     override func viewDidLoad() {
@@ -44,25 +48,21 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-//        animateIfFirstLaunch()
-//        self.navigationController?.delegate = self
+        fetchNotesFromCoreData()
     }
     
-    func animateIfFirstLaunch() {
-        if firstLaunch == true {
-            animateCells()
-            firstLaunch = false
-        }
-    }
- 
     func setupView() {
+        self.navigationController?.delegate = self
+
         navigationItem.title = "Saved Notes"
         navigationController?.navigationBar.prefersLargeTitles = false
         let rightItem = UIBarButtonItem(image: UIImage(systemName: "arrow.up.arrow.down.circle"), style: .plain, target: self, action: #selector(handleRightButton))
         navigationItem.rightBarButtonItem  = rightItem
+        navigationItem.setHidesBackButton(true, animated: true)
         
         collectionView.frame = self.view.frame
         collectionView.backgroundColor = UIColor(named: "viewBackgroundColor")
+
         collectionView.setCollectionViewLayout(blueprintLayout, animated: true)
         collectionView.alwaysBounceVertical = true
         
@@ -221,11 +221,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         noteDetailController.detailText = content
         noteDetailController.index = rowNumber
         
-//        noteDetailController.hidesBottomBarWhenPushed = true
-
-//        present(noteDetailController, animated: true, completion: nil)
         navigationController?.pushViewController(noteDetailController, animated: true)
-        
     }
     
     @objc func longTouchHandler(sender: UILongPressGestureRecognizer) {
@@ -253,13 +249,20 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         let actionController = SkypeActionController()
         actionController.backgroundColor = cellColor
         
-        actionController.addAction(Action("Take photo", style: .default, handler: { action in
+        actionController.addAction(Action("Open Note", style: .default, handler: { action in
+            print("Open note")
+            //add function for editing note here
+            
         }))
         actionController.addAction(Action("Delete Note", style: .default, handler: { action in
-            print("1")
+            print("Delete note")
             self.deleteNote(indexPath: indexPath ?? [0, 0], int: rowNumber)
+            
         }))
-        actionController.addAction(Action("Remove profile picture", style: .default, handler: { action in
+        actionController.addAction(Action("Share Note", style: .default, handler: { action in
+            print("Share note")
+            //add function for sharing the text of notes
+            
         }))
         actionController.addAction(Action("Cancel", style: .cancel, handler: nil))
         
@@ -309,7 +312,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         let content = note.value(forKey: "content") as? String
         let color = note.value(forKey: "color") as? String ?? "white"
         let date = note.value(forKey: "date") as? Double ?? 0
-
+        
         cell.textLabel.text = content?.trunc(length: 55)
         cell.textLabel.textColor = UIColor.white
         cell.dateLabel.textColor = UIColor.white
@@ -359,19 +362,19 @@ extension SavedNoteController: UISearchResultsUpdating {
     }
 }
 
-//extension SavedNoteController: UINavigationControllerDelegate {
-//
-//    internal func navigationController(_ navigationController: UINavigationController,
-//                                      animationControllerFor operation: UINavigationController.Operation,
-//                              from fromVC: UIViewController,
-//                              to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        switch operation {
-//        case .push:
-//            return PopAnimator()
-//        case .pop:
-//            return SystemPopAnimator(type: .navigation)
-//        default:
-//            return nil
-//        }
-//    }
-//}
+extension SavedNoteController: UINavigationControllerDelegate {
+
+    internal func navigationController(_ navigationController: UINavigationController,
+                                      animationControllerFor operation: UINavigationController.Operation,
+                              from fromVC: UIViewController,
+                              to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        switch operation {
+        case .push:
+            return SystemPushAnimator(type: .navigation)
+        case .pop:
+            return SystemPopAnimator(type: .navigation)
+        default:
+            return nil
+        }
+    }
+}

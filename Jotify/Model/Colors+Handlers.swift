@@ -20,6 +20,8 @@ extension UIColor {
     }
     
     static let lightRed = UIColor(r: 254, g: 129, b: 118)
+    static let lightRedBack = UIColor(r: 221, g: 86, b: 75)
+
     static let medRed = UIColor(r: 254, g: 151, b: 114)
     
     static let lightOrange = UIColor(r: 254, g: 171, b: 109)
@@ -37,6 +39,8 @@ extension UIColor {
     
     static let lightPurple = UIColor(r: 138, g: 138, b: 239)
     static let medPurple = UIColor(r: 144, g: 91, b: 236)
+    
+    static let grayBackground = UIColor(r: 242, g: 242, b: 248)
     
 }
 

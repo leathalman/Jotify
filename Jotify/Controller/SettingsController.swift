@@ -78,8 +78,8 @@ class SettingsController: QuickTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            let iconSelectionController = IconSelectionController()
-            navigationController?.pushViewController(iconSelectionController, animated: true)
+            let themeSelectionViewController = ThemeSelectionController()
+            navigationController?.pushViewController(themeSelectionViewController, animated: true)
         case 1:
             let themeSelectionViewController = ThemeSelectionController()
             navigationController?.pushViewController(themeSelectionViewController, animated: true)

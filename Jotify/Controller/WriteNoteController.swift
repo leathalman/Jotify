@@ -17,6 +17,8 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.hideKeyboardWhenTappedAround()
+        
         view = writeNoteView
         
         writeNoteView.inputTextView.delegate = self
