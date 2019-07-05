@@ -55,14 +55,15 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     }
     
     func setupView() {
-        self.navigationController?.delegate = self
-
         navigationItem.title = "Saved Notes"
         navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.setHidesBackButton(true, animated: true)
         
         let rightItem = UIBarButtonItem(image: UIImage(systemName: "arrow.up.arrow.down.circle"), style: .plain, target: self, action: #selector(handleRightButton))
         navigationItem.rightBarButtonItem  = rightItem
-        navigationItem.setHidesBackButton(true, animated: true)
+        
+        let leftItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(handleLeftButton))
+        navigationItem.leftBarButtonItem  = leftItem
         
         collectionView.frame = self.view.frame
         collectionView.backgroundColor = UIColor(named: "viewBackgroundColor")
@@ -88,7 +89,6 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     @objc func handleRightButton() {
         
         //change this to based on UserDefualts instead of pressed, because you can start with sort by content and then the button doesnt to anything
-        
         if pressed == 0 {
             print("Sort by content")
             UserDefaults.standard.set("content", forKey: "sortBy")
@@ -119,6 +119,11 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         
         fetchNotesFromCoreData()
         animateCells()
+    }
+    
+    @objc func handleLeftButton() {
+        navigationController?.pushViewController(SettingsController(style: .grouped), animated: true)
+        print("SettingsController presented")
     }
     
     func setupSearchBar() {
@@ -369,22 +374,5 @@ extension SavedNoteController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
-    }
-}
-
-extension SavedNoteController: UINavigationControllerDelegate {
-
-    internal func navigationController(_ navigationController: UINavigationController,
-                                      animationControllerFor operation: UINavigationController.Operation,
-                              from fromVC: UIViewController,
-                              to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        switch operation {
-        case .push:
-            return SystemPushAnimator(type: .navigation)
-        case .pop:
-            return SystemPopAnimator(type: .navigation)
-        default:
-            return nil
-        }
     }
 }

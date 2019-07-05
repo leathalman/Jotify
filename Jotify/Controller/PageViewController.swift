@@ -16,12 +16,11 @@ class PageViewController: PageboyViewController, PageboyViewControllerDataSource
     
     let savedNotesController = UINavigationController(rootViewController: SavedNoteController(collectionViewLayout: UICollectionViewFlowLayout()))
     let writeNotesController = WriteNoteController()
-    let settingsController = UINavigationController(rootViewController: SettingsController(style: .grouped))
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewControllers = [savedNotesController, writeNotesController, settingsController]
+        viewControllers = [savedNotesController, writeNotesController]
         
         dataSource = self
     }

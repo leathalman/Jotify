@@ -7,91 +7,87 @@
 //
 
 import UIKit
-import QuickTableViewController
 
-class SettingsController: QuickTableViewController {
-
+class SettingsController: UITableViewController {
+    
+    let sections: Array = ["Appearance", "Other"]
+    let general: Array = ["App Icon", "Note Color", "Random Colors", "Setting 4", "Setting 5"]
+    let other: Array = ["Dark Mode"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
         
-        tableContents = [
-            Section(title: "Switch", rows: [
-                SwitchRow(text: "Setting 1", switchValue: true, action: { _ in }),
-                SwitchRow(text: "Use Static Gradient", switchValue: false, action: { _ in })
-                ]),
-            
-            Section(title: "Appearance", rows: [
-                NavigationRow(text: "App Icon", detailText: .value1(""), icon: .named("NAME OF IMAGE HERE"), action: { _ in }),
-                NavigationRow(text: "Themes", detailText: .value1(""), icon: .named("NAME OF IMAGE HERE"), action: { _ in }),
-                ], footer: "Select color for gradient."),
-            
-        ]
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        view.backgroundColor = UIColor.white
         
-//        navigationController?.navigationBar.backgroundColor = StoredColors.noteColor
-//        navigationController?.navigationBar.tintColor = StoredColors.noteColor
-//        navigationController?.navigationBar.barTintColor = StoredColors.noteColor
-
-    }
-    
-    func setupView() {
         navigationItem.title = "Settings"
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.navigationBar.isTranslucent = false
-//        navigationItem.largeTitleDisplayMode = .always
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: nil)
         
-        //this is a bad implementation of this because it updates slowly, fix before release
-        navigationController?.navigationBar.backgroundColor = UIColor(named: "viewBackgroundColor")
-        navigationController?.view.backgroundColor = UIColor(named: "viewBackgroundColor")
+        tableView.contentInset = UIEdgeInsets(top: -36, left: 0, bottom: 0, right: 0)
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.isUserInteractionEnabled = true
-        
-        setupSwipes()
+        tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
     }
     
-    @objc func handleSwipes(_ gesture: UISwipeGestureRecognizer) {
-        if gesture.direction == .left {
-            
-        } else if gesture.direction == .right {
-            tabBarController?.selectedIndex = 1
-            
-        }
+    override func numberOfSections(in tableView: UITableView) -> Int{
+        return sections.count
     }
     
-    func setupSwipes() {
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipes(_:)))
-        swipeLeft.direction = .left
-        view.addGestureRecognizer(swipeLeft)
-        view.isUserInteractionEnabled = true
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipes(_:)))
-        swipeRight.direction = .right
-        view.addGestureRecognizer(swipeRight)
-        view.isUserInteractionEnabled = true
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section]
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0:
-            let themeSelectionViewController = ThemeSelectionController()
-            navigationController?.pushViewController(themeSelectionViewController, animated: true)
-        case 1:
-            let themeSelectionViewController = ThemeSelectionController()
-            navigationController?.pushViewController(themeSelectionViewController, animated: true)
-        case 2:
-            print("3")
-        default:
-            break
+        print("Num: \(indexPath.row)")
+        if indexPath.section == 0 {
+            print("Value: \(general[indexPath.row])")
+        } else if indexPath.section == 1 {
+            print("Value: \(other[indexPath.row])")
         }
     }
     
-    @objc func actionEdit() {
-        dismiss(animated: true, completion: nil)
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return general.count
+        } else if section == 1 {
+            return other.count
+        } else {
+            return 0
+        }
+    }
+    
+    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.section == 0 {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+            
+            cell.textLabel?.text = "\(general[indexPath.row])"
+            
+                cell.backgroundColor = UIColor.white
+                cell.textLabel?.textColor = UIColor.black
+            
+            return cell
+            
+        } else if indexPath.section == 1 {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+            
+            cell.textLabel?.text = "Dark Mode"
+            
+            return cell
+            
+        } else {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+            
+
+                cell.backgroundColor = UIColor.white
+                cell.textLabel?.textColor = UIColor.black
+            return cell
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
     
 }

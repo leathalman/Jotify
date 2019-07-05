@@ -13,9 +13,7 @@
 		F650E13D22BFF35C008D29AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F650E13C22BFF35C008D29AD /* Assets.xcassets */; };
 		F650E14022BFF35C008D29AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F650E13E22BFF35C008D29AD /* LaunchScreen.storyboard */; };
 		F650E15622BFFB12008D29AD /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E15122BFFB12008D29AD /* SettingsController.swift */; };
-		F650E15722BFFB12008D29AD /* ThemeSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E15222BFFB12008D29AD /* ThemeSelectionController.swift */; };
 		F650E15D22BFFB19008D29AD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E15B22BFFB19008D29AD /* Extensions.swift */; };
-		F650E15E22BFFB19008D29AD /* GradientAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E15C22BFFB19008D29AD /* GradientAnimator.swift */; };
 		F650E16422BFFB20008D29AD /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E16022BFFB20008D29AD /* SettingsCell.swift */; };
 		F650E16622BFFB20008D29AD /* UserInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E16222BFFB20008D29AD /* UserInfoHeader.swift */; };
 		F650E16722BFFB20008D29AD /* SavedNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E16322BFFB20008D29AD /* SavedNoteCell.swift */; };
@@ -24,9 +22,9 @@
 		F650E16F22C003A9008D29AD /* Jotify.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F650E13922BFF35A008D29AD /* Jotify.xcdatamodeld */; };
 		F650E17022C00AE3008D29AD /* SavedNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E15022BFFB12008D29AD /* SavedNoteController.swift */; };
 		F650E17122C00AE3008D29AD /* WriteNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E15322BFFB12008D29AD /* WriteNoteController.swift */; };
+		F666D4B222CFED2D00DECE27 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */; };
 		F686D84D22C9269D00C6F555 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F686D84C22C9269D00C6F555 /* PageViewController.swift */; };
 		F686D85222C9B10900C6F555 /* Colors+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F686D85122C9B10900C6F555 /* Colors+Handlers.swift */; };
-		F6B6A79B22C5C15D00AAE178 /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B6A79A22C5C15D00AAE178 /* PopAnimator.swift */; };
 		F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,16 +44,14 @@
 		F650E14922BFF36D008D29AD /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		F650E15022BFFB12008D29AD /* SavedNoteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedNoteController.swift; sourceTree = "<group>"; };
 		F650E15122BFFB12008D29AD /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
-		F650E15222BFFB12008D29AD /* ThemeSelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeSelectionController.swift; sourceTree = "<group>"; };
 		F650E15322BFFB12008D29AD /* WriteNoteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteNoteController.swift; sourceTree = "<group>"; };
 		F650E15B22BFFB19008D29AD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		F650E15C22BFFB19008D29AD /* GradientAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientAnimator.swift; sourceTree = "<group>"; };
 		F650E16022BFFB20008D29AD /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		F650E16222BFFB20008D29AD /* UserInfoHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoHeader.swift; sourceTree = "<group>"; };
 		F650E16322BFFB20008D29AD /* SavedNoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedNoteCell.swift; sourceTree = "<group>"; };
+		F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 		F686D84C22C9269D00C6F555 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		F686D85122C9B10900C6F555 /* Colors+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+Handlers.swift"; sourceTree = "<group>"; };
-		F6B6A79A22C5C15D00AAE178 /* PopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopAnimator.swift; sourceTree = "<group>"; };
 		F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -132,7 +128,6 @@
 				F650E15022BFFB12008D29AD /* SavedNoteController.swift */,
 				F650E15322BFFB12008D29AD /* WriteNoteController.swift */,
 				F650E15122BFFB12008D29AD /* SettingsController.swift */,
-				F650E15222BFFB12008D29AD /* ThemeSelectionController.swift */,
 				F686D84C22C9269D00C6F555 /* PageViewController.swift */,
 			);
 			path = Controller;
@@ -141,9 +136,8 @@
 		F650E15A22BFFB19008D29AD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */,
 				F650E15B22BFFB19008D29AD /* Extensions.swift */,
-				F650E15C22BFFB19008D29AD /* GradientAnimator.swift */,
-				F6B6A79A22C5C15D00AAE178 /* PopAnimator.swift */,
 				F686D85122C9B10900C6F555 /* Colors+Handlers.swift */,
 			);
 			path = Model;
@@ -278,13 +272,11 @@
 				F650E17122C00AE3008D29AD /* WriteNoteController.swift in Sources */,
 				F650E16F22C003A9008D29AD /* Jotify.xcdatamodeld in Sources */,
 				F650E16D22C00381008D29AD /* AppDelegate.swift in Sources */,
-				F650E15E22BFFB19008D29AD /* GradientAnimator.swift in Sources */,
-				F6B6A79B22C5C15D00AAE178 /* PopAnimator.swift in Sources */,
-				F650E15722BFFB12008D29AD /* ThemeSelectionController.swift in Sources */,
 				F650E15D22BFFB19008D29AD /* Extensions.swift in Sources */,
 				F650E15622BFFB12008D29AD /* SettingsController.swift in Sources */,
 				F650E16722BFFB20008D29AD /* SavedNoteCell.swift in Sources */,
 				F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */,
+				F666D4B222CFED2D00DECE27 /* UIDevice+Extensions.swift in Sources */,
 				F644968622C16422009CC386 /* NoteDetailController.swift in Sources */,
 				F650E13322BFF35A008D29AD /* SceneDelegate.swift in Sources */,
 				F686D85222C9B10900C6F555 /* Colors+Handlers.swift in Sources */,
