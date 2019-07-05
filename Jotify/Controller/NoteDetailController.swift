@@ -66,6 +66,7 @@ class NoteDetailController: UIViewController {
         writeNoteView.colorView.backgroundColor = backgroundColor
         writeNoteView.inputTextView.text = detailText
         writeNoteView.inputTextView.font = UIFont.boldSystemFont(ofSize: 18)
+        writeNoteView.inputTextView.placeholder = ""
         
         navigationItem.title = navigationTitle
         navigationItem.setHidesBackButton(true, animated:true)

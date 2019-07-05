@@ -34,6 +34,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        setupSearchBar()
         
         if firstLaunch == true {
             fetchNotesFromCoreData()
@@ -58,6 +59,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
 
         navigationItem.title = "Saved Notes"
         navigationController?.navigationBar.prefersLargeTitles = false
+        
         let rightItem = UIBarButtonItem(image: UIImage(systemName: "arrow.up.arrow.down.circle"), style: .plain, target: self, action: #selector(handleRightButton))
         navigationItem.rightBarButtonItem  = rightItem
         navigationItem.setHidesBackButton(true, animated: true)
@@ -73,8 +75,6 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         
         collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
         view.addSubview(collectionView)
-        
-        setupSearchBar()
     }
     
     func setupPersistentNavigationBar() {
@@ -127,7 +127,7 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         searchController.searchBar.placeholder = "Search Notes"
         searchController.hidesNavigationBarDuringPresentation = true
         navigationItem.searchController = searchController
-        definesPresentationContext = true
+        searchController.isActive = false
     }
     
     func searchBarIsEmpty() -> Bool {
@@ -358,9 +358,9 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
 extension SavedNoteController: CollectionViewFlowLayoutDelegate {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
+
         let height: CGFloat = 110
-        
+
         return CGSize(width: UIScreen.main.bounds.width, height: height)
     }
 }

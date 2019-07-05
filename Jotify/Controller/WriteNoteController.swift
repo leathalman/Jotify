@@ -17,11 +17,37 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupNotifications()
+        
         self.hideKeyboardWhenTappedAround()
         
         view = writeNoteView
         
         writeNoteView.inputTextView.delegate = self
+    }
+    
+    func setupNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(WriteNoteController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(WriteNoteController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        print("keyboard shown")
+        let info = notification.userInfo
+        let infoNSValue = info![UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue
+        let keyboardSize = infoNSValue.cgRectValue.size
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
+        writeNoteView.inputTextView.frame = CGRect(x: 0, y: 20, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight - 35)
+        writeNoteView.inputTextView.contentInset = contentInsets
+        writeNoteView.inputTextView.scrollIndicatorInsets = contentInsets
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        print("keyboard hidden")
+        let contentInsets = UIEdgeInsets.zero
+        writeNoteView.inputTextView.frame = CGRect(x: 0, y: 75, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
+        writeNoteView.inputTextView.contentInset = contentInsets
+        writeNoteView.inputTextView.scrollIndicatorInsets = contentInsets
     }
     
     @objc func handleSend() {

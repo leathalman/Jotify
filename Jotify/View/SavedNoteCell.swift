@@ -20,6 +20,7 @@ class SavedNoteCell: UICollectionViewCell {
         label.textColor = UIColor.darkGray
         label.text = "Loading..."
         label.isUserInteractionEnabled = false
+        label.isEditable = false
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = UIColor.clear
         return label
