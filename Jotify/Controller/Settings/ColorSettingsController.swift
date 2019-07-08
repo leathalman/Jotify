@@ -8,13 +8,15 @@
 
 import UIKit
 import CoreData
+import Pageboy
 
 class ColorSettingsController: UITableViewController {
     
     var notes: [Note] = []
     
-    let sections: Array = ["Palettes"]
-    let general: Array = ["Default", "Sunset", "Kypool", "Celestial"]
+    let sections: Array = ["Palettes", "Other"]
+    let palettes: Array = ["Default", "Sunset", "Kypool", "Celestial", "Apple Vibrant"]
+    let other: Array = ["Random Colors"]
     
     let defaults = UserDefaults.standard
     
@@ -27,31 +29,42 @@ class ColorSettingsController: UITableViewController {
         navigationItem.title = "Note Color Themes"
         
         tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
+        tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         
-        switch indexPath.row {
-        case 0:
-            defaults.set("default", forKey: "noteColorTheme")
-            setNewColorsForExistingNotes()
+        if indexPath.section == 0 {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
             
-        case 1:
-            defaults.set("sunset", forKey: "noteColorTheme")
-            setNewColorsForExistingNotes()
-
-        case 2:
-            defaults.set("kypool", forKey: "noteColorTheme")
-            setNewColorsForExistingNotes()
-
-        case 3:
-            defaults.set("celestial", forKey: "noteColorTheme")
-            setNewColorsForExistingNotes()
-
-        default:
-            print("Setting not implemented")
+            switch indexPath.row {
+            case 0:
+                defaults.set("default", forKey: "noteColorTheme")
+                setNewColorsForExistingNotes()
+                
+            case 1:
+                defaults.set("sunset", forKey: "noteColorTheme")
+                setNewColorsForExistingNotes()
+                
+            case 2:
+                defaults.set("kypool", forKey: "noteColorTheme")
+                setNewColorsForExistingNotes()
+                
+            case 3:
+                defaults.set("celestial", forKey: "noteColorTheme")
+                setNewColorsForExistingNotes()
+                
+            case 4:
+                defaults.set("appleVibrant", forKey: "noteColorTheme")
+                setNewColorsForExistingNotes()
+                
+            default:
+                print("Setting not implemented")
+            }
+        } else if indexPath.section == 1 {
+            print("Random Colors")
         }
+        
     }
     
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -60,13 +73,12 @@ class ColorSettingsController: UITableViewController {
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-        
-        cell.textLabel?.text = "\(general[indexPath.row])"
-        cell.backgroundColor = UIColor.white
-        cell.textLabel?.textColor = UIColor.black
-        
         if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+            
+            cell.textLabel?.text = "\(palettes[indexPath.row])"
+            cell.backgroundColor = UIColor.white
+            cell.textLabel?.textColor = UIColor.black
             
             switch indexPath.row {
             case 0:
@@ -85,6 +97,10 @@ class ColorSettingsController: UITableViewController {
                 if isSelectedColorFromDefaults(key: "celestial", indexPath: indexPath) == true {
                     cell.accessoryType = .checkmark
                 }
+            case 4:
+                if isSelectedColorFromDefaults(key: "appleVibrant", indexPath: indexPath) == true {
+                    cell.accessoryType = .checkmark
+                }
             default:
                 cell.accessoryType = .none
             }
@@ -93,11 +109,19 @@ class ColorSettingsController: UITableViewController {
             
         } else if indexPath.section == 1 {
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-            
-            cell.textLabel?.text = "Dark Mode"
-            
-            return cell
+            switch indexPath.row {
+            case 0:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
+                cell.textLabel?.text = "\(other[indexPath.row])"
+                cell.selectionStyle = .none
+                cell.switchButton.addTarget(self, action: #selector(randomColorSwitchPressed), for: .valueChanged)
+                return cell
+                
+            default:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+                print("cell outside of bounds")
+                return cell
+            }
             
         } else {
             
@@ -107,6 +131,23 @@ class ColorSettingsController: UITableViewController {
             cell.backgroundColor = UIColor.white
             cell.textLabel?.textColor = UIColor.black
             return cell
+        }
+    }
+    
+    @objc func randomColorSwitchPressed(sender: UISwitch) {
+        if sender.isOn {
+            print("random colors enabled")
+            let colorPickerController = ColorPickerController()
+            colorPickerController.modalPresentationStyle = .overCurrentContext
+            colorPickerController.modalTransitionStyle = .crossDissolve
+            
+            addChild(colorPickerController)
+            colorPickerController.view.frame = view.frame
+            view.addSubview(colorPickerController.view)
+            colorPickerController.didMove(toParent: self)
+//            navigationController?.pushViewController(colorPickerController, animated: true)
+        } else {
+            print("random colors disabled")
         }
     }
     
@@ -138,25 +179,37 @@ class ColorSettingsController: UITableViewController {
                 return
         }
         
+        let writeNoteView = WriteNoteView()
+        var newBackgroundColor = UIColor.white
+        
         for note in notes {
             var newColor = String()
             let colorTheme = UserDefaults.standard.string(forKey: "noteColorTheme")
             
             if colorTheme == "default" {
                 newColor = Colors.defaultColorsStrings.randomElement() ?? "white"
+                newBackgroundColor = Colors.defaultColors.randomElement() ?? UIColor.white
                 
             } else if colorTheme == "sunset" {
                 newColor = Colors.sunsetColorsStrings.randomElement() ?? "white"
+                newBackgroundColor = Colors.sunsetColors.randomElement() ?? UIColor.white
                 
             } else if colorTheme == "kypool" {
                 newColor = Colors.kypoolColorsStrings.randomElement() ?? "white"
+                newBackgroundColor = Colors.kypoolColors.randomElement() ?? UIColor.white
                 
             } else if colorTheme == "celestial" {
                 newColor = Colors.celestialColorsStrings.randomElement() ?? "white"
+                newBackgroundColor = Colors.celestialColors.randomElement() ?? UIColor.white
                 
+            } else if colorTheme == "appleVibrant" {
+                newColor = Colors.appleVibrantColorsStrings.randomElement() ?? "white"
+                newBackgroundColor = Colors.appleVibrantColors.randomElement() ?? UIColor.white
             }
             note.color = newColor
         }
+        
+        writeNoteView.colorView.backgroundColor = newBackgroundColor
         
         appDelegate.saveContext()
     }
@@ -172,6 +225,17 @@ class ColorSettingsController: UITableViewController {
         
     }
     
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Pick the color theme for your saved notes. Each theme has at least 8 colors which will be selected at random when you open the app."
+        case 1:
+            return "By default Jotify uses random color generation for all of your saved notes. Turing this off will require you to select a new default color for all notes."
+        default:
+            return ""
+        }
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int{
         return sections.count
     }
@@ -181,9 +245,12 @@ class ColorSettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return general.count
-        } else {
+        switch section {
+        case 0:
+            return palettes.count
+        case 1:
+            return other.count
+        default:
             return 0
         }
     }

@@ -24,6 +24,8 @@
 		F650E17022C00AE3008D29AD /* SavedNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E15022BFFB12008D29AD /* SavedNoteController.swift */; };
 		F650E17122C00AE3008D29AD /* WriteNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E15322BFFB12008D29AD /* WriteNoteController.swift */; };
 		F666D4B222CFED2D00DECE27 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */; };
+		F67B92DE22D2E083002C6985 /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B92DD22D2E083002C6985 /* SettingsSwitchCell.swift */; };
+		F67B92E022D2E785002C6985 /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B92DF22D2E785002C6985 /* ColorPickerController.swift */; };
 		F686D84D22C9269D00C6F555 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F686D84C22C9269D00C6F555 /* PageViewController.swift */; };
 		F686D85222C9B10900C6F555 /* Colors+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F686D85122C9B10900C6F555 /* Colors+Handlers.swift */; };
 		F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */; };
@@ -52,6 +54,8 @@
 		F650E16222BFFB20008D29AD /* UserInfoHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoHeader.swift; sourceTree = "<group>"; };
 		F650E16322BFFB20008D29AD /* SavedNoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedNoteCell.swift; sourceTree = "<group>"; };
 		F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
+		F67B92DD22D2E083002C6985 /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
+		F67B92DF22D2E785002C6985 /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
 		F686D84C22C9269D00C6F555 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		F686D85122C9B10900C6F555 /* Colors+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+Handlers.swift"; sourceTree = "<group>"; };
 		F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteView.swift; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 			children = (
 				F650E15122BFFB12008D29AD /* SettingsController.swift */,
 				F64908BA22D2BA690019BDBC /* ColorSettingsController.swift */,
+				F67B92DF22D2E785002C6985 /* ColorPickerController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -159,6 +164,7 @@
 			children = (
 				F650E16222BFFB20008D29AD /* UserInfoHeader.swift */,
 				F650E16022BFFB20008D29AD /* SettingsCell.swift */,
+				F67B92DD22D2E083002C6985 /* SettingsSwitchCell.swift */,
 				F650E16322BFFB20008D29AD /* SavedNoteCell.swift */,
 				F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */,
 			);
@@ -285,12 +291,14 @@
 				F650E16D22C00381008D29AD /* AppDelegate.swift in Sources */,
 				F650E15D22BFFB19008D29AD /* Extensions.swift in Sources */,
 				F650E15622BFFB12008D29AD /* SettingsController.swift in Sources */,
+				F67B92DE22D2E083002C6985 /* SettingsSwitchCell.swift in Sources */,
 				F650E16722BFFB20008D29AD /* SavedNoteCell.swift in Sources */,
 				F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */,
 				F666D4B222CFED2D00DECE27 /* UIDevice+Extensions.swift in Sources */,
 				F644968622C16422009CC386 /* NoteDetailController.swift in Sources */,
 				F650E13322BFF35A008D29AD /* SceneDelegate.swift in Sources */,
 				F686D85222C9B10900C6F555 /* Colors+Handlers.swift in Sources */,
+				F67B92E022D2E785002C6985 /* ColorPickerController.swift in Sources */,
 				F64908BB22D2BA690019BDBC /* ColorSettingsController.swift in Sources */,
 				F686D84D22C9269D00C6F555 /* PageViewController.swift in Sources */,
 				F650E16622BFFB20008D29AD /* UserInfoHeader.swift in Sources */,

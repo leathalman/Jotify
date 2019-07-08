@@ -10,7 +10,8 @@
 #endif
 #endif
 
+#import "ChromaColorPicker.h"
 
-FOUNDATION_EXPORT double QuickTableViewControllerVersionNumber;
-FOUNDATION_EXPORT const unsigned char QuickTableViewControllerVersionString[];
+FOUNDATION_EXPORT double ChromaColorPickerVersionNumber;
+FOUNDATION_EXPORT const unsigned char ChromaColorPickerVersionString[];
 

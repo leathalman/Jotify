@@ -11,7 +11,7 @@ import UIKit
 class SettingsController: UITableViewController {
     
     let sections: Array = ["Appearance", "Other"]
-    let general: Array = ["App Icon", "Note Colors Themes", "Setting 3", "Setting 4", "Setting 5"]
+    let general: Array = ["App Icon", "Note Color Themes", "Setting 3", "Setting 4", "Setting 5"]
     let other: Array = ["Dark Mode"]
     
     override func viewDidLoad() {

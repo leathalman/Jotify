@@ -12,12 +12,16 @@ import UIKit
 struct StoredColors {
     static var noteColor = UIColor()
     static var noteColorString = String()
+    static var staticColor = UIColor()
 }
 
 extension UIColor {
     convenience init(r: CGFloat, g: CGFloat, b: CGFloat) {
         self.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
     }
+    
+    static let grayBackground = UIColor(red: 242/255, green: 242/255, blue: 245/255, alpha: 1.0)
+    static let grayBlur = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.5)
     
     //default
     static let lightRed = UIColor(r: 254, g: 129, b: 118)
@@ -40,8 +44,6 @@ extension UIColor {
     
     static let lightPurple = UIColor(r: 138, g: 138, b: 239)
     static let medPurple = UIColor(r: 144, g: 91, b: 236)
-    
-    static let grayBackground = UIColor(r: 242, g: 242, b: 248)
     
     //sunset
     static let blue1 = UIColor(red: 0.1450980392, green: 0.4588235294, blue: 0.9882352941, alpha: 1)
@@ -87,6 +89,9 @@ class Colors {
     
     static var celestialColors = [UIColor.green3, UIColor.green4, UIColor.purple2, UIColor.purple3, UIColor.blue5, UIColor.blue6, UIColor.darkRed1, UIColor.darkRed2]
     static var celestialColorsStrings = ["green3", "green4", "purple2", "purple3", "blue5", "blue6", "darkRed1", "darkRed2"]
+    
+    static var appleVibrantColors = [UIColor.systemRed, UIColor.systemBlue, UIColor.systemGreen, UIColor.systemPink, UIColor.systemOrange, UIColor.systemPurple, UIColor.systemTeal, UIColor.systemYellow]
+    static var appleVibrantColorsStrings = ["systemRed", "systemBlue", "systemGreen", "systemPink", "systemOrange", "systemPurple", "systemTeal", "systemYellow"]
     
     static func stringFromColor(color: UIColor) -> String {
         
@@ -210,6 +215,36 @@ class Colors {
                 
             } else if color == UIColor.darkRed2 {
                 return "darkRed2"
+            }
+        }
+        
+        if UserDefaults.standard.string(forKey: "noteColorTheme") == "appleVibrant" {
+            if color == UIColor.systemTeal {
+                return "systemTeal"
+                
+            } else if color == UIColor.systemGreen {
+                return "systemGreen"
+                
+            } else if color == UIColor.systemRed {
+                return "systemRed"
+                
+            } else if color == UIColor.systemBlue {
+                return "systemBlue"
+                
+            } else if color == UIColor.systemPink {
+                return "systemPink"
+                
+            } else if color == UIColor.systemOrange {
+                return "systemOrange"
+                
+            } else if color == UIColor.systemPurple {
+                return "systemPurple"
+                
+            } else if color == UIColor.systemTeal {
+                return "systemTeal"
+                
+            } else if color == UIColor.systemYellow {
+                return "systemYellow"
             }
         }
         return "white"
@@ -337,6 +372,36 @@ class Colors {
                 
             } else if string == "darkRed2" {
                 return UIColor.darkRed2
+            }
+        }
+        
+        if UserDefaults.standard.string(forKey: "noteColorTheme") == "appleVibrant" {
+            if string == "systemTeal" {
+                return UIColor.systemTeal
+                
+            } else if string == "systemGreen" {
+                return UIColor.systemGreen
+                
+            } else if string == "systemRed" {
+                return UIColor.systemRed
+                
+            } else if string == "systemBlue" {
+                return UIColor.systemBlue
+                
+            } else if string == "systemPink" {
+                return UIColor.systemPink
+                
+            } else if string == "systemOrange" {
+                return UIColor.systemOrange
+                
+            } else if string == "systemPurple" {
+                return UIColor.systemPurple
+                
+            } else if string == "systemTeal" {
+                return UIColor.systemTeal
+                
+            } else if string == "systemYellow" {
+                return UIColor.systemYellow
             }
         }
         return UIColor.white

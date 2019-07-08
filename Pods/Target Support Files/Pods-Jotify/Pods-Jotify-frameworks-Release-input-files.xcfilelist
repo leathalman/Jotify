@@ -1,7 +1,7 @@
 ${PODS_ROOT}/Target Support Files/Pods-Jotify/Pods-Jotify-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Blueprints/Blueprints.framework
+${BUILT_PRODUCTS_DIR}/ChromaColorPicker/ChromaColorPicker.framework
 ${BUILT_PRODUCTS_DIR}/MultilineTextField/MultilineTextField.framework
 ${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework
-${BUILT_PRODUCTS_DIR}/QuickTableViewController/QuickTableViewController.framework
 ${BUILT_PRODUCTS_DIR}/ViewAnimator/ViewAnimator.framework
 ${BUILT_PRODUCTS_DIR}/XLActionController/XLActionController.framework

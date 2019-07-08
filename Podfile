@@ -23,4 +23,7 @@ pod'XLActionController/Skype'
 # UIPageController for navigation across multiple views
 pod 'Pageboy', '~> 3.2'
 
+# Used for picking a static color for notes
+pod 'ChromaColorPicker'
+
 end

@@ -55,7 +55,7 @@ class WriteNoteView: UIView {
     
     func getRandomColor() {
         let colorTheme = UserDefaults.standard.string(forKey: "noteColorTheme")
-        var randomColor = UIColor()
+        var randomColor: UIColor = .white
         
         if colorTheme == "default" {
             randomColor = Colors.defaultColors.randomElement() ?? UIColor.white
@@ -68,6 +68,9 @@ class WriteNoteView: UIView {
 
         } else if colorTheme == "celestial" {
             randomColor = Colors.celestialColors.randomElement() ?? UIColor.white
+            
+        } else if colorTheme == "appleVibrant" {
+            randomColor = Colors.appleVibrantColors.randomElement() ?? UIColor.white
         }
         
         //set global value to equal generated value
