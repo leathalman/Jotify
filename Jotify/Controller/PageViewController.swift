@@ -39,13 +39,4 @@ class PageViewController: PageboyViewController, PageboyViewControllerDataSource
         return Page.at(index: 1)
     }
   
-    //implement dots??
-    
-//    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-//        return viewControllers.count
-//    }
-//
-//    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-//        return 1
-//    }
 }

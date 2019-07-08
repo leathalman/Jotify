@@ -24,30 +24,33 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         view = writeNoteView
         
         writeNoteView.inputTextView.delegate = self
+        writeNoteView.inputTextView.frame = CGRect(x: 0, y: 100, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
     }
     
     func setupNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(WriteNoteController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(WriteNoteController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
-    @objc func keyboardWillShow(notification: Notification) {
-        print("keyboard shown")
-        let info = notification.userInfo
-        let infoNSValue = info![UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue
-        let keyboardSize = infoNSValue.cgRectValue.size
-        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
-        writeNoteView.inputTextView.frame = CGRect(x: 0, y: 40, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight - 50)
-        writeNoteView.inputTextView.contentInset = contentInsets
-        writeNoteView.inputTextView.scrollIndicatorInsets = contentInsets
-    }
-    
-    @objc func keyboardWillHide(notification: Notification) {
-        print("keyboard hidden")
-        let contentInsets = UIEdgeInsets.zero
-        writeNoteView.inputTextView.frame = CGRect(x: 0, y: 100, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
-        writeNoteView.inputTextView.contentInset = contentInsets
-        writeNoteView.inputTextView.scrollIndicatorInsets = contentInsets
+    @objc func adjustForKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+        
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            writeNoteView.inputTextView.contentInset = .zero
+            writeNoteView.inputTextView.frame = CGRect(x: 0, y: 100, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
+        } else {
+            writeNoteView.inputTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height + 60, right: 0)
+            writeNoteView.inputTextView.frame = CGRect(x: 0, y: 40, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
+        }
+        
+        writeNoteView.inputTextView.scrollIndicatorInsets = writeNoteView.inputTextView.contentInset
+        
+        let selectedRange = writeNoteView.inputTextView.selectedRange
+        writeNoteView.inputTextView.scrollRangeToVisible(selectedRange)
     }
     
     @objc func handleSend() {

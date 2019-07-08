@@ -11,8 +11,6 @@ import MultilineTextField
 
 class WriteNoteView: UIView {
     
-    let iconSize: CGFloat = 50
-    
     public var screenWidth: CGFloat {
         return UIScreen.main.bounds.width
     }
@@ -45,27 +43,6 @@ class WriteNoteView: UIView {
         return view
     }()
     
-    
-    lazy var collectionButton: UIButton = {
-        let button = UIButton()
-        let frame = CGRect(x: screenWidth * 0.1, y: screenHeight * 0.1, width: iconSize, height: iconSize)
-        button.frame = frame
-        let image = UIImage(named: "collection3")
-        button.setImage(image, for: .normal)
-        
-        return button
-    }()
-    
-    lazy var settingButton: UIButton = {
-        let button = UIButton()
-        let frame = CGRect(x: screenWidth * 0.7, y: screenHeight * 0.8, width: iconSize, height: iconSize)
-        button.frame = frame
-        let image = UIImage(named: "gear1")
-        button.setImage(image, for: .normal)
-        
-        return button
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
@@ -74,14 +51,27 @@ class WriteNoteView: UIView {
         
         addSubview(inputTextView)
         insertSubview(colorView, belowSubview: inputTextView)
-        //        addSubview(collectionButton)
-        //        addSubview(settingButton)
     }
     
     func getRandomColor() {
-        let randomColor = Colors.softColors.randomElement()
+        let colorTheme = UserDefaults.standard.string(forKey: "noteColorTheme")
+        var randomColor = UIColor()
+        
+        if colorTheme == "default" {
+            randomColor = Colors.defaultColors.randomElement() ?? UIColor.white
+            
+        } else if colorTheme == "sunset" {
+            randomColor = Colors.sunsetColors.randomElement() ?? UIColor.white
+            
+        } else if colorTheme == "kypool" {
+            randomColor = Colors.kypoolColors.randomElement() ?? UIColor.white
+
+        } else if colorTheme == "celestial" {
+            randomColor = Colors.celestialColors.randomElement() ?? UIColor.white
+        }
+        
         //set global value to equal generated value
-        StoredColors.noteColor = randomColor!
+        StoredColors.noteColor = randomColor
         colorView.backgroundColor = randomColor
     }
     

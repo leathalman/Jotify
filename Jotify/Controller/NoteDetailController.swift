@@ -79,7 +79,6 @@ class NoteDetailController: UIViewController {
     }
     
     @objc func handleCancel() {
-        print("STUFF")
         navigationController?.popViewController(animated: true)
     }
     

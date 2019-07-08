@@ -20,7 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         registerForPushNotifications()
         UIApplication.shared.applicationIconBadgeNumber = 0
-
+        
+        UserDefaults.standard.register(defaults: [
+            "noteColorTheme": "default",
+        ])
+        
         return true
     }
 

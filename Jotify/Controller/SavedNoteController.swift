@@ -13,13 +13,12 @@ import Blueprints
 import ViewAnimator
 import XLActionController
 
-class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
+class SavedNoteController: UICollectionViewController {
     
     var notes: [Note] = []
     var filteredNotes: [Note] = []
     
     var firstLaunch: Bool = true
-    var pressed: Int = 0
     
     let searchController = UISearchController(searchResultsController: nil)
     let loadingAnimations = [AnimationType.from(direction: .top, offset: 30.0)]
@@ -87,43 +86,36 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
     }
     
     @objc func handleRightButton() {
+        feedbackOnPress()
         
-        //change this to based on UserDefualts instead of pressed, because you can start with sort by content and then the button doesnt to anything
-        if pressed == 0 {
-            print("Sort by content")
+        let actionController = SkypeActionController()
+        actionController.backgroundColor = UIColor.medBlue
+        
+        actionController.addAction(Action("Sort by content", style: .default, handler: { action in
             UserDefaults.standard.set("content", forKey: "sortBy")
-            pressed += 1
+            self.fetchNotesFromCoreData()
+            self.animateCells()
             
-        } else if pressed == 1 {
-            print("Sort by color")
+        }))
+        actionController.addAction(Action("Sort by color", style: .default, handler: { action in
             UserDefaults.standard.set("color", forKey: "sortBy")
-            pressed += 1
-            
-        } else if pressed == 2 {
-            print("Sort by date")
+            self.fetchNotesFromCoreData()
+            self.animateCells()
+
+        }))
+        actionController.addAction(Action("Sort by date", style: .default, handler: { action in
             UserDefaults.standard.set("date", forKey: "sortBy")
-            pressed = 0
-            
-        }
+            self.fetchNotesFromCoreData()
+            self.animateCells()
+        }))
+        actionController.addAction(Action("Cancel", style: .cancel, handler: nil))
         
-        if UIDevice.current.hasTapticEngine == true {
-            //iPhone 6s and iPhone 6s Plus
-            let peek = SystemSoundID(1519)
-            AudioServicesPlaySystemSoundWithCompletion(peek, nil)
-            
-        } else if UIDevice.current.hasHapticFeedback == true {
-            //iPhone 7 and newer
-            let generator = UIImpactFeedbackGenerator(style: .medium)
-            generator.impactOccurred()
-        }
-        
-        fetchNotesFromCoreData()
-        animateCells()
+        present(actionController, animated: true, completion: nil)
     }
     
     @objc func handleLeftButton() {
+        feedbackOnPress()
         navigationController?.pushViewController(SettingsController(style: .grouped), animated: true)
-        print("SettingsController presented")
     }
     
     func setupSearchBar() {
@@ -249,17 +241,6 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         let color = note.value(forKey: "color") as! String
         var cellColor = UIColor(red: 18/255.0, green: 165/255.0, blue: 244/255.0, alpha: 1.0)
         cellColor = Colors.colorFromString(string: color)
-
-//        if UIDevice.current.hasTapticEngine == true {
-//            //iPhone 6s and iPhone 6s Plus
-//            let peek = SystemSoundID(1519)
-//            AudioServicesPlaySystemSoundWithCompletion(peek, nil)
-//
-//        } else if UIDevice.current.hasHapticFeedback == true {
-//            //iPhone 7 and newer
-//            let generator = UIImpactFeedbackGenerator(style: .medium)
-//            generator.impactOccurred()
-//        }
         
         let actionController = SkypeActionController()
         actionController.backgroundColor = cellColor
@@ -302,6 +283,19 @@ class SavedNoteController: UICollectionViewController, UINavigationBarDelegate {
         
         DispatchQueue.main.async {
             self.collectionView.reloadData()
+        }
+    }
+    
+    func feedbackOnPress() {
+        if UIDevice.current.hasTapticEngine == true {
+            //iPhone 6s and iPhone 6s Plus
+            let peek = SystemSoundID(1519)
+            AudioServicesPlaySystemSoundWithCompletion(peek, nil)
+            
+        } else if UIDevice.current.hasHapticFeedback == true {
+            //iPhone 7 and newer
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
         }
     }
     

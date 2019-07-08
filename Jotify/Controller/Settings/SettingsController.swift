@@ -11,7 +11,7 @@ import UIKit
 class SettingsController: UITableViewController {
     
     let sections: Array = ["Appearance", "Other"]
-    let general: Array = ["App Icon", "Note Color", "Random Colors", "Setting 4", "Setting 5"]
+    let general: Array = ["App Icon", "Note Colors Themes", "Setting 3", "Setting 4", "Setting 5"]
     let other: Array = ["Dark Mode"]
     
     override func viewDidLoad() {
@@ -20,9 +20,10 @@ class SettingsController: UITableViewController {
         view.backgroundColor = UIColor.white
         
         navigationItem.title = "Settings"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: nil)
         
         tableView.contentInset = UIEdgeInsets(top: -36, left: 0, bottom: 0, right: 0)
+        
+//        tableView.tableHeaderView = UserInfoHeader()
         
         tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
     }
@@ -37,10 +38,22 @@ class SettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Num: \(indexPath.row)")
+        
         if indexPath.section == 0 {
-            print("Value: \(general[indexPath.row])")
+            
+            switch indexPath.row {
+            case 0:
+                print("0")
+            case 1:
+                navigationController?.pushViewController(ColorSettingsController(style: .grouped), animated: true)
+            case 2:
+                print("2")
+            default:
+                print("default")
+            }
+            
         } else if indexPath.section == 1 {
-            print("Value: \(other[indexPath.row])")
+            
         }
     }
     
@@ -61,9 +74,9 @@ class SettingsController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
             
             cell.textLabel?.text = "\(general[indexPath.row])"
-            
-                cell.backgroundColor = UIColor.white
-                cell.textLabel?.textColor = UIColor.black
+            cell.backgroundColor = UIColor.white
+            cell.textLabel?.textColor = UIColor.black
+            cell.accessoryType = .disclosureIndicator
             
             return cell
             

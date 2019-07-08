@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9B6AC7C1DBA10CBFB04F374B /* Pods_Jotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3C025699629E8C8FD896B4 /* Pods_Jotify.framework */; };
 		F644968622C16422009CC386 /* NoteDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F644968522C16422009CC386 /* NoteDetailController.swift */; };
+		F64908BB22D2BA690019BDBC /* ColorSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64908BA22D2BA690019BDBC /* ColorSettingsController.swift */; };
 		F650E13322BFF35A008D29AD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E13222BFF35A008D29AD /* SceneDelegate.swift */; };
 		F650E13D22BFF35C008D29AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F650E13C22BFF35C008D29AD /* Assets.xcassets */; };
 		F650E14022BFF35C008D29AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F650E13E22BFF35C008D29AD /* LaunchScreen.storyboard */; };
@@ -33,6 +34,7 @@
 		134E86D639FF0CE5ED6FEF08 /* Pods-Jotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.release.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.release.xcconfig"; sourceTree = "<group>"; };
 		77AB5562845EB3AEFA1502C6 /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.debug.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
 		F644968522C16422009CC386 /* NoteDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailController.swift; sourceTree = "<group>"; };
+		F64908BA22D2BA690019BDBC /* ColorSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSettingsController.swift; sourceTree = "<group>"; };
 		F650E12D22BFF35A008D29AD /* Jotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F650E13022BFF35A008D29AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F650E13222BFF35A008D29AD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +77,15 @@
 				134E86D639FF0CE5ED6FEF08 /* Pods-Jotify.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F64908BC22D2BA6E0019BDBC /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				F650E15122BFFB12008D29AD /* SettingsController.swift */,
+				F64908BA22D2BA690019BDBC /* ColorSettingsController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		F650E12422BFF35A008D29AD = {
@@ -127,8 +138,8 @@
 				F644968522C16422009CC386 /* NoteDetailController.swift */,
 				F650E15022BFFB12008D29AD /* SavedNoteController.swift */,
 				F650E15322BFFB12008D29AD /* WriteNoteController.swift */,
-				F650E15122BFFB12008D29AD /* SettingsController.swift */,
 				F686D84C22C9269D00C6F555 /* PageViewController.swift */,
+				F64908BC22D2BA6E0019BDBC /* Settings */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -136,8 +147,8 @@
 		F650E15A22BFFB19008D29AD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */,
 				F650E15B22BFFB19008D29AD /* Extensions.swift */,
+				F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */,
 				F686D85122C9B10900C6F555 /* Colors+Handlers.swift */,
 			);
 			path = Model;
@@ -280,6 +291,7 @@
 				F644968622C16422009CC386 /* NoteDetailController.swift in Sources */,
 				F650E13322BFF35A008D29AD /* SceneDelegate.swift in Sources */,
 				F686D85222C9B10900C6F555 /* Colors+Handlers.swift in Sources */,
+				F64908BB22D2BA690019BDBC /* ColorSettingsController.swift in Sources */,
 				F686D84D22C9269D00C6F555 /* PageViewController.swift in Sources */,
 				F650E16622BFFB20008D29AD /* UserInfoHeader.swift in Sources */,
 				F650E16422BFFB20008D29AD /* SettingsCell.swift in Sources */,

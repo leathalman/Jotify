@@ -15,13 +15,13 @@ class UserInfoHeader: UIView {
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.image = UIImage(named: "default")
+        iv.image = UIImage(named: "AppIcon")
         return iv
     }()
     
     let usernameLabel: UILabel = {
         let label = UILabel()
-        let name = UserDefaults.standard.string(forKey: "name") ?? "Test User"
+        let name = "Harrison Leath"
         label.text = name
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false

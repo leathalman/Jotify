@@ -19,6 +19,7 @@ extension UIColor {
         self.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
     }
     
+    //default
     static let lightRed = UIColor(r: 254, g: 129, b: 118)
     static let lightRedBack = UIColor(r: 221, g: 86, b: 75)
 
@@ -42,104 +43,303 @@ extension UIColor {
     
     static let grayBackground = UIColor(r: 242, g: 242, b: 248)
     
+    //sunset
+    static let blue1 = UIColor(red: 0.1450980392, green: 0.4588235294, blue: 0.9882352941, alpha: 1)
+    static let blue2 = UIColor(red: 0.1450980392, green: 0.4274509804, blue: 0.9019607843, alpha: 1)
+    static let purple1 = UIColor(red: 0.4352941176, green: 0.1137254902, blue: 0.7843137255, alpha: 1)
+    static let lightBlue1 = UIColor(red: 0.368627451, green: 0.6470588235, blue: 0.8901960784, alpha: 1)
+    static let lightBlue2 = UIColor(red: 0.3098039216, green: 0.6745098039, blue: 0.9960784314, alpha: 1)
+    static let orange1 = UIColor(red: 0.8941176471, green: 0.5764705882, blue: 0.1176470588, alpha: 1)
+    static let red1 = UIColor(red: 0.9647058824, green: 0.2745098039, blue: 0.2745098039, alpha: 1)
+    static let red2 = UIColor(red: 1, green: 0.3450980392, blue: 0.3450980392, alpha: 1)
+    
+    //kypool
+    static let pink1 = UIColor(red: 0.9960784314, green: 0.3176470588, blue: 0.5882352941, alpha: 1)
+    static let pink2 = UIColor(red: 0.9254901961, green: 0.2862745098, blue: 0.5411764706, alpha: 1)
+    static let red3 = UIColor(red: 0.9098039216, green: 0.3647058824, blue: 0.3058823529, alpha: 1)
+    static let red4 = UIColor(red: 0.968627451, green: 0.4392156863, blue: 0.3843137255, alpha: 1)
+    static let green1 = UIColor(red: 0, green: 0.8901960784, blue: 0.6823529412, alpha: 1)
+    static let green2 = UIColor(red: 0.07843137255, green: 0.7960784314, blue: 0.6274509804, alpha: 1)
+    static let blue3 = UIColor(red: 0.1450980392, green: 0.4588235294, blue: 0.9882352941, alpha: 1)
+    static let blue4 = UIColor(red: 0.1450980392, green: 0.4274509804, blue: 0.9019607843, alpha: 1)
+    
+    //celestial
+    static let green3 = UIColor(red: 0.1411764706, green: 0.8235294118, blue: 0.5725490196, alpha: 1)
+    static let green4 = UIColor(red: 0.1215686275, green: 0.7725490196, blue: 0.5333333333, alpha: 1)
+    static let purple2 = UIColor(red: 0.7607843137, green: 0.2941176471, blue: 0.7137254902, alpha: 1)
+    static let purple3 = UIColor(red: 0.8352941176, green: 0.3450980392, blue: 0.7843137255, alpha: 1)
+    static let blue5 = UIColor(red: 0.007843137255, green: 0.3137254902, blue: 0.7725490196, alpha: 1)
+    static let blue6 = UIColor(red: 0.168627451, green: 0.3450980392, blue: 0.6078431373, alpha: 1)
+    static let darkRed1 = UIColor(red: 0.7215686275, green: 0.2196078431, blue: 0.4823529412, alpha: 1)
+    static let darkRed2 = UIColor(red: 0.831372549, green: 0.2470588235, blue: 0.5529411765, alpha: 1)
 }
 
 class Colors {
     
-    static var softColors = [UIColor.lightRed, UIColor.medRed, UIColor.lightOrange, UIColor.medOrange, UIColor.lightYellow, UIColor.medYellow, UIColor.lightGreen, UIColor.medGreen, UIColor.heavyGreen, UIColor.lightBlue, UIColor.medBlue, UIColor.lightPurple, UIColor.medPurple]
-    static var softColorNames = ["lightRed", "medRed", "lightOrange", "medOrange", "lightYellow", "medYellow", "lightGreen", "medGreen", "heavyGreen", "lightBlue", "medBlue", "lightPurple", "medPurple"]
+    static var defaultColors = [UIColor.lightRed, UIColor.medRed, UIColor.lightOrange, UIColor.medOrange, UIColor.lightYellow, UIColor.medYellow, UIColor.lightGreen, UIColor.medGreen, UIColor.heavyGreen, UIColor.lightBlue, UIColor.medBlue, UIColor.lightPurple, UIColor.medPurple]
+    static var defaultColorsStrings = ["lightRed", "medRed", "lightOrange", "medOrange", "lightYellow", "medYellow", "lightGreen", "medGreen", "heavyGreen", "lightBlue", "medBlue", "lightPurple", "medPurple"]
+    
+    static var sunsetColors = [UIColor.blue1, UIColor.blue2, UIColor.purple1, UIColor.lightBlue1, UIColor.lightBlue2, UIColor.orange1, UIColor.red1, UIColor.red2]
+    static var sunsetColorsStrings = ["blue1", "blue2", "purple1", "lightBlue1", "lightBlue2", "orange1", "red1", "red2"]
+    
+    static var kypoolColors = [UIColor.pink1, UIColor.pink2, UIColor.red3, UIColor.red4, UIColor.green1, UIColor.green2, UIColor.blue3, UIColor.blue4]
+    static var kypoolColorsStrings = ["pink1", "pink2", "red3", "red4", "green1", "green2", "blue3", "blue4"]
+    
+    static var celestialColors = [UIColor.green3, UIColor.green4, UIColor.purple2, UIColor.purple3, UIColor.blue5, UIColor.blue6, UIColor.darkRed1, UIColor.darkRed2]
+    static var celestialColorsStrings = ["green3", "green4", "purple2", "purple3", "blue5", "blue6", "darkRed1", "darkRed2"]
     
     static func stringFromColor(color: UIColor) -> String {
         
-        if color == UIColor.lightRed {
-            return "lightRed"
-            
-        } else if color == UIColor.medRed {
-            return "medRed"
-            
-        } else if color == UIColor.lightOrange {
-            return "lightOrange"
-            
-        } else if color == UIColor.medOrange {
-            return "medOrange"
-            
-        } else if color == UIColor.lightYellow {
-            return "lightYellow"
-            
-        } else if color == UIColor.medYellow {
-            return "medYellow"
-            
-        } else if color == UIColor.lightGreen {
-            return "lightGreen"
-            
-        } else if color == UIColor.medGreen {
-            return "medGreen"
-            
-        } else if color == UIColor.heavyGreen {
-            return "heavyGreen"
-            
-        } else if color == UIColor.lightBlue {
-            return "lightBlue"
-            
-        } else if color == UIColor.medBlue {
-            return "medBlue"
-            
-        } else if color == UIColor.lightPurple {
-            return "lightPurple"
-            
-        } else if color == UIColor.medPurple {
-            return "medPurple"
-            
-        } else {
-            return "white"
+        if UserDefaults.standard.string(forKey: "noteColorTheme") == "default" {
+            if color == UIColor.lightRed {
+                return "lightRed"
+                
+            } else if color == UIColor.medRed {
+                return "medRed"
+                
+            } else if color == UIColor.lightOrange {
+                return "lightOrange"
+                
+            } else if color == UIColor.medOrange {
+                return "medOrange"
+                
+            } else if color == UIColor.lightYellow {
+                return "lightYellow"
+                
+            } else if color == UIColor.medYellow {
+                return "medYellow"
+                
+            } else if color == UIColor.lightGreen {
+                return "lightGreen"
+                
+            } else if color == UIColor.medGreen {
+                return "medGreen"
+                
+            } else if color == UIColor.heavyGreen {
+                return "heavyGreen"
+                
+            } else if color == UIColor.lightBlue {
+                return "lightBlue"
+                
+            } else if color == UIColor.medBlue {
+                return "medBlue"
+                
+            } else if color == UIColor.lightPurple {
+                return "lightPurple"
+                
+            } else if color == UIColor.medPurple {
+                return "medPurple"
+            }
         }
+        
+        if UserDefaults.standard.string(forKey: "noteColorTheme") == "sunset" {
+            if color == UIColor.blue1 {
+                return "blue1"
+                
+            } else if color == UIColor.blue2 {
+                return "blue2"
+                
+            } else if color == UIColor.purple1 {
+                return "purple1"
+                
+            } else if color == UIColor.lightBlue1 {
+                return "lightBlue1"
+                
+            } else if color == UIColor.lightBlue2 {
+                return "lightBlue2"
+                
+            } else if color == UIColor.orange1 {
+                return "orange1"
+                
+            } else if color == UIColor.red1 {
+                return "red1"
+                
+            } else if color == UIColor.red2 {
+                return "red2"
+            }
+        }
+        
+        if UserDefaults.standard.string(forKey: "noteColorTheme") == "kypool" {
+            if color == UIColor.pink1 {
+                return "pink1"
+                
+            } else if color == UIColor.pink2 {
+                return "pink2"
+                
+            } else if color == UIColor.red3 {
+                return "red3"
+                
+            } else if color == UIColor.red4 {
+                return "red4"
+                
+            } else if color == UIColor.green1 {
+                return "green1"
+                
+            } else if color == UIColor.green2 {
+                return "green2"
+                
+            } else if color == UIColor.blue3 {
+                return "blue3"
+                
+            } else if color == UIColor.blue4 {
+                return "blue4"
+            }
+        }
+        
+        if UserDefaults.standard.string(forKey: "noteColorTheme") == "celestial" {
+            if color == UIColor.green3 {
+                return "green3"
+                
+            } else if color == UIColor.green4 {
+                return "green4"
+                
+            } else if color == UIColor.purple2 {
+                return "purple2"
+                
+            } else if color == UIColor.purple3 {
+                return "purple3"
+                
+            } else if color == UIColor.blue5 {
+                return "blue5"
+                
+            } else if color == UIColor.blue6 {
+                return "blue6"
+                
+            } else if color == UIColor.darkRed1 {
+                return "darkRed1"
+                
+            } else if color == UIColor.darkRed2 {
+                return "darkRed2"
+            }
+        }
+        return "white"
     }
     
     static func colorFromString(string: String) -> UIColor {
         
-        if string == "lightRed" {
-            return UIColor.lightRed
-            
-        } else if string == "medRed" {
-            return UIColor.medRed
-            
-        } else if string == "lightOrange" {
-            return UIColor.lightOrange
-            
-        } else if string == "medOrange" {
-            return UIColor.medOrange
-            
-        } else if string == "lightYellow" {
-            return UIColor.lightYellow
-            
-        } else if string == "medYellow" {
-            return UIColor.medYellow
-            
-        } else if string == "lightGreen" {
-            return UIColor.lightGreen
-            
-        } else if string == "medGreen" {
-            return UIColor.medGreen
-
-        } else if string == "heavyGreen" {
-            return UIColor.heavyGreen
-
-        } else if string == "lightBlue" {
-            return UIColor.lightBlue
-
-        } else if string == "medBlue" {
-            return UIColor.medBlue
-
-        } else if string == "lightPurple" {
-            return UIColor.lightPurple
-
-        } else if string == "medPurple" {
-            return UIColor.medPurple
-
-        } else {
-            return UIColor.white
+        if UserDefaults.standard.string(forKey: "noteColorTheme") == "default" {
+            if string == "lightRed" {
+                return UIColor.lightRed
+                
+            } else if string == "medRed" {
+                return UIColor.medRed
+                
+            } else if string == "lightOrange" {
+                return UIColor.lightOrange
+                
+            } else if string == "medOrange" {
+                return UIColor.medOrange
+                
+            } else if string == "lightYellow" {
+                return UIColor.lightYellow
+                
+            } else if string == "medYellow" {
+                return UIColor.medYellow
+                
+            } else if string == "lightGreen" {
+                return UIColor.lightGreen
+                
+            } else if string == "medGreen" {
+                return UIColor.medGreen
+                
+            } else if string == "heavyGreen" {
+                return UIColor.heavyGreen
+                
+            } else if string == "lightBlue" {
+                return UIColor.lightBlue
+                
+            } else if string == "medBlue" {
+                return UIColor.medBlue
+                
+            } else if string == "lightPurple" {
+                return UIColor.lightPurple
+                
+            } else if string == "medPurple" {
+                return UIColor.medPurple
+            }
         }
+        
+        if UserDefaults.standard.string(forKey: "noteColorTheme") == "sunset" {
+            if string == "blue1" {
+                return UIColor.blue1
+                
+            } else if string == "blue2" {
+                return UIColor.blue2
+                
+            } else if string == "purple1" {
+                return UIColor.purple1
+                
+            } else if string == "lightBlue1" {
+                return UIColor.lightBlue1
+                
+            } else if string == "lightBlue2" {
+                return UIColor.lightBlue2
+                
+            } else if string == "orange1" {
+                return UIColor.orange1
+                
+            } else if string == "red1" {
+                return UIColor.red1
+                
+            } else if string == "red2" {
+                return UIColor.red2
+            }
+        }
+        
+        if UserDefaults.standard.string(forKey: "noteColorTheme") == "kypool" {
+            if string == "pink1" {
+                return UIColor.pink1
+                
+            } else if string == "pink2" {
+                return UIColor.pink2
+                
+            } else if string == "red3" {
+                return UIColor.red3
+                
+            } else if string == "red4" {
+                return UIColor.red4
+                
+            } else if string == "green1" {
+                return UIColor.green1
+                
+            } else if string == "green2" {
+                return UIColor.green2
+                
+            } else if string == "blue3" {
+                return UIColor.blue3
+                
+            } else if string == "blue4" {
+                return UIColor.blue4
+            }
+        }
+        
+        if UserDefaults.standard.string(forKey: "noteColorTheme") == "celestial" {
+            if string == "green3" {
+                return UIColor.green3
+                
+            } else if string == "green4" {
+                return UIColor.green4
+                
+            } else if string == "purple2" {
+                return UIColor.purple2
+                
+            } else if string == "purple3" {
+                return UIColor.purple3
+                
+            } else if string == "blue5" {
+                return UIColor.blue5
+                
+            } else if string == "blue6" {
+                return UIColor.blue6
+                
+            } else if string == "darkRed1" {
+                return UIColor.darkRed1
+                
+            } else if string == "darkRed2" {
+                return UIColor.darkRed2
+            }
+        }
+        return UIColor.white
     }
-
     
 }
