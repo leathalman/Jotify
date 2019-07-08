@@ -47,10 +47,21 @@ class WriteNoteView: UIView {
         super.init(frame: .zero)
         
         clipsToBounds = true
-        getRandomColor()
+        
+        handleRandomColorsEnabled()
         
         addSubview(inputTextView)
         insertSubview(colorView, belowSubview: inputTextView)
+    }
+    
+    func handleRandomColorsEnabled() {
+        if UserDefaults.standard.bool(forKey: "useRandomColor") == true {
+            getRandomColor()
+        } else if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
+            let color = UserDefaults.standard.color(forKey: "staticNoteColor")
+            colorView.backgroundColor = color
+            StoredColors.noteColor = color ?? UIColor.white
+        }
     }
     
     func getRandomColor() {

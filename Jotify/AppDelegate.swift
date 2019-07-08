@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UserDefaults.standard.register(defaults: [
             "noteColorTheme": "default",
+            "useRandomColor": true,
         ])
         
         return true

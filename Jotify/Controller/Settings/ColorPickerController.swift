@@ -8,8 +8,11 @@
 
 import UIKit
 import ChromaColorPicker
+import CoreData
 
 class ColorPickerController: UIViewController {
+    
+    var notes: [Note] = []
     
     lazy var colorPicker: ChromaColorPicker = {
         let colorPicker = ChromaColorPicker(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
@@ -30,14 +33,67 @@ class ColorPickerController: UIViewController {
         return contentView
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        fetchData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = UIColor.grayBlur
         
         view.addSubview(contentView)
         view.addSubview(colorPicker)
     }
+    
+    func setStaticColorForNotes() {
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let writeNoteView = WriteNoteView()
+        var newBackgroundColor = UIColor.white
+        
+        for note in notes {
+            var newColor = String()
+            
+            if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
+                newColor = "staticNoteColor"
+                newBackgroundColor = UserDefaults.standard.color(forKey: "staticNoteColor") ?? UIColor.white
+            }
+            
+            note.color = newColor
+        }
+        
+        writeNoteView.colorView.backgroundColor = newBackgroundColor
+        
+        appDelegate.saveContext()
+    }
+    
+    func fetchData() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Note")
+        fetchRequest.returnsObjectsAsFaults = false
+        
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+        
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        do {
+            notes = try managedContext.fetch(fetchRequest) as! [Note]
+            
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+    }
+
     
 }
 
@@ -46,7 +102,11 @@ extension ColorPickerController: ChromaColorPickerDelegate{
     func colorPickerDidChooseColor(_ colorPicker: ChromaColorPicker, color: UIColor) {
         view.backgroundColor = color
         
-        //Perform zesty animation
+        UserDefaults.standard.set(color, forKey: "staticNoteColor")
+        setStaticColorForNotes()
+        
+        StoredColors.staticNoteColor = color
+
         UIView.animate(withDuration: 0.2,
                        animations: {
                         self.view.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)

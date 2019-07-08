@@ -12,7 +12,7 @@ import UIKit
 struct StoredColors {
     static var noteColor = UIColor()
     static var noteColorString = String()
-    static var staticColor = UIColor()
+    static var staticNoteColor = UIColor()
 }
 
 extension UIColor {
@@ -247,6 +247,11 @@ class Colors {
                 return "systemYellow"
             }
         }
+        
+        if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
+            return "staticNoteColor"
+        }
+        
         return "white"
     }
     
@@ -403,6 +408,10 @@ class Colors {
             } else if string == "systemYellow" {
                 return UIColor.systemYellow
             }
+        }
+        
+        if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
+            return UserDefaults.standard.color(forKey: "staticNoteColor") ?? UIColor.white
         }
         return UIColor.white
     }

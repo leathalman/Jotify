@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import CoreData
 import Pageboy
+import CoreData
 
 class ColorSettingsController: UITableViewController {
     
@@ -62,7 +62,7 @@ class ColorSettingsController: UITableViewController {
                 print("Setting not implemented")
             }
         } else if indexPath.section == 1 {
-            print("Random Colors")
+
         }
         
     }
@@ -115,6 +115,13 @@ class ColorSettingsController: UITableViewController {
                 cell.textLabel?.text = "\(other[indexPath.row])"
                 cell.selectionStyle = .none
                 cell.switchButton.addTarget(self, action: #selector(randomColorSwitchPressed), for: .valueChanged)
+                
+                if UserDefaults.standard.bool(forKey: "useRandomColor") == true {
+                    cell.switchButton.isOn = true
+                } else {
+                    cell.switchButton.isOn = false
+                }
+                
                 return cell
                 
             default:
@@ -137,17 +144,22 @@ class ColorSettingsController: UITableViewController {
     @objc func randomColorSwitchPressed(sender: UISwitch) {
         if sender.isOn {
             print("random colors enabled")
+            UserDefaults.standard.set(true, forKey: "useRandomColor")
+            setNewColorsForExistingNotes()
+            
+        } else {
+            print("random colors disabled")
+            UserDefaults.standard.set(false, forKey: "useRandomColor")
+
             let colorPickerController = ColorPickerController()
             colorPickerController.modalPresentationStyle = .overCurrentContext
             colorPickerController.modalTransitionStyle = .crossDissolve
-            
+
             addChild(colorPickerController)
             colorPickerController.view.frame = view.frame
             view.addSubview(colorPickerController.view)
             colorPickerController.didMove(toParent: self)
-//            navigationController?.pushViewController(colorPickerController, animated: true)
-        } else {
-            print("random colors disabled")
+                        navigationController?.pushViewController(colorPickerController, animated: true)
         }
     }
     
@@ -206,6 +218,7 @@ class ColorSettingsController: UITableViewController {
                 newColor = Colors.appleVibrantColorsStrings.randomElement() ?? "white"
                 newBackgroundColor = Colors.appleVibrantColors.randomElement() ?? UIColor.white
             }
+            
             note.color = newColor
         }
         

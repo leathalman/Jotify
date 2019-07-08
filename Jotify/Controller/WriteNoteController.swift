@@ -27,6 +27,20 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         writeNoteView.inputTextView.frame = CGRect(x: 0, y: 100, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        handleRandomColorsEnabled()
+    }
+    
+    func handleRandomColorsEnabled() {
+        if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
+            let color = UserDefaults.standard.color(forKey: "staticNoteColor")
+            writeNoteView.colorView.backgroundColor = color
+        } else {
+            writeNoteView.colorView.backgroundColor = StoredColors.noteColor
+        }
+    }
+    
     func setupNotifications() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -96,7 +110,9 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         textView.resignFirstResponder()
         handleSend()
         
-        writeNoteView.getRandomColor()
+        if UserDefaults.standard.bool(forKey: "useRandomColor") == true {
+            writeNoteView.getRandomColor()
+        }
         
         return false
     }
