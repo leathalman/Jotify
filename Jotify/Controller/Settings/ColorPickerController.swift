@@ -41,7 +41,7 @@ class ColorPickerController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.grayBlur
+        view.backgroundColor = UIColor.gray
         
         view.addSubview(contentView)
         view.addSubview(colorPicker)

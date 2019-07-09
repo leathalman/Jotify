@@ -89,6 +89,7 @@ class NoteDetailController: UIViewController {
         notificationCenter.getNotificationSettings { (settings) in
             if settings.authorizationStatus != .authorized {
                 // Notifications not allowed
+                
             } else {
                 // Notifcations enabled
                 

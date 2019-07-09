@@ -18,6 +18,8 @@ class ColorSettingsController: UITableViewController {
     let palettes: Array = ["Default", "Sunset", "Kypool", "Celestial", "Apple Vibrant"]
     let other: Array = ["Random Colors"]
     
+    var lastIndexPath:NSIndexPath = NSIndexPath(row: 0, section: 0)
+    
     let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
@@ -34,30 +36,42 @@ class ColorSettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let newRow = indexPath.row
+        let oldRow = lastIndexPath.row
+        
+        if oldRow != newRow {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+            tableView.cellForRow(at: lastIndexPath as IndexPath)?.accessoryType = .none
+            
+            lastIndexPath = indexPath as NSIndexPath
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         if indexPath.section == 0 {
             tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
             
             switch indexPath.row {
             case 0:
                 defaults.set("default", forKey: "noteColorTheme")
-                setNewColorsForExistingNotes()
+                setNewColorsForExistingNotesIfNotStatic()
                 
             case 1:
                 defaults.set("sunset", forKey: "noteColorTheme")
-                setNewColorsForExistingNotes()
-                
+                setNewColorsForExistingNotesIfNotStatic()
+
             case 2:
                 defaults.set("kypool", forKey: "noteColorTheme")
-                setNewColorsForExistingNotes()
+                setNewColorsForExistingNotesIfNotStatic()
                 
             case 3:
                 defaults.set("celestial", forKey: "noteColorTheme")
-                setNewColorsForExistingNotes()
-                
+                setNewColorsForExistingNotesIfNotStatic()
+
             case 4:
                 defaults.set("appleVibrant", forKey: "noteColorTheme")
-                setNewColorsForExistingNotes()
-                
+                setNewColorsForExistingNotesIfNotStatic()
+
             default:
                 print("Setting not implemented")
             }
@@ -73,11 +87,25 @@ class ColorSettingsController: UITableViewController {
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
+        if indexPath.section == 0 && UserDefaults.standard.bool(forKey: "useRandomColor") == false {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+            
+            cell.textLabel?.text = "\(palettes[indexPath.row])"
+            cell.textLabel?.textColor = UIColor.black
+            
+            cell.isUserInteractionEnabled = false
+            cell.selectionStyle = .none
+            cell.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.15)
+            
+            return cell
+            
+        } else if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
             
             cell.textLabel?.text = "\(palettes[indexPath.row])"
             cell.backgroundColor = UIColor.white
+            cell.isUserInteractionEnabled = true
+            cell.selectionStyle = .default
             cell.textLabel?.textColor = UIColor.black
             
             switch indexPath.row {
@@ -107,7 +135,7 @@ class ColorSettingsController: UITableViewController {
             
             return cell
             
-        } else if indexPath.section == 1 {
+        }  else if indexPath.section == 1 {
             
             switch indexPath.row {
             case 0:
@@ -146,6 +174,7 @@ class ColorSettingsController: UITableViewController {
             print("random colors enabled")
             UserDefaults.standard.set(true, forKey: "useRandomColor")
             setNewColorsForExistingNotes()
+            tableView.reloadData()
             
         } else {
             print("random colors disabled")
@@ -159,7 +188,8 @@ class ColorSettingsController: UITableViewController {
             colorPickerController.view.frame = view.frame
             view.addSubview(colorPickerController.view)
             colorPickerController.didMove(toParent: self)
-                        navigationController?.pushViewController(colorPickerController, animated: true)
+            navigationController?.pushViewController(colorPickerController, animated: true)
+            tableView.reloadData()
         }
     }
     
@@ -182,6 +212,12 @@ class ColorSettingsController: UITableViewController {
             
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
+        }
+    }
+    
+    func setNewColorsForExistingNotesIfNotStatic() {
+        if UserDefaults.standard.bool(forKey: "useRandomColor") == true {
+            setNewColorsForExistingNotes()
         }
     }
     

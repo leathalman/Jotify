@@ -89,7 +89,12 @@ class SavedNoteController: UICollectionViewController {
         feedbackOnPress()
         
         let actionController = SkypeActionController()
-        actionController.backgroundColor = UIColor.medBlue
+        
+        if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
+            actionController.backgroundColor = UserDefaults.standard.color(forKey: "staticNoteColor") ?? UIColor.white
+        } else {
+            actionController.backgroundColor = UIColor.blue2
+        }
         
         actionController.addAction(Action("Sort by content", style: .default, handler: { action in
             UserDefaults.standard.set("content", forKey: "sortBy")
