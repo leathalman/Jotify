@@ -25,14 +25,7 @@ class NoteDetailController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        guard self.navigationController?.topViewController === self else { return }
-        self.transitionCoordinator?.animate(alongsideTransition: { [weak self](context) in
-            self?.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            self?.navigationController?.navigationBar.shadowImage = UIImage()
-            self?.navigationController?.navigationBar.backgroundColor = .clear
-            self?.navigationController?.navigationBar.barTintColor = .clear
-            self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-            }, completion: nil)
+        setupClearNavigationBar()
     }
     
     override func viewDidLoad() {
@@ -58,6 +51,17 @@ class NoteDetailController: UIViewController {
 //            print("remind written down!")
 //            scheduleNotification(notificationType: "Reminder")
 //        }
+    }
+    
+    func setupClearNavigationBar() {
+        guard self.navigationController?.topViewController === self else { return }
+        self.transitionCoordinator?.animate(alongsideTransition: { [weak self](context) in
+            self?.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            self?.navigationController?.navigationBar.shadowImage = UIImage()
+            self?.navigationController?.navigationBar.backgroundColor = .clear
+            self?.navigationController?.navigationBar.barTintColor = .clear
+            self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            }, completion: nil)
     }
     
     func setupView() {

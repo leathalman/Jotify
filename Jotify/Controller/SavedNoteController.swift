@@ -96,8 +96,8 @@ class SavedNoteController: UICollectionViewController {
             actionController.backgroundColor = UIColor.blue2
         }
         
-        actionController.addAction(Action("Sort by content", style: .default, handler: { action in
-            UserDefaults.standard.set("content", forKey: "sortBy")
+        actionController.addAction(Action("Sort by date", style: .default, handler: { action in
+            UserDefaults.standard.set("date", forKey: "sortBy")
             self.fetchNotesFromCoreData()
             self.animateCells()
             
@@ -108,8 +108,8 @@ class SavedNoteController: UICollectionViewController {
             self.animateCells()
 
         }))
-        actionController.addAction(Action("Sort by date", style: .default, handler: { action in
-            UserDefaults.standard.set("date", forKey: "sortBy")
+        actionController.addAction(Action("Sort by content", style: .default, handler: { action in
+            UserDefaults.standard.set("content", forKey: "sortBy")
             self.fetchNotesFromCoreData()
             self.animateCells()
         }))
@@ -244,30 +244,60 @@ class SavedNoteController: UICollectionViewController {
         
         let note = notes[indexPath?.row ?? 0]
         let color = note.value(forKey: "color") as! String
+        let content = note.value(forKey: "content") as! String
         var cellColor = UIColor(red: 18/255.0, green: 165/255.0, blue: 244/255.0, alpha: 1.0)
         cellColor = Colors.colorFromString(string: color)
         
         let actionController = SkypeActionController()
         actionController.backgroundColor = cellColor
         
-        actionController.addAction(Action("Open Note", style: .default, handler: { action in
+        actionController.addAction(Action("Open note", style: .default, handler: { action in
             print("Open note")
             //add function for editing note here
             
         }))
-        actionController.addAction(Action("Delete Note", style: .default, handler: { action in
+        actionController.addAction(Action("Delete note", style: .default, handler: { action in
             print("Delete note")
-            self.deleteNote(indexPath: indexPath ?? [0, 0], int: rowNumber)
+            
+            let alert = UIAlertController(title: "Are you sure?", message: "This will permanently delete this note in both iCloud and locally on this device.", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (UIAlertAction) in
+                self.deleteNote(indexPath: indexPath ?? [0, 0], int: rowNumber)
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
             
         }))
-        actionController.addAction(Action("Share Note", style: .default, handler: { action in
+        actionController.addAction(Action("Share note", style: .default, handler: { action in
             print("Share note")
             //add function for sharing the text of notes
+            self.shareNote(text: content)
             
         }))
         actionController.addAction(Action("Cancel", style: .cancel, handler: nil))
         
         present(actionController, animated: true, completion: nil)
+    }
+    
+    func shareNote(text: String) {
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        let textToShare = text
+        
+        if let myWebsite = URL(string: "http://itunes.apple.com/app/idXXXXXXXXX") {//Enter link to your app here
+            let objectsToShare = [textToShare, myWebsite, image ?? #imageLiteral(resourceName: "app-logo")] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            
+            //Excluded Activities
+            activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
+            
+            self.present(activityVC, animated: true, completion: nil)
+        }
     }
     
     func deleteNote(indexPath: IndexPath, int: Int) {
@@ -305,11 +335,17 @@ class SavedNoteController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if isFiltering() {
-            return filteredNotes.count
+        if notes.count == 0 {
+            self.collectionView.setEmptyMessage("Hello!!")
         } else {
-            return notes.count
+            self.collectionView.restore()
+            if isFiltering() {
+                return filteredNotes.count
+            } else {
+                return notes.count
+            }
         }
+        return notes.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

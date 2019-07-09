@@ -28,7 +28,7 @@ class ColorPickerController: UIViewController {
         let contentView = UIView()
         contentView.frame = CGRect(x: 0, y: 0, width: 350, height: 350)
         contentView.center = self.view.center
-        contentView.backgroundColor = UIColor.grayBackground
+        contentView.backgroundColor = UIColor.white
         contentView.layer.cornerRadius = 15
         return contentView
     }()
@@ -36,15 +36,36 @@ class ColorPickerController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchData()
+        setupClearNavigationBar()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = UIColor.gray
+        
+        var image = UIImage(named: "cancel")
+        image = image?.withRenderingMode(.alwaysOriginal)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style:.plain, target: self, action: #selector(handleCancel))
+        
+        navigationItem.setHidesBackButton(true, animated: true)
         
         view.addSubview(contentView)
         view.addSubview(colorPicker)
+    }
+    
+    @objc func handleCancel() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func setupClearNavigationBar() {
+        guard self.navigationController?.topViewController === self else { return }
+        self.transitionCoordinator?.animate(alongsideTransition: { [weak self](context) in
+            self?.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            self?.navigationController?.navigationBar.shadowImage = UIImage()
+            self?.navigationController?.navigationBar.backgroundColor = .clear
+            self?.navigationController?.navigationBar.barTintColor = .clear
+            self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            }, completion: nil)
     }
     
     func setStaticColorForNotes() {

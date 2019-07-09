@@ -22,16 +22,29 @@ class ColorSettingsController: UITableViewController {
     
     let defaults = UserDefaults.standard
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        setupPersistentNavigationBar()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchData()
         
         view.backgroundColor = UIColor.white
         
-        navigationItem.title = "Note Color Themes"
+        navigationItem.title = "Note Palettes"
         
         tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
+    }
+    
+    func setupPersistentNavigationBar() {
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.barTintColor = .white
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -105,7 +118,7 @@ class ColorSettingsController: UITableViewController {
             cell.textLabel?.text = "\(palettes[indexPath.row])"
             cell.backgroundColor = UIColor.white
             cell.isUserInteractionEnabled = true
-            cell.selectionStyle = .default
+            cell.selectionStyle = .none
             cell.textLabel?.textColor = UIColor.black
             
             switch indexPath.row {
@@ -181,13 +194,7 @@ class ColorSettingsController: UITableViewController {
             UserDefaults.standard.set(false, forKey: "useRandomColor")
 
             let colorPickerController = ColorPickerController()
-            colorPickerController.modalPresentationStyle = .overCurrentContext
-            colorPickerController.modalTransitionStyle = .crossDissolve
-
-            addChild(colorPickerController)
-            colorPickerController.view.frame = view.frame
-            view.addSubview(colorPickerController.view)
-            colorPickerController.didMove(toParent: self)
+            
             navigationController?.pushViewController(colorPickerController, animated: true)
             tableView.reloadData()
         }

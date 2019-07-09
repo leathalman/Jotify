@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
 class SettingsController: UITableViewController {
     
     let sections: Array = ["Appearance", "Other"]
-    let general: Array = ["App Icon", "Note Color Themes", "Setting 3", "Setting 4", "Setting 5"]
-    let other: Array = ["Dark Mode"]
+    let general: Array = ["App Icon", "Note Palettes", "Setting 3", "Setting 4", "Setting 5"]
+    let other: Array = ["Dark Mode", "Delete All Data"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,26 @@ class SettingsController: UITableViewController {
         tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
     }
     
+    func deleteAllNotes(entity: String) {
+        
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+        
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try managedContext.execute(batchDeleteRequest)
+            try managedContext.save()
+            
+        } catch {
+            print("Error batch deleting data of entity: \(entity)")
+        }
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int{
         return sections.count
     }
@@ -37,8 +58,6 @@ class SettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Num: \(indexPath.row)")
-        
         if indexPath.section == 0 {
             
             switch indexPath.row {
@@ -53,6 +72,24 @@ class SettingsController: UITableViewController {
             }
             
         } else if indexPath.section == 1 {
+            switch indexPath.row {
+            case 0:
+                print("Dark Mode")
+            case 1:
+                print("Delete all data")
+                
+                let alert = UIAlertController(title: "Are you sure?", message: "This will permanently delete all data saved in both iCloud and saved locally on this device.", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (UIAlertAction) in
+                    self.deleteAllNotes(entity: "Note")
+                }))
+                
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                present(alert, animated: true)
+
+            default:
+                print("default")
+            }
             
         }
     }
@@ -81,10 +118,21 @@ class SettingsController: UITableViewController {
             return cell
             
         } else if indexPath.section == 1 {
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+            cell.textLabel?.text = "\(other[indexPath.row])"
             
-            cell.textLabel?.text = "Dark Mode"
+            switch indexPath.row {
+            case 0:
+                return cell
+                
+            case 1:
+                cell.textLabel?.textColor = UIColor.red
+                
+            default:
+                return cell
+            }
+            
+            
             
             return cell
             
