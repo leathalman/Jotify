@@ -92,8 +92,25 @@ class SavedNoteController: UICollectionViewController {
         
         if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
             actionController.backgroundColor = UserDefaults.standard.color(forKey: "staticNoteColor") ?? UIColor.white
+            
         } else {
-            actionController.backgroundColor = UIColor.blue2
+            
+            if isSelectedColorFromDefaults(key: "default") == true {
+                actionController.backgroundColor = Colors.defaultColors.randomElement() ?? UIColor.blue2
+                
+            } else if isSelectedColorFromDefaults(key: "sunset") == true {
+                actionController.backgroundColor = Colors.sunsetColors.randomElement() ?? UIColor.blue2
+                
+            } else if isSelectedColorFromDefaults(key: "kypool") == true {
+                actionController.backgroundColor = Colors.kypoolColors.randomElement() ?? UIColor.blue2
+
+            } else if isSelectedColorFromDefaults(key: "celestial") == true {
+                actionController.backgroundColor = Colors.celestialColors.randomElement() ?? UIColor.blue2
+
+            } else if isSelectedColorFromDefaults(key: "appleVibrant") == true {
+                actionController.backgroundColor = Colors.appleVibrantColors.randomElement() ?? UIColor.blue2
+
+            }
         }
         
         actionController.addAction(Action("Sort by date", style: .default, handler: { action in
@@ -121,6 +138,16 @@ class SavedNoteController: UICollectionViewController {
     @objc func handleLeftButton() {
         feedbackOnPress()
         navigationController?.pushViewController(SettingsController(style: .grouped), animated: true)
+    }
+    
+    func isSelectedColorFromDefaults(key: String) -> Bool {
+        let colorTheme = UserDefaults.standard.string(forKey: "noteColorTheme")
+        
+        if colorTheme == key {
+            return true
+        } else {
+            return false
+        }
     }
     
     func setupSearchBar() {
