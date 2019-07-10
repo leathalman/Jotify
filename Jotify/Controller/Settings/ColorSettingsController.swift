@@ -98,7 +98,7 @@ class ColorSettingsController: UITableViewController {
         tableView.cellForRow(at: indexPath)?.accessoryType = .none
     }
     
-    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 && UserDefaults.standard.bool(forKey: "useRandomColor") == false {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell

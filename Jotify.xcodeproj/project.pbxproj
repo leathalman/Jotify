@@ -29,6 +29,8 @@
 		F67B92E022D2E785002C6985 /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B92DF22D2E785002C6985 /* ColorPickerController.swift */; };
 		F686D84D22C9269D00C6F555 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F686D84C22C9269D00C6F555 /* PageViewController.swift */; };
 		F686D85222C9B10900C6F555 /* Colors+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F686D85122C9B10900C6F555 /* Colors+Handlers.swift */; };
+		F6CE723A22D5832F00544267 /* DataSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CE723922D5832F00544267 /* DataSettingsController.swift */; };
+		F6CE723C22D5833E00544267 /* SortSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CE723B22D5833E00544267 /* SortSettingsController.swift */; };
 		F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +62,8 @@
 		F67B92DF22D2E785002C6985 /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
 		F686D84C22C9269D00C6F555 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		F686D85122C9B10900C6F555 /* Colors+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+Handlers.swift"; sourceTree = "<group>"; };
+		F6CE723922D5832F00544267 /* DataSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSettingsController.swift; sourceTree = "<group>"; };
+		F6CE723B22D5833E00544267 /* SortSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortSettingsController.swift; sourceTree = "<group>"; };
 		F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +93,8 @@
 			isa = PBXGroup;
 			children = (
 				F650E15122BFFB12008D29AD /* SettingsController.swift */,
+				F6CE723922D5832F00544267 /* DataSettingsController.swift */,
+				F6CE723B22D5833E00544267 /* SortSettingsController.swift */,
 				F64908BA22D2BA690019BDBC /* ColorSettingsController.swift */,
 				F67B92DF22D2E785002C6985 /* ColorPickerController.swift */,
 			);
@@ -294,7 +300,9 @@
 				F650E16D22C00381008D29AD /* AppDelegate.swift in Sources */,
 				F650E15D22BFFB19008D29AD /* Extensions.swift in Sources */,
 				F6070B8A22D50796005E4CF3 /* EmptyView.swift in Sources */,
+				F6CE723A22D5832F00544267 /* DataSettingsController.swift in Sources */,
 				F650E15622BFFB12008D29AD /* SettingsController.swift in Sources */,
+				F6CE723C22D5833E00544267 /* SortSettingsController.swift in Sources */,
 				F67B92DE22D2E083002C6985 /* SettingsSwitchCell.swift in Sources */,
 				F650E16722BFFB20008D29AD /* SavedNoteCell.swift in Sources */,
 				F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */,

@@ -19,6 +19,7 @@ class SavedNoteController: UICollectionViewController {
     var filteredNotes: [Note] = []
     
     var firstLaunch: Bool = true
+    var pressed: Int = 0
     
     let searchController = UISearchController(searchResultsController: nil)
     let loadingAnimations = [AnimationType.from(direction: .top, offset: 30.0)]
@@ -90,49 +91,72 @@ class SavedNoteController: UICollectionViewController {
         
         let actionController = SkypeActionController()
         
-        if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
-            actionController.backgroundColor = UserDefaults.standard.color(forKey: "staticNoteColor") ?? UIColor.white
-            
-        } else {
-            
-            if isSelectedColorFromDefaults(key: "default") == true {
-                actionController.backgroundColor = Colors.defaultColors.randomElement() ?? UIColor.blue2
+        if UserDefaults.standard.bool(forKey: "showAlertOnSort") == true {
+            if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
+                actionController.backgroundColor = UserDefaults.standard.color(forKey: "staticNoteColor") ?? UIColor.white
                 
-            } else if isSelectedColorFromDefaults(key: "sunset") == true {
-                actionController.backgroundColor = Colors.sunsetColors.randomElement() ?? UIColor.blue2
+            } else {
                 
-            } else if isSelectedColorFromDefaults(key: "kypool") == true {
-                actionController.backgroundColor = Colors.kypoolColors.randomElement() ?? UIColor.blue2
-
-            } else if isSelectedColorFromDefaults(key: "celestial") == true {
-                actionController.backgroundColor = Colors.celestialColors.randomElement() ?? UIColor.blue2
-
-            } else if isSelectedColorFromDefaults(key: "appleVibrant") == true {
-                actionController.backgroundColor = Colors.appleVibrantColors.randomElement() ?? UIColor.blue2
-
+                if isSelectedColorFromDefaults(key: "default") == true {
+                    actionController.backgroundColor = Colors.defaultColors.randomElement() ?? UIColor.blue2
+                    
+                } else if isSelectedColorFromDefaults(key: "sunset") == true {
+                    actionController.backgroundColor = Colors.sunsetColors.randomElement() ?? UIColor.blue2
+                    
+                } else if isSelectedColorFromDefaults(key: "kypool") == true {
+                    actionController.backgroundColor = Colors.kypoolColors.randomElement() ?? UIColor.blue2
+                    
+                } else if isSelectedColorFromDefaults(key: "celestial") == true {
+                    actionController.backgroundColor = Colors.celestialColors.randomElement() ?? UIColor.blue2
+                    
+                } else if isSelectedColorFromDefaults(key: "appleVibrant") == true {
+                    actionController.backgroundColor = Colors.appleVibrantColors.randomElement() ?? UIColor.blue2
+                    
+                }
             }
-        }
-        
-        actionController.addAction(Action("Sort by date", style: .default, handler: { action in
-            UserDefaults.standard.set("date", forKey: "sortBy")
-            self.fetchNotesFromCoreData()
-            self.animateCells()
             
-        }))
-        actionController.addAction(Action("Sort by color", style: .default, handler: { action in
-            UserDefaults.standard.set("color", forKey: "sortBy")
-            self.fetchNotesFromCoreData()
-            self.animateCells()
-
-        }))
-        actionController.addAction(Action("Sort by content", style: .default, handler: { action in
-            UserDefaults.standard.set("content", forKey: "sortBy")
-            self.fetchNotesFromCoreData()
-            self.animateCells()
-        }))
-        actionController.addAction(Action("Cancel", style: .cancel, handler: nil))
-        
-        present(actionController, animated: true, completion: nil)
+            actionController.addAction(Action("Sort by date", style: .default, handler: { action in
+                UserDefaults.standard.set("date", forKey: "sortBy")
+                self.fetchNotesFromCoreData()
+                self.animateCells()
+                
+            }))
+            actionController.addAction(Action("Sort by color", style: .default, handler: { action in
+                UserDefaults.standard.set("color", forKey: "sortBy")
+                self.fetchNotesFromCoreData()
+                self.animateCells()
+                
+            }))
+            actionController.addAction(Action("Sort by content", style: .default, handler: { action in
+                UserDefaults.standard.set("content", forKey: "sortBy")
+                self.fetchNotesFromCoreData()
+                self.animateCells()
+            }))
+            actionController.addAction(Action("Cancel", style: .cancel, handler: nil))
+            
+            present(actionController, animated: true, completion: nil)
+            
+        } else if UserDefaults.standard.bool(forKey: "showAlertOnSort") == false {
+            
+            if pressed == 0 {
+                print("Sort by content")
+                UserDefaults.standard.set("content", forKey: "sortBy")
+                pressed += 1
+                
+            } else if pressed == 1 {
+                print("Sort by color")
+                UserDefaults.standard.set("color", forKey: "sortBy")
+                pressed += 1
+                
+            } else if pressed == 2 {
+                print("Sort by date")
+                UserDefaults.standard.set("date", forKey: "sortBy")
+                pressed = 0
+                
+            }
+            fetchNotesFromCoreData()
+            animateCells()
+        }
     }
     
     @objc func handleLeftButton() {
@@ -286,15 +310,23 @@ class SavedNoteController: UICollectionViewController {
         actionController.addAction(Action("Delete note", style: .default, handler: { action in
             print("Delete note")
             
-            let alert = UIAlertController(title: "Are you sure?", message: "This will permanently delete this note in both iCloud and locally on this device.", preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (UIAlertAction) in
-                self.deleteNote(indexPath: indexPath ?? [0, 0], int: rowNumber)
+            if UserDefaults.standard.bool(forKey: "showAlertOnDelete") == true {
+                let alert = UIAlertController(title: "Are you sure?", message: "This will permanently delete this note in both iCloud and locally on this device.", preferredStyle: .alert)
                 
-            }))
+                alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (UIAlertAction) in
+                    self.deleteNote(indexPath: indexPath ?? [0, 0], int: rowNumber)
+                    
+                }))
+                
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.present(alert, animated: true)
+                
+            } else if UserDefaults.standard.bool(forKey: "showAlertOnDelete") == false {
+                self.deleteNote(indexPath: indexPath ?? [0, 0], int: rowNumber)
+
+            }
             
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            self.present(alert, animated: true)
+            
             
         }))
         actionController.addAction(Action("Share note", style: .default, handler: { action in

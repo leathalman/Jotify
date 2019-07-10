@@ -24,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.register(defaults: [
             "noteColorTheme": "default",
             "useRandomColor": true,
+            "sortBy": "date",
+            "showAlertOnDelete": true,
+            "showAlertOnSort": true,
         ])
         
         return true
