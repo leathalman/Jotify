@@ -23,9 +23,7 @@ class SettingsController: UITableViewController {
         navigationItem.title = "Settings"
         
         tableView.contentInset = UIEdgeInsets(top: -36, left: 0, bottom: 0, right: 0)
-        
-//        tableView.tableHeaderView = UserInfoHeader()
-        
+                
         tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
     }
@@ -63,7 +61,7 @@ class SettingsController: UITableViewController {
             
             switch indexPath.row {
             case 0:
-                print("0")
+                navigationController?.pushViewController(AboutSettingsController(), animated: true)
             case 1:
                 navigationController?.pushViewController(ColorSettingsController(style: .grouped), animated: true)
             case 2:

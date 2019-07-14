@@ -17,10 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        registerForPushNotifications()
-        UIApplication.shared.applicationIconBadgeNumber = 0
-        
+                
         UserDefaults.standard.register(defaults: [
             "noteColorTheme": "default",
             "useRandomColor": true,

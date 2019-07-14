@@ -44,13 +44,7 @@ class EmptyView: UIView {
         let label = UILabel(frame: .zero)
         label.backgroundColor = .white
         label.textAlignment = .center
-        
-        if UIDevice.modelName == "iPhone SE" || UIDevice.modelName == "Simulator iPhone SE" {
-            label.text = "You haven't saved any notes!"
-        } else {
-            label.text = "Looks like you haven't saved any notes!"
-        }
-        
+        label.text = "You haven't saved any notes!"
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textColor = .black
         return  label

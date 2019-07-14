@@ -84,6 +84,7 @@ class SavedNoteController: UICollectionViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        self.navigationController?.navigationBar.barStyle = .default
     }
     
     @objc func handleRightButton() {
@@ -395,7 +396,7 @@ class SavedNoteController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if notes.count == 0 {
-            self.collectionView.setEmptyMessage("Hello!!")
+            self.collectionView.setEmptyView()
         } else {
             self.collectionView.restore()
             if isFiltering() {

@@ -22,6 +22,8 @@ class NoteDetailController: UIViewController {
     var filteredNotes: [Note] = []
     var isFiltering: Bool = false
     
+    var navigationBarHeight = CGFloat()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -31,6 +33,9 @@ class NoteDetailController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationBarHeight = self.navigationController!.navigationBar.frame.height
+        
+        setupNotifications()
         setupView()
     }
     
@@ -46,11 +51,32 @@ class NoteDetailController: UIViewController {
             self?.navigationController?.navigationBar.barTintColor = .white
             self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
             }, completion: nil)
+    }
+    
+    func setupNotifications() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    @objc func adjustForKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         
-//        if textView.text.contains("remind") || textView.text.contains("Remind") {
-//            print("remind written down!")
-//            scheduleNotification(notificationType: "Reminder")
-//        }
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+        
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            writeNoteView.inputTextView.contentInset = .zero
+//            writeNoteView.inputTextView.frame = CGRect(x: 0, y: 100, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
+        } else {
+            writeNoteView.inputTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height + navigationBarHeight + 20, right: 0)
+//            writeNoteView.inputTextView.frame = CGRect(x: 0, y: 40, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
+        }
+        
+        writeNoteView.inputTextView.scrollIndicatorInsets = writeNoteView.inputTextView.contentInset
+        
+        let selectedRange = writeNoteView.inputTextView.selectedRange
+        writeNoteView.inputTextView.scrollRangeToVisible(selectedRange)
     }
     
     func setupClearNavigationBar() {
@@ -61,11 +87,13 @@ class NoteDetailController: UIViewController {
             self?.navigationController?.navigationBar.backgroundColor = .clear
             self?.navigationController?.navigationBar.barTintColor = .clear
             self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            self?.navigationController?.navigationBar.barStyle = .black
             }, completion: nil)
     }
     
     func setupView() {
         view = writeNoteView
+        writeNoteView.inputTextView.tintColor = .white
         writeNoteView.inputTextView.frame = CGRect(x: 0, y: 100, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
         writeNoteView.colorView.backgroundColor = backgroundColor
         writeNoteView.inputTextView.text = detailText
@@ -86,42 +114,6 @@ class NoteDetailController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    func scheduleNotification(notificationType: String) {
-        
-        let notificationCenter = UNUserNotificationCenter.current()
-        
-        notificationCenter.getNotificationSettings { (settings) in
-            if settings.authorizationStatus != .authorized {
-                // Notifications not allowed
-                
-            } else {
-                // Notifcations enabled
-                
-                let content = UNMutableNotificationContent()
-                
-                content.title = notificationType
-                content.body = self.writeNoteView.inputTextView.text
-                content.sound = UNNotificationSound.default
-                content.badge = 1
-                
-                //        let date = Date(timeIntervalSinceNow: 3600)
-                //        let triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second,], from: date)
-                //        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-                
-                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-                
-                let identifier = "Local Notification"
-                let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-                
-                notificationCenter.add(request) { (error) in
-                    if let error = error {
-                        print("Error \(error.localizedDescription)")
-                    }
-                }
-                
-            }
-        }
-    }
     
     func updateContent(index: Int, newContent: String, newDate: Double){
         guard let appDelegate =

@@ -25,6 +25,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         
         writeNoteView.inputTextView.delegate = self
         writeNoteView.inputTextView.frame = CGRect(x: 0, y: 100, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
+        writeNoteView.inputTextView.tintColor = .white
     }
     
     override func viewWillAppear(_ animated: Bool) {
