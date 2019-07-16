@@ -14,12 +14,10 @@ class AboutSettingsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = UIColor.white
-        
         navigationItem.title = "About"
-                
+        
         view = aboutSettingsView
+        aboutSettingsView.versionLabel.textColor = InterfaceColors.fontColor
+        aboutSettingsView.backgroundColor = InterfaceColors.viewBackgroundColor
     }
-    
 }

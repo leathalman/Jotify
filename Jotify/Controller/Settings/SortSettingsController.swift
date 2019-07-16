@@ -13,29 +13,27 @@ class SortSettingsController: UITableViewController {
     let sections: Array = ["Sort"]
     let general: Array = ["Show Alert on Sort"]
     
+    let settingsController = SettingsController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = UIColor.white
-        
         navigationItem.title = "Sort"
+        
+        setupDynamicElements()
         
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int{
-        return sections.count
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section]
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return general.count
-        } else {
-            return 0
+    func setupDynamicElements() {
+        if settingsController.darkModeEnabled() == false {
+            view.backgroundColor = InterfaceColors.viewBackgroundColor
+            
+            tableView.separatorColor = nil
+            
+        } else if settingsController.darkModeEnabled() == true {
+            view.backgroundColor = InterfaceColors.viewBackgroundColor
+            
+            tableView.separatorColor = InterfaceColors.separatorColor
         }
     }
     
@@ -44,6 +42,9 @@ class SortSettingsController: UITableViewController {
         if indexPath.section == 0 {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
+            
+            settingsController.setupDynamicCells(cell: cell, enableArrow: false)
+            
             cell.textLabel?.text = "\(general[indexPath.row])"
             cell.selectionStyle = .none
             cell.switchButton.addTarget(self, action: #selector(showAlertOnDeleteSwitchPressed), for: .valueChanged)
@@ -86,6 +87,22 @@ class SortSettingsController: UITableViewController {
             
         default:
             return ""
+        }
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int{
+        return sections.count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section]
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return general.count
+        } else {
+            return 0
         }
     }
     

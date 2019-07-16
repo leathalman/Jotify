@@ -51,7 +51,7 @@ class SavedNoteCell: UICollectionViewCell {
         textLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0).isActive = true
         textLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, constant: -35).isActive = true
         
-        dateLabel.leftAnchor.constraint(equalTo: textLabel.leftAnchor, constant: 5).isActive = true
+        dateLabel.leftAnchor.constraint(equalTo: textLabel.leftAnchor).isActive = true
         dateLabel.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 5).isActive = true
         dateLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         dateLabel.widthAnchor.constraint(equalTo: textLabel.widthAnchor).isActive = true

@@ -100,10 +100,10 @@
 			children = (
 				F650E15122BFFB12008D29AD /* SettingsController.swift */,
 				F6969F5D22DA1AFD00C4E8FF /* AboutSettingsController.swift */,
-				F6CE723922D5832F00544267 /* DataSettingsController.swift */,
-				F6CE723B22D5833E00544267 /* SortSettingsController.swift */,
 				F64908BA22D2BA690019BDBC /* ColorSettingsController.swift */,
 				F67B92DF22D2E785002C6985 /* ColorPickerController.swift */,
+				F6CE723922D5832F00544267 /* DataSettingsController.swift */,
+				F6CE723B22D5833E00544267 /* SortSettingsController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";

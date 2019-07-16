@@ -22,7 +22,7 @@ class AboutSettingsView: UIView {
         return iconView
     }()
     
-    lazy var titleLabel: UILabel = {
+    lazy var versionLabel: UILabel = {
        let label = UILabel()
         label.text = "Verison: \(appVersion)"
         label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -52,7 +52,7 @@ class AboutSettingsView: UIView {
     func setupView() {
         addSubview(icon)
         addSubview(iconText)
-        addSubview(titleLabel)
+        addSubview(versionLabel)
         
         icon.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         icon.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -40).isActive = true
@@ -64,8 +64,8 @@ class AboutSettingsView: UIView {
         iconText.widthAnchor.constraint(equalToConstant: 150).isActive = true
         iconText.heightAnchor.constraint(equalToConstant: 52).isActive = true
         
-        titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: iconText.bottomAnchor, constant: 10).isActive = true
+        versionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        versionLabel.topAnchor.constraint(equalTo: iconText.bottomAnchor, constant: 10).isActive = true
     }
     
     required init?(coder: NSCoder) {

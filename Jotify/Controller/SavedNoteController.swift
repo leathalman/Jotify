@@ -34,68 +34,69 @@ class SavedNoteController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        setupSearchBar()
+        
         if firstLaunch == true {
             fetchNotesFromCoreData()
             firstLaunch = false
         }
-        
+
         setupDynamicViewElements()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         fetchNotesFromCoreData()
-        setupSearchBar()
     }
-    
+
     func setupView() {
         navigationItem.title = "Saved Notes"
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.setHidesBackButton(true, animated: true)
-        
+
+        navigationController?.navigationBar.isTranslucent = false
+        extendedLayoutIncludesOpaqueBars = true
+
         let rightItem = UIBarButtonItem(image: UIImage(systemName: "arrow.up.arrow.down.circle"), style: .plain, target: self, action: #selector(handleRightButton))
         navigationItem.rightBarButtonItem  = rightItem
-        
+
         let leftItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(handleLeftButton))
         navigationItem.leftBarButtonItem  = leftItem
-        
+        navigationItem.setHidesBackButton(true, animated: true)
+
         collectionView.frame = self.view.frame
         collectionView.alwaysBounceVertical = true
 
         collectionView.setCollectionViewLayout(blueprintLayout, animated: true)
-        
+
         collectionView.delegate = self
         collectionView.dataSource = self
-        
+
         collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
         view.addSubview(collectionView)
     }
-    
+
     func setupDynamicViewElements() {
         collectionView.backgroundColor = InterfaceColors.viewBackgroundColor
         
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
             searchController.searchBar.barTintColor = InterfaceColors.searchBarColor
             searchController.searchBar.backgroundImage = UIImage()
-            searchController.searchBar.isTranslucent = false
-            
+
             setupDarkPersistentNavigationBar()
             
         } else {
             searchController.searchBar.barTintColor = InterfaceColors.searchBarColor
             searchController.searchBar.backgroundImage = nil
-            searchController.searchBar.isTranslucent = false
-            
+
             setupDefaultPersistentNavigationBar()
         }
     }
-    
+
     func setupDefaultPersistentNavigationBar() {
         navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
         navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
@@ -103,9 +104,8 @@ class SavedNoteController: UICollectionViewController {
         navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         navigationController?.navigationBar.barStyle = .default
-        navigationController?.navigationBar.isTranslucent = false
     }
-    
+
     func setupDarkPersistentNavigationBar() {
         navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
         navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
@@ -113,18 +113,17 @@ class SavedNoteController: UICollectionViewController {
         navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.isTranslucent = false
     }
-    
+
     func setupSearchBar() {
         searchController.searchResultsUpdater = self as UISearchResultsUpdating
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Notes"
         searchController.hidesNavigationBarDuringPresentation = true
-        navigationItem.searchController = searchController
+//        searchController.searchBar.isTranslucent = false
         searchController.isActive = false
+        navigationItem.searchController = searchController
     }
-    
     
     @objc func handleRightButton() {
         feedbackOnPress()

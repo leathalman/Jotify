@@ -35,11 +35,17 @@ class SettingsController: UITableViewController {
     
     func setupDynamicViewElements() {
         if darkModeEnabled() == false {
-            view.backgroundColor = UIColor.white
+            view.backgroundColor = InterfaceColors.viewBackgroundColor
+            
+            tableView.separatorColor = nil
+            
             setupDefaultPersistentNavigationBar()
             
         } else if darkModeEnabled() == true {
-            view.backgroundColor = UIColor.grayBackground
+            view.backgroundColor = InterfaceColors.viewBackgroundColor
+
+            tableView.separatorColor = InterfaceColors.separatorColor
+            
             setupDarkPersistentNavigationBar()
         }
     }
@@ -171,23 +177,18 @@ class SettingsController: UITableViewController {
                 cell.backgroundColor = UIColor.white
                 cell.backgroundColor = InterfaceColors.cellColor
                 
-                cell.textLabel?.textColor = UIColor.black
-                cell.textLabel?.textColor = InterfaceColors.fontColor
-                
+                setupDynamicCells(cell: cell, enableArrow: true)
+
                 cell.accessoryType = .disclosureIndicator
-                
+
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
                 
                 cell.textLabel?.text = "\(general[indexPath.row])"
                 
-                cell.backgroundColor = UIColor.white
-                cell.backgroundColor = InterfaceColors.cellColor
-                
-                cell.textLabel?.textColor = UIColor.black
-                cell.textLabel?.textColor = InterfaceColors.fontColor
-                
+                setupDynamicCells(cell: cell, enableArrow: true)
+
                 cell.accessoryType = .disclosureIndicator
                 
                 return cell
@@ -196,12 +197,8 @@ class SettingsController: UITableViewController {
                 
                 cell.textLabel?.text = "\(general[indexPath.row])"
                 
-                cell.backgroundColor = UIColor.white
-                cell.backgroundColor = InterfaceColors.cellColor
-                
-                cell.textLabel?.textColor = UIColor.black
-                cell.textLabel?.textColor = InterfaceColors.fontColor
-                
+                setupDynamicCells(cell: cell, enableArrow: true)
+
                 cell.accessoryType = .disclosureIndicator
                 
                 return cell
@@ -210,25 +207,17 @@ class SettingsController: UITableViewController {
                 
                 cell.textLabel?.text = "\(general[indexPath.row])"
                 
-                cell.backgroundColor = UIColor.white
-                cell.backgroundColor = InterfaceColors.cellColor
-                
-                cell.textLabel?.textColor = UIColor.black
-                cell.textLabel?.textColor = InterfaceColors.fontColor
-                
+                setupDynamicCells(cell: cell, enableArrow: true)
+
                 cell.accessoryType = .disclosureIndicator
-                
+
                 return cell
             case 4:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
                 
                 cell.textLabel?.text = "\(general[indexPath.row])"
                 
-                cell.backgroundColor = UIColor.white
-                cell.backgroundColor = InterfaceColors.cellColor
-                
-                cell.textLabel?.textColor = UIColor.black
-                cell.textLabel?.textColor = InterfaceColors.fontColor
+                setupDynamicCells(cell: cell, enableArrow: false)
                 
                 cell.selectionStyle = .none
                 
@@ -246,11 +235,7 @@ class SettingsController: UITableViewController {
                 
                 cell.textLabel?.text = "\(general[indexPath.row])"
                 
-                cell.backgroundColor = UIColor.white
-                cell.backgroundColor = InterfaceColors.cellColor
-                
-                cell.textLabel?.textColor = UIColor.black
-                cell.textLabel?.textColor = InterfaceColors.fontColor
+                setupDynamicCells(cell: cell, enableArrow: false)
                 
                 cell.accessoryType = .disclosureIndicator
                 
@@ -289,6 +274,23 @@ class SettingsController: UITableViewController {
                 cell.backgroundColor = UIColor.white
                 cell.textLabel?.textColor = UIColor.black
             return cell
+        }
+    }
+    
+    func setupDynamicCells(cell: UITableViewCell, enableArrow: Bool) {
+        cell.backgroundColor = UIColor.white
+        cell.backgroundColor = InterfaceColors.cellColor
+        
+        cell.textLabel?.textColor = UIColor.black
+        cell.textLabel?.textColor = InterfaceColors.fontColor
+        
+        if enableArrow == true {
+            if darkModeEnabled() == true {
+                cell.accessoryView = UIImageView(image: UIImage(systemName: "chevron.right.circle"))
+                
+            } else {
+                cell.accessoryView = UIImageView(image: UIImage(systemName: "chevron.right.circle.fill"))
+            }
         }
     }
     

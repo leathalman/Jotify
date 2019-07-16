@@ -51,6 +51,8 @@ class ColorPickerController: UIViewController {
         
         view.addSubview(contentView)
         view.addSubview(colorPicker)
+        
+        setupClearNavigationBar()
     }
     
     @objc func handleCancel() {
@@ -63,7 +65,7 @@ class ColorPickerController: UIViewController {
             self?.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
             self?.navigationController?.navigationBar.shadowImage = UIImage()
             self?.navigationController?.navigationBar.backgroundColor = .clear
-            self?.navigationController?.navigationBar.barTintColor = .clear
+            self?.navigationController?.navigationBar.barTintColor = .gray
             self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             }, completion: nil)
     }

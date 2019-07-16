@@ -13,29 +13,27 @@ class DataSettingsController: UITableViewController {
     let sections: Array = ["Delete"]
     let general: Array = ["Show Alert on Delete"]
     
+    let settingsController = SettingsController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = UIColor.white
-        
         navigationItem.title = "Data"
+        
+        setupDynamicElements()
         
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int{
-        return sections.count
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section]
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return general.count
-        } else {
-            return 0
+    func setupDynamicElements() {
+        if settingsController.darkModeEnabled() == false {
+            view.backgroundColor = InterfaceColors.viewBackgroundColor
+            
+            tableView.separatorColor = nil
+            
+        } else if settingsController.darkModeEnabled() == true {
+            view.backgroundColor = InterfaceColors.viewBackgroundColor
+            
+            tableView.separatorColor = InterfaceColors.separatorColor
         }
     }
     
@@ -45,6 +43,9 @@ class DataSettingsController: UITableViewController {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
             cell.textLabel?.text = "\(general[indexPath.row])"
+            
+            settingsController.setupDynamicCells(cell: cell, enableArrow: false)
+
             cell.selectionStyle = .none
             cell.switchButton.addTarget(self, action: #selector(showAlertOnDeleteSwitchPressed), for: .valueChanged)
             
@@ -59,7 +60,6 @@ class DataSettingsController: UITableViewController {
         } else {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-            
             
             cell.backgroundColor = UIColor.white
             cell.textLabel?.textColor = UIColor.black
@@ -87,6 +87,22 @@ class DataSettingsController: UITableViewController {
             print("showAlertOnDelete disabled")
             UserDefaults.standard.set(false, forKey: "showAlertOnDelete")
             
+        }
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int{
+        return sections.count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section]
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return general.count
+        } else {
+            return 0
         }
     }
     

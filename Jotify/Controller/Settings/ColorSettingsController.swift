@@ -18,20 +18,15 @@ class ColorSettingsController: UITableViewController {
     let palettes: Array = ["Default", "Sunset", "Kypool", "Celestial", "Apple Vibrant"]
     let other: Array = ["Random Colors"]
     
+    let settingsController = SettingsController()
+    
     var lastIndexPath:NSIndexPath = NSIndexPath(row: 0, section: 0)
     
     let defaults = UserDefaults.standard
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        setupPersistentNavigationBar()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchData()
-        
-        view.backgroundColor = UIColor.white
         
         navigationItem.title = "Note Palettes"
         
@@ -39,12 +34,42 @@ class ColorSettingsController: UITableViewController {
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
     }
     
-    func setupPersistentNavigationBar() {
-        self.navigationController?.navigationBar.backgroundColor = .white
-        self.navigationController?.navigationBar.barTintColor = .white
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        setupDynamicElements()
+    }
+    
+    func setupDynamicElements() {
+        if settingsController.darkModeEnabled() == false {
+            view.backgroundColor = InterfaceColors.viewBackgroundColor
+            tableView.separatorColor = nil
+            setupDefaultPersistentNavigationBar()
+            
+        } else if settingsController.darkModeEnabled() == true {
+            view.backgroundColor = InterfaceColors.viewBackgroundColor
+            tableView.separatorColor = .white
+            setupDarkPersistentNavigationBar()
+        }
+    }
+    
+    func setupDefaultPersistentNavigationBar() {
+        navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
+        navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.isTranslucent = false
+    }
+    
+    func setupDarkPersistentNavigationBar() {
+        navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
+        navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.isTranslucent = false
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -102,24 +127,23 @@ class ColorSettingsController: UITableViewController {
         
         if indexPath.section == 0 && UserDefaults.standard.bool(forKey: "useRandomColor") == false {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-            
+        
+            settingsController.setupDynamicCells(cell: cell, enableArrow: false)
+
             cell.textLabel?.text = "\(palettes[indexPath.row])"
-            cell.textLabel?.textColor = UIColor.black
-            
             cell.isUserInteractionEnabled = false
             cell.selectionStyle = .none
-            cell.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.15)
             
             return cell
             
         } else if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
             
+            settingsController.setupDynamicCells(cell: cell, enableArrow: false)
+
             cell.textLabel?.text = "\(palettes[indexPath.row])"
-            cell.backgroundColor = UIColor.white
             cell.isUserInteractionEnabled = true
             cell.selectionStyle = .none
-            cell.textLabel?.textColor = UIColor.black
             
             switch indexPath.row {
             case 0:
@@ -153,6 +177,9 @@ class ColorSettingsController: UITableViewController {
             switch indexPath.row {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
+                
+                settingsController.setupDynamicCells(cell: cell, enableArrow: false)
+
                 cell.textLabel?.text = "\(other[indexPath.row])"
                 cell.selectionStyle = .none
                 cell.switchButton.addTarget(self, action: #selector(randomColorSwitchPressed), for: .valueChanged)
@@ -174,7 +201,6 @@ class ColorSettingsController: UITableViewController {
         } else {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-            
             
             cell.backgroundColor = UIColor.white
             cell.textLabel?.textColor = UIColor.black
