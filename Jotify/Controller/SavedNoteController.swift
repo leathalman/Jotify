@@ -66,6 +66,7 @@ class SavedNoteController: UICollectionViewController {
         navigationItem.leftBarButtonItem  = leftItem
         
         collectionView.frame = self.view.frame
+        collectionView.alwaysBounceVertical = true
 
         collectionView.setCollectionViewLayout(blueprintLayout, animated: true)
         
@@ -93,24 +94,6 @@ class SavedNoteController: UICollectionViewController {
             
             setupDefaultPersistentNavigationBar()
         }
-        
-        setNeedsStatusBarAppearanceUpdate()
-        
-//        if notes.count < 9 {
-//            //if collectionView does not (more or less) fill the screen will cells, then disable scrolling and enable static searchBar
-//            collectionView.alwaysBounceVertical = false
-//            navigationItem.hidesSearchBarWhenScrolling = false
-//
-//            print("collection view not full")
-//
-//        } else {
-//            collectionView.alwaysBounceVertical = true
-//            searchController.isActive = false
-//            navigationItem.hidesSearchBarWhenScrolling = true
-//
-//            print("collection view fills screen")
-//
-//        }
     }
     
     func setupDefaultPersistentNavigationBar() {
@@ -139,7 +122,7 @@ class SavedNoteController: UICollectionViewController {
         searchController.searchBar.placeholder = "Search Notes"
         searchController.hidesNavigationBarDuringPresentation = true
         navigationItem.searchController = searchController
-//        searchController.isActive = false
+        searchController.isActive = false
     }
     
     
