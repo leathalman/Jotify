@@ -137,7 +137,7 @@ extension ColorPickerController: ChromaColorPickerDelegate{
                 
                 self.colorPicker.hexLabel.textColor = UIColor.white
 
-                self.contentView.backgroundColor = UIColor.grayBlur
+                self.contentView.backgroundColor = UIColor.grayBackground
                 self.contentView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
                 self.contentView.center = self.view.center
                 

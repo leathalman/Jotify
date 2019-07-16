@@ -14,6 +14,7 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    let themes = Themes()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -24,7 +25,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             "sortBy": "date",
             "showAlertOnDelete": true,
             "showAlertOnSort": true,
+            "darkModeEnabled": false,
         ])
+        
+        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+            themes.setupDarkMode()
+        } else {
+            themes.setupDefaultMode()
+        }
         
         return true
     }

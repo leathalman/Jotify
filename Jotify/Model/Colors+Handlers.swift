@@ -20,8 +20,7 @@ extension UIColor {
         self.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
     }
     
-    static let grayBackground = UIColor(red: 242/255, green: 242/255, blue: 245/255, alpha: 1.0)
-    static let grayBlur = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.5)
+    static let grayBackground = UIColor(r: 40, g: 40, b: 40)
     
     //default
     static let lightRed = UIColor(r: 254, g: 129, b: 118)

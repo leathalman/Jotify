@@ -28,6 +28,16 @@ class NoteDetailController: UIViewController {
         super.viewWillAppear(animated)
         
         setupClearNavigationBar()
+        
+        let input = writeNoteView.inputTextView.text
+        let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+        let matches = detector.matches(in: input!, options: [], range: NSRange(location: 0, length: input!.utf16.count))
+        
+        for match in matches {
+            guard let range = Range(match.range, in: input!) else { continue }
+            let url = input![range]
+            print(url)
+        }
     }
     
     override func viewDidLoad() {
@@ -67,10 +77,10 @@ class NoteDetailController: UIViewController {
         
         if notification.name == UIResponder.keyboardWillHideNotification {
             writeNoteView.inputTextView.contentInset = .zero
-//            writeNoteView.inputTextView.frame = CGRect(x: 0, y: 100, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
+
         } else {
             writeNoteView.inputTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height + navigationBarHeight + 20, right: 0)
-//            writeNoteView.inputTextView.frame = CGRect(x: 0, y: 40, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
+
         }
         
         writeNoteView.inputTextView.scrollIndicatorInsets = writeNoteView.inputTextView.contentInset
@@ -93,12 +103,20 @@ class NoteDetailController: UIViewController {
     
     func setupView() {
         view = writeNoteView
-        writeNoteView.inputTextView.tintColor = .white
-        writeNoteView.inputTextView.frame = CGRect(x: 0, y: 100, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
+        let textView = writeNoteView.inputTextView
+        
         writeNoteView.colorView.backgroundColor = backgroundColor
-        writeNoteView.inputTextView.text = detailText
-        writeNoteView.inputTextView.font = UIFont.boldSystemFont(ofSize: 18)
-        writeNoteView.inputTextView.placeholder = ""
+        
+        textView.tintColor = .white
+        textView.frame = CGRect(x: 0, y: 100, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
+        textView.backgroundColor = backgroundColor
+        textView.text = detailText
+        textView.font = UIFont.boldSystemFont(ofSize: 18)
+        textView.placeholder = ""
+        
+        textView.alwaysBounceVertical = true
+        textView.isUserInteractionEnabled = true
+        textView.isScrollEnabled = true
         
         navigationItem.title = navigationTitle
         navigationItem.setHidesBackButton(true, animated:true)

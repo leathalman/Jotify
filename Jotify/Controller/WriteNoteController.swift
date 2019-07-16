@@ -13,6 +13,7 @@ import CoreData
 class WriteNoteController: UIViewController, UITextViewDelegate {
     
     let writeNoteView = WriteNoteView()
+    let themes = Themes()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,13 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
             let color = UserDefaults.standard.color(forKey: "staticNoteColor")
             writeNoteView.colorView.backgroundColor = color
         } else {
-            writeNoteView.colorView.backgroundColor = StoredColors.noteColor
+            if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+                writeNoteView.colorView.backgroundColor = InterfaceColors.writeViewColor
+
+            } else {
+                writeNoteView.colorView.backgroundColor = StoredColors.noteColor
+
+            }
         }
     }
     

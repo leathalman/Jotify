@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9B6AC7C1DBA10CBFB04F374B /* Pods_Jotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3C025699629E8C8FD896B4 /* Pods_Jotify.framework */; };
 		F6070B8A22D50796005E4CF3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6070B8922D50796005E4CF3 /* EmptyView.swift */; };
+		F63A0C7922DE031E00B8A480 /* VerticalAlignLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63A0C7822DE031E00B8A480 /* VerticalAlignLabel.swift */; };
 		F644968622C16422009CC386 /* NoteDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F644968522C16422009CC386 /* NoteDetailController.swift */; };
 		F64908BB22D2BA690019BDBC /* ColorSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64908BA22D2BA690019BDBC /* ColorSettingsController.swift */; };
 		F650E13322BFF35A008D29AD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E13222BFF35A008D29AD /* SceneDelegate.swift */; };
@@ -30,6 +31,7 @@
 		F686D85222C9B10900C6F555 /* Colors+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F686D85122C9B10900C6F555 /* Colors+Handlers.swift */; };
 		F6969F5E22DA1AFD00C4E8FF /* AboutSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6969F5D22DA1AFD00C4E8FF /* AboutSettingsController.swift */; };
 		F6969F6022DA256F00C4E8FF /* AboutSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6969F5F22DA256F00C4E8FF /* AboutSettingsView.swift */; };
+		F6B2083722DE22860098CF9F /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B2083622DE22860098CF9F /* Themes.swift */; };
 		F6CE723A22D5832F00544267 /* DataSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CE723922D5832F00544267 /* DataSettingsController.swift */; };
 		F6CE723C22D5833E00544267 /* SortSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CE723B22D5833E00544267 /* SortSettingsController.swift */; };
 		F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */; };
@@ -40,6 +42,7 @@
 		134E86D639FF0CE5ED6FEF08 /* Pods-Jotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.release.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.release.xcconfig"; sourceTree = "<group>"; };
 		77AB5562845EB3AEFA1502C6 /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.debug.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
 		F6070B8922D50796005E4CF3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		F63A0C7822DE031E00B8A480 /* VerticalAlignLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalAlignLabel.swift; sourceTree = "<group>"; };
 		F644968522C16422009CC386 /* NoteDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailController.swift; sourceTree = "<group>"; };
 		F64908BA22D2BA690019BDBC /* ColorSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSettingsController.swift; sourceTree = "<group>"; };
 		F650E12D22BFF35A008D29AD /* Jotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +67,7 @@
 		F686D85122C9B10900C6F555 /* Colors+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+Handlers.swift"; sourceTree = "<group>"; };
 		F6969F5D22DA1AFD00C4E8FF /* AboutSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSettingsController.swift; sourceTree = "<group>"; };
 		F6969F5F22DA256F00C4E8FF /* AboutSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSettingsView.swift; sourceTree = "<group>"; };
+		F6B2083622DE22860098CF9F /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
 		F6CE723922D5832F00544267 /* DataSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSettingsController.swift; sourceTree = "<group>"; };
 		F6CE723B22D5833E00544267 /* SortSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortSettingsController.swift; sourceTree = "<group>"; };
 		F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteView.swift; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 				F650E15B22BFFB19008D29AD /* Extensions.swift */,
 				F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */,
 				F686D85122C9B10900C6F555 /* Colors+Handlers.swift */,
+				F6B2083622DE22860098CF9F /* Themes.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -179,6 +184,7 @@
 				F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */,
 				F6070B8922D50796005E4CF3 /* EmptyView.swift */,
 				F6969F5F22DA256F00C4E8FF /* AboutSettingsView.swift */,
+				F63A0C7822DE031E00B8A480 /* VerticalAlignLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -310,8 +316,10 @@
 				F67B92DE22D2E083002C6985 /* SettingsSwitchCell.swift in Sources */,
 				F650E16722BFFB20008D29AD /* SavedNoteCell.swift in Sources */,
 				F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */,
+				F6B2083722DE22860098CF9F /* Themes.swift in Sources */,
 				F6969F6022DA256F00C4E8FF /* AboutSettingsView.swift in Sources */,
 				F666D4B222CFED2D00DECE27 /* UIDevice+Extensions.swift in Sources */,
+				F63A0C7922DE031E00B8A480 /* VerticalAlignLabel.swift in Sources */,
 				F644968622C16422009CC386 /* NoteDetailController.swift in Sources */,
 				F650E13322BFF35A008D29AD /* SceneDelegate.swift in Sources */,
 				F686D85222C9B10900C6F555 /* Colors+Handlers.swift in Sources */,

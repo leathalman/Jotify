@@ -17,12 +17,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
-        //WILL RUN WITH A BLACK SCREEN UNLESS IMPLEMENTED!!!
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = PageViewController()
+            
+            if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+                window.backgroundColor = .black
+            } else {
+                window.backgroundColor = .white
+            }
+            
             self.window = window
-            window.backgroundColor = UIColor(named: "viewBackgroundColor")
+            window.backgroundColor = .white
             window.makeKeyAndVisible()
         }
         
@@ -39,8 +45,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
-        
-        UIApplication.shared.applicationIconBadgeNumber = 0
     }
 
     func sceneWillResignActive(_ scene: UIScene) {

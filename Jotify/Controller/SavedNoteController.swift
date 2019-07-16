@@ -33,15 +33,14 @@ class SavedNoteController: UICollectionViewController {
         stickyFooters: false)
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        setupSearchBar()
-        
+        super.viewWillAppear(animated)
+
         if firstLaunch == true {
             fetchNotesFromCoreData()
             firstLaunch = false
         }
         
-        setupPersistentNavigationBar()
+        setupDynamicViewElements()
     }
     
     override func viewDidLoad() {
@@ -52,6 +51,7 @@ class SavedNoteController: UICollectionViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         fetchNotesFromCoreData()
+        setupSearchBar()
     }
     
     func setupView() {
@@ -66,10 +66,8 @@ class SavedNoteController: UICollectionViewController {
         navigationItem.leftBarButtonItem  = leftItem
         
         collectionView.frame = self.view.frame
-        collectionView.backgroundColor = UIColor(named: "viewBackgroundColor")
 
         collectionView.setCollectionViewLayout(blueprintLayout, animated: true)
-        collectionView.alwaysBounceVertical = true
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -78,14 +76,72 @@ class SavedNoteController: UICollectionViewController {
         view.addSubview(collectionView)
     }
     
-    func setupPersistentNavigationBar() {
-        self.navigationController?.navigationBar.backgroundColor = .white
-        self.navigationController?.navigationBar.barTintColor = .white
+    func setupDynamicViewElements() {
+        collectionView.backgroundColor = InterfaceColors.viewBackgroundColor
+        
+        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+            searchController.searchBar.barTintColor = InterfaceColors.searchBarColor
+            searchController.searchBar.backgroundImage = UIImage()
+            searchController.searchBar.isTranslucent = false
+            
+            setupDarkPersistentNavigationBar()
+            
+        } else {
+            searchController.searchBar.barTintColor = InterfaceColors.searchBarColor
+            searchController.searchBar.backgroundImage = nil
+            searchController.searchBar.isTranslucent = false
+            
+            setupDefaultPersistentNavigationBar()
+        }
+        
+        setNeedsStatusBarAppearanceUpdate()
+        
+//        if notes.count < 9 {
+//            //if collectionView does not (more or less) fill the screen will cells, then disable scrolling and enable static searchBar
+//            collectionView.alwaysBounceVertical = false
+//            navigationItem.hidesSearchBarWhenScrolling = false
+//
+//            print("collection view not full")
+//
+//        } else {
+//            collectionView.alwaysBounceVertical = true
+//            searchController.isActive = false
+//            navigationItem.hidesSearchBarWhenScrolling = true
+//
+//            print("collection view fills screen")
+//
+//        }
+    }
+    
+    func setupDefaultPersistentNavigationBar() {
+        self.navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
+        self.navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         self.navigationController?.navigationBar.barStyle = .default
+        self.navigationController?.navigationBar.isTranslucent = false
     }
+    
+    func setupDarkPersistentNavigationBar() {
+        self.navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
+        self.navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.barStyle = .black
+        self.navigationController?.navigationBar.isTranslucent = false
+    }
+    
+    func setupSearchBar() {
+        searchController.searchResultsUpdater = self as UISearchResultsUpdating
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Notes"
+        searchController.hidesNavigationBarDuringPresentation = true
+        navigationItem.searchController = searchController
+//        searchController.isActive = false
+    }
+    
     
     @objc func handleRightButton() {
         feedbackOnPress()
@@ -173,15 +229,6 @@ class SavedNoteController: UICollectionViewController {
         } else {
             return false
         }
-    }
-    
-    func setupSearchBar() {
-        searchController.searchResultsUpdater = self as UISearchResultsUpdating
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Notes"
-        searchController.hidesNavigationBarDuringPresentation = true
-        navigationItem.searchController = searchController
-        searchController.isActive = false
     }
     
     func searchBarIsEmpty() -> Bool {
@@ -423,7 +470,7 @@ class SavedNoteController: UICollectionViewController {
         let color = note.value(forKey: "color") as? String ?? "white"
         let date = note.value(forKey: "date") as? Double ?? 0
         
-        cell.textLabel.text = content?.trunc(length: 55)
+        cell.textLabel.text = content
         cell.textLabel.textColor = UIColor.white
         cell.dateLabel.textColor = UIColor.white
 
@@ -442,8 +489,14 @@ class SavedNoteController: UICollectionViewController {
         }
         
         cell.contentView.layer.cornerRadius = 5
-        cell.contentView.backgroundColor = cellColor
-        cell.layer.addShadow(color: UIColor.darkGray)
+        
+        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+            cell.contentView.backgroundColor = UIColor(r: 15, g: 15, b: 15)
+            
+        } else {
+            cell.contentView.backgroundColor = cellColor
+            cell.layer.addShadow(color: UIColor.darkGray)
+        }
         //work on scrolling performance
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.main.scale

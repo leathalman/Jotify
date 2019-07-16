@@ -15,6 +15,8 @@ class SettingsController: UITableViewController {
     let general: Array = ["About", "Note Palettes", "Data", "Sort", "Dark Mode"]
     let advanced: Array = ["Reset Settings to Default", "Delete All Data"]
     
+    let themes = Themes()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -122,43 +124,74 @@ class SettingsController: UITableViewController {
         }
     }
     
-    func setupBasicCell(indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-        
-        cell.textLabel?.text = "\(general[indexPath.row])"
-        cell.backgroundColor = UIColor.white
-        cell.textLabel?.textColor = UIColor.black
-        cell.accessoryType = .disclosureIndicator
-        
-        return cell
-    }
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-            var cell: UITableViewCell
             
             switch indexPath.row {
             case 0:
-                cell = setupBasicCell(indexPath: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+                
+                cell.textLabel?.text = "\(general[indexPath.row])"
+                cell.backgroundColor = UIColor.white
+                cell.textLabel?.textColor = UIColor.black
+                cell.accessoryType = .disclosureIndicator
+                
+                return cell
             case 1:
-                cell = setupBasicCell(indexPath: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+                
+                cell.textLabel?.text = "\(general[indexPath.row])"
+                cell.backgroundColor = UIColor.white
+                cell.textLabel?.textColor = UIColor.black
+                cell.accessoryType = .disclosureIndicator
+                
+                return cell
             case 2:
-                cell = setupBasicCell(indexPath: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+                
+                cell.textLabel?.text = "\(general[indexPath.row])"
+                cell.backgroundColor = UIColor.white
+                cell.textLabel?.textColor = UIColor.black
+                cell.accessoryType = .disclosureIndicator
+                
+                return cell
             case 3:
-                cell = setupBasicCell(indexPath: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+                
+                cell.textLabel?.text = "\(general[indexPath.row])"
+                cell.backgroundColor = UIColor.white
+                cell.textLabel?.textColor = UIColor.black
+                cell.accessoryType = .disclosureIndicator
+                
+                return cell
             case 4:
-                cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
                 
                 cell.textLabel?.text = "\(general[indexPath.row])"
                 cell.backgroundColor = UIColor.white
                 cell.textLabel?.textColor = UIColor.black
                 cell.selectionStyle = .none
+                
+                cell.switchButton.addTarget(self, action: #selector(darkModePressed), for: .valueChanged)
+                
+                if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+                    cell.switchButton.isOn = true
+                } else {
+                    cell.switchButton.isOn = false
+                }
+                
+                return cell
             default:
-                cell = setupBasicCell(indexPath: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+                
+                cell.textLabel?.text = "\(general[indexPath.row])"
+                cell.backgroundColor = UIColor.white
+                cell.textLabel?.textColor = UIColor.black
+                cell.accessoryType = .disclosureIndicator
+                
+                return cell
             }
-            
-            return cell
             
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
@@ -186,6 +219,26 @@ class SettingsController: UITableViewController {
                 cell.backgroundColor = UIColor.white
                 cell.textLabel?.textColor = UIColor.black
             return cell
+        }
+    }
+    
+    @objc func darkModePressed(sender: UISwitch) {
+        if sender.isOn {
+            print("darkModeEnabled")
+            UserDefaults.standard.set(true, forKey: "darkModeEnabled")
+            themes.setupDarkMode()
+            if let navigationController = self.navigationController {
+                navigationController.navigationBar.layer.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+            }
+            
+        } else {
+            print("darkModeDisabled")
+            UserDefaults.standard.set(false, forKey: "darkModeEnabled")
+            themes.setupDefaultMode()
+            if let navigationController = self.navigationController {
+                navigationController.navigationBar.layer.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+            }
+            
         }
     }
     
