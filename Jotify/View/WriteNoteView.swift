@@ -86,7 +86,10 @@ class WriteNoteView: UIView {
         
         //set global value to equal generated value
         StoredColors.noteColor = randomColor
-        colorView.backgroundColor = randomColor
+        
+        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+            colorView.backgroundColor = randomColor
+        }
     }
     
     required init?(coder: NSCoder) {

@@ -21,6 +21,7 @@ extension UIColor {
     }
     
     static let grayBackground = UIColor(r: 40, g: 40, b: 40)
+    static let cellBlack = UIColor(r: 15, g: 15, b: 15)
     
     //default
     static let lightRed = UIColor(r: 254, g: 129, b: 118)

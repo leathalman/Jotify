@@ -97,23 +97,23 @@ class SavedNoteController: UICollectionViewController {
     }
     
     func setupDefaultPersistentNavigationBar() {
-        self.navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
-        self.navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        self.navigationController?.navigationBar.barStyle = .default
-        self.navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
+        navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.isTranslucent = false
     }
     
     func setupDarkPersistentNavigationBar() {
-        self.navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
-        self.navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        self.navigationController?.navigationBar.barStyle = .black
-        self.navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
+        navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.isTranslucent = false
     }
     
     func setupSearchBar() {
@@ -135,7 +135,7 @@ class SavedNoteController: UICollectionViewController {
             if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
                 actionController.backgroundColor = UserDefaults.standard.color(forKey: "staticNoteColor") ?? UIColor.white
                 
-            } else {
+            } else if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
                 
                 if isSelectedColorFromDefaults(key: "default") == true {
                     actionController.backgroundColor = Colors.defaultColors.randomElement() ?? UIColor.blue2
@@ -151,8 +151,11 @@ class SavedNoteController: UICollectionViewController {
                     
                 } else if isSelectedColorFromDefaults(key: "appleVibrant") == true {
                     actionController.backgroundColor = Colors.appleVibrantColors.randomElement() ?? UIColor.blue2
-                    
                 }
+                
+            } else if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+                actionController.backgroundColor = InterfaceColors.actionSheetColor
+                
             }
             
             actionController.addAction(Action("Sort by date", style: .default, handler: { action in
@@ -331,13 +334,14 @@ class SavedNoteController: UICollectionViewController {
         cellColor = Colors.colorFromString(string: color)
         
         let actionController = SkypeActionController()
-        actionController.backgroundColor = cellColor
         
-        actionController.addAction(Action("Open note", style: .default, handler: { action in
-            print("Open note")
-            //add function for editing note here
+        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+            actionController.backgroundColor = cellColor
             
-        }))
+        } else if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+            actionController.backgroundColor = InterfaceColors.actionSheetColor
+        }
+        
         actionController.addAction(Action("Delete note", style: .default, handler: { action in
             print("Delete note")
             
@@ -474,7 +478,7 @@ class SavedNoteController: UICollectionViewController {
         cell.contentView.layer.cornerRadius = 5
         
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
-            cell.contentView.backgroundColor = UIColor(r: 15, g: 15, b: 15)
+            cell.contentView.backgroundColor = UIColor.cellBlack
             
         } else {
             cell.contentView.backgroundColor = cellColor

@@ -14,8 +14,10 @@ struct InterfaceColors {
     static var viewBackgroundColor = UIColor()
     static var navigationBarColor = UIColor()
     static var cellColor = UIColor()
+    static var fontColor = UIColor()
     static var writeViewColor = UIColor()
     static var searchBarColor = UIColor()
+    static var actionSheetColor = UIColor()
 }
 
 class Themes {
@@ -25,9 +27,11 @@ class Themes {
         
         InterfaceColors.writeViewColor = .grayBackground
         InterfaceColors.viewBackgroundColor = .grayBackground
-        InterfaceColors.cellColor = .black
+        InterfaceColors.cellColor = .grayBackground
+        InterfaceColors.fontColor = .white
         InterfaceColors.navigationBarColor = .grayBackground
         InterfaceColors.searchBarColor = .grayBackground
+        InterfaceColors.actionSheetColor = .grayBackground
     }
     
     func setupDefaultMode() {
@@ -36,6 +40,8 @@ class Themes {
         InterfaceColors.viewBackgroundColor = .white
         InterfaceColors.navigationBarColor = .white
         InterfaceColors.searchBarColor = .white
+        InterfaceColors.cellColor = .white
+        InterfaceColors.fontColor = .black
 
     }
 }

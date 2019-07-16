@@ -20,14 +20,48 @@ class SettingsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.white
-        
         navigationItem.title = "Settings"
         
         tableView.contentInset = UIEdgeInsets(top: -36, left: 0, bottom: 0, right: 0)
                 
         tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        setupDynamicViewElements()
+    }
+    
+    func setupDynamicViewElements() {
+        if darkModeEnabled() == false {
+            view.backgroundColor = UIColor.white
+            setupDefaultPersistentNavigationBar()
+            
+        } else if darkModeEnabled() == true {
+            view.backgroundColor = UIColor.grayBackground
+            setupDarkPersistentNavigationBar()
+        }
+    }
+    
+    func setupDefaultPersistentNavigationBar() {
+        navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
+        navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.isTranslucent = false
+    }
+    
+    func setupDarkPersistentNavigationBar() {
+        navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
+        navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.isTranslucent = false
     }
     
     func deleteAllNotes(entity: String) {
@@ -71,7 +105,7 @@ class SettingsController: UITableViewController {
             case 3:
                 navigationController?.pushViewController(SortSettingsController(style: .grouped), animated: true)
             default:
-                print("default")
+                return
             }
             
         } else if indexPath.section == 1 {
@@ -133,8 +167,13 @@ class SettingsController: UITableViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
                 
                 cell.textLabel?.text = "\(general[indexPath.row])"
+                
                 cell.backgroundColor = UIColor.white
+                cell.backgroundColor = InterfaceColors.cellColor
+                
                 cell.textLabel?.textColor = UIColor.black
+                cell.textLabel?.textColor = InterfaceColors.fontColor
+                
                 cell.accessoryType = .disclosureIndicator
                 
                 return cell
@@ -142,8 +181,13 @@ class SettingsController: UITableViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
                 
                 cell.textLabel?.text = "\(general[indexPath.row])"
+                
                 cell.backgroundColor = UIColor.white
+                cell.backgroundColor = InterfaceColors.cellColor
+                
                 cell.textLabel?.textColor = UIColor.black
+                cell.textLabel?.textColor = InterfaceColors.fontColor
+                
                 cell.accessoryType = .disclosureIndicator
                 
                 return cell
@@ -151,8 +195,13 @@ class SettingsController: UITableViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
                 
                 cell.textLabel?.text = "\(general[indexPath.row])"
+                
                 cell.backgroundColor = UIColor.white
+                cell.backgroundColor = InterfaceColors.cellColor
+                
                 cell.textLabel?.textColor = UIColor.black
+                cell.textLabel?.textColor = InterfaceColors.fontColor
+                
                 cell.accessoryType = .disclosureIndicator
                 
                 return cell
@@ -160,8 +209,13 @@ class SettingsController: UITableViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
                 
                 cell.textLabel?.text = "\(general[indexPath.row])"
+                
                 cell.backgroundColor = UIColor.white
+                cell.backgroundColor = InterfaceColors.cellColor
+                
                 cell.textLabel?.textColor = UIColor.black
+                cell.textLabel?.textColor = InterfaceColors.fontColor
+                
                 cell.accessoryType = .disclosureIndicator
                 
                 return cell
@@ -169,8 +223,13 @@ class SettingsController: UITableViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
                 
                 cell.textLabel?.text = "\(general[indexPath.row])"
+                
                 cell.backgroundColor = UIColor.white
+                cell.backgroundColor = InterfaceColors.cellColor
+                
                 cell.textLabel?.textColor = UIColor.black
+                cell.textLabel?.textColor = InterfaceColors.fontColor
+                
                 cell.selectionStyle = .none
                 
                 cell.switchButton.addTarget(self, action: #selector(darkModePressed), for: .valueChanged)
@@ -186,8 +245,13 @@ class SettingsController: UITableViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
                 
                 cell.textLabel?.text = "\(general[indexPath.row])"
+                
                 cell.backgroundColor = UIColor.white
+                cell.backgroundColor = InterfaceColors.cellColor
+                
                 cell.textLabel?.textColor = UIColor.black
+                cell.textLabel?.textColor = InterfaceColors.fontColor
+                
                 cell.accessoryType = .disclosureIndicator
                 
                 return cell
@@ -199,9 +263,15 @@ class SettingsController: UITableViewController {
             
             switch indexPath.row {
             case 0:
+                cell.backgroundColor = UIColor.white
+                cell.backgroundColor = InterfaceColors.cellColor
+                
                 cell.textLabel?.textColor = UIColor.lightBlue
 
             case 1:
+                cell.backgroundColor = UIColor.white
+                cell.backgroundColor = InterfaceColors.cellColor
+                
                 cell.textLabel?.textColor = UIColor.red
 
             default:
@@ -227,18 +297,25 @@ class SettingsController: UITableViewController {
             print("darkModeEnabled")
             UserDefaults.standard.set(true, forKey: "darkModeEnabled")
             themes.setupDarkMode()
-            if let navigationController = self.navigationController {
-                navigationController.navigationBar.layer.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
-            }
+        
+            self.viewWillAppear(true)
+            self.tableView.reloadData()
             
         } else {
             print("darkModeDisabled")
             UserDefaults.standard.set(false, forKey: "darkModeEnabled")
             themes.setupDefaultMode()
-            if let navigationController = self.navigationController {
-                navigationController.navigationBar.layer.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
-            }
             
+            self.viewWillAppear(true)
+            self.tableView.reloadData()
+        }
+    }
+    
+    func darkModeEnabled() -> Bool {
+        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+            return true
+        } else {
+            return false
         }
     }
     

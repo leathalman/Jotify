@@ -38,7 +38,9 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
             let color = UserDefaults.standard.color(forKey: "staticNoteColor")
             writeNoteView.colorView.backgroundColor = color
-        } else {
+            
+        } else if UserDefaults.standard.bool(forKey: "useRandomColor") == true {
+            
             if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
                 writeNoteView.colorView.backgroundColor = InterfaceColors.writeViewColor
 
