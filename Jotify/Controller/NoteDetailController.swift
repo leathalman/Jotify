@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import UserNotifications
 
 class NoteDetailController: UIViewController {
     
@@ -26,23 +25,11 @@ class NoteDetailController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        setupClearNavigationBar()
-        
-        let input = writeNoteView.inputTextView.text
-        let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
-        let matches = detector.matches(in: input!, options: [], range: NSRange(location: 0, length: input!.utf16.count))
-        
-        for match in matches {
-            guard let range = Range(match.range, in: input!) else { continue }
-            let url = input![range]
-            print(url)
-        }
+        setupPersistentNavigationBar()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationBarHeight = self.navigationController!.navigationBar.frame.height
         
         setupNotifications()
@@ -51,10 +38,33 @@ class NoteDetailController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
-        
         let newDate = Date.timeIntervalSinceReferenceDate
         updateContent(index: index, newContent: writeNoteView.inputTextView.text, newDate: newDate)
         
+        resetNavigationBarForTransition()
+    }
+    
+    func setupPersistentNavigationBar() {
+        guard self.navigationController?.topViewController === self else { return }
+        self.transitionCoordinator?.animate(alongsideTransition: { [weak self](context) in
+            self?.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            self?.navigationController?.navigationBar.shadowImage = UIImage()
+            self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            self?.navigationController?.navigationBar.barStyle = .black
+            
+            if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+                self?.navigationController?.navigationBar.backgroundColor = self?.backgroundColor
+                self?.navigationController?.navigationBar.barTintColor = self?.backgroundColor
+                
+            } else {
+                self?.navigationController?.navigationBar.backgroundColor = InterfaceColors.viewBackgroundColor
+                self?.navigationController?.navigationBar.barTintColor = InterfaceColors.viewBackgroundColor
+            }
+            
+            }, completion: nil)
+    }
+    
+    func resetNavigationBarForTransition() {
         self.transitionCoordinator?.animate(alongsideTransition: { [weak self](context) in
             self?.navigationController?.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
             self?.navigationController?.navigationBar.backgroundColor = .white
@@ -63,53 +73,21 @@ class NoteDetailController: UIViewController {
             }, completion: nil)
     }
     
-    func setupNotifications() {
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-    }
-    
-    @objc func adjustForKeyboard(notification: Notification) {
-        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
-        
-        let keyboardScreenEndFrame = keyboardValue.cgRectValue
-        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
-        
-        if notification.name == UIResponder.keyboardWillHideNotification {
-            writeNoteView.inputTextView.contentInset = .zero
-
-        } else {
-            writeNoteView.inputTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height + navigationBarHeight + 20, right: 0)
-
-        }
-        
-        writeNoteView.inputTextView.scrollIndicatorInsets = writeNoteView.inputTextView.contentInset
-        
-        let selectedRange = writeNoteView.inputTextView.selectedRange
-        writeNoteView.inputTextView.scrollRangeToVisible(selectedRange)
-    }
-    
-    func setupClearNavigationBar() {
-        guard self.navigationController?.topViewController === self else { return }
-        self.transitionCoordinator?.animate(alongsideTransition: { [weak self](context) in
-            self?.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            self?.navigationController?.navigationBar.shadowImage = UIImage()
-            self?.navigationController?.navigationBar.backgroundColor = .clear
-            self?.navigationController?.navigationBar.barTintColor = .clear
-            self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-            self?.navigationController?.navigationBar.barStyle = .black
-            }, completion: nil)
-    }
-    
     func setupView() {
         view = writeNoteView
         let textView = writeNoteView.inputTextView
         
-        writeNoteView.colorView.backgroundColor = backgroundColor
+        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+            writeNoteView.colorView.backgroundColor = backgroundColor
+            textView.backgroundColor = backgroundColor
+            
+        } else {
+            writeNoteView.colorView.backgroundColor = InterfaceColors.viewBackgroundColor
+            textView.backgroundColor = InterfaceColors.viewBackgroundColor
+        }
         
         textView.tintColor = .white
-        textView.frame = CGRect(x: 0, y: 100, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
-        textView.backgroundColor = backgroundColor
+        textView.frame = CGRect(x: 0, y: 15, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
         textView.text = detailText
         textView.font = UIFont.boldSystemFont(ofSize: 18)
         textView.placeholder = ""
@@ -132,7 +110,6 @@ class NoteDetailController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    
     func updateContent(index: Int, newContent: String, newDate: Double){
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
@@ -151,5 +128,31 @@ class NoteDetailController: UIViewController {
         
         appDelegate.saveContext()
     }
+    
+    func setupNotifications() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    @objc func adjustForKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+        
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            writeNoteView.inputTextView.contentInset = .zero
+            
+        } else {
+            writeNoteView.inputTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height + navigationBarHeight + 20, right: 0)
+        }
+        
+        writeNoteView.inputTextView.scrollIndicatorInsets = writeNoteView.inputTextView.contentInset
+        
+        let selectedRange = writeNoteView.inputTextView.selectedRange
+        writeNoteView.inputTextView.scrollRangeToVisible(selectedRange)
+    }
+    
     
 }
