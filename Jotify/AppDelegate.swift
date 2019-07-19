@@ -84,7 +84,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // initialize the CloudKit schema
         let id = "iCloud.com.austinleath.Jotify"
         let options = NSPersistentCloudKitContainerOptions(containerIdentifier: id)
-        options.shouldInitializeSchema = false // toggle to false when done
         description.cloudKitContainerOptions = options
         
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
