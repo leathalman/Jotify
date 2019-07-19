@@ -8,6 +8,8 @@ Jotify is an iOS app written completely in swift used for simple note taking. It
 
 By using NSPersistentCloudKitContainer, this application can serve as an example of using both CoreData and CloudKit in the same application. Jotify syncs notes instantly between devices and well as storing a copy of the CloudKit database on device.
 
+[Demo](https://imgur.com/ninS69q)
+
 ## Prerequisites
 
 To run this project you will need to be running the lastest XCode 11 Beta and the lastest iOS 13 Beta. 
