@@ -12,7 +12,7 @@ By using NSPersistentCloudKitContainer, this application can serve as an example
 
 ## Prerequisites
 
-To run this project you will need to be running the lastest XCode 11 Beta and the lastest iOS 13 Beta. 
+To run this project you will need to be running the lastest Xcode 11 Beta and the lastest iOS 13 Beta. 
 
 ## Dependencies
 
