@@ -20,16 +20,16 @@ class ColorPickerController: UIViewController {
         colorPicker.padding = 5
         colorPicker.stroke = 3
         colorPicker.hexLabel.textColor = UIColor.black
-        colorPicker.center = self.view.center
+        colorPicker.translatesAutoresizingMaskIntoConstraints = false
         return colorPicker
     }()
     
     lazy var contentView: UIView = {
         let contentView = UIView()
         contentView.frame = CGRect(x: 0, y: 0, width: 350, height: 350)
-        contentView.center = self.view.center
         contentView.backgroundColor = UIColor.white
         contentView.layer.cornerRadius = 15
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         return contentView
     }()
     
@@ -49,10 +49,27 @@ class ColorPickerController: UIViewController {
         
         navigationItem.setHidesBackButton(true, animated: true)
         
+        let navigationBarHeight = self.navigationController!.navigationBar.frame.height
+        
         view.addSubview(contentView)
         view.addSubview(colorPicker)
         
+        contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        contentView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -(navigationBarHeight)).isActive = true
+        contentView.widthAnchor.constraint(equalToConstant: 350).isActive = true
+        contentView.heightAnchor.constraint(equalToConstant: 350).isActive = true
+        
+        colorPicker.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        colorPicker.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -(navigationBarHeight)).isActive = true
+        colorPicker.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        colorPicker.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        
         setupClearNavigationBar()
+        
+        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+            self.colorPicker.hexLabel.textColor = UIColor.white
+            self.contentView.backgroundColor = UIColor.grayBackground
+        }
     }
     
     @objc func handleCancel() {
@@ -129,6 +146,7 @@ extension ColorPickerController: ChromaColorPickerDelegate{
         setStaticColorForNotes()
         
         StoredColors.staticNoteColor = color
+        navigationController?.navigationBar.barTintColor = color
 
         UIView.animate(withDuration: 0.2,
                        animations: {
@@ -136,13 +154,6 @@ extension ColorPickerController: ChromaColorPickerDelegate{
         }, completion: { (done) in
             UIView.animate(withDuration: 0.2, animations: {
                 self.view.transform = CGAffineTransform.identity
-                
-                self.colorPicker.hexLabel.textColor = UIColor.white
-
-                self.contentView.backgroundColor = UIColor.grayBackground
-                self.contentView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
-                self.contentView.center = self.view.center
-                
             })
         })
     }
