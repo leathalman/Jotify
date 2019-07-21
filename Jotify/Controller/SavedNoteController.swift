@@ -86,12 +86,16 @@ class SavedNoteController: UICollectionViewController {
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
             searchController.searchBar.barTintColor = InterfaceColors.searchBarColor
             searchController.searchBar.backgroundImage = UIImage()
+            
+            UIApplication.shared.windows.first?.backgroundColor = InterfaceColors.viewBackgroundColor
 
             setupDarkPersistentNavigationBar()
             
         } else {
             searchController.searchBar.barTintColor = InterfaceColors.searchBarColor
             searchController.searchBar.backgroundImage = nil
+            
+            UIApplication.shared.windows.first?.backgroundColor = InterfaceColors.viewBackgroundColor
 
             setupDefaultPersistentNavigationBar()
         }

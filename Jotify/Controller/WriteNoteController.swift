@@ -44,8 +44,12 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
             writeNoteView.colorView.backgroundColor = InterfaceColors.writeViewColor
             
+            UIApplication.shared.windows.first?.backgroundColor = InterfaceColors.viewBackgroundColor
+            
         } else {
             writeNoteView.colorView.backgroundColor = StoredColors.noteColor
+            
+            UIApplication.shared.windows.first?.backgroundColor = StoredColors.noteColor
             
         }
         

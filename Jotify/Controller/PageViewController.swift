@@ -21,8 +21,10 @@ class PageViewController: PageboyViewController, PageboyViewControllerDataSource
         super.viewDidLoad()
         
         viewControllers = [savedNotesController, writeNotesController]
-        
+
         dataSource = self
+        isScrollEnabled = true
+        bounces = false
     }
     
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
