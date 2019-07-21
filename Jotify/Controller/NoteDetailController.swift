@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NoteDetailController: UIViewController {
+class NoteDetailController: UIViewController, UITextViewDelegate {
     
     var navigationTitle: String = ""
     var backgroundColor: UIColor = .white
@@ -34,6 +34,7 @@ class NoteDetailController: UIViewController {
         
         setupNotifications()
         setupView()
+//        setupToolBar()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -42,6 +43,63 @@ class NoteDetailController: UIViewController {
         updateContent(index: index, newContent: writeNoteView.inputTextView.text, newDate: newDate)
         
         resetNavigationBarForTransition()
+    }
+    
+    func setupToolBar() {
+        let doneButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: writeNoteView.inputTextView, action: #selector(UIResponder.resignFirstResponder))
+        
+        let flexSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
+        
+        let button: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.edit, target: self, action: #selector(addBulletToString))
+        
+        let toolbar = UIToolbar()
+        toolbar.barStyle = UIBarStyle.default
+        toolbar.isTranslucent = true
+        toolbar.tintColor = backgroundColor
+        toolbar.sizeToFit()
+        toolbar.setItems([button, flexSpace, doneButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        writeNoteView.inputTextView.inputAccessoryView = toolbar
+    }
+    
+    @objc func addBulletToString() {
+        let stringArray = writeNoteView.inputTextView.text.components(separatedBy: "\n")
+                
+        for items in stringArray {
+            if !items.contains("•") {
+                writeNoteView.inputTextView.attributedText = add(stringList: stringArray, font: UIFont.boldSystemFont(ofSize: 18), bullet: "•")
+            }
+        }
+    }
+    
+    func add(stringList: [String],
+             font: UIFont,
+             bullet: String = "\u{2022}",
+             indentation: CGFloat = 20,
+             textColor: UIColor = .white,
+             bulletColor: UIColor = .white) -> NSAttributedString {
+
+        let textAttributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: textColor]
+        let bulletAttributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: bulletColor]
+
+        let bulletList = NSMutableAttributedString()
+        for string in stringList {
+            let formattedString = "\(bullet)\t\(string)\n"
+            let attributedString = NSMutableAttributedString(string: formattedString)
+
+            attributedString.addAttributes(range: NSMakeRange(0, attributedString.length))
+
+            attributedString.addAttributes(
+                textAttributes,
+                range: NSMakeRange(0, attributedString.length))
+
+            let string:NSString = NSString(string: formattedString)
+            let rangeForBullet:NSRange = string.range(of: bullet)
+            attributedString.addAttributes(bulletAttributes, range: rangeForBullet)
+            bulletList.append(attributedString)
+        }
+
+        return bulletList
     }
     
     func setupPersistentNavigationBar() {
@@ -95,6 +153,7 @@ class NoteDetailController: UIViewController {
         textView.alwaysBounceVertical = true
         textView.isUserInteractionEnabled = true
         textView.isScrollEnabled = true
+        textView.isPlaceholderScrollEnabled = true
         
         navigationItem.title = navigationTitle
         navigationItem.setHidesBackButton(true, animated:true)

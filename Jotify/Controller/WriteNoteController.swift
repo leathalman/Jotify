@@ -24,6 +24,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         
         view = writeNoteView
         
+        writeNoteView.inputTextView.isScrollEnabled = false
         writeNoteView.inputTextView.delegate = self
         writeNoteView.inputTextView.frame = CGRect(x: 0, y: 100, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
         writeNoteView.inputTextView.tintColor = .white
@@ -32,6 +33,12 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         handleRandomColorsEnabled()
+    }
+    
+    //can change to dismiss when viewWillDisappear
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        writeNoteView.inputTextView.resignFirstResponder()
     }
     
     func handleRandomColorsEnabled() {

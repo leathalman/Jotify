@@ -26,7 +26,6 @@ class WriteNoteView: UIView {
         textField.placeholderColor = .white
         textField.textColor = .white
         textField.isEditable = true
-        textField.isPlaceholderScrollEnabled = true
         textField.leftViewOrigin = CGPoint(x: 8, y: 8)
         textField.font = UIFont.boldSystemFont(ofSize: 32)
         textField.textContainerInset = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
