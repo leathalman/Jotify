@@ -22,6 +22,7 @@ To run this project you will need to be running the latest Xcode 11 Beta and the
 - [XLActionController](https://github.com/xmartlabs/XLActionController) - Used for ActionSheet in SavedNoteController.swift
 - [PageBoy](https://github.com/uias/Pageboy) - UIPageController for navigation across multiple views
 - [ChromaColorPicker](https://github.com/joncardasis/ChromaColorPicker) - Used for picking a static color for notes
+- [WhatsNewKit](https://github.com/SvenTiigi/WhatsNewKit) - Used for displaying information about app updates and onboarding
 
 ## License
 
