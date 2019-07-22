@@ -1,6 +1,6 @@
 # Privacy Policy
 
-I don’t store your data, period.
+I don’t store your data.
 
 There are no accounts local to Jotify nor does Jotify ask for any of your information when you download the app. Jotify does not have any dedicated servers, instead opting to store data on closed containers in the CloudKit platform. All notes are stored on private servers inaccessible by myself or others. Data is also stored locally on device, but this can be removed at user's discretion by deleting the app.
 
