@@ -4,6 +4,7 @@ PODS:
   - MultilineTextField (0.2.3)
   - Pageboy (3.2.2)
   - ViewAnimator (2.5.1)
+  - WhatsNewKit (1.2.0)
   - XLActionController (5.0.0):
     - XLActionController/Core (= 5.0.0)
   - XLActionController/Core (5.0.0)
@@ -16,6 +17,7 @@ DEPENDENCIES:
   - MultilineTextField
   - Pageboy (~> 3.2)
   - ViewAnimator
+  - WhatsNewKit
   - XLActionController
   - XLActionController/Skype
 
@@ -26,6 +28,7 @@ SPEC REPOS:
     - MultilineTextField
     - Pageboy
     - ViewAnimator
+    - WhatsNewKit
     - XLActionController
 
 SPEC CHECKSUMS:
@@ -34,8 +37,9 @@ SPEC CHECKSUMS:
   MultilineTextField: 10965d9c3e05a182181bd7971eb009c7607001ae
   Pageboy: b6e8f5082c23ef2490ddf21339fb6e19673d1453
   ViewAnimator: 173932c659a43c5a15c665878750d92801ae2cf1
+  WhatsNewKit: 3fc7e34db0902b086fa2760e05d4d4403a38a0e0
   XLActionController: d7dea0b162bd3977311bcba7d377b88d6b87a7b4
 
-PODFILE CHECKSUM: ac7f6df9ebc9576ca215b8231a785dcd113cf246
+PODFILE CHECKSUM: 0111e2ec502d7af88d5b4aa2d70d125d8430423c
 
 COCOAPODS: 1.7.1

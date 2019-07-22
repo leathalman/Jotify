@@ -26,4 +26,7 @@ pod 'Pageboy', '~> 3.2'
 # Used for picking a static color for notes
 pod 'ChromaColorPicker'
 
+# Used for Onboarding and Updates
+pod 'WhatsNewKit'
+
 end

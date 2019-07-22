@@ -7,8 +7,9 @@
 //
 
 import UIKit
-import MultilineTextField
 import CoreData
+import MultilineTextField
+import WhatsNewKit
 
 class WriteNoteController: UIViewController, UITextViewDelegate {
     
@@ -18,16 +19,16 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupView()
         setupNotifications()
+  
+        presentOnboarding(tintColor: StoredColors.noteColor)
         
-        self.hideKeyboardWhenTappedAround()
-        
-        view = writeNoteView
-        
-        writeNoteView.inputTextView.isScrollEnabled = false
-        writeNoteView.inputTextView.delegate = self
-        writeNoteView.inputTextView.frame = CGRect(x: 0, y: 100, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
-        writeNoteView.inputTextView.tintColor = .white
+        if UserDefaults.standard.bool(forKey: "isFirstLaunch") == true {
+            presentOnboarding(tintColor: StoredColors.noteColor)
+            
+            UserDefaults.standard.set(false, forKey: "isFirstLaunch")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,10 +36,69 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         handleRandomColorsEnabled()
     }
     
-    //can change to dismiss when viewWillDisappear
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
         writeNoteView.inputTextView.resignFirstResponder()
+    }
+    
+    func presentOnboarding(tintColor: UIColor) {
+        let whatsNew = WhatsNew(
+            title: "Welcome!",
+            items: [
+                WhatsNew.Item(
+                    title: "Notes",
+                    subtitle: "Creating notes is simple: type and enter. Your notes are automatically saved and synced to all of your devices. Swipe right to view your notes.",
+                    image: UIImage(named: "write")
+                ),
+                WhatsNew.Item(
+                    title: "Privacy",
+                    subtitle: "Jotify does not have access to any of your data and never will. All of your notes are just that, yours.",
+                    image: UIImage(named: "lock")
+                ),
+                WhatsNew.Item(
+                    title: "No Accounts. Ever.",
+                    subtitle: "Jotify uses your iCloud account to store notes, so no annoying emails or extra passwords to worry about.",
+                    image: UIImage(named: "person")
+                ),
+                WhatsNew.Item(
+                    title: "Dark Mode",
+                    subtitle: "It looks pretty good. You should check it out.",
+                    image: UIImage(named: "moon")
+                ),
+                WhatsNew.Item(
+                    title: "Open Source",
+                    subtitle: "Jotify is open source, so you know exactly what is running on your device. Feel free to check it out on GitHub.",
+                    image: UIImage(named: "github")
+                )
+            ]
+        )
+        
+        var configuration = WhatsNewViewController.Configuration()
+        configuration.backgroundColor = .white
+        configuration.titleView.titleColor = tintColor
+        configuration.itemsView.titleFont = .boldSystemFont(ofSize: 17)
+        configuration.itemsView.imageSize = .fixed(height: 50)
+        configuration.detailButton?.titleColor = tintColor
+        configuration.completionButton.backgroundColor = tintColor
+        
+        let whatsNewViewController = WhatsNewViewController(
+            whatsNew: whatsNew,
+            configuration: configuration
+        )
+        
+        DispatchQueue.main.async {
+            self.present(whatsNewViewController, animated: true)
+        }
+    }
+    
+    func setupView() {
+        self.hideKeyboardWhenTappedAround()
+        view = writeNoteView
+        
+        writeNoteView.inputTextView.isScrollEnabled = false
+        writeNoteView.inputTextView.delegate = self
+        writeNoteView.inputTextView.frame = CGRect(x: 0, y: 100, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
+        writeNoteView.inputTextView.tintColor = .white
     }
     
     func handleRandomColorsEnabled() {
@@ -137,6 +197,17 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         
         return false
     }
+    
+    func getTopMostViewController() -> UIViewController? {
+         var topMostViewController = UIApplication.shared.windows.first?.rootViewController
+
+         while let presentedViewController = topMostViewController?.presentedViewController {
+             topMostViewController = presentedViewController
+         }
+
+         return topMostViewController
+     }
+     
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent

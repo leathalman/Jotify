@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             "showAlertOnDelete": true,
             "showAlertOnSort": true,
             "darkModeEnabled": false,
+            "isFirstLaunch": true,
         ])
         
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
