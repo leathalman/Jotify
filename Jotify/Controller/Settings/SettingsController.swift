@@ -13,7 +13,7 @@ class SettingsController: UITableViewController {
     
     let sections: Array = ["General", "Advanced"]
     let general: Array = ["About", "Note Palettes", "Data", "Sort", "Dark Mode"]
-    let advanced: Array = ["Reset Settings to Default", "Delete All Data"]
+    let advanced: Array = ["Show Tutorial","Reset Settings to Default", "Delete All Data"]
     
     let themes = Themes()
     
@@ -117,6 +117,10 @@ class SettingsController: UITableViewController {
         } else if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
+                let writeNoteController = WriteNoteController()
+                writeNoteController.presentOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+               
+            case 1:
                 let alert = UIAlertController(title: "Are you sure?", message: "This will reset all settings to default.", preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: { (UIAlertAction) in
@@ -135,8 +139,9 @@ class SettingsController: UITableViewController {
                 
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 present(alert, animated: true)
-               
-            case 1:
+                
+                
+            case 2:
                 print("Delete all data")
                 let alert = UIAlertController(title: "Are you sure?", message: "This will permanently delete all data saved in both iCloud and saved locally on this device.", preferredStyle: .alert)
                 
@@ -250,13 +255,19 @@ class SettingsController: UITableViewController {
             case 0:
                 cell.backgroundColor = UIColor.white
                 cell.backgroundColor = InterfaceColors.cellColor
-                
+                                                
                 cell.textLabel?.textColor = UIColor.lightBlue
 
             case 1:
                 cell.backgroundColor = UIColor.white
                 cell.backgroundColor = InterfaceColors.cellColor
+                                
+                cell.textLabel?.textColor = UIColor.lightBlue
                 
+            case 2:
+                cell.backgroundColor = UIColor.white
+                cell.backgroundColor = InterfaceColors.cellColor
+                                
                 cell.textLabel?.textColor = UIColor.red
 
             default:

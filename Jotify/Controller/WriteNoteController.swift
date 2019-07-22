@@ -21,11 +21,9 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         
         setupView()
         setupNotifications()
-  
-        presentOnboarding(tintColor: StoredColors.noteColor)
-        
+          
         if UserDefaults.standard.bool(forKey: "isFirstLaunch") == true {
-            presentOnboarding(tintColor: StoredColors.noteColor)
+            presentOnboarding(viewController: self, tintColor: StoredColors.noteColor)
             
             UserDefaults.standard.set(false, forKey: "isFirstLaunch")
         }
@@ -41,7 +39,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         writeNoteView.inputTextView.resignFirstResponder()
     }
     
-    func presentOnboarding(tintColor: UIColor) {
+    func presentOnboarding(viewController: UIViewController, tintColor: UIColor) {
         let whatsNew = WhatsNew(
             title: "Welcome!",
             items: [
@@ -76,6 +74,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         var configuration = WhatsNewViewController.Configuration()
         configuration.backgroundColor = .white
         configuration.titleView.titleColor = tintColor
+        configuration.titleView.insets = UIEdgeInsets(top: 40, left: 20, bottom: 15, right: 15)
         configuration.itemsView.titleFont = .boldSystemFont(ofSize: 17)
         configuration.itemsView.imageSize = .fixed(height: 50)
         configuration.detailButton?.titleColor = tintColor
@@ -87,7 +86,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         )
         
         DispatchQueue.main.async {
-            self.present(whatsNewViewController, animated: true)
+            viewController.present(whatsNewViewController, animated: true)
         }
     }
     
