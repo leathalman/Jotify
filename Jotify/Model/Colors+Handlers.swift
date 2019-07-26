@@ -95,7 +95,7 @@ class Colors {
     
     static func stringFromColor(color: UIColor) -> String {
         
-        if UserDefaults.standard.string(forKey: "noteColorTheme") == "default" {
+//        if UserDefaults.standard.string(forKey: "noteColorTheme") == "default" {
             if color == UIColor.lightRed {
                 return "lightRed"
                 
@@ -135,9 +135,9 @@ class Colors {
             } else if color == UIColor.medPurple {
                 return "medPurple"
             }
-        }
+//        }
         
-        if UserDefaults.standard.string(forKey: "noteColorTheme") == "sunset" {
+//        if UserDefaults.standard.string(forKey: "noteColorTheme") == "sunset" {
             if color == UIColor.blue1 {
                 return "blue1"
                 
@@ -162,9 +162,9 @@ class Colors {
             } else if color == UIColor.red2 {
                 return "red2"
             }
-        }
+//        }
         
-        if UserDefaults.standard.string(forKey: "noteColorTheme") == "kypool" {
+//        if UserDefaults.standard.string(forKey: "noteColorTheme") == "kypool" {
             if color == UIColor.pink1 {
                 return "pink1"
                 
@@ -189,9 +189,9 @@ class Colors {
             } else if color == UIColor.blue4 {
                 return "blue4"
             }
-        }
+//        }
         
-        if UserDefaults.standard.string(forKey: "noteColorTheme") == "celestial" {
+//        if UserDefaults.standard.string(forKey: "noteColorTheme") == "celestial" {
             if color == UIColor.green3 {
                 return "green3"
                 
@@ -216,9 +216,9 @@ class Colors {
             } else if color == UIColor.darkRed2 {
                 return "darkRed2"
             }
-        }
+//        }
         
-        if UserDefaults.standard.string(forKey: "noteColorTheme") == "appleVibrant" {
+//        if UserDefaults.standard.string(forKey: "noteColorTheme") == "appleVibrant" {
             if color == UIColor.systemTeal {
                 return "systemTeal"
                 
@@ -246,7 +246,7 @@ class Colors {
             } else if color == UIColor.systemYellow {
                 return "systemYellow"
             }
-        }
+//        }
         
         if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
             return "staticNoteColor"
@@ -257,7 +257,7 @@ class Colors {
     
     static func colorFromString(string: String) -> UIColor {
         
-        if UserDefaults.standard.string(forKey: "noteColorTheme") == "default" {
+//        if UserDefaults.standard.string(forKey: "noteColorTheme") == "default" {
             if string == "lightRed" {
                 return UIColor.lightRed
                 
@@ -297,9 +297,9 @@ class Colors {
             } else if string == "medPurple" {
                 return UIColor.medPurple
             }
-        }
+//        }
         
-        if UserDefaults.standard.string(forKey: "noteColorTheme") == "sunset" {
+//        if UserDefaults.standard.string(forKey: "noteColorTheme") == "sunset" {
             if string == "blue1" {
                 return UIColor.blue1
                 
@@ -324,9 +324,9 @@ class Colors {
             } else if string == "red2" {
                 return UIColor.red2
             }
-        }
+//        }
         
-        if UserDefaults.standard.string(forKey: "noteColorTheme") == "kypool" {
+//        if UserDefaults.standard.string(forKey: "noteColorTheme") == "kypool" {
             if string == "pink1" {
                 return UIColor.pink1
                 
@@ -351,9 +351,9 @@ class Colors {
             } else if string == "blue4" {
                 return UIColor.blue4
             }
-        }
+//        }
         
-        if UserDefaults.standard.string(forKey: "noteColorTheme") == "celestial" {
+//        if UserDefaults.standard.string(forKey: "noteColorTheme") == "celestial" {
             if string == "green3" {
                 return UIColor.green3
                 
@@ -378,9 +378,9 @@ class Colors {
             } else if string == "darkRed2" {
                 return UIColor.darkRed2
             }
-        }
+//        }
         
-        if UserDefaults.standard.string(forKey: "noteColorTheme") == "appleVibrant" {
+//        if UserDefaults.standard.string(forKey: "noteColorTheme") == "appleVibrant" {
             if string == "systemTeal" {
                 return UIColor.systemTeal
                 
@@ -408,7 +408,7 @@ class Colors {
             } else if string == "systemYellow" {
                 return UIColor.systemYellow
             }
-        }
+//        }
         
         if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
             return UserDefaults.standard.color(forKey: "staticNoteColor") ?? UIColor.white

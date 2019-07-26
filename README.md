@@ -10,6 +10,10 @@ By using NSPersistentCloudKitContainer, this application can serve as an example
 
 [Demo](https://imgur.com/ninS69q)
 
+## Testflight
+
+Now available on [Testflight](https://testflight.apple.com/join/EnJVSmNy)! 
+
 ## Prerequisites
 
 To run this project you will need to be running the latest Xcode 11 Beta and the latest iOS 13 Beta. 
