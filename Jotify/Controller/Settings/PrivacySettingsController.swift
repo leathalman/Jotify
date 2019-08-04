@@ -1,8 +1,8 @@
 //
-//  DataSettingsController.swift
+//  PrivacySettingsController.swift
 //  Jotify
 //
-//  Created by Harrison Leath on 7/9/19.
+//  Created by Harrison Leath on 8/4/19.
 //  Copyright © 2019 Harrison Leath. All rights reserved.
 //
 

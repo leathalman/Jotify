@@ -18,6 +18,8 @@ class AboutSettingsView: UIView {
         let image = UIImage(named: "iconLarge")
         let iconView = UIImageView(image: image)
         iconView.translatesAutoresizingMaskIntoConstraints = false
+        iconView.layer.cornerRadius = 28
+        iconView.clipsToBounds = true
         
         return iconView
     }()

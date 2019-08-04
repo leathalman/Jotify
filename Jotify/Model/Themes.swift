@@ -24,8 +24,6 @@ struct InterfaceColors {
 class Themes {
     
     func setupDarkMode() {
-        print("dark mode")
-        
         InterfaceColors.writeViewColor = .grayBackground
         InterfaceColors.viewBackgroundColor = .grayBackground
         InterfaceColors.cellColor = .grayBackground
@@ -36,9 +34,7 @@ class Themes {
         InterfaceColors.separatorColor = .white
     }
     
-    func setupDefaultMode() {
-        print("default mode")
-        
+    func setupDefaultMode() {        
         InterfaceColors.viewBackgroundColor = .white
         InterfaceColors.navigationBarColor = .white
         InterfaceColors.searchBarColor = .white

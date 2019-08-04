@@ -482,20 +482,18 @@ class SavedNoteController: UICollectionViewController {
             
             if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") == true {
                 cell.contentView.backgroundColor = cellColor
-                cell.layer.addShadow(color: UIColor.darkGray)
                 
             } else if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") == true {
                 cell.contentView.backgroundColor = UIColor.cellBlack
-                
             }
             
         } else {
             cell.contentView.backgroundColor = cellColor
-            cell.layer.addShadow(color: UIColor.darkGray)
         }
 
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.main.scale
+        cell.layer.addShadow(color: UIColor.darkGray)
         
         cell.contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapHandler(_:))))
         cell.contentView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTouchHandler(sender:))))
