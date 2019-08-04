@@ -124,8 +124,8 @@ class SavedNoteController: UICollectionViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Notes"
         searchController.hidesNavigationBarDuringPresentation = true
-//        searchController.searchBar.isTranslucent = false
         searchController.isActive = false
+//        searchController.searchBar.scopeButtonTitles = ["Content", "Date", "Color"]
         navigationItem.searchController = searchController
     }
     
@@ -387,10 +387,9 @@ class SavedNoteController: UICollectionViewController {
         let textToShare = text
         
         if let myWebsite = URL(string: "http://itunes.apple.com/app/idXXXXXXXXX") {//Enter link to your app here
-            let objectsToShare = [textToShare, myWebsite, image ?? #imageLiteral(resourceName: "app-logo")] as [Any]
+            let objectsToShare = [textToShare, myWebsite, image ?? #imageLiteral(resourceName: "iconLarge")] as [Any]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             
-            //Excluded Activities
             activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
             
             self.present(activityVC, animated: true, completion: nil)
@@ -405,10 +404,9 @@ class SavedNoteController: UICollectionViewController {
                 return
         }
         let managedContext = appDelegate.persistentContainer.viewContext
-        //delete from Core Data storage
+        
         managedContext.delete(note)
         
-        //delete from array so that UICollectionView displays cells correctly
         notes.remove(at: int)
         
         appDelegate.saveContext()
@@ -481,13 +479,21 @@ class SavedNoteController: UICollectionViewController {
         cell.contentView.layer.cornerRadius = 5
         
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
-            cell.contentView.backgroundColor = UIColor.cellBlack
+            
+            if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") == true {
+                cell.contentView.backgroundColor = cellColor
+                cell.layer.addShadow(color: UIColor.darkGray)
+                
+            } else if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") == true {
+                cell.contentView.backgroundColor = UIColor.cellBlack
+                
+            }
             
         } else {
             cell.contentView.backgroundColor = cellColor
             cell.layer.addShadow(color: UIColor.darkGray)
         }
-        //work on scrolling performance
+
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.main.scale
         

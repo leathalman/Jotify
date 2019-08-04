@@ -17,6 +17,8 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     
     let writeNoteView = WriteNoteView()
     
+    let isDarkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    
     var notes: [Note] = []
     var filteredNotes: [Note] = []
     var isFiltering: Bool = false
@@ -34,7 +36,6 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         
         setupNotifications()
         setupView()
-//        setupToolBar()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -45,63 +46,6 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         resetNavigationBarForTransition()
     }
     
-    func setupToolBar() {
-        let doneButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: writeNoteView.inputTextView, action: #selector(UIResponder.resignFirstResponder))
-        
-        let flexSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
-        
-        let button: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.edit, target: self, action: #selector(addBulletToString))
-        
-        let toolbar = UIToolbar()
-        toolbar.barStyle = UIBarStyle.default
-        toolbar.isTranslucent = true
-        toolbar.tintColor = backgroundColor
-        toolbar.sizeToFit()
-        toolbar.setItems([button, flexSpace, doneButton], animated: false)
-        toolbar.isUserInteractionEnabled = true
-        writeNoteView.inputTextView.inputAccessoryView = toolbar
-    }
-    
-    @objc func addBulletToString() {
-        let stringArray = writeNoteView.inputTextView.text.components(separatedBy: "\n")
-                
-        for items in stringArray {
-            if !items.contains("•") {
-                writeNoteView.inputTextView.attributedText = add(stringList: stringArray, font: UIFont.boldSystemFont(ofSize: 18), bullet: "•")
-            }
-        }
-    }
-    
-    func add(stringList: [String],
-             font: UIFont,
-             bullet: String = "\u{2022}",
-             indentation: CGFloat = 20,
-             textColor: UIColor = .white,
-             bulletColor: UIColor = .white) -> NSAttributedString {
-
-        let textAttributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: textColor]
-        let bulletAttributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: bulletColor]
-
-        let bulletList = NSMutableAttributedString()
-        for string in stringList {
-            let formattedString = "\(bullet)\t\(string)\n"
-            let attributedString = NSMutableAttributedString(string: formattedString)
-
-            attributedString.addAttributes(range: NSMakeRange(0, attributedString.length))
-
-            attributedString.addAttributes(
-                textAttributes,
-                range: NSMakeRange(0, attributedString.length))
-
-            let string:NSString = NSString(string: formattedString)
-            let rangeForBullet:NSRange = string.range(of: bullet)
-            attributedString.addAttributes(bulletAttributes, range: rangeForBullet)
-            bulletList.append(attributedString)
-        }
-
-        return bulletList
-    }
-    
     func setupPersistentNavigationBar() {
         guard self.navigationController?.topViewController === self else { return }
         self.transitionCoordinator?.animate(alongsideTransition: { [weak self](context) in
@@ -110,15 +54,18 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
             self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             self?.navigationController?.navigationBar.barStyle = .black
             
-            if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+            if self?.isDarkModeEnabled == true {
+                if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") == true {
+                    self?.navigationController?.navigationBar.backgroundColor = self?.backgroundColor
+                    self?.navigationController?.navigationBar.barTintColor = self?.backgroundColor
+                } else if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") == true {
+                    self?.navigationController?.navigationBar.backgroundColor = InterfaceColors.viewBackgroundColor
+                    self?.navigationController?.navigationBar.barTintColor = InterfaceColors.viewBackgroundColor
+                }
+            } else if self?.isDarkModeEnabled == false {
                 self?.navigationController?.navigationBar.backgroundColor = self?.backgroundColor
                 self?.navigationController?.navigationBar.barTintColor = self?.backgroundColor
-                
-            } else {
-                self?.navigationController?.navigationBar.backgroundColor = InterfaceColors.viewBackgroundColor
-                self?.navigationController?.navigationBar.barTintColor = InterfaceColors.viewBackgroundColor
             }
-            
             }, completion: nil)
     }
     
@@ -135,13 +82,19 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         view = writeNoteView
         let textView = writeNoteView.inputTextView
         
-        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+        if isDarkModeEnabled == true {
+            
+            if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") == true {
+                writeNoteView.colorView.backgroundColor = backgroundColor
+                textView.backgroundColor = backgroundColor
+            } else if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") == true {
+                writeNoteView.colorView.backgroundColor = InterfaceColors.viewBackgroundColor
+                textView.backgroundColor = InterfaceColors.viewBackgroundColor
+            }
+            
+        } else if isDarkModeEnabled == false {
             writeNoteView.colorView.backgroundColor = backgroundColor
             textView.backgroundColor = backgroundColor
-            
-        } else {
-            writeNoteView.colorView.backgroundColor = InterfaceColors.viewBackgroundColor
-            textView.backgroundColor = InterfaceColors.viewBackgroundColor
         }
         
         textView.tintColor = .white

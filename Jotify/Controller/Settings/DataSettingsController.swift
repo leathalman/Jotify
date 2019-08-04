@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DataSettingsController: UITableViewController {
+class PrivacySettingsController: UITableViewController {
     
     let sections: Array = ["Delete"]
     let general: Array = ["Show Alert on Delete"]
@@ -17,7 +17,7 @@ class DataSettingsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Data"
+        navigationItem.title = "Privacy"
         
         setupDynamicElements()
         

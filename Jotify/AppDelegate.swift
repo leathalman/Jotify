@@ -26,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             "showAlertOnDelete": true,
             "showAlertOnSort": true,
             "darkModeEnabled": false,
+            "vibrantDarkModeEnabled": false,
+            "pureDarkModeEnabled": false,
             "isFirstLaunch": true,
         ])
         

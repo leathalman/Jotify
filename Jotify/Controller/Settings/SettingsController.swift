@@ -12,7 +12,7 @@ import CoreData
 class SettingsController: UITableViewController {
     
     let sections: Array = ["General", "Advanced"]
-    let general: Array = ["About", "Note Palettes", "Data", "Sort", "Dark Mode"]
+    let general: Array = ["About", "Appearance", "Privacy", "Sort"]
     let advanced: Array = ["Show Tutorial","Reset Settings to Default", "Delete All Data"]
     
     let themes = Themes()
@@ -34,19 +34,25 @@ class SettingsController: UITableViewController {
     }
     
     func setupDynamicViewElements() {
-        if darkModeEnabled() == false {
-            view.backgroundColor = InterfaceColors.viewBackgroundColor
-            
-            tableView.separatorColor = nil
-            
-            setupDefaultPersistentNavigationBar()
-            
-        } else if darkModeEnabled() == true {
+        if darkModeEnabled() == true {
             view.backgroundColor = InterfaceColors.viewBackgroundColor
 
             tableView.separatorColor = InterfaceColors.separatorColor
             
+            themes.setupDarkMode()
+            self.tableView.reloadData()
+            
             setupDarkPersistentNavigationBar()
+            
+        } else if darkModeEnabled() == false {
+            view.backgroundColor = InterfaceColors.viewBackgroundColor
+            
+            tableView.separatorColor = nil
+            
+            themes.setupDefaultMode()
+            self.tableView.reloadData()
+            
+            setupDefaultPersistentNavigationBar()
         }
     }
     
@@ -105,9 +111,9 @@ class SettingsController: UITableViewController {
             case 0:
                 navigationController?.pushViewController(AboutSettingsController(), animated: true)
             case 1:
-                navigationController?.pushViewController(ColorSettingsController(style: .grouped), animated: true)
+                navigationController?.pushViewController(AppearanceSettingsController(style: .grouped), animated: true)
             case 2:
-                navigationController?.pushViewController(DataSettingsController(style: .grouped), animated: true)
+                navigationController?.pushViewController(PrivacySettingsController(style: .grouped), animated: true)
             case 3:
                 navigationController?.pushViewController(SortSettingsController(style: .grouped), animated: true)
             default:
@@ -127,7 +133,7 @@ class SettingsController: UITableViewController {
                     let standard = UserDefaults.standard
                     
                     standard.set("default", forKey: "noteColorTheme")
-                    let colorSettingsController = ColorSettingsController()
+                    let colorSettingsController = AppearanceSettingsController()
                     colorSettingsController.fetchData()
                     colorSettingsController.setNewColorsForExistingNotes()
                     
@@ -187,6 +193,7 @@ class SettingsController: UITableViewController {
                 cell.accessoryType = .disclosureIndicator
 
                 return cell
+                
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
                 
@@ -197,6 +204,7 @@ class SettingsController: UITableViewController {
                 cell.accessoryType = .disclosureIndicator
                 
                 return cell
+                
             case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
                 
@@ -207,6 +215,7 @@ class SettingsController: UITableViewController {
                 cell.accessoryType = .disclosureIndicator
                 
                 return cell
+                
             case 3:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
                 
@@ -217,24 +226,7 @@ class SettingsController: UITableViewController {
                 cell.accessoryType = .disclosureIndicator
 
                 return cell
-            case 4:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
                 
-                cell.textLabel?.text = "\(general[indexPath.row])"
-                
-                setupDynamicCells(cell: cell, enableArrow: false)
-                
-                cell.selectionStyle = .none
-                
-                cell.switchButton.addTarget(self, action: #selector(darkModePressed), for: .valueChanged)
-                
-                if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
-                    cell.switchButton.isOn = true
-                } else {
-                    cell.switchButton.isOn = false
-                }
-                
-                return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
                 
@@ -302,25 +294,6 @@ class SettingsController: UITableViewController {
             } else {
                 cell.accessoryView = UIImageView(image: UIImage(systemName: "chevron.right.circle.fill"))
             }
-        }
-    }
-    
-    @objc func darkModePressed(sender: UISwitch) {
-        if sender.isOn {
-            print("darkModeEnabled")
-            UserDefaults.standard.set(true, forKey: "darkModeEnabled")
-            themes.setupDarkMode()
-        
-            self.viewWillAppear(true)
-            self.tableView.reloadData()
-            
-        } else {
-            print("darkModeDisabled")
-            UserDefaults.standard.set(false, forKey: "darkModeEnabled")
-            themes.setupDefaultMode()
-            
-            self.viewWillAppear(true)
-            self.tableView.reloadData()
         }
     }
     
