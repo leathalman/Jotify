@@ -174,6 +174,14 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         note.setValue(color, forKey: "color")
         note.setValue(date, forKey: "date")
         
+        let updateDate = Date(timeIntervalSinceReferenceDate: date)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.long
+        dateFormatter.timeZone = .current
+        let dateString = dateFormatter.string(from: updateDate)
+        
+        note.setValue(dateString, forKey: "dateString")
+        
         do {
             try managedContext.save()
         } catch let error as NSError {

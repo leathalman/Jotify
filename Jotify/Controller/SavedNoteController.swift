@@ -13,7 +13,7 @@ import Blueprints
 import ViewAnimator
 import XLActionController
 
-class SavedNoteController: UICollectionViewController {
+class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     
     var notes: [Note] = []
     var filteredNotes: [Note] = []
@@ -125,7 +125,8 @@ class SavedNoteController: UICollectionViewController {
         searchController.searchBar.placeholder = "Search Notes"
         searchController.hidesNavigationBarDuringPresentation = true
         searchController.isActive = false
-//        searchController.searchBar.scopeButtonTitles = ["Content", "Date", "Color"]
+        searchController.searchBar.scopeButtonTitles = ["Content", "Date"]
+        searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
     }
     
@@ -225,10 +226,21 @@ class SavedNoteController: UICollectionViewController {
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        filteredNotes = notes.filter({( note : Note) -> Bool in
-            return (note.content?.lowercased().contains(searchText.lowercased()) ?? false)
-        })
-        collectionView.reloadData()
+        if searchController.searchBar.selectedScopeButtonIndex == 0 {
+            filteredNotes = notes.filter({( note : Note) -> Bool in
+                return (note.content?.lowercased().contains(searchText.lowercased()) ?? false)
+            })
+            
+            collectionView.reloadData()
+            
+        } else if searchController.searchBar.selectedScopeButtonIndex == 1 {
+            filteredNotes = notes.filter({( note : Note) -> Bool in
+                return (note.dateString?.lowercased().contains(searchText.lowercased()) ?? false)
+            })
+            
+            collectionView.reloadData()
+            
+        }
     }
     
     func isFiltering() -> Bool {
@@ -464,7 +476,7 @@ class SavedNoteController: UICollectionViewController {
 
         let updateDate = Date(timeIntervalSinceReferenceDate: date)
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.long //Set date style
+        dateFormatter.dateStyle = DateFormatter.Style.long
         dateFormatter.timeZone = .current
         let dateString = dateFormatter.string(from: updateDate)
         cell.dateLabel.text = dateString
