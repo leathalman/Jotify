@@ -23,6 +23,8 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     
     let searchController = UISearchController(searchResultsController: nil)
     let loadingAnimations = [AnimationType.from(direction: .top, offset: 30.0)]
+    
+    let defaults = UserDefaults.standard
 
     let blueprintLayout = VerticalBlueprintLayout(
         itemsPerRow: 2.0,
@@ -83,7 +85,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     func setupDynamicViewElements() {
         collectionView.backgroundColor = InterfaceColors.viewBackgroundColor
         
-        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+        if defaults.bool(forKey: "darkModeEnabled") == true {
             searchController.searchBar.barTintColor = InterfaceColors.searchBarColor
             searchController.searchBar.backgroundImage = UIImage()
             
@@ -135,11 +137,11 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         let actionController = SkypeActionController()
         
-        if UserDefaults.standard.bool(forKey: "showAlertOnSort") == true {
-            if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
-                actionController.backgroundColor = UserDefaults.standard.color(forKey: "staticNoteColor") ?? UIColor.white
+        if defaults.bool(forKey: "showAlertOnSort") == true {
+            if defaults.bool(forKey: "useRandomColor") == false {
+                actionController.backgroundColor = defaults.color(forKey: "staticNoteColor") ?? UIColor.white
                 
-            } else if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+            } else if defaults.bool(forKey: "darkModeEnabled") == false {
                 
                 if isSelectedColorFromDefaults(key: "default") == true {
                     actionController.backgroundColor = Colors.defaultColors.randomElement() ?? UIColor.blue2
@@ -157,25 +159,25 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                     actionController.backgroundColor = Colors.appleVibrantColors.randomElement() ?? UIColor.blue2
                 }
                 
-            } else if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+            } else if defaults.bool(forKey: "darkModeEnabled") == true {
                 actionController.backgroundColor = InterfaceColors.actionSheetColor
                 
             }
             
             actionController.addAction(Action("Sort by date", style: .default, handler: { action in
-                UserDefaults.standard.set("date", forKey: "sortBy")
+                self.defaults.set("date", forKey: "sortBy")
                 self.fetchNotesFromCoreData()
                 self.animateCells()
                 
             }))
             actionController.addAction(Action("Sort by color", style: .default, handler: { action in
-                UserDefaults.standard.set("color", forKey: "sortBy")
+                self.defaults.set("color", forKey: "sortBy")
                 self.fetchNotesFromCoreData()
                 self.animateCells()
                 
             }))
             actionController.addAction(Action("Sort by content", style: .default, handler: { action in
-                UserDefaults.standard.set("content", forKey: "sortBy")
+                self.defaults.set("content", forKey: "sortBy")
                 self.fetchNotesFromCoreData()
                 self.animateCells()
             }))
@@ -183,21 +185,21 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             
             present(actionController, animated: true, completion: nil)
             
-        } else if UserDefaults.standard.bool(forKey: "showAlertOnSort") == false {
+        } else if defaults.bool(forKey: "showAlertOnSort") == false {
             
             if pressed == 0 {
                 print("Sort by content")
-                UserDefaults.standard.set("content", forKey: "sortBy")
+                defaults.set("content", forKey: "sortBy")
                 pressed += 1
                 
             } else if pressed == 1 {
                 print("Sort by color")
-                UserDefaults.standard.set("color", forKey: "sortBy")
+                defaults.set("color", forKey: "sortBy")
                 pressed += 1
                 
             } else if pressed == 2 {
                 print("Sort by date")
-                UserDefaults.standard.set("date", forKey: "sortBy")
+                defaults.set("date", forKey: "sortBy")
                 pressed = 0
                 
             }
@@ -212,7 +214,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     }
     
     func isSelectedColorFromDefaults(key: String) -> Bool {
-        let colorTheme = UserDefaults.standard.string(forKey: "noteColorTheme")
+        let colorTheme = defaults.string(forKey: "noteColorTheme")
         
         if colorTheme == key {
             return true
@@ -257,7 +259,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Note")
         fetchRequest.returnsObjectsAsFaults = false
         
-        let sortBy = UserDefaults.standard.string(forKey: "sortBy")
+        let sortBy = defaults.string(forKey: "sortBy")
         var sortDescriptor: NSSortDescriptor?
         
         if sortBy == "content" {
@@ -350,17 +352,17 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         let actionController = SkypeActionController()
         
-        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+        if defaults.bool(forKey: "darkModeEnabled") == false {
             actionController.backgroundColor = cellColor
             
-        } else if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+        } else if defaults.bool(forKey: "darkModeEnabled") == true {
             actionController.backgroundColor = InterfaceColors.actionSheetColor
         }
         
         actionController.addAction(Action("Delete note", style: .default, handler: { action in
             print("Delete note")
             
-            if UserDefaults.standard.bool(forKey: "showAlertOnDelete") == true {
+            if self.defaults.bool(forKey: "showAlertOnDelete") == true {
                 let alert = UIAlertController(title: "Are you sure?", message: "This will permanently delete this note in both iCloud and locally on this device.", preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (UIAlertAction) in
@@ -371,7 +373,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 self.present(alert, animated: true)
                 
-            } else if UserDefaults.standard.bool(forKey: "showAlertOnDelete") == false {
+            } else if self.defaults.bool(forKey: "showAlertOnDelete") == false {
                 self.deleteNote(indexPath: indexPath ?? [0, 0], int: rowNumber)
 
             }
@@ -490,12 +492,12 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         cell.contentView.layer.cornerRadius = 5
         
-        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+        if defaults.bool(forKey: "darkModeEnabled") == true {
             
-            if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") == true {
+            if defaults.bool(forKey: "vibrantDarkModeEnabled") == true {
                 cell.contentView.backgroundColor = cellColor
                 
-            } else if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") == true {
+            } else if defaults.bool(forKey: "pureDarkModeEnabled") == true {
                 cell.contentView.backgroundColor = UIColor.cellBlack
             }
             

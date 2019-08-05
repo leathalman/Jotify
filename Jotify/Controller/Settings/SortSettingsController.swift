@@ -15,6 +15,8 @@ class SortSettingsController: UITableViewController {
     
     let settingsController = SettingsController()
     
+    let defaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Sort"
@@ -49,7 +51,7 @@ class SortSettingsController: UITableViewController {
             cell.selectionStyle = .none
             cell.switchButton.addTarget(self, action: #selector(showAlertOnDeleteSwitchPressed), for: .valueChanged)
             
-            if UserDefaults.standard.bool(forKey: "showAlertOnSort") == true {
+            if defaults.bool(forKey: "showAlertOnSort") == true {
                 cell.switchButton.isOn = true
             } else {
                 cell.switchButton.isOn = false
@@ -71,11 +73,11 @@ class SortSettingsController: UITableViewController {
     @objc func showAlertOnDeleteSwitchPressed(sender: UISwitch) {
         if sender.isOn {
             print("showAlertOnSort enabled")
-            UserDefaults.standard.set(true, forKey: "showAlertOnSort")
+            defaults.set(true, forKey: "showAlertOnSort")
             
         } else {
             print("showAlertOnSort disabled")
-            UserDefaults.standard.set(false, forKey: "showAlertOnSort")
+            defaults.set(false, forKey: "showAlertOnSort")
             
         }
     }

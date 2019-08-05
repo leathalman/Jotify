@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -20,15 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = PageViewController()
-            
-            if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
-                window.backgroundColor = .black
-            } else {
-                window.backgroundColor = .white
-            }
-            
             self.window = window
-            window.backgroundColor = .white
             window.makeKeyAndVisible()
         }
         
@@ -55,6 +48,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+        if UserDefaults.standard.bool (forKey: "useBiometrics") == true {
+            
+            let privacyController = PrivacySettingsController()
+            privacyController.authenticateUserWithBioMetrics(window: window!)
+        }
+
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {

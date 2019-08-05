@@ -14,18 +14,21 @@ import WhatsNewKit
 class WriteNoteController: UIViewController, UITextViewDelegate {
     
     let writeNoteView = WriteNoteView()
+    
     let themes = Themes()
     
+    let defaults = UserDefaults.standard
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
         setupNotifications()
           
-        if UserDefaults.standard.bool(forKey: "isFirstLaunch") == true {
+        if defaults.bool(forKey: "isFirstLaunch") == true {
             presentOnboarding(viewController: self, tintColor: StoredColors.noteColor)
             
-            UserDefaults.standard.set(false, forKey: "isFirstLaunch")
+            defaults.set(false, forKey: "isFirstLaunch")
         }
     }
     
@@ -39,57 +42,6 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         writeNoteView.inputTextView.resignFirstResponder()
     }
     
-    func presentOnboarding(viewController: UIViewController, tintColor: UIColor) {
-        let whatsNew = WhatsNew(
-            title: "Welcome!",
-            items: [
-                WhatsNew.Item(
-                    title: "Notes",
-                    subtitle: "Creating notes is simple: type and enter. Your notes are automatically saved and synced to all of your devices. Swipe right to view your notes.",
-                    image: UIImage(named: "write")
-                ),
-                WhatsNew.Item(
-                    title: "Privacy",
-                    subtitle: "Jotify does not have access to any of your data and never will. All of your notes are just that, yours.",
-                    image: UIImage(named: "lock")
-                ),
-                WhatsNew.Item(
-                    title: "No Accounts. Ever.",
-                    subtitle: "Jotify uses your iCloud account to store notes, so no annoying emails or extra passwords to worry about.",
-                    image: UIImage(named: "person")
-                ),
-                WhatsNew.Item(
-                    title: "Dark Mode",
-                    subtitle: "It looks pretty good. You should check it out.",
-                    image: UIImage(named: "moon")
-                ),
-                WhatsNew.Item(
-                    title: "Open Source",
-                    subtitle: "Jotify is open source, so you know exactly what is running on your device. Feel free to check it out on GitHub.",
-                    image: UIImage(named: "github")
-                )
-            ]
-        )
-        
-        var configuration = WhatsNewViewController.Configuration()
-        configuration.backgroundColor = .white
-        configuration.titleView.titleColor = tintColor
-        configuration.titleView.insets = UIEdgeInsets(top: 40, left: 20, bottom: 15, right: 15)
-        configuration.itemsView.titleFont = .boldSystemFont(ofSize: 17)
-        configuration.itemsView.imageSize = .fixed(height: 50)
-        configuration.detailButton?.titleColor = tintColor
-        configuration.completionButton.backgroundColor = tintColor
-        
-        let whatsNewViewController = WhatsNewViewController(
-            whatsNew: whatsNew,
-            configuration: configuration
-        )
-        
-        DispatchQueue.main.async {
-            viewController.present(whatsNewViewController, animated: true)
-        }
-    }
-    
     func setupView() {
         self.hideKeyboardWhenTappedAround()
         view = writeNoteView
@@ -101,13 +53,13 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     }
     
     func handleRandomColorsEnabled() {
-        if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
-            let color = UserDefaults.standard.color(forKey: "staticNoteColor")
+        if defaults.bool(forKey: "useRandomColor") == false {
+            let color = defaults.color(forKey: "staticNoteColor")
             writeNoteView.colorView.backgroundColor = color
             
         }
         
-        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+        if defaults.bool(forKey: "darkModeEnabled") == true {
             writeNoteView.colorView.backgroundColor = InterfaceColors.writeViewColor
             
             UIApplication.shared.windows.first?.backgroundColor = InterfaceColors.viewBackgroundColor
@@ -198,23 +150,63 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         textView.resignFirstResponder()
         handleSend()
         
-        if UserDefaults.standard.bool(forKey: "useRandomColor") == true {
+        if defaults.bool(forKey: "useRandomColor") == true {
             writeNoteView.getRandomColor()
         }
         
         return false
     }
-    
-    func getTopMostViewController() -> UIViewController? {
-         var topMostViewController = UIApplication.shared.windows.first?.rootViewController
-
-         while let presentedViewController = topMostViewController?.presentedViewController {
-             topMostViewController = presentedViewController
-         }
-
-         return topMostViewController
-     }
      
+    func presentOnboarding(viewController: UIViewController, tintColor: UIColor) {
+        let whatsNew = WhatsNew(
+            title: "Welcome!",
+            items: [
+                WhatsNew.Item(
+                    title: "Notes",
+                    subtitle: "Creating notes is simple: type and enter. Your notes are automatically saved and synced to all of your devices. Swipe right to view your notes.",
+                    image: UIImage(named: "write")
+                ),
+                WhatsNew.Item(
+                    title: "Privacy",
+                    subtitle: "Jotify does not have access to any of your data and never will. All of your notes are just that, yours.",
+                    image: UIImage(named: "lock")
+                ),
+                WhatsNew.Item(
+                    title: "No Accounts. Ever.",
+                    subtitle: "Jotify uses your iCloud account to store notes, so no annoying emails or extra passwords to worry about.",
+                    image: UIImage(named: "person")
+                ),
+                WhatsNew.Item(
+                    title: "Dark Mode",
+                    subtitle: "It looks pretty good. You should check it out.",
+                    image: UIImage(named: "moon")
+                ),
+                WhatsNew.Item(
+                    title: "Open Source",
+                    subtitle: "Jotify is open source, so you know exactly what is running on your device. Feel free to check it out on GitHub.",
+                    image: UIImage(named: "github")
+                )
+            ]
+        )
+        
+        var configuration = WhatsNewViewController.Configuration()
+        configuration.backgroundColor = .white
+        configuration.titleView.titleColor = tintColor
+        configuration.titleView.insets = UIEdgeInsets(top: 40, left: 20, bottom: 15, right: 15)
+        configuration.itemsView.titleFont = .boldSystemFont(ofSize: 17)
+        configuration.itemsView.imageSize = .fixed(height: 50)
+        configuration.detailButton?.titleColor = tintColor
+        configuration.completionButton.backgroundColor = tintColor
+        
+        let whatsNewViewController = WhatsNewViewController(
+            whatsNew: whatsNew,
+            configuration: configuration
+        )
+        
+        DispatchQueue.main.async {
+            viewController.present(whatsNewViewController, animated: true)
+        }
+    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent

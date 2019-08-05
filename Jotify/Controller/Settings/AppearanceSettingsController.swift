@@ -16,7 +16,7 @@ class AppearanceSettingsController: UITableViewController {
     
     let themes = Themes()
     
-    let sections: Array = ["Dark Mode", "Palettes", "Other"]
+    let sections: Array = ["Dark Mode", "Themes", "Other"]
     let darks: Array = ["Vibrant Dark Mode", "Pure Dark Mode" ]
     let palettes: Array = ["Default", "Sunset", "Kypool", "Celestial", "Apple Vibrant"]
     let other: Array = ["Random Colors"]
@@ -139,7 +139,7 @@ class AppearanceSettingsController: UITableViewController {
                 cell.selectionStyle = .none
                 cell.switchButton.addTarget(self, action: #selector(vibrantDarkModeSwitchPressed(sender:)), for: .valueChanged)
                 
-                if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") == true {
+                if defaults.bool(forKey: "vibrantDarkModeEnabled") == true {
                     cell.switchButton.isOn = true
                 } else {
                     cell.switchButton.isOn = false
@@ -156,7 +156,7 @@ class AppearanceSettingsController: UITableViewController {
                 cell.selectionStyle = .none
                 cell.switchButton.addTarget(self, action: #selector(pureDarkModeSwitchPressed(sender:)), for: .valueChanged)
                 
-                if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") == true {
+                if defaults.bool(forKey: "pureDarkModeEnabled") == true {
                     cell.switchButton.isOn = true
                 } else {
                     cell.switchButton.isOn = false
@@ -170,7 +170,7 @@ class AppearanceSettingsController: UITableViewController {
                 return cell
             }
             
-        } else if indexPath.section == 1 && UserDefaults.standard.bool(forKey: "useRandomColor") == false {
+        } else if indexPath.section == 1 && defaults.bool(forKey: "useRandomColor") == false {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
         
             settingsController.setupDynamicCells(cell: cell, enableArrow: false)
@@ -229,7 +229,7 @@ class AppearanceSettingsController: UITableViewController {
                 cell.selectionStyle = .none
                 cell.switchButton.addTarget(self, action: #selector(randomColorSwitchPressed), for: .valueChanged)
                 
-                if UserDefaults.standard.bool(forKey: "useRandomColor") == true {
+                if defaults.bool(forKey: "useRandomColor") == true {
                     cell.switchButton.isOn = true
                 } else {
                     cell.switchButton.isOn = false
@@ -256,9 +256,9 @@ class AppearanceSettingsController: UITableViewController {
     @objc func vibrantDarkModeSwitchPressed(sender: UISwitch) {
         if sender.isOn {
             print("vibrant dark mode enabled")
-            UserDefaults.standard.set(true, forKey: "vibrantDarkModeEnabled")
-            UserDefaults.standard.set(false, forKey: "pureDarkModeEnabled")
-            UserDefaults.standard.set(true, forKey: "darkModeEnabled")
+            defaults.set(true, forKey: "vibrantDarkModeEnabled")
+            defaults.set(false, forKey: "pureDarkModeEnabled")
+            defaults.set(true, forKey: "darkModeEnabled")
             themes.setupDarkMode()
         
             self.viewWillAppear(true)
@@ -266,8 +266,8 @@ class AppearanceSettingsController: UITableViewController {
             
         } else {
             print("vibrant dark mode disabled")
-            UserDefaults.standard.set(false, forKey: "vibrantDarkModeEnabled")
-            UserDefaults.standard.set(false, forKey: "darkModeEnabled")
+            defaults.set(false, forKey: "vibrantDarkModeEnabled")
+            defaults.set(false, forKey: "darkModeEnabled")
             themes.setupDefaultMode()
             
             self.viewWillAppear(true)
@@ -278,9 +278,9 @@ class AppearanceSettingsController: UITableViewController {
     @objc func pureDarkModeSwitchPressed(sender: UISwitch) {
         if sender.isOn {
             print("pure dark mode enabled")
-            UserDefaults.standard.set(true, forKey: "pureDarkModeEnabled")
-            UserDefaults.standard.set(false, forKey: "vibrantDarkModeEnabled")
-            UserDefaults.standard.set(true, forKey: "darkModeEnabled")
+            defaults.set(true, forKey: "pureDarkModeEnabled")
+            defaults.set(false, forKey: "vibrantDarkModeEnabled")
+            defaults.set(true, forKey: "darkModeEnabled")
             themes.setupDarkMode()
             
             self.viewWillAppear(true)
@@ -288,8 +288,8 @@ class AppearanceSettingsController: UITableViewController {
             
         } else {
             print("pure dark mode disabled")
-            UserDefaults.standard.set(false, forKey: "pureDarkModeEnabled")
-            UserDefaults.standard.set(false, forKey: "darkModeEnabled")
+            defaults.set(false, forKey: "pureDarkModeEnabled")
+            defaults.set(false, forKey: "darkModeEnabled")
             themes.setupDefaultMode()
             
             self.viewWillAppear(true)
@@ -300,13 +300,13 @@ class AppearanceSettingsController: UITableViewController {
     @objc func randomColorSwitchPressed(sender: UISwitch) {
         if sender.isOn {
             print("random colors enabled")
-            UserDefaults.standard.set(true, forKey: "useRandomColor")
+            defaults.set(true, forKey: "useRandomColor")
             setNewColorsForExistingNotes()
             tableView.reloadData()
             
         } else {
             print("random colors disabled")
-            UserDefaults.standard.set(false, forKey: "useRandomColor")
+            defaults.set(false, forKey: "useRandomColor")
 
             let colorPickerController = ColorPickerController()
             
@@ -338,7 +338,7 @@ class AppearanceSettingsController: UITableViewController {
     }
     
     func setNewColorsForExistingNotesIfNotStatic() {
-        if UserDefaults.standard.bool(forKey: "useRandomColor") == true {
+        if defaults.bool(forKey: "useRandomColor") == true {
             setNewColorsForExistingNotes()
         }
     }
@@ -354,7 +354,7 @@ class AppearanceSettingsController: UITableViewController {
         
         for note in notes {
             var newColor = String()
-            let colorTheme = UserDefaults.standard.string(forKey: "noteColorTheme")
+            let colorTheme = defaults.string(forKey: "noteColorTheme")
             
             if colorTheme == "default" {
                 newColor = Colors.defaultColorsStrings.randomElement() ?? "white"
@@ -386,7 +386,7 @@ class AppearanceSettingsController: UITableViewController {
     }
     
     func isSelectedColorFromDefaults(key: String, indexPath: IndexPath) -> Bool {
-        let colorTheme = UserDefaults.standard.string(forKey: "noteColorTheme")
+        let colorTheme = defaults.string(forKey: "noteColorTheme")
         if colorTheme == key {
             tableView.selectRow(at: indexPath, animated: false, scrollPosition: .bottom)
             return true
@@ -401,7 +401,7 @@ class AppearanceSettingsController: UITableViewController {
         case 0:
             return "Vibrant dark mode retains the color of your notes while pure dark mode replaces these colors with black."
         case 1:
-            return "Pick the color theme for your saved notes. Each theme has at least 8 colors which will be selected at random when you open the app."
+            return "Pick the color theme for your notes. Each theme has at least 8 colors which will be applied at random."
         case 2:
             return "By default Jotify uses random color generation for all of your saved notes. Turing this off will require you to select a new default color for all notes."
         default:

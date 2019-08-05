@@ -17,8 +17,8 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     
     let writeNoteView = WriteNoteView()
     
-    let isDarkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-    
+    let defaults = UserDefaults.standard
+        
     var notes: [Note] = []
     var filteredNotes: [Note] = []
     var isFiltering: Bool = false
@@ -54,15 +54,17 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
             self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             self?.navigationController?.navigationBar.barStyle = .black
             
-            if self?.isDarkModeEnabled == true {
-                if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") == true {
+            if self?.defaults.bool(forKey: "darkModeEnabled") == true {
+                if self?.defaults.bool(forKey: "vibrantDarkModeEnabled") == true {
                     self?.navigationController?.navigationBar.backgroundColor = self?.backgroundColor
                     self?.navigationController?.navigationBar.barTintColor = self?.backgroundColor
-                } else if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") == true {
+                    
+                } else if self?.defaults.bool(forKey: "pureDarkModeEnabled") == true {
                     self?.navigationController?.navigationBar.backgroundColor = InterfaceColors.viewBackgroundColor
                     self?.navigationController?.navigationBar.barTintColor = InterfaceColors.viewBackgroundColor
                 }
-            } else if self?.isDarkModeEnabled == false {
+                
+            } else if self?.defaults.bool(forKey: "darkModeEnabled") == false {
                 self?.navigationController?.navigationBar.backgroundColor = self?.backgroundColor
                 self?.navigationController?.navigationBar.barTintColor = self?.backgroundColor
             }
@@ -82,17 +84,17 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         view = writeNoteView
         let textView = writeNoteView.inputTextView
         
-        if isDarkModeEnabled == true {
+        if defaults.bool(forKey: "darkModeEnabled") == true {
             
-            if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") == true {
+            if defaults.bool(forKey: "vibrantDarkModeEnabled") == true {
                 writeNoteView.colorView.backgroundColor = backgroundColor
                 textView.backgroundColor = backgroundColor
-            } else if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") == true {
+            } else if defaults.bool(forKey: "pureDarkModeEnabled") == true {
                 writeNoteView.colorView.backgroundColor = InterfaceColors.viewBackgroundColor
                 textView.backgroundColor = InterfaceColors.viewBackgroundColor
             }
             
-        } else if isDarkModeEnabled == false {
+        } else if defaults.bool(forKey: "darkModeEnabled") == false {
             writeNoteView.colorView.backgroundColor = backgroundColor
             textView.backgroundColor = backgroundColor
         }

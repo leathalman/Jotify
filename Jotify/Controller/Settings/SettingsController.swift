@@ -17,6 +17,8 @@ class SettingsController: UITableViewController {
     
     let themes = Themes()
     
+    let defaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -130,17 +132,21 @@ class SettingsController: UITableViewController {
                 let alert = UIAlertController(title: "Are you sure?", message: "This will reset all settings to default.", preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: { (UIAlertAction) in
-                    let standard = UserDefaults.standard
                     
-                    standard.set("default", forKey: "noteColorTheme")
+                    self.defaults.set("default", forKey: "noteColorTheme")
                     let colorSettingsController = AppearanceSettingsController()
                     colorSettingsController.fetchData()
                     colorSettingsController.setNewColorsForExistingNotes()
                     
-                    standard.set(true, forKey: "useRandomColor")
-                    standard.set("date", forKey: "sortBy")
-                    standard.set(true, forKey: "showAlertOnDelete")
-                    standard.set(true, forKey: "showAlertOnSort")
+                    self.defaults.set(true, forKey: "useRandomColor")
+                    self.defaults.set("date", forKey: "sortBy")
+                    self.defaults.set(true, forKey: "showAlertOnDelete")
+                    self.defaults.set(true, forKey: "showAlertOnSort")
+                    self.defaults.set(false, forKey: "darkModeEnabled")
+                    self.defaults.set(false, forKey: "vibrantDarkModeEnabled")
+                    self.defaults.set(false, forKey: "pureDarkModeEnabled")
+                    self.defaults.set(true, forKey: "isFirstLaunch")
+                    
                 }))
                 
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -298,7 +304,7 @@ class SettingsController: UITableViewController {
     }
     
     func darkModeEnabled() -> Bool {
-        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+        if defaults.bool(forKey: "darkModeEnabled") == true {
             return true
         } else {
             return false

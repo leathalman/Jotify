@@ -14,6 +14,8 @@ class ColorPickerController: UIViewController {
     
     var notes: [Note] = []
     
+    let defaults = UserDefaults.standard
+    
     lazy var colorPicker: ChromaColorPicker = {
         let colorPicker = ChromaColorPicker(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
         colorPicker.delegate = self
@@ -66,7 +68,7 @@ class ColorPickerController: UIViewController {
         
         setupClearNavigationBar()
         
-        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+        if defaults.bool(forKey: "darkModeEnabled") == true {
             self.colorPicker.hexLabel.textColor = UIColor.white
             self.contentView.backgroundColor = UIColor.grayBackground
         }
@@ -99,9 +101,9 @@ class ColorPickerController: UIViewController {
         for note in notes {
             var newColor = String()
             
-            if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
+            if defaults.bool(forKey: "useRandomColor") == false {
                 newColor = "staticNoteColor"
-                newBackgroundColor = UserDefaults.standard.color(forKey: "staticNoteColor") ?? UIColor.white
+                newBackgroundColor = defaults.color(forKey: "staticNoteColor") ?? UIColor.white
             }
             
             note.color = newColor
@@ -142,7 +144,7 @@ extension ColorPickerController: ChromaColorPickerDelegate{
     func colorPickerDidChooseColor(_ colorPicker: ChromaColorPicker, color: UIColor) {
         view.backgroundColor = color
         
-        UserDefaults.standard.set(color, forKey: "staticNoteColor")
+        defaults.set(color, forKey: "staticNoteColor")
         setStaticColorForNotes()
         
         StoredColors.staticNoteColor = color
