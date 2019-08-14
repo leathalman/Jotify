@@ -427,6 +427,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         DispatchQueue.main.async {
             self.collectionView.reloadData()
+            self.animateCells()
         }
     }
     

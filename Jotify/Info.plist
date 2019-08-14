@@ -68,6 +68,6 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 	<key>NSFaceIDUsageDescription</key>
-	<string>Unlock Jotify to access your notes.</string>
+	<string>Unlock Jotify to access your notes</string>
 </dict>
 </plist>
