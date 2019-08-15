@@ -37,6 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             themes.setupDefaultMode()
         }
         
+//        UserDefaults.standard.set(true, forKey: "isPremiumEnabled")
+//        UserDefaults.standard.set(false, forKey: "isPremiumEnabled")
+        
         return true
     }
 

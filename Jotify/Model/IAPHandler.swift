@@ -52,7 +52,7 @@ class IAPHandler: NSObject {
     func setProductIds(ids: [String]) {
         self.productIds = ids
     }
-
+    
     //MAKE PURCHASE OF A PRODUCT
     func canMakePurchases() -> Bool {  return SKPaymentQueue.canMakePayments()  }
     
@@ -60,7 +60,7 @@ class IAPHandler: NSObject {
         
         self.purchaseProductComplition = complition
         self.productToPurchase = product
-
+        
         if self.canMakePurchases() {
             let payment = SKPayment(product: product)
             SKPaymentQueue.default().add(self)

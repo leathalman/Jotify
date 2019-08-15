@@ -25,7 +25,7 @@ class SettingsController: UITableViewController {
         navigationItem.title = "Settings"
         
         tableView.contentInset = UIEdgeInsets(top: -36, left: 0, bottom: 0, right: 0)
-                
+        
         tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
     }
@@ -38,7 +38,7 @@ class SettingsController: UITableViewController {
     func setupDynamicViewElements() {
         if darkModeEnabled() == true {
             view.backgroundColor = InterfaceColors.viewBackgroundColor
-
+            
             tableView.separatorColor = InterfaceColors.separatorColor
             
             themes.setupDarkMode()
@@ -129,7 +129,7 @@ class SettingsController: UITableViewController {
             case 0:
                 let writeNoteController = WriteNoteController()
                 writeNoteController.presentOnboarding(viewController: self, tintColor: StoredColors.noteColor)
-               
+                
             case 1:
                 let alert = UIAlertController(title: "Are you sure?", message: "This will reset all settings to default.", preferredStyle: .alert)
                 
@@ -148,6 +148,7 @@ class SettingsController: UITableViewController {
                     self.defaults.set(false, forKey: "vibrantDarkModeEnabled")
                     self.defaults.set(false, forKey: "pureDarkModeEnabled")
                     self.defaults.set(true, forKey: "isFirstLaunch")
+                    self.defaults.set(false, forKey: "useBiometrics")
                     
                 }))
                 
@@ -197,9 +198,9 @@ class SettingsController: UITableViewController {
                 cell.backgroundColor = InterfaceColors.cellColor
                 
                 setupDynamicCells(cell: cell, enableArrow: true)
-
+                
                 cell.accessoryType = .disclosureIndicator
-
+                
                 return cell
                 
             case 1:
@@ -208,7 +209,7 @@ class SettingsController: UITableViewController {
                 cell.textLabel?.text = "\(general[indexPath.row])"
                 
                 setupDynamicCells(cell: cell, enableArrow: true)
-
+                
                 cell.accessoryType = .disclosureIndicator
                 
                 return cell
@@ -219,7 +220,7 @@ class SettingsController: UITableViewController {
                 cell.textLabel?.text = "\(general[indexPath.row])"
                 
                 setupDynamicCells(cell: cell, enableArrow: true)
-
+                
                 cell.accessoryType = .disclosureIndicator
                 
                 return cell
@@ -230,9 +231,9 @@ class SettingsController: UITableViewController {
                 cell.textLabel?.text = "\(general[indexPath.row])"
                 
                 setupDynamicCells(cell: cell, enableArrow: true)
-
+                
                 cell.accessoryType = .disclosureIndicator
-
+                
                 return cell
                 
             default:
@@ -255,21 +256,18 @@ class SettingsController: UITableViewController {
             case 0:
                 cell.backgroundColor = UIColor.white
                 cell.backgroundColor = InterfaceColors.cellColor
-                                                
                 cell.textLabel?.textColor = UIColor.lightBlue
-
+                
             case 1:
                 cell.backgroundColor = UIColor.white
                 cell.backgroundColor = InterfaceColors.cellColor
-                                
                 cell.textLabel?.textColor = UIColor.lightBlue
                 
             case 2:
                 cell.backgroundColor = UIColor.white
                 cell.backgroundColor = InterfaceColors.cellColor
-                                
                 cell.textLabel?.textColor = UIColor.red
-
+                
             default:
                 return cell
                 
@@ -281,9 +279,8 @@ class SettingsController: UITableViewController {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
             
-
-                cell.backgroundColor = UIColor.white
-                cell.textLabel?.textColor = UIColor.black
+            cell.backgroundColor = UIColor.white
+            cell.textLabel?.textColor = UIColor.black
             return cell
         }
     }

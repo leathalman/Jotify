@@ -79,7 +79,7 @@ class AppearanceSettingsController: UITableViewController {
         
         if indexPath.section == 0 {
             tableView.cellForRow(at: indexPath)?.accessoryType = .none
-
+            
         } else if indexPath.section == 1 {
             
             let newRow = indexPath.row
@@ -91,33 +91,39 @@ class AppearanceSettingsController: UITableViewController {
                 
                 lastIndexPath = indexPath as NSIndexPath
             }
-                        
-            switch indexPath.row {
-            case 0:
-                defaults.set("default", forKey: "noteColorTheme")
-                setNewColorsForExistingNotesIfNotStatic()
+            
+            if defaults.bool(forKey: "isPremiumEnabled") == true {
+                switch indexPath.row {
+                case 0:
+                    defaults.set("default", forKey: "noteColorTheme")
+                    setNewColorsForExistingNotesIfNotStatic()
+                    
+                case 1:
+                    defaults.set("sunset", forKey: "noteColorTheme")
+                    setNewColorsForExistingNotesIfNotStatic()
+                    
+                case 2:
+                    defaults.set("kypool", forKey: "noteColorTheme")
+                    setNewColorsForExistingNotesIfNotStatic()
+                    
+                case 3:
+                    defaults.set("celestial", forKey: "noteColorTheme")
+                    setNewColorsForExistingNotesIfNotStatic()
+                    
+                case 4:
+                    defaults.set("appleVibrant", forKey: "noteColorTheme")
+                    setNewColorsForExistingNotesIfNotStatic()
+                    
+                default:
+                    print("Setting not implemented")
+                }
                 
-            case 1:
-                defaults.set("sunset", forKey: "noteColorTheme")
-                setNewColorsForExistingNotesIfNotStatic()
-
-            case 2:
-                defaults.set("kypool", forKey: "noteColorTheme")
-                setNewColorsForExistingNotesIfNotStatic()
-                
-            case 3:
-                defaults.set("celestial", forKey: "noteColorTheme")
-                setNewColorsForExistingNotesIfNotStatic()
-
-            case 4:
-                defaults.set("appleVibrant", forKey: "noteColorTheme")
-                setNewColorsForExistingNotesIfNotStatic()
-
-            default:
-                print("Setting not implemented")
+            } else if defaults.bool(forKey: "isPremiumEnabled") == false {
+                present(GetPremiumController(), animated: true, completion: nil)
             }
+            
         } else if indexPath.section == 2 {
-
+            
         }
         
     }
@@ -134,7 +140,7 @@ class AppearanceSettingsController: UITableViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
                 
                 settingsController.setupDynamicCells(cell: cell, enableArrow: false)
-
+                
                 cell.textLabel?.text = "\(darks[indexPath.row])"
                 cell.selectionStyle = .none
                 cell.switchButton.addTarget(self, action: #selector(vibrantDarkModeSwitchPressed(sender:)), for: .valueChanged)
@@ -172,9 +178,9 @@ class AppearanceSettingsController: UITableViewController {
             
         } else if indexPath.section == 1 && defaults.bool(forKey: "useRandomColor") == false {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-        
+            
             settingsController.setupDynamicCells(cell: cell, enableArrow: false)
-
+            
             cell.textLabel?.text = "\(palettes[indexPath.row])"
             cell.isUserInteractionEnabled = false
             cell.selectionStyle = .none
@@ -185,7 +191,7 @@ class AppearanceSettingsController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
             
             settingsController.setupDynamicCells(cell: cell, enableArrow: false)
-
+            
             cell.textLabel?.text = "\(palettes[indexPath.row])"
             cell.isUserInteractionEnabled = true
             cell.selectionStyle = .none
@@ -224,7 +230,7 @@ class AppearanceSettingsController: UITableViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
                 
                 settingsController.setupDynamicCells(cell: cell, enableArrow: false)
-
+                
                 cell.textLabel?.text = "\(other[indexPath.row])"
                 cell.selectionStyle = .none
                 cell.switchButton.addTarget(self, action: #selector(randomColorSwitchPressed), for: .valueChanged)
@@ -254,24 +260,31 @@ class AppearanceSettingsController: UITableViewController {
     }
     
     @objc func vibrantDarkModeSwitchPressed(sender: UISwitch) {
-        if sender.isOn {
-            print("vibrant dark mode enabled")
-            defaults.set(true, forKey: "vibrantDarkModeEnabled")
-            defaults.set(false, forKey: "pureDarkModeEnabled")
-            defaults.set(true, forKey: "darkModeEnabled")
-            themes.setupDarkMode()
         
-            self.viewWillAppear(true)
-            self.tableView.reloadData()
+        if defaults.bool(forKey: "isPremiumEnabled") == true {
+            if sender.isOn {
+                print("vibrant dark mode enabled")
+                defaults.set(true, forKey: "vibrantDarkModeEnabled")
+                defaults.set(false, forKey: "pureDarkModeEnabled")
+                defaults.set(true, forKey: "darkModeEnabled")
+                themes.setupDarkMode()
+                
+                self.viewWillAppear(true)
+                self.tableView.reloadData()
+                
+            } else {
+                print("vibrant dark mode disabled")
+                defaults.set(false, forKey: "vibrantDarkModeEnabled")
+                defaults.set(false, forKey: "darkModeEnabled")
+                themes.setupDefaultMode()
+                
+                self.viewWillAppear(true)
+                self.tableView.reloadData()
+            }
             
-        } else {
-            print("vibrant dark mode disabled")
-            defaults.set(false, forKey: "vibrantDarkModeEnabled")
-            defaults.set(false, forKey: "darkModeEnabled")
-            themes.setupDefaultMode()
-            
-            self.viewWillAppear(true)
-            self.tableView.reloadData()
+        } else if defaults.bool(forKey: "isPremiumEnabled") == false {
+            present(GetPremiumController(), animated: true, completion: nil)
+            sender.setOn(false, animated: true)
         }
     }
     

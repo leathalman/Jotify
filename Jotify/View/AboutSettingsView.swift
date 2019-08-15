@@ -57,7 +57,7 @@ class AboutSettingsView: UIView {
         addSubview(versionLabel)
         
         icon.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        icon.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -40).isActive = true
+        icon.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -90).isActive = true
         icon.widthAnchor.constraint(equalToConstant: iconSize).isActive = true
         icon.heightAnchor.constraint(equalToConstant: iconSize).isActive = true
         
