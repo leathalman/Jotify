@@ -47,6 +47,7 @@ class PrivacySettingsController: UITableViewController {
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = window.frame
         blurEffectView.tag = 9065
+        blurEffectView.alpha = 0.875
 
         window.addSubview(blurEffectView)
         
@@ -62,7 +63,7 @@ class PrivacySettingsController: UITableViewController {
                     if success {
                         print("success")
                         
-                        UIView.animate(withDuration: 0.35, animations: {
+                        UIView.animate(withDuration: 0.2, animations: {
                             window.viewWithTag(9065)?.alpha = 0
                         }) { _ in
                             window.viewWithTag(9065)?.removeFromSuperview()

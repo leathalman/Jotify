@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             "pureDarkModeEnabled": false,
             "isFirstLaunch": true,
             "useBiometrics": false,
+            "isPremiumEnabled": false,
         ])
         
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {

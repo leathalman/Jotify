@@ -335,7 +335,17 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         noteDetailController.detailText = content
         noteDetailController.index = rowNumber
         
-        navigationController?.pushViewController(noteDetailController, animated: true)
+        UIView.animate(withDuration: 0.05,
+                       animations: {
+                        sender.view?.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+        }, completion: { (done) in
+            UIView.animate(withDuration: 0.05, animations: {
+                sender.view?.transform = CGAffineTransform.identity
+                
+            })
+        })
+        
+        self.navigationController?.pushViewController(noteDetailController, animated: true)
     }
     
     @objc func longTouchHandler(sender: UILongPressGestureRecognizer) {
@@ -499,7 +509,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                 cell.contentView.backgroundColor = cellColor
                 
             } else if defaults.bool(forKey: "pureDarkModeEnabled") == true {
-                cell.contentView.backgroundColor = UIColor.cellBlack
+                cell.contentView.backgroundColor = UIColor.offBlackBackground
             }
             
         } else {

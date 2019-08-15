@@ -302,7 +302,6 @@ class AppearanceSettingsController: UITableViewController {
             print("random colors enabled")
             defaults.set(true, forKey: "useRandomColor")
             setNewColorsForExistingNotes()
-            tableView.reloadData()
             
         } else {
             print("random colors disabled")
@@ -311,7 +310,6 @@ class AppearanceSettingsController: UITableViewController {
             let colorPickerController = ColorPickerController()
             
             navigationController?.pushViewController(colorPickerController, animated: true)
-            tableView.reloadData()
         }
     }
     
