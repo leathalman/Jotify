@@ -29,7 +29,6 @@ class WriteNoteView: UIView {
         textField.leftViewOrigin = CGPoint(x: 8, y: 8)
         textField.font = UIFont.boldSystemFont(ofSize: 32)
         textField.textContainerInset = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
-        textField.placeholder = "Write it down..."
         
         return textField
     }()

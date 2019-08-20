@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             "isFirstLaunch": true,
             "useBiometrics": false,
             "isPremiumEnabled": false,
+            "writeNotePlaceholder": "Start writing or swipe left for saved notes...",
         ])
         
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
@@ -37,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             themes.setupDefaultMode()
         }
         
-//        UserDefaults.standard.set(true, forKey: "isPremiumEnabled")
+        UserDefaults.standard.set(true, forKey: "isPremiumEnabled")
 //        UserDefaults.standard.set(false, forKey: "isPremiumEnabled")
         
         return true

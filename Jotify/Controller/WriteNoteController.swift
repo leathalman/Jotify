@@ -35,6 +35,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         handleRandomColorsEnabled()
+        setupPlaceholder()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -50,6 +51,11 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         writeNoteView.inputTextView.delegate = self
         writeNoteView.inputTextView.frame = CGRect(x: 0, y: 100, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
         writeNoteView.inputTextView.tintColor = .white
+    }
+    
+    func setupPlaceholder() {
+        let placeholder = UserDefaults.standard.string(forKey: "writeNotePlaceholder")
+        writeNoteView.inputTextView.placeholder = placeholder
     }
     
     func handleRandomColorsEnabled() {

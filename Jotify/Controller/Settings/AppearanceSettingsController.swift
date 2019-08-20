@@ -16,9 +16,10 @@ class AppearanceSettingsController: UITableViewController {
     
     let themes = Themes()
     
-    let sections: Array = ["Dark Mode", "Themes", "Other"]
+    let sections: Array = ["Dark Mode", "Themes", "Text", "Other"]
     let darks: Array = ["Vibrant Dark Mode", "Pure Dark Mode" ]
     let palettes: Array = ["Default", "Sunset", "Kypool", "Celestial", "Apple Vibrant"]
+    let text: Array = ["Placeholder"]
     let other: Array = ["Random Colors"]
     
     let settingsController = SettingsController()
@@ -123,7 +124,25 @@ class AppearanceSettingsController: UITableViewController {
             }
             
         } else if indexPath.section == 2 {
+            let alert = UIAlertController(title: "Placeholder", message: "Input custom message for placeholder", preferredStyle: .alert)
+
+            alert.addTextField { (textField) in
+                let placeholder = UserDefaults.standard.string(forKey: "writeNotePlaceholder")
+                textField.placeholder = placeholder
+            }
             
+            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { [weak alert] (_) in
+                print(alert?.message ?? "cancel")
+                print("cancel")
+            }))
+
+            alert.addAction(UIAlertAction(title: "Accept", style: .default, handler: { [weak alert] (_) in
+                let textField = alert?.textFields![0]
+                let text = textField?.text
+                UserDefaults.standard.set(text, forKey: "writeNotePlaceholder")
+            }))
+
+            self.present(alert, animated: true, completion: nil)
         }
         
     }
@@ -223,31 +242,33 @@ class AppearanceSettingsController: UITableViewController {
             
             return cell
             
-        }  else if indexPath.section == 2 {
+        } else if indexPath.section == 2 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
             
-            switch indexPath.row {
-            case 0:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
-                
-                settingsController.setupDynamicCells(cell: cell, enableArrow: false)
-                
-                cell.textLabel?.text = "\(other[indexPath.row])"
-                cell.selectionStyle = .none
-                cell.switchButton.addTarget(self, action: #selector(randomColorSwitchPressed), for: .valueChanged)
-                
-                if defaults.bool(forKey: "useRandomColor") == true {
-                    cell.switchButton.isOn = true
-                } else {
-                    cell.switchButton.isOn = false
-                }
-                
-                return cell
-                
-            default:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-                print("cell outside of bounds")
-                return cell
+            settingsController.setupDynamicCells(cell: cell, enableArrow: true)
+
+            cell.accessoryType = .disclosureIndicator
+            cell.textLabel?.text = "\(text[indexPath.row])"
+            
+            return cell
+            
+        } else if indexPath.section == 3 {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
+            
+            settingsController.setupDynamicCells(cell: cell, enableArrow: false)
+            
+            cell.textLabel?.text = "\(other[indexPath.row])"
+            cell.selectionStyle = .none
+            cell.switchButton.addTarget(self, action: #selector(randomColorSwitchPressed), for: .valueChanged)
+            
+            if defaults.bool(forKey: "useRandomColor") == true {
+                cell.switchButton.isOn = true
+            } else {
+                cell.switchButton.isOn = false
             }
+            
+            return cell
             
         } else {
             
@@ -414,6 +435,8 @@ class AppearanceSettingsController: UITableViewController {
         case 1:
             return "Pick the color theme for your notes. Each theme has at least 8 colors which will be applied at random."
         case 2:
+            return "Customize the message on the screen where you create notes."
+        case 3:
             return "By default Jotify uses random color generation for all of your saved notes. Turing this off will require you to select a new default color for all notes."
         default:
             return ""
@@ -435,6 +458,8 @@ class AppearanceSettingsController: UITableViewController {
         case 1:
             return palettes.count
         case 2:
+            return text.count
+        case 3:
             return other.count
         default:
             return 0
