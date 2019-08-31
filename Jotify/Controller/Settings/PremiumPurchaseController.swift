@@ -10,45 +10,89 @@ import UIKit
 import StoreKit
 
 class PremiumPurchaseController: UITableViewController {
-    
-    //test product arrays/approval from Apple Payments
-    
-    var productsArray: [SKProduct] = []
-    var productIDs: [String] = ["com.austinleath.Jotify.premium"]
         
+    var products: [SKProduct] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Jotify Premium"
+        title = "Jotify Products"
         
-        self.tableView.register(SettingsCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(ProductCell.self, forCellReuseIdentifier: "cell")
         
-        IAPHandler.shared.setProductIds(ids: self.productIDs)
-        IAPHandler.shared.fetchAvailableProducts { [weak self](products)   in
-            self?.productsArray = products
-            self?.tableView.reloadData()
-        }
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(PremiumPurchaseController.reload), for: .valueChanged)
+        
+        let restoreButton = UIBarButtonItem(title: "Restore",
+                                            style: .plain,
+                                            target: self,
+                                            action: #selector(PremiumPurchaseController.restoreTapped(_:)))
+        navigationItem.rightBarButtonItem = restoreButton
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(PremiumPurchaseController.handlePurchaseNotification(_:)),
+                                               name: .IAPHelperPurchaseNotification,
+                                               object: nil)
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        IAPHandler.shared.purchase(product: self.productsArray[indexPath.row]) { (alert, product, transaction) in
-            if let tran = transaction, let prod = product {
-                print(tran)
-                print(prod)
+        reload()
+    }
+    
+    @objc func reload() {
+        products = []
+                
+        JotifyProducts.store.requestProducts{ [weak self] success, products in
+            guard let self = self else { return }
+            if success {
+                self.products = products!
+                
+                print(products?.count as Any)
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+            DispatchQueue.main.async {
+                self.refreshControl?.endRefreshing()
             }
         }
     }
     
+    @objc func restoreTapped(_ sender: AnyObject) {
+        JotifyProducts.store.restorePurchases()
+    }
+    
+    @objc func handlePurchaseNotification(_ notification: Notification) {
+        guard
+            let productID = notification.object as? String,
+            let index = products.firstIndex(where: { product -> Bool in
+                product.productIdentifier == productID
+            })
+            else { return }
+        
+        tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+    }
+}
+
+// MARK: - UITableViewDataSource
+
+extension PremiumPurchaseController {
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return productsArray.count
+        return products.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! SettingsCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ProductCell
         
-        let product = productsArray[indexPath.row]
-        cell.textLabel?.text = product.localizedTitle
+        let product = products[(indexPath as NSIndexPath).row]
+        
+        cell.product = product
+        cell.buyButtonHandler = { product in
+            JotifyProducts.store.buyProduct(product)
+        }
         
         return cell
     }

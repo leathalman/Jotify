@@ -55,6 +55,39 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         super.viewDidAppear(true)
         fetchNotesFromCoreData()
     }
+    
+    func migrateDataFromBeta() {
+        
+        //call this after fetchNotesFromCoreData
+        
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        for note in notes {
+            let date = note.value(forKey: "date")
+            
+            let updateDate = Date(timeIntervalSinceReferenceDate: date as! TimeInterval)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = DateFormatter.Style.long //Set date style
+            dateFormatter.timeZone = .current
+            let dateString = dateFormatter.string(from: updateDate)
+            
+            note.setValue(date, forKey: "modifiedDate")
+            note.setValue(date, forKey: "createdDate")
+            note.setValue(dateString, forKey: "dateString")
+            print("migrated")
+        }
+        
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
 
     func setupView() {
         navigationItem.title = "Saved Notes"
@@ -315,11 +348,11 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             noteDetailController.notes = notes
         }
 
-        let date = note.value(forKey: "date")
+        let modifiedDate = note.value(forKey: "modifiedDate")
         let color = note.value(forKey: "color") as! String
         let content = note.value(forKey: "content") as! String
 
-        let updateDate = Date(timeIntervalSinceReferenceDate: date as! TimeInterval)
+        let updateDate = Date(timeIntervalSinceReferenceDate: modifiedDate as! TimeInterval)
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.long //Set date style
         dateFormatter.timeZone = .current
@@ -437,7 +470,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         DispatchQueue.main.async {
             self.collectionView.reloadData()
-            self.animateCells()
+//            self.animateCells()
         }
     }
     
@@ -481,13 +514,13 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         let content = note.value(forKey: "content") as? String
         let color = note.value(forKey: "color") as? String ?? "white"
-        let date = note.value(forKey: "date") as? Double ?? 0
+        let modifiedDate = note.value(forKey: "modifiedDate") as? Double ?? 0
         
         cell.textLabel.text = content
         cell.textLabel.textColor = UIColor.white
         cell.dateLabel.textColor = UIColor.white
 
-        let updateDate = Date(timeIntervalSinceReferenceDate: date)
+        let updateDate = Date(timeIntervalSinceReferenceDate: modifiedDate)
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.long
         dateFormatter.timeZone = .current

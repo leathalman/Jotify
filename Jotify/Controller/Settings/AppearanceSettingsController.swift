@@ -93,7 +93,7 @@ class AppearanceSettingsController: UITableViewController {
                 lastIndexPath = indexPath as NSIndexPath
             }
             
-            if defaults.bool(forKey: "isPremiumEnabled") == true {
+            if defaults.bool(forKey: "premium") == true {
                 switch indexPath.row {
                 case 0:
                     defaults.set("default", forKey: "noteColorTheme")
@@ -119,13 +119,13 @@ class AppearanceSettingsController: UITableViewController {
                     print("Setting not implemented")
                 }
                 
-            } else if defaults.bool(forKey: "isPremiumEnabled") == false {
+            } else {
                 present(GetPremiumController(), animated: true, completion: nil)
             }
             
         } else if indexPath.section == 2 {
             let alert = UIAlertController(title: "Placeholder", message: "Input custom message for placeholder", preferredStyle: .alert)
-
+            
             alert.addTextField { (textField) in
                 let placeholder = UserDefaults.standard.string(forKey: "writeNotePlaceholder")
                 textField.placeholder = placeholder
@@ -135,13 +135,13 @@ class AppearanceSettingsController: UITableViewController {
                 print(alert?.message ?? "cancel")
                 print("cancel")
             }))
-
+            
             alert.addAction(UIAlertAction(title: "Accept", style: .default, handler: { [weak alert] (_) in
                 let textField = alert?.textFields![0]
                 let text = textField?.text
                 UserDefaults.standard.set(text, forKey: "writeNotePlaceholder")
             }))
-
+            
             self.present(alert, animated: true, completion: nil)
         }
         
@@ -171,12 +171,12 @@ class AppearanceSettingsController: UITableViewController {
                 }
                 
                 return cell
-            
+                
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
                 
                 settingsController.setupDynamicCells(cell: cell, enableArrow: false)
-
+                
                 cell.textLabel?.text = "\(darks[indexPath.row])"
                 cell.selectionStyle = .none
                 cell.switchButton.addTarget(self, action: #selector(pureDarkModeSwitchPressed(sender:)), for: .valueChanged)
@@ -246,7 +246,7 @@ class AppearanceSettingsController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
             
             settingsController.setupDynamicCells(cell: cell, enableArrow: true)
-
+            
             cell.accessoryType = .disclosureIndicator
             cell.textLabel?.text = "\(text[indexPath.row])"
             
@@ -282,7 +282,7 @@ class AppearanceSettingsController: UITableViewController {
     
     @objc func vibrantDarkModeSwitchPressed(sender: UISwitch) {
         
-        if defaults.bool(forKey: "isPremiumEnabled") == true {
+        if defaults.bool(forKey: "premium") == true {
             if sender.isOn {
                 print("vibrant dark mode enabled")
                 defaults.set(true, forKey: "vibrantDarkModeEnabled")
@@ -303,49 +303,65 @@ class AppearanceSettingsController: UITableViewController {
                 self.tableView.reloadData()
             }
             
-        } else if defaults.bool(forKey: "isPremiumEnabled") == false {
+        } else if defaults.bool(forKey: "premium") == false {
             present(GetPremiumController(), animated: true, completion: nil)
             sender.setOn(false, animated: true)
         }
     }
     
     @objc func pureDarkModeSwitchPressed(sender: UISwitch) {
-        if sender.isOn {
-            print("pure dark mode enabled")
-            defaults.set(true, forKey: "pureDarkModeEnabled")
-            defaults.set(false, forKey: "vibrantDarkModeEnabled")
-            defaults.set(true, forKey: "darkModeEnabled")
-            themes.setupDarkMode()
+        
+        if defaults.bool(forKey: "premium") == true {
+            if sender.isOn {
+                print("pure dark mode enabled")
+                defaults.set(true, forKey: "pureDarkModeEnabled")
+                defaults.set(false, forKey: "vibrantDarkModeEnabled")
+                defaults.set(true, forKey: "darkModeEnabled")
+                themes.setupDarkMode()
+                
+                self.viewWillAppear(true)
+                self.tableView.reloadData()
+                
+            } else {
+                print("pure dark mode disabled")
+                defaults.set(false, forKey: "pureDarkModeEnabled")
+                defaults.set(false, forKey: "darkModeEnabled")
+                themes.setupDefaultMode()
+                
+                self.viewWillAppear(true)
+                self.tableView.reloadData()
+            }
             
-            self.viewWillAppear(true)
-            self.tableView.reloadData()
-            
-        } else {
-            print("pure dark mode disabled")
-            defaults.set(false, forKey: "pureDarkModeEnabled")
-            defaults.set(false, forKey: "darkModeEnabled")
-            themes.setupDefaultMode()
-            
-            self.viewWillAppear(true)
-            self.tableView.reloadData()
+        } else if defaults.bool(forKey: "premium") == false {
+            present(GetPremiumController(), animated: true, completion: nil)
+            sender.setOn(false, animated: true)
         }
     }
     
     @objc func randomColorSwitchPressed(sender: UISwitch) {
-        if sender.isOn {
-            print("random colors enabled")
-            defaults.set(true, forKey: "useRandomColor")
-            setNewColorsForExistingNotes()
+        
+        if defaults.bool(forKey: "premium") == true {
             
-        } else {
-            print("random colors disabled")
-            defaults.set(false, forKey: "useRandomColor")
-
-            let colorPickerController = ColorPickerController()
+            if sender.isOn {
+                print("random colors enabled")
+                defaults.set(true, forKey: "useRandomColor")
+                setNewColorsForExistingNotes()
+                
+            } else {
+                print("random colors disabled")
+                defaults.set(false, forKey: "useRandomColor")
+                
+                let colorPickerController = ColorPickerController()
+                
+                navigationController?.pushViewController(colorPickerController, animated: true)
+            }
             
-            navigationController?.pushViewController(colorPickerController, animated: true)
+        } else if defaults.bool(forKey: "premium") == false {
+            present(GetPremiumController(), animated: true, completion: nil)
+            sender.setOn(false, animated: true)
         }
     }
+    
     
     func fetchData() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {

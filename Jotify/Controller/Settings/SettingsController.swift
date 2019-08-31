@@ -149,7 +149,7 @@ class SettingsController: UITableViewController {
                     self.defaults.set(false, forKey: "pureDarkModeEnabled")
                     self.defaults.set(true, forKey: "isFirstLaunch")
                     self.defaults.set(false, forKey: "useBiometrics")
-                    
+                    self.defaults.set("Start typing or swipe left for saved notes...", forKey: "writeNotePlaceholder")
                 }))
                 
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -241,7 +241,7 @@ class SettingsController: UITableViewController {
                 
                 cell.textLabel?.text = "\(general[indexPath.row])"
                 
-                setupDynamicCells(cell: cell, enableArrow: false)
+                setupDynamicCells(cell: cell, enableArrow: true)
                 
                 cell.accessoryType = .disclosureIndicator
                 

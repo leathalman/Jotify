@@ -48,17 +48,17 @@ class PrivacySettingsController: UITableViewController {
         blurEffectView.frame = window.frame
         blurEffectView.tag = 9065
         blurEffectView.alpha = 0.875
-
+        
         window.addSubview(blurEffectView)
         
         let context = LAContext()
         var error: NSError?
-
+        
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             let reason = "Unlock Jotify to access your notes."
-
+            
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
-
+                
                 DispatchQueue.main.async {
                     if success {
                         print("success")
@@ -87,7 +87,7 @@ class PrivacySettingsController: UITableViewController {
             cell.textLabel?.text = "\(delete[indexPath.row])"
             
             settingsController.setupDynamicCells(cell: cell, enableArrow: false)
-
+            
             cell.selectionStyle = .none
             cell.switchButton.addTarget(self, action: #selector(showAlertOnDeleteSwitchPressed), for: .valueChanged)
             
@@ -105,7 +105,7 @@ class PrivacySettingsController: UITableViewController {
             cell.textLabel?.text = "\(biometrics[indexPath.row])"
             
             settingsController.setupDynamicCells(cell: cell, enableArrow: false)
-
+            
             cell.selectionStyle = .none
             cell.switchButton.addTarget(self, action: #selector(useBiometricsSwitchPressed(sender:)), for: .valueChanged)
             
@@ -141,14 +141,21 @@ class PrivacySettingsController: UITableViewController {
     }
     
     @objc func useBiometricsSwitchPressed (sender: UISwitch) {
-        if sender.isOn {
-            print("useBiometrics enabled")
-            defaults.set(true, forKey: "useBiometrics")
+        
+        if defaults.bool(forKey: "premium") == true {
+            if sender.isOn {
+                print("useBiometrics enabled")
+                defaults.set(true, forKey: "useBiometrics")
+                
+            } else {
+                print("useBiometrics disabled")
+                defaults.set(false, forKey: "useBiometrics")
+                
+            }
             
         } else {
-            print("useBiometrics disabled")
-            defaults.set(false, forKey: "useBiometrics")
-            
+            present(GetPremiumController(), animated: true, completion: nil)
+            sender.setOn(false, animated: true)
         }
     }
     
@@ -158,7 +165,7 @@ class PrivacySettingsController: UITableViewController {
             return "By default Jotify displays a confirmation alert when you delete a note. To remove this confirmation, toggle the above setting."
         case 1:
             return "Use Touch ID or Face ID to authenticate Jotify and keep your notes private."
-        
+            
         default:
             return ""
         }

@@ -132,12 +132,11 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         
         if isFiltering == false {
             notes[index].content = newContent
-            notes[index].date = newDate
+            notes[index].modifiedDate = newDate
             
         } else if isFiltering == true {
             filteredNotes[index].content = newContent
-            filteredNotes[index].date = newDate
-            
+            filteredNotes[index].modifiedDate = newDate
         }
         
         appDelegate.saveContext()

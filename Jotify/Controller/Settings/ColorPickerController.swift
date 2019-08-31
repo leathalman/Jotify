@@ -124,7 +124,7 @@ class ColorPickerController: UIViewController {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Note")
         fetchRequest.returnsObjectsAsFaults = false
         
-        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "modifiedDate", ascending: false)
         
         fetchRequest.sortDescriptors = [sortDescriptor]
         

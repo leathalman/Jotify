@@ -132,6 +132,10 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         note.setValue(color, forKey: "color")
         note.setValue(date, forKey: "date")
         
+        //new values before launch
+        note.setValue(date, forKey: "createdDate")
+        note.setValue(date, forKey: "modifiedDate")
+        
         let updateDate = Date(timeIntervalSinceReferenceDate: date)
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.long
