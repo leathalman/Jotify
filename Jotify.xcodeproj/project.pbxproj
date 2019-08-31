@@ -38,6 +38,7 @@
 		F68D639322F7894700DEB4AA /* PrivacySettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68D639222F7894700DEB4AA /* PrivacySettingsController.swift */; };
 		F6969F5E22DA1AFD00C4E8FF /* AboutSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6969F5D22DA1AFD00C4E8FF /* AboutSettingsController.swift */; };
 		F6969F6022DA256F00C4E8FF /* AboutSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6969F5F22DA256F00C4E8FF /* AboutSettingsView.swift */; };
+		F69E5DC0231AE14800872345 /* ThemeSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E5DBF231AE14800872345 /* ThemeSelectionController.swift */; };
 		F6B2083722DE22860098CF9F /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B2083622DE22860098CF9F /* Themes.swift */; };
 		F6CE723C22D5833E00544267 /* SortSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CE723B22D5833E00544267 /* SortSettingsController.swift */; };
 		F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */; };
@@ -80,6 +81,7 @@
 		F68D639222F7894700DEB4AA /* PrivacySettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySettingsController.swift; sourceTree = "<group>"; };
 		F6969F5D22DA1AFD00C4E8FF /* AboutSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSettingsController.swift; sourceTree = "<group>"; };
 		F6969F5F22DA256F00C4E8FF /* AboutSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSettingsView.swift; sourceTree = "<group>"; };
+		F69E5DBF231AE14800872345 /* ThemeSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectionController.swift; sourceTree = "<group>"; };
 		F6B2083622DE22860098CF9F /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
 		F6CE723B22D5833E00544267 /* SortSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortSettingsController.swift; sourceTree = "<group>"; };
 		F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteView.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				F687FBDE2304EC0200713DDE /* GetPremiumController.swift */,
 				F6969F5D22DA1AFD00C4E8FF /* AboutSettingsController.swift */,
 				F68D639022F7890100DEB4AA /* AppearanceSettingsController.swift */,
+				F69E5DBF231AE14800872345 /* ThemeSelectionController.swift */,
 				F67B92DF22D2E785002C6985 /* ColorPickerController.swift */,
 				F68D639222F7894700DEB4AA /* PrivacySettingsController.swift */,
 				F6CE723B22D5833E00544267 /* SortSettingsController.swift */,
@@ -328,6 +331,7 @@
 				F650E16F22C003A9008D29AD /* Jotify.xcdatamodeld in Sources */,
 				F650E16D22C00381008D29AD /* AppDelegate.swift in Sources */,
 				F68AEB59230CCEBC00000F20 /* ProductCell.swift in Sources */,
+				F69E5DC0231AE14800872345 /* ThemeSelectionController.swift in Sources */,
 				F6969F5E22DA1AFD00C4E8FF /* AboutSettingsController.swift in Sources */,
 				F68D639322F7894700DEB4AA /* PrivacySettingsController.swift in Sources */,
 				F650E15D22BFFB19008D29AD /* Extensions.swift in Sources */,

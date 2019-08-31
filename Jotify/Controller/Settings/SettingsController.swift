@@ -136,9 +136,9 @@ class SettingsController: UITableViewController {
                 alert.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: { (UIAlertAction) in
                     
                     self.defaults.set("default", forKey: "noteColorTheme")
-                    let colorSettingsController = AppearanceSettingsController()
-                    colorSettingsController.fetchData()
-                    colorSettingsController.setNewColorsForExistingNotes()
+                    let appearanceSettingsController = AppearanceSettingsController()
+                    appearanceSettingsController.fetchData()
+                    appearanceSettingsController.setNewColorsForExistingNotes()
                     
                     self.defaults.set(true, forKey: "useRandomColor")
                     self.defaults.set("date", forKey: "sortBy")

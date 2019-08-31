@@ -18,7 +18,6 @@ class AppearanceSettingsController: UITableViewController {
     
     let sections: Array = ["Dark Mode", "Themes", "Text", "Other"]
     let darks: Array = ["Vibrant Dark Mode", "Pure Dark Mode" ]
-    let palettes: Array = ["Default", "Sunset", "Kypool", "Celestial", "Apple Vibrant"]
     let text: Array = ["Placeholder"]
     let other: Array = ["Random Colors"]
     
@@ -82,46 +81,7 @@ class AppearanceSettingsController: UITableViewController {
             tableView.cellForRow(at: indexPath)?.accessoryType = .none
             
         } else if indexPath.section == 1 {
-            
-            let newRow = indexPath.row
-            let oldRow = lastIndexPath.row
-            
-            if oldRow != newRow {
-                tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-                tableView.cellForRow(at: lastIndexPath as IndexPath)?.accessoryType = .none
-                
-                lastIndexPath = indexPath as NSIndexPath
-            }
-            
-            if defaults.bool(forKey: "premium") == true {
-                switch indexPath.row {
-                case 0:
-                    defaults.set("default", forKey: "noteColorTheme")
-                    setNewColorsForExistingNotesIfNotStatic()
-                    
-                case 1:
-                    defaults.set("sunset", forKey: "noteColorTheme")
-                    setNewColorsForExistingNotesIfNotStatic()
-                    
-                case 2:
-                    defaults.set("kypool", forKey: "noteColorTheme")
-                    setNewColorsForExistingNotesIfNotStatic()
-                    
-                case 3:
-                    defaults.set("celestial", forKey: "noteColorTheme")
-                    setNewColorsForExistingNotesIfNotStatic()
-                    
-                case 4:
-                    defaults.set("appleVibrant", forKey: "noteColorTheme")
-                    setNewColorsForExistingNotesIfNotStatic()
-                    
-                default:
-                    print("Setting not implemented")
-                }
-                
-            } else {
-                present(GetPremiumController(), animated: true, completion: nil)
-            }
+            navigationController?.pushViewController(ThemeSelectionController(style: .grouped), animated: true)
             
         } else if indexPath.section == 2 {
             let alert = UIAlertController(title: "Placeholder", message: "Input custom message for placeholder", preferredStyle: .alert)
@@ -145,10 +105,6 @@ class AppearanceSettingsController: UITableViewController {
             self.present(alert, animated: true, completion: nil)
         }
         
-    }
-    
-    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        tableView.cellForRow(at: indexPath)?.accessoryType = .none
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -195,50 +151,13 @@ class AppearanceSettingsController: UITableViewController {
                 return cell
             }
             
-        } else if indexPath.section == 1 && defaults.bool(forKey: "useRandomColor") == false {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-            
-            settingsController.setupDynamicCells(cell: cell, enableArrow: false)
-            
-            cell.textLabel?.text = "\(palettes[indexPath.row])"
-            cell.isUserInteractionEnabled = false
-            cell.selectionStyle = .none
-            
-            return cell
-            
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
             
-            settingsController.setupDynamicCells(cell: cell, enableArrow: false)
+            settingsController.setupDynamicCells(cell: cell, enableArrow: true)
             
-            cell.textLabel?.text = "\(palettes[indexPath.row])"
-            cell.isUserInteractionEnabled = true
-            cell.selectionStyle = .none
-            
-            switch indexPath.row {
-            case 0:
-                if isSelectedColorFromDefaults(key: "default", indexPath: indexPath) == true {
-                    cell.accessoryType = .checkmark
-                }
-            case 1:
-                if isSelectedColorFromDefaults(key: "sunset", indexPath: indexPath) == true {
-                    cell.accessoryType = .checkmark
-                }
-            case 2:
-                if isSelectedColorFromDefaults(key: "kypool", indexPath: indexPath) == true {
-                    cell.accessoryType = .checkmark
-                }
-            case 3:
-                if isSelectedColorFromDefaults(key: "celestial", indexPath: indexPath) == true {
-                    cell.accessoryType = .checkmark
-                }
-            case 4:
-                if isSelectedColorFromDefaults(key: "appleVibrant", indexPath: indexPath) == true {
-                    cell.accessoryType = .checkmark
-                }
-            default:
-                cell.accessoryType = .none
-            }
+            cell.accessoryType = .disclosureIndicator
+            cell.textLabel?.text = "Themes"
             
             return cell
             
@@ -278,6 +197,48 @@ class AppearanceSettingsController: UITableViewController {
             cell.textLabel?.textColor = UIColor.black
             return cell
         }
+    }
+    
+    func setNewColorsForExistingNotes() {
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let writeNoteView = WriteNoteView()
+        var newBackgroundColor = UIColor.white
+        
+        for note in notes {
+            var newColor = String()
+            let colorTheme = defaults.string(forKey: "noteColorTheme")
+            
+            if colorTheme == "default" {
+                newColor = Colors.defaultColorsStrings.randomElement() ?? "white"
+                newBackgroundColor = Colors.defaultColors.randomElement() ?? UIColor.white
+                
+            } else if colorTheme == "sunset" {
+                newColor = Colors.sunsetColorsStrings.randomElement() ?? "white"
+                newBackgroundColor = Colors.sunsetColors.randomElement() ?? UIColor.white
+                
+            } else if colorTheme == "kypool" {
+                newColor = Colors.kypoolColorsStrings.randomElement() ?? "white"
+                newBackgroundColor = Colors.kypoolColors.randomElement() ?? UIColor.white
+                
+            } else if colorTheme == "celestial" {
+                newColor = Colors.celestialColorsStrings.randomElement() ?? "white"
+                newBackgroundColor = Colors.celestialColors.randomElement() ?? UIColor.white
+                
+            } else if colorTheme == "appleVibrant" {
+                newColor = Colors.appleVibrantColorsStrings.randomElement() ?? "white"
+                newBackgroundColor = Colors.appleVibrantColors.randomElement() ?? UIColor.white
+            }
+            
+            note.color = newColor
+        }
+        
+        writeNoteView.colorView.backgroundColor = newBackgroundColor
+        
+        appDelegate.saveContext()
     }
     
     @objc func vibrantDarkModeSwitchPressed(sender: UISwitch) {
@@ -385,75 +346,16 @@ class AppearanceSettingsController: UITableViewController {
         }
     }
     
-    func setNewColorsForExistingNotesIfNotStatic() {
-        if defaults.bool(forKey: "useRandomColor") == true {
-            setNewColorsForExistingNotes()
-        }
-    }
-    
-    func setNewColorsForExistingNotes() {
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        let writeNoteView = WriteNoteView()
-        var newBackgroundColor = UIColor.white
-        
-        for note in notes {
-            var newColor = String()
-            let colorTheme = defaults.string(forKey: "noteColorTheme")
-            
-            if colorTheme == "default" {
-                newColor = Colors.defaultColorsStrings.randomElement() ?? "white"
-                newBackgroundColor = Colors.defaultColors.randomElement() ?? UIColor.white
-                
-            } else if colorTheme == "sunset" {
-                newColor = Colors.sunsetColorsStrings.randomElement() ?? "white"
-                newBackgroundColor = Colors.sunsetColors.randomElement() ?? UIColor.white
-                
-            } else if colorTheme == "kypool" {
-                newColor = Colors.kypoolColorsStrings.randomElement() ?? "white"
-                newBackgroundColor = Colors.kypoolColors.randomElement() ?? UIColor.white
-                
-            } else if colorTheme == "celestial" {
-                newColor = Colors.celestialColorsStrings.randomElement() ?? "white"
-                newBackgroundColor = Colors.celestialColors.randomElement() ?? UIColor.white
-                
-            } else if colorTheme == "appleVibrant" {
-                newColor = Colors.appleVibrantColorsStrings.randomElement() ?? "white"
-                newBackgroundColor = Colors.appleVibrantColors.randomElement() ?? UIColor.white
-            }
-            
-            note.color = newColor
-        }
-        
-        writeNoteView.colorView.backgroundColor = newBackgroundColor
-        
-        appDelegate.saveContext()
-    }
-    
-    func isSelectedColorFromDefaults(key: String, indexPath: IndexPath) -> Bool {
-        let colorTheme = defaults.string(forKey: "noteColorTheme")
-        if colorTheme == key {
-            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .bottom)
-            return true
-        } else {
-            return false
-        }
-        
-    }
-    
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0:
             return "Vibrant dark mode retains the color of your notes while pure dark mode replaces these colors with black."
         case 1:
-            return "Pick the color theme for your notes. Each theme has at least 8 colors which will be applied at random."
+            return "Pick the color theme for your notes."
         case 2:
             return "Customize the message on the screen where you create notes."
         case 3:
-            return "By default Jotify uses random color generation for all of your saved notes. Turing this off will require you to select a new default color for all notes."
+            return "Turing this off will require you to select a new default color for all notes."
         default:
             return ""
         }
@@ -472,7 +374,7 @@ class AppearanceSettingsController: UITableViewController {
         case 0:
             return darks.count
         case 1:
-            return palettes.count
+            return 1
         case 2:
             return text.count
         case 3:
