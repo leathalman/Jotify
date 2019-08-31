@@ -135,6 +135,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         //new values before launch
         note.setValue(date, forKey: "createdDate")
         note.setValue(date, forKey: "modifiedDate")
+        note.setValue(false, forKey: "isReminder")
         
         let updateDate = Date(timeIntervalSinceReferenceDate: date)
         let dateFormatter = DateFormatter()

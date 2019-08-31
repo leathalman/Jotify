@@ -89,7 +89,6 @@ class ThemeSelectionController: UITableViewController {
             lastIndexPath = indexPath as NSIndexPath
         }
         
-        
         if defaults.bool(forKey: "premium") == true {
             switch indexPath.row {
             case 0:

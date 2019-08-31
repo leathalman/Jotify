@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             themes.setupDefaultMode()
         }
         
-        UserDefaults.standard.set(true, forKey: "premium")
+        UserDefaults.standard.set(false, forKey: "premium")
         
         let purchased = UserDefaults.standard.bool(forKey: "premium")
         

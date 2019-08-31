@@ -319,7 +319,7 @@ class AppearanceSettingsController: UITableViewController {
             
         } else if defaults.bool(forKey: "premium") == false {
             present(GetPremiumController(), animated: true, completion: nil)
-            sender.setOn(false, animated: true)
+            sender.setOn(true, animated: true)
         }
     }
     
