@@ -12,7 +12,7 @@ import CoreData
 class SettingsController: UITableViewController {
     
     let sections: Array = ["General", "Advanced"]
-    let general: Array = ["About", "Appearance", "Privacy", "Sort", "Premium"]
+    let general: Array = ["About", "Appearance", "Privacy", "Sort"]
     let advanced: Array = ["Show Tutorial","Reset Settings to Default", "Delete All Data"]
     
     let themes = Themes()
@@ -118,8 +118,6 @@ class SettingsController: UITableViewController {
                 navigationController?.pushViewController(PrivacySettingsController(style: .grouped), animated: true)
             case 3:
                 navigationController?.pushViewController(SortSettingsController(style: .grouped), animated: true)
-            case 4:
-                navigationController?.pushViewController(PremiumPurchaseController(style: .grouped), animated: true)
             default:
                 return
             }

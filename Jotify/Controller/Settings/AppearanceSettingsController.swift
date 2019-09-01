@@ -243,7 +243,7 @@ class AppearanceSettingsController: UITableViewController {
     
     @objc func vibrantDarkModeSwitchPressed(sender: UISwitch) {
         
-        if defaults.bool(forKey: "premium") == true {
+        if defaults.bool(forKey: "com.austinleath.Jotify.premium") == true {
             if sender.isOn {
                 print("vibrant dark mode enabled")
                 defaults.set(true, forKey: "vibrantDarkModeEnabled")
@@ -264,7 +264,7 @@ class AppearanceSettingsController: UITableViewController {
                 self.tableView.reloadData()
             }
             
-        } else if defaults.bool(forKey: "premium") == false {
+        } else if defaults.bool(forKey: "com.austinleath.Jotify.premium") == false {
             present(GetPremiumController(), animated: true, completion: nil)
             sender.setOn(false, animated: true)
         }
@@ -272,7 +272,7 @@ class AppearanceSettingsController: UITableViewController {
     
     @objc func pureDarkModeSwitchPressed(sender: UISwitch) {
         
-        if defaults.bool(forKey: "premium") == true {
+        if defaults.bool(forKey: "com.austinleath.Jotify.premium") == true {
             if sender.isOn {
                 print("pure dark mode enabled")
                 defaults.set(true, forKey: "pureDarkModeEnabled")
@@ -293,7 +293,7 @@ class AppearanceSettingsController: UITableViewController {
                 self.tableView.reloadData()
             }
             
-        } else if defaults.bool(forKey: "premium") == false {
+        } else if defaults.bool(forKey: "com.austinleath.Jotify.premium") == false {
             present(GetPremiumController(), animated: true, completion: nil)
             sender.setOn(false, animated: true)
         }
@@ -301,7 +301,7 @@ class AppearanceSettingsController: UITableViewController {
     
     @objc func randomColorSwitchPressed(sender: UISwitch) {
         
-        if defaults.bool(forKey: "premium") == true {
+        if defaults.bool(forKey: "com.austinleath.Jotify.premium") == true {
             
             if sender.isOn {
                 print("random colors enabled")
@@ -317,7 +317,7 @@ class AppearanceSettingsController: UITableViewController {
                 navigationController?.pushViewController(colorPickerController, animated: true)
             }
             
-        } else if defaults.bool(forKey: "premium") == false {
+        } else if defaults.bool(forKey: "com.austinleath.Jotify.premium") == false {
             present(GetPremiumController(), animated: true, completion: nil)
             sender.setOn(true, animated: true)
         }

@@ -10,7 +10,6 @@
 		9B6AC7C1DBA10CBFB04F374B /* Pods_Jotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3C025699629E8C8FD896B4 /* Pods_Jotify.framework */; };
 		F6070B8A22D50796005E4CF3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6070B8922D50796005E4CF3 /* EmptyView.swift */; };
 		F61C1CA52304A29500B944CD /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F61C1CA42304A29500B944CD /* StoreKit.framework */; };
-		F61C1CAB2304A7CC00B944CD /* PremiumPurchaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61C1CAA2304A7CC00B944CD /* PremiumPurchaseController.swift */; };
 		F61C1CAD2304A91000B944CD /* IAPHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61C1CAC2304A91000B944CD /* IAPHandler.swift */; };
 		F63A0C7922DE031E00B8A480 /* VerticalAlignLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63A0C7822DE031E00B8A480 /* VerticalAlignLabel.swift */; };
 		F644968622C16422009CC386 /* NoteDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F644968522C16422009CC386 /* NoteDetailController.swift */; };
@@ -51,7 +50,6 @@
 		77AB5562845EB3AEFA1502C6 /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.debug.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
 		F6070B8922D50796005E4CF3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		F61C1CA42304A29500B944CD /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		F61C1CAA2304A7CC00B944CD /* PremiumPurchaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumPurchaseController.swift; sourceTree = "<group>"; };
 		F61C1CAC2304A91000B944CD /* IAPHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHandler.swift; sourceTree = "<group>"; };
 		F63A0C7822DE031E00B8A480 /* VerticalAlignLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalAlignLabel.swift; sourceTree = "<group>"; };
 		F644968522C16422009CC386 /* NoteDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailController.swift; sourceTree = "<group>"; };
@@ -116,7 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				F650E15122BFFB12008D29AD /* SettingsController.swift */,
-				F61C1CAA2304A7CC00B944CD /* PremiumPurchaseController.swift */,
 				F687FBDE2304EC0200713DDE /* GetPremiumController.swift */,
 				F6969F5D22DA1AFD00C4E8FF /* AboutSettingsController.swift */,
 				F68D639022F7890100DEB4AA /* AppearanceSettingsController.swift */,
@@ -346,7 +343,6 @@
 				F67B92DE22D2E083002C6985 /* SettingsSwitchCell.swift in Sources */,
 				F650E16722BFFB20008D29AD /* SavedNoteCell.swift in Sources */,
 				F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */,
-				F61C1CAB2304A7CC00B944CD /* PremiumPurchaseController.swift in Sources */,
 				F6B2083722DE22860098CF9F /* Themes.swift in Sources */,
 				F6969F6022DA256F00C4E8FF /* AboutSettingsView.swift in Sources */,
 				F666D4B222CFED2D00DECE27 /* UIDevice+Extensions.swift in Sources */,

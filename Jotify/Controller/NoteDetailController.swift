@@ -129,6 +129,8 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     }
     
     @objc func handleCancel() {
+        let savedNoteController = SavedNoteController()
+        savedNoteController.feedbackOnPress()
         navigationController?.popViewController(animated: true)
     }
     
@@ -154,6 +156,8 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
 //        dateChooserAlert.view.addConstraint(height)
 //        dateChooserAlert.view.addConstraint(centerX)
 //        self.present(dateChooserAlert, animated: true, completion: nil)
+        let savedNoteController = SavedNoteController()
+        savedNoteController.feedbackOnPress()
         navigationController?.pushViewController(ReminderController(), animated: true)
     }
     

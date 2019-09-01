@@ -89,7 +89,7 @@ class ThemeSelectionController: UITableViewController {
             lastIndexPath = indexPath as NSIndexPath
         }
         
-        if defaults.bool(forKey: "premium") == true {
+        if defaults.bool(forKey: "com.austinleath.Jotify.premium") == true {
             switch indexPath.row {
             case 0:
                 defaults.set("default", forKey: "noteColorTheme")

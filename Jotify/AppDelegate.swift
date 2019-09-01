@@ -38,9 +38,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         //TODO remove before production
-        UserDefaults.standard.set(true, forKey: "premium")
+//        UserDefaults.standard.set(false, forKey: "premium")
         
-        let purchased = UserDefaults.standard.bool(forKey: "premium")
+        let purchased = UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.premium")
         
         print(purchased)
         //

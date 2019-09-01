@@ -43,6 +43,11 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         writeNoteView.inputTextView.resignFirstResponder()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        handleSend()
+    }
+    
     func setupView() {
         self.hideKeyboardWhenTappedAround()
         view = writeNoteView

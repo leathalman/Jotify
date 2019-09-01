@@ -42,7 +42,7 @@ class GetPremiumController: BottomPopupViewController {
     
     lazy var detailLabel: UILabel = {
         let label = UILabel()
-        label.text = "Unlock dark mode, note themes, static color customization, and more."
+        label.text = "Unlock dark mode, note themes, static color customization, biometrics, and more."
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.numberOfLines = 0
@@ -101,28 +101,44 @@ class GetPremiumController: BottomPopupViewController {
         
         titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 25).isActive = true
-        //        titleLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        //        titleLabel.heightAnchor.constraint(equalToConstant: 52).isActive = true
         
         detailLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         detailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
         detailLabel.widthAnchor.constraint(equalToConstant: screenWidth / 1.15).isActive = true
-        //        detailLabel.heightAnchor.constraint(equalToConstant: 52).isActive = true
-        
-        purchaseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 100).isActive = true
-        purchaseButton.topAnchor.constraint(equalTo: detailLabel.bottomAnchor, constant: 30).isActive = true
-        purchaseButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        purchaseButton.widthAnchor.constraint(equalToConstant: 160).isActive = true
-        
-        cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100).isActive = true
-        cancelButton.topAnchor.constraint(equalTo: detailLabel.bottomAnchor, constant: 30).isActive = true
-        cancelButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        cancelButton.widthAnchor.constraint(equalToConstant: 160).isActive = true
+          
+        //make better constraints for all devices
+        if UIDevice.modelName == "iPhone SE" {
+            purchaseButton.heightAnchor.constraint(equalToConstant: screenHeight / 7.5).isActive = true
+            purchaseButton.widthAnchor.constraint(equalToConstant: screenWidth / 2.5 - 10).isActive = true
+            purchaseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 80).isActive = true
+            purchaseButton.topAnchor.constraint(equalTo: detailLabel.bottomAnchor, constant: 15).isActive = true
+            
+            cancelButton.heightAnchor.constraint(equalToConstant: screenHeight / 7.5).isActive = true
+            cancelButton.widthAnchor.constraint(equalToConstant: screenWidth / 2.5 - 10).isActive = true
+            cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -80).isActive = true
+            cancelButton.topAnchor.constraint(equalTo: detailLabel.bottomAnchor, constant: 15).isActive = true
+            
+            print("OLD")
+        } else {
+            purchaseButton.heightAnchor.constraint(equalToConstant: screenHeight / 11).isActive = true
+            purchaseButton.widthAnchor.constraint(equalToConstant: screenWidth / 3).isActive = true
+            purchaseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 100).isActive = true
+            purchaseButton.topAnchor.constraint(equalTo: detailLabel.bottomAnchor, constant: 15).isActive = true
+            
+            cancelButton.heightAnchor.constraint(equalToConstant: screenHeight / 11).isActive = true
+            cancelButton.widthAnchor.constraint(equalToConstant: screenWidth / 3).isActive = true
+            cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100).isActive = true
+            cancelButton.topAnchor.constraint(equalTo: detailLabel.bottomAnchor, constant: 15).isActive = true
+            
+            print("NEW")
+        }
+
     }
     
     @objc func purchasePremium(sender: UIButton) {
         guard let product = products.first else { return }
         JotifyProducts.store.buyProduct(product)
+        dismiss(animated: true, completion: nil)
     }
     
     @objc func handleCancel(sender: UIButton) {

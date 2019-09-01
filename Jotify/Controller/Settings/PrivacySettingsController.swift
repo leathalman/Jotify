@@ -47,7 +47,7 @@ class PrivacySettingsController: UITableViewController {
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = window.frame
         blurEffectView.tag = 9065
-        blurEffectView.alpha = 0.875
+        blurEffectView.alpha = 0.925
         
         window.addSubview(blurEffectView)
         
@@ -77,6 +77,10 @@ class PrivacySettingsController: UITableViewController {
         } else {
             // no biometrics
         }
+    }
+    
+    func removeBlurView(window: UIWindow) {
+        window.viewWithTag(9065)?.removeFromSuperview()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -142,7 +146,7 @@ class PrivacySettingsController: UITableViewController {
     
     @objc func useBiometricsSwitchPressed (sender: UISwitch) {
         
-        if defaults.bool(forKey: "premium") == true {
+        if defaults.bool(forKey: "com.austinleath.Jotify.premium") == true {
             if sender.isOn {
                 print("useBiometrics enabled")
                 defaults.set(true, forKey: "useBiometrics")
