@@ -29,4 +29,7 @@ pod'ChromaColorPicker'
 # Used for Onboarding and Updates
 pod'WhatsNewKit'
 
+# Fantastic framework for customizing height of presenting viewcontrollers
+pod 'BottomPopup'
+
 end

@@ -9,12 +9,15 @@
 import UIKit
 import UserNotifications
 
-class NoteDetailController: UIViewController, UITextViewDelegate, UNUserNotificationCenterDelegate {
+class NoteDetailController: UIViewController, UITextViewDelegate {
     
     var navigationTitle: String = ""
     var backgroundColor: UIColor = .white
     var detailText: String = ""
     var index: Int = 0
+    
+    var datePicker:UIDatePicker = UIDatePicker()
+    let toolBar = UIToolbar()
     
     let writeNoteView = WriteNoteView()
     
@@ -118,9 +121,9 @@ class NoteDetailController: UIViewController, UITextViewDelegate, UNUserNotifica
         cancel = cancel?.withRenderingMode(.alwaysOriginal)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: cancel, style:.plain, target: self, action: #selector(handleCancel))
         
-        var alarm = UIImage(named: "alarm")
-        alarm = alarm?.withRenderingMode(.alwaysOriginal)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: alarm, style: .plain, target: self, action: #selector(handleReminder))
+//        var alarm = UIImage(named: "alarm")
+//        alarm = alarm?.withRenderingMode(.alwaysOriginal)
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: alarm, style: .plain, target: self, action: #selector(handleReminder))
         
         self.hideKeyboardWhenTappedAround()
     }
@@ -130,79 +133,28 @@ class NoteDetailController: UIViewController, UITextViewDelegate, UNUserNotifica
     }
     
     @objc func handleReminder() {
-        registerLocal()
-        scheduledLocal()
-    }
-    
-    func registerLocal() {
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
-            if granted {
-                print("Authorized Notifications")
-            } else {
-                print("NOT Authorized Notifications")
-            }
-        }
-    }
-    
-    func scheduledLocal() {
-        registerCategories()
-        
-        let center = UNUserNotificationCenter.current()
-//        center.removeAllPendingNotificationRequests()
-        
-        let content = UNMutableNotificationContent()
-        content.title = "Reminder"
-        content.body = self.writeNoteView.inputTextView.text
-        content.categoryIdentifier = "reminder"
-        content.userInfo = ["customData" : "stuff"]
-        content.sound = .default
-        content.badge = 1
-        
-        var dateComponets = DateComponents()
-        dateComponets.hour = 10
-        dateComponets.minute = 30
-//        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponets, repeats: false)
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        center.add(request)
-        print("added notification")
-        
-//        UIApplication.shared.applicationIconBadgeNumber = 0
-    }
-    
-    func registerCategories() {
-        let center = UNUserNotificationCenter.current()
-        center.delegate = self
-        
-        let show = UNNotificationAction(identifier: "show", title: "Tell me more...", options: .foreground)
-        let category = UNNotificationCategory(identifier: "reminder", actions: [show], intentIdentifiers: [])
-        
-        center.setNotificationCategories([category])
-    }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        let userInfo = response.notification.request.content.userInfo
-        
-        if let customData = userInfo["customData"] as? String {
-            print("Custom data received: \(customData)")
-            
-            switch response.actionIdentifier {
-            case UNNotificationDefaultActionIdentifier:
-                // the user swiped to unlock
-                print("Default identifier")
-
-            case "show":
-                // the user tapped our "show more info…" button
-                print("Show more information…")
-
-            default:
-                break
-            }
-        }
-        
-        completionHandler()
+//        let myDatePicker: UIDatePicker = UIDatePicker()
+//        myDatePicker.timeZone = NSTimeZone.local
+//        myDatePicker.frame = CGRect(x: 0, y: 15, width: 270, height: 200)
+//        let alertController = UIAlertController(title: "\n\n\n\n\n\n\n\n", message: nil, preferredStyle: UIAlertController.Style.alert)
+//        alertController.view.addSubview(myDatePicker)
+//        let selectAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in
+//            print("Selected Date: \(myDatePicker.date)")
+//        })
+//        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
+//        alertController.addAction(selectAction)
+//        alertController.addAction(cancelAction)
+//        present(alertController, animated: true, completion:{})
+//        let dateChooserAlert = UIAlertController(title: "Choose date...", message: nil, preferredStyle: .actionSheet)
+//        dateChooserAlert.view.addSubview(datePicker)
+//        dateChooserAlert.addAction(UIAlertAction(title: "Done", style: .cancel, handler: { action in
+//                // Your actions here if "Done" clicked...
+//            }))
+//        let height: NSLayoutConstraint = NSLayoutConstraint(item: dateChooserAlert.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.1, constant: 200)
+//        dateChooserAlert.view.addConstraint(height)
+//        dateChooserAlert.view.addConstraint(centerX)
+//        self.present(dateChooserAlert, animated: true, completion: nil)
+        navigationController?.pushViewController(ReminderController(), animated: true)
     }
     
     func updateContent(index: Int, newContent: String, newDate: Double){

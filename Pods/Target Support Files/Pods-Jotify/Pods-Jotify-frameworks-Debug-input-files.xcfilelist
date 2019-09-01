@@ -1,5 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-Jotify/Pods-Jotify-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Blueprints/Blueprints.framework
+${BUILT_PRODUCTS_DIR}/BottomPopup/BottomPopup.framework
 ${BUILT_PRODUCTS_DIR}/ChromaColorPicker/ChromaColorPicker.framework
 ${BUILT_PRODUCTS_DIR}/MultilineTextField/MultilineTextField.framework
 ${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework

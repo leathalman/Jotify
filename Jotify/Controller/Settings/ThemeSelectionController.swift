@@ -10,7 +10,7 @@ import UIKit
 
 class ThemeSelectionController: UITableViewController {
     
-    let sections: Array = ["Sort"]
+    let sections: Array = ["Color Palettes"]
     let palettes: Array = ["Default", "Sunset", "Kypool", "Celestial", "Apple Vibrant"]
     
     let settingsController = SettingsController()
@@ -143,16 +143,6 @@ class ThemeSelectionController: UITableViewController {
         
     }
     
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return ""
-            
-        default:
-            return ""
-        }
-    }
-    
     override func numberOfSections(in tableView: UITableView) -> Int{
         return sections.count
     }
@@ -167,6 +157,10 @@ class ThemeSelectionController: UITableViewController {
         } else {
             return 0
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return "Each theme has at least 8 colors which will be applied at random."
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

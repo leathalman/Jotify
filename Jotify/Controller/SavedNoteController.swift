@@ -299,11 +299,10 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             sortDescriptor = NSSortDescriptor(key: "content", ascending: true)
             
         } else if sortBy == "date" {
-            sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+            sortDescriptor = NSSortDescriptor(key: "modifiedDate", ascending: false)
             
         } else if sortBy == "color" {
             sortDescriptor = NSSortDescriptor(key: "color", ascending: false)
-            
         }
 
         fetchRequest.sortDescriptors = [sortDescriptor] as? [NSSortDescriptor]

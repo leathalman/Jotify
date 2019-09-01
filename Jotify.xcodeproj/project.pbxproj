@@ -39,6 +39,7 @@
 		F6969F5E22DA1AFD00C4E8FF /* AboutSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6969F5D22DA1AFD00C4E8FF /* AboutSettingsController.swift */; };
 		F6969F6022DA256F00C4E8FF /* AboutSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6969F5F22DA256F00C4E8FF /* AboutSettingsView.swift */; };
 		F69E5DC0231AE14800872345 /* ThemeSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E5DBF231AE14800872345 /* ThemeSelectionController.swift */; };
+		F69E5DC2231B120200872345 /* ReminderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E5DC1231B120200872345 /* ReminderController.swift */; };
 		F6B2083722DE22860098CF9F /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B2083622DE22860098CF9F /* Themes.swift */; };
 		F6CE723C22D5833E00544267 /* SortSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CE723B22D5833E00544267 /* SortSettingsController.swift */; };
 		F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */; };
@@ -82,6 +83,7 @@
 		F6969F5D22DA1AFD00C4E8FF /* AboutSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSettingsController.swift; sourceTree = "<group>"; };
 		F6969F5F22DA256F00C4E8FF /* AboutSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSettingsView.swift; sourceTree = "<group>"; };
 		F69E5DBF231AE14800872345 /* ThemeSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectionController.swift; sourceTree = "<group>"; };
+		F69E5DC1231B120200872345 /* ReminderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderController.swift; sourceTree = "<group>"; };
 		F6B2083622DE22860098CF9F /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
 		F6CE723B22D5833E00544267 /* SortSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortSettingsController.swift; sourceTree = "<group>"; };
 		F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteView.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 		F650E14F22BFFB12008D29AD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				F69E5DC1231B120200872345 /* ReminderController.swift */,
 				F644968522C16422009CC386 /* NoteDetailController.swift */,
 				F650E15022BFFB12008D29AD /* SavedNoteController.swift */,
 				F650E15322BFFB12008D29AD /* WriteNoteController.swift */,
@@ -336,6 +339,7 @@
 				F68D639322F7894700DEB4AA /* PrivacySettingsController.swift in Sources */,
 				F650E15D22BFFB19008D29AD /* Extensions.swift in Sources */,
 				F68AEB5F230CCF7C00000F20 /* JotifyProducts.swift in Sources */,
+				F69E5DC2231B120200872345 /* ReminderController.swift in Sources */,
 				F6070B8A22D50796005E4CF3 /* EmptyView.swift in Sources */,
 				F650E15622BFFB12008D29AD /* SettingsController.swift in Sources */,
 				F6CE723C22D5833E00544267 /* SortSettingsController.swift in Sources */,

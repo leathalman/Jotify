@@ -1,4 +1,5 @@
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Blueprints.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BottomPopup.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChromaColorPicker.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MultilineTextField.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pageboy.framework

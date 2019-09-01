@@ -162,6 +162,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Blueprints/Blueprints.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/BottomPopup/BottomPopup.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ChromaColorPicker/ChromaColorPicker.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MultilineTextField/MultilineTextField.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework"
@@ -171,6 +172,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Blueprints/Blueprints.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/BottomPopup/BottomPopup.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ChromaColorPicker/ChromaColorPicker.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MultilineTextField/MultilineTextField.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework"
