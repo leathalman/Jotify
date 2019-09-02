@@ -54,12 +54,22 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         fetchNotesFromCoreData()
+        migrateFromBeta()
     }
     
-    func migrateDataFromBeta() {
-        
+    func migrateFromBeta() {
+        switch (Config.appConfiguration) {
+        case .TestFlight:
+            migrateData()
+        case .AppStore:
+            return
+        case .Debug:
+            return
+        }
+    }
+    
+    func migrateData() {
         //call this after fetchNotesFromCoreData
-        
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
                 return
@@ -79,6 +89,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             note.setValue(date, forKey: "modifiedDate")
             note.setValue(date, forKey: "createdDate")
             note.setValue(dateString, forKey: "dateString")
+            note.setValue(false, forKey: "isReminder")
             print("migrated")
         }
         
@@ -353,7 +364,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
 
         let updateDate = Date(timeIntervalSinceReferenceDate: modifiedDate as! TimeInterval)
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.long //Set date style
+        dateFormatter.dateStyle = DateFormatter.Style.long
         dateFormatter.timeZone = .current
         let dateString = dateFormatter.string(from: updateDate)
 
@@ -425,7 +436,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         }))
         actionController.addAction(Action("Share note", style: .default, handler: { action in
             print("Share note")
-            //add function for sharing the text of notes
             self.shareNote(text: content)
             
         }))
@@ -435,21 +445,12 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     }
     
     func shareNote(text: String) {
-        UIGraphicsBeginImageContext(view.frame.size)
-        view.layer.render(in: UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
         let textToShare = text
+        let objectsToShare = [textToShare] as [Any]
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
         
-        if let myWebsite = URL(string: "http://itunes.apple.com/app/idXXXXXXXXX") {//Enter link to your app here
-            let objectsToShare = [textToShare, myWebsite, image ?? #imageLiteral(resourceName: "iconLarge")] as [Any]
-            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-            
-            activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
-            
-            self.present(activityVC, animated: true, completion: nil)
-        }
+        self.present(activityVC, animated: true, completion: nil)
     }
     
     func deleteNote(indexPath: IndexPath, int: Int) {
@@ -466,11 +467,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         notes.remove(at: int)
         
         appDelegate.saveContext()
-        
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-//            self.animateCells()
-        }
     }
     
     func feedbackOnPress() {

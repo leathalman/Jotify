@@ -25,6 +25,7 @@
 		F650E16F22C003A9008D29AD /* Jotify.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F650E13922BFF35A008D29AD /* Jotify.xcdatamodeld */; };
 		F650E17022C00AE3008D29AD /* SavedNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E15022BFFB12008D29AD /* SavedNoteController.swift */; };
 		F650E17122C00AE3008D29AD /* WriteNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E15322BFFB12008D29AD /* WriteNoteController.swift */; };
+		F65BD148231D89A300A06D2B /* AppConfiguration+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65BD147231D89A300A06D2B /* AppConfiguration+Helpers.swift */; };
 		F666D4B222CFED2D00DECE27 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */; };
 		F67B92DE22D2E083002C6985 /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B92DD22D2E083002C6985 /* SettingsSwitchCell.swift */; };
 		F67B92E022D2E785002C6985 /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B92DF22D2E785002C6985 /* ColorPickerController.swift */; };
@@ -67,6 +68,7 @@
 		F650E15B22BFFB19008D29AD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F650E16022BFFB20008D29AD /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		F650E16322BFFB20008D29AD /* SavedNoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedNoteCell.swift; sourceTree = "<group>"; };
+		F65BD147231D89A300A06D2B /* AppConfiguration+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppConfiguration+Helpers.swift"; sourceTree = "<group>"; };
 		F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 		F67B92DD22D2E083002C6985 /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
 		F67B92DF22D2E785002C6985 /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 		F650E15A22BFFB19008D29AD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F65BD147231D89A300A06D2B /* AppConfiguration+Helpers.swift */,
 				F650E15B22BFFB19008D29AD /* Extensions.swift */,
 				F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */,
 				F686D85122C9B10900C6F555 /* Colors+Handlers.swift */,
@@ -326,6 +329,7 @@
 				F68D639122F7890100DEB4AA /* AppearanceSettingsController.swift in Sources */,
 				F650E17122C00AE3008D29AD /* WriteNoteController.swift in Sources */,
 				F650E16F22C003A9008D29AD /* Jotify.xcdatamodeld in Sources */,
+				F65BD148231D89A300A06D2B /* AppConfiguration+Helpers.swift in Sources */,
 				F650E16D22C00381008D29AD /* AppDelegate.swift in Sources */,
 				F69E5DC0231AE14800872345 /* ThemeSelectionController.swift in Sources */,
 				F6969F5E22DA1AFD00C4E8FF /* AboutSettingsController.swift in Sources */,
@@ -491,7 +495,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -523,7 +527,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Jotify/Info.plist;

@@ -37,16 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             themes.setupDefaultMode()
         }
         
-        //TODO remove before production
-        UserDefaults.standard.set(false, forKey: "com.austinleath.Jotify.premium")
-        
-        let purchased = UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.premium")
-        
-        print(purchased)
-        //
-        
-//        UIApplication.shared.applicationIconBadgeNumber = 0
-        
         return true
     }
     
