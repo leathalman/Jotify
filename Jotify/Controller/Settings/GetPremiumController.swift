@@ -9,10 +9,13 @@
 import UIKit
 import StoreKit
 import BottomPopup
+import SAConfettiView
 
 class GetPremiumController: BottomPopupViewController {
     
     var products: [SKProduct] = []
+    
+    var rootViewController = UIViewController()
     
     public var screenWidth: CGFloat {
         return UIScreen.main.bounds.width
@@ -86,6 +89,10 @@ class GetPremiumController: BottomPopupViewController {
         
         let randomColor = randomColorFromTheme()
         setupView(color: randomColor)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handlePurchaseNotification(_:)),
+                                                      name: .IAPHelperPurchaseNotification,
+                                                      object: nil)
     }
     
     func setupView(color: UIColor) {
@@ -135,10 +142,36 @@ class GetPremiumController: BottomPopupViewController {
 
     }
     
+    @objc func handlePurchaseNotification(_ notification: Notification) {
+        print("Notification called")
+        purchasePremiumSuccess()
+    }
+    
     @objc func purchasePremium(sender: UIButton) {
+        purchasePremiumSuccess()
+
         guard let product = products.first else { return }
         JotifyProducts.store.buyProduct(product)
+    }
+    
+    func purchasePremiumSuccess() {
         dismiss(animated: true, completion: nil)
+        let alert = UIAlertController(title: "Thank you!", message: "I really appreciate your support of Jotify! Enjoy premium 😄", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Let's celebrate!", style: .cancel, handler: { (UIAlertAction) in
+            let confettiView = SAConfettiView(frame: UIScreen.main.bounds)
+           
+            //find a way to get confetti on the right view controller...
+            self.rootViewController.view.window?.addSubview(confettiView)
+            
+            confettiView.startConfetti()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10.5) {
+                confettiView.stopConfetti()
+            }
+        }))
+        
+        self.view.window?.rootViewController?.present(alert, animated: true)
     }
     
     @objc func handleCancel(sender: UIButton) {
@@ -152,8 +185,6 @@ class GetPremiumController: BottomPopupViewController {
             guard let self = self else { return }
             if success {
                 self.products = products!
-                
-                print(products?.count as Any)
             }
         }
     }

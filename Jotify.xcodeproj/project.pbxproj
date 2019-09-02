@@ -31,7 +31,6 @@
 		F686D84D22C9269D00C6F555 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F686D84C22C9269D00C6F555 /* PageViewController.swift */; };
 		F686D85222C9B10900C6F555 /* Colors+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F686D85122C9B10900C6F555 /* Colors+Handlers.swift */; };
 		F687FBDF2304EC0200713DDE /* GetPremiumController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F687FBDE2304EC0200713DDE /* GetPremiumController.swift */; };
-		F68AEB59230CCEBC00000F20 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68AEB58230CCEBC00000F20 /* ProductCell.swift */; };
 		F68AEB5F230CCF7C00000F20 /* JotifyProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68AEB5E230CCF7C00000F20 /* JotifyProducts.swift */; };
 		F68D639122F7890100DEB4AA /* AppearanceSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68D639022F7890100DEB4AA /* AppearanceSettingsController.swift */; };
 		F68D639322F7894700DEB4AA /* PrivacySettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68D639222F7894700DEB4AA /* PrivacySettingsController.swift */; };
@@ -40,6 +39,7 @@
 		F69E5DC0231AE14800872345 /* ThemeSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E5DBF231AE14800872345 /* ThemeSelectionController.swift */; };
 		F69E5DC2231B120200872345 /* ReminderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E5DC1231B120200872345 /* ReminderController.swift */; };
 		F6B2083722DE22860098CF9F /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B2083622DE22860098CF9F /* Themes.swift */; };
+		F6C32AB2231CD2DC00A56AED /* UIResponder+Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C32AB1231CD2DC00A56AED /* UIResponder+Scene.swift */; };
 		F6CE723C22D5833E00544267 /* SortSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CE723B22D5833E00544267 /* SortSettingsController.swift */; };
 		F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */; };
 /* End PBXBuildFile section */
@@ -74,7 +74,6 @@
 		F686D84C22C9269D00C6F555 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		F686D85122C9B10900C6F555 /* Colors+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+Handlers.swift"; sourceTree = "<group>"; };
 		F687FBDE2304EC0200713DDE /* GetPremiumController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPremiumController.swift; sourceTree = "<group>"; };
-		F68AEB58230CCEBC00000F20 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		F68AEB5E230CCF7C00000F20 /* JotifyProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JotifyProducts.swift; sourceTree = "<group>"; };
 		F68D639022F7890100DEB4AA /* AppearanceSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsController.swift; sourceTree = "<group>"; };
 		F68D639222F7894700DEB4AA /* PrivacySettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySettingsController.swift; sourceTree = "<group>"; };
@@ -83,6 +82,7 @@
 		F69E5DBF231AE14800872345 /* ThemeSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectionController.swift; sourceTree = "<group>"; };
 		F69E5DC1231B120200872345 /* ReminderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderController.swift; sourceTree = "<group>"; };
 		F6B2083622DE22860098CF9F /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
+		F6C32AB1231CD2DC00A56AED /* UIResponder+Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Scene.swift"; sourceTree = "<group>"; };
 		F6CE723B22D5833E00544267 /* SortSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortSettingsController.swift; sourceTree = "<group>"; };
 		F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -192,6 +192,7 @@
 				F6B2083622DE22860098CF9F /* Themes.swift */,
 				F61C1CAC2304A91000B944CD /* IAPHandler.swift */,
 				F68AEB5E230CCF7C00000F20 /* JotifyProducts.swift */,
+				F6C32AB1231CD2DC00A56AED /* UIResponder+Scene.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -199,7 +200,6 @@
 		F650E15F22BFFB20008D29AD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F68AEB58230CCEBC00000F20 /* ProductCell.swift */,
 				F650E16022BFFB20008D29AD /* SettingsCell.swift */,
 				F67B92DD22D2E083002C6985 /* SettingsSwitchCell.swift */,
 				F650E16322BFFB20008D29AD /* SavedNoteCell.swift */,
@@ -330,11 +330,11 @@
 				F650E17122C00AE3008D29AD /* WriteNoteController.swift in Sources */,
 				F650E16F22C003A9008D29AD /* Jotify.xcdatamodeld in Sources */,
 				F650E16D22C00381008D29AD /* AppDelegate.swift in Sources */,
-				F68AEB59230CCEBC00000F20 /* ProductCell.swift in Sources */,
 				F69E5DC0231AE14800872345 /* ThemeSelectionController.swift in Sources */,
 				F6969F5E22DA1AFD00C4E8FF /* AboutSettingsController.swift in Sources */,
 				F68D639322F7894700DEB4AA /* PrivacySettingsController.swift in Sources */,
 				F650E15D22BFFB19008D29AD /* Extensions.swift in Sources */,
+				F6C32AB2231CD2DC00A56AED /* UIResponder+Scene.swift in Sources */,
 				F68AEB5F230CCF7C00000F20 /* JotifyProducts.swift in Sources */,
 				F69E5DC2231B120200872345 /* ReminderController.swift in Sources */,
 				F6070B8A22D50796005E4CF3 /* EmptyView.swift in Sources */,
