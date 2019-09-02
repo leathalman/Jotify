@@ -9,7 +9,6 @@
 import UIKit
 import StoreKit
 import BottomPopup
-import SAConfettiView
 
 class GetPremiumController: BottomPopupViewController {
     
@@ -58,7 +57,7 @@ class GetPremiumController: BottomPopupViewController {
     lazy var purchaseButton: UIButton = {
         let button = UIButton()
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        button.setTitle("Purchase", for: .normal)
+        button.setTitle("Buy $1.99", for: .normal)
         button.addTarget(self, action: #selector(purchasePremium(sender:)), for: .touchUpInside)
         button.backgroundColor = UIColor.black
         button.layer.cornerRadius = 5
@@ -90,9 +89,7 @@ class GetPremiumController: BottomPopupViewController {
         let randomColor = randomColorFromTheme()
         setupView(color: randomColor)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(handlePurchaseNotification(_:)),
-                                                      name: .IAPHelperPurchaseNotification,
-                                                      object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handlePurchaseNotification(_:)), name: .IAPHelperPurchaseNotification, object: nil)
     }
     
     func setupView(color: UIColor) {
@@ -112,33 +109,18 @@ class GetPremiumController: BottomPopupViewController {
         detailLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         detailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
         detailLabel.widthAnchor.constraint(equalToConstant: screenWidth / 1.15).isActive = true
-          
-        //make better constraints for all devices
-        if UIDevice.modelName == "iPhone SE" {
-            purchaseButton.heightAnchor.constraint(equalToConstant: screenHeight / 7.5).isActive = true
-            purchaseButton.widthAnchor.constraint(equalToConstant: screenWidth / 2.5 - 10).isActive = true
-            purchaseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 80).isActive = true
-            purchaseButton.topAnchor.constraint(equalTo: detailLabel.bottomAnchor, constant: 15).isActive = true
-            
-            cancelButton.heightAnchor.constraint(equalToConstant: screenHeight / 7.5).isActive = true
-            cancelButton.widthAnchor.constraint(equalToConstant: screenWidth / 2.5 - 10).isActive = true
-            cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -80).isActive = true
-            cancelButton.topAnchor.constraint(equalTo: detailLabel.bottomAnchor, constant: 15).isActive = true
-            
-            print("OLD")
-        } else {
-            purchaseButton.heightAnchor.constraint(equalToConstant: screenHeight / 11).isActive = true
-            purchaseButton.widthAnchor.constraint(equalToConstant: screenWidth / 3).isActive = true
-            purchaseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 100).isActive = true
-            purchaseButton.topAnchor.constraint(equalTo: detailLabel.bottomAnchor, constant: 15).isActive = true
-            
-            cancelButton.heightAnchor.constraint(equalToConstant: screenHeight / 11).isActive = true
-            cancelButton.widthAnchor.constraint(equalToConstant: screenWidth / 3).isActive = true
-            cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100).isActive = true
-            cancelButton.topAnchor.constraint(equalTo: detailLabel.bottomAnchor, constant: 15).isActive = true
-            
-            print("NEW")
-        }
+        
+        purchaseButton.heightAnchor.constraint(equalToConstant: screenHeight / 11).isActive = true
+        purchaseButton.widthAnchor.constraint(equalToConstant: screenWidth - 30).isActive = true
+        purchaseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        purchaseButton.topAnchor.constraint(equalTo: detailLabel.bottomAnchor, constant: 15).isActive = true
+        purchaseButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -15).isActive = true
+        
+        cancelButton.heightAnchor.constraint(equalToConstant: screenHeight / 11).isActive = true
+        cancelButton.widthAnchor.constraint(equalToConstant: screenWidth - 30).isActive = true
+        cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        cancelButton.topAnchor.constraint(equalTo: purchaseButton.bottomAnchor, constant: 15).isActive = true
+        cancelButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
 
     }
     
@@ -148,27 +130,16 @@ class GetPremiumController: BottomPopupViewController {
     }
     
     @objc func purchasePremium(sender: UIButton) {
-        purchasePremiumSuccess()
-
         guard let product = products.first else { return }
         JotifyProducts.store.buyProduct(product)
     }
     
     func purchasePremiumSuccess() {
         dismiss(animated: true, completion: nil)
-        let alert = UIAlertController(title: "Thank you!", message: "I really appreciate your support of Jotify! Enjoy premium 😄", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Thank you for supporting Jotify!", message: "You're awesome. Enjoy premium 😄", preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "Let's celebrate!", style: .cancel, handler: { (UIAlertAction) in
-            let confettiView = SAConfettiView(frame: UIScreen.main.bounds)
-           
-            //find a way to get confetti on the right view controller...
-            self.rootViewController.view.window?.addSubview(confettiView)
+        alert.addAction(UIAlertAction(title: "Yay!", style: .cancel, handler: { (UIAlertAction) in
             
-            confettiView.startConfetti()
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 10.5) {
-                confettiView.stopConfetti()
-            }
         }))
         
         self.view.window?.rootViewController?.present(alert, animated: true)
@@ -190,7 +161,11 @@ class GetPremiumController: BottomPopupViewController {
     }
     
     override func getPopupHeight() -> CGFloat {
-        return 280
+        if screenHeight < 600 {
+            return screenHeight / 1.5
+        } else {
+            return screenHeight / 2
+        }
     }
     
     func randomColorFromTheme() -> UIColor {

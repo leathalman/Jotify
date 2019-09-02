@@ -116,9 +116,7 @@ class ThemeSelectionController: UITableViewController {
             }
             
         } else {
-            let premiumController = GetPremiumController()
-            premiumController.rootViewController = ThemeSelectionController()
-            present(premiumController, animated: true, completion: nil)
+            present(GetPremiumController(), animated: true, completion: nil)
         }
     }
     

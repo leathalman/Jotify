@@ -45,6 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(purchased)
         //
         
+//        UIApplication.shared.applicationIconBadgeNumber = 0
+        
         return true
     }
     
