@@ -467,6 +467,10 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         notes.remove(at: int)
         
         appDelegate.saveContext()
+        
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
     
     func feedbackOnPress() {

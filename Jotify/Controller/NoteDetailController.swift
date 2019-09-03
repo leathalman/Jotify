@@ -36,7 +36,6 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationBarHeight = self.navigationController!.navigationBar.frame.height
         
         setupNotifications()
         setupView()
@@ -121,10 +120,6 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         cancel = cancel?.withRenderingMode(.alwaysOriginal)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: cancel, style:.plain, target: self, action: #selector(handleCancel))
         
-//        var alarm = UIImage(named: "alarm")
-//        alarm = alarm?.withRenderingMode(.alwaysOriginal)
-//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: alarm, style: .plain, target: self, action: #selector(handleReminder))
-        
         self.hideKeyboardWhenTappedAround()
     }
     
@@ -132,33 +127,6 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         let savedNoteController = SavedNoteController()
         savedNoteController.feedbackOnPress()
         navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func handleReminder() {
-//        let myDatePicker: UIDatePicker = UIDatePicker()
-//        myDatePicker.timeZone = NSTimeZone.local
-//        myDatePicker.frame = CGRect(x: 0, y: 15, width: 270, height: 200)
-//        let alertController = UIAlertController(title: "\n\n\n\n\n\n\n\n", message: nil, preferredStyle: UIAlertController.Style.alert)
-//        alertController.view.addSubview(myDatePicker)
-//        let selectAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in
-//            print("Selected Date: \(myDatePicker.date)")
-//        })
-//        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
-//        alertController.addAction(selectAction)
-//        alertController.addAction(cancelAction)
-//        present(alertController, animated: true, completion:{})
-//        let dateChooserAlert = UIAlertController(title: "Choose date...", message: nil, preferredStyle: .actionSheet)
-//        dateChooserAlert.view.addSubview(datePicker)
-//        dateChooserAlert.addAction(UIAlertAction(title: "Done", style: .cancel, handler: { action in
-//                // Your actions here if "Done" clicked...
-//            }))
-//        let height: NSLayoutConstraint = NSLayoutConstraint(item: dateChooserAlert.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.1, constant: 200)
-//        dateChooserAlert.view.addConstraint(height)
-//        dateChooserAlert.view.addConstraint(centerX)
-//        self.present(dateChooserAlert, animated: true, completion: nil)
-        let savedNoteController = SavedNoteController()
-        savedNoteController.feedbackOnPress()
-        navigationController?.pushViewController(ReminderController(), animated: true)
     }
     
     func updateContent(index: Int, newContent: String, newDate: Double){
@@ -191,11 +159,19 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         let keyboardScreenEndFrame = keyboardValue.cgRectValue
         let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
         
+        let navigationBarHeight = self.navigationController!.navigationBar.frame.height
+        
         if notification.name == UIResponder.keyboardWillHideNotification {
             writeNoteView.inputTextView.contentInset = .zero
+            print(writeNoteView.inputTextView.contentInset)
             
         } else {
-            writeNoteView.inputTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height + navigationBarHeight - 10, right: 0)
+            print("Keyboard: \(keyboardViewEndFrame.height)")
+            
+            print("Navigation Bar: \(navigationBarHeight)")
+            
+            writeNoteView.inputTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height + navigationBarHeight + 42, right: 0)
+            print(writeNoteView.inputTextView.contentInset)
         }
         
         writeNoteView.inputTextView.scrollIndicatorInsets = writeNoteView.inputTextView.contentInset
@@ -203,6 +179,5 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         let selectedRange = writeNoteView.inputTextView.selectedRange
         writeNoteView.inputTextView.scrollRangeToVisible(selectedRange)
     }
-    
     
 }
