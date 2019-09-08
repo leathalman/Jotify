@@ -51,9 +51,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if UserDefaults.standard.bool (forKey: "useBiometrics") == true {
             
             let privacyController = PrivacySettingsController()
+            privacyController.setupBiometricsView(window: window!)
+            privacyController.unlockButton.addTarget(self, action: #selector(unlockPressed(sender:)), for: .touchUpInside)
             privacyController.authenticateUserWithBioMetrics(window: window!)
         }
 
+    }
+    
+    @objc func unlockPressed(sender: UIButton) {
+        let privacyController = PrivacySettingsController()
+        privacyController.authenticateUserWithBioMetrics(window: window!)
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {

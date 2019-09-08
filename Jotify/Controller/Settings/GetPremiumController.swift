@@ -113,13 +113,11 @@ class GetPremiumController: BottomPopupViewController {
         purchaseButton.heightAnchor.constraint(equalToConstant: screenHeight / 11).isActive = true
         purchaseButton.widthAnchor.constraint(equalToConstant: screenWidth - 30).isActive = true
         purchaseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        purchaseButton.topAnchor.constraint(equalTo: detailLabel.bottomAnchor, constant: 15).isActive = true
         purchaseButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -15).isActive = true
         
         cancelButton.heightAnchor.constraint(equalToConstant: screenHeight / 11).isActive = true
         cancelButton.widthAnchor.constraint(equalToConstant: screenWidth - 30).isActive = true
         cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        cancelButton.topAnchor.constraint(equalTo: purchaseButton.bottomAnchor, constant: 15).isActive = true
         cancelButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
 
     }

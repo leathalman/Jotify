@@ -16,8 +16,21 @@ class PrivacySettingsController: UITableViewController {
     let biometrics: Array = ["Use Touch ID or Face ID"]
     
     let settingsController = SettingsController()
+    let blurEffectView = UIVisualEffectView()
     
     let defaults = UserDefaults.standard
+    
+    let unlockButton: UIButton = {
+        let button = UIButton()
+        button.frame = CGRect(x: 0, y: 0, width: 150, height: 50)
+        button.setTitle("Unlock Jotify", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.isUserInteractionEnabled = true
+        button.layer.cornerRadius = 5
+        button.tag = 101
+        
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,34 +54,64 @@ class PrivacySettingsController: UITableViewController {
         }
     }
     
-    func authenticateUserWithBioMetrics(window: UIWindow) {
-        
+    func setupBiometricsView(window: UIWindow) {
         let blurEffect = UIBlurEffect(style: .dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = window.frame
-        blurEffectView.tag = 9065
-        blurEffectView.alpha = 0.925
+         blurEffectView.effect = blurEffect
+         blurEffectView.frame = window.frame
+         blurEffectView.alpha = 0.925
         
-        window.addSubview(blurEffectView)
-        
+         unlockButton.center = window.center
+                 
+         if defaults.bool(forKey: "useRandomColor") == false {
+             unlockButton.backgroundColor = defaults.color(forKey: "staticNoteColor") ?? UIColor.white
+             
+         } else {
+             
+             if isSelectedColorFromDefaults(key: "default") == true {
+                 unlockButton.backgroundColor = Colors.defaultColors.randomElement() ?? UIColor.blue2
+                 
+             } else if isSelectedColorFromDefaults(key: "sunset") == true {
+                 unlockButton.backgroundColor = Colors.sunsetColors.randomElement() ?? UIColor.blue2
+                 
+             } else if isSelectedColorFromDefaults(key: "kypool") == true {
+                 unlockButton.backgroundColor = Colors.kypoolColors.randomElement() ?? UIColor.blue2
+                 
+             } else if isSelectedColorFromDefaults(key: "celestial") == true {
+                 unlockButton.backgroundColor = Colors.celestialColors.randomElement() ?? UIColor.blue2
+                 
+             } else if isSelectedColorFromDefaults(key: "appleVibrant") == true {
+                 unlockButton.backgroundColor = Colors.appleVibrantColors.randomElement() ?? UIColor.blue2
+             }
+        }
+         
+         blurEffectView.tag = 100
+         
+         window.addSubview(blurEffectView)
+         window.addSubview(unlockButton)
+    }
+    
+    func authenticateUserWithBioMetrics(window: UIWindow) {
         let context = LAContext()
         var error: NSError?
-        
+
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             let reason = "Unlock Jotify to access your notes."
-            
+
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
-                
+
                 DispatchQueue.main.async {
                     if success {
                         print("success")
-                        
+
                         UIView.animate(withDuration: 0.2, animations: {
-                            window.viewWithTag(9065)?.alpha = 0
+                            window.viewWithTag(100)?.alpha = 0
+                            window.viewWithTag(101)?.alpha = 0
                         }) { _ in
-                            window.viewWithTag(9065)?.removeFromSuperview()
+                            self.blurEffectView.removeFromSuperview()
+                            window.viewWithTag(100)?.removeFromSuperview()
+                            window.viewWithTag(101)?.removeFromSuperview()
                         }
-                        
+
                     } else {
                         print("error")
                     }
@@ -80,7 +123,8 @@ class PrivacySettingsController: UITableViewController {
     }
     
     func removeBlurView(window: UIWindow) {
-        window.viewWithTag(9065)?.removeFromSuperview()
+        window.viewWithTag(100)?.removeFromSuperview()
+        window.viewWithTag(101)?.removeFromSuperview()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -160,6 +204,16 @@ class PrivacySettingsController: UITableViewController {
         } else {
             present(GetPremiumController(), animated: true, completion: nil)
             sender.setOn(false, animated: true)
+        }
+    }
+    
+    func isSelectedColorFromDefaults(key: String) -> Bool {
+        let colorTheme = defaults.string(forKey: "noteColorTheme")
+        
+        if colorTheme == key {
+            return true
+        } else {
+            return false
         }
     }
     

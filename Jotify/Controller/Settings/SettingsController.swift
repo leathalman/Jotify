@@ -23,6 +23,8 @@ class SettingsController: UITableViewController {
         super.viewDidLoad()
         
         navigationItem.title = "Settings"
+        
+        tableView.contentInset = .zero
                 
         tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
