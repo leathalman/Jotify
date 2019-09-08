@@ -40,7 +40,7 @@ class SettingsController: UITableViewController {
         if darkModeEnabled() == true {
             view.backgroundColor = InterfaceColors.viewBackgroundColor
             
-            tableView.separatorColor = InterfaceColors.separatorColor
+            tableView.separatorColor = .clear
             
             themes.setupDarkMode()
             self.tableView.reloadData()
@@ -50,7 +50,7 @@ class SettingsController: UITableViewController {
         } else if darkModeEnabled() == false {
             view.backgroundColor = InterfaceColors.viewBackgroundColor
             
-            tableView.separatorColor = nil
+            tableView.separatorColor = .clear
             
             themes.setupDefaultMode()
             self.tableView.reloadData()
@@ -206,6 +206,8 @@ class SettingsController: UITableViewController {
                 
                 cell.accessoryType = .disclosureIndicator
                 
+                cell.applyConfig(for: indexPath, numberOfCellsInSection: tableView.numberOfRows(inSection: indexPath.section))
+                
                 return cell
                 
             case 1:
@@ -216,6 +218,8 @@ class SettingsController: UITableViewController {
                 setupDynamicCells(cell: cell, enableArrow: true)
                 
                 cell.accessoryType = .disclosureIndicator
+                
+                cell.applyConfig(for: indexPath, numberOfCellsInSection: tableView.numberOfRows(inSection: indexPath.section))
                 
                 return cell
                 
@@ -228,6 +232,8 @@ class SettingsController: UITableViewController {
                 
                 cell.accessoryType = .disclosureIndicator
                 
+                cell.applyConfig(for: indexPath, numberOfCellsInSection: tableView.numberOfRows(inSection: indexPath.section))
+                
                 return cell
                 
             case 3:
@@ -238,6 +244,8 @@ class SettingsController: UITableViewController {
                 setupDynamicCells(cell: cell, enableArrow: true)
                 
                 cell.accessoryType = .disclosureIndicator
+                
+                cell.applyConfig(for: indexPath, numberOfCellsInSection: tableView.numberOfRows(inSection: indexPath.section))
                 
                 return cell
                 
@@ -250,12 +258,15 @@ class SettingsController: UITableViewController {
                 
                 cell.accessoryType = .disclosureIndicator
                 
+                cell.applyConfig(for: indexPath, numberOfCellsInSection: tableView.numberOfRows(inSection: indexPath.section))
+                
                 return cell
             }
             
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
             cell.textLabel?.text = "\(advanced[indexPath.row])"
+            cell.applyConfig(for: indexPath, numberOfCellsInSection: tableView.numberOfRows(inSection: indexPath.section))
             
             switch indexPath.row {
             case 0:

@@ -17,7 +17,6 @@
 		F650E13D22BFF35C008D29AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F650E13C22BFF35C008D29AD /* Assets.xcassets */; };
 		F650E14022BFF35C008D29AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F650E13E22BFF35C008D29AD /* LaunchScreen.storyboard */; };
 		F650E15622BFFB12008D29AD /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E15122BFFB12008D29AD /* SettingsController.swift */; };
-		F650E15D22BFFB19008D29AD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E15B22BFFB19008D29AD /* Extensions.swift */; };
 		F650E16422BFFB20008D29AD /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E16022BFFB20008D29AD /* SettingsCell.swift */; };
 		F650E16722BFFB20008D29AD /* SavedNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E16322BFFB20008D29AD /* SavedNoteCell.swift */; };
 		F650E16A22C001A8008D29AD /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F650E14922BFF36D008D29AD /* CloudKit.framework */; };
@@ -26,6 +25,11 @@
 		F650E17022C00AE3008D29AD /* SavedNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E15022BFFB12008D29AD /* SavedNoteController.swift */; };
 		F650E17122C00AE3008D29AD /* WriteNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E15322BFFB12008D29AD /* WriteNoteController.swift */; };
 		F65BD148231D89A300A06D2B /* AppConfiguration+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65BD147231D89A300A06D2B /* AppConfiguration+Helpers.swift */; };
+		F65E479B2324B0CE00FCAEF3 /* UITableViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65E479A2324B0CE00FCAEF3 /* UITableViewCell+Extensions.swift */; };
+		F65E479D2324B10500FCAEF3 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65E479C2324B10500FCAEF3 /* UIViewController+Extensions.swift */; };
+		F65E479F2324B12A00FCAEF3 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65E479E2324B12A00FCAEF3 /* UserDefaults+Extensions.swift */; };
+		F65E47A12324B15F00FCAEF3 /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65E47A02324B15F00FCAEF3 /* CALayer+Extensions.swift */; };
+		F65E47A42324B20200FCAEF3 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65E47A32324B20200FCAEF3 /* UIView+Extensions.swift */; };
 		F666D4B222CFED2D00DECE27 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */; };
 		F67B92DE22D2E083002C6985 /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B92DD22D2E083002C6985 /* SettingsSwitchCell.swift */; };
 		F67B92E022D2E785002C6985 /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B92DF22D2E785002C6985 /* ColorPickerController.swift */; };
@@ -65,10 +69,14 @@
 		F650E15022BFFB12008D29AD /* SavedNoteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedNoteController.swift; sourceTree = "<group>"; };
 		F650E15122BFFB12008D29AD /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		F650E15322BFFB12008D29AD /* WriteNoteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteNoteController.swift; sourceTree = "<group>"; };
-		F650E15B22BFFB19008D29AD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F650E16022BFFB20008D29AD /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		F650E16322BFFB20008D29AD /* SavedNoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedNoteCell.swift; sourceTree = "<group>"; };
 		F65BD147231D89A300A06D2B /* AppConfiguration+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppConfiguration+Helpers.swift"; sourceTree = "<group>"; };
+		F65E479A2324B0CE00FCAEF3 /* UITableViewCell+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extensions.swift"; sourceTree = "<group>"; };
+		F65E479C2324B10500FCAEF3 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		F65E479E2324B12A00FCAEF3 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
+		F65E47A02324B15F00FCAEF3 /* CALayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
+		F65E47A32324B20200FCAEF3 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 		F67B92DD22D2E083002C6985 /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
 		F67B92DF22D2E785002C6985 /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
@@ -186,9 +194,8 @@
 		F650E15A22BFFB19008D29AD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F65E47A22324B17500FCAEF3 /* Extensions */,
 				F65BD147231D89A300A06D2B /* AppConfiguration+Helpers.swift */,
-				F650E15B22BFFB19008D29AD /* Extensions.swift */,
-				F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */,
 				F686D85122C9B10900C6F555 /* Colors+Handlers.swift */,
 				F6B2083622DE22860098CF9F /* Themes.swift */,
 				F61C1CAC2304A91000B944CD /* IAPHandler.swift */,
@@ -209,6 +216,19 @@
 				F63A0C7822DE031E00B8A480 /* VerticalAlignLabel.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		F65E47A22324B17500FCAEF3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F65E479A2324B0CE00FCAEF3 /* UITableViewCell+Extensions.swift */,
+				F65E47A32324B20200FCAEF3 /* UIView+Extensions.swift */,
+				F65E47A02324B15F00FCAEF3 /* CALayer+Extensions.swift */,
+				F65E479E2324B12A00FCAEF3 /* UserDefaults+Extensions.swift */,
+				F65E479C2324B10500FCAEF3 /* UIViewController+Extensions.swift */,
+				F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,11 +350,13 @@
 				F650E17122C00AE3008D29AD /* WriteNoteController.swift in Sources */,
 				F650E16F22C003A9008D29AD /* Jotify.xcdatamodeld in Sources */,
 				F65BD148231D89A300A06D2B /* AppConfiguration+Helpers.swift in Sources */,
+				F65E479B2324B0CE00FCAEF3 /* UITableViewCell+Extensions.swift in Sources */,
+				F65E47A42324B20200FCAEF3 /* UIView+Extensions.swift in Sources */,
 				F650E16D22C00381008D29AD /* AppDelegate.swift in Sources */,
 				F69E5DC0231AE14800872345 /* ThemeSelectionController.swift in Sources */,
 				F6969F5E22DA1AFD00C4E8FF /* AboutSettingsController.swift in Sources */,
 				F68D639322F7894700DEB4AA /* PrivacySettingsController.swift in Sources */,
-				F650E15D22BFFB19008D29AD /* Extensions.swift in Sources */,
+				F65E47A12324B15F00FCAEF3 /* CALayer+Extensions.swift in Sources */,
 				F68AEB5F230CCF7C00000F20 /* JotifyProducts.swift in Sources */,
 				F69E5DC2231B120200872345 /* ReminderController.swift in Sources */,
 				F6070B8A22D50796005E4CF3 /* EmptyView.swift in Sources */,
@@ -343,6 +365,7 @@
 				F67B92DE22D2E083002C6985 /* SettingsSwitchCell.swift in Sources */,
 				F650E16722BFFB20008D29AD /* SavedNoteCell.swift in Sources */,
 				F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */,
+				F65E479F2324B12A00FCAEF3 /* UserDefaults+Extensions.swift in Sources */,
 				F6B2083722DE22860098CF9F /* Themes.swift in Sources */,
 				F6969F6022DA256F00C4E8FF /* AboutSettingsView.swift in Sources */,
 				F666D4B222CFED2D00DECE27 /* UIDevice+Extensions.swift in Sources */,
@@ -352,6 +375,7 @@
 				F686D85222C9B10900C6F555 /* Colors+Handlers.swift in Sources */,
 				F67B92E022D2E785002C6985 /* ColorPickerController.swift in Sources */,
 				F61C1CAD2304A91000B944CD /* IAPHandler.swift in Sources */,
+				F65E479D2324B10500FCAEF3 /* UIViewController+Extensions.swift in Sources */,
 				F687FBDF2304EC0200713DDE /* GetPremiumController.swift in Sources */,
 				F686D84D22C9269D00C6F555 /* PageViewController.swift in Sources */,
 				F650E16422BFFB20008D29AD /* SettingsCell.swift in Sources */,

@@ -102,14 +102,12 @@ class PrivacySettingsController: UITableViewController {
                 DispatchQueue.main.async {
                     if success {
                         print("success")
+                        window.viewWithTag(101)?.removeFromSuperview()
 
                         UIView.animate(withDuration: 0.2, animations: {
                             window.viewWithTag(100)?.alpha = 0
-                            window.viewWithTag(101)?.alpha = 0
                         }) { _ in
                             self.blurEffectView.removeFromSuperview()
-                            window.viewWithTag(100)?.removeFromSuperview()
-                            window.viewWithTag(101)?.removeFromSuperview()
                         }
 
                     } else {
