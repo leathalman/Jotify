@@ -23,9 +23,7 @@ class SettingsController: UITableViewController {
         super.viewDidLoad()
         
         navigationItem.title = "Settings"
-        
-        tableView.contentInset = UIEdgeInsets(top: -36, left: 0, bottom: 0, right: 0)
-        
+                
         tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
     }

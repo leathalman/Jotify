@@ -37,6 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             themes.setupDefaultMode()
         }
         
+        UserDefaults.standard.set(true, forKey: "com.austinleath.Jotify.premium")
+        
         return true
     }
     

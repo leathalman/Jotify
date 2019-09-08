@@ -42,7 +42,6 @@ class EmptyView: UIView {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.backgroundColor = .white
         label.textAlignment = .center
         label.text = "You haven't saved any notes!"
         label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -52,7 +51,6 @@ class EmptyView: UIView {
     
     lazy var descriptionLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.backgroundColor = .white
         label.numberOfLines = 0
         label.textAlignment = .center
         label.text = "Swipe right to write a new note."
@@ -74,8 +72,6 @@ class EmptyView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        backgroundColor = .white
         
         addSubview(containerView)
         

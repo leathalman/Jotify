@@ -56,6 +56,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         writeNoteView.inputTextView.delegate = self
         writeNoteView.inputTextView.frame = CGRect(x: 0, y: 100, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
         writeNoteView.inputTextView.tintColor = .white
+        writeNoteView.inputTextView.isScrollEnabled = true
     }
     
     func setupPlaceholder() {
@@ -100,7 +101,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
             writeNoteView.inputTextView.contentInset = .zero
             writeNoteView.inputTextView.frame = CGRect(x: 0, y: 100, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
         } else {
-            writeNoteView.inputTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height + 60, right: 0)
+            writeNoteView.inputTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height + 42, right: 0)
             writeNoteView.inputTextView.frame = CGRect(x: 0, y: 40, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
         }
         

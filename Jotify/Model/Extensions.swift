@@ -43,7 +43,6 @@ extension UserDefaults {
             print("color error \(error.localizedDescription)")
             return nil
         }
-        
     }
     
     func set(_ value: UIColor?, forKey key: String) {
@@ -55,18 +54,5 @@ extension UserDefaults {
         } catch let error {
             print("error color key data not saved \(error.localizedDescription)")
         }
-        
-    }
-}
-
-extension UICollectionView {
-    
-    func setEmptyView() {
-        
-        self.backgroundView = EmptyView()
-    }
-    
-    func restore() {
-        self.backgroundView = nil
     }
 }

@@ -21,6 +21,8 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     var firstLaunch: Bool = true
     var pressed: Int = 0
     
+    let emptyView = EmptyView()
+    
     let searchController = UISearchController(searchResultsController: nil)
     let loadingAnimations = [AnimationType.from(direction: .top, offset: 30.0)]
     
@@ -36,7 +38,10 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupSearchBar()
+        
+        if notes.count != 0 {
+            setupSearchBar()
+        }
         
         if firstLaunch == true {
             fetchNotesFromCoreData()
@@ -44,6 +49,12 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         }
 
         setupDynamicViewElements()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        navigationItem.searchController = nil
+
     }
 
     override func viewDidLoad() {
@@ -54,50 +65,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         fetchNotesFromCoreData()
-        migrateFromBeta()
-    }
-    
-    func migrateFromBeta() {
-        switch (Config.appConfiguration) {
-        case .TestFlight:
-            migrateData()
-        case .AppStore:
-            return
-        case .Debug:
-            return
-        }
-    }
-    
-    func migrateData() {
-        //call this after fetchNotesFromCoreData
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
-        for note in notes {
-            let date = note.value(forKey: "date")
-            
-            let updateDate = Date(timeIntervalSinceReferenceDate: date as! TimeInterval)
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = DateFormatter.Style.long //Set date style
-            dateFormatter.timeZone = .current
-            let dateString = dateFormatter.string(from: updateDate)
-            
-            note.setValue(date, forKey: "modifiedDate")
-            note.setValue(date, forKey: "createdDate")
-            note.setValue(dateString, forKey: "dateString")
-            note.setValue(false, forKey: "isReminder")
-            print("migrated")
-        }
-        
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
     }
 
     func setupView() {
@@ -133,6 +100,11 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             searchController.searchBar.barTintColor = InterfaceColors.searchBarColor
             searchController.searchBar.backgroundImage = UIImage()
             
+            emptyView.descriptionLabel.backgroundColor = InterfaceColors.viewBackgroundColor
+            emptyView.descriptionLabel.textColor = .white
+            emptyView.titleLabel.backgroundColor = InterfaceColors.viewBackgroundColor
+            emptyView.titleLabel.textColor = .white
+            
             UIApplication.shared.windows.first?.backgroundColor = InterfaceColors.viewBackgroundColor
 
             setupDarkPersistentNavigationBar()
@@ -140,6 +112,11 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         } else {
             searchController.searchBar.barTintColor = InterfaceColors.searchBarColor
             searchController.searchBar.backgroundImage = nil
+            
+            emptyView.descriptionLabel.backgroundColor = InterfaceColors.viewBackgroundColor
+            emptyView.descriptionLabel.textColor = .black
+            emptyView.titleLabel.backgroundColor = InterfaceColors.viewBackgroundColor
+            emptyView.titleLabel.textColor = .black
             
             UIApplication.shared.windows.first?.backgroundColor = InterfaceColors.viewBackgroundColor
 
@@ -420,7 +397,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                 
                 alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (UIAlertAction) in
                     self.deleteNote(indexPath: indexPath ?? [0, 0], int: rowNumber)
-                    
                 }))
                 
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -428,10 +404,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                 
             } else if self.defaults.bool(forKey: "showAlertOnDelete") == false {
                 self.deleteNote(indexPath: indexPath ?? [0, 0], int: rowNumber)
-
             }
-            
-            
             
         }))
         actionController.addAction(Action("Share note", style: .default, handler: { action in
@@ -488,9 +461,9 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if notes.count == 0 {
-            self.collectionView.setEmptyView()
+            self.collectionView.backgroundView = emptyView
         } else {
-            self.collectionView.restore()
+            self.collectionView.backgroundView = nil
             if isFiltering() {
                 return filteredNotes.count
             } else {
