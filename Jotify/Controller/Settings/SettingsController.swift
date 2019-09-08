@@ -19,20 +19,21 @@ class SettingsController: UITableViewController {
     
     let defaults = UserDefaults.standard
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        navigationItem.title = "Settings"
-        
-        tableView.contentInset = .zero
-                
-        tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
-        tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setupDynamicViewElements()
+        removeExtraHeaderView()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.contentInset = .zero
+        
+        navigationItem.title = "Settings"
+        
+        tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
+        tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
     }
     
     func setupDynamicViewElements() {
@@ -56,6 +57,12 @@ class SettingsController: UITableViewController {
             
             setupDefaultPersistentNavigationBar()
         }
+    }
+    
+    func removeExtraHeaderView() {
+        var frame = CGRect.zero
+        frame.size.height = .leastNormalMagnitude
+        tableView.tableHeaderView = UIView(frame: frame)
     }
     
     func setupDefaultPersistentNavigationBar() {
