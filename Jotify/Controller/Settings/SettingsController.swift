@@ -12,8 +12,8 @@ import CoreData
 class SettingsController: UITableViewController {
     
     let sections: Array = ["General", "Advanced"]
-    let general: Array = ["About", "Appearance", "Privacy", "Sort"]
-    let advanced: Array = ["Show Tutorial","Reset Settings to Default", "Delete All Data"]
+    let general: Array = ["About", "Appearance", "Privacy", "Alerts"]
+    let advanced: Array = ["Show Tutorial", "Restore Purchases", "Reset Settings to Default", "Delete All Data"]
     
     let themes = Themes()
     
@@ -105,6 +105,28 @@ class SettingsController: UITableViewController {
         }
     }
     
+    func successfullyRestoredPurchase() {
+        print(UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.premium"))
+        if UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.premium") == true {
+            
+            let alert = UIAlertController(title: "Congratulations!", message: "You successfully restored your purchase! Enjoy Jotify premium!", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Yay!", style: .cancel, handler: { (UIAlertAction) in
+                
+            }))
+            self.present(alert, animated: true)
+            
+        } else if UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.premium") == false {
+            
+            let alert = UIAlertController(title: "Not quite.", message: "It looks like you have not bought premium yet. Please consider supporting Jotify!", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (UIAlertAction) in
+                
+            }))
+            self.present(alert, animated: true)
+        }
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int{
         return sections.count
     }
@@ -135,8 +157,29 @@ class SettingsController: UITableViewController {
                 let writeNoteController = WriteNoteController()
                 writeNoteController.presentOnboarding(viewController: self, tintColor: StoredColors.noteColor)
                 
+                let cell = tableView.cellForRow(at: indexPath)
+                cell?.isSelected = false
+                
             case 1:
+                JotifyProducts.store.restorePurchases()
+                
+                let cell = tableView.cellForRow(at: indexPath)
+                cell?.isSelected = false
+                
+                let alert = UIAlertController(title: "Wait for it...", message: "Let's see if you already purchased Jotify premium.", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "I'm waiting", style: .cancel, handler: { (UIAlertAction) in
+                    self.successfullyRestoredPurchase()
+                }))
+                
+                self.present(alert, animated: true)
+                
+                
+            case 2:
                 let alert = UIAlertController(title: "Are you sure?", message: "This will reset all settings to default.", preferredStyle: .alert)
+                
+                let cell = tableView.cellForRow(at: indexPath)
+                cell?.isSelected = false
                 
                 alert.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: { (UIAlertAction) in
                     
@@ -160,9 +203,11 @@ class SettingsController: UITableViewController {
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 present(alert, animated: true)
                 
-                
-            case 2:
+            case 3:
                 print("Delete all data")
+                let cell = tableView.cellForRow(at: indexPath)
+                cell?.isSelected = false
+                
                 let alert = UIAlertController(title: "Are you sure?", message: "This will permanently delete all data saved in both iCloud and saved locally on this device.", preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (UIAlertAction) in
@@ -269,6 +314,11 @@ class SettingsController: UITableViewController {
                 cell.textLabel?.textColor = UIColor.lightBlue
                 
             case 2:
+                cell.backgroundColor = UIColor.white
+                cell.backgroundColor = InterfaceColors.cellColor
+                cell.textLabel?.textColor = UIColor.lightBlue
+                
+            case 3:
                 cell.backgroundColor = UIColor.white
                 cell.backgroundColor = InterfaceColors.cellColor
                 cell.textLabel?.textColor = UIColor.red

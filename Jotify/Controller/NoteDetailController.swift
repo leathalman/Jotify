@@ -16,13 +16,13 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     var detailText: String = ""
     var index: Int = 0
     
-    var datePicker:UIDatePicker = UIDatePicker()
+    var datePicker: UIDatePicker = UIDatePicker()
     let toolBar = UIToolbar()
     
     let writeNoteView = WriteNoteView()
     
     let defaults = UserDefaults.standard
-        
+    
     var notes: [Note] = []
     var filteredNotes: [Note] = []
     var isFiltering: Bool = false
@@ -166,12 +166,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
             print(writeNoteView.inputTextView.contentInset)
             
         } else {
-            print("Keyboard: \(keyboardViewEndFrame.height)")
-            
-            print("Navigation Bar: \(navigationBarHeight)")
-            
             writeNoteView.inputTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height + navigationBarHeight + 42, right: 0)
-            print(writeNoteView.inputTextView.contentInset)
         }
         
         writeNoteView.inputTextView.scrollIndicatorInsets = writeNoteView.inputTextView.contentInset

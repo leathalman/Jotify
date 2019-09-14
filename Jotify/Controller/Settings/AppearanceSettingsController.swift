@@ -84,11 +84,16 @@ class AppearanceSettingsController: UITableViewController {
             navigationController?.pushViewController(ThemeSelectionController(style: .grouped), animated: true)
             
         } else if indexPath.section == 2 {
-            let alert = UIAlertController(title: "Placeholder", message: "Input custom message for placeholder", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Placeholder", message: "Input a custom message for the placeholder.", preferredStyle: .alert)
+            
+            let cell = tableView.cellForRow(at: indexPath)
+            cell?.isSelected = false
             
             alert.addTextField { (textField) in
                 let placeholder = UserDefaults.standard.string(forKey: "writeNotePlaceholder")
                 textField.placeholder = placeholder
+                textField.autocorrectionType = .yes
+                textField.autocapitalizationType = .sentences
             }
             
             alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { [weak alert] (_) in
@@ -96,10 +101,15 @@ class AppearanceSettingsController: UITableViewController {
                 print("cancel")
             }))
             
-            alert.addAction(UIAlertAction(title: "Accept", style: .default, handler: { [weak alert] (_) in
+            alert.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak alert] (_) in
                 let textField = alert?.textFields![0]
                 let text = textField?.text
-                UserDefaults.standard.set(text, forKey: "writeNotePlaceholder")
+                
+                if text?.isEmpty ?? false {
+                    //                    UserDefaults.standard.set(text, forKey: "writeNotePlaceholder")
+                } else {
+                    UserDefaults.standard.set(text, forKey: "writeNotePlaceholder")
+                }
             }))
             
             self.present(alert, animated: true, completion: nil)

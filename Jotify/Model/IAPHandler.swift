@@ -8,6 +8,10 @@
 
 import StoreKit
 
+struct IAPErrors {
+    static var transactionError = String()
+}
+
 public typealias ProductIdentifier = String
 public typealias ProductsRequestCompletionHandler = (_ success: Bool, _ products: [SKProduct]?) -> Void
 
@@ -149,6 +153,7 @@ extension IAPHelper: SKPaymentTransactionObserver {
             let localizedDescription = transaction.error?.localizedDescription,
             transactionError.code != SKError.paymentCancelled.rawValue {
             print("Transaction Error: \(localizedDescription)")
+            IAPErrors.transactionError = localizedDescription
         }
         
         SKPaymentQueue.default().finishTransaction(transaction)

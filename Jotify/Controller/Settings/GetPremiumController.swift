@@ -128,6 +128,17 @@ class GetPremiumController: BottomPopupViewController {
     }
     
     @objc func purchasePremium(sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+        if !IAPErrors.transactionError.isEmpty {
+            let alert = UIAlertController(title: "Something's not right here...", message: IAPErrors.transactionError, preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (UIAlertAction) in
+                
+            }))
+            
+            self.view.window?.rootViewController?.present(alert, animated: true)
+        }
+        
         guard let product = products.first else { return }
         JotifyProducts.store.buyProduct(product)
     }

@@ -27,7 +27,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
           
         if defaults.bool(forKey: "isFirstLaunch") == true {
             presentOnboarding(viewController: self, tintColor: StoredColors.noteColor)
-            
+            JotifyProducts.store.restorePurchases()
             defaults.set(false, forKey: "isFirstLaunch")
         }
     }

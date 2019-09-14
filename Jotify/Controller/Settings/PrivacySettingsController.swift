@@ -11,8 +11,7 @@ import LocalAuthentication
 
 class PrivacySettingsController: UITableViewController {
     
-    let sections: Array = ["Delete", "Biometrics"]
-    let delete: Array = ["Show Alert on Delete"]
+    let sections: Array = ["Biometrics"]
     let biometrics: Array = ["Use Touch ID or Face ID"]
     
     let settingsController = SettingsController()
@@ -84,7 +83,8 @@ class PrivacySettingsController: UITableViewController {
              }
         }
          
-         blurEffectView.tag = 100
+        blurEffectView.tag = 100
+        unlockButton.alpha = 0
          
          window.addSubview(blurEffectView)
          window.addSubview(unlockButton)
@@ -101,7 +101,7 @@ class PrivacySettingsController: UITableViewController {
 
                 DispatchQueue.main.async {
                     if success {
-                        print("success")
+                        print("success with biometrics")
                         window.viewWithTag(101)?.removeFromSuperview()
 
                         UIView.animate(withDuration: 0.2, animations: {
@@ -111,7 +111,11 @@ class PrivacySettingsController: UITableViewController {
                         }
 
                     } else {
-                        print("error")
+                        print("error with biometrics")
+                        UIView.animate(withDuration: 0.2, animations: {
+                            self.unlockButton.alpha = 1
+                        }) { _ in
+                        }
                     }
                 }
             }
@@ -128,24 +132,6 @@ class PrivacySettingsController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
-            cell.textLabel?.text = "\(delete[indexPath.row])"
-            
-            settingsController.setupDynamicCells(cell: cell, enableArrow: false)
-            
-            cell.selectionStyle = .none
-            cell.switchButton.addTarget(self, action: #selector(showAlertOnDeleteSwitchPressed), for: .valueChanged)
-            
-            if defaults.bool(forKey: "showAlertOnDelete") == true {
-                cell.switchButton.isOn = true
-            } else {
-                cell.switchButton.isOn = false
-            }
-            
-            return cell
-            
-        } else if indexPath.section == 1 {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
             cell.textLabel?.text = "\(biometrics[indexPath.row])"
@@ -171,18 +157,6 @@ class PrivacySettingsController: UITableViewController {
             cell.backgroundColor = UIColor.white
             cell.textLabel?.textColor = UIColor.black
             return cell
-        }
-    }
-    
-    @objc func showAlertOnDeleteSwitchPressed(sender: UISwitch) {
-        if sender.isOn {
-            print("showAlertOnDelete enabled")
-            defaults.set(true, forKey: "showAlertOnDelete")
-            
-        } else {
-            print("showAlertOnDelete disabled")
-            defaults.set(false, forKey: "showAlertOnDelete")
-            
         }
     }
     
@@ -218,10 +192,7 @@ class PrivacySettingsController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "By default Jotify displays a confirmation alert when you delete a note. To remove this confirmation, toggle the above setting."
-        case 1:
             return "Use Touch ID or Face ID to authenticate Jotify and keep your notes private."
-            
         default:
             return ""
         }
@@ -237,8 +208,6 @@ class PrivacySettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return delete.count
-        } else if section == 1 {
             return biometrics.count
         } else {
             return 0

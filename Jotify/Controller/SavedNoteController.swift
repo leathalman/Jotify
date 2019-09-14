@@ -392,7 +392,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             print("Delete note")
             
             if self.defaults.bool(forKey: "showAlertOnDelete") == true {
-                let alert = UIAlertController(title: "Are you sure?", message: "This will permanently delete this note in both iCloud and locally on this device.", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Are you sure?", message: "This will permanently delete this note in both iCloud and locally on this device. This message can be disabled from settings.", preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (UIAlertAction) in
                     self.deleteNote(indexPath: indexPath ?? [0, 0], int: rowNumber)
