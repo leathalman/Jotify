@@ -34,7 +34,7 @@ class EmptyView: UIView {
     }()
     
     lazy var image: UIImageView = {
-        let cloud = UIImage(named: "cloud")
+        let cloud = UIImage(named: "Cloud")
         let image = UIImageView(image: cloud)
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
