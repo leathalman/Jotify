@@ -252,84 +252,63 @@ class AppearanceSettingsController: UITableViewController {
     }
     
     @objc func vibrantDarkModeSwitchPressed(sender: UISwitch) {
-        
-        if defaults.bool(forKey: "com.austinleath.Jotify.premium") == true {
-            if sender.isOn {
-                print("vibrant dark mode enabled")
-                defaults.set(true, forKey: "vibrantDarkModeEnabled")
-                defaults.set(false, forKey: "pureDarkModeEnabled")
-                defaults.set(true, forKey: "darkModeEnabled")
-                themes.setupDarkMode()
-                
-                self.viewWillAppear(true)
-                self.tableView.reloadData()
-                
-            } else {
-                print("vibrant dark mode disabled")
-                defaults.set(false, forKey: "vibrantDarkModeEnabled")
-                defaults.set(false, forKey: "darkModeEnabled")
-                themes.setupDefaultMode()
-                
-                self.viewWillAppear(true)
-                self.tableView.reloadData()
-            }
+        if sender.isOn {
+            print("vibrant dark mode enabled")
+            defaults.set(true, forKey: "vibrantDarkModeEnabled")
+            defaults.set(false, forKey: "pureDarkModeEnabled")
+            defaults.set(true, forKey: "darkModeEnabled")
+            themes.setupDarkMode()
             
-        } else if defaults.bool(forKey: "com.austinleath.Jotify.premium") == false {
-            present(GetPremiumController(), animated: true, completion: nil)
-            sender.setOn(false, animated: true)
+            self.viewWillAppear(true)
+            self.tableView.reloadData()
+            
+        } else {
+            print("vibrant dark mode disabled")
+            defaults.set(false, forKey: "vibrantDarkModeEnabled")
+            defaults.set(false, forKey: "darkModeEnabled")
+            themes.setupDefaultMode()
+            
+            self.viewWillAppear(true)
+            self.tableView.reloadData()
         }
+        
     }
     
     @objc func pureDarkModeSwitchPressed(sender: UISwitch) {
-        
-        if defaults.bool(forKey: "com.austinleath.Jotify.premium") == true {
-            if sender.isOn {
-                print("pure dark mode enabled")
-                defaults.set(true, forKey: "pureDarkModeEnabled")
-                defaults.set(false, forKey: "vibrantDarkModeEnabled")
-                defaults.set(true, forKey: "darkModeEnabled")
-                themes.setupDarkMode()
-                
-                self.viewWillAppear(true)
-                self.tableView.reloadData()
-                
-            } else {
-                print("pure dark mode disabled")
-                defaults.set(false, forKey: "pureDarkModeEnabled")
-                defaults.set(false, forKey: "darkModeEnabled")
-                themes.setupDefaultMode()
-                
-                self.viewWillAppear(true)
-                self.tableView.reloadData()
-            }
+        if sender.isOn {
+            print("pure dark mode enabled")
+            defaults.set(true, forKey: "pureDarkModeEnabled")
+            defaults.set(false, forKey: "vibrantDarkModeEnabled")
+            defaults.set(true, forKey: "darkModeEnabled")
+            themes.setupDarkMode()
             
-        } else if defaults.bool(forKey: "com.austinleath.Jotify.premium") == false {
-            present(GetPremiumController(), animated: true, completion: nil)
-            sender.setOn(false, animated: true)
+            self.viewWillAppear(true)
+            self.tableView.reloadData()
+            
+        } else {
+            print("pure dark mode disabled")
+            defaults.set(false, forKey: "pureDarkModeEnabled")
+            defaults.set(false, forKey: "darkModeEnabled")
+            themes.setupDefaultMode()
+            
+            self.viewWillAppear(true)
+            self.tableView.reloadData()
         }
     }
     
     @objc func randomColorSwitchPressed(sender: UISwitch) {
-        
-        if defaults.bool(forKey: "com.austinleath.Jotify.premium") == true {
+        if sender.isOn {
+            print("random colors enabled")
+            defaults.set(true, forKey: "useRandomColor")
+            setNewColorsForExistingNotes()
             
-            if sender.isOn {
-                print("random colors enabled")
-                defaults.set(true, forKey: "useRandomColor")
-                setNewColorsForExistingNotes()
-                
-            } else {
-                print("random colors disabled")
-                defaults.set(false, forKey: "useRandomColor")
-                
-                let colorPickerController = ColorPickerController()
-                
-                navigationController?.pushViewController(colorPickerController, animated: true)
-            }
+        } else {
+            print("random colors disabled")
+            defaults.set(false, forKey: "useRandomColor")
             
-        } else if defaults.bool(forKey: "com.austinleath.Jotify.premium") == false {
-            present(GetPremiumController(), animated: true, completion: nil)
-            sender.setOn(true, animated: true)
+            let colorPickerController = ColorPickerController()
+            
+            navigationController?.pushViewController(colorPickerController, animated: true)
         }
     }
     

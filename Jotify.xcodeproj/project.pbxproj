@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		9B6AC7C1DBA10CBFB04F374B /* Pods_Jotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3C025699629E8C8FD896B4 /* Pods_Jotify.framework */; };
 		F6070B8A22D50796005E4CF3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6070B8922D50796005E4CF3 /* EmptyView.swift */; };
-		F61C1CA52304A29500B944CD /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F61C1CA42304A29500B944CD /* StoreKit.framework */; };
-		F61C1CAD2304A91000B944CD /* IAPHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61C1CAC2304A91000B944CD /* IAPHandler.swift */; };
 		F63A0C7922DE031E00B8A480 /* VerticalAlignLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63A0C7822DE031E00B8A480 /* VerticalAlignLabel.swift */; };
 		F644968622C16422009CC386 /* NoteDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F644968522C16422009CC386 /* NoteDetailController.swift */; };
 		F650E13322BFF35A008D29AD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E13222BFF35A008D29AD /* SceneDelegate.swift */; };
@@ -33,8 +31,6 @@
 		F67B92E022D2E785002C6985 /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B92DF22D2E785002C6985 /* ColorPickerController.swift */; };
 		F686D84D22C9269D00C6F555 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F686D84C22C9269D00C6F555 /* PageViewController.swift */; };
 		F686D85222C9B10900C6F555 /* Colors+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F686D85122C9B10900C6F555 /* Colors+Handlers.swift */; };
-		F687FBDF2304EC0200713DDE /* GetPremiumController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F687FBDE2304EC0200713DDE /* GetPremiumController.swift */; };
-		F68AEB5F230CCF7C00000F20 /* JotifyProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68AEB5E230CCF7C00000F20 /* JotifyProducts.swift */; };
 		F68D639122F7890100DEB4AA /* AppearanceSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68D639022F7890100DEB4AA /* AppearanceSettingsController.swift */; };
 		F68D639322F7894700DEB4AA /* PrivacySettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68D639222F7894700DEB4AA /* PrivacySettingsController.swift */; };
 		F6969F5E22DA1AFD00C4E8FF /* AboutSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6969F5D22DA1AFD00C4E8FF /* AboutSettingsController.swift */; };
@@ -51,8 +47,6 @@
 		134E86D639FF0CE5ED6FEF08 /* Pods-Jotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.release.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.release.xcconfig"; sourceTree = "<group>"; };
 		77AB5562845EB3AEFA1502C6 /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.debug.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
 		F6070B8922D50796005E4CF3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
-		F61C1CA42304A29500B944CD /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		F61C1CAC2304A91000B944CD /* IAPHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHandler.swift; sourceTree = "<group>"; };
 		F63A0C7822DE031E00B8A480 /* VerticalAlignLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalAlignLabel.swift; sourceTree = "<group>"; };
 		F644968522C16422009CC386 /* NoteDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailController.swift; sourceTree = "<group>"; };
 		F650E12D22BFF35A008D29AD /* Jotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,8 +72,6 @@
 		F67B92DF22D2E785002C6985 /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
 		F686D84C22C9269D00C6F555 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		F686D85122C9B10900C6F555 /* Colors+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+Handlers.swift"; sourceTree = "<group>"; };
-		F687FBDE2304EC0200713DDE /* GetPremiumController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPremiumController.swift; sourceTree = "<group>"; };
-		F68AEB5E230CCF7C00000F20 /* JotifyProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JotifyProducts.swift; sourceTree = "<group>"; };
 		F68D639022F7890100DEB4AA /* AppearanceSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsController.swift; sourceTree = "<group>"; };
 		F68D639222F7894700DEB4AA /* PrivacySettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySettingsController.swift; sourceTree = "<group>"; };
 		F6969F5D22DA1AFD00C4E8FF /* AboutSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSettingsController.swift; sourceTree = "<group>"; };
@@ -96,7 +88,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F61C1CA52304A29500B944CD /* StoreKit.framework in Frameworks */,
 				F650E16A22C001A8008D29AD /* CloudKit.framework in Frameworks */,
 				9B6AC7C1DBA10CBFB04F374B /* Pods_Jotify.framework in Frameworks */,
 			);
@@ -118,7 +109,6 @@
 			isa = PBXGroup;
 			children = (
 				F650E15122BFFB12008D29AD /* SettingsController.swift */,
-				F687FBDE2304EC0200713DDE /* GetPremiumController.swift */,
 				F6969F5D22DA1AFD00C4E8FF /* AboutSettingsController.swift */,
 				F68D639022F7890100DEB4AA /* AppearanceSettingsController.swift */,
 				F69E5DBF231AE14800872345 /* ThemeSelectionController.swift */,
@@ -167,7 +157,6 @@
 		F650E14822BFF36D008D29AD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F61C1CA42304A29500B944CD /* StoreKit.framework */,
 				F650E14922BFF36D008D29AD /* CloudKit.framework */,
 				0C3C025699629E8C8FD896B4 /* Pods_Jotify.framework */,
 			);
@@ -194,8 +183,6 @@
 				F65BD147231D89A300A06D2B /* AppConfiguration+Helpers.swift */,
 				F686D85122C9B10900C6F555 /* Colors+Handlers.swift */,
 				F6B2083622DE22860098CF9F /* Themes.swift */,
-				F61C1CAC2304A91000B944CD /* IAPHandler.swift */,
-				F68AEB5E230CCF7C00000F20 /* JotifyProducts.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -349,7 +336,6 @@
 				F6969F5E22DA1AFD00C4E8FF /* AboutSettingsController.swift in Sources */,
 				F68D639322F7894700DEB4AA /* PrivacySettingsController.swift in Sources */,
 				F65E47A12324B15F00FCAEF3 /* CALayer+Extensions.swift in Sources */,
-				F68AEB5F230CCF7C00000F20 /* JotifyProducts.swift in Sources */,
 				F69E5DC2231B120200872345 /* ReminderController.swift in Sources */,
 				F6070B8A22D50796005E4CF3 /* EmptyView.swift in Sources */,
 				F650E15622BFFB12008D29AD /* SettingsController.swift in Sources */,
@@ -366,9 +352,7 @@
 				F650E13322BFF35A008D29AD /* SceneDelegate.swift in Sources */,
 				F686D85222C9B10900C6F555 /* Colors+Handlers.swift in Sources */,
 				F67B92E022D2E785002C6985 /* ColorPickerController.swift in Sources */,
-				F61C1CAD2304A91000B944CD /* IAPHandler.swift in Sources */,
 				F65E479D2324B10500FCAEF3 /* UIViewController+Extensions.swift in Sources */,
-				F687FBDF2304EC0200713DDE /* GetPremiumController.swift in Sources */,
 				F686D84D22C9269D00C6F555 /* PageViewController.swift in Sources */,
 				F650E16422BFFB20008D29AD /* SettingsCell.swift in Sources */,
 			);
@@ -511,7 +495,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -543,7 +527,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Jotify/Info.plist;

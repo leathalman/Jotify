@@ -105,28 +105,6 @@ class SettingsController: UITableViewController {
         }
     }
     
-    func successfullyRestoredPurchase() {
-        print(UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.premium"))
-        if UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.premium") == true {
-            
-            let alert = UIAlertController(title: "Congratulations!", message: "You successfully restored your purchase! Enjoy Jotify premium!", preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "Yay!", style: .cancel, handler: { (UIAlertAction) in
-                
-            }))
-            self.present(alert, animated: true)
-            
-        } else if UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.premium") == false {
-            
-            let alert = UIAlertController(title: "Not quite.", message: "It looks like you have not bought premium yet. Please consider supporting Jotify!", preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (UIAlertAction) in
-                
-            }))
-            self.present(alert, animated: true)
-        }
-    }
-    
     override func numberOfSections(in tableView: UITableView) -> Int{
         return sections.count
     }

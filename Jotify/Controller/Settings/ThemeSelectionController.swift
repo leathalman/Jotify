@@ -88,36 +88,31 @@ class ThemeSelectionController: UITableViewController {
             
             lastIndexPath = indexPath as NSIndexPath
         }
-        
-        if defaults.bool(forKey: "com.austinleath.Jotify.premium") == true {
-            switch indexPath.row {
-            case 0:
-                defaults.set("default", forKey: "noteColorTheme")
-                setNewColorsForExistingNotesIfNotStatic()
-                
-            case 1:
-                defaults.set("sunset", forKey: "noteColorTheme")
-                setNewColorsForExistingNotesIfNotStatic()
-                
-            case 2:
-                defaults.set("kypool", forKey: "noteColorTheme")
-                setNewColorsForExistingNotesIfNotStatic()
-                
-            case 3:
-                defaults.set("celestial", forKey: "noteColorTheme")
-                setNewColorsForExistingNotesIfNotStatic()
-                
-            case 4:
-                defaults.set("appleVibrant", forKey: "noteColorTheme")
-                setNewColorsForExistingNotesIfNotStatic()
-                
-            default:
-                print("Setting not implemented")
-            }
+        switch indexPath.row {
+        case 0:
+            defaults.set("default", forKey: "noteColorTheme")
+            setNewColorsForExistingNotesIfNotStatic()
             
-        } else {
-            present(GetPremiumController(), animated: true, completion: nil)
+        case 1:
+            defaults.set("sunset", forKey: "noteColorTheme")
+            setNewColorsForExistingNotesIfNotStatic()
+            
+        case 2:
+            defaults.set("kypool", forKey: "noteColorTheme")
+            setNewColorsForExistingNotesIfNotStatic()
+            
+        case 3:
+            defaults.set("celestial", forKey: "noteColorTheme")
+            setNewColorsForExistingNotesIfNotStatic()
+            
+        case 4:
+            defaults.set("appleVibrant", forKey: "noteColorTheme")
+            setNewColorsForExistingNotesIfNotStatic()
+            
+        default:
+            print("Setting not implemented")
         }
+        
     }
     
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -168,5 +163,3 @@ class ThemeSelectionController: UITableViewController {
     }
     
 }
-
-

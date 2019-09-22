@@ -55,61 +55,61 @@ class PrivacySettingsController: UITableViewController {
     
     func setupBiometricsView(window: UIWindow) {
         let blurEffect = UIBlurEffect(style: .dark)
-         blurEffectView.effect = blurEffect
-         blurEffectView.frame = window.frame
-         blurEffectView.alpha = 0.925
+        blurEffectView.effect = blurEffect
+        blurEffectView.frame = window.frame
+        blurEffectView.alpha = 0.925
         
-         unlockButton.center = window.center
-                 
-         if defaults.bool(forKey: "useRandomColor") == false {
-             unlockButton.backgroundColor = defaults.color(forKey: "staticNoteColor") ?? UIColor.white
-             
-         } else {
-             
-             if isSelectedColorFromDefaults(key: "default") == true {
-                 unlockButton.backgroundColor = Colors.defaultColors.randomElement() ?? UIColor.blue2
-                 
-             } else if isSelectedColorFromDefaults(key: "sunset") == true {
-                 unlockButton.backgroundColor = Colors.sunsetColors.randomElement() ?? UIColor.blue2
-                 
-             } else if isSelectedColorFromDefaults(key: "kypool") == true {
-                 unlockButton.backgroundColor = Colors.kypoolColors.randomElement() ?? UIColor.blue2
-                 
-             } else if isSelectedColorFromDefaults(key: "celestial") == true {
-                 unlockButton.backgroundColor = Colors.celestialColors.randomElement() ?? UIColor.blue2
-                 
-             } else if isSelectedColorFromDefaults(key: "appleVibrant") == true {
-                 unlockButton.backgroundColor = Colors.appleVibrantColors.randomElement() ?? UIColor.blue2
-             }
+        unlockButton.center = window.center
+        
+        if defaults.bool(forKey: "useRandomColor") == false {
+            unlockButton.backgroundColor = defaults.color(forKey: "staticNoteColor") ?? UIColor.white
+            
+        } else {
+            
+            if isSelectedColorFromDefaults(key: "default") == true {
+                unlockButton.backgroundColor = Colors.defaultColors.randomElement() ?? UIColor.blue2
+                
+            } else if isSelectedColorFromDefaults(key: "sunset") == true {
+                unlockButton.backgroundColor = Colors.sunsetColors.randomElement() ?? UIColor.blue2
+                
+            } else if isSelectedColorFromDefaults(key: "kypool") == true {
+                unlockButton.backgroundColor = Colors.kypoolColors.randomElement() ?? UIColor.blue2
+                
+            } else if isSelectedColorFromDefaults(key: "celestial") == true {
+                unlockButton.backgroundColor = Colors.celestialColors.randomElement() ?? UIColor.blue2
+                
+            } else if isSelectedColorFromDefaults(key: "appleVibrant") == true {
+                unlockButton.backgroundColor = Colors.appleVibrantColors.randomElement() ?? UIColor.blue2
+            }
         }
-         
+        
         blurEffectView.tag = 100
         unlockButton.alpha = 0
-         
-         window.addSubview(blurEffectView)
-         window.addSubview(unlockButton)
+        
+        window.addSubview(blurEffectView)
+        window.addSubview(unlockButton)
     }
     
     func authenticateUserWithBioMetrics(window: UIWindow) {
         let context = LAContext()
         var error: NSError?
-
+        
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             let reason = "Unlock Jotify to access your notes."
-
+            
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
-
+                
                 DispatchQueue.main.async {
                     if success {
                         print("success with biometrics")
                         window.viewWithTag(101)?.removeFromSuperview()
-
+                        
                         UIView.animate(withDuration: 0.2, animations: {
                             window.viewWithTag(100)?.alpha = 0
                         }) { _ in
                             self.blurEffectView.removeFromSuperview()
                         }
-
+                        
                     } else {
                         print("error with biometrics")
                         UIView.animate(withDuration: 0.2, animations: {
@@ -161,21 +161,14 @@ class PrivacySettingsController: UITableViewController {
     }
     
     @objc func useBiometricsSwitchPressed (sender: UISwitch) {
-        
-        if defaults.bool(forKey: "com.austinleath.Jotify.premium") == true {
-            if sender.isOn {
-                print("useBiometrics enabled")
-                defaults.set(true, forKey: "useBiometrics")
-                
-            } else {
-                print("useBiometrics disabled")
-                defaults.set(false, forKey: "useBiometrics")
-                
-            }
+        if sender.isOn {
+            print("useBiometrics enabled")
+            defaults.set(true, forKey: "useBiometrics")
             
         } else {
-            present(GetPremiumController(), animated: true, completion: nil)
-            sender.setOn(false, animated: true)
+            print("useBiometrics disabled")
+            defaults.set(false, forKey: "useBiometrics")
+            
         }
     }
     
