@@ -33,6 +33,17 @@ class Themes {
         InterfaceColors.separatorColor = .white
     }
     
+    func setupPureDarkMode() {
+        InterfaceColors.writeViewColor = .black
+        InterfaceColors.viewBackgroundColor = .black
+        InterfaceColors.cellColor = .cellDark
+        InterfaceColors.fontColor = .white
+        InterfaceColors.navigationBarColor = .black
+        InterfaceColors.searchBarColor = .black
+        InterfaceColors.actionSheetColor = .black
+        InterfaceColors.separatorColor = .white
+    }
+    
     func setupDefaultMode() {        
         InterfaceColors.viewBackgroundColor = .white
         InterfaceColors.navigationBarColor = .white

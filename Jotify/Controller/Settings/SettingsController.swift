@@ -38,14 +38,26 @@ class SettingsController: UITableViewController {
     
     func setupDynamicViewElements() {
         if darkModeEnabled() == true {
-            view.backgroundColor = InterfaceColors.viewBackgroundColor
+            if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") {
+                view.backgroundColor = InterfaceColors.viewBackgroundColor
+                
+                tableView.separatorColor = InterfaceColors.separatorColor
+                
+                themes.setupDarkMode()
+                self.tableView.reloadData()
+                
+                setupDarkPersistentNavigationBar()
+            } else if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") == true {
+                view.backgroundColor = InterfaceColors.viewBackgroundColor
+                
+                tableView.separatorColor = InterfaceColors.separatorColor
+                
+                themes.setupPureDarkMode()
+                self.tableView.reloadData()
+                
+                setupDarkPersistentNavigationBar()
+            }
             
-            tableView.separatorColor = InterfaceColors.separatorColor
-            
-            themes.setupDarkMode()
-            self.tableView.reloadData()
-            
-            setupDarkPersistentNavigationBar()
             
         } else if darkModeEnabled() == false {
             view.backgroundColor = InterfaceColors.viewBackgroundColor

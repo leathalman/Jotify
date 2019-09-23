@@ -89,7 +89,11 @@ class WriteNoteView: UIView {
             colorView.backgroundColor = randomColor
             backgroundColor = randomColor
         } else if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
-            backgroundColor = .grayBackground
+            if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") == true {
+                backgroundColor = .grayBackground
+            } else if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") == true {
+                backgroundColor = .black
+            }
         }
     }
     
