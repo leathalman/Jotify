@@ -10,6 +10,11 @@ import UIKit
 import UserNotifications
 import BottomPopup
 
+struct RemindersData {
+    static var isReminder = Bool()
+    static var reminderDate = String()
+}
+
 class ReminderController: BottomPopupViewController, UNUserNotificationCenterDelegate {
     
     public var screenWidth: CGFloat {
@@ -49,7 +54,6 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupView()
     }
     
@@ -70,7 +74,7 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 25).isActive = true
         
         datePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        datePicker.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 6).isActive = true
+        datePicker.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2).isActive = true
         datePicker.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
         datePicker.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
@@ -95,17 +99,16 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     }
     
     @objc func setReminder(sender: UIButton) {
-        //change value of isReminder
         //display animation that confirms it worked
         scheduleNotification()
         dismiss(animated: true, completion: nil)
     }
     
     func scheduleNotification() {
+        //add category for custom buttons
         let center = UNUserNotificationCenter.current()
         
         let content = UNMutableNotificationContent()
-        content.title = "Reminder"
         content.body = reminderBodyText
         content.categoryIdentifier = "reminder"
         content.userInfo = ["customData": "placeholder"]
@@ -116,14 +119,17 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         center.add(request)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
+        let selectedDate = dateFormatter.string(from: datePicker.date)
+        
+        RemindersData.isReminder = true
+        RemindersData.reminderDate = selectedDate
     }
     
     override func getPopupHeight() -> CGFloat {
-        if screenHeight < 600 {
-            return screenHeight / 1.5
-        } else {
-            return screenHeight / 2
-        }
+        return 80 + (screenHeight / 11) + datePicker.frame.height
     }
     
 }

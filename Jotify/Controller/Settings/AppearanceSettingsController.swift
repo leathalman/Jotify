@@ -81,7 +81,7 @@ class AppearanceSettingsController: UITableViewController {
             tableView.cellForRow(at: indexPath)?.accessoryType = .none
             
         } else if indexPath.section == 1 {
-            navigationController?.pushViewController(ThemeSelectionController(style: .grouped), animated: true)
+            navigationController?.pushViewController(ThemeSelectionController(style: .insetGrouped), animated: true)
             
         } else if indexPath.section == 2 {
             let alert = UIAlertController(title: "Placeholder", message: "Input a custom message for the placeholder.", preferredStyle: .alert)

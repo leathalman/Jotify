@@ -230,7 +230,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     
     @objc func handleLeftButton() {
         feedbackOnPress()
-        navigationController?.pushViewController(SettingsController(style: .grouped), animated: true)
+        navigationController?.pushViewController(SettingsController(style: .insetGrouped), animated: true)
     }
     
     func isSelectedColorFromDefaults(key: String) -> Bool {

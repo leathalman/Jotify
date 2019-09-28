@@ -134,11 +134,11 @@ class SettingsController: UITableViewController {
             case 0:
                 navigationController?.pushViewController(AboutSettingsController(), animated: true)
             case 1:
-                navigationController?.pushViewController(AppearanceSettingsController(style: .grouped), animated: true)
+                navigationController?.pushViewController(AppearanceSettingsController(style: .insetGrouped), animated: true)
             case 2:
-                navigationController?.pushViewController(PrivacySettingsController(style: .grouped), animated: true)
+                navigationController?.pushViewController(PrivacySettingsController(style: .insetGrouped), animated: true)
             case 3:
-                navigationController?.pushViewController(SortSettingsController(style: .grouped), animated: true)
+                navigationController?.pushViewController(SortSettingsController(style: .insetGrouped), animated: true)
             default:
                 return
             }

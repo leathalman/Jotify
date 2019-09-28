@@ -37,6 +37,12 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(notes[index].isReminder)
+        
+        if notes[index].isReminder == true {
+            RemindersData.isReminder = true
+        }
+        
         setupNotifications()
         setupView()
     }
@@ -44,7 +50,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
         let newDate = Date.timeIntervalSinceReferenceDate
-        updateContent(index: index, newContent: writeNoteView.inputTextView.text, newDate: newDate)
+        updateContent(index: index, newContent: writeNoteView.inputTextView.text, newDate: newDate, isReminder: RemindersData.isReminder)
         
         resetNavigationBarForTransition()
     }
@@ -146,14 +152,14 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
 
         center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
             if granted {
-                print("Yay!")
+                print("Notifications granted")
             } else {
-                print("D'oh")
+                print("Notifications denied")
             }
         }
     }
     
-    func updateContent(index: Int, newContent: String, newDate: Double){
+    func updateContent(index: Int, newContent: String, newDate: Double, isReminder: Bool){
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
                 return
@@ -162,11 +168,17 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         if isFiltering == false {
             notes[index].content = newContent
             notes[index].modifiedDate = newDate
+            notes[index].isReminder = isReminder
             
         } else if isFiltering == true {
             filteredNotes[index].content = newContent
             filteredNotes[index].modifiedDate = newDate
+            filteredNotes[index].isReminder = isReminder
         }
+        
+        //setup reminders for next note
+        //set reminder to default (false) if note does not have a reminder
+        RemindersData.isReminder = false
         
         appDelegate.saveContext()
     }
