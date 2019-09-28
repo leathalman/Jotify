@@ -27,7 +27,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     let loadingAnimations = [AnimationType.from(direction: .top, offset: 30.0)]
     
     let defaults = UserDefaults.standard
-
+    
     let blueprintLayout = VerticalBlueprintLayout(
         itemsPerRow: 2.0,
         minimumInteritemSpacing: 10,
@@ -47,7 +47,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             fetchNotesFromCoreData()
             firstLaunch = false
         }
-
+        
         setupDynamicViewElements()
     }
     
@@ -55,43 +55,43 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         super.viewDidDisappear(true)
         navigationItem.searchController = nil
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         fetchNotesFromCoreData()
     }
-
+    
     func setupView() {
         navigationItem.title = "Saved Notes"
         navigationController?.navigationBar.prefersLargeTitles = false
-
+        
         navigationController?.navigationBar.isTranslucent = false
         extendedLayoutIncludesOpaqueBars = true
-
+        
         let rightItem = UIBarButtonItem(image: UIImage(systemName: "arrow.up.arrow.down.circle"), style: .plain, target: self, action: #selector(handleRightButton))
         navigationItem.rightBarButtonItem  = rightItem
-
+        
         let leftItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(handleLeftButton))
         navigationItem.leftBarButtonItem  = leftItem
         navigationItem.setHidesBackButton(true, animated: true)
-
+        
         collectionView.frame = self.view.frame
         collectionView.alwaysBounceVertical = true
-
+        
         collectionView.setCollectionViewLayout(blueprintLayout, animated: true)
-
+        
         collectionView.delegate = self
         collectionView.dataSource = self
-
+        
         collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
         view.addSubview(collectionView)
     }
-
+    
     func setupDynamicViewElements() {
         collectionView.backgroundColor = InterfaceColors.viewBackgroundColor
         
@@ -105,7 +105,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             emptyView.titleLabel.textColor = .white
             
             UIApplication.shared.windows.first?.backgroundColor = InterfaceColors.viewBackgroundColor
-
+            
             setupDarkPersistentNavigationBar()
             
         } else {
@@ -118,11 +118,11 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             emptyView.titleLabel.textColor = .black
             
             UIApplication.shared.windows.first?.backgroundColor = InterfaceColors.viewBackgroundColor
-
+            
             setupDefaultPersistentNavigationBar()
         }
     }
-
+    
     func setupDefaultPersistentNavigationBar() {
         navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
         navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
@@ -131,7 +131,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         navigationController?.navigationBar.barStyle = .default
     }
-
+    
     func setupDarkPersistentNavigationBar() {
         navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
         navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
@@ -140,7 +140,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationController?.navigationBar.barStyle = .black
     }
-
+    
     func setupSearchBar() {
         searchController.searchResultsUpdater = self as UISearchResultsUpdating
         searchController.obscuresBackgroundDuringPresentation = false
@@ -201,6 +201,11 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                 self.fetchNotesFromCoreData()
                 self.animateCells()
             }))
+            actionController.addAction(Action("Sort by reminders", style: .default, handler: { action in
+                self.defaults.set("reminders", forKey: "sortBy")
+                self.fetchNotesFromCoreData()
+                self.animateCells()
+            }))
             actionController.addAction(Action("Cancel", style: .cancel, handler: nil))
             
             present(actionController, animated: true, completion: nil)
@@ -221,6 +226,11 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                 print("Sort by date")
                 defaults.set("date", forKey: "sortBy")
                 pressed = 0
+                
+            } else if pressed == 3 {
+            print("Sort by reminders")
+            defaults.set("reminders", forKey: "sortBy")
+            pressed = 0
                 
             }
             fetchNotesFromCoreData()
@@ -271,7 +281,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     
     func fetchNotesFromCoreData() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                return
+            return
         }
         
         let managedContext = appDelegate.persistentContainer.viewContext
@@ -290,8 +300,11 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             
         } else if sortBy == "color" {
             sortDescriptor = NSSortDescriptor(key: "color", ascending: false)
+            
+        } else if sortBy == "reminders" {
+            sortDescriptor = NSSortDescriptor(key: "isReminder", ascending: false)
         }
-
+        
         fetchRequest.sortDescriptors = [sortDescriptor] as? [NSSortDescriptor]
         
         do {
@@ -315,38 +328,38 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     
     @objc func tapHandler(_ sender: UITapGestureRecognizer) {
         print("Tap triggered")
-
+        
         let location = sender.location(in: self.collectionView)
         let indexPath = self.collectionView.indexPathForItem(at: location)
         let rowNumber : Int = indexPath?.row ?? 0
-
+        
         let noteDetailController = NoteDetailController()
-
+        
         var note = notes[indexPath?.row ?? 0]
-
+        
         if isFiltering() {
             note = filteredNotes[indexPath?.row ?? 0]
             noteDetailController.filteredNotes = filteredNotes
             noteDetailController.isFiltering = true
-
+            
         } else {
             note = notes[indexPath?.row ?? 0]
             noteDetailController.notes = notes
         }
-
+        
         let modifiedDate = note.value(forKey: "modifiedDate")
         let color = note.value(forKey: "color") as! String
         let content = note.value(forKey: "content") as! String
-
+        
         let updateDate = Date(timeIntervalSinceReferenceDate: modifiedDate as! TimeInterval)
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.long
         dateFormatter.timeZone = .current
         let dateString = dateFormatter.string(from: updateDate)
-
+        
         noteDetailController.navigationController?.navigationItem.title = dateString
         noteDetailController.navigationTitle = dateString
-
+        
         var cellColor: UIColor = .white
         cellColor = Colors.colorFromString(string: color)
         
@@ -486,11 +499,12 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         let content = note.value(forKey: "content") as? String
         let color = note.value(forKey: "color") as? String ?? "white"
         let modifiedDate = note.value(forKey: "modifiedDate") as? Double ?? 0
+        let isReminder = note.value(forKey: "isReminder") as? Bool
         
         cell.textLabel.text = content
         cell.textLabel.textColor = UIColor.white
         cell.dateLabel.textColor = UIColor.white
-
+        
         let updateDate = Date(timeIntervalSinceReferenceDate: modifiedDate)
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.long
@@ -505,8 +519,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             cell.dateLabel.textColor = .black
         }
         
-        cell.contentView.layer.cornerRadius = 5
-        
         if defaults.bool(forKey: "darkModeEnabled") == true {
             
             if defaults.bool(forKey: "vibrantDarkModeEnabled") == true {
@@ -519,14 +531,33 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         } else {
             cell.contentView.backgroundColor = cellColor
         }
-
+        
+        if isReminder == true {
+            cell.layer.borderWidth = 5.5
+            
+            if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") == true {
+                cell.layer.borderColor = UIColor.grayBackground.adjust(by: 10)?.cgColor
+                cell.layer.cornerRadius = 5
+                
+            } else {
+                cell.layer.borderColor = cellColor.adjust(by: 10)?.cgColor
+                cell.layer.cornerRadius = 5
+            }
+            
+        } else {
+            cell.layer.borderWidth = 0
+            cell.layer.borderColor = cellColor.cgColor
+            cell.layer.cornerRadius = 0
+        }
+        
+        cell.contentView.layer.cornerRadius = 5
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.main.scale
         
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
             cell.layer.addShadow(color: UIColor.darkGray)
         }
-                
+        
         cell.contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapHandler(_:))))
         cell.contentView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTouchHandler(sender:))))
         
@@ -535,11 +566,11 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
 }
 
 extension SavedNoteController: CollectionViewFlowLayoutDelegate {
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
+        
         let height: CGFloat = 110
-
+        
         return CGSize(width: UIScreen.main.bounds.width, height: height)
     }
 }

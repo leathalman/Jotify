@@ -8,6 +8,7 @@
 
 import UIKit
 import UserNotifications
+import AudioToolbox
 import BottomPopup
 
 struct RemindersData {
@@ -99,6 +100,7 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     }
     
     @objc func setReminder(sender: UIButton) {
+        feedbackOnPress()
         //display animation that confirms it worked
         scheduleNotification()
         dismiss(animated: true, completion: nil)
@@ -126,6 +128,19 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         
         RemindersData.isReminder = true
         RemindersData.reminderDate = selectedDate
+    }
+    
+    func feedbackOnPress() {
+        if UIDevice.current.hasTapticEngine == true {
+            //iPhone 6s and iPhone 6s Plus
+            let peek = SystemSoundID(1519)
+            AudioServicesPlaySystemSoundWithCompletion(peek, nil)
+            
+        } else if UIDevice.current.hasHapticFeedback == true {
+            //iPhone 7 and newer
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
+        }
     }
     
     override func getPopupHeight() -> CGFloat {

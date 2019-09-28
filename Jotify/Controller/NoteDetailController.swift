@@ -134,11 +134,19 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     }
     
     @objc func handleReminder() {
-        StoredColors.reminderColor = backgroundColor
-        let reminderController = ReminderController()
-        reminderController.reminderBodyText = writeNoteView.inputTextView.text
-        requestNotificationPermission()
-        present(reminderController, animated: true, completion: nil)
+        if RemindersData.isReminder == true {
+            //do something if a reminder is already set
+            print("Already set a reminder")
+            
+        } else {
+            //present controller to set a reminder if reminder is not already set
+            StoredColors.reminderColor = backgroundColor
+            let reminderController = ReminderController()
+            reminderController.reminderBodyText = writeNoteView.inputTextView.text
+            requestNotificationPermission()
+            present(reminderController, animated: true, completion: nil)
+        }
+        
     }
     
     @objc func handleCancel() {
@@ -149,7 +157,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     
     func requestNotificationPermission() {
         let center = UNUserNotificationCenter.current()
-
+        
         center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
             if granted {
                 print("Notifications granted")
