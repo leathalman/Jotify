@@ -120,13 +120,37 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         cancel = cancel?.withRenderingMode(.alwaysOriginal)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: cancel, style:.plain, target: self, action: #selector(handleCancel))
         
+        var alarm = UIImage(named: "alarm")
+        alarm = alarm?.withRenderingMode(.alwaysOriginal)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: alarm, style: .plain, target: self, action: #selector(handleReminder))
+        
         self.hideKeyboardWhenTappedAround()
+    }
+    
+    @objc func handleReminder() {
+        StoredColors.reminderColor = backgroundColor
+        let reminderController = ReminderController()
+        reminderController.reminderBodyText = writeNoteView.inputTextView.text
+        requestNotificationPermission()
+        present(reminderController, animated: true, completion: nil)
     }
     
     @objc func handleCancel() {
         let savedNoteController = SavedNoteController()
         savedNoteController.feedbackOnPress()
         navigationController?.popViewController(animated: true)
+    }
+    
+    func requestNotificationPermission() {
+        let center = UNUserNotificationCenter.current()
+
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+            if granted {
+                print("Yay!")
+            } else {
+                print("D'oh")
+            }
+        }
     }
     
     func updateContent(index: Int, newContent: String, newDate: Double){
