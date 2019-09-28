@@ -22,7 +22,7 @@ struct InterfaceColors {
 
 class Themes {
     
-    func setupDarkMode() {
+    func setupVibrantDarkMode() {
         InterfaceColors.writeViewColor = .grayBackground
         InterfaceColors.viewBackgroundColor = .grayBackground
         InterfaceColors.cellColor = .cellDark
@@ -36,7 +36,7 @@ class Themes {
     func setupPureDarkMode() {
         InterfaceColors.writeViewColor = .black
         InterfaceColors.viewBackgroundColor = .black
-        InterfaceColors.cellColor = .cellDark
+        InterfaceColors.cellColor = .cellPureDark ?? UIColor.cellDark
         InterfaceColors.fontColor = .white
         InterfaceColors.navigationBarColor = .black
         InterfaceColors.searchBarColor = .black

@@ -522,8 +522,11 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
 
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.main.scale
-        cell.layer.addShadow(color: UIColor.darkGray)
         
+        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+            cell.layer.addShadow(color: UIColor.darkGray)
+        }
+                
         cell.contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapHandler(_:))))
         cell.contentView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTouchHandler(sender:))))
         

@@ -56,14 +56,11 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     func setupView() {
         title = "Set a reminder"
         
-        view.backgroundColor = noteColor
+        setupDynamicColors()
         
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.timeZone = NSTimeZone.local
-        datePicker.backgroundColor = noteColor
         datePicker.setValue(UIColor.white, forKeyPath: "textColor")
-        
-        confirmButton.backgroundColor = noteColor.adjust(by: -3.75)
         
         view.addSubview(titleLabel)
         view.addSubview(datePicker)
@@ -80,7 +77,21 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         confirmButton.heightAnchor.constraint(equalToConstant: screenHeight / 11).isActive = true
         confirmButton.widthAnchor.constraint(equalToConstant: screenWidth - 30).isActive = true
         confirmButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        confirmButton.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 20).isActive = true
+        confirmButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+    }
+    
+    func setupDynamicColors () {
+        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+            view.backgroundColor = .grayBackground
+            datePicker.backgroundColor = .grayBackground
+            let confirmButtonColor = UIColor.grayBackground.adjust(by: 3.75)
+            confirmButton.backgroundColor = confirmButtonColor
+            
+        } else if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+            view.backgroundColor = noteColor
+            datePicker.backgroundColor = noteColor
+            confirmButton.backgroundColor = noteColor.adjust(by: -3.75)
+        }
     }
     
     @objc func setReminder(sender: UIButton) {
@@ -92,14 +103,14 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     
     func scheduleNotification() {
         let center = UNUserNotificationCenter.current()
-
+        
         let content = UNMutableNotificationContent()
         content.title = "Reminder"
         content.body = reminderBodyText
         content.categoryIdentifier = "reminder"
         content.userInfo = ["customData": "placeholder"]
         content.sound = UNNotificationSound.default
-
+        
         let componets = datePicker.calendar?.dateComponents([.day, .hour, .minute], from: datePicker.date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: componets!, repeats: false)
         

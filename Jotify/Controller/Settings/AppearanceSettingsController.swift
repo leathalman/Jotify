@@ -257,7 +257,7 @@ class AppearanceSettingsController: UITableViewController {
             defaults.set(true, forKey: "vibrantDarkModeEnabled")
             defaults.set(false, forKey: "pureDarkModeEnabled")
             defaults.set(true, forKey: "darkModeEnabled")
-            themes.setupDarkMode()
+            themes.setupVibrantDarkMode()
             
             self.viewWillAppear(true)
             self.tableView.reloadData()

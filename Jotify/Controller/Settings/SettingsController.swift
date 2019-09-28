@@ -39,7 +39,7 @@ class SettingsController: UITableViewController {
     func setupDynamicViewElements() {
         if darkModeEnabled() == true {
             if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") {
-                themes.setupDarkMode()
+                themes.setupVibrantDarkMode()
 
                 view.backgroundColor = InterfaceColors.viewBackgroundColor
                 

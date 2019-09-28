@@ -32,7 +32,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ])
         
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
-            themes.setupDarkMode()
+            if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") == true {
+                themes.setupVibrantDarkMode()
+            } else if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") {
+                themes.setupPureDarkMode()
+            }
         } else {
             themes.setupDefaultMode()
         }
