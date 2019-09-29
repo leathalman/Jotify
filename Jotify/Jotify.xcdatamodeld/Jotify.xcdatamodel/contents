@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14897.2" systemVersion="19A546d" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14903" systemVersion="19A573a" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Note" representedClassName="Note" syncable="YES" codeGenerationType="class">
         <attribute name="color" optional="YES" attributeType="String" defaultValueString="white"/>
         <attribute name="content" optional="YES" attributeType="String" defaultValueString="Test"/>
@@ -8,8 +8,10 @@
         <attribute name="dateString" optional="YES" attributeType="String" defaultValueString="January 1, 2019"/>
         <attribute name="isReminder" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="modifiedDate" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="notificationUUID" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="reminderDate" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Note" positionX="-45" positionY="0" width="128" height="148"/>
+        <element name="Note" positionX="-45" positionY="0" width="128" height="178"/>
     </elements>
 </model>

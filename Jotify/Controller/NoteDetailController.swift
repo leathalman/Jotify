@@ -16,6 +16,8 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     var detailText: String = ""
     var index: Int = 0
     
+    let newDate = Date.timeIntervalSinceReferenceDate
+    
     var datePicker: UIDatePicker = UIDatePicker()
     let toolBar = UIToolbar()
     
@@ -32,27 +34,89 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupPersistentNavigationBar()
+        removeReminderIfDelivered()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(notes[index].isReminder)
-        
-        if notes[index].isReminder == true {
-            RemindersData.isReminder = true
-        }
-        
+        resetRemindersData()
         setupNotifications()
         setupView()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
-        let newDate = Date.timeIntervalSinceReferenceDate
-        updateContent(index: index, newContent: writeNoteView.inputTextView.text, newDate: newDate, isReminder: RemindersData.isReminder)
+        updateContent(index: index, newContent: writeNoteView.inputTextView.text, newDate: newDate, isReminder: RemindersData.isReminder, notificationUUID: RemindersData.notificationUUID, reminderDate: RemindersData.reminderDate)
         
         resetNavigationBarForTransition()
+    }
+    
+    func resetRemindersData() {
+        if isFiltering == false {
+            if notes[index].isReminder == true {
+                RemindersData.isReminder = true
+            }
+            
+        } else if isFiltering == true {
+            if filteredNotes[index].isReminder == true {
+                RemindersData.isReminder = true
+            }
+        }
+        
+        RemindersData.notificationUUID = ""
+    }
+    
+    func removeReminderIfDelivered() {
+        if checkIfReminderHasBeenDelivered() == true {
+            updateContent(index: index, newContent: writeNoteView.inputTextView.text, newDate: newDate, isReminder: false, notificationUUID: "", reminderDate: "")
+            UIApplication.shared.applicationIconBadgeNumber -= 1
+        }
+    }
+    
+    func checkIfReminderHasBeenDelivered() -> Bool {
+        
+        if isFiltering == false {
+            
+            let isReminder = notes[index].isReminder
+            
+            if isReminder == true {
+                let reminderDate = notes[index].reminderDate ?? "07/02/2000 11:11 PM"
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
+                let formattedReminderDate = dateFormatter.date(from: reminderDate) ?? Date()
+                
+                let currentDate = Date()
+                
+                if currentDate > formattedReminderDate {
+                    return true
+                } else {
+                    return false
+                }
+            }
+            
+        } else if isFiltering == true {
+            
+            let isReminder = filteredNotes[index].isReminder
+            
+            if isReminder == true {
+                let reminderDate = filteredNotes[index].reminderDate ?? "07/02/2000 11:11 PM"
+
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
+                let formattedReminderDate = dateFormatter.date(from: reminderDate) ?? Date()
+                
+                let currentDate = Date()
+                
+                if currentDate + 10 > formattedReminderDate {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        }
+        
+        return false
     }
     
     func setupPersistentNavigationBar() {
@@ -109,7 +173,9 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         }
         
         textView.tintColor = .white
-        textView.frame = CGRect(x: 0, y: 15, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight)
+        navigationBarHeight = navigationController?.navigationBar.bounds.height ?? 0
+        print(navigationBarHeight)
+        textView.frame = CGRect(x: 0, y: 15, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight - navigationBarHeight - 30)
         textView.text = detailText
         textView.font = UIFont.boldSystemFont(ofSize: 18)
         textView.placeholder = ""
@@ -126,17 +192,37 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         cancel = cancel?.withRenderingMode(.alwaysOriginal)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: cancel, style:.plain, target: self, action: #selector(handleCancel))
         
+        if RemindersData.isReminder == true {
+            setNavBarIfReminderIsActive()
+        } else {
+            setNavBarIfReminderIsNotActive()
+        }
+        
+        self.hideKeyboardWhenTappedAround()
+    }
+    
+    func setNavBarIfReminderIsActive() {
+        var alarm = UIImage(named: "alarm.fill")
+        alarm = alarm?.withRenderingMode(.alwaysOriginal)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: alarm, style: .plain, target: self, action: #selector(handleReminder))
+    }
+    
+    func setNavBarIfReminderIsNotActive() {
         var alarm = UIImage(named: "alarm")
         alarm = alarm?.withRenderingMode(.alwaysOriginal)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: alarm, style: .plain, target: self, action: #selector(handleReminder))
-        
-        self.hideKeyboardWhenTappedAround()
     }
     
     @objc func handleReminder() {
         if RemindersData.isReminder == true {
             //do something if a reminder is already set
+            // present secondary vc that displays time reminder is set, and offers to cancel it
             print("Already set a reminder")
+            let uuid = notes[index].value(forKey: "notificationUUID") as! String
+            
+            let center = UNUserNotificationCenter.current()
+            center.removeDeliveredNotifications(withIdentifiers: [uuid])
+            center.removePendingNotificationRequests(withIdentifiers: [uuid])
             
         } else {
             //present controller to set a reminder if reminder is not already set
@@ -167,7 +253,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         }
     }
     
-    func updateContent(index: Int, newContent: String, newDate: Double, isReminder: Bool){
+    func updateContent(index: Int, newContent: String, newDate: Double, isReminder: Bool, notificationUUID: String, reminderDate: String){
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
                 return
@@ -177,11 +263,15 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
             notes[index].content = newContent
             notes[index].modifiedDate = newDate
             notes[index].isReminder = isReminder
+            notes[index].notificationUUID = notificationUUID
+            notes[index].reminderDate = reminderDate
             
         } else if isFiltering == true {
             filteredNotes[index].content = newContent
             filteredNotes[index].modifiedDate = newDate
             filteredNotes[index].isReminder = isReminder
+            filteredNotes[index].notificationUUID = notificationUUID
+            filteredNotes[index].reminderDate = reminderDate
         }
         
         //setup reminders for next note

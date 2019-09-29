@@ -14,6 +14,7 @@ import BottomPopup
 struct RemindersData {
     static var isReminder = Bool()
     static var reminderDate = String()
+    static var notificationUUID = String()
 }
 
 class ReminderController: BottomPopupViewController, UNUserNotificationCenterDelegate {
@@ -110,16 +111,19 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         //add category for custom buttons
         let center = UNUserNotificationCenter.current()
         
+        let uuid = UUID().uuidString
+        
         let content = UNMutableNotificationContent()
         content.body = reminderBodyText
         content.categoryIdentifier = "reminder"
-        content.userInfo = ["customData": "placeholder"]
+        content.userInfo = ["reminderBodyText": reminderBodyText]
         content.sound = UNNotificationSound.default
-        
+        content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
+
         let componets = datePicker.calendar?.dateComponents([.day, .hour, .minute], from: datePicker.date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: componets!, repeats: false)
         
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: uuid, content: content, trigger: trigger)
         center.add(request)
         
         let dateFormatter = DateFormatter()
@@ -128,6 +132,7 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         
         RemindersData.isReminder = true
         RemindersData.reminderDate = selectedDate
+        RemindersData.notificationUUID = uuid
     }
     
     func feedbackOnPress() {

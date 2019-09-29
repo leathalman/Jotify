@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -40,6 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             themes.setupDefaultMode()
         }
+        
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
         
         return true
     }
@@ -115,4 +119,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    //when app is in foreground
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+//        let userInfo = notification.request.content.userInfo
+        print("THIS IS FIRED")
+                
+        // Play a sound.
+        //  completionHandler(UNNotificationPresentationOptions.sound)
+    }
+    
+    //when app is in background / or notification is tapped
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        let userInfo = response.notification.request.content.userInfo
+
+        if let reminderText = userInfo["reminderBodyText"] {
+            print("Reminder Text: \(reminderText)")
+        }
+                
+        print(userInfo)
+        
+        completionHandler()
+    }
 }
