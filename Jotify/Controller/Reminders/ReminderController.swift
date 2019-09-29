@@ -12,7 +12,6 @@ import AudioToolbox
 import BottomPopup
 
 struct RemindersData {
-    static var isReminder = Bool()
     static var reminderDate = String()
     static var notificationUUID = String()
 }
@@ -26,6 +25,11 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     public var screenHeight: CGFloat {
         return UIScreen.main.bounds.height
     }
+    
+    var notes: [Note] = []
+    var filteredNotes: [Note] = []
+    var isFiltering: Bool = false
+    var index: Int = 0
     
     var noteColor = StoredColors.reminderColor
     var reminderBodyText = String()
@@ -60,8 +64,6 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     }
     
     func setupView() {
-        title = "Set a reminder"
-        
         setupDynamicColors()
         
         datePicker.translatesAutoresizingMaskIntoConstraints = false
@@ -84,6 +86,27 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         confirmButton.widthAnchor.constraint(equalToConstant: screenWidth - 30).isActive = true
         confirmButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         confirmButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+    }
+    
+    func updateContentWithReminder(reminderDate: String, notificationUUID: String) {
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        if isFiltering == false {
+            notes[index].isReminder = true
+            notes[index].reminderDate = reminderDate
+            notes[index].notificationUUID = notificationUUID
+            
+        } else if isFiltering == true {
+            filteredNotes[index].isReminder = true
+            filteredNotes[index].reminderDate = reminderDate
+            filteredNotes[index].notificationUUID = notificationUUID
+
+        }
+        
+        appDelegate.saveContext()
     }
     
     func setupDynamicColors () {
@@ -115,7 +138,6 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         
         let content = UNMutableNotificationContent()
         content.body = reminderBodyText
-        content.categoryIdentifier = "reminder"
         content.userInfo = ["reminderBodyText": reminderBodyText]
         content.sound = UNNotificationSound.default
         content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
@@ -130,9 +152,8 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
         let selectedDate = dateFormatter.string(from: datePicker.date)
         
-        RemindersData.isReminder = true
-        RemindersData.reminderDate = selectedDate
-        RemindersData.notificationUUID = uuid
+        //set acutal note to isReminder true
+        updateContentWithReminder(reminderDate: selectedDate, notificationUUID: uuid)
     }
     
     func feedbackOnPress() {
