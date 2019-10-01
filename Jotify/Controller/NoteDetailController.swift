@@ -56,7 +56,22 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     
     func removeReminderIfDelivered() {
         if checkIfReminderHasBeenDelivered() == true {
-            updateContent(index: index, newContent: writeNoteView.inputTextView.text, newDate: newDate)
+            
+                guard let appDelegate =
+                    UIApplication.shared.delegate as? AppDelegate else {
+                        return
+                }
+                
+                if isFiltering == false {
+                    notes[index].isReminder = false
+                    
+                } else if isFiltering == true {
+                    filteredNotes[index].isReminder = false
+
+                }
+                
+                appDelegate.saveContext()
+            
             UIApplication.shared.applicationIconBadgeNumber -= 1
             
         } else {
@@ -79,7 +94,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
         let date = dateFormatter.date(from: reminderDate) ?? Date()
         let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month, .day, .hour], from: date)
+        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
         let formattedDate = calendar.date(from:components)!
         
         dateFormatter.dateFormat = "MMMM d, yyyy"
@@ -89,10 +104,10 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         let secondPartOfDisplayString = dateFormatter.string(from: formattedDate)
         
         RemindersData.reminderDate = firstPartOfDisplayString + " at " + secondPartOfDisplayString
+        print("From NoteDetail \(RemindersData.reminderDate)")
     }
     
     func checkIfReminderHasBeenDelivered() -> Bool {
-        //refactor!
         
         if isFiltering == false {
             
@@ -107,7 +122,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
                 
                 let currentDate = Date()
                 
-                if currentDate + 10 >= formattedReminderDate {
+                if currentDate >= formattedReminderDate {
                     return true
                 } else {
                     return false
@@ -127,7 +142,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
                 
                 let currentDate = Date()
                 
-                if currentDate + 10 >= formattedReminderDate {
+                if currentDate >= formattedReminderDate {
                     return true
                 } else {
                     return false

@@ -129,8 +129,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 //        let userInfo = notification.request.content.userInfo
         print("THIS IS FIRED")
                 
-        // Play a sound.
-        //  completionHandler(UNNotificationPresentationOptions.sound)
+        //display banner when app is open
+        completionHandler(UNNotificationPresentationOptions.alert)
     }
     
     //when app is in background / or notification is tapped

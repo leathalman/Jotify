@@ -32,4 +32,6 @@ pod'WhatsNewKit'
 # Fantastic framework for customizing height of presenting viewcontrollers
 pod 'BottomPopup'
 
+pod 'SPAlert'
+
 end

@@ -10,8 +10,9 @@
         <attribute name="modifiedDate" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="notificationUUID" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="reminderDate" optional="YES" attributeType="String"/>
+        <attribute name="reminderDateDisplay" optional="YES" attributeType="String" defaultValueString=""/>
     </entity>
     <elements>
-        <element name="Note" positionX="-45" positionY="0" width="128" height="178"/>
+        <element name="Note" positionX="-45" positionY="0" width="128" height="193"/>
     </elements>
 </model>

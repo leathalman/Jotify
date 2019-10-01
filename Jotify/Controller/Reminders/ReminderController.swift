@@ -10,6 +10,7 @@ import UIKit
 import UserNotifications
 import AudioToolbox
 import BottomPopup
+import SPAlert
 
 struct RemindersData {
     static var reminderDate = String()
@@ -88,7 +89,7 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         confirmButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
     }
     
-    func updateContentWithReminder(reminderDate: String, notificationUUID: String) {
+    func updateContentWithReminder(reminderDate: String, notificationUUID: String, reminderDateDisplay: String) {
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
                 return
@@ -98,11 +99,13 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
             notes[index].isReminder = true
             notes[index].reminderDate = reminderDate
             notes[index].notificationUUID = notificationUUID
+            notes[index].reminderDateDisplay = reminderDateDisplay
             
         } else if isFiltering == true {
             filteredNotes[index].isReminder = true
             filteredNotes[index].reminderDate = reminderDate
             filteredNotes[index].notificationUUID = notificationUUID
+            filteredNotes[index].reminderDateDisplay = reminderDateDisplay
 
         }
         
@@ -127,6 +130,10 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         feedbackOnPress()
         //display animation that confirms it worked
         scheduleNotification()
+        
+        //add dark mode support too
+        SPAlert.present(title: "Reminder Set", preset: .done)
+        
         dismiss(animated: true, completion: nil)
     }
     
@@ -142,7 +149,7 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         content.sound = UNNotificationSound.default
         content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
 
-        let componets = datePicker.calendar?.dateComponents([.day, .hour, .minute], from: datePicker.date)
+        let componets = datePicker.calendar?.dateComponents([.year, .month, .day, .hour, .minute], from: datePicker.date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: componets!, repeats: false)
         
         let request = UNNotificationRequest(identifier: uuid, content: content, trigger: trigger)
@@ -150,10 +157,24 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
-        let selectedDate = dateFormatter.string(from: datePicker.date)
+        let dateFromPicker = dateFormatter.string(from: datePicker.date)
         
+        
+        let calendar = Calendar.current
+        let formattedDate = calendar.date(from: componets!)
+        
+        dateFormatter.dateFormat = "MMMM d, yyyy"
+        let firstPartOfDisplayString = dateFormatter.string(from: formattedDate!)
+        
+        dateFormatter.dateFormat = "h:mm a"
+        let secondPartOfDisplayString = dateFormatter.string(from: formattedDate!)
+        
+        RemindersData.reminderDate = firstPartOfDisplayString + " at " + secondPartOfDisplayString
+        
+        let reminderDateString = firstPartOfDisplayString + " at " + secondPartOfDisplayString
+                
         //set acutal note to isReminder true
-        updateContentWithReminder(reminderDate: selectedDate, notificationUUID: uuid)
+        updateContentWithReminder(reminderDate: dateFromPicker, notificationUUID: uuid, reminderDateDisplay: reminderDateString)
     }
     
     func feedbackOnPress() {
