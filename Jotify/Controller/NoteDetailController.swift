@@ -54,12 +54,12 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     func fetchNotificaitonUUID() {
         if isFiltering == false {
             
-            let notificationUUID = notes[index].notificationUUID!
+            let notificationUUID = notes[index].notificationUUID ?? ""
             RemindersData.notificationUUID = notificationUUID
             
         } else if isFiltering == true {
             
-            let notificationUUID = filteredNotes[index].notificationUUID!
+            let notificationUUID = filteredNotes[index].notificationUUID ?? ""
             RemindersData.notificationUUID = notificationUUID
             
         }
@@ -88,12 +88,12 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         } else {
             if isFiltering == false {
                 
-                let reminderDate = notes[index].reminderDate!
+                let reminderDate = notes[index].reminderDate ?? "July 1, 2000 at 12:00 AM"
                 getReminderDateStringToDisplayForUser(reminderDate: reminderDate)
                 
             } else if isFiltering == true {
                 
-                let reminderDate = filteredNotes[index].reminderDate!
+                let reminderDate = filteredNotes[index].reminderDate ?? "July 1, 2000 at 12:00 AM"
                 getReminderDateStringToDisplayForUser(reminderDate: reminderDate)
                 
             }
@@ -259,6 +259,9 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     }
     
     @objc func handleReminder() {
+        let savedNoteController = SavedNoteController()
+        savedNoteController.feedbackOnPress()
+
         if RemindersData.isReminder == false {
             reminderIsNotSet()
         } else {

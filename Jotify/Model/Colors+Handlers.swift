@@ -123,7 +123,6 @@ class Colors {
     
     static func stringFromColor(color: UIColor) -> String {
         
-//        if UserDefaults.standard.string(forKey: "noteColorTheme") == "default" {
             if color == UIColor.lightRed {
                 return "lightRed"
                 
@@ -271,7 +270,7 @@ class Colors {
             return "staticNoteColor"
         }
         
-        return "white"
+        return "blue2"
     }
     
     static func colorFromString(string: String) -> UIColor {
@@ -422,7 +421,7 @@ class Colors {
         if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
             return UserDefaults.standard.color(forKey: "staticNoteColor") ?? UIColor.white
         }
-        return UIColor.white
+        return UIColor.blue2
     }
     
 }
