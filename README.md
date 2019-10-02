@@ -37,7 +37,3 @@ To run this project you will need to use Xcode 11 and iOS 13. **Jotify does not 
 ## License
 
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details
-
-## Acknowledgments
-
-* StackOverFlow... you already knew that
