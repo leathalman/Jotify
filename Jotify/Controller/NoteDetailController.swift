@@ -9,9 +9,6 @@
 import UIKit
 import UserNotifications
 
-//crashes when relaunching and entering existing controller
-//doesnt properly save reminder date???
-
 class NoteDetailController: UIViewController, UITextViewDelegate {
     
     var navigationTitle: String = ""
@@ -42,7 +39,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        resetRemindersData()
+        fetchNotificaitonUUID()
         setupNotifications()
         setupView()
     }
@@ -52,6 +49,20 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         updateContent(index: index, newContent: writeNoteView.inputTextView.text, newDate: newDate)
         
         resetNavigationBarForTransition()
+    }
+    
+    func fetchNotificaitonUUID() {
+        if isFiltering == false {
+            
+            let notificationUUID = notes[index].notificationUUID!
+            RemindersData.notificationUUID = notificationUUID
+            
+        } else if isFiltering == true {
+            
+            let notificationUUID = filteredNotes[index].notificationUUID!
+            RemindersData.notificationUUID = notificationUUID
+            
+        }
     }
     
     func removeReminderIfDelivered() {
@@ -104,14 +115,20 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         let secondPartOfDisplayString = dateFormatter.string(from: formattedDate)
         
         RemindersData.reminderDate = firstPartOfDisplayString + " at " + secondPartOfDisplayString
-        print("From NoteDetail \(RemindersData.reminderDate)")
     }
     
     func checkIfReminderHasBeenDelivered() -> Bool {
         
         if isFiltering == false {
+            let notificationUUID = notes[index].notificationUUID
+            
+            if notificationUUID == "cleared" {
+                notes[index].notificationUUID = "cleared"
+                return true
+            }
             
             let isReminder = notes[index].isReminder
+            RemindersData.isReminder = notes[index].isReminder
             
             if isReminder == true {
                 let reminderDate = notes[index].reminderDate ?? "07/02/2000 11:11 PM"
@@ -130,8 +147,15 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
             }
             
         } else if isFiltering == true {
+            let notificationUUID = filteredNotes[index].notificationUUID
+            
+            if notificationUUID == "cleared" {
+                filteredNotes[index].notificationUUID = "cleared"
+                return true
+            }
             
             let isReminder = filteredNotes[index].isReminder
+            RemindersData.isReminder = filteredNotes[index].isReminder
             
             if isReminder == true {
                 let reminderDate = filteredNotes[index].reminderDate ?? "07/02/2000 11:11 PM"
@@ -235,31 +259,24 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     }
     
     @objc func handleReminder() {
-        
-        if isFiltering == false {
-            if notes[index].isReminder == true {
-                alreadySetReminder()
-                
-            } else {
-                reminderIsNotSet()
-            }
-            
-        } else if isFiltering == true {
-            if filteredNotes[index].isReminder == true {
-                alreadySetReminder()
-                
-            } else {
-                reminderIsNotSet()
-            }
+        if RemindersData.isReminder == false {
+            reminderIsNotSet()
+        } else {
+            alreadySetReminder()
         }
     }
     
     func alreadySetReminder() {
-        //do something if a reminder is already set
-        // present secondary vc that displays time reminder is set, and offers to cancel it
         print("Already set a reminder")
         
-        present(ReminderExistsController(), animated: true, completion: nil)
+        //pass note data so that ReminderExistsController can directly edit the CoreData object
+        let reminderExistsController = ReminderExistsController()
+        reminderExistsController.index = index
+        reminderExistsController.notes = notes
+        reminderExistsController.filteredNotes = filteredNotes
+        reminderExistsController.isFiltering = isFiltering
+        
+        present(reminderExistsController, animated: true, completion: nil)
     }
     
     func reminderIsNotSet() {
@@ -331,7 +348,6 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         
         if notification.name == UIResponder.keyboardWillHideNotification {
             writeNoteView.inputTextView.contentInset = .zero
-            print(writeNoteView.inputTextView.contentInset)
             
         } else {
             writeNoteView.inputTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height + navigationBarHeight + 42, right: 0)

@@ -15,6 +15,7 @@ import SPAlert
 struct RemindersData {
     static var reminderDate = String()
     static var notificationUUID = String()
+    static var isReminder = Bool()
 }
 
 class ReminderController: BottomPopupViewController, UNUserNotificationCenterDelegate {
@@ -128,11 +129,12 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     
     @objc func setReminder(sender: UIButton) {
         feedbackOnPress()
-        //display animation that confirms it worked
         scheduleNotification()
         
         //add dark mode support too
-        SPAlert.present(title: "Reminder Set", preset: .done)
+        let alertView = SPAlertView(title: "Reminder Set", message: nil, preset: .done)
+        alertView.duration = 1
+        alertView.present()
         
         dismiss(animated: true, completion: nil)
     }
@@ -172,6 +174,8 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         RemindersData.reminderDate = firstPartOfDisplayString + " at " + secondPartOfDisplayString
         
         let reminderDateString = firstPartOfDisplayString + " at " + secondPartOfDisplayString
+        
+        RemindersData.isReminder = true
                 
         //set acutal note to isReminder true
         updateContentWithReminder(reminderDate: dateFromPicker, notificationUUID: uuid, reminderDateDisplay: reminderDateString)

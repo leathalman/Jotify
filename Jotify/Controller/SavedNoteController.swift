@@ -419,6 +419,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             }
             
         }))
+        
         actionController.addAction(Action("Share note", style: .default, handler: { action in
             print("Share note")
             self.shareNote(text: content)
@@ -448,6 +449,20 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         let managedContext = appDelegate.persistentContainer.viewContext
         
         managedContext.delete(note)
+
+        if isFiltering() == false {
+            let notificationUUID = notes[int].notificationUUID ?? "empty error in SavedNoteController"
+            let center = UNUserNotificationCenter.current()
+            center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
+            
+            notes.remove(at: int)
+
+        } else {
+            let notificationUUID = filteredNotes[int].notificationUUID ?? "empty error in SavedNoteController"
+            let center = UNUserNotificationCenter.current()
+            center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
+            filteredNotes.remove(at: int)
+        }
         
         notes.remove(at: int)
         

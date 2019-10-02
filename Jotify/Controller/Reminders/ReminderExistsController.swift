@@ -7,12 +7,19 @@
 //
 
 import UIKit
+import UserNotifications
 import BottomPopup
+import SPAlert
 
 class ReminderExistsController: BottomPopupViewController {
     
     var noteColor = StoredColors.reminderColor
     var reminderDate = RemindersData.reminderDate
+    
+    var index: Int = 0
+    var notes: [Note] = []
+    var filteredNotes: [Note] = []
+    var isFiltering: Bool = false
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -38,11 +45,11 @@ class ReminderExistsController: BottomPopupViewController {
         return label
     }()
     
-    lazy var confirmButton: UIButton = {
+    lazy var removeButton: UIButton = {
         let button = UIButton()
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        button.setTitle("Confirm", for: .normal)
-        button.addTarget(self, action: #selector(setReminder(sender:)), for: .touchUpInside)
+        button.setTitle("Delete", for: .normal)
+        button.addTarget(self, action: #selector(removePressed(sender:)), for: .touchUpInside)
         button.backgroundColor = UIColor.black
         button.layer.cornerRadius = 5
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -50,19 +57,38 @@ class ReminderExistsController: BottomPopupViewController {
         return button
     }()
     
+    lazy var cancelButton: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.setTitle("Cancel", for: .normal)
+        button.addTarget(self, action: #selector(cancelPressed(sender:)), for: .touchUpInside)
+        button.backgroundColor = UIColor.black
+        button.layer.cornerRadius = 5
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        print("DISAPPEAR")
+    }
+    
     func setupView() {
         setupDynamicColors()
         
-        detailLabel.text = "Would you like to remove this reminder for \(reminderDate)?"
+        detailLabel.text = "Would you like to delete this reminder for \(reminderDate)?"
         
         view.addSubview(titleLabel)
         view.addSubview(detailLabel)
-        view.addSubview(confirmButton)
+        view.addSubview(removeButton)
+        view.addSubview(cancelButton)
         
         titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 25).isActive = true
@@ -72,29 +98,96 @@ class ReminderExistsController: BottomPopupViewController {
         detailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20).isActive = true
         detailLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 1.15).isActive = true
         
-        confirmButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 11).isActive = true
-        confirmButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 30).isActive = true
-        confirmButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        confirmButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        removeButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 11).isActive = true
+        removeButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 30).isActive = true
+        removeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        removeButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -20).isActive = true
+        
+        cancelButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 11).isActive = true
+        cancelButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 30).isActive = true
+        cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        cancelButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
     }
     
     func setupDynamicColors () {
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
             view.backgroundColor = .grayBackground
-            let confirmButtonColor = UIColor.grayBackground.adjust(by: 3.75)
-            confirmButton.backgroundColor = confirmButtonColor
+            let removeButtonColor = UIColor.grayBackground.adjust(by: 4.75)
+            removeButton.backgroundColor = removeButtonColor
+            
+            let cancelButtonColor = UIColor.grayBackground.adjust(by: 3.75)
+            cancelButton.backgroundColor = cancelButtonColor
             
         } else if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
             view.backgroundColor = noteColor
-            confirmButton.backgroundColor = noteColor.adjust(by: -3.75)
+            removeButton.backgroundColor = noteColor.adjust(by: -7.75)
+            cancelButton.backgroundColor = noteColor.adjust(by: -7.75)
         }
     }
     
-    @objc func setReminder(sender: UIButton) {
-        print("")
+    @objc func removePressed(sender: UIButton) {
+        print("Remove notification")
+        let reminderController = ReminderController()
+        reminderController.feedbackOnPress()
+                
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        if isFiltering == false {
+            let notificationUUID = notes[index].notificationUUID ?? "empty error in ReminderExistsController"
+            let center = UNUserNotificationCenter.current()
+            center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
+            notes[index].notificationUUID = "cleared"
+            notes[index].isReminder = false
+
+        } else if isFiltering == true {
+            let notificationUUID = filteredNotes[index].notificationUUID ?? "empty error in ReminderExistsController"
+            let center = UNUserNotificationCenter.current()
+            center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
+            filteredNotes[index].notificationUUID = "cleared"
+            filteredNotes[index].isReminder = false
+        }
+        
+        appDelegate.saveContext()
+        
+        RemindersData.isReminder = false
+        
+        let alertView = SPAlertView(title: "Reminder Deleted", message: nil, preset: .done)
+        alertView.duration = 1
+        alertView.present()
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func cancelPressed(sender: UIButton) {
+        print("Cancel removing notification")
+        let reminderController = ReminderController()
+        reminderController.feedbackOnPress()
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func estimatedLabelHeight(text: String, width: CGFloat, font: UIFont) -> CGFloat {
+        
+        let size = CGSize(width: width, height: 1000)
+        
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        
+        let attributes = [NSAttributedString.Key.font: font]
+        
+        let rectangleHeight = String(text).boundingRect(with: size, options: options, attributes: attributes, context: nil).height
+        
+        return rectangleHeight
     }
     
     override func getPopupHeight() -> CGFloat {
-        return UIScreen.main.bounds.height / 3 + 20
+        let titleText = titleLabel.text ?? ""
+        let titleHeight = estimatedLabelHeight(text: titleText, width: UIScreen.main.bounds.width - 30, font: .boldSystemFont(ofSize: 35))
+        
+        let detailText = detailLabel.text ?? ""
+        let detailHeight = estimatedLabelHeight(text: detailText, width: UIScreen.main.bounds.width / 1.15, font: .boldSystemFont(ofSize: 20))
+        
+        return ((UIScreen.main.bounds.height / 11) * 2) + (detailHeight + 30) + (titleHeight + 40) + 90
     }
 }
