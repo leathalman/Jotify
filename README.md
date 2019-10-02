@@ -12,11 +12,15 @@ By using NSPersistentCloudKitContainer, this application can serve as an example
 
 ## Testflight
 
-Now available on [Testflight](https://testflight.apple.com/join/EnJVSmNy)! 
+Available on [Testflight](https://testflight.apple.com/join/EnJVSmNy)!
+
+## App Store
+
+Check out Jotify on the [iOS App Store](https://apps.apple.com/us/app/jotify/id1469983730?ls=1)! 
 
 ## Prerequisites
 
-To run this project you will need to be running the latest Xcode 11 Beta and the latest iOS 13 Beta. 
+To run this project you will need to use Xcode 11 and iOS 13. **Jotify does not support iOS 12**.
 
 ## Dependencies
 
@@ -28,6 +32,7 @@ To run this project you will need to be running the latest Xcode 11 Beta and the
 - [ChromaColorPicker](https://github.com/joncardasis/ChromaColorPicker) - Used for picking a static color for notes
 - [WhatsNewKit](https://github.com/SvenTiigi/WhatsNewKit) - Used for displaying information about app updates and onboarding
 - [BottomPopup](https://github.com/ergunemr/BottomPopup) - Used for presenting ViewControllers at a custom height
+- [SPAlert](https://github.com/ivanvorobei/SPAlert) - Used for displaying confirmations to users when reminders are created or deleted
 
 ## License
 
