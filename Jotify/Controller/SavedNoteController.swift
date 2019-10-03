@@ -441,7 +441,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     
     func deleteNote(indexPath: IndexPath, int: Int) {
         let note = notes[indexPath.row]
-        
+                
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
                 return
@@ -451,20 +451,53 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         managedContext.delete(note)
 
         if isFiltering() == false {
+            //remove pending notification
             let notificationUUID = notes[int].notificationUUID ?? "empty error in SavedNoteController"
             let center = UNUserNotificationCenter.current()
             center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
             
+            //remove notification on badge if already delivered but not opened
+            let isReminder = notes[int].isReminder
+            if isReminder == true {
+                let reminderDate = notes[int].reminderDate ?? "07/02/2000 11:11 PM"
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
+                let formattedReminderDate = dateFormatter.date(from: reminderDate) ?? Date()
+                
+                let currentDate = Date()
+                
+                if currentDate >= formattedReminderDate {
+                    UIApplication.shared.applicationIconBadgeNumber -= 1
+                }
+            }
+            
             notes.remove(at: int)
 
         } else {
+            //remove pending notification
             let notificationUUID = filteredNotes[int].notificationUUID ?? "empty error in SavedNoteController"
             let center = UNUserNotificationCenter.current()
             center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
+            
+            //remove notification on badge if already delivered but not opened
+            let isReminder = filteredNotes[int].isReminder
+            if isReminder == true {
+                let reminderDate = filteredNotes[int].reminderDate ?? "07/02/2000 11:11 PM"
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
+                let formattedReminderDate = dateFormatter.date(from: reminderDate) ?? Date()
+                
+                let currentDate = Date()
+                
+                if currentDate >= formattedReminderDate {
+                    UIApplication.shared.applicationIconBadgeNumber -= 1
+                }
+            }
+            
             filteredNotes.remove(at: int)
         }
-        
-        notes.remove(at: int)
         
         appDelegate.saveContext()
         

@@ -207,7 +207,15 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         )
         
         var configuration = WhatsNewViewController.Configuration()
-        configuration.backgroundColor = .white
+        
+        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+            configuration.apply(theme: .darkDefault)
+            configuration.backgroundColor = .grayBackground
+            
+        } else {
+            configuration.apply(theme: .default)
+        }
+        
         configuration.titleView.titleColor = tintColor
         configuration.titleView.insets = UIEdgeInsets(top: 40, left: 20, bottom: 15, right: 15)
         configuration.itemsView.titleFont = .boldSystemFont(ofSize: 17)
