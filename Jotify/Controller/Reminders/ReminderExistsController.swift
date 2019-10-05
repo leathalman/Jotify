@@ -82,7 +82,7 @@ class ReminderExistsController: BottomPopupViewController {
         removeButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 11).isActive = true
         removeButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 30).isActive = true
         removeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        removeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        removeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40).isActive = true
     }
     
     func setupDynamicColors () {
@@ -160,6 +160,6 @@ class ReminderExistsController: BottomPopupViewController {
         let detailText = detailLabel.text ?? ""
         let detailHeight = estimatedLabelHeight(text: detailText, width: UIScreen.main.bounds.width / 1.15, font: .boldSystemFont(ofSize: 20))
         
-        return (UIScreen.main.bounds.height / 11) + (detailHeight + 30) + (titleHeight + 40) + 70
+        return (UIScreen.main.bounds.height / 11) + (detailHeight + 30) + (titleHeight + 40) + 90
     }
 }

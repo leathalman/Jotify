@@ -66,8 +66,8 @@ public extension WhatsNewViewController {
                     titleColor: UIColor = .white,
                     cornerRadius: CGFloat = 14,
                     animation: Animation? = nil,
-                    insets: UIEdgeInsets = .init(top: 5, left: 23.5, bottom: 53.5, right: 23.5),
-                    contentEdgeInsets: UIEdgeInsets = .init(top: 14, left: 0, bottom: 14, right: 0)) {
+                    insets: UIEdgeInsets = .init(top: 30, left: 23.5, bottom: 53.5, right: 23.5),
+                    contentEdgeInsets: UIEdgeInsets = .init(top: 25, left: 0, bottom: 25, right: 0)) {
             self.title = title
             self.action = action
             self.hapticFeedback = hapticFeedback

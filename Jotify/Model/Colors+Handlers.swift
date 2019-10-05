@@ -24,7 +24,7 @@ extension UIColor {
     static let grayBackground = UIColor(r: 40, g: 40, b: 40)
     static let offBlackBackground = UIColor(r: 25, g: 25, b: 25)
     
-    static let cellLight = UIColor(r: 242, g: 242, b: 242)
+    static let cellLight = UIColor(r: 246, g: 246, b: 246)
     static let cellDark = UIColor(r: 35, g: 35, b: 35)
     static let cellPureDark = cellDark.adjust(by: -3.75)
     

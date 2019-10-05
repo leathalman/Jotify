@@ -87,7 +87,7 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         confirmButton.heightAnchor.constraint(equalToConstant: screenHeight / 11).isActive = true
         confirmButton.widthAnchor.constraint(equalToConstant: screenWidth - 30).isActive = true
         confirmButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        confirmButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        confirmButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40).isActive = true
     }
     
     func updateContentWithReminder(reminderDate: String, notificationUUID: String, reminderDateDisplay: String) {
@@ -117,13 +117,13 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
             view.backgroundColor = .grayBackground
             datePicker.backgroundColor = .grayBackground
-            let confirmButtonColor = UIColor.grayBackground.adjust(by: 3.75)
+            let confirmButtonColor = UIColor.grayBackground.adjust(by: 4.75)
             confirmButton.backgroundColor = confirmButtonColor
             
         } else if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
             view.backgroundColor = noteColor
             datePicker.backgroundColor = noteColor
-            confirmButton.backgroundColor = noteColor.adjust(by: -3.75)
+            confirmButton.backgroundColor = noteColor.adjust(by: -7.75)
         }
     }
     
@@ -195,7 +195,7 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     }
     
     override func getPopupHeight() -> CGFloat {
-        return 80 + (screenHeight / 11) + datePicker.frame.height
+        return 80 + (screenHeight / 11) + datePicker.frame.height + 30
     }
     
 }
