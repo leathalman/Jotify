@@ -32,6 +32,10 @@ class SettingsSwitchCell: UITableViewCell {
         switchButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
+    override func prepareForReuse() {
+        switchButton.removeTarget(nil, action: nil, for: .allEvents)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
