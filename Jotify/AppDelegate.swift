@@ -30,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             "darkModeEnabled": false,
             "vibrantDarkModeEnabled": false,
             "pureDarkModeEnabled": false,
-            "isFirstLaunch": true,
             "useBiometrics": false,
             "writeNotePlaceholder": "Start typing or swipe left for saved notes...",
         ])

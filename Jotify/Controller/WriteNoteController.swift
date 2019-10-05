@@ -55,7 +55,6 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        // handling code\
         writeNoteView.inputTextView.becomeFirstResponder()
     }
     
