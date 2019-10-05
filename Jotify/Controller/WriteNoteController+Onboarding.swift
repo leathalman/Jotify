@@ -10,59 +10,59 @@ import UIKit
 
 extension WriteNoteController {
     
-    //    func presentOnboarding() {
-    //        //check to see if the user is new, updated, or neither
-    //        let standard = UserDefaults.standard
-    //        let shortVersionKey = "CFBundleShortVersionString"
-    //        let currentVersion = Bundle.main.infoDictionary![shortVersionKey] as! String
-    //        let previousVersion = standard.object(forKey: shortVersionKey) as? String
-    //        if previousVersion == currentVersion {
-    //            //same version, no update
-    //            print("same version")
-    //
-    //        } else {
-    //            // replace with `if let previousVersion = previousVersion {` if you need the exact value
-    //            if previousVersion != nil {
-    //                // new version
-    //                print("new version")
-    //                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
-    //
-    //            } else {
-    //                // first launch
-    //                print("first launch")
-    //                presentFirstLaunchOnboarding(viewController: self, tintColor: StoredColors.noteColor)
-    //            }
-    //            standard.set(currentVersion, forKey: shortVersionKey)
-    //        }
-    //    }
+//    func presentOnboarding() {
+//        //check to see if the user is new, updated, or neither
+//        let standard = UserDefaults.standard
+//        let shortVersionKey = "CFBundleShortVersionString"
+//        let currentVersion = Bundle.main.infoDictionary![shortVersionKey] as! String
+//        let previousVersion = standard.object(forKey: shortVersionKey) as? String
+//        if previousVersion == currentVersion {
+//            //same version, no update
+//            print("same version")
+//
+//        } else {
+//            // replace with `if let previousVersion = previousVersion {` if you need the exact value
+//            if previousVersion != nil {
+//                // new version
+//                print("new version")
+//                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+//
+//            } else {
+//                // first launch
+//                print("first launch")
+//                presentFirstLaunchOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+//            }
+//            standard.set(currentVersion, forKey: shortVersionKey)
+//        }
+//    }
     
     //TEMPORARY VERSION BECAUSE THIS WAS NOT IMPLEMENTED IN 1.0.0
     //CHANGE FROM FIRST LAUNCH TO NEW VERSION FOR ALL FUTURE UPDATES
-        func presentOnboarding() {
-            //check to see if the user is new, updated, or neither
-            let standard = UserDefaults.standard
-            let shortVersionKey = "CFBundleShortVersionString"
-            let currentVersion = Bundle.main.infoDictionary![shortVersionKey] as! String
-            let previousVersion = standard.object(forKey: shortVersionKey) as? String
-            if previousVersion == currentVersion {
-                //same version, no update
-                print("same version")
-    
+    func presentOnboarding() {
+        //check to see if the user is new, updated, or neither
+        let standard = UserDefaults.standard
+        let shortVersionKey = "CFBundleShortVersionString"
+        let currentVersion = Bundle.main.infoDictionary![shortVersionKey] as! String
+        let previousVersion = standard.object(forKey: shortVersionKey) as? String
+        if previousVersion == currentVersion {
+            //same version, no update
+            print("same version")
+            
+        } else {
+            // replace with `if let previousVersion = previousVersion {` if you need the exact value
+            if previousVersion != nil {
+                // new version
+                print("new version")
+                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+                
             } else {
-                // replace with `if let previousVersion = previousVersion {` if you need the exact value
-                if previousVersion != nil {
-                    // new version
-                    print("new version")
-                    presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
-    
-                } else {
-                    // first launch
-                    print("first launch")
-                    presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
-                }
-                standard.set(currentVersion, forKey: shortVersionKey)
+                // first launch
+                print("first launch")
+                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
             }
+            standard.set(currentVersion, forKey: shortVersionKey)
         }
+    }
     
     func presentUpdateOnboarding(viewController: UIViewController, tintColor: UIColor) {
         //Jotify v1.1.0 Onboarding

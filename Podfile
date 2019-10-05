@@ -29,6 +29,7 @@ pod'ChromaColorPicker'
 # Fantastic framework for customizing height of presenting viewcontrollers
 pod 'BottomPopup'
 
+# Used for displaying confirmations to users when reminders are created or deleted
 pod 'SPAlert'
 
 end
