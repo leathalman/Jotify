@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
+        
         UserDefaults.standard.register(defaults: [
             "noteColorTheme": "default",
             "useRandomColor": true,
@@ -41,9 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             themes.setupDefaultMode()
         }
-        
-        let center = UNUserNotificationCenter.current()
-        center.delegate = self
         
         return true
     }

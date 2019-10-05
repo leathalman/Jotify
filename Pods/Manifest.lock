@@ -6,7 +6,6 @@ PODS:
   - Pageboy (3.2.2)
   - SPAlert (1.1.1)
   - ViewAnimator (2.5.1)
-  - WhatsNewKit (1.2.0)
   - XLActionController (5.0.0):
     - XLActionController/Core (= 5.0.0)
   - XLActionController/Core (5.0.0)
@@ -21,7 +20,6 @@ DEPENDENCIES:
   - Pageboy (~> 3.2)
   - SPAlert
   - ViewAnimator
-  - WhatsNewKit
   - XLActionController
   - XLActionController/Skype
 
@@ -34,7 +32,6 @@ SPEC REPOS:
     - Pageboy
     - SPAlert
     - ViewAnimator
-    - WhatsNewKit
     - XLActionController
 
 SPEC CHECKSUMS:
@@ -45,9 +42,8 @@ SPEC CHECKSUMS:
   Pageboy: b6e8f5082c23ef2490ddf21339fb6e19673d1453
   SPAlert: 292690a27df49ff131d532a0a39d89b08dd93e4d
   ViewAnimator: 173932c659a43c5a15c665878750d92801ae2cf1
-  WhatsNewKit: 3fc7e34db0902b086fa2760e05d4d4403a38a0e0
   XLActionController: d7dea0b162bd3977311bcba7d377b88d6b87a7b4
 
-PODFILE CHECKSUM: 4ebc27a473c2b9191ed124e0e563354f951f9baf
+PODFILE CHECKSUM: 1c5e1313a1d67101d10e6c2fb67749ac7787830e
 
 COCOAPODS: 1.7.1

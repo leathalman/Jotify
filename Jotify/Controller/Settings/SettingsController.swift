@@ -147,7 +147,7 @@ class SettingsController: UITableViewController {
             switch indexPath.row {
             case 0:
                 let writeNoteController = WriteNoteController()
-                writeNoteController.presentOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+                writeNoteController.presentFirstLaunchOnboarding(viewController: self, tintColor: StoredColors.noteColor)
                 
                 let cell = tableView.cellForRow(at: indexPath)
                 cell?.isSelected = false
