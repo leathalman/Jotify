@@ -57,27 +57,9 @@ class ReminderExistsController: BottomPopupViewController {
         return button
     }()
     
-    lazy var cancelButton: UIButton = {
-        let button = UIButton()
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        button.setTitle("Cancel", for: .normal)
-        button.addTarget(self, action: #selector(cancelPressed(sender:)), for: .touchUpInside)
-        button.backgroundColor = UIColor.black
-        button.layer.cornerRadius = 5
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        return button
-    }()
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(true)
-        print("DISAPPEAR")
     }
     
     func setupView() {
@@ -88,7 +70,6 @@ class ReminderExistsController: BottomPopupViewController {
         view.addSubview(titleLabel)
         view.addSubview(detailLabel)
         view.addSubview(removeButton)
-        view.addSubview(cancelButton)
         
         titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 25).isActive = true
@@ -101,12 +82,7 @@ class ReminderExistsController: BottomPopupViewController {
         removeButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 11).isActive = true
         removeButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 30).isActive = true
         removeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        removeButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -20).isActive = true
-        
-        cancelButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 11).isActive = true
-        cancelButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 30).isActive = true
-        cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        cancelButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        removeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
     }
     
     func setupDynamicColors () {
@@ -115,13 +91,9 @@ class ReminderExistsController: BottomPopupViewController {
             let removeButtonColor = UIColor.grayBackground.adjust(by: 4.75)
             removeButton.backgroundColor = removeButtonColor
             
-            let cancelButtonColor = UIColor.grayBackground.adjust(by: 3.75)
-            cancelButton.backgroundColor = cancelButtonColor
-            
         } else if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
             view.backgroundColor = noteColor
             removeButton.backgroundColor = noteColor.adjust(by: -7.75)
-            cancelButton.backgroundColor = noteColor.adjust(by: -7.75)
         }
     }
     
@@ -188,6 +160,6 @@ class ReminderExistsController: BottomPopupViewController {
         let detailText = detailLabel.text ?? ""
         let detailHeight = estimatedLabelHeight(text: detailText, width: UIScreen.main.bounds.width / 1.15, font: .boldSystemFont(ofSize: 20))
         
-        return ((UIScreen.main.bounds.height / 11) * 2) + (detailHeight + 30) + (titleHeight + 40) + 90
+        return (UIScreen.main.bounds.height / 11) + (detailHeight + 30) + (titleHeight + 40) + 70
     }
 }
