@@ -15,7 +15,7 @@ class CoreDataManager {
     
     private var context: NSManagedObjectContext
     private var container: NSPersistentCloudKitContainer
-
+    
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     let persistentContainerQueue = OperationQueue()
     

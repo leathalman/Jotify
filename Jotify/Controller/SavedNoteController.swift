@@ -18,7 +18,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     var notes: [Note] = []
     var filteredNotes: [Note] = []
     
-    var firstLaunch: Bool = true
     var pressed: Int = 0
     
     let emptyView = EmptyView()
@@ -43,11 +42,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             setupSearchBar()
         }
         
-        if firstLaunch == true {
-            fetchNotesFromCoreData()
-            firstLaunch = false
-        }
-        
+        fetchNotesFromCoreData()
         setupDynamicViewElements()
     }
     
@@ -307,14 +302,16 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         fetchRequest.sortDescriptors = [sortDescriptor] as? [NSSortDescriptor]
         
-        do {
-            notes = try managedContext.fetch(fetchRequest) as! [Note]
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
+        CoreDataManager.shared.enqueue { (context) in
+            do {
+                self.notes = try managedContext.fetch(fetchRequest) as! [Note]
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+                
+            } catch let error as NSError {
+                print("Could not fetch. \(error), \(error.userInfo)")
             }
-            
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
         }
     }
     
