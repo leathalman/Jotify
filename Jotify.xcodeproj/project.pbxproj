@@ -34,6 +34,7 @@
 		F61EC8D22348E1BA00FB0A63 /* KeyValueWhatsNewVersionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61EC8BA2348E1BA00FB0A63 /* KeyValueWhatsNewVersionStore.swift */; };
 		F61EC8D32348E1BA00FB0A63 /* WhatsNewVersionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61EC8BB2348E1BA00FB0A63 /* WhatsNewVersionStore.swift */; };
 		F61EC8D52348EE5200FB0A63 /* WriteNoteController+Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61EC8D42348EE5200FB0A63 /* WriteNoteController+Onboarding.swift */; };
+		F637FD2A2349422400288369 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F637FD292349422400288369 /* CoreDataManager.swift */; };
 		F63A0C7922DE031E00B8A480 /* VerticalAlignLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63A0C7822DE031E00B8A480 /* VerticalAlignLabel.swift */; };
 		F644968622C16422009CC386 /* NoteDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F644968522C16422009CC386 /* NoteDetailController.swift */; };
 		F650E13322BFF35A008D29AD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E13222BFF35A008D29AD /* SceneDelegate.swift */; };
@@ -98,6 +99,7 @@
 		F61EC8BA2348E1BA00FB0A63 /* KeyValueWhatsNewVersionStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyValueWhatsNewVersionStore.swift; sourceTree = "<group>"; };
 		F61EC8BB2348E1BA00FB0A63 /* WhatsNewVersionStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNewVersionStore.swift; sourceTree = "<group>"; };
 		F61EC8D42348EE5200FB0A63 /* WriteNoteController+Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WriteNoteController+Onboarding.swift"; sourceTree = "<group>"; };
+		F637FD292349422400288369 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		F63A0C7822DE031E00B8A480 /* VerticalAlignLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalAlignLabel.swift; sourceTree = "<group>"; };
 		F644968522C16422009CC386 /* NoteDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailController.swift; sourceTree = "<group>"; };
 		F650E12D22BFF35A008D29AD /* Jotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -332,6 +334,7 @@
 				F65BD147231D89A300A06D2B /* AppConfiguration+Helpers.swift */,
 				F686D85122C9B10900C6F555 /* Colors+Handlers.swift */,
 				F6B2083622DE22860098CF9F /* Themes.swift */,
+				F637FD292349422400288369 /* CoreDataManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				F65E479D2324B10500FCAEF3 /* UIViewController+Extensions.swift in Sources */,
 				F61EC8C92348E1BA00FB0A63 /* UIColor+Defaults.swift in Sources */,
 				F686D84D22C9269D00C6F555 /* PageViewController.swift in Sources */,
+				F637FD2A2349422400288369 /* CoreDataManager.swift in Sources */,
 				F650E16422BFFB20008D29AD /* SettingsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

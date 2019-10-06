@@ -67,12 +67,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     
     func removeReminderIfDelivered() {
         if checkIfReminderHasBeenDelivered() == true {
-            
-                guard let appDelegate =
-                    UIApplication.shared.delegate as? AppDelegate else {
-                        return
-                }
-                
+                            
                 if isFiltering == false {
                     notes[index].isReminder = false
                     
@@ -81,7 +76,14 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
 
                 }
                 
-                appDelegate.saveContext()
+                CoreDataManager.shared.enqueue { (context) in
+                    do {
+                        try context.save()
+                        
+                    } catch let error as NSError {
+                        print("Could not save. \(error), \(error.userInfo)")
+                    }
+                }
             
             UIApplication.shared.applicationIconBadgeNumber -= 1
             
@@ -318,11 +320,6 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     }
     
     func updateContent(index: Int, newContent: String, newDate: Double){
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
         if isFiltering == false {
             notes[index].content = newContent
             notes[index].modifiedDate = newDate
@@ -332,7 +329,15 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
             filteredNotes[index].modifiedDate = newDate
         }
         
-        appDelegate.saveContext()
+        CoreDataManager.shared.enqueue { (context) in
+            do {
+                try context.save()
+                
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+        }
+        
     }
     
     func setupNotifications() {

@@ -90,11 +90,6 @@ class ColorPickerController: UIViewController {
     }
     
     func setStaticColorForNotes() {
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
         let writeNoteView = WriteNoteView()
         var newBackgroundColor = UIColor.white
         
@@ -111,7 +106,15 @@ class ColorPickerController: UIViewController {
         
         writeNoteView.colorView.backgroundColor = newBackgroundColor
         
-        appDelegate.saveContext()
+        CoreDataManager.shared.enqueue { (context) in
+            do {
+                try context.save()
+                
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+        }
+        
     }
     
     func fetchData() {

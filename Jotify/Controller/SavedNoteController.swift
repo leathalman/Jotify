@@ -228,9 +228,9 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                 pressed = 0
                 
             } else if pressed == 3 {
-            print("Sort by reminders")
-            defaults.set("reminders", forKey: "sortBy")
-            pressed = 0
+                print("Sort by reminders")
+                defaults.set("reminders", forKey: "sortBy")
+                pressed = 0
                 
             }
             fetchNotesFromCoreData()
@@ -441,15 +441,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     
     func deleteNote(indexPath: IndexPath, int: Int) {
         let note = notes[indexPath.row]
-                
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        let managedContext = appDelegate.persistentContainer.viewContext
         
-        managedContext.delete(note)
-
         if isFiltering() == false {
             //remove pending notification
             let notificationUUID = notes[int].notificationUUID ?? "empty error in SavedNoteController"
@@ -473,7 +465,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             }
             
             notes.remove(at: int)
-
+            
         } else {
             //remove pending notification
             let notificationUUID = filteredNotes[int].notificationUUID ?? "empty error in SavedNoteController"
@@ -499,7 +491,19 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             filteredNotes.remove(at: int)
         }
         
-        appDelegate.saveContext()
+        //needs to delete from viewContext itself?
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let managedContext = appDelegate?.persistentContainer.viewContext
+        managedContext?.delete(note)
+        
+        CoreDataManager.shared.enqueue { (context) in
+            do {
+                try context.save()
+                
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+        }
         
         DispatchQueue.main.async {
             self.collectionView.reloadData()

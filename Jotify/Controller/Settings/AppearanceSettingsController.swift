@@ -209,12 +209,7 @@ class AppearanceSettingsController: UITableViewController {
         }
     }
     
-    func setNewColorsForExistingNotes() {
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
+    func setNewColorsForExistingNotes() { 
         let writeNoteView = WriteNoteView()
         var newBackgroundColor = UIColor.white
         
@@ -248,7 +243,15 @@ class AppearanceSettingsController: UITableViewController {
         
         writeNoteView.colorView.backgroundColor = newBackgroundColor
         
-        appDelegate.saveContext()
+        CoreDataManager.shared.enqueue { (context) in
+            do {
+                try context.save()
+                
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+        }
+        
     }
     
     @objc func vibrantDarkModeSwitchPressed(sender: UISwitch) {

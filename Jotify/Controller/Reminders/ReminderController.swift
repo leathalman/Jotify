@@ -91,11 +91,6 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     }
     
     func updateContentWithReminder(reminderDate: String, notificationUUID: String, reminderDateDisplay: String) {
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
         if isFiltering == false {
             notes[index].isReminder = true
             notes[index].reminderDate = reminderDate
@@ -107,10 +102,18 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
             filteredNotes[index].reminderDate = reminderDate
             filteredNotes[index].notificationUUID = notificationUUID
             filteredNotes[index].reminderDateDisplay = reminderDateDisplay
-
+            
         }
         
-        appDelegate.saveContext()
+        CoreDataManager.shared.enqueue { (context) in
+            do {
+                try context.save()
+                
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+        }
+        
     }
     
     func setupDynamicColors () {
@@ -150,7 +153,7 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         content.userInfo = ["reminderBodyText": reminderBodyText]
         content.sound = UNNotificationSound.default
         content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
-
+        
         let componets = datePicker.calendar?.dateComponents([.year, .month, .day, .hour, .minute], from: datePicker.date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: componets!, repeats: false)
         
@@ -176,7 +179,7 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         let reminderDateString = firstPartOfDisplayString + " at " + secondPartOfDisplayString
         
         RemindersData.isReminder = true
-                
+        
         //set acutal note to isReminder true
         updateContentWithReminder(reminderDate: dateFromPicker, notificationUUID: uuid, reminderDateDisplay: reminderDateString)
     }

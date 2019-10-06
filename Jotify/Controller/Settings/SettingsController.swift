@@ -40,7 +40,7 @@ class SettingsController: UITableViewController {
         if darkModeEnabled() == true {
             if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") {
                 themes.setupVibrantDarkMode()
-
+                
                 view.backgroundColor = InterfaceColors.viewBackgroundColor
                 
                 tableView.separatorColor = InterfaceColors.separatorColor
@@ -50,7 +50,7 @@ class SettingsController: UITableViewController {
                 setupDarkPersistentNavigationBar()
             } else if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") == true {
                 themes.setupPureDarkMode()
-
+                
                 view.backgroundColor = InterfaceColors.viewBackgroundColor
                 
                 tableView.separatorColor = InterfaceColors.separatorColor
@@ -100,22 +100,17 @@ class SettingsController: UITableViewController {
     }
     
     func deleteAllNotes(entity: String) {
-        
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
-        
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         
-        do {
-            try managedContext.execute(batchDeleteRequest)
-            try managedContext.save()
-            
-        } catch {
-            print("Error batch deleting data of entity: \(entity)")
+        CoreDataManager.shared.enqueue { (context) in
+            do {
+                try context.execute(batchDeleteRequest)
+                try context.save()
+                
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
         }
     }
     
@@ -151,7 +146,7 @@ class SettingsController: UITableViewController {
                 
                 let cell = tableView.cellForRow(at: indexPath)
                 cell?.isSelected = false
-            
+                
             case 1:
                 let alert = UIAlertController(title: "Are you sure?", message: "This will reset all settings to default.", preferredStyle: .alert)
                 

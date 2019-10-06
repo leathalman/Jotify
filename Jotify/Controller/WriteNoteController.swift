@@ -17,7 +17,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     let themes = Themes()
     
     let defaults = UserDefaults.standard
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -125,19 +125,25 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     
     func saveNote(content: String, color: String, date: Double) {
         
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
+        CoreDataManager.shared.enqueue { (context) in
+            do {
+                self.setNoteValues(context: context, content: content, color: color, date: date)
+                try context.save()
+                
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
         }
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "Note", in: managedContext)!
-        let note = NSManagedObject(entity: entity, insertInto: managedContext)
+    }
+    
+    func setNoteValues(context: NSManagedObjectContext, content: String, color: String, date: Double) {
+        let entity = NSEntityDescription.entity(forEntityName: "Note", in: context)!
+        let note = NSManagedObject(entity: entity, insertInto: context)
         
         note.setValue(content, forKeyPath: "content")
         note.setValue(color, forKey: "color")
         note.setValue(date, forKey: "date")
         
-        //new values before launch
         note.setValue(date, forKey: "createdDate")
         note.setValue(date, forKey: "modifiedDate")
         note.setValue(false, forKey: "isReminder")
@@ -150,12 +156,6 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         let dateString = dateFormatter.string(from: updateDate)
         
         note.setValue(dateString, forKey: "dateString")
-        
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

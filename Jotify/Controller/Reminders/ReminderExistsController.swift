@@ -101,11 +101,6 @@ class ReminderExistsController: BottomPopupViewController {
         print("Remove notification")
         let reminderController = ReminderController()
         reminderController.feedbackOnPress()
-                
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
         
         if isFiltering == false {
             let notificationUUID = notes[index].notificationUUID ?? "empty error in ReminderExistsController"
@@ -113,7 +108,7 @@ class ReminderExistsController: BottomPopupViewController {
             center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
             notes[index].notificationUUID = "cleared"
             notes[index].isReminder = false
-
+            
         } else if isFiltering == true {
             let notificationUUID = filteredNotes[index].notificationUUID ?? "empty error in ReminderExistsController"
             let center = UNUserNotificationCenter.current()
@@ -122,7 +117,14 @@ class ReminderExistsController: BottomPopupViewController {
             filteredNotes[index].isReminder = false
         }
         
-        appDelegate.saveContext()
+        CoreDataManager.shared.enqueue { (context) in
+            do {
+                try context.save()
+                
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+        }
         
         RemindersData.isReminder = false
         
