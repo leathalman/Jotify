@@ -9,6 +9,14 @@
 import UIKit
 import UserNotifications
 
+struct EditingData {
+    static var index = Int()
+    static var newContent = String()
+    static var newDate = Double()
+    static var notes = Array<Note>()
+    static var isEditing = Bool()
+}
+
 class NoteDetailController: UIViewController, UITextViewDelegate {
     
     var navigationTitle: String = ""
@@ -42,6 +50,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         fetchNotificaitonUUID()
         setupNotifications()
         setupView()
+        setEditingData()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -49,6 +58,16 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         updateContent(index: index, newContent: writeNoteView.inputTextView.text, newDate: newDate)
         
         resetNavigationBarForTransition()
+        EditingData.isEditing = false
+    }
+    
+    func setEditingData() {
+        EditingData.newDate = newDate
+        EditingData.index = index
+        EditingData.notes = notes
+        //use isEditing to determine if we are on the NoteDetailController
+        //if we are, then call function to save data
+        EditingData.isEditing = true
     }
     
     func fetchNotificaitonUUID() {
@@ -245,6 +264,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         textView.isUserInteractionEnabled = true
         textView.isScrollEnabled = true
         textView.isPlaceholderScrollEnabled = true
+        textView.delegate = self
         
         navigationItem.title = navigationTitle
         navigationItem.setHidesBackButton(true, animated:true)
@@ -338,6 +358,13 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
             }
         }
         
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        //set newContent everytime character is changed
+        EditingData.newContent = textView.text
+        
+        return true
     }
     
     func setupNotifications() {

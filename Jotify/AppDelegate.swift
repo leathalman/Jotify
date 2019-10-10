@@ -50,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
+        saveNoteBeforeExiting()
         self.saveContext()
     }
     
@@ -74,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //set a merge policy when queues do not work properly
         //you never want a merge conflict to exist becuase data will be lost
         //only set for backup cases
-//        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        //        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         
         // get the store description
         guard let description = container.persistentStoreDescriptions.first else {
@@ -128,9 +129,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     //when app is in foreground
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
-//        let userInfo = notification.request.content.userInfo
+        //        let userInfo = notification.request.content.userInfo
         print("THIS IS FIRED")
-                
+        
         //display banner when app is open
         completionHandler(UNNotificationPresentationOptions.alert)
     }
@@ -139,13 +140,29 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
         let userInfo = response.notification.request.content.userInfo
-
+        
         if let reminderText = userInfo["reminderBodyText"] {
             print("Reminder Text: \(reminderText)")
         }
-                
+        
         print(userInfo)
         
         completionHandler()
+    }
+    
+    func saveNoteBeforeExiting() {
+        if EditingData.isEditing == true {
+            let noteDetailController = NoteDetailController()
+            let index = EditingData.index
+            let newContent = EditingData.newContent
+            let newDate = EditingData.newDate
+            let notes = EditingData.notes
+            noteDetailController.notes = notes
+            noteDetailController.updateContent(index: index, newContent: newContent, newDate: newDate)
+            print("Note data successfully saved.")
+            
+        } else {
+            print("No new note data to save.")
+        }
     }
 }
