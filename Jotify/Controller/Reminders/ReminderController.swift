@@ -152,6 +152,7 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         content.body = reminderBodyText
         content.userInfo = ["reminderBodyText": reminderBodyText]
         content.sound = UNNotificationSound.default
+        //ALWAYS RETURNS ONE.... so yay thats not the move
         content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
         
         let componets = datePicker.calendar?.dateComponents([.year, .month, .day, .hour, .minute], from: datePicker.date)

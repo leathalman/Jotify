@@ -154,7 +154,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         if defaults.bool(forKey: "showAlertOnSort") == true {
             if defaults.bool(forKey: "useRandomColor") == false {
-                actionController.backgroundColor = defaults.color(forKey: "staticNoteColor") ?? UIColor.white
+                actionController.backgroundColor = defaults.color(forKey: "staticNoteColor") ?? UIColor.blue2
                 
             } else if defaults.bool(forKey: "darkModeEnabled") == false {
                 
@@ -323,9 +323,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         }, completion: nil)
     }
     
-    @objc func tapHandler(_ sender: UITapGestureRecognizer) {
-        print("Tap triggered")
-        
+    @objc func tapHandler(_ sender: UITapGestureRecognizer) {        
         let location = sender.location(in: self.collectionView)
         let indexPath = self.collectionView.indexPathForItem(at: location)
         let rowNumber : Int = indexPath?.row ?? 0
@@ -357,7 +355,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         noteDetailController.navigationController?.navigationItem.title = dateString
         noteDetailController.navigationTitle = dateString
         
-        var cellColor: UIColor = .white
+        var cellColor: UIColor = .blue2
         cellColor = Colors.colorFromString(string: color)
         
         noteDetailController.backgroundColor = cellColor
@@ -546,7 +544,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         }
         
         let content = note.value(forKey: "content") as? String
-        let color = note.value(forKey: "color") as? String ?? "white"
+        let color = note.value(forKey: "color") as? String ?? "blue2"
         let modifiedDate = note.value(forKey: "modifiedDate") as? Double ?? 0
         let isReminder = note.value(forKey: "isReminder") as? Bool
         

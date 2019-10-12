@@ -72,10 +72,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     lazy var persistentContainer: NSPersistentCloudKitContainer = {
         let container = NSPersistentCloudKitContainer(name: "Jotify")
+        
         //set a merge policy when queues do not work properly
         //you never want a merge conflict to exist becuase data will be lost
         //only set for backup cases
-        //        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         
         // get the store description
         guard let description = container.persistentStoreDescriptions.first else {

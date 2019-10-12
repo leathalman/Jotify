@@ -332,9 +332,9 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         
         center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
             if granted {
-                print("Notifications granted")
+//                print("Notifications granted")
             } else {
-                print("Notifications denied")
+//                print("Notifications denied")
             }
         }
     }
