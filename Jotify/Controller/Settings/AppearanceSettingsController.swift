@@ -333,7 +333,7 @@ class AppearanceSettingsController: UITableViewController {
             print("Multiline input enabled")
             defaults.set(true, forKey: "useMultilineInput")
             
-            let alert = UIAlertController(title: "Mutliline Input", message: "You have enabled multiline input! Now when you press return while writing a note, it will create a new line instead of saving. To save a note, simply swipe left. You can always disable this by toggling it off.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Mutliline Input", message: "You have enabled multiline input! Now when you press return while writing a note, it will create a new line instead of saving. To save a note, simply swipe left. Tapping return WILL NOT save notes with this enabled.", preferredStyle: .alert)
                           
              alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
                  print(alert?.message ?? "cancel")

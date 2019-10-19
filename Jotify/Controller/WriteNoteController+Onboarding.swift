@@ -42,13 +42,18 @@ extension WriteNoteController {
             title: "What's New",
             items: [
                 WhatsNew.Item(
+                    title: "Features",
+                    subtitle: "You can now write multiline jots! This can be enabled in Settings -> Appearance -> Enable Multiline Input",
+                    image: UIImage(named: "write")
+                ),
+                WhatsNew.Item(
                     title: "Improvements",
-                    subtitle: "A few small notable changes: settings have been updated to look more inline with iOS 13, onboarding now supports dark mode, you can now tap anywhere to bring up the keyboard, and added haptic feedback to button presses.",
+                    subtitle: "Major improvements to data management and handling. Syncing aross devices will now work much better. Closing Jotify while editing a note will now save that note automatically.",
                     image: UIImage(named: "add")
                 ),
                 WhatsNew.Item(
                     title: "Bug Fixes",
-                    subtitle: "Small fixes regarding deleting notes and settings on iPhone SE.",
+                    subtitle: "Fixed a bug where notifications were not incrementing the app badge correctly.",
                     image: UIImage(named: "bugFix")
                 ),
             ]
