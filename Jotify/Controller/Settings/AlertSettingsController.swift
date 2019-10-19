@@ -1,5 +1,5 @@
 //
-//  SortSettingsController.swift
+//  AlertSettingsController.swift
 //  Jotify
 //
 //  Created by Harrison Leath on 7/9/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SortSettingsController: UITableViewController {
+class AlertSettingsController: UITableViewController {
     
     let sections: Array = ["Delete", "Sort"]
     let delete: Array = ["Show Alert on Delete"]
@@ -136,5 +136,6 @@ class SortSettingsController: UITableViewController {
     }
     
 }
+
 
 

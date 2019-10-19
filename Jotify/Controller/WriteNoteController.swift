@@ -120,6 +120,10 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
             let date = Date.timeIntervalSinceReferenceDate
             saveNote(content: writeNoteView.inputTextView.text, color: StoredColors.noteColorString, date: date)
             writeNoteView.inputTextView.text = ""
+            
+            if defaults.bool(forKey: "useRandomColor") == true {
+                writeNoteView.getRandomColor()
+            }
         }
     }
     
@@ -163,12 +167,16 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
             return true
         }
         
-        //dismiss keyboard on return key
-        textView.resignFirstResponder()
-        handleSend()
-        
-        if defaults.bool(forKey: "useRandomColor") == true {
-            writeNoteView.getRandomColor()
+        if defaults.bool(forKey: "useMultilineInput") == false {
+            //dismiss keyboard on return key
+            textView.resignFirstResponder()
+            handleSend()
+            
+        } else if defaults.bool(forKey: "useMultilineInput") == true {
+            //print new line on return
+            if (text == "\n") {
+                textView.text = textView.text + "\n"
+            }
         }
         
         return false

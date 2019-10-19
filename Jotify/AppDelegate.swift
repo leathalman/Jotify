@@ -130,7 +130,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     //when app is in foreground
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
-        //        let userInfo = notification.request.content.userInfo
+//        let userInfo = notification.request.content.userInfo
         print("THIS IS FIRED")
         
         //display banner when app is open

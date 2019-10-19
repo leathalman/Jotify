@@ -10,34 +10,6 @@ import UIKit
 
 extension WriteNoteController {
     
-//    func presentOnboarding() {
-//        //check to see if the user is new, updated, or neither
-//        let standard = UserDefaults.standard
-//        let shortVersionKey = "CFBundleShortVersionString"
-//        let currentVersion = Bundle.main.infoDictionary![shortVersionKey] as! String
-//        let previousVersion = standard.object(forKey: shortVersionKey) as? String
-//        if previousVersion == currentVersion {
-//            //same version, no update
-//            print("same version")
-//
-//        } else {
-//            // replace with `if let previousVersion = previousVersion {` if you need the exact value
-//            if previousVersion != nil {
-//                // new version
-//                print("new version")
-//                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
-//
-//            } else {
-//                // first launch
-//                print("first launch")
-//                presentFirstLaunchOnboarding(viewController: self, tintColor: StoredColors.noteColor)
-//            }
-//            standard.set(currentVersion, forKey: shortVersionKey)
-//        }
-//    }
-    
-    //TEMPORARY VERSION BECAUSE THIS WAS NOT IMPLEMENTED IN 1.0.0
-    //CHANGE FROM FIRST LAUNCH TO NEW VERSION FOR ALL FUTURE UPDATES
     func presentOnboarding() {
         //check to see if the user is new, updated, or neither
         let standard = UserDefaults.standard
@@ -47,40 +19,30 @@ extension WriteNoteController {
         if previousVersion == currentVersion {
             //same version, no update
             print("same version")
-            
+
         } else {
             // replace with `if let previousVersion = previousVersion {` if you need the exact value
             if previousVersion != nil {
                 // new version
                 print("new version")
                 presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
-                
+
             } else {
                 // first launch
                 print("first launch")
-                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+                presentFirstLaunchOnboarding(viewController: self, tintColor: StoredColors.noteColor)
             }
             standard.set(currentVersion, forKey: shortVersionKey)
         }
     }
     
     func presentUpdateOnboarding(viewController: UIViewController, tintColor: UIColor) {
-        //Jotify v1.1.0 Onboarding
+        //Jotify v1.1.1 Onboarding
         let whatsNew = WhatsNew(
             title: "What's New",
             items: [
                 WhatsNew.Item(
-                    title: "Reminders",
-                    subtitle: "Jotify now natively supports reminders! To set a reminder, tap into a note and click on the alarm icon on the top left hand corner. Once a note becomes a reminder, the border around the note will change color, and once a reminder has been delivered, simply click on your note to clear it.",
-                    image: UIImage(named: "reminder")
-                ),
-                WhatsNew.Item(
-                    title: "OLED Dark Mode",
-                    subtitle: "Pure Dark Mode has been changed, so it now closely resembles Apple's signature dark mode.",
-                    image: UIImage(named: "moon")
-                ),
-                WhatsNew.Item(
-                    title: "Minor Improvements",
+                    title: "Improvements",
                     subtitle: "A few small notable changes: settings have been updated to look more inline with iOS 13, onboarding now supports dark mode, you can now tap anywhere to bring up the keyboard, and added haptic feedback to button presses.",
                     image: UIImage(named: "add")
                 ),

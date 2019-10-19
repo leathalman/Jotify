@@ -57,7 +57,7 @@ class PrivacySettingsController: UITableViewController {
         let blurEffect = UIBlurEffect(style: .dark)
         blurEffectView.effect = blurEffect
         blurEffectView.frame = window.frame
-        blurEffectView.alpha = 0.925
+        blurEffectView.alpha = 1
         
         unlockButton.center = window.center
         

@@ -72,7 +72,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         print ("Backgroud")
         
         renumberBadgesOfPendingNotifications()
-        appDelegate?.saveNoteBeforeExiting()
+//        appDelegate?.saveNoteBeforeExiting()
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
     

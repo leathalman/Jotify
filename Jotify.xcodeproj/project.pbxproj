@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9B6AC7C1DBA10CBFB04F374B /* Pods_Jotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3C025699629E8C8FD896B4 /* Pods_Jotify.framework */; };
 		F6070B8A22D50796005E4CF3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6070B8922D50796005E4CF3 /* EmptyView.swift */; };
+		F608ECEB2352703E00ABFD48 /* AlertSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F608ECEA2352703E00ABFD48 /* AlertSettingsController.swift */; };
 		F61EC8BC2348E1BA00FB0A63 /* WhatsNewViewController+TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61EC89D2348E1B900FB0A63 /* WhatsNewViewController+TitleView.swift */; };
 		F61EC8BD2348E1BA00FB0A63 /* WhatsNewViewController+CompletionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61EC89E2348E1B900FB0A63 /* WhatsNewViewController+CompletionButton.swift */; };
 		F61EC8BE2348E1BA00FB0A63 /* WhatsNewViewController+HapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61EC89F2348E1B900FB0A63 /* WhatsNewViewController+HapticFeedback.swift */; };
@@ -65,7 +66,6 @@
 		F69E5DC2231B120200872345 /* ReminderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E5DC1231B120200872345 /* ReminderController.swift */; };
 		F6A2C7232340E87A0031A81B /* ReminderExistsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A2C7222340E87A0031A81B /* ReminderExistsController.swift */; };
 		F6B2083722DE22860098CF9F /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B2083622DE22860098CF9F /* Themes.swift */; };
-		F6CE723C22D5833E00544267 /* SortSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CE723B22D5833E00544267 /* SortSettingsController.swift */; };
 		F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +74,7 @@
 		134E86D639FF0CE5ED6FEF08 /* Pods-Jotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.release.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.release.xcconfig"; sourceTree = "<group>"; };
 		77AB5562845EB3AEFA1502C6 /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.debug.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
 		F6070B8922D50796005E4CF3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		F608ECEA2352703E00ABFD48 /* AlertSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSettingsController.swift; sourceTree = "<group>"; };
 		F61EC89D2348E1B900FB0A63 /* WhatsNewViewController+TitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WhatsNewViewController+TitleView.swift"; sourceTree = "<group>"; };
 		F61EC89E2348E1B900FB0A63 /* WhatsNewViewController+CompletionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WhatsNewViewController+CompletionButton.swift"; sourceTree = "<group>"; };
 		F61EC89F2348E1B900FB0A63 /* WhatsNewViewController+HapticFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WhatsNewViewController+HapticFeedback.swift"; sourceTree = "<group>"; };
@@ -133,7 +134,6 @@
 		F69E5DC1231B120200872345 /* ReminderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderController.swift; sourceTree = "<group>"; };
 		F6A2C7222340E87A0031A81B /* ReminderExistsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderExistsController.swift; sourceTree = "<group>"; };
 		F6B2083622DE22860098CF9F /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
-		F6CE723B22D5833E00544267 /* SortSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortSettingsController.swift; sourceTree = "<group>"; };
 		F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -263,7 +263,7 @@
 				F69E5DBF231AE14800872345 /* ThemeSelectionController.swift */,
 				F67B92DF22D2E785002C6985 /* ColorPickerController.swift */,
 				F68D639222F7894700DEB4AA /* PrivacySettingsController.swift */,
-				F6CE723B22D5833E00544267 /* SortSettingsController.swift */,
+				F608ECEA2352703E00ABFD48 /* AlertSettingsController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -498,6 +498,7 @@
 				F650E17122C00AE3008D29AD /* WriteNoteController.swift in Sources */,
 				F650E16F22C003A9008D29AD /* Jotify.xcdatamodeld in Sources */,
 				F65BD148231D89A300A06D2B /* AppConfiguration+Helpers.swift in Sources */,
+				F608ECEB2352703E00ABFD48 /* AlertSettingsController.swift in Sources */,
 				F650E16D22C00381008D29AD /* AppDelegate.swift in Sources */,
 				F69E5DC0231AE14800872345 /* ThemeSelectionController.swift in Sources */,
 				F61EC8CD2348E1BA00FB0A63 /* WhatsNewButtonViewController.swift in Sources */,
@@ -514,7 +515,6 @@
 				F61EC8D52348EE5200FB0A63 /* WriteNoteController+Onboarding.swift in Sources */,
 				F650E15622BFFB12008D29AD /* SettingsController.swift in Sources */,
 				F6A2C7232340E87A0031A81B /* ReminderExistsController.swift in Sources */,
-				F6CE723C22D5833E00544267 /* SortSettingsController.swift in Sources */,
 				F67B92DE22D2E083002C6985 /* SettingsSwitchCell.swift in Sources */,
 				F650E16722BFFB20008D29AD /* SavedNoteCell.swift in Sources */,
 				F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */,
@@ -683,7 +683,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -715,7 +715,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Jotify/Info.plist;

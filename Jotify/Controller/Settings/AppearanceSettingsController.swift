@@ -18,7 +18,7 @@ class AppearanceSettingsController: UITableViewController {
     
     let sections: Array = ["Dark Mode", "Themes", "Text", "Other"]
     let darks: Array = ["Vibrant Dark Mode", "Pure Dark Mode" ]
-    let text: Array = ["Placeholder"]
+    let text: Array = ["Custom Placeholder","Enable Multiline Input"]
     let other: Array = ["Random Colors"]
     
     let settingsController = SettingsController()
@@ -84,40 +84,50 @@ class AppearanceSettingsController: UITableViewController {
             navigationController?.pushViewController(ThemeSelectionController(style: .insetGrouped), animated: true)
             
         } else if indexPath.section == 2 {
-            let alert = UIAlertController(title: "Placeholder", message: "Input a custom message for the placeholder.", preferredStyle: .alert)
-            
-            let cell = tableView.cellForRow(at: indexPath)
-            cell?.isSelected = false
-            
-            alert.addTextField { (textField) in
-                let placeholder = UserDefaults.standard.string(forKey: "writeNotePlaceholder")
-                textField.placeholder = placeholder
-                textField.autocorrectionType = .yes
-                textField.autocapitalizationType = .sentences
-            }
-            
-            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { [weak alert] (_) in
-                print(alert?.message ?? "cancel")
-                print("cancel")
-            }))
-            
-            alert.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak alert] (_) in
-                let textField = alert?.textFields![0]
-                let text = textField?.text
+            switch indexPath.row {
+            case 0:
+                let alert = UIAlertController(title: "Placeholder", message: "Input a custom message for the placeholder.", preferredStyle: .alert)
                 
-                if text?.isEmpty ?? false {
-                    //                    UserDefaults.standard.set(text, forKey: "writeNotePlaceholder")
-                } else {
-                    UserDefaults.standard.set(text, forKey: "writeNotePlaceholder")
+                let cell = tableView.cellForRow(at: indexPath)
+                cell?.isSelected = false
+                
+                alert.addTextField { (textField) in
+                    let placeholder = UserDefaults.standard.string(forKey: "writeNotePlaceholder")
+                    textField.placeholder = placeholder
+                    textField.autocorrectionType = .yes
+                    textField.autocapitalizationType = .sentences
                 }
-            }))
-            
-            self.present(alert, animated: true, completion: nil)
+                
+                alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { [weak alert] (_) in
+                    print(alert?.message ?? "cancel")
+                    print("cancel")
+                }))
+                
+                alert.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak alert] (_) in
+                    let textField = alert?.textFields![0]
+                    let text = textField?.text
+                    
+                    if text?.isEmpty ?? false {
+                        
+                    } else {
+                        UserDefaults.standard.set(text, forKey: "writeNotePlaceholder")
+                    }
+                }))
+                
+                self.present(alert, animated: true, completion: nil)
+                
+            case 1:
+                print("Tapped")
+            default:
+                print("Tapped")
+            }
         }
+        
         
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell") as! SettingsCell
         
         if indexPath.section == 0 {
             switch indexPath.row {
@@ -172,14 +182,39 @@ class AppearanceSettingsController: UITableViewController {
             return cell
             
         } else if indexPath.section == 2 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-            
-            settingsController.setupDynamicCells(cell: cell, enableArrow: true)
-            
-            cell.accessoryType = .disclosureIndicator
-            cell.textLabel?.text = "\(text[indexPath.row])"
-            
-            return cell
+            switch indexPath.row {
+            case 0:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+                
+                settingsController.setupDynamicCells(cell: cell, enableArrow: true)
+                
+                cell.accessoryType = .disclosureIndicator
+                cell.textLabel?.text = "\(text[indexPath.row])"
+                
+                return cell
+                
+            case 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
+                
+                settingsController.setupDynamicCells(cell: cell, enableArrow: false)
+                
+                cell.textLabel?.text = "\(text[indexPath.row])"
+                cell.selectionStyle = .none
+                cell.switchButton.addTarget(self, action: #selector(enableMultilineInputSwitchPressed(sender:)), for: .valueChanged)
+                
+                if defaults.bool(forKey: "useMultilineInput") == true {
+                    cell.switchButton.isOn = true
+                } else {
+                    cell.switchButton.isOn = false
+                }
+                
+                return cell
+                
+            default:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+                print("cell outside of bounds")
+                return cell
+            }
             
         } else if indexPath.section == 3 {
             
@@ -199,14 +234,8 @@ class AppearanceSettingsController: UITableViewController {
             
             return cell
             
-        } else {
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-            
-            cell.backgroundColor = UIColor.white
-            cell.textLabel?.textColor = UIColor.black
-            return cell
         }
+        return cell
     }
     
     func setNewColorsForExistingNotes() { 
@@ -296,6 +325,26 @@ class AppearanceSettingsController: UITableViewController {
             
             self.viewWillAppear(true)
             self.tableView.reloadData()
+        }
+    }
+    
+    @objc func enableMultilineInputSwitchPressed (sender: UISwitch) {
+        if sender.isOn {
+            print("Multiline input enabled")
+            defaults.set(true, forKey: "useMultilineInput")
+            
+            let alert = UIAlertController(title: "Mutliline Input", message: "You have enabled multiline input! Now when you press return while writing a note, it will create a new line instead of saving. To save a note, simply swipe left. You can always disable this by toggling it off.", preferredStyle: .alert)
+                          
+             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+                 print(alert?.message ?? "cancel")
+             }))
+             
+             self.present(alert, animated: true, completion: nil)
+            
+        } else {
+            print("Multiline input disabled")
+            defaults.set(false, forKey: "useMultilineInput")
+            
         }
     }
     

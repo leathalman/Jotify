@@ -133,7 +133,7 @@ class SettingsController: UITableViewController {
             case 2:
                 navigationController?.pushViewController(PrivacySettingsController(style: .insetGrouped), animated: true)
             case 3:
-                navigationController?.pushViewController(SortSettingsController(style: .insetGrouped), animated: true)
+                navigationController?.pushViewController(AlertSettingsController(style: .insetGrouped), animated: true)
             default:
                 return
             }
