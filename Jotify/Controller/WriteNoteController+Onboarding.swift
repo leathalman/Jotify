@@ -48,12 +48,12 @@ extension WriteNoteController {
                 ),
                 WhatsNew.Item(
                     title: "Improvements",
-                    subtitle: "Major improvements to data management and handling. Syncing aross devices will now work much better. Closing Jotify while editing a note will now save that note automatically.",
+                    subtitle: "Major improvements to data management and handling. Your notes should sync much quicker and should persist much better if reinstalled. Syncing your notes across devices should work significantly better.",
                     image: UIImage(named: "add")
                 ),
                 WhatsNew.Item(
                     title: "Bug Fixes",
-                    subtitle: "Fixed a bug where notifications were not incrementing the app badge correctly.",
+                    subtitle: "Fixed a bug where notifications were not incrementing the app badge correctly. Fixed a bug where date text would by empty after reminder has been delivered.",
                     image: UIImage(named: "bugFix")
                 ),
             ]

@@ -284,7 +284,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         let savedNoteController = SavedNoteController()
         savedNoteController.feedbackOnPress()
 
-        if RemindersData.isReminder == false {
+        if RemindersData.isReminder == false || RemindersData.reminderDate == "" {
             reminderIsNotSet()
         } else {
             alreadySetReminder()
