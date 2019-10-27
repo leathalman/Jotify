@@ -80,6 +80,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func renumberBadgesOfPendingNotifications() {
+        // once reminders are delivered it will override the badge number
+        // so it will increment correctly as long as the notifications have been delivered
+        // but a new reminder scheduled after the others have been delivered will still be badge = 1
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().getPendingNotificationRequests { pendingNotificationRequests in
                 if pendingNotificationRequests.count > 0 {

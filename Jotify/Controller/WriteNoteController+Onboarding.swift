@@ -36,7 +36,7 @@ extension WriteNoteController {
     }
     
     func presentUpdateOnboarding(viewController: UIViewController, tintColor: UIColor) {
-        // Jotify v1.1.1 Onboarding
+        // Jotify v1.1.1 Onboarding, no Onboarding for v1.1.2
         let whatsNew = WhatsNew(
             title: "What's New",
             items: [
