@@ -149,7 +149,7 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         content.body = reminderBodyText
         content.userInfo = ["reminderBodyText": reminderBodyText]
         content.sound = UNNotificationSound.default
-        content.badge = 1
+        content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
         
         let componets = datePicker.calendar?.dateComponents([.year, .month, .day, .hour, .minute], from: datePicker.date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: componets!, repeats: false)
