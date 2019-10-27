@@ -9,14 +9,13 @@
 import UIKit
 
 class ThemeSelectionController: UITableViewController {
-    
     let sections: Array = ["Color Palettes"]
     let palettes: Array = ["Default", "Sunset", "Kypool", "Celestial", "Apple Vibrant"]
     
     let settingsController = SettingsController()
     
     let defaults = UserDefaults.standard
-    var lastIndexPath:NSIndexPath = NSIndexPath(row: 0, section: 0)
+    var lastIndexPath: NSIndexPath = NSIndexPath(row: 0, section: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +40,6 @@ class ThemeSelectionController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
         
         settingsController.setupDynamicCells(cell: cell, enableArrow: false)
@@ -78,7 +76,6 @@ class ThemeSelectionController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let newRow = indexPath.row
         let oldRow = lastIndexPath.row
         
@@ -112,7 +109,6 @@ class ThemeSelectionController: UITableViewController {
         default:
             print("Setting not implemented")
         }
-        
     }
     
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -135,10 +131,9 @@ class ThemeSelectionController: UITableViewController {
         } else {
             return false
         }
-        
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int{
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
     
@@ -161,5 +156,4 @@ class ThemeSelectionController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
-    
 }

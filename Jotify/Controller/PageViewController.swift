@@ -6,12 +6,11 @@
 //  Copyright © 2019 Harrison Leath. All rights reserved.
 //
 
-import UIKit
-import Pageboy
 import Blueprints
+import Pageboy
+import UIKit
 
 class PageViewController: PageboyViewController, PageboyViewControllerDataSource {
-    
     var viewControllers = [UIViewController]()
     
     let savedNotesController = UINavigationController(rootViewController: SavedNoteController(collectionViewLayout: UICollectionViewFlowLayout()))
@@ -21,14 +20,13 @@ class PageViewController: PageboyViewController, PageboyViewControllerDataSource
         super.viewDidLoad()
         
         viewControllers = [savedNotesController, writeNotesController]
-
+        
         dataSource = self
         isScrollEnabled = true
         bounces = false
     }
     
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
-
         return viewControllers.count
     }
     
@@ -40,5 +38,4 @@ class PageViewController: PageboyViewController, PageboyViewControllerDataSource
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
         return Page.at(index: 1)
     }
-  
 }

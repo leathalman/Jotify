@@ -6,15 +6,14 @@
 //  Copyright © 2019 Harrison Leath. All rights reserved.
 //
 
-import UIKit
-import CoreData
 import AudioToolbox
 import Blueprints
+import CoreData
+import UIKit
 import ViewAnimator
 import XLActionController
 
 class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
-    
     var notes: [Note] = []
     var filteredNotes: [Note] = []
     
@@ -69,13 +68,13 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         extendedLayoutIncludesOpaqueBars = true
         
         let rightItem = UIBarButtonItem(image: UIImage(systemName: "arrow.up.arrow.down.circle"), style: .plain, target: self, action: #selector(handleRightButton))
-        navigationItem.rightBarButtonItem  = rightItem
+        navigationItem.rightBarButtonItem = rightItem
         
         let leftItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(handleLeftButton))
-        navigationItem.leftBarButtonItem  = leftItem
+        navigationItem.leftBarButtonItem = leftItem
         navigationItem.setHidesBackButton(true, animated: true)
         
-        collectionView.frame = self.view.frame
+        collectionView.frame = view.frame
         collectionView.alwaysBounceVertical = true
         
         collectionView.setCollectionViewLayout(blueprintLayout, animated: true)
@@ -157,7 +156,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                 actionController.backgroundColor = defaults.color(forKey: "staticNoteColor") ?? UIColor.blue2
                 
             } else if defaults.bool(forKey: "darkModeEnabled") == false {
-                
                 if isSelectedColorFromDefaults(key: "default") == true {
                     actionController.backgroundColor = Colors.defaultColors.randomElement() ?? UIColor.blue2
                     
@@ -176,27 +174,26 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                 
             } else if defaults.bool(forKey: "darkModeEnabled") == true {
                 actionController.backgroundColor = InterfaceColors.actionSheetColor
-                
             }
             
-            actionController.addAction(Action("Sort by date", style: .default, handler: { action in
+            actionController.addAction(Action("Sort by date", style: .default, handler: { _ in
                 self.defaults.set("date", forKey: "sortBy")
                 self.fetchNotesFromCoreData()
                 self.animateCells()
                 
             }))
-            actionController.addAction(Action("Sort by color", style: .default, handler: { action in
+            actionController.addAction(Action("Sort by color", style: .default, handler: { _ in
                 self.defaults.set("color", forKey: "sortBy")
                 self.fetchNotesFromCoreData()
                 self.animateCells()
                 
             }))
-            actionController.addAction(Action("Sort by content", style: .default, handler: { action in
+            actionController.addAction(Action("Sort by content", style: .default, handler: { _ in
                 self.defaults.set("content", forKey: "sortBy")
                 self.fetchNotesFromCoreData()
                 self.animateCells()
             }))
-            actionController.addAction(Action("Sort by reminders", style: .default, handler: { action in
+            actionController.addAction(Action("Sort by reminders", style: .default, handler: { _ in
                 self.defaults.set("reminders", forKey: "sortBy")
                 self.fetchNotesFromCoreData()
                 self.animateCells()
@@ -206,7 +203,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             present(actionController, animated: true, completion: nil)
             
         } else if defaults.bool(forKey: "showAlertOnSort") == false {
-            
             if pressed == 0 {
                 print("Sort by content")
                 defaults.set("content", forKey: "sortBy")
@@ -226,7 +222,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                 print("Sort by reminders")
                 defaults.set("reminders", forKey: "sortBy")
                 pressed = 0
-                
             }
             fetchNotesFromCoreData()
             animateCells()
@@ -254,19 +249,18 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         if searchController.searchBar.selectedScopeButtonIndex == 0 {
-            filteredNotes = notes.filter({( note : Note) -> Bool in
-                return (note.content?.lowercased().contains(searchText.lowercased()) ?? false)
-            })
+            filteredNotes = notes.filter { (note: Note) -> Bool in
+                note.content?.lowercased().contains(searchText.lowercased()) ?? false
+            }
             
             collectionView.reloadData()
             
         } else if searchController.searchBar.selectedScopeButtonIndex == 1 {
-            filteredNotes = notes.filter({( note : Note) -> Bool in
-                return (note.dateString?.lowercased().contains(searchText.lowercased()) ?? false)
-            })
+            filteredNotes = notes.filter { (note: Note) -> Bool in
+                note.dateString?.lowercased().contains(searchText.lowercased()) ?? false
+            }
             
             collectionView.reloadData()
-            
         }
     }
     
@@ -302,7 +296,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         fetchRequest.sortDescriptors = [sortDescriptor] as? [NSSortDescriptor]
         
-        CoreDataManager.shared.enqueue { (context) in
+        CoreDataManager.shared.enqueue { _ in
             do {
                 self.notes = try managedContext.fetch(fetchRequest) as! [Note]
                 DispatchQueue.main.async {
@@ -318,15 +312,14 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     func animateCells() {
         collectionView?.reloadData()
         collectionView?.performBatchUpdates({
-            UIView.animate(views: self.collectionView!.orderedVisibleCells, animations: loadingAnimations, completion: {
-            })
+            UIView.animate(views: self.collectionView!.orderedVisibleCells, animations: loadingAnimations, completion: {})
         }, completion: nil)
     }
     
-    @objc func tapHandler(_ sender: UITapGestureRecognizer) {        
-        let location = sender.location(in: self.collectionView)
-        let indexPath = self.collectionView.indexPathForItem(at: location)
-        let rowNumber : Int = indexPath?.row ?? 0
+    @objc func tapHandler(_ sender: UITapGestureRecognizer) {
+        let location = sender.location(in: collectionView)
+        let indexPath = collectionView.indexPathForItem(at: location)
+        let rowNumber: Int = indexPath?.row ?? 0
         
         let noteDetailController = NoteDetailController()
         
@@ -364,27 +357,26 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         UIView.animate(withDuration: 0.05,
                        animations: {
-                        sender.view?.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
-        }, completion: { (done) in
-            UIView.animate(withDuration: 0.05, animations: {
-                sender.view?.transform = CGAffineTransform.identity
-                
-            })
+                           sender.view?.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+                       }, completion: { _ in
+                           UIView.animate(withDuration: 0.05, animations: {
+                               sender.view?.transform = CGAffineTransform.identity
+                               
+                           })
         })
         
-        self.navigationController?.pushViewController(noteDetailController, animated: true)
+        navigationController?.pushViewController(noteDetailController, animated: true)
     }
     
     @objc func longTouchHandler(sender: UILongPressGestureRecognizer) {
-        
-        let location = sender.location(in: self.collectionView)
-        let indexPath = self.collectionView.indexPathForItem(at: location)
-        let rowNumber : Int = indexPath?.row ?? 0
+        let location = sender.location(in: collectionView)
+        let indexPath = collectionView.indexPathForItem(at: location)
+        let rowNumber: Int = indexPath?.row ?? 0
         
         let note = notes[indexPath?.row ?? 0]
         let color = note.value(forKey: "color") as! String
         let content = note.value(forKey: "content") as! String
-        var cellColor = UIColor(red: 18/255.0, green: 165/255.0, blue: 244/255.0, alpha: 1.0)
+        var cellColor = UIColor(red: 18 / 255.0, green: 165 / 255.0, blue: 244 / 255.0, alpha: 1.0)
         cellColor = Colors.colorFromString(string: color)
         
         let actionController = SkypeActionController()
@@ -396,13 +388,13 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             actionController.backgroundColor = InterfaceColors.actionSheetColor
         }
         
-        actionController.addAction(Action("Delete note", style: .default, handler: { action in
+        actionController.addAction(Action("Delete note", style: .default, handler: { _ in
             print("Delete note")
             
             if self.defaults.bool(forKey: "showAlertOnDelete") == true {
                 let alert = UIAlertController(title: "Are you sure?", message: "This will permanently delete this note in both iCloud and locally on this device. This message can be disabled from settings.", preferredStyle: .alert)
                 
-                alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (UIAlertAction) in
+                alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
                     self.deleteNote(indexPath: indexPath ?? [0, 0], int: rowNumber)
                 }))
                 
@@ -415,7 +407,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             
         }))
         
-        actionController.addAction(Action("Share note", style: .default, handler: { action in
+        actionController.addAction(Action("Share note", style: .default, handler: { _ in
             print("Share note")
             self.shareNote(text: content)
             
@@ -431,19 +423,19 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
         
-        self.present(activityVC, animated: true, completion: nil)
+        present(activityVC, animated: true, completion: nil)
     }
     
     func deleteNote(indexPath: IndexPath, int: Int) {
         let note = notes[indexPath.row]
         
         if isFiltering() == false {
-            //remove pending notification
+            // remove pending notification
             let notificationUUID = notes[int].notificationUUID ?? "empty error in SavedNoteController"
             let center = UNUserNotificationCenter.current()
             center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
             
-            //remove notification on badge if already delivered but not opened
+            // remove notification on badge if already delivered but not opened
             let isReminder = notes[int].isReminder
             if isReminder == true {
                 let reminderDate = notes[int].reminderDate ?? "07/02/2000 11:11 PM"
@@ -462,12 +454,12 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             notes.remove(at: int)
             
         } else {
-            //remove pending notification
+            // remove pending notification
             let notificationUUID = filteredNotes[int].notificationUUID ?? "empty error in SavedNoteController"
             let center = UNUserNotificationCenter.current()
             center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
             
-            //remove notification on badge if already delivered but not opened
+            // remove notification on badge if already delivered but not opened
             let isReminder = filteredNotes[int].isReminder
             if isReminder == true {
                 let reminderDate = filteredNotes[int].reminderDate ?? "07/02/2000 11:11 PM"
@@ -486,12 +478,12 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             filteredNotes.remove(at: int)
         }
         
-        //needs to delete from viewContext itself?
+        // needs to delete from viewContext itself?
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         let managedContext = appDelegate?.persistentContainer.viewContext
         managedContext?.delete(note)
         
-        CoreDataManager.shared.enqueue { (context) in
+        CoreDataManager.shared.enqueue { context in
             do {
                 try context.save()
                 
@@ -507,12 +499,12 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     
     func feedbackOnPress() {
         if UIDevice.current.hasTapticEngine == true {
-            //iPhone 6s and iPhone 6s Plus
+            // iPhone 6s and iPhone 6s Plus
             let peek = SystemSoundID(1519)
             AudioServicesPlaySystemSoundWithCompletion(peek, nil)
             
         } else if UIDevice.current.hasHapticFeedback == true {
-            //iPhone 7 and newer
+            // iPhone 7 and newer
             let generator = UIImpactFeedbackGenerator(style: .medium)
             generator.impactOccurred()
         }
@@ -533,7 +525,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedNoteCell", for: indexPath) as? SavedNoteCell else {fatalError("Wrong cell class dequeued")}
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedNoteCell", for: indexPath) as? SavedNoteCell else { fatalError("Wrong cell class dequeued") }
         
         var note = notes[indexPath.row]
         
@@ -567,7 +559,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         }
         
         if defaults.bool(forKey: "darkModeEnabled") == true {
-            
             if defaults.bool(forKey: "vibrantDarkModeEnabled") == true {
                 cell.contentView.backgroundColor = cellColor
                 
@@ -613,9 +604,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
 }
 
 extension SavedNoteController: CollectionViewFlowLayoutDelegate {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         let height: CGFloat = 110
         
         return CGSize(width: UIScreen.main.bounds.width, height: height)
@@ -623,7 +612,6 @@ extension SavedNoteController: CollectionViewFlowLayoutDelegate {
 }
 
 extension SavedNoteController: UISearchResultsUpdating {
-    
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
     }

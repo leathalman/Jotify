@@ -6,12 +6,11 @@
 //  Copyright © 2019 Harrison Leath. All rights reserved.
 //
 
-import UIKit
 import CoreData
 import MultilineTextField
+import UIKit
 
 class WriteNoteController: UIViewController, UITextViewDelegate {
-    
     let writeNoteView = WriteNoteView()
     
     let themes = Themes()
@@ -44,7 +43,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     func setupView() {
         view = writeNoteView
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         view.addGestureRecognizer(tap)
         
         writeNoteView.inputTextView.isScrollEnabled = false
@@ -67,7 +66,6 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         if defaults.bool(forKey: "useRandomColor") == false {
             let color = defaults.color(forKey: "staticNoteColor")
             writeNoteView.colorView.backgroundColor = color
-            
         }
         
         if defaults.bool(forKey: "darkModeEnabled") == true {
@@ -79,9 +77,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
             writeNoteView.colorView.backgroundColor = StoredColors.noteColor
             
             UIApplication.shared.windows.first?.backgroundColor = StoredColors.noteColor
-            
         }
-        
     }
     
     func setupNotifications() {
@@ -111,9 +107,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     }
     
     @objc func handleSend() {
-        
         if writeNoteView.inputTextView.text == "" {
-            
         } else {
             StoredColors.noteColorString = Colors.stringFromColor(color: StoredColors.noteColor)
             
@@ -128,8 +122,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     }
     
     func saveNote(content: String, color: String, date: Double) {
-        
-        CoreDataManager.shared.enqueue { (context) in
+        CoreDataManager.shared.enqueue { context in
             do {
                 self.setNoteValues(context: context, content: content, color: color, date: date)
                 try context.save()
@@ -168,13 +161,13 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         }
         
         if defaults.bool(forKey: "useMultilineInput") == false {
-            //dismiss keyboard on return key
+            // dismiss keyboard on return key
             textView.resignFirstResponder()
             handleSend()
             
         } else if defaults.bool(forKey: "useMultilineInput") == true {
-            //print new line on return
-            if (text == "\n") {
+            // print new line on return
+            if text == "\n" {
                 textView.text = textView.text + "\n"
             }
         }

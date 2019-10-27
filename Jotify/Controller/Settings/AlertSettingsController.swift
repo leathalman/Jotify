@@ -9,7 +9,6 @@
 import UIKit
 
 class AlertSettingsController: UITableViewController {
-    
     let sections: Array = ["Delete", "Sort"]
     let delete: Array = ["Show Alert on Delete"]
     let sort: Array = ["Show Alert on Sort"]
@@ -41,9 +40,7 @@ class AlertSettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if indexPath.section == 0 {
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
             cell.textLabel?.text = "\(delete[indexPath.row])"
             
@@ -61,7 +58,6 @@ class AlertSettingsController: UITableViewController {
             return cell
             
         } else if indexPath.section == 1 {
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
             
             settingsController.setupDynamicCells(cell: cell, enableArrow: false)
@@ -79,14 +75,12 @@ class AlertSettingsController: UITableViewController {
             return cell
             
         } else {
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
             
             cell.backgroundColor = UIColor.white
             cell.textLabel?.textColor = UIColor.black
             return cell
         }
-        
     }
     
     @objc func showAlertOnDeleteSwitchPressed(sender: UISwitch) {
@@ -97,7 +91,6 @@ class AlertSettingsController: UITableViewController {
         } else {
             print("showAlertOnDelete disabled")
             defaults.set(false, forKey: "showAlertOnDelete")
-            
         }
     }
     
@@ -113,7 +106,7 @@ class AlertSettingsController: UITableViewController {
         }
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int{
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
     
@@ -134,8 +127,4 @@ class AlertSettingsController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
-    
 }
-
-
-

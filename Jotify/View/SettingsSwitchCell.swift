@@ -9,7 +9,6 @@
 import UIKit
 
 class SettingsSwitchCell: UITableViewCell {
-    
     let detailText = UILabel()
     let switchButton = UISwitch()
     
@@ -39,5 +38,4 @@ class SettingsSwitchCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

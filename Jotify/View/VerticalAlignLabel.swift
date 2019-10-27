@@ -15,13 +15,13 @@ public class VerticalAlignLabel: UILabel {
         case bottom
     }
     
-    var verticalAlignment : VerticalAlignment = .top {
+    var verticalAlignment: VerticalAlignment = .top {
         didSet {
             setNeedsDisplay()
         }
     }
     
-    override public func textRect(forBounds bounds: CGRect, limitedToNumberOfLines: Int) -> CGRect {
+    public override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines: Int) -> CGRect {
         let rect = super.textRect(forBounds: bounds, limitedToNumberOfLines: limitedToNumberOfLines)
         
         if UIView.userInterfaceLayoutDirection(for: .unspecified) == .rightToLeft {
@@ -45,8 +45,8 @@ public class VerticalAlignLabel: UILabel {
         }
     }
     
-    override public func drawText(in rect: CGRect) {
-        let r = self.textRect(forBounds: rect, limitedToNumberOfLines: self.numberOfLines)
+    public override func drawText(in rect: CGRect) {
+        let r = textRect(forBounds: rect, limitedToNumberOfLines: numberOfLines)
         super.drawText(in: r)
     }
 }

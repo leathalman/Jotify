@@ -6,13 +6,12 @@
 //  Copyright © 2019 Harrison Leath. All rights reserved.
 //
 
-import UIKit
-import UserNotifications
 import BottomPopup
 import SPAlert
+import UIKit
+import UserNotifications
 
 class ReminderExistsController: BottomPopupViewController {
-    
     var noteColor = StoredColors.reminderColor
     var reminderDate = RemindersData.reminderDate
     
@@ -85,7 +84,7 @@ class ReminderExistsController: BottomPopupViewController {
         removeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40).isActive = true
     }
     
-    func setupDynamicColors () {
+    func setupDynamicColors() {
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
             view.backgroundColor = .grayBackground
             let removeButtonColor = UIColor.grayBackground.adjust(by: 4.75)
@@ -117,7 +116,7 @@ class ReminderExistsController: BottomPopupViewController {
             filteredNotes[index].isReminder = false
         }
         
-        CoreDataManager.shared.enqueue { (context) in
+        CoreDataManager.shared.enqueue { context in
             do {
                 try context.save()
                 
@@ -143,7 +142,6 @@ class ReminderExistsController: BottomPopupViewController {
     }
     
     func estimatedLabelHeight(text: String, width: CGFloat, font: UIFont) -> CGFloat {
-        
         let size = CGSize(width: width, height: 1000)
         
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)

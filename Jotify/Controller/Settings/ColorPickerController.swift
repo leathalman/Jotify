@@ -6,12 +6,11 @@
 //  Copyright © 2019 Harrison Leath. All rights reserved.
 //
 
-import UIKit
 import ChromaColorPicker
 import CoreData
+import UIKit
 
 class ColorPickerController: UIViewController {
-    
     var notes: [Note] = []
     
     let defaults = UserDefaults.standard
@@ -47,30 +46,30 @@ class ColorPickerController: UIViewController {
         
         var image = UIImage(named: "cancel")
         image = image?.withRenderingMode(.alwaysOriginal)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style:.plain, target: self, action: #selector(handleCancel))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(handleCancel))
         
         navigationItem.setHidesBackButton(true, animated: true)
         
-        let navigationBarHeight = self.navigationController!.navigationBar.frame.height
+        let navigationBarHeight = navigationController!.navigationBar.frame.height
         
         view.addSubview(contentView)
         view.addSubview(colorPicker)
         
         contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        contentView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -(navigationBarHeight)).isActive = true
+        contentView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -navigationBarHeight).isActive = true
         contentView.widthAnchor.constraint(equalToConstant: 350).isActive = true
         contentView.heightAnchor.constraint(equalToConstant: 350).isActive = true
         
         colorPicker.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        colorPicker.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -(navigationBarHeight)).isActive = true
+        colorPicker.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -navigationBarHeight).isActive = true
         colorPicker.widthAnchor.constraint(equalToConstant: 300).isActive = true
         colorPicker.heightAnchor.constraint(equalToConstant: 300).isActive = true
         
         setupClearNavigationBar()
         
         if defaults.bool(forKey: "darkModeEnabled") == true {
-            self.colorPicker.hexLabel.textColor = UIColor.white
-            self.contentView.backgroundColor = UIColor.grayBackground
+            colorPicker.hexLabel.textColor = UIColor.white
+            contentView.backgroundColor = UIColor.grayBackground
         }
     }
     
@@ -79,14 +78,14 @@ class ColorPickerController: UIViewController {
     }
     
     func setupClearNavigationBar() {
-        guard self.navigationController?.topViewController === self else { return }
-        self.transitionCoordinator?.animate(alongsideTransition: { [weak self](context) in
+        guard navigationController?.topViewController === self else { return }
+        transitionCoordinator?.animate(alongsideTransition: { [weak self] _ in
             self?.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
             self?.navigationController?.navigationBar.shadowImage = UIImage()
             self?.navigationController?.navigationBar.backgroundColor = .clear
             self?.navigationController?.navigationBar.barTintColor = .gray
             self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-            }, completion: nil)
+        }, completion: nil)
     }
     
     func setStaticColorForNotes() {
@@ -106,7 +105,7 @@ class ColorPickerController: UIViewController {
         
         writeNoteView.colorView.backgroundColor = newBackgroundColor
         
-        CoreDataManager.shared.enqueue { (context) in
+        CoreDataManager.shared.enqueue { context in
             do {
                 try context.save()
                 
@@ -114,7 +113,6 @@ class ColorPickerController: UIViewController {
                 print("Could not save. \(error), \(error.userInfo)")
             }
         }
-        
     }
     
     func fetchData() {
@@ -138,12 +136,9 @@ class ColorPickerController: UIViewController {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
     }
-
-    
 }
 
-extension ColorPickerController: ChromaColorPickerDelegate{
-    
+extension ColorPickerController: ChromaColorPickerDelegate {
     func colorPickerDidChooseColor(_ colorPicker: ChromaColorPicker, color: UIColor) {
         view.backgroundColor = color
         
@@ -152,14 +147,14 @@ extension ColorPickerController: ChromaColorPickerDelegate{
         
         StoredColors.staticNoteColor = color
         navigationController?.navigationBar.barTintColor = color
-
+        
         UIView.animate(withDuration: 0.2,
                        animations: {
-                        self.view.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
-        }, completion: { (done) in
-            UIView.animate(withDuration: 0.2, animations: {
-                self.view.transform = CGAffineTransform.identity
-            })
+                           self.view.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+                       }, completion: { _ in
+                           UIView.animate(withDuration: 0.2, animations: {
+                               self.view.transform = CGAffineTransform.identity
+                           })
         })
     }
 }

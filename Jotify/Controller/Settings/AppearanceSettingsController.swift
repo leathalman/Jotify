@@ -6,24 +6,23 @@
 //  Copyright © 2019 Harrison Leath. All rights reserved.
 //
 
-import UIKit
-import Pageboy
 import CoreData
+import Pageboy
+import UIKit
 
 class AppearanceSettingsController: UITableViewController {
-    
     var notes: [Note] = []
     
     let themes = Themes()
     
     let sections: Array = ["Dark Mode", "Themes", "Text", "Other"]
-    let darks: Array = ["Vibrant Dark Mode", "Pure Dark Mode" ]
-    let text: Array = ["Custom Placeholder","Enable Multiline Input"]
+    let darks: Array = ["Vibrant Dark Mode", "Pure Dark Mode"]
+    let text: Array = ["Custom Placeholder", "Enable Multiline Input"]
     let other: Array = ["Random Colors"]
     
     let settingsController = SettingsController()
     
-    var lastIndexPath:NSIndexPath = NSIndexPath(row: 0, section: 0)
+    var lastIndexPath: NSIndexPath = NSIndexPath(row: 0, section: 0)
     
     let defaults = UserDefaults.standard
     
@@ -76,7 +75,6 @@ class AppearanceSettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if indexPath.section == 0 {
             tableView.cellForRow(at: indexPath)?.accessoryType = .none
             
@@ -91,30 +89,29 @@ class AppearanceSettingsController: UITableViewController {
                 let cell = tableView.cellForRow(at: indexPath)
                 cell?.isSelected = false
                 
-                alert.addTextField { (textField) in
+                alert.addTextField { textField in
                     let placeholder = UserDefaults.standard.string(forKey: "writeNotePlaceholder")
                     textField.placeholder = placeholder
                     textField.autocorrectionType = .yes
                     textField.autocapitalizationType = .sentences
                 }
                 
-                alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { [weak alert] (_) in
+                alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { [weak alert] _ in
                     print(alert?.message ?? "cancel")
                     print("cancel")
                 }))
                 
-                alert.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak alert] (_) in
+                alert.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak alert] _ in
                     let textField = alert?.textFields![0]
                     let text = textField?.text
                     
                     if text?.isEmpty ?? false {
-                        
                     } else {
                         UserDefaults.standard.set(text, forKey: "writeNotePlaceholder")
                     }
                 }))
                 
-                self.present(alert, animated: true, completion: nil)
+                present(alert, animated: true, completion: nil)
                 
             case 1:
                 print("Tapped")
@@ -122,8 +119,6 @@ class AppearanceSettingsController: UITableViewController {
                 print("Tapped")
             }
         }
-        
-        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -217,7 +212,6 @@ class AppearanceSettingsController: UITableViewController {
             }
             
         } else if indexPath.section == 3 {
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
             
             settingsController.setupDynamicCells(cell: cell, enableArrow: false)
@@ -233,12 +227,11 @@ class AppearanceSettingsController: UITableViewController {
             }
             
             return cell
-            
         }
         return cell
     }
     
-    func setNewColorsForExistingNotes() { 
+    func setNewColorsForExistingNotes() {
         let writeNoteView = WriteNoteView()
         var newBackgroundColor = UIColor.white
         
@@ -272,7 +265,7 @@ class AppearanceSettingsController: UITableViewController {
         
         writeNoteView.colorView.backgroundColor = newBackgroundColor
         
-        CoreDataManager.shared.enqueue { (context) in
+        CoreDataManager.shared.enqueue { context in
             do {
                 try context.save()
                 
@@ -280,7 +273,6 @@ class AppearanceSettingsController: UITableViewController {
                 print("Could not save. \(error), \(error.userInfo)")
             }
         }
-        
     }
     
     @objc func vibrantDarkModeSwitchPressed(sender: UISwitch) {
@@ -291,7 +283,7 @@ class AppearanceSettingsController: UITableViewController {
             defaults.set(true, forKey: "darkModeEnabled")
             themes.setupVibrantDarkMode()
             
-            self.viewWillAppear(true)
+            viewWillAppear(true)
             self.tableView.reloadData()
             
         } else {
@@ -300,10 +292,9 @@ class AppearanceSettingsController: UITableViewController {
             defaults.set(false, forKey: "darkModeEnabled")
             themes.setupDefaultMode()
             
-            self.viewWillAppear(true)
+            viewWillAppear(true)
             self.tableView.reloadData()
         }
-        
     }
     
     @objc func pureDarkModeSwitchPressed(sender: UISwitch) {
@@ -314,7 +305,7 @@ class AppearanceSettingsController: UITableViewController {
             defaults.set(true, forKey: "darkModeEnabled")
             themes.setupPureDarkMode()
             
-            self.viewWillAppear(true)
+            viewWillAppear(true)
             self.tableView.reloadData()
             
         } else {
@@ -323,28 +314,27 @@ class AppearanceSettingsController: UITableViewController {
             defaults.set(false, forKey: "darkModeEnabled")
             themes.setupDefaultMode()
             
-            self.viewWillAppear(true)
+            viewWillAppear(true)
             self.tableView.reloadData()
         }
     }
     
-    @objc func enableMultilineInputSwitchPressed (sender: UISwitch) {
+    @objc func enableMultilineInputSwitchPressed(sender: UISwitch) {
         if sender.isOn {
             print("Multiline input enabled")
             defaults.set(true, forKey: "useMultilineInput")
             
             let alert = UIAlertController(title: "Mutliline Input", message: "You have enabled multiline input! Now when you press return while writing a note, it will create a new line instead of saving. To save a note, simply swipe left. Tapping return WILL NOT save notes with this enabled.", preferredStyle: .alert)
-                          
-             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-                 print(alert?.message ?? "cancel")
-             }))
-             
-             self.present(alert, animated: true, completion: nil)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] _ in
+                print(alert?.message ?? "cancel")
+            }))
+            
+            present(alert, animated: true, completion: nil)
             
         } else {
             print("Multiline input disabled")
             defaults.set(false, forKey: "useMultilineInput")
-            
         }
     }
     
@@ -363,7 +353,6 @@ class AppearanceSettingsController: UITableViewController {
             navigationController?.pushViewController(colorPickerController, animated: true)
         }
     }
-    
     
     func fetchData() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -402,7 +391,7 @@ class AppearanceSettingsController: UITableViewController {
         }
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int{
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
     
@@ -428,5 +417,4 @@ class AppearanceSettingsController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
-    
 }

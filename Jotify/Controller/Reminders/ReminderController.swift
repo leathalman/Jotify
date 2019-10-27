@@ -6,11 +6,11 @@
 //  Copyright © 2019 Harrison Leath. All rights reserved.
 //
 
-import UIKit
-import UserNotifications
 import AudioToolbox
 import BottomPopup
 import SPAlert
+import UIKit
+import UserNotifications
 
 struct RemindersData {
     static var reminderDate = String()
@@ -19,7 +19,6 @@ struct RemindersData {
 }
 
 class ReminderController: BottomPopupViewController, UNUserNotificationCenterDelegate {
-    
     public var screenWidth: CGFloat {
         return UIScreen.main.bounds.width
     }
@@ -102,10 +101,9 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
             filteredNotes[index].reminderDate = reminderDate
             filteredNotes[index].notificationUUID = notificationUUID
             filteredNotes[index].reminderDateDisplay = reminderDateDisplay
-            
         }
         
-        CoreDataManager.shared.enqueue { (context) in
+        CoreDataManager.shared.enqueue { context in
             do {
                 try context.save()
                 
@@ -113,10 +111,9 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
                 print("Could not save. \(error), \(error.userInfo)")
             }
         }
-        
     }
     
-    func setupDynamicColors () {
+    func setupDynamicColors() {
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
             view.backgroundColor = .grayBackground
             datePicker.backgroundColor = .grayBackground
@@ -134,7 +131,7 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         feedbackOnPress()
         scheduleNotification()
         
-        //add dark mode support too
+        // add dark mode support too
         let alertView = SPAlertView(title: "Reminder Set", message: nil, preset: .done)
         alertView.duration = 1
         alertView.present()
@@ -143,7 +140,7 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     }
     
     func scheduleNotification() {
-        //add category for custom buttons
+        // add category for custom buttons
         let center = UNUserNotificationCenter.current()
         
         let uuid = UUID().uuidString
@@ -152,8 +149,7 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         content.body = reminderBodyText
         content.userInfo = ["reminderBodyText": reminderBodyText]
         content.sound = UNNotificationSound.default
-        //ALWAYS RETURNS ONE.... so yay thats not the move
-        content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
+        content.badge = 1
         
         let componets = datePicker.calendar?.dateComponents([.year, .month, .day, .hour, .minute], from: datePicker.date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: componets!, repeats: false)
@@ -164,7 +160,6 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
         let dateFromPicker = dateFormatter.string(from: datePicker.date)
-        
         
         let calendar = Calendar.current
         let formattedDate = calendar.date(from: componets!)
@@ -181,18 +176,18 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         
         RemindersData.isReminder = true
         
-        //set acutal note to isReminder true
+        // set acutal note to isReminder true
         updateContentWithReminder(reminderDate: dateFromPicker, notificationUUID: uuid, reminderDateDisplay: reminderDateString)
     }
     
     func feedbackOnPress() {
         if UIDevice.current.hasTapticEngine == true {
-            //iPhone 6s and iPhone 6s Plus
+            // iPhone 6s and iPhone 6s Plus
             let peek = SystemSoundID(1519)
             AudioServicesPlaySystemSoundWithCompletion(peek, nil)
             
         } else if UIDevice.current.hasHapticFeedback == true {
-            //iPhone 7 and newer
+            // iPhone 7 and newer
             let generator = UIImpactFeedbackGenerator(style: .medium)
             generator.impactOccurred()
         }
@@ -201,5 +196,4 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     override func getPopupHeight() -> CGFloat {
         return 80 + (screenHeight / 11) + datePicker.frame.height + 30
     }
-    
 }

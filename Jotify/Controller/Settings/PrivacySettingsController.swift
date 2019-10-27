@@ -6,11 +6,10 @@
 //  Copyright © 2019 Harrison Leath. All rights reserved.
 //
 
-import UIKit
 import LocalAuthentication
+import UIKit
 
 class PrivacySettingsController: UITableViewController {
-    
     let sections: Array = ["Biometrics"]
     let biometrics: Array = ["Use Touch ID or Face ID"]
     
@@ -65,7 +64,6 @@ class PrivacySettingsController: UITableViewController {
             unlockButton.backgroundColor = defaults.color(forKey: "staticNoteColor") ?? UIColor.white
             
         } else {
-            
             if isSelectedColorFromDefaults(key: "default") == true {
                 unlockButton.backgroundColor = Colors.defaultColors.randomElement() ?? UIColor.blue2
                 
@@ -97,7 +95,7 @@ class PrivacySettingsController: UITableViewController {
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             let reason = "Unlock Jotify to access your notes."
             
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, _ in
                 
                 DispatchQueue.main.async {
                     if success {
@@ -130,9 +128,7 @@ class PrivacySettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if indexPath.section == 0 {
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
             cell.textLabel?.text = "\(biometrics[indexPath.row])"
             
@@ -149,9 +145,7 @@ class PrivacySettingsController: UITableViewController {
             
             return cell
             
-            
         } else {
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
             
             cell.backgroundColor = UIColor.white
@@ -160,7 +154,7 @@ class PrivacySettingsController: UITableViewController {
         }
     }
     
-    @objc func useBiometricsSwitchPressed (sender: UISwitch) {
+    @objc func useBiometricsSwitchPressed(sender: UISwitch) {
         if sender.isOn {
             print("useBiometrics enabled")
             defaults.set(true, forKey: "useBiometrics")
@@ -168,7 +162,6 @@ class PrivacySettingsController: UITableViewController {
         } else {
             print("useBiometrics disabled")
             defaults.set(false, forKey: "useBiometrics")
-            
         }
     }
     
@@ -191,7 +184,7 @@ class PrivacySettingsController: UITableViewController {
         }
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int{
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
     
@@ -210,6 +203,4 @@ class PrivacySettingsController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
-    
 }
-

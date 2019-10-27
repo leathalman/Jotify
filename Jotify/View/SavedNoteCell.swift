@@ -9,7 +9,6 @@
 import UIKit
 
 class SavedNoteCell: UICollectionViewCell {
-    
     private var initialFrame: CGRect?
     private var initialCornerRadius: CGFloat?
     
@@ -36,13 +35,13 @@ class SavedNoteCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
-    override init(frame : CGRect) {
-        super.init(frame : frame)
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         addViews()
     }
     
-    func addViews(){
+    func addViews() {
         contentView.addSubview(textLabel)
         contentView.addSubview(dateLabel)
         

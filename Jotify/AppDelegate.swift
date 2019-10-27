@@ -6,13 +6,12 @@
 //  Copyright © 2019 Harrison Leath. All rights reserved.
 //
 
-import UIKit
 import CoreData
+import UIKit
 import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
     let themes = Themes()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -51,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         saveNoteBeforeExiting()
-        self.saveContext()
+        saveContext()
     }
     
     // MARK: UISceneSession Lifecycle
@@ -73,9 +72,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var persistentContainer: NSPersistentCloudKitContainer = {
         let container = NSPersistentCloudKitContainer(name: "Jotify")
         
-        //set a merge policy when queues do not work properly
-        //you never want a merge conflict to exist becuase data will be lost
-        //only set for backup cases
+        // set a merge policy when queues do not work properly
+        // you never want a merge conflict to exist becuase data will be lost
+        // only set for backup cases
 //        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         
         // get the store description
@@ -88,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let options = NSPersistentCloudKitContainerOptions(containerIdentifier: id)
         description.cloudKitContainerOptions = options
         
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores(completionHandler: { _, error in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -109,7 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Core Data Saving support
     
-    func saveContext () {
+    func saveContext() {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
@@ -122,24 +121,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
-    
-    //when app is in foreground
+    // when app is in foreground
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        
 //        let userInfo = notification.request.content.userInfo
         print("THIS IS FIRED")
         
-        //display banner when app is open
+        // display banner when app is open
         completionHandler(UNNotificationPresentationOptions.alert)
     }
     
-    //when app is in background / or notification is tapped
+    // when app is in background / or notification is tapped
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        
         let userInfo = response.notification.request.content.userInfo
         
         if let reminderText = userInfo["reminderBodyText"] {

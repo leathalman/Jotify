@@ -9,24 +9,23 @@
 import UIKit
 
 extension WriteNoteController {
-    
     func presentOnboarding() {
-        //check to see if the user is new, updated, or neither
+        // check to see if the user is new, updated, or neither
         let standard = UserDefaults.standard
         let shortVersionKey = "CFBundleShortVersionString"
         let currentVersion = Bundle.main.infoDictionary![shortVersionKey] as! String
         let previousVersion = standard.object(forKey: shortVersionKey) as? String
         if previousVersion == currentVersion {
-            //same version, no update
+            // same version, no update
             print("same version")
-
+            
         } else {
             // replace with `if let previousVersion = previousVersion {` if you need the exact value
             if previousVersion != nil {
                 // new version
                 print("new version")
-                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
-
+//                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+                
             } else {
                 // first launch
                 print("first launch")
@@ -37,7 +36,7 @@ extension WriteNoteController {
     }
     
     func presentUpdateOnboarding(viewController: UIViewController, tintColor: UIColor) {
-        //Jotify v1.1.1 Onboarding
+        // Jotify v1.1.1 Onboarding
         let whatsNew = WhatsNew(
             title: "What's New",
             items: [
@@ -117,7 +116,7 @@ extension WriteNoteController {
                     title: "Open Source",
                     subtitle: "Jotify is open source, so you know exactly what is running on your device. Feel free to check it out on GitHub.",
                     image: UIImage(named: "github")
-                )
+                ),
             ]
         )
         

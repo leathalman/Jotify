@@ -13,12 +13,11 @@ struct EditingData {
     static var index = Int()
     static var newContent = String()
     static var newDate = Double()
-    static var notes = Array<Note>()
+    static var notes = [Note]()
     static var isEditing = Bool()
 }
 
 class NoteDetailController: UIViewController, UITextViewDelegate {
-    
     var navigationTitle: String = ""
     var backgroundColor: UIColor = .white
     var detailText: String = ""
@@ -65,58 +64,50 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         EditingData.newDate = newDate
         EditingData.index = index
         EditingData.notes = notes
-        //use isEditing to determine if we are on the NoteDetailController
-        //if we are, then call function to save data
+        // use isEditing to determine if we are on the NoteDetailController
+        // if we are, then call function to save data
         EditingData.isEditing = true
     }
     
     func fetchNotificaitonUUID() {
         if isFiltering == false {
-            
             let notificationUUID = notes[index].notificationUUID ?? ""
             RemindersData.notificationUUID = notificationUUID
             
         } else if isFiltering == true {
-            
             let notificationUUID = filteredNotes[index].notificationUUID ?? ""
             RemindersData.notificationUUID = notificationUUID
-            
         }
     }
     
     func removeReminderIfDelivered() {
         if checkIfReminderHasBeenDelivered() == true {
-                            
-                if isFiltering == false {
-                    notes[index].isReminder = false
-                    
-                } else if isFiltering == true {
-                    filteredNotes[index].isReminder = false
-
-                }
+            if isFiltering == false {
+                notes[index].isReminder = false
                 
-                CoreDataManager.shared.enqueue { (context) in
-                    do {
-                        try context.save()
-                        
-                    } catch let error as NSError {
-                        print("Could not save. \(error), \(error.userInfo)")
-                    }
+            } else if isFiltering == true {
+                filteredNotes[index].isReminder = false
+            }
+            
+            CoreDataManager.shared.enqueue { context in
+                do {
+                    try context.save()
+                    
+                } catch let error as NSError {
+                    print("Could not save. \(error), \(error.userInfo)")
                 }
+            }
             
             UIApplication.shared.applicationIconBadgeNumber -= 1
             
         } else {
             if isFiltering == false {
-                
                 let reminderDate = notes[index].reminderDate ?? "July 1, 2000 at 12:00 AM"
                 getReminderDateStringToDisplayForUser(reminderDate: reminderDate)
                 
             } else if isFiltering == true {
-                
                 let reminderDate = filteredNotes[index].reminderDate ?? "July 1, 2000 at 12:00 AM"
                 getReminderDateStringToDisplayForUser(reminderDate: reminderDate)
-                
             }
         }
     }
@@ -127,7 +118,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         let date = dateFormatter.date(from: reminderDate) ?? Date()
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
-        let formattedDate = calendar.date(from:components)!
+        let formattedDate = calendar.date(from: components)!
         
         dateFormatter.dateFormat = "MMMM d, yyyy"
         let firstPartOfDisplayString = dateFormatter.string(from: formattedDate)
@@ -139,7 +130,6 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     }
     
     func checkIfReminderHasBeenDelivered() -> Bool {
-        
         if isFiltering == false {
             let notificationUUID = notes[index].notificationUUID
             
@@ -199,8 +189,8 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     }
     
     func setupPersistentNavigationBar() {
-        guard self.navigationController?.topViewController === self else { return }
-        self.transitionCoordinator?.animate(alongsideTransition: { [weak self](context) in
+        guard navigationController?.topViewController === self else { return }
+        transitionCoordinator?.animate(alongsideTransition: { [weak self] _ in
             self?.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
             self?.navigationController?.navigationBar.shadowImage = UIImage()
             self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -220,26 +210,26 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
                 self?.navigationController?.navigationBar.backgroundColor = self?.backgroundColor
                 self?.navigationController?.navigationBar.barTintColor = self?.backgroundColor
             }
-            }, completion: nil)
+        }, completion: nil)
     }
     
     func resetNavigationBarForTransition() {
-        self.transitionCoordinator?.animate(alongsideTransition: { [weak self](context) in
+        transitionCoordinator?.animate(alongsideTransition: { [weak self] _ in
             self?.navigationController?.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
             self?.navigationController?.navigationBar.backgroundColor = .white
             self?.navigationController?.navigationBar.barTintColor = .white
             self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-            }, completion: nil)
+        }, completion: nil)
     }
     
     func setupView() {
         view = writeNoteView
+        
         let textView = writeNoteView.inputTextView
         
         StoredColors.reminderColor = backgroundColor
         
         if defaults.bool(forKey: "darkModeEnabled") == true {
-            
             if defaults.bool(forKey: "vibrantDarkModeEnabled") == true {
                 writeNoteView.colorView.backgroundColor = backgroundColor
                 textView.backgroundColor = backgroundColor
@@ -267,23 +257,23 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         textView.delegate = self
         
         navigationItem.title = navigationTitle
-        navigationItem.setHidesBackButton(true, animated:true)
+        navigationItem.setHidesBackButton(true, animated: true)
         
         var cancel = UIImage(named: "cancel")
         cancel = cancel?.withRenderingMode(.alwaysOriginal)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: cancel, style:.plain, target: self, action: #selector(handleCancel))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: cancel, style: .plain, target: self, action: #selector(handleCancel))
         
         var alarm = UIImage(named: "alarm.fill")
         alarm = alarm?.withRenderingMode(.alwaysOriginal)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: alarm, style: .plain, target: self, action: #selector(handleReminder))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: alarm, style: .plain, target: self, action: #selector(handleReminder))
         
-        self.hideKeyboardWhenTappedAround()
+        hideKeyboardWhenTappedAround()
     }
     
     @objc func handleReminder() {
         let savedNoteController = SavedNoteController()
         savedNoteController.feedbackOnPress()
-
+        
         if RemindersData.isReminder == false || RemindersData.reminderDate == "" {
             reminderIsNotSet()
         } else {
@@ -294,7 +284,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     func alreadySetReminder() {
         print("Already set a reminder")
         
-        //pass note data so that ReminderExistsController can directly edit the CoreData object
+        // pass note data so that ReminderExistsController can directly edit the CoreData object
         let reminderExistsController = ReminderExistsController()
         reminderExistsController.index = index
         reminderExistsController.notes = notes
@@ -330,16 +320,16 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     func requestNotificationPermission() {
         let center = UNUserNotificationCenter.current()
         
-        center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { granted, _ in
             if granted {
-//                print("Notifications granted")
+                // print("Notifications granted")
             } else {
-//                print("Notifications denied")
+                // print("Notifications denied")
             }
         }
     }
     
-    func updateContent(index: Int, newContent: String, newDate: Double){
+    func updateContent(index: Int, newContent: String, newDate: Double) {
         if isFiltering == false {
             notes[index].content = newContent
             notes[index].modifiedDate = newDate
@@ -349,7 +339,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
             filteredNotes[index].modifiedDate = newDate
         }
         
-        CoreDataManager.shared.enqueue { (context) in
+        CoreDataManager.shared.enqueue { context in
             do {
                 try context.save()
                 
@@ -357,11 +347,10 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
                 print("Could not save. \(error), \(error.userInfo)")
             }
         }
-        
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        //set newContent everytime character is changed
+        // set newContent everytime character is changed
         EditingData.newContent = textView.text
         
         return true
@@ -379,7 +368,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         let keyboardScreenEndFrame = keyboardValue.cgRectValue
         let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
         
-        let navigationBarHeight = self.navigationController!.navigationBar.frame.height
+        let navigationBarHeight = navigationController!.navigationBar.frame.height
         
         if notification.name == UIResponder.keyboardWillHideNotification {
             writeNoteView.inputTextView.contentInset = .zero
@@ -393,5 +382,4 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         let selectedRange = writeNoteView.inputTextView.selectedRange
         writeNoteView.inputTextView.scrollRangeToVisible(selectedRange)
     }
-    
 }

@@ -6,11 +6,10 @@
 //  Copyright © 2019 Harrison Leath. All rights reserved.
 //
 
-import UIKit
 import CoreData
+import UIKit
 
 class CoreDataManager {
-    
     static let shared = CoreDataManager()
     
     private var context: NSManagedObjectContext
@@ -27,13 +26,12 @@ class CoreDataManager {
     }
     
     func enqueue(block: @escaping (_ context: NSManagedObjectContext) -> Void) {
-        persistentContainerQueue.addOperation() {
+        persistentContainerQueue.addOperation {
             let context: NSManagedObjectContext = self.container.newBackgroundContext()
-            context.performAndWait{
+            context.performAndWait {
                 block(context)
                 try? context.save()
             }
         }
     }
-    
 }

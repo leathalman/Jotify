@@ -9,7 +9,6 @@
 import UIKit
 
 class EmptyView: UIView {
-    
     lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [imageContainer, titleLabel, descriptionLabel])
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -29,7 +28,8 @@ class EmptyView: UIView {
             image.heightAnchor.constraint(equalToConstant: 120),
             image.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             image.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            view.heightAnchor.constraint(equalTo: image.heightAnchor)])
+            view.heightAnchor.constraint(equalTo: image.heightAnchor),
+        ])
         return view
     }()
     
@@ -46,7 +46,7 @@ class EmptyView: UIView {
         label.text = "You haven't saved any notes!"
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textColor = .black
-        return  label
+        return label
     }()
     
     lazy var descriptionLabel: UILabel = {
@@ -56,7 +56,7 @@ class EmptyView: UIView {
         label.text = "Swipe right to write a new note."
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textColor = .black
-        return  label
+        return label
     }()
     
     override func layoutSubviews() {
@@ -84,16 +84,16 @@ class EmptyView: UIView {
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             containerView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            containerView.centerYAnchor.constraint(equalTo: centerYAnchor)])
+            containerView.centerYAnchor.constraint(equalTo: centerYAnchor),
+        ])
     }
     
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
-        self.frame = self.superview?.bounds ?? .zero
+        frame = superview?.bounds ?? .zero
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-

@@ -9,7 +9,6 @@
 import UIKit
 
 extension CALayer {
-    
     func addShadow(color: UIColor) {
         self.shadowOffset = .zero
         self.shadowOpacity = 0.3

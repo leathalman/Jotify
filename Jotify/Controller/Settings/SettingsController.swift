@@ -6,11 +6,10 @@
 //  Copyright © 2019 Harrison Leath. All rights reserved.
 //
 
-import UIKit
 import CoreData
+import UIKit
 
 class SettingsController: UITableViewController {
-    
     let sections: Array = ["General", "Advanced"]
     let general: Array = ["About", "Appearance", "Privacy", "Alerts"]
     let advanced: Array = ["Show Tutorial", "Reset Settings to Default", "Delete All Data"]
@@ -45,7 +44,7 @@ class SettingsController: UITableViewController {
                 
                 tableView.separatorColor = InterfaceColors.separatorColor
                 
-                self.tableView.reloadData()
+                tableView.reloadData()
                 
                 setupDarkPersistentNavigationBar()
             } else if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") == true {
@@ -55,11 +54,10 @@ class SettingsController: UITableViewController {
                 
                 tableView.separatorColor = InterfaceColors.separatorColor
                 
-                self.tableView.reloadData()
+                tableView.reloadData()
                 
                 setupDarkPersistentNavigationBar()
             }
-            
             
         } else if darkModeEnabled() == false {
             view.backgroundColor = InterfaceColors.viewBackgroundColor
@@ -67,7 +65,7 @@ class SettingsController: UITableViewController {
             tableView.separatorColor = nil
             
             themes.setupDefaultMode()
-            self.tableView.reloadData()
+            tableView.reloadData()
             
             setupDefaultPersistentNavigationBar()
         }
@@ -103,7 +101,7 @@ class SettingsController: UITableViewController {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         
-        CoreDataManager.shared.enqueue { (context) in
+        CoreDataManager.shared.enqueue { context in
             do {
                 try context.execute(batchDeleteRequest)
                 try context.save()
@@ -114,7 +112,7 @@ class SettingsController: UITableViewController {
         }
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int{
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
     
@@ -124,7 +122,6 @@ class SettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            
             switch indexPath.row {
             case 0:
                 navigationController?.pushViewController(AboutSettingsController(), animated: true)
@@ -153,7 +150,7 @@ class SettingsController: UITableViewController {
                 let cell = tableView.cellForRow(at: indexPath)
                 cell?.isSelected = false
                 
-                alert.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: { (UIAlertAction) in
+                alert.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: { _ in
                     
                     self.defaults.set("default", forKey: "noteColorTheme")
                     let appearanceSettingsController = AppearanceSettingsController()
@@ -183,7 +180,7 @@ class SettingsController: UITableViewController {
                 
                 let alert = UIAlertController(title: "Are you sure?", message: "This will permanently delete all data saved in both iCloud and saved locally on this device.", preferredStyle: .alert)
                 
-                alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (UIAlertAction) in
+                alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
                     self.deleteAllNotes(entity: "Note")
                 }))
                 
@@ -193,7 +190,6 @@ class SettingsController: UITableViewController {
             default:
                 print("default")
             }
-            
         }
     }
     
@@ -208,9 +204,7 @@ class SettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if indexPath.section == 0 {
-            
             switch indexPath.row {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
@@ -293,13 +287,11 @@ class SettingsController: UITableViewController {
                 
             default:
                 return cell
-                
             }
             
             return cell
             
         } else {
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
             
             cell.backgroundColor = UIColor.white
@@ -336,5 +328,4 @@ class SettingsController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
-    
 }

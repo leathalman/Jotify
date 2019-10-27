@@ -6,11 +6,10 @@
 //  Copyright © 2019 Harrison Leath. All rights reserved.
 //
 
-import UIKit
 import MultilineTextField
+import UIKit
 
 class WriteNoteView: UIView {
-    
     public var screenWidth: CGFloat {
         return UIScreen.main.bounds.width
     }
@@ -74,7 +73,7 @@ class WriteNoteView: UIView {
             
         } else if colorTheme == "kypool" {
             randomColor = Colors.kypoolColors.randomElement() ?? UIColor.white
-
+            
         } else if colorTheme == "celestial" {
             randomColor = Colors.celestialColors.randomElement() ?? UIColor.white
             
@@ -82,7 +81,7 @@ class WriteNoteView: UIView {
             randomColor = Colors.appleVibrantColors.randomElement() ?? UIColor.white
         }
         
-        //set global value to equal generated value
+        // set global value to equal generated value
         StoredColors.noteColor = randomColor
         
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
@@ -100,7 +99,4 @@ class WriteNoteView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
-
-

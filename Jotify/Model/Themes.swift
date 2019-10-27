@@ -9,7 +9,7 @@
 import UIKit
 
 struct InterfaceColors {
-    //colors for light/dark mode toggle
+    // colors for light/dark mode toggle
     static var viewBackgroundColor = UIColor()
     static var navigationBarColor = UIColor()
     static var cellColor = UIColor()
@@ -21,7 +21,6 @@ struct InterfaceColors {
 }
 
 class Themes {
-    
     func setupVibrantDarkMode() {
         InterfaceColors.writeViewColor = .grayBackground
         InterfaceColors.viewBackgroundColor = .grayBackground
@@ -32,7 +31,7 @@ class Themes {
         InterfaceColors.actionSheetColor = .grayBackground
         InterfaceColors.separatorColor = .white
     }
-    
+
     func setupPureDarkMode() {
         InterfaceColors.writeViewColor = .black
         InterfaceColors.viewBackgroundColor = .black
@@ -43,13 +42,12 @@ class Themes {
         InterfaceColors.actionSheetColor = .black
         InterfaceColors.separatorColor = .white
     }
-    
-    func setupDefaultMode() {        
+
+    func setupDefaultMode() {
         InterfaceColors.viewBackgroundColor = .white
         InterfaceColors.navigationBarColor = .white
         InterfaceColors.searchBarColor = .white
         InterfaceColors.cellColor = .cellLight
         InterfaceColors.fontColor = .black
-
     }
 }

@@ -6,11 +6,10 @@
 //  Copyright © 2019 Harrison Leath. All rights reserved.
 //
 
-import UIKit
 import LocalAuthentication
+import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    
     var window: UIWindow?
     
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
@@ -50,8 +49,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
-        if UserDefaults.standard.bool (forKey: "useBiometrics") == true {
-            
+        if UserDefaults.standard.bool(forKey: "useBiometrics") == true {
             let privacyController = PrivacySettingsController()
             privacyController.setupBiometricsView(window: window!)
             privacyController.unlockButton.addTarget(self, action: #selector(unlockPressed(sender:)), for: .touchUpInside)
@@ -69,7 +67,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let privacyController = PrivacySettingsController()
         privacyController.removeBlurView(window: window!)
         
-        print ("Backgroud")
+        print("Backgroud")
         
         renumberBadgesOfPendingNotifications()
 //        appDelegate?.saveNoteBeforeExiting()
@@ -99,7 +97,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     let identifiers = notificationRequests.map { $0.identifier }
                     UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
                     
-                    notificationRequests.enumerated().forEach { (index, request) in
+                    notificationRequests.enumerated().forEach { index, request in
                         if let trigger = request.trigger {
                             let content = UNMutableNotificationContent()
                             content.body = request.content.body
@@ -118,12 +116,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 .sorted(by: { n1, n2 in n1.fireDate!.compare(n2.fireDate!) == .orderedAscending })
             
             notifications.forEach { UIApplication.shared.cancelLocalNotification($0) }
-            notifications.enumerated().forEach { (index, notification) in
+            notifications.enumerated().forEach { index, notification in
                 notification.applicationIconBadgeNumber = index + 1
                 UIApplication.shared.scheduleLocalNotification(notification)
             }
         }
     }
-    
 }
-
