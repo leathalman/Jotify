@@ -1,0 +1,6 @@
+framework module Aztec {
+  umbrella header "WordPress-Aztec-iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

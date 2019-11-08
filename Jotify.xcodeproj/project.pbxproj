@@ -65,6 +65,7 @@
 		F69E5DC0231AE14800872345 /* ThemeSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E5DBF231AE14800872345 /* ThemeSelectionController.swift */; };
 		F69E5DC2231B120200872345 /* ReminderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E5DC1231B120200872345 /* ReminderController.swift */; };
 		F6A2C7232340E87A0031A81B /* ReminderExistsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A2C7222340E87A0031A81B /* ReminderExistsController.swift */; };
+		F6A99F3523750D89001D2898 /* EditorDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A99F3423750D89001D2898 /* EditorDemo.swift */; };
 		F6B2083722DE22860098CF9F /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B2083622DE22860098CF9F /* Themes.swift */; };
 		F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */; };
 /* End PBXBuildFile section */
@@ -133,6 +134,7 @@
 		F69E5DBF231AE14800872345 /* ThemeSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectionController.swift; sourceTree = "<group>"; };
 		F69E5DC1231B120200872345 /* ReminderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderController.swift; sourceTree = "<group>"; };
 		F6A2C7222340E87A0031A81B /* ReminderExistsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderExistsController.swift; sourceTree = "<group>"; };
+		F6A99F3423750D89001D2898 /* EditorDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorDemo.swift; sourceTree = "<group>"; };
 		F6B2083622DE22860098CF9F /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
 		F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -318,6 +320,7 @@
 			children = (
 				F6A2C7212340E8530031A81B /* Reminders */,
 				F644968522C16422009CC386 /* NoteDetailController.swift */,
+				F6A99F3423750D89001D2898 /* EditorDemo.swift */,
 				F650E15022BFFB12008D29AD /* SavedNoteController.swift */,
 				F650E15322BFFB12008D29AD /* WriteNoteController.swift */,
 				F61EC8D42348EE5200FB0A63 /* WriteNoteController+Onboarding.swift */,
@@ -538,6 +541,7 @@
 				F650E13322BFF35A008D29AD /* SceneDelegate.swift in Sources */,
 				F686D85222C9B10900C6F555 /* Colors+Handlers.swift in Sources */,
 				F67B92E022D2E785002C6985 /* ColorPickerController.swift in Sources */,
+				F6A99F3523750D89001D2898 /* EditorDemo.swift in Sources */,
 				F65E479D2324B10500FCAEF3 /* UIViewController+Extensions.swift in Sources */,
 				F61EC8C92348E1BA00FB0A63 /* UIColor+Defaults.swift in Sources */,
 				F686D84D22C9269D00C6F555 /* PageViewController.swift in Sources */,

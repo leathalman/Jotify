@@ -2,8 +2,11 @@ ${PODS_ROOT}/Target Support Files/Pods-Jotify/Pods-Jotify-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Blueprints/Blueprints.framework
 ${BUILT_PRODUCTS_DIR}/BottomPopup/BottomPopup.framework
 ${BUILT_PRODUCTS_DIR}/ChromaColorPicker/ChromaColorPicker.framework
+${BUILT_PRODUCTS_DIR}/Gridicons/Gridicons.framework
 ${BUILT_PRODUCTS_DIR}/MultilineTextField/MultilineTextField.framework
 ${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework
 ${BUILT_PRODUCTS_DIR}/SPAlert/SPAlert.framework
 ${BUILT_PRODUCTS_DIR}/ViewAnimator/ViewAnimator.framework
+${BUILT_PRODUCTS_DIR}/WordPress-Aztec-iOS/Aztec.framework
+${BUILT_PRODUCTS_DIR}/WordPress-Editor-iOS/WordPressEditor.framework
 ${BUILT_PRODUCTS_DIR}/XLActionController/XLActionController.framework

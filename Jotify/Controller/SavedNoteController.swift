@@ -365,7 +365,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                            })
         })
         
-        navigationController?.pushViewController(noteDetailController, animated: true)
+        navigationController?.pushViewController(EditorDemoController(withSampleHTML: content, wordPressMode: false), animated: true)
     }
     
     @objc func longTouchHandler(sender: UILongPressGestureRecognizer) {

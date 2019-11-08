@@ -1,0 +1,6 @@
+framework module Gridicons {
+  umbrella header "Gridicons-umbrella.h"
+
+  export *
+  module * { export * }
+}

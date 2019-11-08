@@ -164,20 +164,26 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Blueprints/Blueprints.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/BottomPopup/BottomPopup.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ChromaColorPicker/ChromaColorPicker.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Gridicons/Gridicons.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MultilineTextField/MultilineTextField.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SPAlert/SPAlert.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ViewAnimator/ViewAnimator.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/WordPress-Aztec-iOS/Aztec.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/WordPress-Editor-iOS/WordPressEditor.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/XLActionController/XLActionController.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Blueprints/Blueprints.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/BottomPopup/BottomPopup.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ChromaColorPicker/ChromaColorPicker.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Gridicons/Gridicons.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MultilineTextField/MultilineTextField.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SPAlert/SPAlert.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ViewAnimator/ViewAnimator.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/WordPress-Aztec-iOS/Aztec.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/WordPress-Editor-iOS/WordPressEditor.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/XLActionController/XLActionController.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

@@ -32,4 +32,8 @@ pod 'BottomPopup'
 # Used for displaying confirmations to users when reminders are created or deleted
 pod 'SPAlert'
 
+pod 'WordPress-Aztec-iOS'
+pod 'WordPress-Editor-iOS'
+pod 'Gridicons'
+
 end
