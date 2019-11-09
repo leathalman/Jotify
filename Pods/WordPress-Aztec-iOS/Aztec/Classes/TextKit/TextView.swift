@@ -658,25 +658,34 @@ open class TextView: UITextView {
 
     // MARK: - UITextView Overrides
     
+//    open override func caretRect(for position: UITextPosition) -> CGRect {
+//        var caretRect = super.caretRect(for: position)
+//        let characterIndex = offset(from: beginningOfDocument, to: position)
+//
+//        guard layoutManager.isValidGlyphIndex(characterIndex) else {
+//            return caretRect
+//        }
+//
+//        let glyphIndex = layoutManager.glyphIndexForCharacter(at: characterIndex)
+//        let usedLineFragment = layoutManager.lineFragmentUsedRect(forGlyphAt: glyphIndex, effectiveRange: nil)
+//
+//        guard !usedLineFragment.isEmpty else {
+//            return caretRect
+//        }
+//
+//        caretRect.origin.y = usedLineFragment.origin.y + textContainerInset.top
+//        caretRect.size.height = usedLineFragment.size.height
+//
+//        return caretRect
+//    }
+    
     open override func caretRect(for position: UITextPosition) -> CGRect {
-        var caretRect = super.caretRect(for: position)
-        let characterIndex = offset(from: beginningOfDocument, to: position)
-        
-        guard layoutManager.isValidGlyphIndex(characterIndex) else {
-            return caretRect
-        }
-        
-        let glyphIndex = layoutManager.glyphIndexForCharacter(at: characterIndex)
-        let usedLineFragment = layoutManager.lineFragmentUsedRect(forGlyphAt: glyphIndex, effectiveRange: nil)
-        
-        guard !usedLineFragment.isEmpty else {
-            return caretRect
-        }
-     
-        caretRect.origin.y = usedLineFragment.origin.y + textContainerInset.top
-        caretRect.size.height = usedLineFragment.size.height
-
-        return caretRect
+          var rect = super.caretRect(for: position)
+              let size = CGSize(width: 10, height: 50)
+              // Calculating center y
+              let y = rect.origin.y - (size.height - rect.size.height)/2
+              rect = CGRect(origin: CGPoint(x: rect.origin.x, y: y), size: size)
+              return rect
     }
 
     // MARK: - HTML Interaction

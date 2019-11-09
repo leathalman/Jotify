@@ -6,13 +6,8 @@
 //  Copyright © 2019 Harrison Leath. All rights reserved.
 //
 
-import AVFoundation
-import AVKit
 import Aztec
-import Foundation
 import Gridicons
-import MobileCoreServices
-import Photos
 import UIKit
 import WordPressEditor
 
@@ -41,6 +36,7 @@ class EditorDemoController: UIViewController {
             defaultMissingImage: Constants.defaultMissingImage)
 
         editorView.clipsToBounds = false
+        
         setupHTMLTextView(editorView.htmlTextView)
         setupRichTextView(editorView.richTextView)
 
@@ -87,6 +83,7 @@ class EditorDemoController: UIViewController {
     private lazy var optionsTablePresenter = OptionsTablePresenter(presentingViewController: self, presentingTextView: richTextView)
 
     // MARK: - Lifecycle Methods
+
     init(withSampleHTML sampleHTML: String? = nil, wordPressMode: Bool) {
         self.sampleHTML = sampleHTML
         self.wordPressMode = wordPressMode
@@ -106,42 +103,39 @@ class EditorDemoController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        MediaAttachment.defaultAppearance.progressColor = UIColor.blue
-        MediaAttachment.defaultAppearance.progressBackgroundColor = UIColor.lightGray
-        MediaAttachment.defaultAppearance.progressHeight = 2.0
-        MediaAttachment.defaultAppearance.overlayColor = UIColor(red: CGFloat(46.0 / 255.0), green: CGFloat(69.0 / 255.0), blue: CGFloat(83.0 / 255.0), alpha: 0.6)
-        // Uncomment to add a border
-        // MediaAttachment.defaultAppearance.overlayBorderWidth = 3.0
-        // MediaAttachment.defaultAppearance.overlayBorderColor = UIColor(red: CGFloat(0.0/255.0), green: CGFloat(135.0/255.0), blue: CGFloat(190.0/255.0), alpha: 0.8)
-
+        
         edgesForExtendedLayout = UIRectEdge()
-        navigationController?.navigationBar.isTranslucent = false
+//        navigationController?.navigationBar.isTranslucent = false
         view.addSubview(editorView)
 
         // color setup
-        view.backgroundColor = UIColor.systemBackground
-        editorView.htmlTextView.textColor = UIColor.label
-        editorView.richTextView.textColor = UIColor.label
+        view.backgroundColor = .black
+        editorView.backgroundColor = .red
+        editorView.richTextView.backgroundColor = .clear
+        editorView.htmlTextView.backgroundColor = .clear
+        
+        // special colors
         editorView.richTextView.blockquoteBackgroundColor = UIColor.secondarySystemBackground
         editorView.richTextView.preBackgroundColor = UIColor.secondarySystemBackground
         editorView.richTextView.blockquoteBorderColor = UIColor.secondarySystemFill
+        
+        
         var attributes = editorView.richTextView.linkTextAttributes
         attributes?[.foregroundColor] = UIColor.link
+        
         // Don't allow scroll while the constraints are being setup and text set
         editorView.isScrollEnabled = false
         configureConstraints()
-        registerAttachmentImageProviders()
 
         let html: String
-
         if let sampleHTML = sampleHTML {
             html = sampleHTML
         } else {
             html = ""
         }
+        
         editorView.setHTML(html)
-        editorView.becomeFirstResponder()
+//        editorView.becomeFirstResponder()
     }
 
     @objc func changeFont() {
@@ -191,11 +185,9 @@ class EditorDemoController: UIViewController {
     }
 
     private func configureConstraints() {
-        let layoutGuide = view.readableContentGuide
-
         NSLayoutConstraint.activate([
-            editorView.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor),
-            editorView.trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor),
+            editorView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
+            editorView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
             editorView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
             editorView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
         ])
@@ -205,34 +197,12 @@ class EditorDemoController: UIViewController {
         textView.accessibilityLabel = accessibilityLabel
         textView.font = Constants.defaultContentFont
         textView.keyboardDismissMode = .interactive
-//        if #available(iOS 13.0, *) {
-//            textView.textColor = UIColor.label
-//            if let htmlStorage = textView.textStorage as? HTMLStorage {
-//                htmlStorage.textColor = UIColor.label
-//            }
-//        } else {
-        // Fallback on earlier versions
-        textView.textColor = UIColor(red: 0x1A / 255.0, green: 0x1A / 255.0, blue: 0x1A / 255.0, alpha: 1)
-//        }
-        textView.linkTextAttributes = [.foregroundColor: UIColor(red: 0x01 / 255.0, green: 0x60 / 255.0, blue: 0x87 / 255.0, alpha: 1), NSAttributedString.Key.underlineStyle: NSNumber(value: NSUnderlineStyle.single.rawValue)]
-    }
-
-    private func registerAttachmentImageProviders() {
-        let providers: [TextViewAttachmentImageProvider] = [
-            GutenpackAttachmentRenderer(),
-            SpecialTagAttachmentRenderer(),
-            CommentAttachmentRenderer(font: Constants.defaultContentFont),
-            HTMLAttachmentRenderer(font: Constants.defaultHtmlFont)
-        ]
-
-        for provider in providers {
-            richTextView.registerAttachmentImageProvider(provider)
-        }
+        textView.textColor = Constants.defaultTextColor
     }
 
     // MARK: - Helpers
 
-    @IBAction func toggleEditingMode() {
+    private func toggleEditingMode() {
         formatBar.overflowToolbar(expand: true)
         editorView.toggleEditingMode()
     }
@@ -299,27 +269,7 @@ class EditorDemoController: UIViewController {
 
         toolbar.selectItemsMatchingIdentifiers(identifiers.map { $0.rawValue })
     }
-
-    override var keyCommands: [UIKeyCommand] {
-        if richTextView.isFirstResponder {
-//            return [ UIKeyCommand(input:"B", modifierFlags: .command, action:#selector(toggleBold), discoverabilityTitle:NSLocalizedString("Bold", comment: "Discoverability title for bold formatting keyboard shortcut.")),
-//                     UIKeyCommand(input:"I", modifierFlags: .command, action:#selector(toggleItalic), discoverabilityTitle:NSLocalizedString("Italic", comment: "Discoverability title for italic formatting keyboard shortcut.")),
-//                     UIKeyCommand(input:"S", modifierFlags: [.command], action:#selector(toggleStrikethrough), discoverabilityTitle: NSLocalizedString("Strikethrough", comment:"Discoverability title for strikethrough formatting keyboard shortcut.")),
-//                     UIKeyCommand(input:"U", modifierFlags: .command, action:#selector(EditorDemoController.toggleUnderline(_:)), discoverabilityTitle: NSLocalizedString("Underline", comment:"Discoverability title for underline formatting keyboard shortcut.")),
-//                     UIKeyCommand(input:"Q", modifierFlags:[.command,.alternate], action: #selector(toggleBlockquote), discoverabilityTitle: NSLocalizedString("Block Quote", comment: "Discoverability title for block quote keyboard shortcut.")),
-//                     UIKeyCommand(input:"K", modifierFlags:.command, action:#selector(toggleLink), discoverabilityTitle: NSLocalizedString("Insert Link", comment: "Discoverability title for insert link keyboard shortcut.")),
-//                     UIKeyCommand(input:"M", modifierFlags:[.command,.alternate], action:#selector(showImagePicker), discoverabilityTitle: NSLocalizedString("Insert Media", comment: "Discoverability title for insert media keyboard shortcut.")),
-//                     UIKeyCommand(input:"U", modifierFlags:[.command, .alternate], action:#selector(toggleUnorderedList), discoverabilityTitle:NSLocalizedString("Bullet List", comment: "Discoverability title for bullet list keyboard shortcut.")),
-//                     UIKeyCommand(input:"O", modifierFlags:[.command, .alternate], action:#selector(toggleOrderedList), discoverabilityTitle:NSLocalizedString("Numbered List", comment:"Discoverability title for numbered list keyboard shortcut.")),
-//                     UIKeyCommand(input:"H", modifierFlags:[.command, .shift], action:#selector(toggleEditingMode), discoverabilityTitle:NSLocalizedString("Toggle HTML Source ", comment: "Discoverability title for HTML keyboard shortcut."))
-//            ]
-        } else if htmlTextView.isFirstResponder {
-//            return [UIKeyCommand(input:"H", modifierFlags:[.command, .shift], action:#selector(toggleEditingMode), discoverabilityTitle:NSLocalizedString("Toggle HTML Source ", comment: "Discoverability title for HTML keyboard shortcut."))
-//            ]
-        }
-        return []
-    }
-
+    
     // MARK: - Sample Content
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -369,6 +319,19 @@ extension EditorDemoController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         return false
     }
+    
+//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//        if (text as NSString).rangeOfCharacter(from: CharacterSet.newlines).location == NSNotFound {
+//            return true
+//        }
+//
+//        if text == "\n" {
+//            textView.text = textView.text + "\n"
+//        }
+//        print("TAPPED")
+//
+//        return false
+//    }
 }
 
 extension EditorDemoController: Aztec.TextViewFormattingDelegate {
@@ -617,18 +580,6 @@ extension EditorDemoController {
         richTextView.replace(richTextView.selectedRange, withComment: Constants.moreAttachmentText)
     }
 
-    @objc func alertTextFieldDidChange(_ textField: UITextField) {
-        guard
-            let alertController = presentedViewController as? UIAlertController,
-            let urlFieldText = alertController.textFields?.first?.text,
-            let insertAction = alertController.actions.first
-        else {
-            return
-        }
-
-        insertAction.isEnabled = !urlFieldText.isEmpty
-    }
-
     @objc func tabOnTitle() {
         if editorView.becomeFirstResponder() {
             editorView.selectedTextRange = editorView.htmlTextView.textRange(from: editorView.htmlTextView.endOfDocument, to: editorView.htmlTextView.endOfDocument)
@@ -641,33 +592,25 @@ extension EditorDemoController {
     }
 
     func createToolbar() -> Aztec.FormatBar {
-        let mediaItem = makeToolbarButton(identifier: .media)
+//        let mediaItem = makeToolbarButton(identifier: .media)
         let scrollableItems = scrollableItemsForToolbar
         let overflowItems = overflowItemsForToolbar
 
         let toolbar = Aztec.FormatBar()
 
-        if #available(iOS 13.0, *) {
-            toolbar.backgroundColor = UIColor.systemGroupedBackground
-            toolbar.tintColor = UIColor.secondaryLabel
-            toolbar.highlightedTintColor = UIColor.systemBlue
-            toolbar.selectedTintColor = UIColor.systemBlue
-            toolbar.disabledTintColor = .systemGray4
-            toolbar.dividerTintColor = UIColor.separator
-        } else {
-            toolbar.tintColor = .gray
-            toolbar.highlightedTintColor = .blue
-            toolbar.selectedTintColor = view.tintColor
-            toolbar.disabledTintColor = .lightGray
-            toolbar.dividerTintColor = .gray
-        }
+        toolbar.backgroundColor = UIColor.systemGroupedBackground
+        toolbar.tintColor = UIColor.secondaryLabel
+        toolbar.highlightedTintColor = UIColor.systemBlue
+        toolbar.selectedTintColor = UIColor.systemBlue
+        toolbar.disabledTintColor = .systemGray4
+        toolbar.dividerTintColor = UIColor.separator
 
         toolbar.overflowToggleIcon = Gridicon.iconOfType(.ellipsis)
         toolbar.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 44.0)
         toolbar.autoresizingMask = [.flexibleHeight]
         toolbar.formatter = self
 
-        toolbar.leadingItem = mediaItem
+//        toolbar.leadingItem = mediaItem
         toolbar.setDefaultItems(
             scrollableItems,
             overflowItems: overflowItems)
@@ -701,19 +644,18 @@ extension EditorDemoController {
         return [
             headerButton,
             listButton,
-            makeToolbarButton(identifier: .blockquote),
             makeToolbarButton(identifier: .bold),
-            makeToolbarButton(identifier: .italic)
+            makeToolbarButton(identifier: .italic),
+            makeToolbarButton(identifier: .underline)
         ]
     }
 
     var overflowItemsForToolbar: [FormatBarItem] {
         return [
-            makeToolbarButton(identifier: .underline),
+            makeToolbarButton(identifier: .blockquote),
             makeToolbarButton(identifier: .strikethrough),
             makeToolbarButton(identifier: .code),
             makeToolbarButton(identifier: .horizontalruler),
-            makeToolbarButton(identifier: .more),
             makeToolbarButton(identifier: .sourcecode)
         ]
     }
@@ -721,14 +663,14 @@ extension EditorDemoController {
 
 extension EditorDemoController {
     struct Constants {
-        static let defaultContentFont = UIFont.boldSystemFont(ofSize: 14)
-        static let defaultHtmlFont = UIFont.systemFont(ofSize: 24)
+        static let defaultContentFont = UIFont.boldSystemFont(ofSize: 18)
+        static let defaultHtmlFont = UIFont.boldSystemFont(ofSize: 18)
         static let defaultMissingImage = Gridicon.iconOfType(.image)
         static let formatBarIconSize = CGSize(width: 20.0, height: 20.0)
         static let headers = [Header.HeaderType.none, .h1, .h2, .h3, .h4, .h5, .h6]
         static let lists = [TextList.Style.unordered, .ordered]
         static let moreAttachmentText = "more"
-        static let titleInsets = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
+        static let defaultTextColor = UIColor.white
     }
 }
 
