@@ -321,7 +321,8 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         let indexPath = collectionView.indexPathForItem(at: location)
         let rowNumber: Int = indexPath?.row ?? 0
         
-        let noteDetailController = NoteDetailController()
+        let noteDetailController = EditorDemoController()
+//        let noteDetailController = NoteDetailController()
         
         var note = notes[indexPath?.row ?? 0]
         
@@ -365,7 +366,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                            })
         })
         
-        navigationController?.pushViewController(EditorDemoController(withSampleHTML: content, wordPressMode: false), animated: true)
+        navigationController?.pushViewController(noteDetailController, animated: true)
     }
     
     @objc func longTouchHandler(sender: UILongPressGestureRecognizer) {

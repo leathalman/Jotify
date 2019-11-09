@@ -8,35 +8,34 @@
 
 import UIKit
 import UserNotifications
-import Aztec
 
-struct EditingData {
-    static var index = Int()
-    static var newContent = String()
-    static var newDate = Double()
-    static var notes = [Note]()
-    static var isEditing = Bool()
-}
+//struct EditingData {
+//    static var index = Int()
+//    static var newContent = String()
+//    static var newDate = Double()
+//    static var notes = [Note]()
+//    static var isEditing = Bool()
+//}
 
 class NoteDetailController: UIViewController, UITextViewDelegate {
     var navigationTitle: String = ""
     var backgroundColor: UIColor = .white
     var detailText: String = ""
     var index: Int = 0
-    
+
     let newDate = Date.timeIntervalSinceReferenceDate
-    
+
     var datePicker: UIDatePicker = UIDatePicker()
     let toolBar = UIToolbar()
-    
+
     let writeNoteView = WriteNoteView()
-    
+
     let defaults = UserDefaults.standard
-    
+
     var notes: [Note] = []
     var filteredNotes: [Note] = []
     var isFiltering: Bool = false
-    
+
     var navigationBarHeight = CGFloat()
     
     override func viewWillAppear(_ animated: Bool) {
