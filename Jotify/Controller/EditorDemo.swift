@@ -27,7 +27,7 @@ class EditorDemoController: UIViewController {
 
     let newDate = Date.timeIntervalSinceReferenceDate
     
-    let writeNoteView = WriteNoteView()
+//    let writeNoteView = WriteNoteView()
 
     var datePicker: UIDatePicker = UIDatePicker()
 
@@ -298,7 +298,7 @@ class EditorDemoController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        updateContent(index: index, newContent: writeNoteView.inputTextView.text, newDate: newDate)
+        updateContent(index: index, newContent: editorView.richTextView.text, newDate: newDate)
 
         resetNavigationBarForTransition()
         EditingData.isEditing = false
@@ -451,7 +451,7 @@ class EditorDemoController: UIViewController {
         }
 
         reminderController.index = index
-        reminderController.reminderBodyText = writeNoteView.inputTextView.text
+        reminderController.reminderBodyText = editorView.richTextView.text
         requestNotificationPermission()
         present(reminderController, animated: true, completion: nil)
     }
@@ -516,16 +516,16 @@ class EditorDemoController: UIViewController {
         let navigationBarHeight = navigationController!.navigationBar.frame.height
 
         if notification.name == UIResponder.keyboardWillHideNotification {
-            writeNoteView.inputTextView.contentInset = .zero
+            editorView.richTextView.contentInset = .zero
 
         } else {
-            writeNoteView.inputTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height + navigationBarHeight + 42, right: 0)
+            editorView.richTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height + navigationBarHeight + 42, right: 0)
         }
 
-        writeNoteView.inputTextView.scrollIndicatorInsets = writeNoteView.inputTextView.contentInset
+        editorView.richTextView.scrollIndicatorInsets = editorView.richTextView.contentInset
 
-        let selectedRange = writeNoteView.inputTextView.selectedRange
-        writeNoteView.inputTextView.scrollRangeToVisible(selectedRange)
+        let selectedRange = editorView.richTextView.selectedRange
+        editorView.richTextView.scrollRangeToVisible(selectedRange)
     }
 
     // MARK: - Configuration Methods
@@ -548,15 +548,10 @@ class EditorDemoController: UIViewController {
         textView.font = Constants.defaultContentFont
         textView.keyboardDismissMode = .interactive
         textView.textColor = Constants.defaultTextColor
-
-        if #available(iOS 13.0, *) {
-            if let htmlStorage = textView.textStorage as? HTMLStorage {
+        
+        if let htmlStorage = textView.textStorage as? HTMLStorage {
                 htmlStorage.textColor = UIColor.white
             }
-        } else {
-            //             Fallback on earlier versions
-            textView.textColor = UIColor(red: 0x1A / 255.0, green: 0x1A / 255.0, blue: 0x1A / 255.0, alpha: 1)
-        }
     }
 
     // MARK: - Helpers

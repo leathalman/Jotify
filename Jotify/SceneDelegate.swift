@@ -71,7 +71,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         renumberBadgesOfPendingNotifications()
         // conisider saving notes when entering background
-//        appDelegate?.saveNoteBeforeExiting()
+        // we will have to change this to use the new editor!
+        appDelegate?.saveNoteBeforeExiting()
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
     
