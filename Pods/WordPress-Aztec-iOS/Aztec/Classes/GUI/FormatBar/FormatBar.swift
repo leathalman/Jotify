@@ -296,8 +296,6 @@ open class FormatBar: UIView {
     var overflowToggleItemRTLLeadingConstraint: NSLayoutConstraint?
 
     // MARK: - Initializers
-
-
     public init() {
         super.init(frame: .zero)
         backgroundColor = .white
@@ -328,6 +326,8 @@ open class FormatBar: UIView {
 
         if #available(iOS 11.0, *) {
             updateForSafeAreaInsets()
+        } else {
+            // Fallback on earlier versions
         }
     }
 
@@ -682,14 +682,10 @@ private extension FormatBar {
 
     /// Sets up the Constraints
     ///
+    @available(iOS 11.0, *)
     func configureConstraints() {
-        var leadingAnchor = self.leadingAnchor
-        var trailingAnchor = self.trailingAnchor
-
-        if #available(iOS 11.0, *) {
-            leadingAnchor = safeAreaLayoutGuide.leadingAnchor
-            trailingAnchor = safeAreaLayoutGuide.trailingAnchor
-        }
+        let leadingAnchor = safeAreaLayoutGuide.leadingAnchor
+        let trailingAnchor = safeAreaLayoutGuide.trailingAnchor
 
         ///Overflow toggle item
 
@@ -712,7 +708,6 @@ private extension FormatBar {
                 constant: 0
             )
             self.overflowToggleItemRTLLeadingConstraint = overflowLeadingConstraint
-        // added unknown default to ignore warning, should never actually be executed
         @unknown default:
             overflowLeadingConstraint = overflowToggleItem.leadingAnchor.constraint(greaterThanOrEqualTo: scrollableStackView.trailingAnchor)
         }
@@ -729,7 +724,6 @@ private extension FormatBar {
             trailingItemLeadingConstraint = trailingItemContainer.leadingAnchor.constraint(greaterThanOrEqualTo: scrollableStackView.trailingAnchor)
         case .rightToLeft:
             trailingItemLeadingConstraint = trailingItemContainer.leadingAnchor.constraint(greaterThanOrEqualTo: scrollableStackView.leadingAnchor)
-        // added unknown default to ignore warning, should never actually be executed
         @unknown default:
             trailingItemLeadingConstraint = trailingItemContainer.leadingAnchor.constraint(greaterThanOrEqualTo: scrollableStackView.trailingAnchor)
         }

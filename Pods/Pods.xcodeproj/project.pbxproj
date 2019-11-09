@@ -328,6 +328,10 @@
 		F5A335209281505231F83DD12372EEAC /* UIView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E4FE962A6104795A1EBAF0DBE05C08 /* UIView+Animation.swift */; };
 		F5BD05F10C1187BEEA49A6C963E57A6C /* AttributeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA6480AA4EB58CCD9E282B062DC040A /* AttributeType.swift */; };
 		F66E989E81DB7A83E420FD953260180E /* LineAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D28AAA28F87902F0514ED769899631 /* LineAttachment.swift */; };
+		F6962CEF237734B10034B5E6 /* FontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6962CEE237734B10034B5E6 /* FontProvider.swift */; };
+		F69697C0237737F8007E1519 /* ForegroundColorElementAttributeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69697BF237737F8007E1519 /* ForegroundColorElementAttributeConverter.swift */; };
+		F69697C22377386E007E1519 /* ForegroundColorCSSAttributeMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69697C12377386E007E1519 /* ForegroundColorCSSAttributeMatcher.swift */; };
+		F69697C723773B18007E1519 /* NSMutableAttributedString+ReplaceAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69697C623773B18007E1519 /* NSMutableAttributedString+ReplaceAttributes.swift */; };
 		F94B20BD091135A843AC1E750EB4250D /* ActionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C076CD5F71AD46E097658DB427BC4ED3 /* ActionController.swift */; };
 		FA3F48428074CEEEE5503E92762CA78F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F407E2F8DB4446DA66907FE69683CD4 /* Foundation.framework */; };
 		FA467CEAA3F3EE3C510EC701436F2D1C /* ChromaColorPicker-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AB4DD63D1C20D250DE052B4789D8567 /* ChromaColorPicker-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -800,6 +804,10 @@
 		F4902A6121B5186365753958FA2EBE6E /* WordPress-Editor-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "WordPress-Editor-iOS-dummy.m"; sourceTree = "<group>"; };
 		F4CF969F93D658DE8EEFAA887077FA59 /* SPAlert-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SPAlert-prefix.pch"; sourceTree = "<group>"; };
 		F632A0F05E0FF72E359D93FC11141C27 /* ActionCell.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = ActionCell.xib; path = Resource/ActionCell.xib; sourceTree = "<group>"; };
+		F6962CEE237734B10034B5E6 /* FontProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontProvider.swift; sourceTree = "<group>"; };
+		F69697BF237737F8007E1519 /* ForegroundColorElementAttributeConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForegroundColorElementAttributeConverter.swift; sourceTree = "<group>"; };
+		F69697C12377386E007E1519 /* ForegroundColorCSSAttributeMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForegroundColorCSSAttributeMatcher.swift; path = Aztec/Classes/Libxml2/DOM/Logic/CSS/ForegroundColorCSSAttributeMatcher.swift; sourceTree = "<group>"; };
+		F69697C623773B18007E1519 /* NSMutableAttributedString+ReplaceAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSMutableAttributedString+ReplaceAttributes.swift"; path = "Aztec/Classes/Extensions/NSMutableAttributedString+ReplaceAttributes.swift"; sourceTree = "<group>"; };
 		F7340943C19754AA3742ED8E6872D0D3 /* DocumentReadingOptionKey+Swift4.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DocumentReadingOptionKey+Swift4.swift"; path = "Aztec/Classes/Extensions/DocumentReadingOptionKey+Swift4.swift"; sourceTree = "<group>"; };
 		F80B938791E9CC9FF5923DFC8D9FBAC0 /* PageboyViewController+Transitioning.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "PageboyViewController+Transitioning.swift"; path = "Sources/Pageboy/Transitioning/PageboyViewController+Transitioning.swift"; sourceTree = "<group>"; };
 		F92039352283A75EF78313ED85EBFE8A /* CaptionShortcodeInputProcessor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CaptionShortcodeInputProcessor.swift; path = WordPressEditor/WordPressEditor/Classes/Plugins/WordPressPlugin/Calypso/CaptionShortcode/CaptionShortcodeInputProcessor.swift; sourceTree = "<group>"; };
@@ -1271,6 +1279,9 @@
 				8632F5034BC8641E775DE6C5FB0F8AEA /* FigureElementConverter.swift */,
 				DA6D192C1C5C9D3BB321900BF4904947 /* FigureFormatter.swift */,
 				DDF40C4621921BD7D2E01F134C69B97E /* FontFormatter.swift */,
+				F6962CEE237734B10034B5E6 /* FontProvider.swift */,
+				F69697C12377386E007E1519 /* ForegroundColorCSSAttributeMatcher.swift */,
+				F69697BF237737F8007E1519 /* ForegroundColorElementAttributeConverter.swift */,
 				3D33D2B85C4AC943896A889424BC3A2B /* FormatBar.swift */,
 				20E64B1E140B1A43A05136161CBA02A8 /* FormatBarDelegate.swift */,
 				FA05083AA8DF7ADA20D17F8F89519F86 /* FormatBarItem.swift */,
@@ -1333,6 +1344,7 @@
 				CE93F5CAD0401C667237B53A1EE17430 /* NSLayoutManager+Attachments.swift */,
 				28084802F2A3CAC04C9582EF5F432C18 /* NSMutableAttributedString+ParagraphProperty.swift */,
 				E3331784FFABD273E9748F275D123233 /* NSMutableAttributedString+ReplaceOcurrences.swift */,
+				F69697C623773B18007E1519 /* NSMutableAttributedString+ReplaceAttributes.swift */,
 				791BB6248ECCA5ACDBD23572CF1817ED /* NSRange+Helpers.swift */,
 				C7562A38127B905CAF3ADD62D68B6A36 /* NSTextingResult+Helpers.swift */,
 				1630C51C41D0D439CFE9020F6F70BBCE /* ParagraphAttributeFormatter.swift */,
@@ -1958,6 +1970,9 @@
 					6AC97A319172C716659A6283A2D82401 = {
 						LastSwiftMigration = 1120;
 					};
+					7961A0F04FB3D96E3E703CF075D6DACD = {
+						LastSwiftMigration = 1120;
+					};
 					E78B17C6DDC46B873852A827DF9E8DC6 = {
 						LastSwiftMigration = 1120;
 					};
@@ -1969,7 +1984,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
 			productRefGroup = 4772257173D17EDEA5FA7A8034B15C1D /* Products */;
@@ -2290,6 +2304,7 @@
 				86A77C8C41AC0ACFBADAF5E48BD1906B /* ElementConverter.swift in Sources */,
 				6217A88989A380215ACEA6A071B6D238 /* ElementNode.swift in Sources */,
 				C94460F1343BCDF0B83620A43AB9B01B /* ElementToStringConverter.swift in Sources */,
+				F6962CEF237734B10034B5E6 /* FontProvider.swift in Sources */,
 				C0BCAD01F68A1BC3B54BCC07994633C0 /* Figcaption.swift in Sources */,
 				077FC3F8A7D8670A2A21697DC2B33EA1 /* FigcaptionElementConverter.swift in Sources */,
 				3B07B7FA53CE0A47AE3D8A557F9EF1ED /* FigcaptionFormatter.swift in Sources */,
@@ -2304,6 +2319,7 @@
 				769FEEBBAA22AB31AD6DFFA1BD19C25B /* FormattingIdentifier.swift in Sources */,
 				B021D97B997136147DBB56710E661A75 /* GenericElementConverter.swift in Sources */,
 				0D224B6584C3E8544CECFFC46241530C /* GenericElementToTagConverter.swift in Sources */,
+				F69697C723773B18007E1519 /* NSMutableAttributedString+ReplaceAttributes.swift in Sources */,
 				0F28E86FBD619DD33C80B9D8509E1163 /* Header.swift in Sources */,
 				466E0BAC80BF56AF1DAC6DB5E80FDEFE /* HeaderFormatter.swift in Sources */,
 				E9D11BD351A45E65BAE8A20B7325865D /* HRElementConverter.swift in Sources */,
@@ -2386,6 +2402,7 @@
 				740D361C29ED40113002FB5796B85ABB /* String+RangeConversion.swift in Sources */,
 				2B314334F880310A8408C6A1E381C8B5 /* StringAttributeConverter.swift in Sources */,
 				374AEFF9B50F3B18C0931E894F3B6851 /* StringUTF16+RangeConversion.swift in Sources */,
+				F69697C22377386E007E1519 /* ForegroundColorCSSAttributeMatcher.swift in Sources */,
 				02C75E26E691355FD447D7B1F9027FEB /* TextList.swift in Sources */,
 				7625F7ED6AAFBF1AB5DD6C13BF0BF1E8 /* TextListFormatter.swift in Sources */,
 				DEA3A46DFA99B83249842109AC01FD0E /* TextNode.swift in Sources */,
@@ -2400,6 +2417,7 @@
 				3BCCEF86670513885156482BD441C0E1 /* UIPasteboard+Helpers.swift in Sources */,
 				185908FF70DC009E7291D2F7698991C5 /* UIStackView+Helpers.swift in Sources */,
 				D72C81B896290BDF8F9F12D5946B5CCA /* UITextView+Delegate.swift in Sources */,
+				F69697C0237737F8007E1519 /* ForegroundColorElementAttributeConverter.swift in Sources */,
 				E72D0B64B1BD2C83320214C7111CBE24 /* UITextView+Undoable.swift in Sources */,
 				3C905CF94A5E6F8E3D2064097FF3EC9F /* UnderlineCSSAttributeMatcher.swift in Sources */,
 				AEEA5DDDF8D951EA5346912F83B43D2D /* UnderlineElementAttributeConverter.swift in Sources */,
@@ -2612,7 +2630,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2680,7 +2698,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/ViewAnimator/ViewAnimator-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/ViewAnimator/ViewAnimator-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2716,7 +2734,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/WordPress-Editor-iOS/WordPress-Editor-iOS-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/WordPress-Editor-iOS/WordPress-Editor-iOS-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2752,7 +2770,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/ViewAnimator/ViewAnimator-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/ViewAnimator/ViewAnimator-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2779,7 +2797,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/WordPress-Aztec-iOS";
 				INFOPLIST_FILE = "Target Support Files/WordPress-Aztec-iOS/ResourceBundle-WordPress-Aztec-iOS-WordPress-Aztec-iOS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = "WordPress-Aztec-iOS";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -2804,7 +2822,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Pageboy/Pageboy-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Pageboy/Pageboy-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2841,7 +2859,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/BottomPopup/BottomPopup-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/BottomPopup/BottomPopup-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2866,6 +2884,7 @@
 			baseConfigurationReference = 77F645BA4EA749AF6289877188190A9C /* WordPress-Aztec-iOS.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -2878,7 +2897,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/WordPress-Aztec-iOS/WordPress-Aztec-iOS-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/WordPress-Aztec-iOS/WordPress-Aztec-iOS-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2914,7 +2933,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/ChromaColorPicker/ChromaColorPicker-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/ChromaColorPicker/ChromaColorPicker-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2950,7 +2969,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Blueprints/Blueprints-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Blueprints/Blueprints-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2984,7 +3003,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/XLActionController/XLActionController-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/XLActionController/XLActionController-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3020,7 +3039,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/XLActionController/XLActionController-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/XLActionController/XLActionController-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3055,7 +3074,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/ChromaColorPicker/ChromaColorPicker-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/ChromaColorPicker/ChromaColorPicker-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3090,7 +3109,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/MultilineTextField/MultilineTextField-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/MultilineTextField/MultilineTextField-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3126,7 +3145,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Blueprints/Blueprints-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Blueprints/Blueprints-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3161,7 +3180,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Gridicons/Gridicons-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Gridicons/Gridicons-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3186,6 +3205,7 @@
 			baseConfigurationReference = 77F645BA4EA749AF6289877188190A9C /* WordPress-Aztec-iOS.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -3198,7 +3218,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/WordPress-Aztec-iOS/WordPress-Aztec-iOS-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/WordPress-Aztec-iOS/WordPress-Aztec-iOS-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3234,7 +3254,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SPAlert/SPAlert-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SPAlert/SPAlert-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3260,7 +3280,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/WordPress-Aztec-iOS";
 				INFOPLIST_FILE = "Target Support Files/WordPress-Aztec-iOS/ResourceBundle-WordPress-Aztec-iOS-WordPress-Aztec-iOS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = "WordPress-Aztec-iOS";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -3286,7 +3306,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SPAlert/SPAlert-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SPAlert/SPAlert-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3361,7 +3381,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/BottomPopup/BottomPopup-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/BottomPopup/BottomPopup-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3396,7 +3416,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Gridicons/Gridicons-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Gridicons/Gridicons-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3431,7 +3451,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/MultilineTextField/MultilineTextField-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/MultilineTextField/MultilineTextField-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3498,7 +3518,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3526,7 +3546,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Pageboy/Pageboy-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Pageboy/Pageboy-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3562,7 +3582,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/WordPress-Editor-iOS/WordPress-Editor-iOS-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/WordPress-Editor-iOS/WordPress-Editor-iOS-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

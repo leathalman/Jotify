@@ -6,12 +6,18 @@ import UIKit
 public class EditorView: UIView {
     public let htmlTextView: UITextView
     public let richTextView: TextView
+    public var htmlStorage: HTMLStorage {
+        guard let htmlStorage = htmlTextView.textStorage as? HTMLStorage else {
+            fatalError("If this happens, something is very off on the init config")
+        }
+        return htmlStorage
+    }
     
     // MARK: - Encoding / Decoding
     
     static let htmlTextViewKey = "Aztec.EditorView.htmlTextView"
     static let richTextViewKey = "Aztec.EditorView.richTextView"
-    
+
     // MARK: - Content Insets
     
     public var contentInset: UIEdgeInsets {
@@ -101,34 +107,36 @@ public class EditorView: UIView {
         
         self.htmlTextView = htmlTextView
         self.richTextView = richTextView
-        
-        if #available(iOS 11, *) {
+
+        if #available(iOS 11.0, *) {
             htmlTextView.smartInsertDeleteType = .no
             htmlTextView.smartDashesType = .no
             htmlTextView.smartQuotesType = .no
+        } else {
+            // Fallback on earlier versions
         }
+        
         
         super.init(coder: aDecoder)
         
         initialSetup()
     }
     
+    @available(iOS 11.0, *)
     public init(defaultFont: UIFont, defaultHTMLFont: UIFont, defaultParagraphStyle: ParagraphStyle, defaultMissingImage: UIImage) {
         let storage = HTMLStorage(defaultFont: defaultHTMLFont)
         let layoutManager = NSLayoutManager()
         let container = NSTextContainer()
-        
+
         storage.addLayoutManager(layoutManager)
         layoutManager.addTextContainer(container)
-        
+
         self.htmlTextView = UITextView(frame: .zero, textContainer: container)
         self.richTextView = TextView(defaultFont: defaultFont, defaultParagraphStyle: defaultParagraphStyle, defaultMissingImage: defaultMissingImage)
-        
-        if #available(iOS 11, *) {
-            htmlTextView.smartInsertDeleteType = .no
-            htmlTextView.smartDashesType = .no
-            htmlTextView.smartQuotesType = .no
-        }
+
+        htmlTextView.smartInsertDeleteType = .no
+        htmlTextView.smartDashesType = .no
+        htmlTextView.smartQuotesType = .no
         
         super.init(frame: .zero)
         

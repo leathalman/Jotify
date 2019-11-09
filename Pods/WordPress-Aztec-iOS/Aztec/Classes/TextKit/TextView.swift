@@ -226,7 +226,14 @@ open class TextView: UITextView {
 
     // MARK: - Properties: UI Defaults
 
-    public var defaultFont: UIFont
+    /// The font to use to render any HTML that doesn't specify an explicit font.
+    /// If this is changed all the instances that use this font will be updated to the new one.
+    public var defaultFont: UIFont {
+        didSet {
+            textStorage.replace(font: oldValue, with: defaultFont)
+        }
+    }
+
     public let defaultParagraphStyle: ParagraphStyle
     var defaultMissingImage: UIImage
     
@@ -238,23 +245,6 @@ open class TextView: UITextView {
         if let color = textColor {
             attributes[.foregroundColor] = color
         }
-        return attributes
-    }
-    
-    /// This closure will be executed whenever the `TextView` needs to set the base style for
-    /// a caption.  Override this to customize the caption styling.
-    ///
-    public lazy var captionStyler: ([NSAttributedString.Key:Any]) -> [NSAttributedString.Key:Any] = { [weak self] attributes in
-        guard let `self` = self else {
-            return attributes
-        }
-        
-        let font = self.defaultFont.withSize(10)
-        
-        var attributes = attributes
-        attributes[.font] = font
-        attributes[.foregroundColor] = UIColor.darkGray
-        
         return attributes
     }
     
@@ -371,16 +361,17 @@ open class TextView: UITextView {
 
     // MARK: - Init & deinit
 
+    /// Creates a Text View using the provided parameters as a base for HTML rendering.
+    /// - Parameter defaultFont: The font to use to render the elements if no specific font is set by the HTML.
+    /// - Parameter defaultParagraphStyle: The default paragraph style if no explicit attributes are defined in HTML
+    /// - Parameter defaultMissingImage: The image to use if the view is not able to render an image specified in the HTML.
+    @available(iOS 11.0, *)
     @objc public init(
         defaultFont: UIFont,
         defaultParagraphStyle: ParagraphStyle = ParagraphStyle.default,
         defaultMissingImage: UIImage) {
-
-        if #available(iOS 11.0, *) {
-            self.defaultFont = UIFontMetrics.default.scaledFont(for: defaultFont)
-        } else {
-            self.defaultFont = defaultFont
-        }
+        
+        self.defaultFont = UIFontMetrics.default.scaledFont(for: defaultFont)
         self.defaultParagraphStyle = defaultParagraphStyle
         self.defaultMissingImage = defaultMissingImage
 
@@ -397,13 +388,7 @@ open class TextView: UITextView {
     }
 
     required public init?(coder aDecoder: NSCoder) {
-        let font = UIFont.systemFont(ofSize: 14)
-        if #available(iOS 11.0, *) {
-            self.defaultFont = UIFontMetrics.default.scaledFont(for: font)
-        } else {
-            self.defaultFont = font
-        }
-
+        defaultFont = FontProvider.shared.defaultFont
         defaultParagraphStyle = ParagraphStyle.default
         defaultMissingImage = Assets.imageIcon
         
@@ -413,12 +398,11 @@ open class TextView: UITextView {
 
     private func commonInit() {
         allowsEditingTextAttributes = true
-        if #available(iOS 10.0, *) {
-            adjustsFontForContentSizeCategory = true
-        }
+        adjustsFontForContentSizeCategory = true
+
         storage.attachmentsDelegate = self
         font = defaultFont
-        linkTextAttributes = [.underlineStyle: NSNumber(value: NSUnderlineStyle.single.rawValue), .foregroundColor: self.tintColor ?? UIColor.black]
+        linkTextAttributes = [.underlineStyle: NSNumber(value: NSUnderlineStyle.single.rawValue), .foregroundColor: tintColor as Any]
         typingAttributes = defaultAttributes
         setupMenuController()
         setupAttachmentTouchDetection()
@@ -658,34 +642,25 @@ open class TextView: UITextView {
 
     // MARK: - UITextView Overrides
     
-//    open override func caretRect(for position: UITextPosition) -> CGRect {
-//        var caretRect = super.caretRect(for: position)
-//        let characterIndex = offset(from: beginningOfDocument, to: position)
-//
-//        guard layoutManager.isValidGlyphIndex(characterIndex) else {
-//            return caretRect
-//        }
-//
-//        let glyphIndex = layoutManager.glyphIndexForCharacter(at: characterIndex)
-//        let usedLineFragment = layoutManager.lineFragmentUsedRect(forGlyphAt: glyphIndex, effectiveRange: nil)
-//
-//        guard !usedLineFragment.isEmpty else {
-//            return caretRect
-//        }
-//
-//        caretRect.origin.y = usedLineFragment.origin.y + textContainerInset.top
-//        caretRect.size.height = usedLineFragment.size.height
-//
-//        return caretRect
-//    }
-    
     open override func caretRect(for position: UITextPosition) -> CGRect {
-          var rect = super.caretRect(for: position)
-              let size = CGSize(width: 10, height: 50)
-              // Calculating center y
-              let y = rect.origin.y - (size.height - rect.size.height)/2
-              rect = CGRect(origin: CGPoint(x: rect.origin.x, y: y), size: size)
-              return rect
+        var caretRect = super.caretRect(for: position)
+        let characterIndex = offset(from: beginningOfDocument, to: position)
+        
+        guard layoutManager.isValidGlyphIndex(characterIndex) else {
+            return caretRect
+        }
+        
+        let glyphIndex = layoutManager.glyphIndexForCharacter(at: characterIndex)
+        let usedLineFragment = layoutManager.lineFragmentUsedRect(forGlyphAt: glyphIndex, effectiveRange: nil)
+        
+        guard !usedLineFragment.isEmpty else {
+            return caretRect
+        }
+     
+        caretRect.origin.y = usedLineFragment.origin.y + textContainerInset.top
+        caretRect.size.height = usedLineFragment.size.height
+
+        return caretRect
     }
 
     // MARK: - HTML Interaction
@@ -756,7 +731,7 @@ open class TextView: UITextView {
     private static let formatterMap: [FormattingIdentifier: AttributeFormatter] = [
         .bold: BoldFormatter(),
         .italic: ItalicFormatter(),
-        .underline: UnderlineFormatter(),
+        .underline: SpanUnderlineFormatter(),
         .strikethrough: StrikethroughFormatter(),
         .link: LinkFormatter(),
         .orderedlist: TextListFormatter(style: .ordered),
@@ -944,7 +919,7 @@ open class TextView: UITextView {
     /// - Parameter range: The NSRange to edit.
     ///
     open func toggleUnderline(range: NSRange) {
-        let formatter = UnderlineFormatter()
+        let formatter = SpanUnderlineFormatter()
         toggle(formatter: formatter, atRange: range)
     }
 
@@ -1351,8 +1326,7 @@ open class TextView: UITextView {
     open func replaceWithImage(at range: NSRange, sourceURL url: URL, placeHolderImage: UIImage?, identifier: String = UUID().uuidString) -> ImageAttachment {
         let attachment = ImageAttachment(identifier: identifier, url: url)
         attachment.delegate = storage
-        attachment.image = placeHolderImage
-        attachment.alignment = Optional.none
+        attachment.image = placeHolderImage        
         replace(at: range, with: attachment)
         return attachment
     }

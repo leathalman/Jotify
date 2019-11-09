@@ -36,7 +36,7 @@ class EditorDemoController: UIViewController {
             defaultMissingImage: Constants.defaultMissingImage)
 
         editorView.clipsToBounds = false
-        
+
         setupHTMLTextView(editorView.htmlTextView)
         setupRichTextView(editorView.richTextView)
 
@@ -103,9 +103,8 @@ class EditorDemoController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         edgesForExtendedLayout = UIRectEdge()
-//        navigationController?.navigationBar.isTranslucent = false
         view.addSubview(editorView)
 
         // color setup
@@ -113,16 +112,15 @@ class EditorDemoController: UIViewController {
         editorView.backgroundColor = .red
         editorView.richTextView.backgroundColor = .clear
         editorView.htmlTextView.backgroundColor = .clear
-        
+
         // special colors
         editorView.richTextView.blockquoteBackgroundColor = UIColor.secondarySystemBackground
         editorView.richTextView.preBackgroundColor = UIColor.secondarySystemBackground
         editorView.richTextView.blockquoteBorderColor = UIColor.secondarySystemFill
-        
-        
+
         var attributes = editorView.richTextView.linkTextAttributes
         attributes?[.foregroundColor] = UIColor.link
-        
+
         // Don't allow scroll while the constraints are being setup and text set
         editorView.isScrollEnabled = false
         configureConstraints()
@@ -133,7 +131,7 @@ class EditorDemoController: UIViewController {
         } else {
             html = ""
         }
-        
+
         editorView.setHTML(html)
 //        editorView.becomeFirstResponder()
     }
@@ -198,6 +196,15 @@ class EditorDemoController: UIViewController {
         textView.font = Constants.defaultContentFont
         textView.keyboardDismissMode = .interactive
         textView.textColor = Constants.defaultTextColor
+
+        if #available(iOS 13.0, *) {
+            if let htmlStorage = textView.textStorage as? HTMLStorage {
+                htmlStorage.textColor = UIColor.white
+            }
+        } else {
+            //             Fallback on earlier versions
+            textView.textColor = UIColor(red: 0x1A / 255.0, green: 0x1A / 255.0, blue: 0x1A / 255.0, alpha: 1)
+        }
     }
 
     // MARK: - Helpers
@@ -269,7 +276,7 @@ class EditorDemoController: UIViewController {
 
         toolbar.selectItemsMatchingIdentifiers(identifiers.map { $0.rawValue })
     }
-    
+
     // MARK: - Sample Content
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -319,7 +326,7 @@ extension EditorDemoController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         return false
     }
-    
+
 //    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
 //        if (text as NSString).rangeOfCharacter(from: CharacterSet.newlines).location == NSNotFound {
 //            return true
