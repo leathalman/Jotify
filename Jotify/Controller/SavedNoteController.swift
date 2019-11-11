@@ -321,8 +321,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         let indexPath = collectionView.indexPathForItem(at: location)
         let rowNumber: Int = indexPath?.row ?? 0
         
-        let noteDetailController = EditorDemoController()
-//        let noteDetailController = NoteDetailController()
+        let noteDetailController = NoteDetailController()
         
         var note = notes[indexPath?.row ?? 0]
         
@@ -339,6 +338,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         let modifiedDate = note.value(forKey: "modifiedDate")
         let color = note.value(forKey: "color") as! String
         let content = note.value(forKey: "content") as! String
+        let htmlContent = note.value(forKey: "htmlContent") as! String
         
         let updateDate = Date(timeIntervalSinceReferenceDate: modifiedDate as! TimeInterval)
         let dateFormatter = DateFormatter()
@@ -354,6 +354,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         noteDetailController.backgroundColor = cellColor
         noteDetailController.detailText = content
+        noteDetailController.htmlContent = htmlContent
         noteDetailController.index = rowNumber
         
         UIView.animate(withDuration: 0.05,

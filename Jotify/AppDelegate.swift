@@ -153,8 +153,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             let newContent = EditingData.newContent
             let newDate = EditingData.newDate
             let notes = EditingData.notes
+            let newHtml = EditingData.newHtml
             noteDetailController.notes = notes
-            noteDetailController.updateContent(index: index, newContent: newContent, newDate: newDate)
+            noteDetailController.updateContent(index: index, newContent: newContent, newDate: newDate, htmlContent: newHtml)
             print("Note data successfully saved.")
             
         } else {
