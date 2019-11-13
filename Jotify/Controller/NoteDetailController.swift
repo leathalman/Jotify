@@ -29,8 +29,6 @@ class NoteDetailController: UIViewController {
 
     let newDate = Date.timeIntervalSinceReferenceDate
     
-//    let writeNoteView = WriteNoteView()
-
     var datePicker: UIDatePicker = UIDatePicker()
 
     let defaults = UserDefaults.standard
@@ -185,7 +183,6 @@ class NoteDetailController: UIViewController {
             editorView.backgroundColor = backgroundColor
         }
         
-        // special colors
         editorView.richTextView.blockquoteBackgroundColor = UIColor.secondarySystemBackground
         editorView.richTextView.preBackgroundColor = UIColor.secondarySystemBackground
         editorView.richTextView.blockquoteBorderColor = UIColor.secondarySystemFill
@@ -198,7 +195,7 @@ class NoteDetailController: UIViewController {
         configureConstraints()
 
         editorView.setHTML(detailText)
-        //        editorView.becomeFirstResponder()
+//        editorView.becomeFirstResponder()
 
         navigationItem.title = navigationTitle
         navigationItem.setHidesBackButton(true, animated: true)
@@ -255,7 +252,6 @@ class NoteDetailController: UIViewController {
         super.viewDidAppear(true)
         // Reanable scroll after setup is done
         editorView.isScrollEnabled = true
-
         removeReminderIfDelivered()
     }
 
@@ -263,7 +259,6 @@ class NoteDetailController: UIViewController {
         super.viewWillDisappear(true)
         updateContent(index: index, newContent: editorView.richTextView.text, newDate: newDate, htmlContent: editorView.getHTML())
 
-        setupDynamicViewElements()
         EditingData.isEditing = false
 
         let notificationCenter = NotificationCenter.default
@@ -496,6 +491,10 @@ class NoteDetailController: UIViewController {
         // set newContent everytime character is changed
         EditingData.newContent = textView.text
         EditingData.newHtml = htmlTextView.text
+        
+        if text == "\n" {
+            textView.text = textView.text + "\n"
+        }
 
         return true
     }
