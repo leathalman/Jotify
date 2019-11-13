@@ -179,23 +179,27 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             actionController.addAction(Action("Sort by date", style: .default, handler: { _ in
                 self.defaults.set("date", forKey: "sortBy")
                 self.fetchNotesFromCoreData()
+                self.collectionView.reloadData()
                 self.animateCells()
                 
             }))
             actionController.addAction(Action("Sort by color", style: .default, handler: { _ in
                 self.defaults.set("color", forKey: "sortBy")
                 self.fetchNotesFromCoreData()
+                self.collectionView.reloadData()
                 self.animateCells()
                 
             }))
             actionController.addAction(Action("Sort by content", style: .default, handler: { _ in
                 self.defaults.set("content", forKey: "sortBy")
                 self.fetchNotesFromCoreData()
+                self.collectionView.reloadData()
                 self.animateCells()
             }))
             actionController.addAction(Action("Sort by reminders", style: .default, handler: { _ in
                 self.defaults.set("reminders", forKey: "sortBy")
                 self.fetchNotesFromCoreData()
+                self.collectionView.reloadData()
                 self.animateCells()
             }))
             actionController.addAction(Action("Cancel", style: .cancel, handler: nil))
