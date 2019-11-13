@@ -275,7 +275,7 @@ open class TextView: UITextView {
 
     /// Blockquote Blocks Border Color.
     ///
-    @objc dynamic public var blockquoteBorderColor: UIColor {
+    @objc dynamic public var blockquoteBorderColor: UIColor? {
         get {
             return layout.blockquoteBorderColor
         }
@@ -286,7 +286,7 @@ open class TextView: UITextView {
 
     /// Blockquote Blocks Background Color.
     ///
-    @objc dynamic public var blockquoteBackgroundColor: UIColor {
+    @objc dynamic public var blockquoteBackgroundColor: UIColor? {
         get {
             return layout.blockquoteBackgroundColor
         }
@@ -309,7 +309,7 @@ open class TextView: UITextView {
 
     /// Pre Blocks Background Color.
     ///
-    @objc dynamic public var preBackgroundColor: UIColor {
+    @objc dynamic public var preBackgroundColor: UIColor? {
         get {
             return layout.preBackgroundColor
         }
@@ -339,6 +339,14 @@ open class TextView: UITextView {
         }
     }
 
+    override open var textAlignment: NSTextAlignment {
+        didSet {
+            if (textAlignment != oldValue) {
+                recalculateTypingAttributes()
+            }
+        }
+    }
+
 
     /// This property returns the Attributes associated to the Extra Line Fragment.
     ///
@@ -365,13 +373,13 @@ open class TextView: UITextView {
     /// - Parameter defaultFont: The font to use to render the elements if no specific font is set by the HTML.
     /// - Parameter defaultParagraphStyle: The default paragraph style if no explicit attributes are defined in HTML
     /// - Parameter defaultMissingImage: The image to use if the view is not able to render an image specified in the HTML.
-    @available(iOS 11.0, *)
     @objc public init(
         defaultFont: UIFont,
         defaultParagraphStyle: ParagraphStyle = ParagraphStyle.default,
         defaultMissingImage: UIImage) {
-        
+
         self.defaultFont = UIFontMetrics.default.scaledFont(for: defaultFont)
+        
         self.defaultParagraphStyle = defaultParagraphStyle
         self.defaultMissingImage = defaultMissingImage
 

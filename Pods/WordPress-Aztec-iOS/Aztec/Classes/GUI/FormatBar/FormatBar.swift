@@ -296,6 +296,8 @@ open class FormatBar: UIView {
     var overflowToggleItemRTLLeadingConstraint: NSLayoutConstraint?
 
     // MARK: - Initializers
+
+
     public init() {
         super.init(frame: .zero)
         backgroundColor = .white
@@ -324,11 +326,7 @@ open class FormatBar: UIView {
     open override func didMoveToWindow() {
         super.didMoveToWindow()
 
-        if #available(iOS 11.0, *) {
-            updateForSafeAreaInsets()
-        } else {
-            // Fallback on earlier versions
-        }
+        updateForSafeAreaInsets()
     }
 
     open override func layoutSubviews() {
@@ -682,7 +680,6 @@ private extension FormatBar {
 
     /// Sets up the Constraints
     ///
-    @available(iOS 11.0, *)
     func configureConstraints() {
         let leadingAnchor = safeAreaLayoutGuide.leadingAnchor
         let trailingAnchor = safeAreaLayoutGuide.trailingAnchor

@@ -108,21 +108,15 @@ public class EditorView: UIView {
         self.htmlTextView = htmlTextView
         self.richTextView = richTextView
 
-        if #available(iOS 11.0, *) {
-            htmlTextView.smartInsertDeleteType = .no
-            htmlTextView.smartDashesType = .no
-            htmlTextView.smartQuotesType = .no
-        } else {
-            // Fallback on earlier versions
-        }
-        
+        htmlTextView.smartInsertDeleteType = .no
+        htmlTextView.smartDashesType = .no
+        htmlTextView.smartQuotesType = .no
         
         super.init(coder: aDecoder)
         
         initialSetup()
     }
     
-    @available(iOS 11.0, *)
     public init(defaultFont: UIFont, defaultHTMLFont: UIFont, defaultParagraphStyle: ParagraphStyle, defaultMissingImage: UIImage) {
         let storage = HTMLStorage(defaultFont: defaultHTMLFont)
         let layoutManager = NSLayoutManager()

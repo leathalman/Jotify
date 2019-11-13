@@ -492,10 +492,6 @@ class NoteDetailController: UIViewController {
         EditingData.newContent = textView.text
         EditingData.newHtml = htmlTextView.text
         
-        if text == "\n" {
-            textView.text = textView.text + "\n"
-        }
-
         return true
     }
 
