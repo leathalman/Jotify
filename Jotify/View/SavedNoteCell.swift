@@ -8,6 +8,10 @@
 
 import UIKit
 
+struct CellStates {
+    static var shouldSelectMultiple = Bool()
+}
+
 class SavedNoteCell: UICollectionViewCell {
     private var initialFrame: CGRect?
     private var initialCornerRadius: CGFloat?
@@ -54,6 +58,15 @@ class SavedNoteCell: UICollectionViewCell {
         dateLabel.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 5).isActive = true
         dateLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         dateLabel.widthAnchor.constraint(equalTo: textLabel.widthAnchor).isActive = true
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            if CellStates.shouldSelectMultiple == true {
+                let color = self.contentView.tintColor
+                self.contentView.backgroundColor = isSelected ? UIColor.darkGray : color
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

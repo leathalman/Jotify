@@ -38,10 +38,10 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         super.viewWillAppear(animated)
         
         for note in notes {
-             if note.content == "" {
+            if note.content == "" {
                 deleteEmptyNote(note: note)
-             }
-         }
+            }
+        }
         
         if notes.count != 0 {
             setupSearchBar()
@@ -67,6 +67,9 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     }
     
     func setupView() {
+        // setup CellState for multiple selection
+        CellStates.shouldSelectMultiple = false
+        
         navigationItem.title = "Saved Notes"
         navigationController?.navigationBar.prefersLargeTitles = false
         
@@ -84,6 +87,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         collectionView.alwaysBounceVertical = true
         
         collectionView.setCollectionViewLayout(blueprintLayout, animated: true)
+        collectionView.allowsMultipleSelection = true
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -326,22 +330,28 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         }, completion: nil)
     }
     
-    @objc func tapHandler(_ sender: UITapGestureRecognizer) {
-        let location = sender.location(in: collectionView)
-        let indexPath = collectionView.indexPathForItem(at: location)
-        let rowNumber: Int = indexPath?.row ?? 0
-        
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if CellStates.shouldSelectMultiple == false {
+            print("Normal Tap")
+            cellSingleTap(indexPath: indexPath)
+            
+        } else if CellStates.shouldSelectMultiple == true {
+            print("Multiple Tap")
+        }
+    }
+    
+    func cellSingleTap(indexPath: IndexPath) {
         let noteDetailController = NoteDetailController()
         
-        var note = notes[indexPath?.row ?? 0]
+        var note = notes[indexPath.row]
         
         if isFiltering() {
-            note = filteredNotes[indexPath?.row ?? 0]
+            note = filteredNotes[indexPath.row]
             noteDetailController.filteredNotes = filteredNotes
             noteDetailController.isFiltering = true
             
         } else {
-            note = notes[indexPath?.row ?? 0]
+            note = notes[indexPath.row]
             noteDetailController.notes = notes
         }
         
@@ -363,17 +373,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         noteDetailController.backgroundColor = cellColor
         noteDetailController.detailText = content
-        noteDetailController.index = rowNumber
-        
-        UIView.animate(withDuration: 0.05,
-                       animations: {
-                           sender.view?.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
-                       }, completion: { _ in
-                           UIView.animate(withDuration: 0.05, animations: {
-                               sender.view?.transform = CGAffineTransform.identity
-                               
-                           })
-        })
+        noteDetailController.index = indexPath.row
         
         navigationController?.pushViewController(noteDetailController, animated: true)
     }
@@ -381,7 +381,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     @objc func longTouchHandler(sender: UILongPressGestureRecognizer) {
         let location = sender.location(in: collectionView)
         let indexPath = collectionView.indexPathForItem(at: location)
-        let rowNumber: Int = indexPath?.row ?? 0
         
         let note = notes[indexPath?.row ?? 0]
         let color = note.value(forKey: "color") as! String
@@ -405,15 +404,22 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                 let alert = UIAlertController(title: "Are you sure?", message: "This will permanently delete this note in both iCloud and locally on this device. This message can be disabled from settings.", preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
-                    self.deleteNote(indexPath: indexPath ?? [0, 0], int: rowNumber)
+                    self.deleteNote(indexPath: indexPath ?? [0, 0])
                 }))
                 
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 self.present(alert, animated: true)
                 
             } else if self.defaults.bool(forKey: "showAlertOnDelete") == false {
-                self.deleteNote(indexPath: indexPath ?? [0, 0], int: rowNumber)
+                self.deleteNote(indexPath: indexPath ?? [0, 0])
             }
+            
+        }))
+        
+        actionController.addAction(Action("Select multiple", style: .default, handler: { _ in
+            print("Select multiple")
+            CellStates.shouldSelectMultiple = true
+            self.setupMultipleSelection()
             
         }))
         
@@ -427,6 +433,58 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         present(actionController, animated: true, completion: nil)
     }
     
+    func setupMultipleSelection() {
+        navigationController?.setToolbarHidden(false, animated: true)
+        
+        var items = [UIBarButtonItem]()
+        
+        items.append(UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(removeMultipleSelection)))
+        items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil))
+        items.append(UIBarButtonItem(title: "Delete", style: .done, target: self, action: #selector(deleteSelectedCells)))
+        
+        toolbarItems = items
+    }
+    
+    @objc func removeMultipleSelection() {
+        navigationController?.setToolbarHidden(true, animated: true)
+        
+        let selectedItems = collectionView.indexPathsForSelectedItems ?? []
+        
+        for value in selectedItems {
+            collectionView.deselectItem(at: value, animated: true)
+        }
+        
+        CellStates.shouldSelectMultiple = false
+    }
+    
+    @objc func deleteSelectedCells() {
+        let selectedItems = collectionView.indexPathsForSelectedItems ?? []
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let managedContext = appDelegate?.persistentContainer.viewContext
+        
+        var selectedNotes: [Note] = []
+        
+        for value in selectedItems {
+            selectedNotes.append(notes[value.row])
+        }
+        
+        for note in selectedNotes {
+            managedContext?.delete(note)
+        }
+        
+        CoreDataManager.shared.enqueue { context in
+            do {
+                try context.save()
+                
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+        }
+        
+        fetchNotesFromCoreData()
+    }
+    
     func shareNote(text: String) {
         let textToShare = text
         let objectsToShare = [textToShare] as [Any]
@@ -436,19 +494,18 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         present(activityVC, animated: true, completion: nil)
     }
     
-    func deleteNote(indexPath: IndexPath, int: Int) {
-        let note = notes[indexPath.row]
-        
+    func deleteNote(indexPath: IndexPath) {
         if isFiltering() == false {
+            let note = notes[indexPath.row]
             // remove pending notification
-            let notificationUUID = notes[int].notificationUUID ?? "empty error in SavedNoteController"
+            let notificationUUID = note.notificationUUID ?? "empty error in SavedNoteController"
             let center = UNUserNotificationCenter.current()
             center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
             
             // remove notification on badge if already delivered but not opened
-            let isReminder = notes[int].isReminder
+            let isReminder = note.isReminder
             if isReminder == true {
-                let reminderDate = notes[int].reminderDate ?? "07/02/2000 11:11 PM"
+                let reminderDate = note.reminderDate ?? "07/02/2000 11:11 PM"
                 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
@@ -461,18 +518,24 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                 }
             }
             
-            notes.remove(at: int)
+            notes.remove(at: indexPath.row)
+            
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate
+            let managedContext = appDelegate?.persistentContainer.viewContext
+            managedContext?.delete(note)
             
         } else {
+            let filteredNote = filteredNotes[indexPath.row]
+            
             // remove pending notification
-            let notificationUUID = filteredNotes[int].notificationUUID ?? "empty error in SavedNoteController"
+            let notificationUUID = filteredNote.notificationUUID ?? "empty error in SavedNoteController"
             let center = UNUserNotificationCenter.current()
             center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
             
             // remove notification on badge if already delivered but not opened
-            let isReminder = filteredNotes[int].isReminder
+            let isReminder = filteredNote.isReminder
             if isReminder == true {
-                let reminderDate = filteredNotes[int].reminderDate ?? "07/02/2000 11:11 PM"
+                let reminderDate = filteredNote.reminderDate ?? "07/02/2000 11:11 PM"
                 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
@@ -485,12 +548,12 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                 }
             }
             
-            filteredNotes.remove(at: int)
+            filteredNotes.remove(at: indexPath.row)
+            
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate
+            let managedContext = appDelegate?.persistentContainer.viewContext
+            managedContext?.delete(filteredNote)
         }
-        
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        let managedContext = appDelegate?.persistentContainer.viewContext
-        managedContext?.delete(note)
         
         CoreDataManager.shared.enqueue { context in
             do {
@@ -507,54 +570,25 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     }
     
     func deleteEmptyNote(note: Note) {
+        // remove pending notification
+        let notificationUUID = note.notificationUUID ?? "empty error in SavedNoteController"
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
         
-        if isFiltering() == false {
-            // remove pending notification
-            let notificationUUID = note.notificationUUID ?? "empty error in SavedNoteController"
-            let center = UNUserNotificationCenter.current()
-            center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
+        // remove notification on badge if already delivered but not opened
+        let isReminder = note.isReminder
+        if isReminder == true {
+            let reminderDate = note.reminderDate ?? "07/02/2000 11:11 PM"
             
-            // remove notification on badge if already delivered but not opened
-            let isReminder = note.isReminder
-            if isReminder == true {
-                let reminderDate = note.reminderDate ?? "07/02/2000 11:11 PM"
-                
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
-                let formattedReminderDate = dateFormatter.date(from: reminderDate) ?? Date()
-                
-                let currentDate = Date()
-                
-                if currentDate >= formattedReminderDate {
-                    UIApplication.shared.applicationIconBadgeNumber -= 1
-                }
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
+            let formattedReminderDate = dateFormatter.date(from: reminderDate) ?? Date()
+            
+            let currentDate = Date()
+            
+            if currentDate >= formattedReminderDate {
+                UIApplication.shared.applicationIconBadgeNumber -= 1
             }
-            
-//            notes.remove(note)
-            
-        } else {
-            // remove pending notification
-            let notificationUUID = note.notificationUUID ?? "empty error in SavedNoteController"
-            let center = UNUserNotificationCenter.current()
-            center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
-            
-            // remove notification on badge if already delivered but not opened
-            let isReminder = note.isReminder
-            if isReminder == true {
-                let reminderDate = note.reminderDate ?? "07/02/2000 11:11 PM"
-                
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
-                let formattedReminderDate = dateFormatter.date(from: reminderDate) ?? Date()
-                
-                let currentDate = Date()
-                
-                if currentDate >= formattedReminderDate {
-                    UIApplication.shared.applicationIconBadgeNumber -= 1
-                }
-            }
-            
-//            filteredNotes.remove(at: int)
         }
         
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
@@ -602,6 +636,16 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         return notes.count
     }
     
+    override func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+        if let selectedItems = collectionView.indexPathsForSelectedItems {
+            if selectedItems.contains(indexPath) {
+                collectionView.deselectItem(at: indexPath, animated: true)
+                return false
+            }
+        }
+        return true
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedNoteCell", for: indexPath) as? SavedNoteCell else { fatalError("Wrong cell class dequeued") }
         
@@ -639,13 +683,16 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         if defaults.bool(forKey: "darkModeEnabled") == true {
             if defaults.bool(forKey: "vibrantDarkModeEnabled") == true {
                 cell.contentView.backgroundColor = cellColor
+                cell.contentView.tintColor = cellColor
                 
             } else if defaults.bool(forKey: "pureDarkModeEnabled") == true {
                 cell.contentView.backgroundColor = UIColor.offBlackBackground
+                cell.contentView.tintColor = UIColor.offBlackBackground
             }
             
         } else {
             cell.contentView.backgroundColor = cellColor
+            cell.contentView.tintColor = cellColor
         }
         
         if isReminder == true {
@@ -674,7 +721,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             cell.layer.addShadow(color: UIColor.darkGray)
         }
         
-        cell.contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapHandler(_:))))
         cell.contentView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTouchHandler(sender:))))
         
         return cell
