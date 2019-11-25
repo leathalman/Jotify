@@ -37,6 +37,12 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        for note in notes {
+             if note.content == "" {
+                deleteEmptyNote(note: note)
+             }
+         }
+        
         if notes.count != 0 {
             setupSearchBar()
         }
@@ -482,7 +488,75 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             filteredNotes.remove(at: int)
         }
         
-        // needs to delete from viewContext itself?
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let managedContext = appDelegate?.persistentContainer.viewContext
+        managedContext?.delete(note)
+        
+        CoreDataManager.shared.enqueue { context in
+            do {
+                try context.save()
+                
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+        }
+        
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func deleteEmptyNote(note: Note) {
+        
+        if isFiltering() == false {
+            // remove pending notification
+            let notificationUUID = note.notificationUUID ?? "empty error in SavedNoteController"
+            let center = UNUserNotificationCenter.current()
+            center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
+            
+            // remove notification on badge if already delivered but not opened
+            let isReminder = note.isReminder
+            if isReminder == true {
+                let reminderDate = note.reminderDate ?? "07/02/2000 11:11 PM"
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
+                let formattedReminderDate = dateFormatter.date(from: reminderDate) ?? Date()
+                
+                let currentDate = Date()
+                
+                if currentDate >= formattedReminderDate {
+                    UIApplication.shared.applicationIconBadgeNumber -= 1
+                }
+            }
+            
+//            notes.remove(note)
+            
+        } else {
+            // remove pending notification
+            let notificationUUID = note.notificationUUID ?? "empty error in SavedNoteController"
+            let center = UNUserNotificationCenter.current()
+            center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
+            
+            // remove notification on badge if already delivered but not opened
+            let isReminder = note.isReminder
+            if isReminder == true {
+                let reminderDate = note.reminderDate ?? "07/02/2000 11:11 PM"
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
+                let formattedReminderDate = dateFormatter.date(from: reminderDate) ?? Date()
+                
+                let currentDate = Date()
+                
+                if currentDate >= formattedReminderDate {
+                    UIApplication.shared.applicationIconBadgeNumber -= 1
+                }
+            }
+            
+//            filteredNotes.remove(at: int)
+        }
+        
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         let managedContext = appDelegate?.persistentContainer.viewContext
         managedContext?.delete(note)

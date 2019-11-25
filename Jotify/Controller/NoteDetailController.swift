@@ -52,8 +52,8 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         setEditingData()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(true)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
         updateContent(index: index, newContent: writeNoteView.inputTextView.text, newDate: newDate)
         
         resetNavigationBarForTransition()
