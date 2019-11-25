@@ -56,7 +56,6 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         super.viewWillDisappear(true)
         updateContent(index: index, newContent: writeNoteView.inputTextView.text, newDate: newDate)
         
-        resetNavigationBarForTransition()
         EditingData.isEditing = false
     }
     
@@ -210,15 +209,6 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
                 self?.navigationController?.navigationBar.backgroundColor = self?.backgroundColor
                 self?.navigationController?.navigationBar.barTintColor = self?.backgroundColor
             }
-        }, completion: nil)
-    }
-    
-    func resetNavigationBarForTransition() {
-        transitionCoordinator?.animate(alongsideTransition: { [weak self] _ in
-            self?.navigationController?.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
-            self?.navigationController?.navigationBar.backgroundColor = .white
-            self?.navigationController?.navigationBar.barTintColor = .white
-            self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         }, completion: nil)
     }
     

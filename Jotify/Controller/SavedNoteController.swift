@@ -54,6 +54,8 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
         navigationItem.searchController = nil
+        navigationController?.setToolbarHidden(true, animated: false)
+        CellStates.shouldSelectMultiple = false
     }
     
     override func viewDidLoad() {
