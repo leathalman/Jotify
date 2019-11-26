@@ -48,6 +48,32 @@ class AboutSettingsView: UIView {
         backgroundColor = UIColor.white
         
         setupView()
+        setupGestures()
+    }
+    
+    func setupGestures() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(changeIcon))
+        icon.isUserInteractionEnabled = true
+        icon.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc func changeIcon() {
+        let iconName = UIApplication.shared.alternateIconName
+        if UIApplication.shared.supportsAlternateIcons {
+            if iconName == "Golden2" {
+                print("current icon is \(String(describing: iconName)), change to primary icon")
+                UIApplication.shared.setAlternateIconName(nil)
+            } else {
+                print("current icon is primary icon, change to alternative icon")
+                UIApplication.shared.setAlternateIconName("Golden2"){ error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    } else {
+                        print("Done!")
+                    }
+                }
+            }
+        }
     }
     
     func setupView() {

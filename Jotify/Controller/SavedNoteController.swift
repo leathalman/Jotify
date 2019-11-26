@@ -421,7 +421,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         actionController.addAction(Action("Select multiple", style: .default, handler: { _ in
             print("Select multiple")
             CellStates.shouldSelectMultiple = true
-            self.setupMultipleSelection()
+            self.setupMultiSelectionToolBar()
             
         }))
         
@@ -435,9 +435,20 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         present(actionController, animated: true, completion: nil)
     }
     
-    func setupMultipleSelection() {
-        navigationController?.setToolbarHidden(false, animated: true)
+    func setupMultiSelectionToolBar() {
+        let toolBar = navigationController?.toolbar
+        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+            toolBar?.tintColor = .white
+            toolBar?.barTintColor = .black
+            toolBar?.sizeToFit()
+        } else {
+            toolBar?.tintColor = nil
+            toolBar?.barTintColor = nil
+            toolBar?.sizeToFit()
+        }
         
+        navigationController?.setToolbarHidden(false, animated: true)
+                
         var items = [UIBarButtonItem]()
         
         items.append(UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(removeMultipleSelection)))
