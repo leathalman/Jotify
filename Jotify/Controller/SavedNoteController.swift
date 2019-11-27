@@ -399,6 +399,12 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             actionController.backgroundColor = InterfaceColors.actionSheetColor
         }
         
+        actionController.addAction(Action("Share note", style: .default, handler: { _ in
+            print("Share note")
+            self.shareNote(text: content)
+            
+        }))
+        
         actionController.addAction(Action("Delete note", style: .default, handler: { _ in
             print("Delete note")
             
@@ -425,11 +431,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             
         }))
         
-        actionController.addAction(Action("Share note", style: .default, handler: { _ in
-            print("Share note")
-            self.shareNote(text: content)
-            
-        }))
         actionController.addAction(Action("Cancel", style: .cancel, handler: nil))
         
         present(actionController, animated: true, completion: nil)

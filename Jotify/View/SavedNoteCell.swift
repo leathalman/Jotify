@@ -65,6 +65,7 @@ class SavedNoteCell: UICollectionViewCell {
             if CellStates.shouldSelectMultiple == true {
                 let color = self.contentView.tintColor
                 self.contentView.backgroundColor = isSelected ? UIColor.darkGray : color
+                self.layer.borderColor = isSelected ? UIColor.darkGray.cgColor : color?.adjust(by: 10)?.cgColor
             }
         }
     }
