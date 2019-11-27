@@ -24,7 +24,7 @@ extension WriteNoteController {
             if previousVersion != nil {
                 // new version
                 print("new version")
-//                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
                 
             } else {
                 // first launch
@@ -36,23 +36,23 @@ extension WriteNoteController {
     }
     
     func presentUpdateOnboarding(viewController: UIViewController, tintColor: UIColor) {
-        // Jotify v1.1.1 Onboarding, no Onboarding for v1.1.2
+        // Jotify v1.1.3 Onboarding
         let whatsNew = WhatsNew(
             title: "What's New",
             items: [
                 WhatsNew.Item(
                     title: "Features",
-                    subtitle: "You can now write multiline jots! This can be enabled in Settings -> Appearance -> Enable Multiline Input",
+                    subtitle: "You can now delete multiple notes at once! Simply long press a note, click \"select multiple\", and then delete as many as your heart desires.",
                     image: UIImage(named: "write")
                 ),
                 WhatsNew.Item(
                     title: "Improvements",
-                    subtitle: "Major improvements to data management and handling. Your notes should sync much quicker and should persist much better if reinstalled. Syncing your notes across devices should work significantly better.",
+                    subtitle: "Added an additional dark mode icon for Jotify! To check it out, click on the gear icon, then about, and finally tap on the large icon image. Also added automatic saving for notes whenever the app enters multitasking.",
                     image: UIImage(named: "add")
                 ),
                 WhatsNew.Item(
                     title: "Bug Fixes",
-                    subtitle: "Fixed a bug where notifications were not incrementing the app badge correctly. Fixed a bug where date text would by empty after reminder has been delivered.",
+                    subtitle: "Fixed a bug where notes would incorrectly order themselves after sorting. Also fixed an issue where navigation bar would update with the wrong color in dark mode.",
                     image: UIImage(named: "bugFix")
                 ),
             ]

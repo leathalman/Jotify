@@ -10,25 +10,16 @@
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIcons</key>
 	<dict>
-		<key>CFBundlePrimaryIcon</key>
-		<dict>
-			<key>CFBundleIconFiles</key>
-			<array>
-				<string>Light</string>
-			</array>
-			<key>UIPrerenderedIcon</key>
-			<false/>
-		</dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
 			<key>Default</key>
 			<dict>
-				<key>UIPrerenderedIcon</key>
-				<false/>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>Light</string>
 				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
 			</dict>
 			<key>Golden2</key>
 			<dict>
@@ -39,6 +30,15 @@
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
+		</dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>Light</string>
+			</array>
+			<key>UIPrerenderedIcon</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>CFBundleIcons~ipad</key>
