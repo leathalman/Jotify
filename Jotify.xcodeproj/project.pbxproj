@@ -704,6 +704,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 77AB5562845EB3AEFA1502C6 /* Pods-Jotify.debug.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = Default;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -735,6 +736,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 134E86D639FF0CE5ED6FEF08 /* Pods-Jotify.release.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = Default;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
