@@ -14,7 +14,18 @@ class AboutSettingsView: UIView {
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
     
     lazy var icon: UIImageView = {
-        let image = UIImage(named: "iconLarge")
+        var image = UIImage(named: "defaultLarge")
+        
+        let iconName = UIApplication.shared.alternateIconName
+        if UIApplication.shared.supportsAlternateIcons {
+            if iconName == "Golden2" {
+                image = UIImage(named: "goldLarge")
+                
+            } else {
+                image = UIImage(named: "defaultLarge")
+            }
+        }
+        
         let iconView = UIImageView(image: image)
         iconView.translatesAutoresizingMaskIntoConstraints = false
         iconView.layer.cornerRadius = 28
@@ -33,7 +44,20 @@ class AboutSettingsView: UIView {
     }()
     
     lazy var iconText: UIImageView = {
-        let image = UIImage(named: "iconText")
+        var image = UIImage(named: "defaultText")
+        
+        let iconName = UIApplication.shared.alternateIconName
+        if UIApplication.shared.supportsAlternateIcons {
+            if iconName == "Golden2", UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+                image = UIImage(named: "goldTextAlt")
+                
+            } else if iconName == "Golden2", UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+                image = UIImage(named: "goldText")
+                
+            } else {
+                image = UIImage(named: "defaultText")
+            }
+        }
         let iconView = UIImageView(image: image)
         iconView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -46,34 +70,7 @@ class AboutSettingsView: UIView {
         clipsToBounds = true
         
         backgroundColor = UIColor.white
-        
         setupView()
-        setupGestures()
-    }
-    
-    func setupGestures() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(changeIcon))
-        icon.isUserInteractionEnabled = true
-        icon.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
-    @objc func changeIcon() {
-        let iconName = UIApplication.shared.alternateIconName
-        if UIApplication.shared.supportsAlternateIcons {
-            if iconName == "Golden2" {
-                print("current icon is \(String(describing: iconName)), change to primary icon")
-                UIApplication.shared.setAlternateIconName(nil)
-            } else {
-                print("current icon is primary icon, change to alternative icon")
-                UIApplication.shared.setAlternateIconName("Golden2"){ error in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    } else {
-                        print("Done!")
-                    }
-                }
-            }
-        }
     }
     
     func setupView() {

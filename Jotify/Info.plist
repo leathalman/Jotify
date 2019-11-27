@@ -14,13 +14,22 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
-				<string>Default</string>
+				<string>Light</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<false/>
 		</dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
+			<key>Default</key>
+			<dict>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Light</string>
+				</array>
+			</dict>
 			<key>Golden2</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
@@ -28,7 +37,7 @@
 					<string>Golden2</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
-                <false/>
+				<false/>
 			</dict>
 		</dict>
 	</dict>

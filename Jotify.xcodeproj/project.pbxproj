@@ -65,10 +65,10 @@
 		F69E5DC0231AE14800872345 /* ThemeSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E5DBF231AE14800872345 /* ThemeSelectionController.swift */; };
 		F69E5DC2231B120200872345 /* ReminderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E5DC1231B120200872345 /* ReminderController.swift */; };
 		F6A2C7232340E87A0031A81B /* ReminderExistsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A2C7222340E87A0031A81B /* ReminderExistsController.swift */; };
+		F6A7E4C0238F128A00D3E6AF /* Light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6A7E4BF238F128A00D3E6AF /* Light@2x.png */; };
+		F6A7E4C2238F128F00D3E6AF /* Light@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6A7E4C1238F128F00D3E6AF /* Light@3x.png */; };
 		F6AEC561238CE28B0068706B /* Golden2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6AEC560238CE28B0068706B /* Golden2@3x.png */; };
 		F6AEC563238CE2C00068706B /* Golden2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6AEC562238CE2C00068706B /* Golden2@2x.png */; };
-		F6AEC565238CE3DF0068706B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6AEC564238CE3DF0068706B /* Default@2x.png */; };
-		F6AEC567238CE4010068706B /* Default@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6AEC566238CE4010068706B /* Default@3x.png */; };
 		F6B2083722DE22860098CF9F /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B2083622DE22860098CF9F /* Themes.swift */; };
 		F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */; };
 /* End PBXBuildFile section */
@@ -137,10 +137,10 @@
 		F69E5DBF231AE14800872345 /* ThemeSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectionController.swift; sourceTree = "<group>"; };
 		F69E5DC1231B120200872345 /* ReminderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderController.swift; sourceTree = "<group>"; };
 		F6A2C7222340E87A0031A81B /* ReminderExistsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderExistsController.swift; sourceTree = "<group>"; };
+		F6A7E4BF238F128A00D3E6AF /* Light@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Light@2x.png"; sourceTree = "<group>"; };
+		F6A7E4C1238F128F00D3E6AF /* Light@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Light@3x.png"; sourceTree = "<group>"; };
 		F6AEC560238CE28B0068706B /* Golden2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Golden2@3x.png"; sourceTree = "<group>"; };
 		F6AEC562238CE2C00068706B /* Golden2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Golden2@2x.png"; sourceTree = "<group>"; };
-		F6AEC564238CE3DF0068706B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		F6AEC566238CE4010068706B /* Default@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@3x.png"; sourceTree = "<group>"; };
 		F6B2083622DE22860098CF9F /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
 		F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -385,8 +385,8 @@
 		F6AEC557238CE02C0068706B /* App Icons */ = {
 			isa = PBXGroup;
 			children = (
-				F6AEC564238CE3DF0068706B /* Default@2x.png */,
-				F6AEC566238CE4010068706B /* Default@3x.png */,
+				F6A7E4BF238F128A00D3E6AF /* Light@2x.png */,
+				F6A7E4C1238F128F00D3E6AF /* Light@3x.png */,
 				F6AEC562238CE2C00068706B /* Golden2@2x.png */,
 				F6AEC560238CE28B0068706B /* Golden2@3x.png */,
 			);
@@ -453,12 +453,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6AEC567238CE4010068706B /* Default@3x.png in Resources */,
 				F6AEC561238CE28B0068706B /* Golden2@3x.png in Resources */,
 				F650E14022BFF35C008D29AD /* LaunchScreen.storyboard in Resources */,
+				F6A7E4C0238F128A00D3E6AF /* Light@2x.png in Resources */,
+				F6A7E4C2238F128F00D3E6AF /* Light@3x.png in Resources */,
 				F650E13D22BFF35C008D29AD /* Assets.xcassets in Resources */,
 				F6AEC563238CE2C00068706B /* Golden2@2x.png in Resources */,
-				F6AEC565238CE3DF0068706B /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
