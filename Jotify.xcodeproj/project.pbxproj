@@ -67,6 +67,8 @@
 		F6A2C7232340E87A0031A81B /* ReminderExistsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A2C7222340E87A0031A81B /* ReminderExistsController.swift */; };
 		F6A7E4C0238F128A00D3E6AF /* Light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6A7E4BF238F128A00D3E6AF /* Light@2x.png */; };
 		F6A7E4C2238F128F00D3E6AF /* Light@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6A7E4C1238F128F00D3E6AF /* Light@3x.png */; };
+		F6A7E4C4238F243200D3E6AF /* IAPHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A7E4C3238F243200D3E6AF /* IAPHandler.swift */; };
+		F6A7E4C6238F244800D3E6AF /* JotifyProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A7E4C5238F244800D3E6AF /* JotifyProducts.swift */; };
 		F6AEC561238CE28B0068706B /* Golden2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6AEC560238CE28B0068706B /* Golden2@3x.png */; };
 		F6AEC563238CE2C00068706B /* Golden2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6AEC562238CE2C00068706B /* Golden2@2x.png */; };
 		F6B2083722DE22860098CF9F /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B2083622DE22860098CF9F /* Themes.swift */; };
@@ -139,6 +141,8 @@
 		F6A2C7222340E87A0031A81B /* ReminderExistsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderExistsController.swift; sourceTree = "<group>"; };
 		F6A7E4BF238F128A00D3E6AF /* Light@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Light@2x.png"; sourceTree = "<group>"; };
 		F6A7E4C1238F128F00D3E6AF /* Light@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Light@3x.png"; sourceTree = "<group>"; };
+		F6A7E4C3238F243200D3E6AF /* IAPHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHandler.swift; sourceTree = "<group>"; };
+		F6A7E4C5238F244800D3E6AF /* JotifyProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JotifyProducts.swift; sourceTree = "<group>"; };
 		F6AEC560238CE28B0068706B /* Golden2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Golden2@3x.png"; sourceTree = "<group>"; };
 		F6AEC562238CE2C00068706B /* Golden2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Golden2@2x.png"; sourceTree = "<group>"; };
 		F6B2083622DE22860098CF9F /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
@@ -344,6 +348,8 @@
 				F686D85122C9B10900C6F555 /* Colors+Handlers.swift */,
 				F6B2083622DE22860098CF9F /* Themes.swift */,
 				F637FD292349422400288369 /* CoreDataManager.swift */,
+				F6A7E4C3238F243200D3E6AF /* IAPHandler.swift */,
+				F6A7E4C5238F244800D3E6AF /* JotifyProducts.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -557,8 +563,10 @@
 				F63A0C7922DE031E00B8A480 /* VerticalAlignLabel.swift in Sources */,
 				F644968622C16422009CC386 /* NoteDetailController.swift in Sources */,
 				F61EC8D02348E1BA00FB0A63 /* WhatsNewItemsViewController+Cell.swift in Sources */,
+				F6A7E4C6238F244800D3E6AF /* JotifyProducts.swift in Sources */,
 				F61EC8BD2348E1BA00FB0A63 /* WhatsNewViewController+CompletionButton.swift in Sources */,
 				F61EC8C02348E1BA00FB0A63 /* WhatsNewViewController+ItemsView.swift in Sources */,
+				F6A7E4C4238F243200D3E6AF /* IAPHandler.swift in Sources */,
 				F650E13322BFF35A008D29AD /* SceneDelegate.swift in Sources */,
 				F686D85222C9B10900C6F555 /* Colors+Handlers.swift in Sources */,
 				F67B92E022D2E785002C6985 /* ColorPickerController.swift in Sources */,
