@@ -18,7 +18,6 @@ extension WriteNoteController {
         if previousVersion == currentVersion {
             // same version, no update
             print("same version")
-            presentFirstLaunchOnboarding(viewController: self, tintColor: StoredColors.noteColor)
             
         } else {
             // replace with `if let previousVersion = previousVersion {` if you need the exact value

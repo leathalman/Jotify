@@ -7,12 +7,18 @@
 //
 
 import UIKit
+import StoreKit
 
 class PremiumView {
     
     static let shared = PremiumView()
+    
+    var products: [SKProduct] = []
         
     func presentPremiumView(viewController: UIViewController) {
+        
+        requestProducts()
+        
         let whatsNew = WhatsNew(
             title: "Get Premium",
             items: [
@@ -63,9 +69,10 @@ class PremiumView {
         configuration.completionButton.insets.bottom = 30
         configuration.apply(animation: .fade)
         
-//        configuration.completionButton.action = .custom(action: { whatsNewViewController in
-                    
-//        })
+        configuration.completionButton.action = .custom(action: { whatsNewViewController in
+            self.buyPremium()
+            whatsNewViewController.dismiss(animated: true, completion: nil)
+        })
 
         let whatsNewViewController = WhatsNewViewController(
             whatsNew: whatsNew,
@@ -75,5 +82,19 @@ class PremiumView {
         DispatchQueue.main.async {
             viewController.present(whatsNewViewController, animated: true)
         }
+    }
+    
+    func requestProducts() {
+        JotifyProducts.store.requestProducts{ [weak self] success, products in
+            guard let self = self else { return }
+            if success {
+                self.products = products!
+            }
+        }
+    }
+    
+    func buyPremium() {
+        guard let product = self.products.first else { return }
+        JotifyProducts.store.buyProduct(product)
     }
 }

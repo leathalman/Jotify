@@ -91,20 +91,48 @@ class ThemeSelectionController: UITableViewController {
             setNewColorsForExistingNotesIfNotStatic()
             
         case 1:
-            defaults.set("sunset", forKey: "noteColorTheme")
-            setNewColorsForExistingNotesIfNotStatic()
+            if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+                PremiumView.shared.presentPremiumView(viewController: self)
+                tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.accessoryType = .checkmark
+                tableView.cellForRow(at: indexPath)?.accessoryType = .none
+
+            } else {
+                defaults.set("sunset", forKey: "noteColorTheme")
+                setNewColorsForExistingNotesIfNotStatic()
+            }
             
         case 2:
-            defaults.set("kypool", forKey: "noteColorTheme")
-            setNewColorsForExistingNotesIfNotStatic()
+            if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+                PremiumView.shared.presentPremiumView(viewController: self)
+                tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.accessoryType = .checkmark
+                tableView.cellForRow(at: indexPath)?.accessoryType = .none
+                
+            } else {
+                defaults.set("kypool", forKey: "noteColorTheme")
+                setNewColorsForExistingNotesIfNotStatic()
+            }
             
         case 3:
-            defaults.set("celestial", forKey: "noteColorTheme")
-            setNewColorsForExistingNotesIfNotStatic()
+            if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+                PremiumView.shared.presentPremiumView(viewController: self)
+                tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.accessoryType = .checkmark
+                tableView.cellForRow(at: indexPath)?.accessoryType = .none
+                
+            } else {
+                defaults.set("celestial", forKey: "noteColorTheme")
+                setNewColorsForExistingNotesIfNotStatic()
+            }
             
         case 4:
-            defaults.set("appleVibrant", forKey: "noteColorTheme")
-            setNewColorsForExistingNotesIfNotStatic()
+            if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+                PremiumView.shared.presentPremiumView(viewController: self)
+                tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.accessoryType = .checkmark
+                tableView.cellForRow(at: indexPath)?.accessoryType = .none
+                
+            } else {
+                defaults.set("appleVibrant", forKey: "noteColorTheme")
+                setNewColorsForExistingNotesIfNotStatic()
+            }
             
         default:
             print("Setting not implemented")

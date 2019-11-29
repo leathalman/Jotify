@@ -12,7 +12,7 @@ import UIKit
 class SettingsController: UITableViewController {
     let sections: Array = ["General", "Advanced"]
     let general: Array = ["About", "Appearance", "Privacy", "Alerts"]
-    let advanced: Array = ["Show Tutorial", "Reset Settings to Default", "Delete All Data"]
+    let advanced: Array = ["Restore Purchases", "Show Tutorial", "Reset Settings to Default", "Delete All Data"]
     
     let themes = Themes()
     
@@ -138,13 +138,20 @@ class SettingsController: UITableViewController {
         } else if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
+                JotifyProducts.store.restorePurchases()
+                
+                let cell = tableView.cellForRow(at: indexPath)
+                cell?.isSelected = false
+                
+                checkForRestore()
+            case 1:
                 let writeNoteController = WriteNoteController()
                 writeNoteController.presentFirstLaunchOnboarding(viewController: self, tintColor: StoredColors.noteColor)
                 
                 let cell = tableView.cellForRow(at: indexPath)
                 cell?.isSelected = false
                 
-            case 1:
+            case 2:
                 let alert = UIAlertController(title: "Are you sure?", message: "This will reset all settings to default.", preferredStyle: .alert)
                 
                 let cell = tableView.cellForRow(at: indexPath)
@@ -173,7 +180,7 @@ class SettingsController: UITableViewController {
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 present(alert, animated: true)
                 
-            case 2:
+            case 3:
                 print("Delete all data")
                 let cell = tableView.cellForRow(at: indexPath)
                 cell?.isSelected = false
@@ -274,13 +281,17 @@ class SettingsController: UITableViewController {
                 cell.backgroundColor = UIColor.white
                 cell.backgroundColor = InterfaceColors.cellColor
                 cell.textLabel?.textColor = UIColor.lightBlue
-                
             case 1:
                 cell.backgroundColor = UIColor.white
                 cell.backgroundColor = InterfaceColors.cellColor
                 cell.textLabel?.textColor = UIColor.lightBlue
                 
             case 2:
+                cell.backgroundColor = UIColor.white
+                cell.backgroundColor = InterfaceColors.cellColor
+                cell.textLabel?.textColor = UIColor.lightBlue
+                
+            case 3:
                 cell.backgroundColor = UIColor.white
                 cell.backgroundColor = InterfaceColors.cellColor
                 cell.textLabel?.textColor = UIColor.red
@@ -297,6 +308,26 @@ class SettingsController: UITableViewController {
             cell.backgroundColor = UIColor.white
             cell.textLabel?.textColor = UIColor.black
             return cell
+        }
+    }
+    
+    func checkForRestore() {
+        print(UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.Premium"))
+        if UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.Premium") == true {
+            let alert = UIAlertController(title: "Congratulations!", message: "You successfully restored your purchase! Enjoy Jotify premium!", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Yay!", style: .cancel, handler: { _ in
+                
+            }))
+            present(alert, animated: true)
+            
+        } else if UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+            let alert = UIAlertController(title: "Not quite.", message: "It looks like you have not bought premium yet. Please consider supporting Jotify!", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { _ in
+                
+            }))
+            present(alert, animated: true)
         }
     }
     
