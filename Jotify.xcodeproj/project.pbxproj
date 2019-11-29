@@ -72,6 +72,7 @@
 		F6AEC561238CE28B0068706B /* Golden2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6AEC560238CE28B0068706B /* Golden2@3x.png */; };
 		F6AEC563238CE2C00068706B /* Golden2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6AEC562238CE2C00068706B /* Golden2@2x.png */; };
 		F6B2083722DE22860098CF9F /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B2083622DE22860098CF9F /* Themes.swift */; };
+		F6B7BF8E239189700057FB8B /* PremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B7BF8D239189700057FB8B /* PremiumView.swift */; };
 		F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */; };
 /* End PBXBuildFile section */
 
@@ -146,6 +147,7 @@
 		F6AEC560238CE28B0068706B /* Golden2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Golden2@3x.png"; sourceTree = "<group>"; };
 		F6AEC562238CE2C00068706B /* Golden2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Golden2@2x.png"; sourceTree = "<group>"; };
 		F6B2083622DE22860098CF9F /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
+		F6B7BF8D239189700057FB8B /* PremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumView.swift; sourceTree = "<group>"; };
 		F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -364,6 +366,7 @@
 				F6070B8922D50796005E4CF3 /* EmptyView.swift */,
 				F6969F5F22DA256F00C4E8FF /* AboutSettingsView.swift */,
 				F63A0C7822DE031E00B8A480 /* VerticalAlignLabel.swift */,
+				F6B7BF8D239189700057FB8B /* PremiumView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				F65BD148231D89A300A06D2B /* AppConfiguration+Helpers.swift in Sources */,
 				F608ECEB2352703E00ABFD48 /* AlertSettingsController.swift in Sources */,
 				F650E16D22C00381008D29AD /* AppDelegate.swift in Sources */,
+				F6B7BF8E239189700057FB8B /* PremiumView.swift in Sources */,
 				F69E5DC0231AE14800872345 /* ThemeSelectionController.swift in Sources */,
 				F61EC8CD2348E1BA00FB0A63 /* WhatsNewButtonViewController.swift in Sources */,
 				F6969F5E22DA1AFD00C4E8FF /* AboutSettingsController.swift in Sources */,
@@ -732,7 +736,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -755,7 +759,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

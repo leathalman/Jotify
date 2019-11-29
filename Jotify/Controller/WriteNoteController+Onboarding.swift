@@ -18,13 +18,14 @@ extension WriteNoteController {
         if previousVersion == currentVersion {
             // same version, no update
             print("same version")
+            presentFirstLaunchOnboarding(viewController: self, tintColor: StoredColors.noteColor)
             
         } else {
             // replace with `if let previousVersion = previousVersion {` if you need the exact value
             if previousVersion != nil {
                 // new version
                 print("new version")
-                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+//                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
                 
             } else {
                 // first launch
@@ -68,15 +69,23 @@ extension WriteNoteController {
             configuration.apply(theme: .default)
         }
         
-        configuration.titleView.titleColor = tintColor
         configuration.titleView.insets = UIEdgeInsets(top: 40, left: 20, bottom: 15, right: 15)
         configuration.itemsView.titleFont = .boldSystemFont(ofSize: 17)
         configuration.itemsView.imageSize = .preferred
         configuration.completionButton.hapticFeedback = .impact(.medium)
-        configuration.detailButton?.titleColor = tintColor
-        configuration.completionButton.backgroundColor = tintColor
-        configuration.completionButton.insets.bottom = 50
+        configuration.completionButton.insets.bottom = 30
         configuration.apply(animation: .fade)
+        
+        if UserDefaults.standard.bool(forKey: "useRandomColor") == true {
+            configuration.titleView.titleColor = StoredColors.noteColor
+            configuration.detailButton?.titleColor = StoredColors.noteColor
+            configuration.completionButton.backgroundColor = StoredColors.noteColor
+            
+        } else if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
+            configuration.titleView.titleColor = StoredColors.staticNoteColor
+            configuration.detailButton?.titleColor = StoredColors.staticNoteColor
+            configuration.completionButton.backgroundColor = StoredColors.staticNoteColor
+        }
         
         let whatsNewViewController = WhatsNewViewController(
             whatsNew: whatsNew,
@@ -130,14 +139,23 @@ extension WriteNoteController {
             configuration.apply(theme: .default)
         }
         
-        configuration.titleView.titleColor = tintColor
         configuration.titleView.insets = UIEdgeInsets(top: 40, left: 20, bottom: 15, right: 15)
         configuration.itemsView.titleFont = .boldSystemFont(ofSize: 17)
         configuration.itemsView.imageSize = .preferred
         configuration.completionButton.hapticFeedback = .impact(.medium)
-        configuration.detailButton?.titleColor = tintColor
-        configuration.completionButton.backgroundColor = tintColor
+        configuration.completionButton.insets.bottom = 30
         configuration.apply(animation: .fade)
+        
+        if UserDefaults.standard.bool(forKey: "useRandomColor") == true {
+            configuration.titleView.titleColor = StoredColors.noteColor
+            configuration.detailButton?.titleColor = StoredColors.noteColor
+            configuration.completionButton.backgroundColor = StoredColors.noteColor
+            
+        } else if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
+            configuration.titleView.titleColor = StoredColors.staticNoteColor
+            configuration.detailButton?.titleColor = StoredColors.staticNoteColor
+            configuration.completionButton.backgroundColor = StoredColors.staticNoteColor
+        }
         
         let whatsNewViewController = WhatsNewViewController(
             whatsNew: whatsNew,
