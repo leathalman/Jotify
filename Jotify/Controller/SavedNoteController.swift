@@ -438,10 +438,15 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     
     func setupMultiSelectionToolBar() {
         let toolBar = navigationController?.toolbar
-        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+        if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") == true {
+            toolBar?.tintColor = .white
+            toolBar?.barTintColor = .grayBackground
+            toolBar?.sizeToFit()
+        } else if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") == true {
             toolBar?.tintColor = .white
             toolBar?.barTintColor = .black
             toolBar?.sizeToFit()
+            
         } else {
             toolBar?.tintColor = nil
             toolBar?.barTintColor = nil
