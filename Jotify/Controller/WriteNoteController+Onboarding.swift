@@ -27,9 +27,10 @@ extension WriteNoteController {
 //                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
                 
             } else {
-                // first launch
+                // first launch, restore purchases
                 print("first launch")
                 presentFirstLaunchOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+                JotifyProducts.store.restorePurchases()
             }
             standard.set(currentVersion, forKey: shortVersionKey)
         }

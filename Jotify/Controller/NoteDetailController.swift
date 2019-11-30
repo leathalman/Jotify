@@ -218,6 +218,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         let textView = writeNoteView.inputTextView
         
         StoredColors.reminderColor = backgroundColor
+        UIApplication.shared.windows.first?.backgroundColor = backgroundColor
         
         if defaults.bool(forKey: "darkModeEnabled") == true {
             if defaults.bool(forKey: "vibrantDarkModeEnabled") == true {
@@ -261,13 +262,17 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     }
     
     @objc func handleReminder() {
-        let savedNoteController = SavedNoteController()
-        savedNoteController.feedbackOnPress()
-        
-        if RemindersData.isReminder == false || RemindersData.reminderDate == "" {
-            reminderIsNotSet()
+        if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+            PremiumView.shared.presentPremiumView(viewController: self)
         } else {
-            alreadySetReminder()
+            let savedNoteController = SavedNoteController()
+            savedNoteController.feedbackOnPress()
+            
+            if RemindersData.isReminder == false || RemindersData.reminderDate == "" {
+                reminderIsNotSet()
+            } else {
+                alreadySetReminder()
+            }
         }
     }
     
@@ -358,13 +363,13 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         let keyboardScreenEndFrame = keyboardValue.cgRectValue
         let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
         
-        let navigationBarHeight = navigationController!.navigationBar.frame.height
+        let navigationBarHeight = navigationController?.navigationBar.frame.height
         
         if notification.name == UIResponder.keyboardWillHideNotification {
             writeNoteView.inputTextView.contentInset = .zero
             
         } else {
-            writeNoteView.inputTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height + navigationBarHeight + 42, right: 0)
+            writeNoteView.inputTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height + (navigationBarHeight ?? 10) + 42, right: 0)
         }
         
         writeNoteView.inputTextView.scrollIndicatorInsets = writeNoteView.inputTextView.contentInset

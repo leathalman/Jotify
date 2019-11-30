@@ -44,6 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             themes.setupDefaultMode()
         }
         
+//        UserDefaults.standard.set(false, forKey: "com.austinleath.Jotify.Premium")
+        
         switch Config.appConfiguration {
         case .Debug:
             print("Debug")

@@ -11,6 +11,8 @@ import StoreKit
 
 class PremiumView {
     
+    //NEED TO CHECK RECEIPTS OF PEOPLE TO MAKE SURE THAT NO ONE HAS TO PAY AGAIN
+    
     static let shared = PremiumView()
     
     var products: [SKProduct] = []
@@ -23,18 +25,38 @@ class PremiumView {
             title: "Get Premium",
             items: [
                 WhatsNew.Item(
-                    title: "Features",
+                    title: "Reminders",
                     subtitle: "You can now delete multiple notes at once! Simply long press a note, click \"select multiple\", and then delete as many as your heart desires.",
                     image: UIImage(named: "write")
                 ),
                 WhatsNew.Item(
-                    title: "Improvements",
+                    title: "Dark Mode",
                     subtitle: "Added an additional dark mode icon for Jotify! To check it out, click on the gear icon, then about, and finally tap on the large icon image. Also added automatic saving for notes whenever the app enters multitasking.",
                     image: UIImage(named: "add")
                 ),
                 WhatsNew.Item(
-                    title: "Bug Fixes",
+                    title: "Biometric Unlock",
                     subtitle: "Fixed a bug where notes would incorrectly order themselves after sorting. Also fixed an issue where navigation bar would update with the wrong color in dark mode.",
+                    image: UIImage(named: "bugFix")
+                ),
+                WhatsNew.Item(
+                    title: "Themes",
+                    subtitle: "Fixed a bug where notes would incorrectly order themselves after sorting. Also fixed an issue where navigation bar would update with the wrong color in dark mode.",
+                    image: UIImage(named: "bugFix")
+                ),
+                WhatsNew.Item(
+                    title: "Icons",
+                    subtitle: "Fixed a bug where notes would incorrectly order themselves after sorting. Also fixed an issue where navigation bar would update with the wrong color in dark mode.",
+                    image: UIImage(named: "bugFix")
+                ),
+                WhatsNew.Item(
+                    title: "Premium Forever",
+                    subtitle: "Make a point here that once you buy this version of premium, you will have access to all new features, even if the price of premium increases.",
+                    image: UIImage(named: "bugFix")
+                ),
+                WhatsNew.Item(
+                    title: "Developer Support",
+                    subtitle: "Make a point here that once you buy this version of premium, you will have access to all new features, even if the price of premium increases.",
                     image: UIImage(named: "bugFix")
                 ),
             ]

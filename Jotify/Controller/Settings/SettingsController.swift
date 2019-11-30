@@ -138,11 +138,10 @@ class SettingsController: UITableViewController {
         } else if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
-                JotifyProducts.store.restorePurchases()
-                
                 let cell = tableView.cellForRow(at: indexPath)
                 cell?.isSelected = false
                 
+                JotifyProducts.store.restorePurchases()
                 checkForRestore()
             case 1:
                 let writeNoteController = WriteNoteController()
