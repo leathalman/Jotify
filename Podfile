@@ -32,6 +32,7 @@ pod 'BottomPopup'
 # Used for displaying confirmations to users when reminders are created or deleted
 pod 'SPAlert'
 
+# Used for verifying purchase receipts for users who bought Jotify as a paid application
 pod'OpenSSL-Universal'
 
 end

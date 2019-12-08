@@ -24,7 +24,7 @@ extension WriteNoteController {
             if previousVersion != nil {
                 // new version
                 print("new version")
-//                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
                 
             } else {
                 // first launch, restore purchases
@@ -37,23 +37,18 @@ extension WriteNoteController {
     }
     
     func presentUpdateOnboarding(viewController: UIViewController, tintColor: UIColor) {
-        // Jotify v1.1.3 Onboarding
+        // Jotify v1.2.0 Onboarding
         let whatsNew = WhatsNew(
             title: "What's New",
             items: [
                 WhatsNew.Item(
-                    title: "Features",
-                    subtitle: "You can now delete multiple notes at once! Simply long press a note, click \"select multiple\", and then delete as many as your heart desires.",
-                    image: UIImage(named: "write")
-                ),
-                WhatsNew.Item(
-                    title: "Improvements",
-                    subtitle: "Added an additional dark mode icon for Jotify! To check it out, click on the gear icon, then about, and finally tap on the large icon image. Also added automatic saving for notes whenever the app enters multitasking.",
-                    image: UIImage(named: "add")
+                    title: "Major Changes",
+                    subtitle: "Jotify is no longer a paid app. It can be downloaded for free from the iOS App Store and has an optional in-app purchase for premium features. However, because you supported Jotify in the very beginning, you will receive this update and all future updates for free! Thank you for your support!",
+                    image: UIImage(named: "bell")
                 ),
                 WhatsNew.Item(
                     title: "Bug Fixes",
-                    subtitle: "Fixed a bug where notes would incorrectly order themselves after sorting. Also fixed an issue where navigation bar would update with the wrong color in dark mode.",
+                    subtitle: "Fixed a bug where Jotify would crash if the navigation bar was incorrectly rendered on launch. Minor underhood improvements to stabilty.",
                     image: UIImage(named: "bugFix")
                 ),
             ]
