@@ -17,11 +17,47 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     
     let defaults = UserDefaults.standard
     
+    let receiptFetcher = ReceiptFetcher()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupNotifications()
         presentOnboarding()
+        
+        // fetch receipt if receipt file doesn't exist yet
+        receiptFetcher.fetchReceipt()
+        
+        // validage receipt
+        let receiptValidator = ReceiptValidator()
+        let validationResult = receiptValidator.validateReceipt()
+
+        
+        switch validationResult {
+        case .success(let receipt):
+            // receipt validation success
+            // Work with parsed receipt data.
+          
+            grantPremiumToPreviousUser(receipt: receipt)
+            print("original app version is \(receipt.originalAppVersion ?? "n/a")")
+        case .error(let error):
+            // receipt validation failed, refer to enum ReceiptValidationError
+            print("error is \(error.localizedDescription)")
+        }
+    }
+    
+    func grantPremiumToPreviousUser(receipt: ParsedReceipt) {
+        // cast the string into integer (build number)
+        guard let originalAppVersionString = receipt.originalAppVersion,
+              let originalBuildNumber = Int(originalAppVersionString) else {
+            return
+        }
+        
+        // the last build number that the app is still a paid app
+        if originalBuildNumber < 37 {
+            // grant user premium feature here
+            print("premium granted")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

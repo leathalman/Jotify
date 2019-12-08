@@ -74,6 +74,10 @@
 		F6B2083722DE22860098CF9F /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B2083622DE22860098CF9F /* Themes.swift */; };
 		F6B7BF8E239189700057FB8B /* PremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B7BF8D239189700057FB8B /* PremiumView.swift */; };
 		F6B7BF902391CF600057FB8B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6B7BF8F2391CF600057FB8B /* StoreKit.framework */; };
+		F6D1816D239C748700EAB85C /* ReceiptFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D1816C239C748700EAB85C /* ReceiptFetcher.swift */; };
+		F6D18172239C7B1100EAB85C /* AppleIncRootCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = F6D18171239C7B1000EAB85C /* AppleIncRootCertificate.cer */; };
+		F6D18179239C7BEE00EAB85C /* pkcs7_union_accessors.c in Sources */ = {isa = PBXBuildFile; fileRef = F6D18178239C7BEE00EAB85C /* pkcs7_union_accessors.c */; };
+		F6D1817B239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D1817A239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift */; };
 		F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */; };
 /* End PBXBuildFile section */
 
@@ -150,6 +154,12 @@
 		F6B2083622DE22860098CF9F /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
 		F6B7BF8D239189700057FB8B /* PremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumView.swift; sourceTree = "<group>"; };
 		F6B7BF8F2391CF600057FB8B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		F6D1816C239C748700EAB85C /* ReceiptFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptFetcher.swift; sourceTree = "<group>"; };
+		F6D1816E239C7AC900EAB85C /* Jotify-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Jotify-Bridging-Header.h"; sourceTree = "<group>"; };
+		F6D18171239C7B1000EAB85C /* AppleIncRootCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleIncRootCertificate.cer; sourceTree = "<group>"; };
+		F6D18178239C7BEE00EAB85C /* pkcs7_union_accessors.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pkcs7_union_accessors.c; sourceTree = "<group>"; };
+		F6D1817A239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyLocalReceiptValidator.swift; sourceTree = "<group>"; };
+		F6D1817C239C7C6600EAB85C /* pkcs7_union_accessors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pkcs7_union_accessors.h; sourceTree = "<group>"; };
 		F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -318,6 +328,11 @@
 				F650E13C22BFF35C008D29AD /* Assets.xcassets */,
 				F650E13E22BFF35C008D29AD /* LaunchScreen.storyboard */,
 				F650E14122BFF35C008D29AD /* Info.plist */,
+				F6D1816E239C7AC900EAB85C /* Jotify-Bridging-Header.h */,
+				F6D1817C239C7C6600EAB85C /* pkcs7_union_accessors.h */,
+				F6D18171239C7B1000EAB85C /* AppleIncRootCertificate.cer */,
+				F6D1817A239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift */,
+				F6D18178239C7BEE00EAB85C /* pkcs7_union_accessors.c */,
 			);
 			path = Jotify;
 			sourceTree = "<group>";
@@ -356,6 +371,7 @@
 				F637FD292349422400288369 /* CoreDataManager.swift */,
 				F6A7E4C3238F243200D3E6AF /* IAPHandler.swift */,
 				F6A7E4C5238F244800D3E6AF /* JotifyProducts.swift */,
+				F6D1816C239C748700EAB85C /* ReceiptFetcher.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -440,6 +456,7 @@
 				TargetAttributes = {
 					F650E12C22BFF35A008D29AD = {
 						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1120;
 					};
 				};
 			};
@@ -468,6 +485,7 @@
 			files = (
 				F6AEC561238CE28B0068706B /* Golden2@3x.png in Resources */,
 				F650E14022BFF35C008D29AD /* LaunchScreen.storyboard in Resources */,
+				F6D18172239C7B1100EAB85C /* AppleIncRootCertificate.cer in Resources */,
 				F6A7E4C0238F128A00D3E6AF /* Light@2x.png in Resources */,
 				F6A7E4C2238F128F00D3E6AF /* Light@3x.png in Resources */,
 				F650E13D22BFF35C008D29AD /* Assets.xcassets in Resources */,
@@ -527,6 +545,7 @@
 				F61EC8C22348E1BA00FB0A63 /* WhatsNewViewController+DetailButton.swift in Sources */,
 				F61EC8C52348E1BA00FB0A63 /* WhatsNew+Item.swift in Sources */,
 				F61EC8C12348E1BA00FB0A63 /* WhatsNewViewController+Configuration.swift in Sources */,
+				F6D18179239C7BEE00EAB85C /* pkcs7_union_accessors.c in Sources */,
 				F61EC8C42348E1BA00FB0A63 /* WhatsNew+Version.swift in Sources */,
 				F61EC8C82348E1BA00FB0A63 /* NSLayoutConstraint+Activate.swift in Sources */,
 				F650E17022C00AE3008D29AD /* SavedNoteController.swift in Sources */,
@@ -544,6 +563,7 @@
 				F61EC8BF2348E1BA00FB0A63 /* WhatsNewViewController+Animation.swift in Sources */,
 				F68D639322F7894700DEB4AA /* PrivacySettingsController.swift in Sources */,
 				F61EC8D32348E1BA00FB0A63 /* WhatsNewVersionStore.swift in Sources */,
+				F6D1817B239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift in Sources */,
 				F65E47A12324B15F00FCAEF3 /* CALayer+Extensions.swift in Sources */,
 				F69E5DC2231B120200872345 /* ReminderController.swift in Sources */,
 				F6070B8A22D50796005E4CF3 /* EmptyView.swift in Sources */,
@@ -567,6 +587,7 @@
 				F666D4B222CFED2D00DECE27 /* UIDevice+Extensions.swift in Sources */,
 				F61EC8CE2348E1BA00FB0A63 /* WhatsNewTitleViewController.swift in Sources */,
 				F61EC8C72348E1BA00FB0A63 /* UIViewController+AddChild.swift in Sources */,
+				F6D1816D239C748700EAB85C /* ReceiptFetcher.swift in Sources */,
 				F61EC8CF2348E1BA00FB0A63 /* WhatsNewItemsViewController.swift in Sources */,
 				F63A0C7922DE031E00B8A480 /* VerticalAlignLabel.swift in Sources */,
 				F644968622C16422009CC386 /* NoteDetailController.swift in Sources */,
@@ -721,6 +742,7 @@
 			baseConfigurationReference = 77AB5562845EB3AEFA1502C6 /* Pods-Jotify.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Default;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
@@ -743,6 +765,8 @@
 				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Jotify/Jotify-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -753,6 +777,7 @@
 			baseConfigurationReference = 134E86D639FF0CE5ED6FEF08 /* Pods-Jotify.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Default;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
@@ -766,6 +791,7 @@
 				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Jotify/Jotify-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
