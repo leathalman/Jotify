@@ -37,11 +37,11 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        for note in notes {
-            if note.content == "" {
+//        for note in notes {
+//            if note.content == "" {
 //                deleteEmptyNote(note: note)
-            }
-        }
+//            }
+//        }
         
         if notes.count != 0 {
             setupSearchBar()

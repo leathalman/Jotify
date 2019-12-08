@@ -96,7 +96,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         case .success(let receipt):
             // receipt validation success
             // Work with parsed receipt data.
-            print("original app version is \(receipt.originalAppVersion ?? "n/a")")
+            print("original receipt app version is \(receipt.originalAppVersion ?? "n/a")")
             grantPremiumToPreviousUser(receipt: receipt)
         case .error(let error):
             // receipt validation failed, refer to enum ReceiptValidationError
