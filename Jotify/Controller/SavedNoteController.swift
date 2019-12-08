@@ -39,7 +39,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         for note in notes {
             if note.content == "" {
-                deleteEmptyNote(note: note)
+//                deleteEmptyNote(note: note)
             }
         }
         

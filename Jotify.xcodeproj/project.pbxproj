@@ -84,7 +84,9 @@
 /* Begin PBXFileReference section */
 		0C3C025699629E8C8FD896B4 /* Pods_Jotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		134E86D639FF0CE5ED6FEF08 /* Pods-Jotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.release.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.release.xcconfig"; sourceTree = "<group>"; };
+		68C1B4D116CC7FA198355723 /* Pods-Jotify.testflight.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.testflight.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.testflight.xcconfig"; sourceTree = "<group>"; };
 		77AB5562845EB3AEFA1502C6 /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.debug.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
+		B3D4F129EFF4F09451251D56 /* Pods-Jotify.release (development).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.release (development).xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.release (development).xcconfig"; sourceTree = "<group>"; };
 		F6070B8922D50796005E4CF3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		F608ECEA2352703E00ABFD48 /* AlertSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSettingsController.swift; sourceTree = "<group>"; };
 		F61EC89D2348E1B900FB0A63 /* WhatsNewViewController+TitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WhatsNewViewController+TitleView.swift"; sourceTree = "<group>"; };
@@ -182,6 +184,8 @@
 			children = (
 				77AB5562845EB3AEFA1502C6 /* Pods-Jotify.debug.xcconfig */,
 				134E86D639FF0CE5ED6FEF08 /* Pods-Jotify.release.xcconfig */,
+				B3D4F129EFF4F09451251D56 /* Pods-Jotify.release (development).xcconfig */,
+				68C1B4D116CC7FA198355723 /* Pods-Jotify.testflight.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -318,6 +322,7 @@
 			isa = PBXGroup;
 			children = (
 				F6AEC557238CE02C0068706B /* App Icons */,
+				F6D1817D239C823100EAB85C /* Receipt */,
 				F650E15A22BFFB19008D29AD /* Model */,
 				F650E15F22BFFB20008D29AD /* View */,
 				F650E14F22BFFB12008D29AD /* Controller */,
@@ -329,11 +334,6 @@
 				F650E13E22BFF35C008D29AD /* LaunchScreen.storyboard */,
 				F650E14122BFF35C008D29AD /* Info.plist */,
 				F6D1816E239C7AC900EAB85C /* Jotify-Bridging-Header.h */,
-				F6D1817C239C7C6600EAB85C /* pkcs7_union_accessors.h */,
-				F6D18171239C7B1000EAB85C /* AppleIncRootCertificate.cer */,
-				F6D1817A239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift */,
-				F6D18178239C7BEE00EAB85C /* pkcs7_union_accessors.c */,
-				F6D1817D239C823100EAB85C /* Receipt */,
 			);
 			path = Jotify;
 			sourceTree = "<group>";
@@ -426,6 +426,10 @@
 		F6D1817D239C823100EAB85C /* Receipt */ = {
 			isa = PBXGroup;
 			children = (
+				F6D1817C239C7C6600EAB85C /* pkcs7_union_accessors.h */,
+				F6D18171239C7B1000EAB85C /* AppleIncRootCertificate.cer */,
+				F6D1817A239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift */,
+				F6D18178239C7BEE00EAB85C /* pkcs7_union_accessors.c */,
 			);
 			path = Receipt;
 			sourceTree = "<group>";
@@ -755,7 +759,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Blueprints\"",
@@ -770,6 +774,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LD_VERIFY_BITCODE = NO;
 				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -790,12 +795,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Jotify/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LD_VERIFY_BITCODE = NO;
 				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -805,6 +811,87 @@
 			};
 			name = Release;
 		};
+		F6D1817E239C973000EAB85C /* TestFlight */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_VERIFY_BITCODE = NO;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = TestFlight;
+		};
+		F6D1817F239C973000EAB85C /* TestFlight */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 68C1B4D116CC7FA198355723 /* Pods-Jotify.testflight.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = Default;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 24;
+				DEVELOPMENT_TEAM = G69P7XTUQ3;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Jotify/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LD_VERIFY_BITCODE = NO;
+				MARKETING_VERSION = 1.2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Jotify/Jotify-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = TestFlight;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -813,6 +900,7 @@
 			buildConfigurations = (
 				F650E14222BFF35C008D29AD /* Debug */,
 				F650E14322BFF35C008D29AD /* Release */,
+				F6D1817E239C973000EAB85C /* TestFlight */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -822,6 +910,7 @@
 			buildConfigurations = (
 				F650E14522BFF35C008D29AD /* Debug */,
 				F650E14622BFF35C008D29AD /* Release */,
+				F6D1817F239C973000EAB85C /* TestFlight */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

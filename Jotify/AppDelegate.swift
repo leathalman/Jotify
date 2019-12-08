@@ -43,15 +43,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             themes.setupDefaultMode()
         }
-        
-//        UserDefaults.standard.set(false, forKey: "com.austinleath.Jotify.Premium")
-        
+                
         switch Config.appConfiguration {
         case .Debug:
             print("Debug")
         case .TestFlight:
             print("Testflight")
-            UserDefaults.standard.set(true, forKey: "com.austinleath.Jotify.Premium")
+//            UserDefaults.standard.set(true, forKey: "com.austinleath.Jotify.Premium")
         case .AppStore:
             print("AppStore")
         }

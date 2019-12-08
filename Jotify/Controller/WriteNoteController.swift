@@ -96,9 +96,8 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         case .success(let receipt):
             // receipt validation success
             // Work with parsed receipt data.
-          
-            grantPremiumToPreviousUser(receipt: receipt)
             print("original app version is \(receipt.originalAppVersion ?? "n/a")")
+            grantPremiumToPreviousUser(receipt: receipt)
         case .error(let error):
             // receipt validation failed, refer to enum ReceiptValidationError
             print("error is \(error.localizedDescription)")
@@ -106,17 +105,13 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     }
     
     func grantPremiumToPreviousUser(receipt: ParsedReceipt) {
-        // cast the string into integer (build number)
-        guard let originalAppVersionString = receipt.originalAppVersion,
-              let originalBuildNumber = Int(originalAppVersionString) else {
-            return
-        }
+        let originalAppVersionString = receipt.originalAppVersion
         
-        // the last build number that the app is still a paid app
-        if originalBuildNumber < 24 {
-            // grant user premium feature here
-//            UserDefaults.standard.set(true, forKey: "com.austinleath.Jotify.Premium")
-            print("premium granted")
+        // the last build version when the app is still a paid app
+        if originalAppVersionString == "1.0" || originalAppVersionString == "1.1.0" || originalAppVersionString == "1.1.1" || originalAppVersionString == "1.1.2" || originalAppVersionString == "1.1.3" {
+            // grant user premium
+            UserDefaults.standard.set(true, forKey: "com.austinleath.Jotify.Premium")
+            print("premium granted from receipt")
         }
     }
     
