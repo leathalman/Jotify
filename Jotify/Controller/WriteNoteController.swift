@@ -24,40 +24,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         setupView()
         setupNotifications()
         presentOnboarding()
-        
-        // fetch receipt if receipt file doesn't exist yet
-        receiptFetcher.fetchReceipt()
-        
-        // validage receipt
-        let receiptValidator = ReceiptValidator()
-        let validationResult = receiptValidator.validateReceipt()
-
-        
-        switch validationResult {
-        case .success(let receipt):
-            // receipt validation success
-            // Work with parsed receipt data.
-          
-            grantPremiumToPreviousUser(receipt: receipt)
-            print("original app version is \(receipt.originalAppVersion ?? "n/a")")
-        case .error(let error):
-            // receipt validation failed, refer to enum ReceiptValidationError
-            print("error is \(error.localizedDescription)")
-        }
-    }
-    
-    func grantPremiumToPreviousUser(receipt: ParsedReceipt) {
-        // cast the string into integer (build number)
-        guard let originalAppVersionString = receipt.originalAppVersion,
-              let originalBuildNumber = Int(originalAppVersionString) else {
-            return
-        }
-        
-        // the last build number that the app is still a paid app
-        if originalBuildNumber < 37 {
-            // grant user premium feature here
-            print("premium granted")
-        }
+        handleReceiptValidation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -113,6 +80,42 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
             writeNoteView.colorView.backgroundColor = StoredColors.noteColor
             
             UIApplication.shared.windows.first?.backgroundColor = StoredColors.noteColor
+        }
+    }
+    
+    func handleReceiptValidation() {
+        // fetch receipt if receipt file doesn't exist yet
+        receiptFetcher.fetchReceipt()
+        
+        // validage receipt
+        let receiptValidator = ReceiptValidator()
+        let validationResult = receiptValidator.validateReceipt()
+
+        
+        switch validationResult {
+        case .success(let receipt):
+            // receipt validation success
+            // Work with parsed receipt data.
+          
+            grantPremiumToPreviousUser(receipt: receipt)
+            print("original app version is \(receipt.originalAppVersion ?? "n/a")")
+        case .error(let error):
+            // receipt validation failed, refer to enum ReceiptValidationError
+            print("error is \(error.localizedDescription)")
+        }
+    }
+    
+    func grantPremiumToPreviousUser(receipt: ParsedReceipt) {
+        // cast the string into integer (build number)
+        guard let originalAppVersionString = receipt.originalAppVersion,
+              let originalBuildNumber = Int(originalAppVersionString) else {
+            return
+        }
+        
+        // the last build number that the app is still a paid app
+        if originalBuildNumber < 24 {
+            // grant user premium feature here
+            print("premium granted")
         }
     }
     
