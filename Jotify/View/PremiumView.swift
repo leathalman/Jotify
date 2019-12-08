@@ -26,38 +26,33 @@ class PremiumView {
             items: [
                 WhatsNew.Item(
                     title: "Reminders",
-                    subtitle: "You can now delete multiple notes at once! Simply long press a note, click \"select multiple\", and then delete as many as your heart desires.",
-                    image: UIImage(named: "write")
+                    subtitle: "Set reminders on all of the your notes with ease. Simply tap on the alarm icon, set a date, and wait. All natively supported in Jotify.",
+                    image: UIImage(named: "reminder")
                 ),
                 WhatsNew.Item(
                     title: "Dark Mode",
-                    subtitle: "Added an additional dark mode icon for Jotify! To check it out, click on the gear icon, then about, and finally tap on the large icon image. Also added automatic saving for notes whenever the app enters multitasking.",
-                    image: UIImage(named: "add")
+                    subtitle: "Unlock access to vibrant and pure dark modes to make your notes look even better.",
+                    image: UIImage(named: "moon")
                 ),
                 WhatsNew.Item(
                     title: "Biometric Unlock",
-                    subtitle: "Fixed a bug where notes would incorrectly order themselves after sorting. Also fixed an issue where navigation bar would update with the wrong color in dark mode.",
-                    image: UIImage(named: "bugFix")
+                    subtitle: "Lock and unlock Jotify by using TouchID or FaceID. The ultimate way to make your notes even more private and secure.",
+                    image: UIImage(named: "lock")
                 ),
                 WhatsNew.Item(
                     title: "Themes",
-                    subtitle: "Fixed a bug where notes would incorrectly order themselves after sorting. Also fixed an issue where navigation bar would update with the wrong color in dark mode.",
-                    image: UIImage(named: "bugFix")
-                ),
-                WhatsNew.Item(
-                    title: "Icons",
-                    subtitle: "Fixed a bug where notes would incorrectly order themselves after sorting. Also fixed an issue where navigation bar would update with the wrong color in dark mode.",
-                    image: UIImage(named: "bugFix")
+                    subtitle: "Customize the look of your notes with 5 different themes: Default, Sunset, Kypool, Celestial, and Apple Vibrant.",
+                    image: UIImage(named: "themes")
                 ),
                 WhatsNew.Item(
                     title: "Premium Forever",
-                    subtitle: "Make a point here that once you buy this version of premium, you will have access to all new features, even if the price of premium increases.",
+                    subtitle: "You will have access to all of Jotify's premium features forever. Even when the price of the app increases or new features are added, you will be covered.",
                     image: UIImage(named: "bugFix")
                 ),
                 WhatsNew.Item(
                     title: "Developer Support",
-                    subtitle: "Make a point here that once you buy this version of premium, you will have access to all new features, even if the price of premium increases.",
-                    image: UIImage(named: "bugFix")
+                    subtitle: "Jotify is an open source app, and it does not receive funding for its development. By buying Jotify premium, you are supporting an independent app developer and helping out the open source community by ensuring that Jotify is available for everyone, always.",
+                    image: UIImage(named: "github")
                 ),
             ]
         )

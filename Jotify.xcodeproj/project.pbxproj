@@ -333,6 +333,7 @@
 				F6D18171239C7B1000EAB85C /* AppleIncRootCertificate.cer */,
 				F6D1817A239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift */,
 				F6D18178239C7BEE00EAB85C /* pkcs7_union_accessors.c */,
+				F6D1817D239C823100EAB85C /* Receipt */,
 			);
 			path = Jotify;
 			sourceTree = "<group>";
@@ -420,6 +421,13 @@
 				F6AEC560238CE28B0068706B /* Golden2@3x.png */,
 			);
 			path = "App Icons";
+			sourceTree = "<group>";
+		};
+		F6D1817D239C823100EAB85C /* Receipt */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Receipt;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

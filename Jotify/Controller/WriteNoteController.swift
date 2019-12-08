@@ -115,6 +115,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         // the last build number that the app is still a paid app
         if originalBuildNumber < 24 {
             // grant user premium feature here
+//            UserDefaults.standard.set(true, forKey: "com.austinleath.Jotify.Premium")
             print("premium granted")
         }
     }
