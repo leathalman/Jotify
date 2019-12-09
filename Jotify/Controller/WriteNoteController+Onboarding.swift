@@ -43,7 +43,7 @@ extension WriteNoteController {
             items: [
                 WhatsNew.Item(
                     title: "Major Changes",
-                    subtitle: "Jotify is no longer a paid app. It can be downloaded for free from the iOS App Store and has an optional in-app purchase for premium features. However, because you supported Jotify in the very beginning, you will receive this update and all future updates for free! Thank you for your support!",
+                    subtitle: "Jotify is no longer a paid app. It can be downloaded for free from the iOS App Store and has an optional in-app purchase for premium features. However, because you supported Jotify in the very beginning, you will receive this update and all future updates for free! Thank you for your support! If premium does not work initially, please force relaunch the app.",
                     image: UIImage(named: "bell")
                 ),
                 WhatsNew.Item(
