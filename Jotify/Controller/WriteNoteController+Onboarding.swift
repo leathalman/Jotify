@@ -48,7 +48,7 @@ extension WriteNoteController {
                 ),
                 WhatsNew.Item(
                     title: "Bug Fixes",
-                    subtitle: "Fixed a bug where Jotify would crash if the navigation bar was incorrectly rendered on launch. Minor underhood improvements to stabilty.",
+                    subtitle: "Fixed a bug where Jotify would crash if the navigation bar was incorrectly rendered on launch. Minor under the hood improvements to stability.",
                     image: UIImage(named: "bugFix")
                 ),
             ]
