@@ -155,13 +155,19 @@ class PrivacySettingsController: UITableViewController {
     }
     
     @objc func useBiometricsSwitchPressed(sender: UISwitch) {
-        if sender.isOn {
-            print("useBiometrics enabled")
-            defaults.set(true, forKey: "useBiometrics")
+        if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+            PremiumView.shared.presentPremiumView(viewController: self)
+            sender.isOn = false
             
         } else {
-            print("useBiometrics disabled")
-            defaults.set(false, forKey: "useBiometrics")
+            if sender.isOn {
+                print("useBiometrics enabled")
+                defaults.set(true, forKey: "useBiometrics")
+                
+            } else {
+                print("useBiometrics disabled")
+                defaults.set(false, forKey: "useBiometrics")
+            }
         }
     }
     

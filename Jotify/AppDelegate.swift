@@ -31,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             "pureDarkModeEnabled": false,
             "useBiometrics": false,
             "writeNotePlaceholder": "Start typing or swipe left for saved notes...",
+            "com.austinleath.Jotify.Premium": false,
         ])
         
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
@@ -41,6 +42,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         } else {
             themes.setupDefaultMode()
+        }
+                
+        switch Config.appConfiguration {
+        case .Debug:
+            print("Debug")
+        case .TestFlight:
+            print("Testflight")
+//            UserDefaults.standard.set(true, forKey: "com.austinleath.Jotify.Premium")
+        case .AppStore:
+            print("AppStore")
         }
         
         return true

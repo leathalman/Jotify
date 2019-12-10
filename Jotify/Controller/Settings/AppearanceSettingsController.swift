@@ -276,65 +276,83 @@ class AppearanceSettingsController: UITableViewController {
     }
     
     @objc func vibrantDarkModeSwitchPressed(sender: UISwitch) {
-        if sender.isOn {
-            print("vibrant dark mode enabled")
-            defaults.set(true, forKey: "vibrantDarkModeEnabled")
-            defaults.set(false, forKey: "pureDarkModeEnabled")
-            defaults.set(true, forKey: "darkModeEnabled")
-            themes.setupVibrantDarkMode()
-            
-            viewWillAppear(true)
-            self.tableView.reloadData()
+        if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+            PremiumView.shared.presentPremiumView(viewController: self)
+            sender.isOn = false
             
         } else {
-            print("vibrant dark mode disabled")
-            defaults.set(false, forKey: "vibrantDarkModeEnabled")
-            defaults.set(false, forKey: "darkModeEnabled")
-            themes.setupDefaultMode()
-            
-            viewWillAppear(true)
-            self.tableView.reloadData()
+            if sender.isOn {
+                print("vibrant dark mode enabled")
+                defaults.set(true, forKey: "vibrantDarkModeEnabled")
+                defaults.set(false, forKey: "pureDarkModeEnabled")
+                defaults.set(true, forKey: "darkModeEnabled")
+                themes.setupVibrantDarkMode()
+                
+                viewWillAppear(true)
+                self.tableView.reloadData()
+                
+            } else {
+                print("vibrant dark mode disabled")
+                defaults.set(false, forKey: "vibrantDarkModeEnabled")
+                defaults.set(false, forKey: "darkModeEnabled")
+                themes.setupDefaultMode()
+                
+                viewWillAppear(true)
+                self.tableView.reloadData()
+            }
         }
     }
     
     @objc func pureDarkModeSwitchPressed(sender: UISwitch) {
-        if sender.isOn {
-            print("pure dark mode enabled")
-            defaults.set(true, forKey: "pureDarkModeEnabled")
-            defaults.set(false, forKey: "vibrantDarkModeEnabled")
-            defaults.set(true, forKey: "darkModeEnabled")
-            themes.setupPureDarkMode()
-            
-            viewWillAppear(true)
-            self.tableView.reloadData()
+        if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+            PremiumView.shared.presentPremiumView(viewController: self)
+            sender.isOn = false
             
         } else {
-            print("pure dark mode disabled")
-            defaults.set(false, forKey: "pureDarkModeEnabled")
-            defaults.set(false, forKey: "darkModeEnabled")
-            themes.setupDefaultMode()
-            
-            viewWillAppear(true)
-            self.tableView.reloadData()
+            if sender.isOn {
+                print("pure dark mode enabled")
+                defaults.set(true, forKey: "pureDarkModeEnabled")
+                defaults.set(false, forKey: "vibrantDarkModeEnabled")
+                defaults.set(true, forKey: "darkModeEnabled")
+                themes.setupPureDarkMode()
+                
+                viewWillAppear(true)
+                self.tableView.reloadData()
+                
+            } else {
+                print("pure dark mode disabled")
+                defaults.set(false, forKey: "pureDarkModeEnabled")
+                defaults.set(false, forKey: "darkModeEnabled")
+                themes.setupDefaultMode()
+                
+                viewWillAppear(true)
+                self.tableView.reloadData()
+            }
         }
     }
     
     @objc func enableMultilineInputSwitchPressed(sender: UISwitch) {
-        if sender.isOn {
-            print("Multiline input enabled")
-            defaults.set(true, forKey: "useMultilineInput")
-            
-            let alert = UIAlertController(title: "Mutliline Input", message: "You have enabled multiline input! Now when you press return while writing a note, it will create a new line instead of saving. To save a note, simply swipe left. Tapping return WILL NOT save notes with this enabled.", preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] _ in
-                print(alert?.message ?? "cancel")
-            }))
-            
-            present(alert, animated: true, completion: nil)
+        if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+            PremiumView.shared.presentPremiumView(viewController: self)
+            sender.isOn = false
             
         } else {
-            print("Multiline input disabled")
-            defaults.set(false, forKey: "useMultilineInput")
+            if sender.isOn {
+                print("Multiline input enabled")
+                defaults.set(true, forKey: "useMultilineInput")
+                
+                let alert = UIAlertController(title: "Mutliline Input", message: "You have enabled multiline input! Now when you press return while writing a note, it will create a new line instead of saving. To save a note, simply swipe left. Tapping return WILL NOT save notes with this enabled.", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] _ in
+                    print(alert?.message ?? "cancel")
+                }))
+                
+                present(alert, animated: true, completion: nil)
+                
+            } else {
+                print("Multiline input disabled")
+                defaults.set(false, forKey: "useMultilineInput")
+            }
         }
     }
     

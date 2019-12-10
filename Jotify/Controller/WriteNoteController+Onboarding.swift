@@ -27,32 +27,28 @@ extension WriteNoteController {
                 presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
                 
             } else {
-                // first launch
+                // first launch, restore purchases
                 print("first launch")
                 presentFirstLaunchOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+                JotifyProducts.store.restorePurchases()
             }
             standard.set(currentVersion, forKey: shortVersionKey)
         }
     }
     
     func presentUpdateOnboarding(viewController: UIViewController, tintColor: UIColor) {
-        // Jotify v1.1.3 Onboarding
+        // Jotify v1.2.0 Onboarding
         let whatsNew = WhatsNew(
             title: "What's New",
             items: [
                 WhatsNew.Item(
-                    title: "Features",
-                    subtitle: "You can now delete multiple notes at once! Simply long press a note, click \"select multiple\", and then delete as many as your heart desires.",
-                    image: UIImage(named: "write")
-                ),
-                WhatsNew.Item(
-                    title: "Improvements",
-                    subtitle: "Added an additional dark mode icon for Jotify! To check it out, click on the gear icon, then about, and finally tap on the large icon image. Also added automatic saving for notes whenever the app enters multitasking.",
-                    image: UIImage(named: "add")
+                    title: "Major Changes",
+                    subtitle: "Jotify is no longer a paid app. It can be downloaded for free from the iOS App Store and has an optional in-app purchase for premium features. However, because you supported Jotify in the very beginning, you will receive this update and all future updates for free! Thank you for your support! If premium does not work initially, please force relaunch the app.",
+                    image: UIImage(named: "bell")
                 ),
                 WhatsNew.Item(
                     title: "Bug Fixes",
-                    subtitle: "Fixed a bug where notes would incorrectly order themselves after sorting. Also fixed an issue where navigation bar would update with the wrong color in dark mode.",
+                    subtitle: "Fixed a bug where Jotify would crash if the navigation bar was incorrectly rendered on launch. Minor under the hood improvements to stability.",
                     image: UIImage(named: "bugFix")
                 ),
             ]
@@ -68,15 +64,23 @@ extension WriteNoteController {
             configuration.apply(theme: .default)
         }
         
-        configuration.titleView.titleColor = tintColor
         configuration.titleView.insets = UIEdgeInsets(top: 40, left: 20, bottom: 15, right: 15)
         configuration.itemsView.titleFont = .boldSystemFont(ofSize: 17)
         configuration.itemsView.imageSize = .preferred
         configuration.completionButton.hapticFeedback = .impact(.medium)
-        configuration.detailButton?.titleColor = tintColor
-        configuration.completionButton.backgroundColor = tintColor
-        configuration.completionButton.insets.bottom = 50
+        configuration.completionButton.insets.bottom = 30
         configuration.apply(animation: .fade)
+        
+        if UserDefaults.standard.bool(forKey: "useRandomColor") == true {
+            configuration.titleView.titleColor = StoredColors.noteColor
+            configuration.detailButton?.titleColor = StoredColors.noteColor
+            configuration.completionButton.backgroundColor = StoredColors.noteColor
+            
+        } else if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
+            configuration.titleView.titleColor = StoredColors.staticNoteColor
+            configuration.detailButton?.titleColor = StoredColors.staticNoteColor
+            configuration.completionButton.backgroundColor = StoredColors.staticNoteColor
+        }
         
         let whatsNewViewController = WhatsNewViewController(
             whatsNew: whatsNew,
@@ -130,14 +134,23 @@ extension WriteNoteController {
             configuration.apply(theme: .default)
         }
         
-        configuration.titleView.titleColor = tintColor
         configuration.titleView.insets = UIEdgeInsets(top: 40, left: 20, bottom: 15, right: 15)
         configuration.itemsView.titleFont = .boldSystemFont(ofSize: 17)
         configuration.itemsView.imageSize = .preferred
         configuration.completionButton.hapticFeedback = .impact(.medium)
-        configuration.detailButton?.titleColor = tintColor
-        configuration.completionButton.backgroundColor = tintColor
+        configuration.completionButton.insets.bottom = 30
         configuration.apply(animation: .fade)
+        
+        if UserDefaults.standard.bool(forKey: "useRandomColor") == true {
+            configuration.titleView.titleColor = StoredColors.noteColor
+            configuration.detailButton?.titleColor = StoredColors.noteColor
+            configuration.completionButton.backgroundColor = StoredColors.noteColor
+            
+        } else if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
+            configuration.titleView.titleColor = StoredColors.staticNoteColor
+            configuration.detailButton?.titleColor = StoredColors.staticNoteColor
+            configuration.completionButton.backgroundColor = StoredColors.staticNoteColor
+        }
         
         let whatsNewViewController = WhatsNewViewController(
             whatsNew: whatsNew,

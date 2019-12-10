@@ -37,11 +37,11 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        for note in notes {
-            if note.content == "" {
-                deleteEmptyNote(note: note)
-            }
-        }
+//        for note in notes {
+//            if note.content == "" {
+//                deleteEmptyNote(note: note)
+//            }
+//        }
         
         if notes.count != 0 {
             setupSearchBar()
@@ -49,6 +49,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         fetchNotesFromCoreData()
         setupDynamicViewElements()
+        enablePremiumIfOriginalContributor()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -96,6 +97,14 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
         view.addSubview(collectionView)
+    }
+    
+    func enablePremiumIfOriginalContributor() {
+        for note in notes {
+            if note.originalContributor == true {
+                UserDefaults.standard.setValue(true, forKey: "com.austinleath.Jotify.Premium")
+            }
+        }
     }
     
     func setupDynamicViewElements() {
