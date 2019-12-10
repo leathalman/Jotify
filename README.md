@@ -33,6 +33,7 @@ To run this project you will need to use Xcode 11 and iOS 13. **Jotify does not 
 - [WhatsNewKit](https://github.com/SvenTiigi/WhatsNewKit) - Used for displaying information about app updates and onboarding
 - [BottomPopup](https://github.com/ergunemr/BottomPopup) - Used for presenting ViewControllers at a custom height
 - [SPAlert](https://github.com/ivanvorobei/SPAlert) - Used for displaying confirmations to users when reminders are created or deleted
+- [OpenSSL](https://github.com/krzyzanowskim/OpenSSL) - Used in receipt validation to read the user's original purchase statement
 
 ## License
 
