@@ -49,7 +49,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         fetchNotesFromCoreData()
         setupDynamicViewElements()
-        enablePremiumIfOriginalContributor()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -97,14 +96,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
         view.addSubview(collectionView)
-    }
-    
-    func enablePremiumIfOriginalContributor() {
-        for note in notes {
-            if note.originalContributor == true {
-                UserDefaults.standard.setValue(true, forKey: "com.austinleath.Jotify.Premium")
-            }
-        }
     }
     
     func setupDynamicViewElements() {
