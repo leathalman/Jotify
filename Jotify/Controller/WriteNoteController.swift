@@ -91,7 +91,6 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         let receiptValidator = ReceiptValidator()
         let validationResult = receiptValidator.validateReceipt()
 
-        
         switch validationResult {
         case .success(let receipt):
             // receipt validation success
@@ -203,7 +202,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         } else if defaults.bool(forKey: "useMultilineInput") == true {
             // print new line on return
             if text == "\n" {
-                textView.text = textView.text + "\n"
+                textView.text += "\n"
             }
         }
         

@@ -13,7 +13,10 @@ extension WriteNoteController {
         // check to see if the user is new, updated, or neither
         let standard = UserDefaults.standard
         let shortVersionKey = "CFBundleShortVersionString"
-        let currentVersion = Bundle.main.infoDictionary![shortVersionKey] as! String
+        guard let currentVersion = Bundle.main.infoDictionary![shortVersionKey] as? String else {
+            print("Current version could not be found")
+            return
+        }
         let previousVersion = standard.object(forKey: shortVersionKey) as? String
         if previousVersion == currentVersion {
             // same version, no update

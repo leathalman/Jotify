@@ -43,7 +43,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
 //            }
 //        }
         
-        if notes.count != 0 {
+        if notes.isEmpty {
             setupSearchBar()
         }
         
@@ -642,7 +642,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if notes.count == 0 {
+        if notes.isEmpty {
             self.collectionView.backgroundView = emptyView
         } else {
             self.collectionView.backgroundView = nil
