@@ -326,12 +326,16 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     
     func updateContent(index: Int, newContent: String, newDate: Double) {
         if isFiltering == false {
-            notes[index].content = newContent
-            notes[index].modifiedDate = newDate
+            if notes[index].content != newContent {
+                notes[index].content = newContent
+                notes[index].modifiedDate = newDate
+            }
             
         } else if isFiltering == true {
-            filteredNotes[index].content = newContent
-            filteredNotes[index].modifiedDate = newDate
+            if filteredNotes[index].content != newContent {
+                filteredNotes[index].content = newContent
+                filteredNotes[index].modifiedDate = newDate
+            }
         }
         
         CoreDataManager.shared.enqueue { context in
