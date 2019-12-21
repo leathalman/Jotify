@@ -110,6 +110,18 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         view.addSubview(collectionView)
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        // used to support adaptive interfaces with iPadOS
+        if traitCollection.horizontalSizeClass == .compact {
+            iPadOSLayout.itemsPerRow = 1.0
+            collectionView.reloadData()
+            
+        } else if traitCollection.horizontalSizeClass == .regular {
+            iPadOSLayout.itemsPerRow = 3.0
+            collectionView.reloadData()
+        }
+    }
+    
     func setupDynamicViewElements() {
         collectionView.backgroundColor = InterfaceColors.viewBackgroundColor
         
