@@ -10,6 +10,7 @@ import AudioToolbox
 import Blueprints
 import CoreData
 import UIKit
+import StoreKit
 import ViewAnimator
 import XLActionController
 
@@ -45,12 +46,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        for note in notes {
-//            if note.content == "" {
-//                deleteEmptyNote(note: note)
-//            }
-//        }
-        
         if !notes.isEmpty {
             setupSearchBar()
         }
@@ -74,6 +69,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         fetchNotesFromCoreData()
+        requestReview()
     }
     
     func setupView() {
@@ -108,6 +104,18 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
         view.addSubview(collectionView)
+    }
+    
+    func requestReview() {
+        let shortVersionKey = "CFBundleShortVersionString"
+        let currentVersion = Bundle.main.infoDictionary![shortVersionKey] as? String
+        
+        print("Last version reviewed: \(String(describing: defaults.value(forKey: "lastReviewRequest")))")
+        
+        if notes.count > 9 && defaults.value(forKey: "lastReviewRequest") as? String != currentVersion {
+            SKStoreReviewController.requestReview()
+            defaults.set(currentVersion, forKey: "lastReviewRequest")
+        }
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -478,7 +486,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         }
         
         navigationController?.setToolbarHidden(false, animated: true)
-                
+        
         var items = [UIBarButtonItem]()
         
         items.append(UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(removeMultipleSelection)))
@@ -597,46 +605,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             let managedContext = appDelegate?.persistentContainer.viewContext
             managedContext?.delete(filteredNote)
         }
-        
-        CoreDataManager.shared.enqueue { context in
-            do {
-                try context.save()
-                
-            } catch let error as NSError {
-                print("Could not save. \(error), \(error.userInfo)")
-            }
-        }
-        
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
-    }
-    
-    func deleteEmptyNote(note: Note) {
-        // remove pending notification
-        let notificationUUID = note.notificationUUID ?? "empty error in SavedNoteController"
-        let center = UNUserNotificationCenter.current()
-        center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
-        
-        // remove notification on badge if already delivered but not opened
-        let isReminder = note.isReminder
-        if isReminder == true {
-            let reminderDate = note.reminderDate ?? "07/02/2000 11:11 PM"
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
-            let formattedReminderDate = dateFormatter.date(from: reminderDate) ?? Date()
-            
-            let currentDate = Date()
-            
-            if currentDate >= formattedReminderDate {
-                UIApplication.shared.applicationIconBadgeNumber -= 1
-            }
-        }
-        
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        let managedContext = appDelegate?.persistentContainer.viewContext
-        managedContext?.delete(note)
         
         CoreDataManager.shared.enqueue { context in
             do {
@@ -779,7 +747,7 @@ extension SavedNoteController: CollectionViewFlowLayoutDelegate {
         } else if UIDevice.current.userInterfaceIdiom == .phone {
             height = 110
         }
-
+        
         return CGSize(width: UIScreen.main.bounds.width, height: height)
     }
 }
