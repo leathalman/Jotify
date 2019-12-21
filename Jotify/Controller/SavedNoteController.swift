@@ -110,7 +110,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         let shortVersionKey = "CFBundleShortVersionString"
         let currentVersion = Bundle.main.infoDictionary![shortVersionKey] as? String
         
-        print("Last version reviewed: \(String(describing: defaults.value(forKey: "lastReviewRequest")))")
+//        print("Last version reviewed: \(String(describing: defaults.value(forKey: "lastReviewRequest")))")
         
         if notes.count > 9 && defaults.value(forKey: "lastReviewRequest") as? String != currentVersion {
             SKStoreReviewController.requestReview()
@@ -408,6 +408,8 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         noteDetailController.backgroundColor = cellColor
         noteDetailController.detailText = content
         noteDetailController.index = indexPath.row
+        
+        EditingData.width = view.bounds.width
         
         navigationController?.pushViewController(noteDetailController, animated: true)
     }

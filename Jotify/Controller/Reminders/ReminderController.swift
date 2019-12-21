@@ -84,7 +84,7 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         datePicker.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         confirmButton.heightAnchor.constraint(equalToConstant: screenHeight / 11).isActive = true
-        confirmButton.widthAnchor.constraint(equalToConstant: screenWidth - 30).isActive = true
+        confirmButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true
         confirmButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         confirmButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40).isActive = true
     }

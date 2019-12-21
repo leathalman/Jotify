@@ -15,6 +15,7 @@ struct EditingData {
     static var newDate = Double()
     static var notes = [Note]()
     static var isEditing = Bool()
+    static var width = CGFloat()
 }
 
 class NoteDetailController: UIViewController, UITextViewDelegate {
@@ -76,6 +77,22 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         } else if isFiltering == true {
             let notificationUUID = filteredNotes[index].notificationUUID ?? ""
             RemindersData.notificationUUID = notificationUUID
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        // more accurately returns new screen size
+        // used each time the window is resized
+        let frame = CGRect(x: 0, y: 15, width: size.width, height: writeNoteView.screenHeight - navigationBarHeight - 30)
+        writeNoteView.inputTextView.frame = frame
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        // used to support adaptive interfaces with iPadOS on first launch
+        if traitCollection.horizontalSizeClass == .compact {
+            let frame = CGRect(x: 0, y: 15, width: view.bounds.width, height: writeNoteView.screenHeight - navigationBarHeight - 30)
+            writeNoteView.inputTextView.frame = frame
         }
     }
     
@@ -236,7 +253,8 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         
         textView.tintColor = .white
         navigationBarHeight = navigationController?.navigationBar.bounds.height ?? 0
-        textView.frame = CGRect(x: 0, y: 15, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight - navigationBarHeight - 30)
+        print("Current width: \(EditingData.width)")
+        writeNoteView.inputTextView.frame = CGRect(x: 0, y: 15, width: EditingData.width, height: writeNoteView.screenHeight - navigationBarHeight - 30)
         textView.text = detailText
         textView.font = UIFont.boldSystemFont(ofSize: 18)
         textView.placeholder = ""
