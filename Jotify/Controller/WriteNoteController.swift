@@ -29,7 +29,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        handleRandomColorsEnabled()
+        writeNoteView.handleRandomColorsEnabled()
         setupPlaceholder()
     }
     
@@ -63,24 +63,6 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     func setupPlaceholder() {
         let placeholder = UserDefaults.standard.string(forKey: "writeNotePlaceholder")
         writeNoteView.inputTextView.placeholder = placeholder
-    }
-    
-    func handleRandomColorsEnabled() {
-        if defaults.bool(forKey: "useRandomColor") == false {
-            let color = defaults.color(forKey: "staticNoteColor")
-            writeNoteView.colorView.backgroundColor = color
-        }
-        
-        if defaults.bool(forKey: "darkModeEnabled") == true {
-            writeNoteView.colorView.backgroundColor = InterfaceColors.writeViewColor
-            
-            UIApplication.shared.windows.first?.backgroundColor = InterfaceColors.viewBackgroundColor
-            
-        } else {
-            writeNoteView.colorView.backgroundColor = StoredColors.noteColor
-            
-            UIApplication.shared.windows.first?.backgroundColor = StoredColors.noteColor
-        }
     }
     
     func handleReceiptValidation() {
@@ -150,7 +132,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
             writeNoteView.inputTextView.text = ""
             
             if defaults.bool(forKey: "useRandomColor") == true {
-                writeNoteView.getRandomColor()
+                writeNoteView.getRandomColor(previousColor: StoredColors.noteColor)
             }
         }
     }

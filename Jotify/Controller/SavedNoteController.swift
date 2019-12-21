@@ -26,8 +26,16 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     
     let defaults = UserDefaults.standard
     
-    let blueprintLayout = VerticalBlueprintLayout(
+    let iOSLayout = VerticalBlueprintLayout(
         itemsPerRow: 2.0,
+        minimumInteritemSpacing: 10,
+        minimumLineSpacing: 15,
+        sectionInset: EdgeInsets(top: 10, left: 10, bottom: 10, right: 10),
+        stickyHeaders: false,
+        stickyFooters: false)
+    
+    let iPadOSLayout = VerticalBlueprintLayout(
+        itemsPerRow: 3.0,
         minimumInteritemSpacing: 10,
         minimumLineSpacing: 15,
         sectionInset: EdgeInsets(top: 10, left: 10, bottom: 10, right: 10),
@@ -88,9 +96,13 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         collectionView.frame = view.frame
         collectionView.alwaysBounceVertical = true
         
-        collectionView.setCollectionViewLayout(blueprintLayout, animated: true)
-        collectionView.allowsMultipleSelection = true
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            collectionView.setCollectionViewLayout(iPadOSLayout, animated: true)
+        } else if UIDevice.current.userInterfaceIdiom == .phone {
+            collectionView.setCollectionViewLayout(iOSLayout, animated: true)
+        }
         
+        collectionView.allowsMultipleSelection = true
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -748,8 +760,14 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
 
 extension SavedNoteController: CollectionViewFlowLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height: CGFloat = 110
+        var height: CGFloat = 0
         
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            height = 120
+        } else if UIDevice.current.userInterfaceIdiom == .phone {
+            height = 110
+        }
+
         return CGSize(width: UIScreen.main.bounds.width, height: height)
     }
 }

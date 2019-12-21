@@ -53,7 +53,7 @@ class WriteNoteView: UIView {
     
     func handleRandomColorsEnabled() {
         if UserDefaults.standard.bool(forKey: "useRandomColor") == true {
-            getRandomColor()
+            getRandomColor(previousColor: backgroundColor ?? UIColor.white)
         } else if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
             let color = UserDefaults.standard.color(forKey: "staticNoteColor")
             colorView.backgroundColor = color
@@ -61,24 +61,16 @@ class WriteNoteView: UIView {
         }
     }
     
-    func getRandomColor() {
+    func getRandomColor(previousColor: UIColor) {
         let colorTheme = UserDefaults.standard.string(forKey: "noteColorTheme")
         var randomColor: UIColor = .white
         
-        if colorTheme == "default" {
-            randomColor = Colors.defaultColors.randomElement() ?? UIColor.white
-            
-        } else if colorTheme == "sunset" {
-            randomColor = Colors.sunsetColors.randomElement() ?? UIColor.white
-            
-        } else if colorTheme == "kypool" {
-            randomColor = Colors.kypoolColors.randomElement() ?? UIColor.white
-            
-        } else if colorTheme == "celestial" {
-            randomColor = Colors.celestialColors.randomElement() ?? UIColor.white
-            
-        } else if colorTheme == "appleVibrant" {
-            randomColor = Colors.appleVibrantColors.randomElement() ?? UIColor.white
+        randomColor = pickRandomColorFromTheme(colorTheme: colorTheme ?? "default")
+        
+        // continually pick a color until it is different from the last color
+        // used to never repeat colors
+        while randomColor == previousColor {
+            randomColor = pickRandomColorFromTheme(colorTheme: colorTheme ?? "default")
         }
         
         // set global value to equal generated value
@@ -96,6 +88,28 @@ class WriteNoteView: UIView {
         }
     }
     
+    func pickRandomColorFromTheme(colorTheme: String) -> UIColor {
+        var randomColor = UIColor.white
+        
+        if colorTheme == "default" {
+            randomColor = Colors.defaultColors.randomElement() ?? UIColor.white
+            
+        } else if colorTheme == "sunset" {
+            randomColor = Colors.sunsetColors.randomElement() ?? UIColor.white
+            
+        } else if colorTheme == "kypool" {
+            randomColor = Colors.kypoolColors.randomElement() ?? UIColor.white
+            
+        } else if colorTheme == "celestial" {
+            randomColor = Colors.celestialColors.randomElement() ?? UIColor.white
+            
+        } else if colorTheme == "appleVibrant" {
+            randomColor = Colors.appleVibrantColors.randomElement() ?? UIColor.white
+        }
+        
+        return randomColor
+    }
+ 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

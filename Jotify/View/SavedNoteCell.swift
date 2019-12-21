@@ -35,7 +35,7 @@ class SavedNoteCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = UIColor.darkGray
-        label.text = "January 1, 2019"
+        label.text = "January 1, 2020"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -46,6 +46,11 @@ class SavedNoteCell: UICollectionViewCell {
     }
     
     func addViews() {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            textLabel.numberOfLines = 4
+            textLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        }
+        
         contentView.addSubview(textLabel)
         contentView.addSubview(dateLabel)
         
