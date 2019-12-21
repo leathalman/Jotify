@@ -10,9 +10,7 @@ import UIKit
 import StoreKit
 
 class PremiumView {
-    
-    //NEED TO CHECK RECEIPTS OF PEOPLE TO MAKE SURE THAT NO ONE HAS TO PAY AGAIN
-    
+        
     static let shared = PremiumView()
     
     var products: [SKProduct] = []

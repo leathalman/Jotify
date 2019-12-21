@@ -43,7 +43,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
 //            }
 //        }
         
-        if notes.isEmpty {
+        if !notes.isEmpty {
             setupSearchBar()
         }
         

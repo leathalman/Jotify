@@ -27,7 +27,7 @@ extension WriteNoteController {
             if previousVersion != nil {
                 // new version
                 print("new version")
-                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+//                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
                 
             } else {
                 // first launch, restore purchases
