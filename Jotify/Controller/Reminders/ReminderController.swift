@@ -37,6 +37,8 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     
     let datePicker: UIDatePicker = UIDatePicker()
     
+    var popupHeight: CGFloat = 0
+    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Set a reminder:"
@@ -86,7 +88,7 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         confirmButton.heightAnchor.constraint(equalToConstant: screenHeight / 11).isActive = true
         confirmButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true
         confirmButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        confirmButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40).isActive = true
+        confirmButton.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 10).isActive = true
     }
     
     func updateContentWithReminder(reminderDate: String, notificationUUID: String, reminderDateDisplay: String) {
@@ -194,6 +196,10 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     }
     
     override func getPopupHeight() -> CGFloat {
-        return 80 + (screenHeight / 11) + datePicker.frame.height + 30
+        if popupHeight != 0 {
+            return popupHeight / 11 + 80 + datePicker.frame.height + 30
+        } else {
+            return 80 + (screenHeight / 11) + datePicker.frame.height + 30
+        }
     }
 }

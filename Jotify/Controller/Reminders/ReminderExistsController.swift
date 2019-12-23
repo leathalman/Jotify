@@ -20,11 +20,13 @@ class ReminderExistsController: BottomPopupViewController {
     var filteredNotes: [Note] = []
     var isFiltering: Bool = false
     
+    var popupHeight: CGFloat = 0
+    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Reminder already set:"
         label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 35)
+        label.font = UIFont.boldSystemFont(ofSize: 33)
         label.numberOfLines = 0
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -72,14 +74,14 @@ class ReminderExistsController: BottomPopupViewController {
         
         titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 25).isActive = true
-        titleLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 30).isActive = true
+        titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true
         
         detailLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         detailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20).isActive = true
-        detailLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 1.15).isActive = true
+        detailLabel.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true
         
         removeButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 11).isActive = true
-        removeButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 30).isActive = true
+        removeButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true
         removeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         removeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40).isActive = true
     }
@@ -156,10 +158,14 @@ class ReminderExistsController: BottomPopupViewController {
     override func getPopupHeight() -> CGFloat {
         let titleText = titleLabel.text ?? ""
         let titleHeight = estimatedLabelHeight(text: titleText, width: UIScreen.main.bounds.width - 30, font: .boldSystemFont(ofSize: 35))
-        
+
         let detailText = detailLabel.text ?? ""
         let detailHeight = estimatedLabelHeight(text: detailText, width: UIScreen.main.bounds.width / 1.15, font: .boldSystemFont(ofSize: 20))
-        
-        return (UIScreen.main.bounds.height / 11) + (detailHeight + 30) + (titleHeight + 40) + 90
+
+        if popupHeight != 0 {
+            return (popupHeight / 11) + (detailHeight + 30) + (titleHeight + 40) + 90
+        } else {
+            return (UIScreen.main.bounds.height / 11) + (detailHeight + 30) + (titleHeight + 40) + 90
+        }
     }
 }

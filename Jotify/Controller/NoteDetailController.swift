@@ -38,6 +38,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     var isFiltering: Bool = false
     
     var navigationBarHeight = CGFloat()
+    var popupHeight: CGFloat = 0
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -86,6 +87,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         // used each time the window is resized
         let frame = CGRect(x: 0, y: 15, width: size.width, height: writeNoteView.screenHeight - navigationBarHeight - 30)
         writeNoteView.inputTextView.frame = frame
+        popupHeight = size.height + 40
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -93,6 +95,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         if traitCollection.horizontalSizeClass == .compact {
             let frame = CGRect(x: 0, y: 15, width: view.bounds.width, height: writeNoteView.screenHeight - navigationBarHeight - 30)
             writeNoteView.inputTextView.frame = frame
+            popupHeight = view.bounds.height + 40
         }
     }
     
@@ -303,6 +306,10 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         reminderExistsController.notes = notes
         reminderExistsController.filteredNotes = filteredNotes
         reminderExistsController.isFiltering = isFiltering
+        if popupHeight == 0 {
+            popupHeight = view.bounds.height
+        }
+        reminderExistsController.popupHeight = popupHeight + 170
         
         present(reminderExistsController, animated: true, completion: nil)
     }
@@ -321,6 +328,14 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         reminderController.index = index
         reminderController.reminderBodyText = writeNoteView.inputTextView.text
         requestNotificationPermission()
+        
+        print("PopupHeight is \(popupHeight)")
+        
+        if popupHeight == 0 {
+            popupHeight = view.bounds.height
+        }
+        reminderController.popupHeight = popupHeight
+        
         present(reminderController, animated: true, completion: nil)
     }
     

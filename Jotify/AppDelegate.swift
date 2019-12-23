@@ -164,8 +164,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             let newDate = EditingData.newDate
             let notes = EditingData.notes
             noteDetailController.notes = notes
-            noteDetailController.updateContent(index: index, newContent: newContent, newDate: newDate)
-            print("Note data successfully saved.")
+            
+            if newContent.count >= 1 {
+                noteDetailController.updateContent(index: index, newContent: newContent, newDate: newDate)
+                print("Note data successfully saved.")
+            } else {
+                print("New note data is too short to save.")
+            }
             
         } else {
             print("No new note data to save.")
