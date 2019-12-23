@@ -51,7 +51,7 @@ extension WriteNoteController {
                 ),
                 WhatsNew.Item(
                     title: "Minor Improvements",
-                    subtitle: "Opening a note without editing its contents will no longer update the date of the note.",
+                    subtitle: "Opening a note without editing its contents will no longer update the date of the note. Notes will no longer repeat the same color once saved.",
                     image: UIImage(named: "add")
                 ),
                 WhatsNew.Item(
