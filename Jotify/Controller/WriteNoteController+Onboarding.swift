@@ -27,7 +27,7 @@ extension WriteNoteController {
             if previousVersion != nil {
                 // new version
                 print("new version")
-//                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
                 
             } else {
                 // first launch, restore purchases
@@ -40,18 +40,23 @@ extension WriteNoteController {
     }
     
     func presentUpdateOnboarding(viewController: UIViewController, tintColor: UIColor) {
-        // Jotify v1.2.0 Onboarding
+        // Jotify v1.2.1 Onboarding
         let whatsNew = WhatsNew(
             title: "What's New",
             items: [
                 WhatsNew.Item(
                     title: "Major Changes",
-                    subtitle: "Jotify is no longer a paid app. It can be downloaded for free from the iOS App Store and has an optional in-app purchase for premium features. However, because you supported Jotify in the very beginning, you will receive this update and all future updates for free! Thank you for your support! If premium does not work initially, please force relaunch the app.",
+                    subtitle: "Jotify now natively supports iPadOS! If you have an iPad, download Jotify on that device to experience a powerful, multi-window experience. All of your notes will sync seamlessly between your iPhone and iPad; I would love for you to try it out!",
                     image: UIImage(named: "bell")
                 ),
                 WhatsNew.Item(
+                    title: "Minor Improvements",
+                    subtitle: "Opening a note without editing its contents will no longer update the date of the note.",
+                    image: UIImage(named: "add")
+                ),
+                WhatsNew.Item(
                     title: "Bug Fixes",
-                    subtitle: "Fixed a bug where Jotify would crash if the navigation bar was incorrectly rendered on launch. Minor under the hood improvements to stability.",
+                    subtitle: "Fixed a bug where changing the theme while writing a note would produce two different colored backgrounds.",
                     image: UIImage(named: "bugFix")
                 ),
             ]
