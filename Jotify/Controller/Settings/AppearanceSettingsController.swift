@@ -263,7 +263,7 @@ class AppearanceSettingsController: UITableViewController {
             note.color = newColor
         }
         
-        writeNoteView.colorView.backgroundColor = newBackgroundColor
+        writeNoteView.backgroundColor = newBackgroundColor
         
         CoreDataManager.shared.enqueue { context in
             do {

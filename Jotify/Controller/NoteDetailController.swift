@@ -242,15 +242,15 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         
         if defaults.bool(forKey: "darkModeEnabled") == true {
             if defaults.bool(forKey: "vibrantDarkModeEnabled") == true {
-                writeNoteView.colorView.backgroundColor = backgroundColor
+                writeNoteView.backgroundColor = backgroundColor
                 textView.backgroundColor = backgroundColor
             } else if defaults.bool(forKey: "pureDarkModeEnabled") == true {
-                writeNoteView.colorView.backgroundColor = InterfaceColors.viewBackgroundColor
+                writeNoteView.backgroundColor = InterfaceColors.viewBackgroundColor
                 textView.backgroundColor = InterfaceColors.viewBackgroundColor
             }
             
         } else if defaults.bool(forKey: "darkModeEnabled") == false {
-            writeNoteView.colorView.backgroundColor = backgroundColor
+            writeNoteView.backgroundColor = backgroundColor
             textView.backgroundColor = backgroundColor
         }
         

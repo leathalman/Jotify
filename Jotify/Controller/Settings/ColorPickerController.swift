@@ -103,7 +103,7 @@ class ColorPickerController: UIViewController {
             note.color = newColor
         }
         
-        writeNoteView.colorView.backgroundColor = newBackgroundColor
+        writeNoteView.backgroundColor = newBackgroundColor
         
         CoreDataManager.shared.enqueue { context in
             do {

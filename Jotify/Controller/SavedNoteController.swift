@@ -70,6 +70,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         super.viewDidAppear(true)
         fetchNotesFromCoreData()
         requestReview()
+        resetAppBadgeIfAllRemindersCleared()
     }
     
     func setupView() {
@@ -116,6 +117,22 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             SKStoreReviewController.requestReview()
             defaults.set(currentVersion, forKey: "lastReviewRequest")
         }
+    }
+    
+    func resetAppBadgeIfAllRemindersCleared() {
+        var count = 0
+        for note in notes {
+            if note.isReminder {
+                count += 1
+            }
+        }
+        
+        print("There are \(count) reminders")
+        
+        if count == 0 {
+            UIApplication.shared.applicationIconBadgeNumber = 0
+        }
+        
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

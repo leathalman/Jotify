@@ -32,14 +32,6 @@ class WriteNoteView: UIView {
         return textField
     }()
     
-    lazy var colorView: UIView = {
-        let view = UIView()
-        let frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
-        view.frame = frame
-        
-        return view
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
@@ -48,7 +40,6 @@ class WriteNoteView: UIView {
         handleRandomColorsEnabled()
         
         addSubview(inputTextView)
-        insertSubview(colorView, belowSubview: inputTextView)
     }
     
     func handleRandomColorsEnabled() {
@@ -56,7 +47,7 @@ class WriteNoteView: UIView {
             getRandomColor(previousColor: backgroundColor ?? UIColor.white)
         } else if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
             let color = UserDefaults.standard.color(forKey: "staticNoteColor")
-            colorView.backgroundColor = color
+            backgroundColor = color
             StoredColors.noteColor = color ?? UIColor.white
         }
     }
@@ -77,7 +68,6 @@ class WriteNoteView: UIView {
         StoredColors.noteColor = randomColor
         
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
-            colorView.backgroundColor = randomColor
             backgroundColor = randomColor
         } else if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
             if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") == true {
