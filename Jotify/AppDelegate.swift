@@ -32,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             "useBiometrics": false,
             "writeNotePlaceholder": "Start typing or swipe left for saved notes...",
             "com.austinleath.Jotify.Premium": false,
+            "useSystemMode": false,
         ])
         
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {

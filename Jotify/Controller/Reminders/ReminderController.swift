@@ -202,4 +202,10 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
             return 80 + (screenHeight / 11) + datePicker.frame.height + 30
         }
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        let themes = Themes()
+        themes.triggerSystemMode(mode: traitCollection)
+        setupDynamicColors()
+    }
 }

@@ -414,4 +414,8 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         let selectedRange = writeNoteView.inputTextView.selectedRange
         writeNoteView.inputTextView.scrollRangeToVisible(selectedRange)
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }

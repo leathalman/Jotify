@@ -50,4 +50,24 @@ class Themes {
         InterfaceColors.cellColor = .cellLight
         InterfaceColors.fontColor = .black
     }
+    
+    func triggerSystemMode(mode: UITraitCollection) {
+        if UserDefaults.standard.bool(forKey: "useSystemMode") {
+            if mode.userInterfaceStyle == .light {
+                setupDefaultMode()
+                UserDefaults.standard.set(false, forKey: "darkModeEnabled")
+                UserDefaults.standard.set(false, forKey: "vibrantDarkModeEnabled")
+                UserDefaults.standard.set(false, forKey: "pureDarkModeEnabled")
+            } else if mode.userInterfaceStyle == .dark {
+                setupVibrantDarkMode()
+                UserDefaults.standard.set(true, forKey: "darkModeEnabled")
+                UserDefaults.standard.set(true, forKey: "vibrantDarkModeEnabled")
+            } else {
+                setupDefaultMode()
+                UserDefaults.standard.set(false, forKey: "darkModeEnabled")
+                UserDefaults.standard.set(false, forKey: "vibrantDarkModeEnabled")
+                UserDefaults.standard.set(false, forKey: "pureDarkModeEnabled")
+            }
+        }
+    }
 }

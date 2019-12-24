@@ -136,6 +136,31 @@ class ColorPickerController: UIViewController {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        let themes = Themes()
+        themes.triggerSystemMode(mode: traitCollection)
+        
+        if defaults.bool(forKey: "darkModeEnabled") == true {
+            colorPicker.hexLabel.textColor = UIColor.white
+            contentView.backgroundColor = UIColor.grayBackground
+        } else {
+            colorPicker.hexLabel.textColor = UIColor.black
+            contentView.backgroundColor = UIColor.white
+        }
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+            return .darkContent
+        } else if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+            return .lightContent
+        } else if UserDefaults.standard.bool(forKey: "useSystemMode") && traitCollection.userInterfaceStyle == .light {
+            return .darkContent
+        } else {
+            return .lightContent
+        }
+    }
 }
 
 extension ColorPickerController: ChromaColorPickerDelegate {

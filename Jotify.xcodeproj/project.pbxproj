@@ -60,6 +60,7 @@
 		F686D85222C9B10900C6F555 /* Colors+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F686D85122C9B10900C6F555 /* Colors+Handlers.swift */; };
 		F68D639122F7890100DEB4AA /* AppearanceSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68D639022F7890100DEB4AA /* AppearanceSettingsController.swift */; };
 		F68D639322F7894700DEB4AA /* PrivacySettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68D639222F7894700DEB4AA /* PrivacySettingsController.swift */; };
+		F692D97723B1CB2C00E47109 /* UINavigationController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F692D97623B1CB2C00E47109 /* UINavigationController+Extensions.swift */; };
 		F6969F5E22DA1AFD00C4E8FF /* AboutSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6969F5D22DA1AFD00C4E8FF /* AboutSettingsController.swift */; };
 		F6969F6022DA256F00C4E8FF /* AboutSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6969F5F22DA256F00C4E8FF /* AboutSettingsView.swift */; };
 		F69E5DC0231AE14800872345 /* ThemeSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E5DBF231AE14800872345 /* ThemeSelectionController.swift */; };
@@ -142,6 +143,7 @@
 		F686D85122C9B10900C6F555 /* Colors+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+Handlers.swift"; sourceTree = "<group>"; };
 		F68D639022F7890100DEB4AA /* AppearanceSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsController.swift; sourceTree = "<group>"; };
 		F68D639222F7894700DEB4AA /* PrivacySettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySettingsController.swift; sourceTree = "<group>"; };
+		F692D97623B1CB2C00E47109 /* UINavigationController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extensions.swift"; sourceTree = "<group>"; };
 		F6969F5D22DA1AFD00C4E8FF /* AboutSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSettingsController.swift; sourceTree = "<group>"; };
 		F6969F5F22DA256F00C4E8FF /* AboutSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSettingsView.swift; sourceTree = "<group>"; };
 		F69E5DBF231AE14800872345 /* ThemeSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectionController.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 				F65E479E2324B12A00FCAEF3 /* UserDefaults+Extensions.swift */,
 				F65E479C2324B10500FCAEF3 /* UIViewController+Extensions.swift */,
 				F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */,
+				F692D97623B1CB2C00E47109 /* UINavigationController+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -588,6 +591,7 @@
 				F67B92DE22D2E083002C6985 /* SettingsSwitchCell.swift in Sources */,
 				F650E16722BFFB20008D29AD /* SavedNoteCell.swift in Sources */,
 				F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */,
+				F692D97723B1CB2C00E47109 /* UINavigationController+Extensions.swift in Sources */,
 				F65E479F2324B12A00FCAEF3 /* UserDefaults+Extensions.swift in Sources */,
 				F61EC8BE2348E1BA00FB0A63 /* WhatsNewViewController+HapticFeedback.swift in Sources */,
 				F61EC8CA2348E1BA00FB0A63 /* Sequence+WhatsNew.swift in Sources */,
@@ -757,7 +761,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 31;
+				CURRENT_PROJECT_VERSION = 32;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -793,7 +797,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 31;
+				CURRENT_PROJECT_VERSION = 32;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Jotify/Info.plist;
@@ -874,7 +878,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 31;
+				CURRENT_PROJECT_VERSION = 32;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Jotify/Info.plist;

@@ -358,4 +358,22 @@ class SettingsController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {       
+        themes.triggerSystemMode(mode: traitCollection)
+        setupDynamicViewElements()
+        tableView.reloadData()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+            return .darkContent
+        } else if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+            return .lightContent
+        } else if UserDefaults.standard.bool(forKey: "useSystemMode") && traitCollection.userInterfaceStyle == .light {
+            return .darkContent
+        } else {
+            return .lightContent
+        }
+    }
 }

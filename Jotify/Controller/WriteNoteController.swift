@@ -57,22 +57,6 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         writeNoteView.inputTextView.isScrollEnabled = true
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        // more accurately returns new screen size
-        // used each time the window is resized
-        let frame = CGRect(x: 0, y: 100, width: size.width, height: writeNoteView.screenHeight / 4)
-        writeNoteView.inputTextView.frame = frame
-    }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        // used to support adaptive interfaces with iPadOS on first launch
-        if traitCollection.horizontalSizeClass == .compact {
-            let frame = CGRect(x: 0, y: 100, width: view.bounds.width, height: writeNoteView.screenHeight / 4)
-            writeNoteView.inputTextView.frame = frame
-        }
-    }
-    
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         writeNoteView.inputTextView.becomeFirstResponder()
     }
@@ -216,6 +200,25 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         }
         
         return false
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        // more accurately returns new screen size
+        // used each time the window is resized
+        let frame = CGRect(x: 0, y: 100, width: size.width, height: writeNoteView.screenHeight / 4)
+        writeNoteView.inputTextView.frame = frame
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        // used to support adaptive interfaces with iPadOS on first launch
+        if traitCollection.horizontalSizeClass == .compact {
+            let frame = CGRect(x: 0, y: 100, width: view.bounds.width, height: writeNoteView.screenHeight / 4)
+            writeNoteView.inputTextView.frame = frame
+        }
+        
+        themes.triggerSystemMode(mode: traitCollection)
+        setupDynamicBackground()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

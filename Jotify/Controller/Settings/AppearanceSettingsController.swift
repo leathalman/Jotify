@@ -16,7 +16,8 @@ class AppearanceSettingsController: UITableViewController {
     let themes = Themes()
     
     let sections: Array = ["Dark Mode", "Themes", "Text", "Other"]
-    let darks: Array = ["Vibrant Dark Mode", "Pure Dark Mode"]
+    let darks: Array = ["Use System Light/Dark Mode"]
+    let darks2: Array = ["Use System Light/Dark Mode", "Vibrant Dark Mode", "Pure Dark Mode"]
     let text: Array = ["Custom Placeholder", "Enable Multiline Input"]
     let other: Array = ["Random Colors"]
     
@@ -124,17 +125,35 @@ class AppearanceSettingsController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell") as! SettingsCell
         
-        if indexPath.section == 0 {
+        if indexPath.section == 0 && UserDefaults.standard.bool(forKey: "useSystemMode") == false {
+            // when user decides to not use System Light or Dark mode
+            // show 3 cells
+            // allow for bottom two to have independent functions
             switch indexPath.row {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
                 
                 settingsController.setupDynamicCells(cell: cell, enableArrow: false)
                 
-                cell.textLabel?.text = "\(darks[indexPath.row])"
+                cell.textLabel?.text = "\(darks2[indexPath.row])"
+                cell.selectionStyle = .none
+                cell.switchButton.addTarget(self, action: #selector(useSystemMode(sender:)), for: .valueChanged)
+
+                if defaults.bool(forKey: "useSystemMode") == true {
+                    cell.switchButton.isOn = true
+                } else {
+                    cell.switchButton.isOn = false
+                }
+                
+                return cell
+            case 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
+                
+                settingsController.setupDynamicCells(cell: cell, enableArrow: false)
+                
+                cell.textLabel?.text = "\(darks2[indexPath.row])"
                 cell.selectionStyle = .none
                 cell.switchButton.addTarget(self, action: #selector(vibrantDarkModeSwitchPressed(sender:)), for: .valueChanged)
-                
                 if defaults.bool(forKey: "vibrantDarkModeEnabled") == true {
                     cell.switchButton.isOn = true
                 } else {
@@ -143,12 +162,12 @@ class AppearanceSettingsController: UITableViewController {
                 
                 return cell
                 
-            case 1:
+            case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
                 
                 settingsController.setupDynamicCells(cell: cell, enableArrow: false)
                 
-                cell.textLabel?.text = "\(darks[indexPath.row])"
+                cell.textLabel?.text = "\(darks2[indexPath.row])"
                 cell.selectionStyle = .none
                 cell.switchButton.addTarget(self, action: #selector(pureDarkModeSwitchPressed(sender:)), for: .valueChanged)
                 
@@ -160,6 +179,32 @@ class AppearanceSettingsController: UITableViewController {
                 
                 return cell
                 
+            default:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+                print("cell outside of bounds")
+                return cell
+            }
+            
+        } else if indexPath.section == 0 && UserDefaults.standard.bool(forKey: "useSystemMode") == true {
+            // when the user decided to use System Light or Dark Mode
+            // toggle on means only show 1 cell
+            switch indexPath.row {
+            case 0:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
+                
+                settingsController.setupDynamicCells(cell: cell, enableArrow: false)
+                
+                cell.textLabel?.text = "\(darks[indexPath.row])"
+                cell.selectionStyle = .none
+                cell.switchButton.addTarget(self, action: #selector(useSystemMode(sender:)), for: .valueChanged)
+
+                if defaults.bool(forKey: "useSystemMode") == true {
+                    cell.switchButton.isOn = true
+                } else {
+                    cell.switchButton.isOn = false
+                }
+                
+                return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
                 print("cell outside of bounds")
@@ -271,6 +316,31 @@ class AppearanceSettingsController: UITableViewController {
                 
             } catch let error as NSError {
                 print("Could not save. \(error), \(error.userInfo)")
+            }
+        }
+    }
+    
+    @objc func useSystemMode(sender: UISwitch) {
+        if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+            PremiumView.shared.presentPremiumView(viewController: self)
+            sender.isOn = false
+            
+        } else {
+            if sender.isOn {
+                print("use system mode enabled")
+                defaults.set(true, forKey: "useSystemMode")
+                
+                themes.triggerSystemMode(mode: self.traitCollection)
+                
+                viewWillAppear(true)
+                self.tableView.reloadData()
+                
+            } else {
+                print("use system mode disabled")
+                defaults.set(false, forKey: "useSystemMode")
+                
+                viewWillAppear(true)
+                self.tableView.reloadData()
             }
         }
     }
@@ -397,7 +467,11 @@ class AppearanceSettingsController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Vibrant dark mode retains the color of your notes while pure dark mode replaces these colors with black."
+            if defaults.bool(forKey: "useSystemMode") == false {
+                return "Vibrant dark mode retains the color of your notes while pure dark mode replaces these colors with black."
+            } else {
+                return "Jotify can automatically match your system's preference, or you can chose to toggle light/dark mode manually."
+            }
         case 1:
             return "Pick the color theme for your notes."
         case 2:
@@ -420,7 +494,11 @@ class AppearanceSettingsController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return darks.count
+            if defaults.bool(forKey: "useSystemMode") {
+                return darks.count
+            } else {
+                return darks2.count
+            }
         case 1:
             return 1
         case 2:
@@ -434,5 +512,23 @@ class AppearanceSettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {        
+        themes.triggerSystemMode(mode: traitCollection)
+        setupDynamicElements()
+        tableView.reloadData()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+            return .darkContent
+        } else if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+            return .lightContent
+        } else if UserDefaults.standard.bool(forKey: "useSystemMode") && traitCollection.userInterfaceStyle == .light {
+            return .darkContent
+        } else {
+            return .lightContent
+        }
     }
 }

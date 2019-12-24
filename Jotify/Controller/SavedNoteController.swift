@@ -110,9 +110,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     func requestReview() {
         let shortVersionKey = "CFBundleShortVersionString"
         let currentVersion = Bundle.main.infoDictionary![shortVersionKey] as? String
-        
-//        print("Last version reviewed: \(String(describing: defaults.value(forKey: "lastReviewRequest")))")
-        
+                
         if notes.count > 9 && defaults.value(forKey: "lastReviewRequest") as? String != currentVersion {
             SKStoreReviewController.requestReview()
             defaults.set(currentVersion, forKey: "lastReviewRequest")
@@ -133,18 +131,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             UIApplication.shared.applicationIconBadgeNumber = 0
         }
         
-    }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        // used to support adaptive interfaces with iPadOS
-        if traitCollection.horizontalSizeClass == .compact {
-            iPadOSLayout.itemsPerRow = 1.0
-            collectionView.reloadData()
-            
-        } else if traitCollection.horizontalSizeClass == .regular {
-            iPadOSLayout.itemsPerRow = 3.0
-            collectionView.reloadData()
-        }
     }
     
     func setupDynamicViewElements() {
@@ -754,6 +740,35 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         cell.contentView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTouchHandler(sender:))))
         
         return cell
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        // used to support adaptive interfaces with iPadOS
+        if traitCollection.horizontalSizeClass == .compact {
+            iPadOSLayout.itemsPerRow = 1.0
+            collectionView.reloadData()
+            
+        } else if traitCollection.horizontalSizeClass == .regular {
+            iPadOSLayout.itemsPerRow = 3.0
+            collectionView.reloadData()
+        }
+        
+        let themes = Themes()
+        themes.triggerSystemMode(mode: traitCollection)
+        setupDynamicViewElements()
+        collectionView.reloadData()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+            return .darkContent
+        } else if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+            return .lightContent
+        } else if UserDefaults.standard.bool(forKey: "useSystemMode") && traitCollection.userInterfaceStyle == .light {
+            return .darkContent
+        } else {
+            return .lightContent
+        }
     }
 }
 
