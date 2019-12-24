@@ -136,6 +136,12 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     func setupDynamicViewElements() {
         collectionView.backgroundColor = InterfaceColors.viewBackgroundColor
         
+        let cancelButtonAttributes: NSDictionary = [NSAttributedString.Key.foregroundColor: self.view.tintColor ?? UIColor.systemBlue]
+
+        UIBarButtonItem.appearance().setTitleTextAttributes(cancelButtonAttributes as? [NSAttributedString.Key : Any], for: UIControl.State.normal)
+        
+        setupDynamicSearchBar()
+        
         if defaults.bool(forKey: "darkModeEnabled") == true {
             searchController.searchBar.barTintColor = InterfaceColors.searchBarColor
             searchController.searchBar.backgroundImage = UIImage()
@@ -162,6 +168,32 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             
             setupDefaultPersistentNavigationBar()
         }
+    }
+    
+    func setupDynamicSearchBar() {
+        if defaults.bool(forKey: "useSystemMode") == false && defaults.bool(forKey: "darkModeEnabled") == false {
+            setupLightSearchBar()
+        } else if defaults.bool(forKey: "useSystemMode") == false && defaults.bool(forKey: "darkModeEnabled") == true {
+            setupDarkSearchBar()
+        } else if defaults.bool(forKey: "useSystemMode") && traitCollection.userInterfaceStyle == .light {
+            setupLightSearchBar()
+        } else if defaults.bool(forKey: "useSystemMode") && traitCollection.userInterfaceStyle == .dark {
+            setupDarkSearchBar()
+        }
+    }
+    
+    func setupLightSearchBar() {
+        searchController.searchBar.barTintColor = InterfaceColors.searchBarColor
+        searchController.searchBar.backgroundImage = nil
+        searchController.overrideUserInterfaceStyle = .dark
+        searchController.searchBar.overrideUserInterfaceStyle = .light
+    }
+    
+    func setupDarkSearchBar() {
+        searchController.searchBar.barTintColor = InterfaceColors.searchBarColor
+        searchController.searchBar.backgroundImage = UIImage()
+        searchController.overrideUserInterfaceStyle = .dark
+        searchController.searchBar.overrideUserInterfaceStyle = .dark
     }
     
     func setupDefaultPersistentNavigationBar() {
