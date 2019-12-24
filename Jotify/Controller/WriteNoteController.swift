@@ -30,6 +30,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setupPlaceholder()
+        setupDynamicBackground()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -47,6 +48,8 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         view.addGestureRecognizer(tap)
+        
+        writeNoteView.inputTextView.frame = CGRect(x: 0, y: 100, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight / 4)
         
         writeNoteView.inputTextView.isScrollEnabled = false
         writeNoteView.inputTextView.delegate = self
@@ -77,6 +80,16 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     func setupPlaceholder() {
         let placeholder = UserDefaults.standard.string(forKey: "writeNotePlaceholder")
         writeNoteView.inputTextView.placeholder = placeholder
+    }
+    
+    func setupDynamicBackground() {
+        if defaults.bool(forKey: "vibrantDarkModeEnabled") {
+            writeNoteView.colorView.backgroundColor = .grayBackground
+        } else if defaults.bool(forKey: "pureDarkModeEnabled") {
+            writeNoteView.colorView.backgroundColor = .black
+        } else if defaults.bool(forKey: "darkModeEnabled") == false {
+            writeNoteView.colorView.backgroundColor = StoredColors.noteColor
+        }
     }
     
     func handleReceiptValidation() {
