@@ -28,6 +28,9 @@ extension UIColor {
     static let cellDark = UIColor(r: 35, g: 35, b: 35)
     static let cellPureDark = cellDark.adjust(by: -3.75)
     
+    static let cellHighlightDefault = UIColor(r: 209, g: 209, b: 214)
+    static let cellHighlightDark = UIColor(r: 58, g: 58, b: 60)
+    
     // default
     static let lightRed = UIColor(r: 254, g: 129, b: 118)
     static let lightRedBack = UIColor(r: 221, g: 86, b: 75)

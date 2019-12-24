@@ -280,21 +280,22 @@ class SettingsController: UITableViewController {
                 cell.backgroundColor = UIColor.white
                 cell.backgroundColor = InterfaceColors.cellColor
                 cell.textLabel?.textColor = UIColor.lightBlue
+                setupHighlightCorrection(cell: cell)
             case 1:
                 cell.backgroundColor = UIColor.white
                 cell.backgroundColor = InterfaceColors.cellColor
                 cell.textLabel?.textColor = UIColor.lightBlue
-                
+                setupHighlightCorrection(cell: cell)
             case 2:
                 cell.backgroundColor = UIColor.white
                 cell.backgroundColor = InterfaceColors.cellColor
                 cell.textLabel?.textColor = UIColor.lightBlue
-                
+                setupHighlightCorrection(cell: cell)
             case 3:
                 cell.backgroundColor = UIColor.white
                 cell.backgroundColor = InterfaceColors.cellColor
                 cell.textLabel?.textColor = UIColor.red
-                
+                setupHighlightCorrection(cell: cell)                
             default:
                 return cell
             }
@@ -337,6 +338,8 @@ class SettingsController: UITableViewController {
         cell.textLabel?.textColor = UIColor.black
         cell.textLabel?.textColor = InterfaceColors.fontColor
         
+        setupHighlightCorrection(cell: cell)
+        
         if enableArrow == true {
             if darkModeEnabled() == true {
                 cell.accessoryView = UIImageView(image: UIImage(systemName: "chevron.right.circle"))
@@ -344,6 +347,20 @@ class SettingsController: UITableViewController {
             } else {
                 cell.accessoryView = UIImageView(image: UIImage(systemName: "chevron.right.circle.fill"))
             }
+        }
+    }
+    
+    func setupHighlightCorrection(cell: UITableViewCell) {
+        if defaults.bool(forKey: "useSystemMode") == false && defaults.bool(forKey: "darkModeEnabled") == false {
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = UIColor.cellHighlightDefault
+            cell.selectedBackgroundView = backgroundView
+        } else if defaults.bool(forKey: "useSystemMode") == false && defaults.bool(forKey: "darkModeEnabled") {
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = UIColor.cellHighlightDark
+            cell.selectedBackgroundView = backgroundView
+        } else {
+            cell.selectedBackgroundView = nil
         }
     }
     
