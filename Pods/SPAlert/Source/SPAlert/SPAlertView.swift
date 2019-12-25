@@ -47,14 +47,22 @@ open class SPAlertView: UIView {
     private var backgroundView: UIVisualEffectView!
     
     private var isDarkMode: Bool {
-        if #available(iOS 12.0, *) {
-            if self.traitCollection.userInterfaceStyle == .dark {
+        if UserDefaults.standard.bool(forKey: "useSystemMode") {
+           if #available(iOS 12.0, *) {
+               if self.traitCollection.userInterfaceStyle == .dark {
+                   return true
+               } else {
+                   return false
+               }
+           } else {
+               return false
+           }
+        } else {
+            if UserDefaults.standard.bool(forKey: "darkModeEnabled") {
                 return true
             } else {
                 return false
             }
-        } else {
-            return false
         }
     }
     
@@ -120,17 +128,25 @@ open class SPAlertView: UIView {
         self.backgroundColor = .clear
         self.layer.masksToBounds = true
         self.layer.cornerRadius = 8
-        
-        if #available(iOS 12.0, *) {
-            if self.traitCollection.userInterfaceStyle == .dark {
+
+        if UserDefaults.standard.bool(forKey: "useSystemMode") {
+           if #available(iOS 12.0, *) {
+               if self.traitCollection.userInterfaceStyle == .dark {
+                   self.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+               } else {
+                   self.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+               }
+           } else {
+               self.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+           }
+        } else {
+            if UserDefaults.standard.bool(forKey: "darkModeEnabled") {
                 self.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
             } else {
                 self.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
             }
-        } else {
-            self.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
         }
-        
+                
         self.backgroundView.isUserInteractionEnabled = false
         self.addSubview(self.backgroundView)
         
