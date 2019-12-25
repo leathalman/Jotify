@@ -44,6 +44,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         super.viewWillAppear(animated)
         setupPersistentNavigationBar()
         removeReminderIfDelivered()
+        setupDynamicKeyboardColor()
     }
     
     override func viewDidLoad() {
@@ -81,21 +82,15 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         }
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        // more accurately returns new screen size
-        // used each time the window is resized
-        let frame = CGRect(x: 0, y: 15, width: size.width, height: writeNoteView.screenHeight - navigationBarHeight - 30)
-        writeNoteView.inputTextView.frame = frame
-        popupHeight = size.height + 40
-    }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        // used to support adaptive interfaces with iPadOS on first launch
-        if traitCollection.horizontalSizeClass == .compact {
-            let frame = CGRect(x: 0, y: 15, width: view.bounds.width, height: writeNoteView.screenHeight - navigationBarHeight - 30)
-            writeNoteView.inputTextView.frame = frame
-            popupHeight = view.bounds.height + 40
+    func setupDynamicKeyboardColor() {
+        if UserDefaults.standard.bool(forKey: "useSystemMode") == false {
+            if UserDefaults.standard.bool(forKey: "darkModeEnabled") {
+                writeNoteView.inputTextView.keyboardAppearance = .dark
+                writeNoteView.inputTextView.overrideUserInterfaceStyle = .dark
+            } else {
+                writeNoteView.inputTextView.keyboardAppearance = .default
+                writeNoteView.inputTextView.overrideUserInterfaceStyle = .light
+            }
         }
     }
     
@@ -413,6 +408,24 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         
         let selectedRange = writeNoteView.inputTextView.selectedRange
         writeNoteView.inputTextView.scrollRangeToVisible(selectedRange)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        // more accurately returns new screen size
+        // used each time the window is resized
+        let frame = CGRect(x: 0, y: 15, width: size.width, height: writeNoteView.screenHeight - navigationBarHeight - 30)
+        writeNoteView.inputTextView.frame = frame
+        popupHeight = size.height + 40
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        // used to support adaptive interfaces with iPadOS on first launch
+        if traitCollection.horizontalSizeClass == .compact {
+            let frame = CGRect(x: 0, y: 15, width: view.bounds.width, height: writeNoteView.screenHeight - navigationBarHeight - 30)
+            writeNoteView.inputTextView.frame = frame
+            popupHeight = view.bounds.height + 40
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

@@ -32,6 +32,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         themes.triggerSystemMode(mode: traitCollection)
         setupPlaceholder()
         setupDynamicBackground()
+        setupDynamicKeyboardColor()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -74,6 +75,18 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
             writeNoteView.backgroundColor = .black
         } else if defaults.bool(forKey: "darkModeEnabled") == false {
             writeNoteView.backgroundColor = StoredColors.noteColor
+        }
+    }
+    
+    func setupDynamicKeyboardColor() {
+        if UserDefaults.standard.bool(forKey: "useSystemMode") == false {
+            if UserDefaults.standard.bool(forKey: "darkModeEnabled") {
+                writeNoteView.inputTextView.keyboardAppearance = .dark
+                writeNoteView.inputTextView.overrideUserInterfaceStyle = .dark
+            } else {
+                writeNoteView.inputTextView.keyboardAppearance = .default
+                writeNoteView.inputTextView.overrideUserInterfaceStyle = .light
+            }
         }
     }
     
