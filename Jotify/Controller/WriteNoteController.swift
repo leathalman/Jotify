@@ -29,6 +29,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        themes.triggerSystemMode(mode: traitCollection)
         setupPlaceholder()
         setupDynamicBackground()
     }
