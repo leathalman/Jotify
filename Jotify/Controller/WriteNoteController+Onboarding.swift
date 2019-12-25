@@ -47,21 +47,21 @@ extension WriteNoteController {
     func presentUpdateOnboarding(viewController: UIViewController, tintColor: UIColor) {
         // Jotify v1.2.1 Onboarding
         let whatsNew = WhatsNew(
-            title: "What's New",
+            title: "What's New - v1.2.1",
             items: [
                 WhatsNew.Item(
                     title: "Major Changes",
-                    subtitle: "Jotify now natively supports iPadOS! If you have an iPad, download Jotify on that device to experience a powerful, multi-window experience. All of your notes will sync seamlessly between your iPhone and iPad; I would love for you to try it out!",
+                    subtitle: "• Jotify now natively supports iPadOS! If you have an iPad, download Jotify on that device to experience a powerful, multi-window experience. All of your notes will sync seamlessly between your iPhone and iPad; I would love for you to try it out!\n• If you have Jotify Premium, Jotify will now automatically sync with iOS light/dark modes! You don't have to worry about setting Jotify to dark mode manually anymore.",
                     image: UIImage(named: "bell")
                 ),
                 WhatsNew.Item(
                     title: "Minor Improvements",
-                    subtitle: "Opening a note without editing its contents will no longer update the date of the note. Notes will no longer repeat the same color once saved.",
+                    subtitle: "• Opening a note without editing its contents will no longer update the date of the note.\n• Notes will no longer be assigned the same random color twice in a row.\n• App badge number is automatically set to zero when no reminders are present.",
                     image: UIImage(named: "add")
                 ),
                 WhatsNew.Item(
                     title: "Bug Fixes",
-                    subtitle: "Fixed a bug where changing the theme while writing a note would produce two different colored backgrounds.",
+                    subtitle: "• Fixed a bug where changing the theme while writing a note would produce two different colored backgrounds.",
                     image: UIImage(named: "bugFix")
                 ),
             ]
