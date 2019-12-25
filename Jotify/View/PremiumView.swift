@@ -24,7 +24,7 @@ class PremiumView {
             items: [
                 WhatsNew.Item(
                     title: "Reminders",
-                    subtitle: "Set reminders on all of the your notes with ease. Simply tap on the alarm icon, set a date, and wait. All natively supported in Jotify.",
+                    subtitle: "Set reminders on all of your notes with ease. Simply tap on the alarm icon, set a date, and wait. All natively supported in Jotify.",
                     image: UIImage(named: "reminder")
                 ),
                 WhatsNew.Item(

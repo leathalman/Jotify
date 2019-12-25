@@ -36,6 +36,8 @@ class PrivacySettingsController: UITableViewController {
         
         setupDynamicElements()
         
+        UIApplication.shared.windows.first?.backgroundColor = UIColor.grayBackground
+        
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
     }
     

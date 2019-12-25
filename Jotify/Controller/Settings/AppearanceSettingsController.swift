@@ -33,6 +33,8 @@ class AppearanceSettingsController: UITableViewController {
         
         navigationItem.title = "Appearance"
         
+        UIApplication.shared.windows.first?.backgroundColor = UIColor.grayBackground
+        
         tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
     }

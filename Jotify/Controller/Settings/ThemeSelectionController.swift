@@ -21,6 +21,8 @@ class ThemeSelectionController: UITableViewController {
         super.viewDidLoad()
         navigationItem.title = "Themes"
         
+        UIApplication.shared.windows.first?.backgroundColor = UIColor.grayBackground
+        
         setupDynamicElements()
         
         tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")

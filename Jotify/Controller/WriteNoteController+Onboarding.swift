@@ -115,6 +115,11 @@ extension WriteNoteController {
                     image: UIImage(named: "write")
                 ),
                 WhatsNew.Item(
+                    title: "Reminders",
+                    subtitle: "Set reminders on all of your notes with ease. Simply tap on the alarm icon, set a date, and wait.",
+                    image: UIImage(named: "reminder")
+                ),
+                WhatsNew.Item(
                     title: "Privacy",
                     subtitle: "Jotify does not have access to any of your data and never will. All of your notes are just that, yours.",
                     image: UIImage(named: "lock")
