@@ -1,22 +1,26 @@
 # Jotify
 
-Jotify is an iOS app written completely in swift used for simple note taking. It uses a few of Apple's new frameworks and features introduced with iOS 13 including:
+## Screenshots
+
+<img src="docs/1.png" width="20%"> <img src="docs/2.png" width="20%"> <img src="docs/3.png" width="20%"> <img src="docs/4.png" width="20%">
+
+## About
+
+Jotify is an iOS app used for lightning fast note-taking and reminders, all written in swift. It uses several of Apple's newest frameworks and features introduced in iOS 13 including:
 - [NSPersistentCloudKitContainer](https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer)
 - System Colors 
 - [SF Symbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/)
 - SceneDelegate
 
-By using NSPersistentCloudKitContainer, this application can serve as an example of using both CoreData and CloudKit in the same application. Jotify syncs notes instantly between devices and well as storing a copy of the CloudKit database on device.
-
-[Demo](https://imgur.com/ninS69q)
+Jotify utilizes NSPersistentCloudKitContainer, allowing Jotify to sync notes between a user's devices seamlessly. Notes are stored locally on device using CoreData and are uploaded to iCloud using Apple's CloudKit. Jotify is avaliable for both iPhone and iPad.
 
 ## Testflight
 
-Available on [Testflight](https://testflight.apple.com/join/EnJVSmNy)!
+Want to test the lastest features as they come out? Check out Jotify on [Testflight](https://testflight.apple.com/join/EnJVSmNy)!
 
 ## App Store
 
-Check out Jotify on the [iOS App Store](https://apps.apple.com/us/app/jotify/id1469983730?ls=1)! 
+Jotify is available on the [iOS App Store](https://apps.apple.com/us/app/jotify/id1469983730?ls=1) for iPhone and iPad! 
 
 ## Prerequisites
 
