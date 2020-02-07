@@ -257,29 +257,27 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             
             actionController.addAction(Action("Sort by date", style: .default, handler: { _ in
                 self.defaults.set("date", forKey: "sortBy")
-                self.fetchNotesFromCoreData()
-                self.collectionView.reloadData()
+                self.sortNotesByDate()
                 self.animateCells()
                 
             }))
             actionController.addAction(Action("Sort by color", style: .default, handler: { _ in
                 self.defaults.set("color", forKey: "sortBy")
-                self.fetchNotesFromCoreData()
-                self.collectionView.reloadData()
+                self.sortNotesByColor()
                 self.animateCells()
                 
             }))
             actionController.addAction(Action("Sort by content", style: .default, handler: { _ in
                 self.defaults.set("content", forKey: "sortBy")
-                self.fetchNotesFromCoreData()
-                self.collectionView.reloadData()
+                self.sortNotesByContent()
                 self.animateCells()
+                
             }))
             actionController.addAction(Action("Sort by reminders", style: .default, handler: { _ in
                 self.defaults.set("reminders", forKey: "sortBy")
-                self.fetchNotesFromCoreData()
-                self.collectionView.reloadData()
+                self.sortNotesByReminders()
                 self.animateCells()
+                
             }))
             actionController.addAction(Action("Cancel", style: .cancel, handler: nil))
             
@@ -308,6 +306,60 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             }
             fetchNotesFromCoreData()
             animateCells()
+        }
+    }
+    
+    func sortNotesFromUserDefaults() {
+        let sortBy = UserDefaults.standard.string(forKey: "sortBy")
+        
+        print("UserDefaults: \(String(describing: sortBy))")
+        
+        if sortBy == "content" {
+                sortNotesByContent()
+        } else if sortBy == "date" {
+                sortNotesByDate()
+        } else if sortBy == "color" {
+            sortNotesByColor()
+        } else if sortBy == "reminders" {
+            sortNotesByReminders()
+        }
+    }
+    
+    func sortNotesByDate() {
+        //sort notes by newest -> oldest date
+        self.notes.sort {
+            $0.date > $1.date
+        }
+    }
+    
+    func sortNotesByColor() {
+        //sort colors by String A -> Z
+        self.notes.sort {
+            guard let first: String = $0.color else { return false }
+            guard let second: String = $1.color else { return true }
+            
+            return first > second
+        }
+    }
+    
+    func sortNotesByContent() {
+        //sort content of notes alphabetically
+        self.notes.sort {
+            guard let first: String = $0.content else { return false }
+            guard let second: String = $1.content else { return true }
+            
+            return first < second
+        }
+    }
+    
+    func sortNotesByReminders() {
+        //sort by date first, then put reminders on top
+        //sort by bool, isReminder
+        
+        sortNotesByDate()
+        
+        self.notes.sort {
+            $0.isReminder && !$1.isReminder
         }
     }
     
@@ -360,29 +412,12 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Note")
         fetchRequest.returnsObjectsAsFaults = false
-        
-        let sortBy = defaults.string(forKey: "sortBy")
-        var sortDescriptor: NSSortDescriptor?
-        
-        if sortBy == "content" {
-            sortDescriptor = NSSortDescriptor(key: "content", ascending: true)
-            
-        } else if sortBy == "date" {
-            sortDescriptor = NSSortDescriptor(key: "modifiedDate", ascending: false)
-            
-        } else if sortBy == "color" {
-            sortDescriptor = NSSortDescriptor(key: "color", ascending: false)
-            
-        } else if sortBy == "reminders" {
-            sortDescriptor = NSSortDescriptor(key: "isReminder", ascending: false)
-        }
-        
-        fetchRequest.sortDescriptors = [sortDescriptor] as? [NSSortDescriptor]
-        
+                
         CoreDataManager.shared.enqueue { _ in
             do {
                 self.notes = try managedContext.fetch(fetchRequest) as! [Note]
                 DispatchQueue.main.async {
+                    self.sortNotesFromUserDefaults()
                     self.collectionView.reloadData()
                 }
                 
@@ -390,6 +425,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                 print("Could not fetch. \(error), \(error.userInfo)")
             }
         }
+        
     }
     
     func animateCells() {
