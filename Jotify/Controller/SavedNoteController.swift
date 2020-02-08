@@ -125,7 +125,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             }
         }
         
-        print("There are \(count) reminders")
+//        print("There are \(count) reminders")
         
         if count == 0 {
             UIApplication.shared.applicationIconBadgeNumber = 0
@@ -311,9 +311,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     
     func sortNotesFromUserDefaults() {
         let sortBy = UserDefaults.standard.string(forKey: "sortBy")
-        
-        print("UserDefaults: \(String(describing: sortBy))")
-        
+                
         if sortBy == "content" {
                 sortNotesByContent()
         } else if sortBy == "date" {
@@ -594,6 +592,10 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         }
         
         for note in selectedNotes {
+            if note.isReminder == true {
+                UIApplication.shared.applicationIconBadgeNumber -= 1
+            }
+            
             managedContext?.delete(note)
         }
         
