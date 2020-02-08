@@ -37,6 +37,10 @@
 		F61EC8D52348EE5200FB0A63 /* WriteNoteController+Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61EC8D42348EE5200FB0A63 /* WriteNoteController+Onboarding.swift */; };
 		F637FD2A2349422400288369 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F637FD292349422400288369 /* CoreDataManager.swift */; };
 		F63A0C7922DE031E00B8A480 /* VerticalAlignLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63A0C7822DE031E00B8A480 /* VerticalAlignLabel.swift */; };
+		F63C488D23EF7CE300310CFF /* Golden2@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F63C488923EF7CE200310CFF /* Golden2@2x~ipad.png */; };
+		F63C488E23EF7CE300310CFF /* Golden2@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F63C488A23EF7CE200310CFF /* Golden2@3x~ipad.png */; };
+		F63C488F23EF7CE300310CFF /* Light@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F63C488B23EF7CE200310CFF /* Light@3x~ipad.png */; };
+		F63C489023EF7CE300310CFF /* Light@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F63C488C23EF7CE300310CFF /* Light@2x~ipad.png */; };
 		F644968622C16422009CC386 /* NoteDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F644968522C16422009CC386 /* NoteDetailController.swift */; };
 		F650E13322BFF35A008D29AD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E13222BFF35A008D29AD /* SceneDelegate.swift */; };
 		F650E13D22BFF35C008D29AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F650E13C22BFF35C008D29AD /* Assets.xcassets */; };
@@ -117,6 +121,10 @@
 		F61EC8D42348EE5200FB0A63 /* WriteNoteController+Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WriteNoteController+Onboarding.swift"; sourceTree = "<group>"; };
 		F637FD292349422400288369 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		F63A0C7822DE031E00B8A480 /* VerticalAlignLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalAlignLabel.swift; sourceTree = "<group>"; };
+		F63C488923EF7CE200310CFF /* Golden2@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Golden2@2x~ipad.png"; sourceTree = "<group>"; };
+		F63C488A23EF7CE200310CFF /* Golden2@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Golden2@3x~ipad.png"; sourceTree = "<group>"; };
+		F63C488B23EF7CE200310CFF /* Light@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Light@3x~ipad.png"; sourceTree = "<group>"; };
+		F63C488C23EF7CE300310CFF /* Light@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Light@2x~ipad.png"; sourceTree = "<group>"; };
 		F644968522C16422009CC386 /* NoteDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailController.swift; sourceTree = "<group>"; };
 		F650E12D22BFF35A008D29AD /* Jotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F650E13022BFF35A008D29AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -418,6 +426,10 @@
 		F6AEC557238CE02C0068706B /* App Icons */ = {
 			isa = PBXGroup;
 			children = (
+				F63C488923EF7CE200310CFF /* Golden2@2x~ipad.png */,
+				F63C488A23EF7CE200310CFF /* Golden2@3x~ipad.png */,
+				F63C488C23EF7CE300310CFF /* Light@2x~ipad.png */,
+				F63C488B23EF7CE200310CFF /* Light@3x~ipad.png */,
 				F6A7E4BF238F128A00D3E6AF /* Light@2x.png */,
 				F6A7E4C1238F128F00D3E6AF /* Light@3x.png */,
 				F6AEC562238CE2C00068706B /* Golden2@2x.png */,
@@ -505,6 +517,10 @@
 				F6A7E4C2238F128F00D3E6AF /* Light@3x.png in Resources */,
 				F650E13D22BFF35C008D29AD /* Assets.xcassets in Resources */,
 				F6AEC563238CE2C00068706B /* Golden2@2x.png in Resources */,
+				F63C489023EF7CE300310CFF /* Light@2x~ipad.png in Resources */,
+				F63C488E23EF7CE300310CFF /* Golden2@3x~ipad.png in Resources */,
+				F63C488D23EF7CE300310CFF /* Golden2@2x~ipad.png in Resources */,
+				F63C488F23EF7CE300310CFF /* Light@3x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
