@@ -88,8 +88,8 @@ class ReminderExistsController: BottomPopupViewController {
     
     func setupDynamicColors() {
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
-            view.backgroundColor = .grayBackground
-            let removeButtonColor = UIColor.grayBackground.adjust(by: 4.75)
+            view.backgroundColor = Colors.grayBackground
+            let removeButtonColor = Colors.grayBackground.adjust(by: 4.75)
             removeButton.backgroundColor = removeButtonColor
             
         } else if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {

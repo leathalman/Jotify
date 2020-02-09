@@ -71,7 +71,7 @@ extension WriteNoteController {
         
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
             configuration.apply(theme: .darkDefault)
-            configuration.backgroundColor = .grayBackground
+            configuration.backgroundColor = Colors.grayBackground
             
         } else {
             configuration.apply(theme: .default)
@@ -146,7 +146,7 @@ extension WriteNoteController {
         
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
             configuration.apply(theme: .darkDefault)
-            configuration.backgroundColor = .grayBackground
+            configuration.backgroundColor = Colors.grayBackground
             
         } else {
             configuration.apply(theme: .default)

@@ -21,7 +21,7 @@ class ThemeSelectionController: UITableViewController {
         super.viewDidLoad()
         navigationItem.title = "Themes"
         
-        UIApplication.shared.windows.first?.backgroundColor = UIColor.grayBackground
+        UIApplication.shared.windows.first?.backgroundColor = Colors.grayBackground
         
         setupDynamicElements()
         

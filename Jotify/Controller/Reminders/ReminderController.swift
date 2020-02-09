@@ -117,9 +117,9 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     
     func setupDynamicColors() {
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
-            view.backgroundColor = .grayBackground
-            datePicker.backgroundColor = .grayBackground
-            let confirmButtonColor = UIColor.grayBackground.adjust(by: 4.75)
+            view.backgroundColor = Colors.grayBackground
+            datePicker.backgroundColor = Colors.grayBackground
+            let confirmButtonColor = Colors.grayBackground.adjust(by: 4.75)
             confirmButton.backgroundColor = confirmButtonColor
             
         } else if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {

@@ -69,7 +69,7 @@ class ColorPickerController: UIViewController {
         
         if defaults.bool(forKey: "darkModeEnabled") == true {
             colorPicker.hexLabel.textColor = UIColor.white
-            contentView.backgroundColor = UIColor.grayBackground
+            contentView.backgroundColor = Colors.grayBackground
         }
     }
     
@@ -143,7 +143,7 @@ class ColorPickerController: UIViewController {
         
         if defaults.bool(forKey: "darkModeEnabled") == true {
             colorPicker.hexLabel.textColor = UIColor.white
-            contentView.backgroundColor = UIColor.grayBackground
+            contentView.backgroundColor = Colors.grayBackground
         } else {
             colorPicker.hexLabel.textColor = UIColor.black
             contentView.backgroundColor = UIColor.white
