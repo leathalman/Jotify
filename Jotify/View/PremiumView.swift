@@ -39,7 +39,7 @@ class PremiumView {
                 ),
                 WhatsNew.Item(
                     title: "Themes",
-                    subtitle: "Customize the look of your notes with 5 different themes: Default, Sunset, Kypool, Celestial, and Apple Vibrant.",
+                    subtitle: "Customize the look of your notes with 6 different themes: Default, Sunset, Kypool, Celestial, Scarlet Azure, and Apple Vibrant.",
                     image: UIImage(named: "themes")
                 ),
                 WhatsNew.Item(

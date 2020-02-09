@@ -249,6 +249,9 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                     
                 } else if isSelectedColorFromDefaults(key: "appleVibrant") == true {
                     actionController.backgroundColor = Colors.appleVibrantColors.randomElement() ?? UIColor.blue2
+                    
+                } else if isSelectedColorFromDefaults(key: "scarletAzure") == true {
+                    actionController.backgroundColor = Colors.scarletAzureColors.randomElement() ?? UIColor.blue2
                 }
                 
             } else if defaults.bool(forKey: "darkModeEnabled") == true {
@@ -414,8 +417,8 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         CoreDataManager.shared.enqueue { _ in
             do {
                 self.notes = try managedContext.fetch(fetchRequest) as! [Note]
+                self.sortNotesFromUserDefaults()
                 DispatchQueue.main.async {
-                    self.sortNotesFromUserDefaults()
                     self.collectionView.reloadData()
                 }
                 

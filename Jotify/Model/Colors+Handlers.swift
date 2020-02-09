@@ -82,6 +82,14 @@ extension UIColor {
     static let blue6 = UIColor(red: 0.168627451, green: 0.3450980392, blue: 0.6078431373, alpha: 1)
     static let darkRed1 = UIColor(red: 0.7215686275, green: 0.2196078431, blue: 0.4823529412, alpha: 1)
     static let darkRed2 = UIColor(red: 0.831372549, green: 0.2470588235, blue: 0.5529411765, alpha: 1)
+    
+    // scarlet azure
+    static let dBlue = UIColor(r: 192, g: 108, b: 132)
+    static let dRed = UIColor(r: 53, g: 92, b: 125)
+    static let dGold = UIColor(r: 232, g: 188, b: 118)
+    static let lBlue = UIColor(r: 58, g: 101, b: 137)
+    static let lRed = UIColor(r: 201, g: 129, b: 150)
+    static let lGold = UIColor(r: 233, g: 189, b: 124)
 }
 
 extension UIColor {
@@ -121,6 +129,9 @@ class Colors {
     
     static var appleVibrantColors = [UIColor.systemRed, UIColor.systemBlue, UIColor.systemGreen, UIColor.systemPink, UIColor.systemOrange, UIColor.systemPurple, UIColor.systemTeal, UIColor.systemYellow]
     static var appleVibrantColorsStrings = ["systemRed", "systemBlue", "systemGreen", "systemPink", "systemOrange", "systemPurple", "systemTeal", "systemYellow"]
+    
+    static var scarletAzureColors = [UIColor.lGold, UIColor.dBlue, UIColor.lRed, UIColor.lBlue, UIColor.dRed, UIColor.dGold]
+    static var scarletAzureColorsString = ["lGold", "dBlue", "lRed", "lBlue", "dRed", "dGold"]
     
     static func stringFromColor(color: UIColor) -> String {
         if color == UIColor.lightRed {
@@ -264,6 +275,25 @@ class Colors {
             
         } else if color == UIColor.systemYellow {
             return "systemYellow"
+        }
+        
+        if color == UIColor.lGold {
+            return "lGold"
+            
+        } else if color == UIColor.dBlue {
+            return "dBlue"
+            
+        } else if color == UIColor.lRed {
+            return "lRed"
+            
+        } else if color == UIColor.lBlue {
+            return "lBlue"
+            
+        } else if color == UIColor.dRed {
+            return "dRed"
+            
+        } else if color == UIColor.dGold {
+            return "dGold"
         }
         
         if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
@@ -415,6 +445,25 @@ class Colors {
             
         } else if string == "systemYellow" {
             return UIColor.systemYellow
+        }
+        
+        if string == "lGold" {
+            return UIColor.lGold
+            
+        } else if string == "dBlue" {
+            return UIColor.dBlue
+            
+        } else if string == "lRed" {
+            return UIColor.lRed
+            
+        } else if string == "lBlue" {
+            return UIColor.lBlue
+            
+        } else if string == "dRed" {
+            return UIColor.dRed
+            
+        } else if string == "dGold" {
+            return UIColor.dGold
         }
         
         if UserDefaults.standard.bool(forKey: "useRandomColor") == false {

@@ -80,6 +80,9 @@ class PrivacySettingsController: UITableViewController {
                 
             } else if isSelectedColorFromDefaults(key: "appleVibrant") == true {
                 unlockButton.backgroundColor = Colors.appleVibrantColors.randomElement() ?? UIColor.blue2
+                
+            } else if isSelectedColorFromDefaults(key: "scarletAzure") == true {
+                unlockButton.backgroundColor = Colors.scarletAzureColors.randomElement() ?? UIColor.blue2
             }
         }
         

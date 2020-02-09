@@ -10,7 +10,7 @@ import UIKit
 
 class ThemeSelectionController: UITableViewController {
     let sections: Array = ["Color Palettes"]
-    let palettes: Array = ["Default", "Sunset", "Kypool", "Celestial", "Apple Vibrant"]
+    let palettes: Array = ["Default", "Sunset", "Kypool", "Celestial", "Scarlet Azure", "Apple Vibrant"]
     
     let settingsController = SettingsController()
     
@@ -67,6 +67,10 @@ class ThemeSelectionController: UITableViewController {
                 cell.accessoryType = .checkmark
             }
         case 4:
+            if isSelectedColorFromDefaults(key: "scarletAzure", indexPath: indexPath) == true {
+                cell.accessoryType = .checkmark
+            }
+        case 5:
             if isSelectedColorFromDefaults(key: "appleVibrant", indexPath: indexPath) == true {
                 cell.accessoryType = .checkmark
             }
@@ -97,7 +101,7 @@ class ThemeSelectionController: UITableViewController {
                 PremiumView.shared.presentPremiumView(viewController: self)
                 tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.accessoryType = .checkmark
                 tableView.cellForRow(at: indexPath)?.accessoryType = .none
-
+                
             } else {
                 defaults.set("sunset", forKey: "noteColorTheme")
                 setNewColorsForExistingNotesIfNotStatic()
@@ -126,6 +130,17 @@ class ThemeSelectionController: UITableViewController {
             }
             
         case 4:
+            if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+                PremiumView.shared.presentPremiumView(viewController: self)
+                tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.accessoryType = .checkmark
+                tableView.cellForRow(at: indexPath)?.accessoryType = .none
+                
+            } else {
+                defaults.set("scarletAzure", forKey: "noteColorTheme")
+                setNewColorsForExistingNotesIfNotStatic()
+            }
+            
+        case 5:
             if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
                 PremiumView.shared.presentPremiumView(viewController: self)
                 tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.accessoryType = .checkmark

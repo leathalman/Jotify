@@ -95,6 +95,8 @@ class WriteNoteView: UIView {
             
         } else if colorTheme == "appleVibrant" {
             randomColor = Colors.appleVibrantColors.randomElement() ?? UIColor.white
+        } else if colorTheme == "scarletAzure" {
+            randomColor = Colors.scarletAzureColors.randomElement() ?? UIColor.white
         }
         
         return randomColor

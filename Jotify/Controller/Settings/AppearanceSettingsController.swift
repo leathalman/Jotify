@@ -305,7 +305,12 @@ class AppearanceSettingsController: UITableViewController {
             } else if colorTheme == "appleVibrant" {
                 newColor = Colors.appleVibrantColorsStrings.randomElement() ?? "white"
                 newBackgroundColor = Colors.appleVibrantColors.randomElement() ?? UIColor.white
+                
+            } else if colorTheme == "scarletAzure" {
+                newColor = Colors.scarletAzureColorsString.randomElement() ?? "white"
+                newBackgroundColor = Colors.scarletAzureColors.randomElement() ?? UIColor.white
             }
+
             
             note.color = newColor
         }
