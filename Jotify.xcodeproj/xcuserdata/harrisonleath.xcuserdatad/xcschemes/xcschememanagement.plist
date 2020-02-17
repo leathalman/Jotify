@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Jotify (Testflight).xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
+		</dict>
 		<key>Jotify.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>

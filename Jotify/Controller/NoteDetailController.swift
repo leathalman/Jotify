@@ -12,7 +12,6 @@ import UserNotifications
 struct EditingData {
     static var index = Int()
     static var newContent = String()
-    static var newDate = Double()
     static var notes = [Note]()
     static var isEditing = Bool()
     static var width = CGFloat()
@@ -23,8 +22,6 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     var backgroundColor: UIColor = .white
     var detailText: String = ""
     var index: Int = 0
-    
-    let newDate = Date.timeIntervalSinceReferenceDate
     
     var datePicker: UIDatePicker = UIDatePicker()
     let toolBar = UIToolbar()
@@ -57,13 +54,12 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        updateContent(index: index, newContent: writeNoteView.inputTextView.text, newDate: newDate)
+        updateContent(index: index, newContent: writeNoteView.inputTextView.text)
         
         EditingData.isEditing = false
     }
     
     func setEditingData() {
-        EditingData.newDate = newDate
         EditingData.index = index
         EditingData.notes = notes
         // use isEditing to determine if we are on the NoteDetailController
@@ -352,17 +348,19 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         }
     }
     
-    func updateContent(index: Int, newContent: String, newDate: Double) {
+    func updateContent(index: Int, newContent: String) {
         if isFiltering == false {
             if notes[index].content != newContent {
                 notes[index].content = newContent
-                notes[index].modifiedDate = newDate
+                notes[index].modifiedDate = Date.timeIntervalSinceReferenceDate
+                print("Note: date updated")
             }
             
         } else if isFiltering == true {
             if filteredNotes[index].content != newContent {
                 filteredNotes[index].content = newContent
-                filteredNotes[index].modifiedDate = newDate
+                filteredNotes[index].modifiedDate = Date.timeIntervalSinceReferenceDate
+                print("Note: date updated")
             }
         }
         
