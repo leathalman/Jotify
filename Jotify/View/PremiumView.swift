@@ -80,7 +80,7 @@ class PremiumView {
         configuration.itemsView.titleFont = .boldSystemFont(ofSize: 17)
         configuration.itemsView.imageSize = .preferred
         configuration.completionButton.hapticFeedback = .impact(.medium)
-        configuration.completionButton.title = "Buy $1.99"
+        configuration.completionButton.title = "Buy \(products.first?.localizedPrice ?? "")"
         configuration.completionButton.insets.bottom = 30
         configuration.apply(animation: .fade)
         

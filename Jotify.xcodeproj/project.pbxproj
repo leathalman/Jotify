@@ -87,6 +87,7 @@
 		F6D18172239C7B1100EAB85C /* AppleIncRootCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = F6D18171239C7B1000EAB85C /* AppleIncRootCertificate.cer */; };
 		F6D18179239C7BEE00EAB85C /* pkcs7_union_accessors.c in Sources */ = {isa = PBXBuildFile; fileRef = F6D18178239C7BEE00EAB85C /* pkcs7_union_accessors.c */; };
 		F6D1817B239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D1817A239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift */; };
+		F6DE443123FCB82F00A45347 /* SKProduct+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DE443023FCB82F00A45347 /* SKProduct+Extensions.swift */; };
 		F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */; };
 /* End PBXBuildFile section */
 
@@ -180,6 +181,7 @@
 		F6D18178239C7BEE00EAB85C /* pkcs7_union_accessors.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pkcs7_union_accessors.c; sourceTree = "<group>"; };
 		F6D1817A239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyLocalReceiptValidator.swift; sourceTree = "<group>"; };
 		F6D1817C239C7C6600EAB85C /* pkcs7_union_accessors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pkcs7_union_accessors.h; sourceTree = "<group>"; };
+		F6DE443023FCB82F00A45347 /* SKProduct+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKProduct+Extensions.swift"; sourceTree = "<group>"; };
 		F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -430,6 +432,7 @@
 				F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */,
 				F692D97623B1CB2C00E47109 /* UINavigationController+Extensions.swift */,
 				F63C489523EFBC7500310CFF /* UIColor+Extensions.swift */,
+				F6DE443023FCB82F00A45347 /* SKProduct+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -624,6 +627,7 @@
 				F61EC8D12348E1BA00FB0A63 /* InMemoryWhatsNewVersionStore.swift in Sources */,
 				F61EC8D52348EE5200FB0A63 /* WriteNoteController+Onboarding.swift in Sources */,
 				F650E15622BFFB12008D29AD /* SettingsController.swift in Sources */,
+				F6DE443123FCB82F00A45347 /* SKProduct+Extensions.swift in Sources */,
 				F6A2C7232340E87A0031A81B /* ReminderExistsController.swift in Sources */,
 				F67B92DE22D2E083002C6985 /* SettingsSwitchCell.swift in Sources */,
 				F63C489823EFBC9D00310CFF /* StoredColors.swift in Sources */,
