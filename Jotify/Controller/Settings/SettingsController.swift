@@ -12,7 +12,8 @@ import UIKit
 class SettingsController: UITableViewController {
     let sections: Array = ["General", "Advanced"]
     let general: Array = ["About", "Appearance", "Privacy", "Alerts"]
-    let advanced: Array = ["Restore Purchases", "Show Tutorial", "Reset Settings to Default", "Delete All Data"]
+    let advanced1: Array = ["Get Premium", "Restore Purchases", "Show Tutorial", "Reset Settings to Default", "Delete All Data"]
+    let advanced2: Array = ["Restore Purchases", "Show Tutorial", "Reset Settings to Default", "Delete All Data"]
     
     let themes = Themes()
     
@@ -138,66 +139,136 @@ class SettingsController: UITableViewController {
             }
             
         } else if indexPath.section == 1 {
-            switch indexPath.row {
-            case 0:
-                let cell = tableView.cellForRow(at: indexPath)
-                cell?.isSelected = false
-                
-                JotifyProducts.store.restorePurchases()
-                checkForRestore()
-            case 1:
-                let writeNoteController = WriteNoteController()
-                writeNoteController.presentFirstLaunchOnboarding(viewController: self, tintColor: StoredColors.noteColor)
-                
-                let cell = tableView.cellForRow(at: indexPath)
-                cell?.isSelected = false
-                
-            case 2:
-                let alert = UIAlertController(title: "Are you sure?", message: "This will reset all settings to default.", preferredStyle: .alert)
-                
-                let cell = tableView.cellForRow(at: indexPath)
-                cell?.isSelected = false
-                
-                alert.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: { _ in
+            
+            if defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
+                switch indexPath.row {
+                case 0:
+                    let cell = tableView.cellForRow(at: indexPath)
+                    cell?.isSelected = false
                     
-                    self.defaults.set("default", forKey: "noteColorTheme")
-                    let appearanceSettingsController = AppearanceSettingsController()
-                    appearanceSettingsController.fetchData()
-                    appearanceSettingsController.setNewColorsForExistingNotes()
+                    JotifyProducts.store.restorePurchases()
+                    checkForRestore()
+                case 1:
+                    let writeNoteController = WriteNoteController()
+                    writeNoteController.presentFirstLaunchOnboarding(viewController: self, tintColor: StoredColors.noteColor)
                     
-                    self.defaults.set(true, forKey: "useRandomColor")
-                    self.defaults.set("date", forKey: "sortBy")
-                    self.defaults.set(true, forKey: "showAlertOnDelete")
-                    self.defaults.set(true, forKey: "showAlertOnSort")
-                    self.defaults.set(false, forKey: "darkModeEnabled")
-                    self.defaults.set(false, forKey: "vibrantDarkModeEnabled")
-                    self.defaults.set(false, forKey: "pureDarkModeEnabled")
-                    self.defaults.set(true, forKey: "isFirstLaunch")
-                    self.defaults.set(false, forKey: "useBiometrics")
-                    self.defaults.set("Start typing or swipe left for saved notes...", forKey: "writeNotePlaceholder")
-                    self.defaults.set(false, forKey: "useMultilineInput")
-                }))
-                
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                present(alert, animated: true)
-                
-            case 3:
-                print("Delete all data")
-                let cell = tableView.cellForRow(at: indexPath)
-                cell?.isSelected = false
-                
-                let alert = UIAlertController(title: "Are you sure?", message: "This will permanently delete all data saved in both iCloud and saved locally on this device.", preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
-                    self.deleteAllNotes(entity: "Note")
-                }))
-                
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                present(alert, animated: true)
-                
-            default:
-                print("default")
+                    let cell = tableView.cellForRow(at: indexPath)
+                    cell?.isSelected = false
+                    
+                case 2:
+                    let alert = UIAlertController(title: "Are you sure?", message: "This will reset all settings to default.", preferredStyle: .alert)
+                    
+                    let cell = tableView.cellForRow(at: indexPath)
+                    cell?.isSelected = false
+                    
+                    alert.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: { _ in
+                        
+                        self.defaults.set("default", forKey: "noteColorTheme")
+                        let appearanceSettingsController = AppearanceSettingsController()
+                        appearanceSettingsController.fetchData()
+                        appearanceSettingsController.setNewColorsForExistingNotes()
+                        
+                        self.defaults.set(true, forKey: "useRandomColor")
+                        self.defaults.set("date", forKey: "sortBy")
+                        self.defaults.set(true, forKey: "showAlertOnDelete")
+                        self.defaults.set(true, forKey: "showAlertOnSort")
+                        self.defaults.set(false, forKey: "darkModeEnabled")
+                        self.defaults.set(false, forKey: "vibrantDarkModeEnabled")
+                        self.defaults.set(false, forKey: "pureDarkModeEnabled")
+                        self.defaults.set(true, forKey: "isFirstLaunch")
+                        self.defaults.set(false, forKey: "useBiometrics")
+                        self.defaults.set("Start typing or swipe left for saved notes...", forKey: "writeNotePlaceholder")
+                        self.defaults.set(false, forKey: "useMultilineInput")
+                    }))
+                    
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    present(alert, animated: true)
+                    
+                case 3:
+                    print("Delete all data")
+                    let cell = tableView.cellForRow(at: indexPath)
+                    cell?.isSelected = false
+                    
+                    let alert = UIAlertController(title: "Are you sure?", message: "This will permanently delete all data saved in both iCloud and saved locally on this device.", preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+                        self.deleteAllNotes(entity: "Note")
+                    }))
+                    
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    present(alert, animated: true)
+                    
+                default:
+                    print("default")
+                }
+            } else {
+                switch indexPath.row {
+                case 0:
+                    let cell = tableView.cellForRow(at: indexPath)
+                    cell?.isSelected = false
+                    
+                    PremiumView.shared.presentPremiumView(viewController: self)
+                case 1:
+                    let cell = tableView.cellForRow(at: indexPath)
+                    cell?.isSelected = false
+                    
+                    JotifyProducts.store.restorePurchases()
+                    checkForRestore()
+                case 2:
+                    let writeNoteController = WriteNoteController()
+                    writeNoteController.presentFirstLaunchOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+                    
+                    let cell = tableView.cellForRow(at: indexPath)
+                    cell?.isSelected = false
+                    
+                case 3:
+                    let alert = UIAlertController(title: "Are you sure?", message: "This will reset all settings to default.", preferredStyle: .alert)
+                    
+                    let cell = tableView.cellForRow(at: indexPath)
+                    cell?.isSelected = false
+                    
+                    alert.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: { _ in
+                        
+                        self.defaults.set("default", forKey: "noteColorTheme")
+                        let appearanceSettingsController = AppearanceSettingsController()
+                        appearanceSettingsController.fetchData()
+                        appearanceSettingsController.setNewColorsForExistingNotes()
+                        
+                        self.defaults.set(true, forKey: "useRandomColor")
+                        self.defaults.set("date", forKey: "sortBy")
+                        self.defaults.set(true, forKey: "showAlertOnDelete")
+                        self.defaults.set(true, forKey: "showAlertOnSort")
+                        self.defaults.set(false, forKey: "darkModeEnabled")
+                        self.defaults.set(false, forKey: "vibrantDarkModeEnabled")
+                        self.defaults.set(false, forKey: "pureDarkModeEnabled")
+                        self.defaults.set(true, forKey: "isFirstLaunch")
+                        self.defaults.set(false, forKey: "useBiometrics")
+                        self.defaults.set("Start typing or swipe left for saved notes...", forKey: "writeNotePlaceholder")
+                        self.defaults.set(false, forKey: "useMultilineInput")
+                    }))
+                    
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    present(alert, animated: true)
+                    
+                case 4:
+                    print("Delete all data")
+                    let cell = tableView.cellForRow(at: indexPath)
+                    cell?.isSelected = false
+                    
+                    let alert = UIAlertController(title: "Are you sure?", message: "This will permanently delete all data saved in both iCloud and saved locally on this device.", preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+                        self.deleteAllNotes(entity: "Note")
+                    }))
+                    
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    present(alert, animated: true)
+                    
+                default:
+                    print("default")
+                }
             }
+            
         }
     }
     
@@ -205,7 +276,11 @@ class SettingsController: UITableViewController {
         if section == 0 {
             return general.count
         } else if section == 1 {
-            return advanced.count
+            if defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
+                return advanced2.count
+            } else {
+                return advanced1.count
+            }
         } else {
             return 0
         }
@@ -274,34 +349,72 @@ class SettingsController: UITableViewController {
             }
             
         } else if indexPath.section == 1 {
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-            cell.textLabel?.text = "\(advanced[indexPath.row])"
+                    
+                    if defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
+                        cell.textLabel?.text = "\(advanced2[indexPath.row])"
+                    } else {
+                        cell.textLabel?.text = "\(advanced1[indexPath.row])"
+                    }
             
-            switch indexPath.row {
-            case 0:
-                cell.backgroundColor = UIColor.white
-                cell.backgroundColor = InterfaceColors.cellColor
-                cell.textLabel?.textColor = Colors.lightBlue
-                setupHighlightCorrection(cell: cell)
-            case 1:
-                cell.backgroundColor = UIColor.white
-                cell.backgroundColor = InterfaceColors.cellColor
-                cell.textLabel?.textColor = Colors.lightBlue
-                setupHighlightCorrection(cell: cell)
-            case 2:
-                cell.backgroundColor = UIColor.white
-                cell.backgroundColor = InterfaceColors.cellColor
-                cell.textLabel?.textColor = Colors.lightBlue
-                setupHighlightCorrection(cell: cell)
-            case 3:
-                cell.backgroundColor = UIColor.white
-                cell.backgroundColor = InterfaceColors.cellColor
-                cell.textLabel?.textColor = UIColor.red
-                setupHighlightCorrection(cell: cell)                
-            default:
-                return cell
+            if defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
+                switch indexPath.row {
+                case 0:
+                    cell.backgroundColor = UIColor.white
+                    cell.backgroundColor = InterfaceColors.cellColor
+                    cell.textLabel?.textColor = Colors.lightBlue
+                    setupHighlightCorrection(cell: cell)
+                case 1:
+                    cell.backgroundColor = UIColor.white
+                    cell.backgroundColor = InterfaceColors.cellColor
+                    cell.textLabel?.textColor = Colors.lightBlue
+                    setupHighlightCorrection(cell: cell)
+                case 2:
+                    cell.backgroundColor = UIColor.white
+                    cell.backgroundColor = InterfaceColors.cellColor
+                    cell.textLabel?.textColor = Colors.lightBlue
+                    setupHighlightCorrection(cell: cell)
+                case 3:
+                    cell.backgroundColor = UIColor.white
+                    cell.backgroundColor = InterfaceColors.cellColor
+                    cell.textLabel?.textColor = UIColor.red
+                    setupHighlightCorrection(cell: cell)
+                default:
+                    return cell
+                }
+                
+            } else {
+                switch indexPath.row {
+                case 0:
+                    cell.backgroundColor = UIColor.white
+                    cell.backgroundColor = InterfaceColors.cellColor
+                    cell.textLabel?.textColor = Colors.lightBlue
+                    setupHighlightCorrection(cell: cell)
+                case 1:
+                    cell.backgroundColor = UIColor.white
+                    cell.backgroundColor = InterfaceColors.cellColor
+                    cell.textLabel?.textColor = Colors.lightBlue
+                    setupHighlightCorrection(cell: cell)
+                case 2:
+                    cell.backgroundColor = UIColor.white
+                    cell.backgroundColor = InterfaceColors.cellColor
+                    cell.textLabel?.textColor = Colors.lightBlue
+                    setupHighlightCorrection(cell: cell)
+                case 3:
+                    cell.backgroundColor = UIColor.white
+                    cell.backgroundColor = InterfaceColors.cellColor
+                    cell.textLabel?.textColor = Colors.lightBlue
+                    setupHighlightCorrection(cell: cell)
+                case 4:
+                    cell.backgroundColor = UIColor.white
+                    cell.backgroundColor = InterfaceColors.cellColor
+                    cell.textLabel?.textColor = UIColor.red
+                    setupHighlightCorrection(cell: cell)
+                default:
+                    return cell
+                }
             }
-            
             return cell
             
         } else {
