@@ -27,7 +27,7 @@ extension WriteNoteController {
             if previousVersion != nil {
                 // new version
                 print("new version")
-//                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
                 
                 // if user has premium, go ahead and enable automatic light/dark mode
                 if UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.Premium") {
@@ -45,23 +45,23 @@ extension WriteNoteController {
     }
     
     func presentUpdateOnboarding(viewController: UIViewController, tintColor: UIColor) {
-        // Jotify v1.3.0 Onboarding
+        // Jotify v1.2.2 Onboarding
         let whatsNew = WhatsNew(
-            title: "What's New - v1.2.1",
+            title: "What's New - v1.2.2",
             items: [
                 WhatsNew.Item(
-                    title: "Major Changes",
-                    subtitle: "• Jotify now natively supports iPadOS! If you have an iPad, download Jotify on that device to experience a powerful, multi-window experience. All of your notes will sync seamlessly between your iPhone and iPad; I would love for you to try it out!\n• If you have Jotify Premium, Jotify will now automatically sync with iOS light/dark modes! You don't have to worry about setting Jotify to dark mode manually anymore.",
+                    title: "Major Changes - SALE!",
+                    subtitle: "• There is a limited time sale on Jotify Premium! Get it for only 99 cents (50% off)!\n• Jotify now has a 6th color scheme, \"Scarlet Azure\", check it out in settings!",
                     image: UIImage(named: "bell")
                 ),
                 WhatsNew.Item(
                     title: "Minor Improvements",
-                    subtitle: "• Opening a note without editing its contents will no longer update the date of the note.\n• Notes will no longer be assigned the same random color twice in a row.\n• App badge number is automatically set to zero when no reminders are present.",
+                    subtitle: "• Added dark icon support for iPad! If you own Jotify Premium, you can enable this by settings -> about -> click on the Jotify icon.",
                     image: UIImage(named: "add")
                 ),
                 WhatsNew.Item(
                     title: "Bug Fixes",
-                    subtitle: "• Fixed a bug where changing the theme while writing a note would produce two different colored backgrounds.",
+                    subtitle: "• Fixed a bug where using mass delete would not correctly update the app badge.\n• Fixed a bug that would incorrectly sort notes when searching.",
                     image: UIImage(named: "bugFix")
                 ),
             ]
