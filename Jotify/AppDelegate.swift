@@ -53,9 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case .AppStore:
             print("AppStore")
         }
-        
-        UserDefaults.standard.set(false, forKey: "com.austinleath.Jotify.Premium")
-        
+                
         return true
     }
     
