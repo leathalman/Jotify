@@ -43,8 +43,8 @@
 		F63C489023EF7CE300310CFF /* Light@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F63C488C23EF7CE300310CFF /* Light@2x~ipad.png */; };
 		F63C489623EFBC7500310CFF /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63C489523EFBC7500310CFF /* UIColor+Extensions.swift */; };
 		F63C489823EFBC9D00310CFF /* StoredColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63C489723EFBC9D00310CFF /* StoredColors.swift */; };
-		F63C489A23EFBCC500310CFF /* Colors+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63C489923EFBCC500310CFF /* Colors+Formatting.swift */; };
-		F63C489C23EFBF7C00310CFF /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63C489123EFBBE900310CFF /* Colors.swift */; };
+		F63C489A23EFBCC500310CFF /* UIColors+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63C489923EFBCC500310CFF /* UIColors+Formatting.swift */; };
+		F63C489C23EFBF7C00310CFF /* UIColors+Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63C489123EFBBE900310CFF /* UIColors+Themes.swift */; };
 		F644968622C16422009CC386 /* NoteDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F644968522C16422009CC386 /* NoteDetailController.swift */; };
 		F650E13322BFF35A008D29AD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650E13222BFF35A008D29AD /* SceneDelegate.swift */; };
 		F650E13D22BFF35C008D29AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F650E13C22BFF35C008D29AD /* Assets.xcassets */; };
@@ -129,10 +129,10 @@
 		F63C488A23EF7CE200310CFF /* Golden2@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Golden2@3x~ipad.png"; sourceTree = "<group>"; };
 		F63C488B23EF7CE200310CFF /* Light@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Light@3x~ipad.png"; sourceTree = "<group>"; };
 		F63C488C23EF7CE300310CFF /* Light@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Light@2x~ipad.png"; sourceTree = "<group>"; };
-		F63C489123EFBBE900310CFF /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		F63C489123EFBBE900310CFF /* UIColors+Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColors+Themes.swift"; sourceTree = "<group>"; };
 		F63C489523EFBC7500310CFF /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		F63C489723EFBC9D00310CFF /* StoredColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredColors.swift; sourceTree = "<group>"; };
-		F63C489923EFBCC500310CFF /* Colors+Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+Formatting.swift"; sourceTree = "<group>"; };
+		F63C489923EFBCC500310CFF /* UIColors+Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColors+Formatting.swift"; sourceTree = "<group>"; };
 		F644968522C16422009CC386 /* NoteDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailController.swift; sourceTree = "<group>"; };
 		F650E12D22BFF35A008D29AD /* Jotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F650E13022BFF35A008D29AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -307,8 +307,8 @@
 			isa = PBXGroup;
 			children = (
 				F63C489723EFBC9D00310CFF /* StoredColors.swift */,
-				F63C489923EFBCC500310CFF /* Colors+Formatting.swift */,
-				F63C489123EFBBE900310CFF /* Colors.swift */,
+				F63C489923EFBCC500310CFF /* UIColors+Formatting.swift */,
+				F63C489123EFBBE900310CFF /* UIColors+Themes.swift */,
 			);
 			path = Colors;
 			sourceTree = "<group>";
@@ -428,8 +428,8 @@
 				F65E479C2324B10500FCAEF3 /* UIViewController+Extensions.swift */,
 				F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */,
 				F692D97623B1CB2C00E47109 /* UINavigationController+Extensions.swift */,
-				F63C489523EFBC7500310CFF /* UIColor+Extensions.swift */,
 				F6DE443023FCB82F00A45347 /* SKProduct+Extensions.swift */,
+				F63C489523EFBC7500310CFF /* UIColor+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -628,7 +628,7 @@
 				F6A2C7232340E87A0031A81B /* ReminderExistsController.swift in Sources */,
 				F67B92DE22D2E083002C6985 /* SettingsSwitchCell.swift in Sources */,
 				F63C489823EFBC9D00310CFF /* StoredColors.swift in Sources */,
-				F63C489A23EFBCC500310CFF /* Colors+Formatting.swift in Sources */,
+				F63C489A23EFBCC500310CFF /* UIColors+Formatting.swift in Sources */,
 				F650E16722BFFB20008D29AD /* SavedNoteCell.swift in Sources */,
 				F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */,
 				F692D97723B1CB2C00E47109 /* UINavigationController+Extensions.swift in Sources */,
@@ -651,7 +651,7 @@
 				F6A7E4C6238F244800D3E6AF /* JotifyProducts.swift in Sources */,
 				F61EC8BD2348E1BA00FB0A63 /* WhatsNewViewController+CompletionButton.swift in Sources */,
 				F61EC8C02348E1BA00FB0A63 /* WhatsNewViewController+ItemsView.swift in Sources */,
-				F63C489C23EFBF7C00310CFF /* Colors.swift in Sources */,
+				F63C489C23EFBF7C00310CFF /* UIColors+Themes.swift in Sources */,
 				F6A7E4C4238F243200D3E6AF /* IAPHandler.swift in Sources */,
 				F650E13322BFF35A008D29AD /* SceneDelegate.swift in Sources */,
 				F67B92E022D2E785002C6985 /* ColorPickerController.swift in Sources */,

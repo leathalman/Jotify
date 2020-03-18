@@ -27,7 +27,7 @@ extension WriteNoteController {
             if previousVersion != nil {
                 // new version
                 print("new version")
-                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+//                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
                 
                 // if user has premium, go ahead and enable automatic light/dark mode
                 if UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.Premium") {

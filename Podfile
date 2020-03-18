@@ -1,9 +1,8 @@
+# Pods for Jotify
 platform :ios, '12.0'
 
 target 'Jotify' do
   use_frameworks!
-
-  # Pods for Sticky Notes
   
 # Used in WriteNoteView.swift to create a UITextView with a placeholder
 pod'MultilineTextField'
