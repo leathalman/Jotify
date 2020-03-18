@@ -230,26 +230,26 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         if defaults.bool(forKey: "showAlertOnSort") == true {
             if defaults.bool(forKey: "useRandomColor") == false {
-                actionController.backgroundColor = defaults.color(forKey: "staticNoteColor") ?? Colors.blue2
+                actionController.backgroundColor = defaults.color(forKey: "staticNoteColor") ?? UIColor.blue2
                 
             } else if defaults.bool(forKey: "darkModeEnabled") == false {
                 if isSelectedColorFromDefaults(key: "default") == true {
-                    actionController.backgroundColor = Colors.defaultColors.randomElement() ?? Colors.blue2
+                    actionController.backgroundColor = UIColor.defaultColors.randomElement() ?? UIColor.blue2
                     
                 } else if isSelectedColorFromDefaults(key: "sunset") == true {
-                    actionController.backgroundColor = Colors.sunsetColors.randomElement() ?? Colors.blue2
+                    actionController.backgroundColor = UIColor.sunsetColors.randomElement() ?? UIColor.blue2
                     
                 } else if isSelectedColorFromDefaults(key: "kypool") == true {
-                    actionController.backgroundColor = Colors.kypoolColors.randomElement() ?? Colors.blue2
+                    actionController.backgroundColor = UIColor.kypoolColors.randomElement() ?? UIColor.blue2
                     
                 } else if isSelectedColorFromDefaults(key: "celestial") == true {
-                    actionController.backgroundColor = Colors.celestialColors.randomElement() ?? Colors.blue2
+                    actionController.backgroundColor = UIColor.celestialColors.randomElement() ?? UIColor.blue2
                     
                 } else if isSelectedColorFromDefaults(key: "appleVibrant") == true {
-                    actionController.backgroundColor = Colors.appleVibrantColors.randomElement() ?? Colors.blue2
+                    actionController.backgroundColor = UIColor.appleVibrantColors.randomElement() ?? UIColor.blue2
                     
                 } else if isSelectedColorFromDefaults(key: "scarletAzure") == true {
-                    actionController.backgroundColor = Colors.scarletAzureColors.randomElement() ?? Colors.blue2
+                    actionController.backgroundColor = UIColor.scarletAzureColors.randomElement() ?? UIColor.blue2
                 }
                 
             } else if defaults.bool(forKey: "darkModeEnabled") == true {
@@ -437,8 +437,8 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         noteDetailController.navigationController?.navigationItem.title = dateString
         noteDetailController.navigationTitle = dateString
         
-        var cellColor: UIColor = Colors.blue2
-        cellColor = Colors.colorFromString(string: color)
+        var cellColor: UIColor = .blue2
+        cellColor = UIColor.colorFromString(string: color)
         
         noteDetailController.backgroundColor = cellColor
         noteDetailController.detailText = content
@@ -457,7 +457,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         let color = note.value(forKey: "color") as! String
         let content = note.value(forKey: "content") as! String
         var cellColor = UIColor(red: 18 / 255.0, green: 165 / 255.0, blue: 244 / 255.0, alpha: 1.0)
-        cellColor = Colors.colorFromString(string: color)
+        cellColor = UIColor.colorFromString(string: color)
         
         let actionController = SkypeActionController()
         
@@ -509,7 +509,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         let toolBar = navigationController?.toolbar
         if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") == true {
             toolBar?.tintColor = .white
-            toolBar?.barTintColor = Colors.grayBackground
+            toolBar?.barTintColor = UIColor.grayBackground
             toolBar?.sizeToFit()
         } else if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") == true {
             toolBar?.tintColor = .white
@@ -725,7 +725,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         let dateString = dateFormatter.string(from: updateDate)
         cell.dateLabel.text = dateString
         
-        let cellColor = Colors.colorFromString(string: color)
+        let cellColor = UIColor.colorFromString(string: color)
         
         if cellColor == UIColor.white {
             cell.textLabel.textColor = .black
@@ -738,8 +738,8 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                 cell.contentView.tintColor = cellColor
                 
             } else if defaults.bool(forKey: "pureDarkModeEnabled") == true {
-                cell.contentView.backgroundColor = Colors.offBlackBackground
-                cell.contentView.tintColor = Colors.offBlackBackground
+                cell.contentView.backgroundColor = UIColor.offBlackBackground
+                cell.contentView.tintColor = UIColor.offBlackBackground
             }
             
         } else {
@@ -751,7 +751,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             cell.layer.borderWidth = 5.5
             
             if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") == true {
-                cell.layer.borderColor = Colors.grayBackground.adjust(by: 10)?.cgColor
+                cell.layer.borderColor = UIColor.grayBackground.adjust(by: 10)?.cgColor
                 cell.layer.cornerRadius = 5
                 
             } else {

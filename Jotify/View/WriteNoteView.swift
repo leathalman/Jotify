@@ -71,7 +71,7 @@ class WriteNoteView: UIView {
             backgroundColor = randomColor
         } else if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
             if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") == true {
-                backgroundColor = Colors.grayBackground
+                backgroundColor = UIColor.grayBackground
             } else if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") == true {
                 backgroundColor = .black
             }
@@ -82,21 +82,21 @@ class WriteNoteView: UIView {
         var randomColor = UIColor.white
         
         if colorTheme == "default" {
-            randomColor = Colors.defaultColors.randomElement() ?? UIColor.white
+            randomColor = UIColor.defaultColors.randomElement() ?? UIColor.white
             
         } else if colorTheme == "sunset" {
-            randomColor = Colors.sunsetColors.randomElement() ?? UIColor.white
+            randomColor = UIColor.sunsetColors.randomElement() ?? UIColor.white
             
         } else if colorTheme == "kypool" {
-            randomColor = Colors.kypoolColors.randomElement() ?? UIColor.white
+            randomColor = UIColor.kypoolColors.randomElement() ?? UIColor.white
             
         } else if colorTheme == "celestial" {
-            randomColor = Colors.celestialColors.randomElement() ?? UIColor.white
+            randomColor = UIColor.celestialColors.randomElement() ?? UIColor.white
             
         } else if colorTheme == "appleVibrant" {
-            randomColor = Colors.appleVibrantColors.randomElement() ?? UIColor.white
+            randomColor = UIColor.appleVibrantColors.randomElement() ?? UIColor.white
         } else if colorTheme == "scarletAzure" {
-            randomColor = Colors.scarletAzureColors.randomElement() ?? UIColor.white
+            randomColor = UIColor.scarletAzureColors.randomElement() ?? UIColor.white
         }
         
         return randomColor

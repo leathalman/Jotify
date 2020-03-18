@@ -33,7 +33,7 @@ class AppearanceSettingsController: UITableViewController {
         
         navigationItem.title = "Appearance"
         
-        UIApplication.shared.windows.first?.backgroundColor = Colors.grayBackground
+        UIApplication.shared.windows.first?.backgroundColor = UIColor.grayBackground
         
         tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
@@ -287,28 +287,28 @@ class AppearanceSettingsController: UITableViewController {
             let colorTheme = defaults.string(forKey: "noteColorTheme")
             
             if colorTheme == "default" {
-                newColor = Colors.defaultColorsStrings.randomElement() ?? "white"
-                newBackgroundColor = Colors.defaultColors.randomElement() ?? UIColor.white
+                newColor = UIColor.defaultColorsStrings.randomElement() ?? "white"
+                newBackgroundColor = UIColor.defaultColors.randomElement() ?? UIColor.white
                 
             } else if colorTheme == "sunset" {
-                newColor = Colors.sunsetColorsStrings.randomElement() ?? "white"
-                newBackgroundColor = Colors.sunsetColors.randomElement() ?? UIColor.white
+                newColor = UIColor.sunsetColorsStrings.randomElement() ?? "white"
+                newBackgroundColor = UIColor.sunsetColors.randomElement() ?? UIColor.white
                 
             } else if colorTheme == "kypool" {
-                newColor = Colors.kypoolColorsStrings.randomElement() ?? "white"
-                newBackgroundColor = Colors.kypoolColors.randomElement() ?? UIColor.white
+                newColor = UIColor.kypoolColorsStrings.randomElement() ?? "white"
+                newBackgroundColor = UIColor.kypoolColors.randomElement() ?? UIColor.white
                 
             } else if colorTheme == "celestial" {
-                newColor = Colors.celestialColorsStrings.randomElement() ?? "white"
-                newBackgroundColor = Colors.celestialColors.randomElement() ?? UIColor.white
+                newColor = UIColor.celestialColorsStrings.randomElement() ?? "white"
+                newBackgroundColor = UIColor.celestialColors.randomElement() ?? UIColor.white
                 
             } else if colorTheme == "appleVibrant" {
-                newColor = Colors.appleVibrantColorsStrings.randomElement() ?? "white"
-                newBackgroundColor = Colors.appleVibrantColors.randomElement() ?? UIColor.white
+                newColor = UIColor.appleVibrantColorsStrings.randomElement() ?? "white"
+                newBackgroundColor = UIColor.appleVibrantColors.randomElement() ?? UIColor.white
                 
             } else if colorTheme == "scarletAzure" {
-                newColor = Colors.scarletAzureColorsString.randomElement() ?? "white"
-                newBackgroundColor = Colors.scarletAzureColors.randomElement() ?? UIColor.white
+                newColor = UIColor.scarletAzureColorsString.randomElement() ?? "white"
+                newBackgroundColor = UIColor.scarletAzureColors.randomElement() ?? UIColor.white
             }
 
             

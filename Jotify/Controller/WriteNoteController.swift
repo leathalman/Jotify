@@ -70,7 +70,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     
     func setupDynamicBackground() {
         if defaults.bool(forKey: "vibrantDarkModeEnabled") {
-            writeNoteView.backgroundColor = Colors.grayBackground
+            writeNoteView.backgroundColor = UIColor.grayBackground
         } else if defaults.bool(forKey: "pureDarkModeEnabled") {
             writeNoteView.backgroundColor = .black
         } else if defaults.bool(forKey: "darkModeEnabled") == false {
@@ -150,7 +150,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     @objc func handleSend() {
         if writeNoteView.inputTextView.text == "" {
         } else {
-            StoredColors.noteColorString = Colors.stringFromColor(color: StoredColors.noteColor)
+            StoredColors.noteColorString = UIColor.stringFromColor(color: StoredColors.noteColor)
             
             let date = Date.timeIntervalSinceReferenceDate
             saveNote(content: writeNoteView.inputTextView.text, color: StoredColors.noteColorString, date: date)

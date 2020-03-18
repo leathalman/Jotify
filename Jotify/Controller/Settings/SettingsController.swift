@@ -32,7 +32,7 @@ class SettingsController: UITableViewController {
         
         navigationItem.title = "Settings"
         
-        UIApplication.shared.windows.first?.backgroundColor = Colors.grayBackground
+        UIApplication.shared.windows.first?.backgroundColor = UIColor.grayBackground
         
         tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
@@ -363,17 +363,17 @@ class SettingsController: UITableViewController {
                 case 0:
                     cell.backgroundColor = UIColor.white
                     cell.backgroundColor = InterfaceColors.cellColor
-                    cell.textLabel?.textColor = Colors.lightBlue
+                    cell.textLabel?.textColor = UIColor.lightBlue
                     setupHighlightCorrection(cell: cell)
                 case 1:
                     cell.backgroundColor = UIColor.white
                     cell.backgroundColor = InterfaceColors.cellColor
-                    cell.textLabel?.textColor = Colors.lightBlue
+                    cell.textLabel?.textColor = UIColor.lightBlue
                     setupHighlightCorrection(cell: cell)
                 case 2:
                     cell.backgroundColor = UIColor.white
                     cell.backgroundColor = InterfaceColors.cellColor
-                    cell.textLabel?.textColor = Colors.lightBlue
+                    cell.textLabel?.textColor = UIColor.lightBlue
                     setupHighlightCorrection(cell: cell)
                 case 3:
                     cell.backgroundColor = UIColor.white
@@ -389,22 +389,22 @@ class SettingsController: UITableViewController {
                 case 0:
                     cell.backgroundColor = UIColor.white
                     cell.backgroundColor = InterfaceColors.cellColor
-                    cell.textLabel?.textColor = Colors.lightBlue
+                    cell.textLabel?.textColor = UIColor.lightBlue
                     setupHighlightCorrection(cell: cell)
                 case 1:
                     cell.backgroundColor = UIColor.white
                     cell.backgroundColor = InterfaceColors.cellColor
-                    cell.textLabel?.textColor = Colors.lightBlue
+                    cell.textLabel?.textColor = UIColor.lightBlue
                     setupHighlightCorrection(cell: cell)
                 case 2:
                     cell.backgroundColor = UIColor.white
                     cell.backgroundColor = InterfaceColors.cellColor
-                    cell.textLabel?.textColor = Colors.lightBlue
+                    cell.textLabel?.textColor = UIColor.lightBlue
                     setupHighlightCorrection(cell: cell)
                 case 3:
                     cell.backgroundColor = UIColor.white
                     cell.backgroundColor = InterfaceColors.cellColor
-                    cell.textLabel?.textColor = Colors.lightBlue
+                    cell.textLabel?.textColor = UIColor.lightBlue
                     setupHighlightCorrection(cell: cell)
                 case 4:
                     cell.backgroundColor = UIColor.white
@@ -468,11 +468,11 @@ class SettingsController: UITableViewController {
     func setupHighlightCorrection(cell: UITableViewCell) {
         if defaults.bool(forKey: "useSystemMode") == false && defaults.bool(forKey: "darkModeEnabled") == false {
             let backgroundView = UIView()
-            backgroundView.backgroundColor = Colors.cellHighlightDefault
+            backgroundView.backgroundColor = UIColor.cellHighlightDefault
             cell.selectedBackgroundView = backgroundView
         } else if defaults.bool(forKey: "useSystemMode") == false && defaults.bool(forKey: "darkModeEnabled") {
             let backgroundView = UIView()
-            backgroundView.backgroundColor = Colors.cellHighlightDark
+            backgroundView.backgroundColor = UIColor.cellHighlightDark
             cell.selectedBackgroundView = backgroundView
         } else {
             cell.selectedBackgroundView = nil

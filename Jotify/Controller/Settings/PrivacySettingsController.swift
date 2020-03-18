@@ -36,7 +36,7 @@ class PrivacySettingsController: UITableViewController {
         
         setupDynamicElements()
         
-        UIApplication.shared.windows.first?.backgroundColor = Colors.grayBackground
+        UIApplication.shared.windows.first?.backgroundColor = UIColor.grayBackground
         
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
     }
@@ -67,22 +67,22 @@ class PrivacySettingsController: UITableViewController {
             
         } else {
             if isSelectedColorFromDefaults(key: "default") == true {
-                unlockButton.backgroundColor = Colors.defaultColors.randomElement() ?? Colors.blue2
+                unlockButton.backgroundColor = UIColor.defaultColors.randomElement() ?? UIColor.blue2
                 
             } else if isSelectedColorFromDefaults(key: "sunset") == true {
-                unlockButton.backgroundColor = Colors.sunsetColors.randomElement() ?? Colors.blue2
+                unlockButton.backgroundColor = UIColor.sunsetColors.randomElement() ?? UIColor.blue2
                 
             } else if isSelectedColorFromDefaults(key: "kypool") == true {
-                unlockButton.backgroundColor = Colors.kypoolColors.randomElement() ?? Colors.blue2
+                unlockButton.backgroundColor = UIColor.kypoolColors.randomElement() ?? UIColor.blue2
                 
             } else if isSelectedColorFromDefaults(key: "celestial") == true {
-                unlockButton.backgroundColor = Colors.celestialColors.randomElement() ?? Colors.blue2
+                unlockButton.backgroundColor = UIColor.celestialColors.randomElement() ?? UIColor.blue2
                 
             } else if isSelectedColorFromDefaults(key: "appleVibrant") == true {
-                unlockButton.backgroundColor = Colors.appleVibrantColors.randomElement() ?? Colors.blue2
+                unlockButton.backgroundColor = UIColor.appleVibrantColors.randomElement() ?? UIColor.blue2
                 
             } else if isSelectedColorFromDefaults(key: "scarletAzure") == true {
-                unlockButton.backgroundColor = Colors.scarletAzureColors.randomElement() ?? Colors.blue2
+                unlockButton.backgroundColor = UIColor.scarletAzureColors.randomElement() ?? UIColor.blue2
             }
         }
         

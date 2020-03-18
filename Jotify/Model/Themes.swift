@@ -22,20 +22,20 @@ struct InterfaceColors {
 
 class Themes {
     func setupVibrantDarkMode() {
-        InterfaceColors.writeViewColor = Colors.grayBackground
-        InterfaceColors.viewBackgroundColor = Colors.grayBackground
-        InterfaceColors.cellColor = Colors.cellDark
+        InterfaceColors.writeViewColor = UIColor.grayBackground
+        InterfaceColors.viewBackgroundColor = UIColor.grayBackground
+        InterfaceColors.cellColor = UIColor.cellDark
         InterfaceColors.fontColor = .white
-        InterfaceColors.navigationBarColor = Colors.grayBackground
-        InterfaceColors.searchBarColor = Colors.grayBackground
-        InterfaceColors.actionSheetColor = Colors.grayBackground
+        InterfaceColors.navigationBarColor = UIColor.grayBackground
+        InterfaceColors.searchBarColor = UIColor.grayBackground
+        InterfaceColors.actionSheetColor = UIColor.grayBackground
         InterfaceColors.separatorColor = .white
     }
 
     func setupPureDarkMode() {
         InterfaceColors.writeViewColor = .black
         InterfaceColors.viewBackgroundColor = .black
-        InterfaceColors.cellColor = Colors.cellPureDark ?? Colors.cellDark
+        InterfaceColors.cellColor = UIColor.cellPureDark ?? UIColor.cellDark
         InterfaceColors.fontColor = .white
         InterfaceColors.navigationBarColor = .black
         InterfaceColors.searchBarColor = .black
@@ -47,7 +47,7 @@ class Themes {
         InterfaceColors.viewBackgroundColor = .white
         InterfaceColors.navigationBarColor = .white
         InterfaceColors.searchBarColor = .white
-        InterfaceColors.cellColor = Colors.cellLight
+        InterfaceColors.cellColor = UIColor.cellLight
         InterfaceColors.fontColor = .black
     }
     
