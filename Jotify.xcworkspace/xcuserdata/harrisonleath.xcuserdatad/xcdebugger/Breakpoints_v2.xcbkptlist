@@ -32,8 +32,8 @@
          <BreakpointContent
             uuid = "A0D0C446-FCDD-4EA9-9A6B-3BC8C8C2681E"
             shouldBeEnabled = "Yes"
-            ignoreCount = "0"
             condition = "$arg3 == nil"
+            ignoreCount = "0"
             continueAfterRunningActions = "No"
             symbolName = "[UIImage imageNamed:]"
             moduleName = "">

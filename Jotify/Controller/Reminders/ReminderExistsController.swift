@@ -87,12 +87,12 @@ class ReminderExistsController: BottomPopupViewController {
     }
     
     func setupDynamicColors() {
-        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+        if UserDefaults.standard.bool(forKey: "darkModeEnabled") {
             view.backgroundColor = UIColor.grayBackground
             let removeButtonColor = UIColor.grayBackground.adjust(by: 4.75)
             removeButton.backgroundColor = removeButtonColor
             
-        } else if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+        } else {
             view.backgroundColor = noteColor
             removeButton.backgroundColor = noteColor.adjust(by: -7.75)
         }
@@ -103,19 +103,19 @@ class ReminderExistsController: BottomPopupViewController {
         let reminderController = ReminderController()
         reminderController.feedbackOnPress()
         
-        if isFiltering == false {
-            let notificationUUID = notes[index].notificationUUID ?? "empty error in ReminderExistsController"
-            let center = UNUserNotificationCenter.current()
-            center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
-            notes[index].notificationUUID = "cleared"
-            notes[index].isReminder = false
-            
-        } else if isFiltering == true {
+        if isFiltering {
             let notificationUUID = filteredNotes[index].notificationUUID ?? "empty error in ReminderExistsController"
             let center = UNUserNotificationCenter.current()
             center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
             filteredNotes[index].notificationUUID = "cleared"
             filteredNotes[index].isReminder = false
+            
+        } else {
+            let notificationUUID = notes[index].notificationUUID ?? "empty error in ReminderExistsController"
+            let center = UNUserNotificationCenter.current()
+            center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
+            notes[index].notificationUUID = "cleared"
+            notes[index].isReminder = false
         }
         
         CoreDataManager.shared.enqueue { context in
@@ -145,11 +145,8 @@ class ReminderExistsController: BottomPopupViewController {
     
     func estimatedLabelHeight(text: String, width: CGFloat, font: UIFont) -> CGFloat {
         let size = CGSize(width: width, height: 1000)
-        
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-        
         let attributes = [NSAttributedString.Key.font: font]
-        
         let rectangleHeight = String(text).boundingRect(with: size, options: options, attributes: attributes, context: nil).height
         
         return rectangleHeight
@@ -158,11 +155,10 @@ class ReminderExistsController: BottomPopupViewController {
     override func getPopupHeight() -> CGFloat {
         let titleText = titleLabel.text ?? ""
         let titleHeight = estimatedLabelHeight(text: titleText, width: UIScreen.main.bounds.width - 30, font: .boldSystemFont(ofSize: 35))
-
         let detailText = detailLabel.text ?? ""
         let detailHeight = estimatedLabelHeight(text: detailText, width: UIScreen.main.bounds.width / 1.15, font: .boldSystemFont(ofSize: 20))
-
-        if popupHeight != 0 {
+        
+        if !popupHeight.isZero {
             return (popupHeight / 11) + (detailHeight + 30) + (titleHeight + 40) + 90
         } else {
             return (UIScreen.main.bounds.height / 11) + (detailHeight + 30) + (titleHeight + 40) + 90

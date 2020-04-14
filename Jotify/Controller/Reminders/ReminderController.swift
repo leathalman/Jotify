@@ -92,17 +92,17 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     }
     
     func updateContentWithReminder(reminderDate: String, notificationUUID: String, reminderDateDisplay: String) {
-        if isFiltering == false {
-            notes[index].isReminder = true
-            notes[index].reminderDate = reminderDate
-            notes[index].notificationUUID = notificationUUID
-            notes[index].reminderDateDisplay = reminderDateDisplay
-            
-        } else if isFiltering == true {
+        if isFiltering {
             filteredNotes[index].isReminder = true
-            filteredNotes[index].reminderDate = reminderDate
-            filteredNotes[index].notificationUUID = notificationUUID
-            filteredNotes[index].reminderDateDisplay = reminderDateDisplay
+                 filteredNotes[index].reminderDate = reminderDate
+                 filteredNotes[index].notificationUUID = notificationUUID
+                 filteredNotes[index].reminderDateDisplay = reminderDateDisplay
+            
+        } else {
+            notes[index].isReminder = true
+                  notes[index].reminderDate = reminderDate
+                  notes[index].notificationUUID = notificationUUID
+                  notes[index].reminderDateDisplay = reminderDateDisplay
         }
         
         CoreDataManager.shared.enqueue { context in
@@ -116,13 +116,13 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     }
     
     func setupDynamicColors() {
-        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+        if UserDefaults.standard.bool(forKey: "darkModeEnabled") {
             view.backgroundColor = UIColor.grayBackground
             datePicker.backgroundColor = UIColor.grayBackground
             let confirmButtonColor = UIColor.grayBackground.adjust(by: 4.75)
             confirmButton.backgroundColor = confirmButtonColor
             
-        } else if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+        } else {
             view.backgroundColor = noteColor
             datePicker.backgroundColor = noteColor
             confirmButton.backgroundColor = noteColor.adjust(by: -7.75)
@@ -183,12 +183,12 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     }
     
     func feedbackOnPress() {
-        if UIDevice.current.hasTapticEngine == true {
+        if UIDevice.current.hasTapticEngine {
             // iPhone 6s and iPhone 6s Plus
             let peek = SystemSoundID(1519)
             AudioServicesPlaySystemSoundWithCompletion(peek, nil)
             
-        } else if UIDevice.current.hasHapticFeedback == true {
+        } else if UIDevice.current.hasHapticFeedback {
             // iPhone 7 and newer
             let generator = UIImpactFeedbackGenerator(style: .medium)
             generator.impactOccurred()
@@ -196,7 +196,7 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     }
     
     override func getPopupHeight() -> CGFloat {
-        if popupHeight != 0 {
+        if !popupHeight.isZero {
             return popupHeight / 11 + 80 + datePicker.frame.height + 30
         } else {
             return 80 + (screenHeight / 11) + datePicker.frame.height + 30

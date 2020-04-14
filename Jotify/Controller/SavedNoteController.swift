@@ -18,8 +18,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     var notes: [Note] = []
     var filteredNotes: [Note] = []
     
-    var pressed: Int = 0
-    
     let emptyView = EmptyView()
     
     let searchController = UISearchController(searchResultsController: nil)
@@ -118,14 +116,14 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     }
     
     func resetAppBadgeIfAllRemindersCleared() {
-        var count = 0
+        var count: CGFloat = 0
         for note in notes {
             if note.isReminder {
                 count += 1
             }
         }
         
-        if count == 0 {
+        if count.isZero {
             UIApplication.shared.applicationIconBadgeNumber = 0
         }
         
@@ -140,7 +138,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         setupDynamicSearchBar()
         
-        if defaults.bool(forKey: "darkModeEnabled") == true {
+        if defaults.bool(forKey: "darkModeEnabled") {
             searchController.searchBar.barTintColor = InterfaceColors.searchBarColor
             searchController.searchBar.backgroundImage = UIImage()
             
@@ -169,9 +167,9 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     }
     
     func setupDynamicSearchBar() {
-        if defaults.bool(forKey: "useSystemMode") == false && defaults.bool(forKey: "darkModeEnabled") == false {
+        if !defaults.bool(forKey: "useSystemMode") && !defaults.bool(forKey: "darkModeEnabled") {
             setupLightSearchBar()
-        } else if defaults.bool(forKey: "useSystemMode") == false && defaults.bool(forKey: "darkModeEnabled") == true {
+        } else if !defaults.bool(forKey: "useSystemMode") && defaults.bool(forKey: "darkModeEnabled") {
             setupDarkSearchBar()
         } else if defaults.bool(forKey: "useSystemMode") && traitCollection.userInterfaceStyle == .light {
             setupLightSearchBar()
@@ -228,31 +226,32 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         let actionController = SkypeActionController()
         
-        if defaults.bool(forKey: "showAlertOnSort") == true {
-            if defaults.bool(forKey: "useRandomColor") == false {
+        if defaults.bool(forKey: "showAlertOnSort") {
+            if !defaults.bool(forKey: "useRandomColor") {
                 actionController.backgroundColor = defaults.color(forKey: "staticNoteColor") ?? UIColor.blue2
                 
-            } else if defaults.bool(forKey: "darkModeEnabled") == false {
-                if isSelectedColorFromDefaults(key: "default") == true {
+            } else if !defaults.bool(forKey: "darkModeEnabled") {
+                
+                switch defaults.string(forKey: "noteColorTheme") {
+                case "default":
                     actionController.backgroundColor = UIColor.defaultColors.randomElement() ?? UIColor.blue2
-                    
-                } else if isSelectedColorFromDefaults(key: "sunset") == true {
+                case "sunset":
                     actionController.backgroundColor = UIColor.sunsetColors.randomElement() ?? UIColor.blue2
-                    
-                } else if isSelectedColorFromDefaults(key: "kypool") == true {
+                case "kypool":
                     actionController.backgroundColor = UIColor.kypoolColors.randomElement() ?? UIColor.blue2
-                    
-                } else if isSelectedColorFromDefaults(key: "celestial") == true {
+                case "celestial":
                     actionController.backgroundColor = UIColor.celestialColors.randomElement() ?? UIColor.blue2
-                    
-                } else if isSelectedColorFromDefaults(key: "appleVibrant") == true {
+                case "appleVibrant":
                     actionController.backgroundColor = UIColor.appleVibrantColors.randomElement() ?? UIColor.blue2
-                    
-                } else if isSelectedColorFromDefaults(key: "scarletAzure") == true {
+                case "scarletAzure":
                     actionController.backgroundColor = UIColor.scarletAzureColors.randomElement() ?? UIColor.blue2
+                case .none:
+                    actionController.backgroundColor = UIColor.defaultColors.randomElement() ?? UIColor.blue2
+                case .some(_):
+                    actionController.backgroundColor = UIColor.defaultColors.randomElement() ?? UIColor.blue2
                 }
                 
-            } else if defaults.bool(forKey: "darkModeEnabled") == true {
+            } else {
                 actionController.backgroundColor = InterfaceColors.actionSheetColor
             }
             
@@ -284,27 +283,32 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             
             present(actionController, animated: true, completion: nil)
             
-        } else if defaults.bool(forKey: "showAlertOnSort") == false {
-            if pressed == 0 {
+        } else if !defaults.bool(forKey: "showAlertOnSort") {
+            var pressed: CGFloat = 0
+            
+            switch pressed {
+            case 0:
                 print("Sort by content")
                 defaults.set("content", forKey: "sortBy")
                 pressed += 1
-                
-            } else if pressed == 1 {
+            case 1:
                 print("Sort by color")
                 defaults.set("color", forKey: "sortBy")
                 pressed += 1
-                
-            } else if pressed == 2 {
+            case 2:
                 print("Sort by date")
                 defaults.set("date", forKey: "sortBy")
-                pressed = 0
-                
-            } else if pressed == 3 {
+                pressed += 1
+            case 3:
                 print("Sort by reminders")
                 defaults.set("reminders", forKey: "sortBy")
                 pressed = 0
+            default:
+                print("Sort by date")
+                defaults.set("date", forKey: "sortBy")
+                pressed = 0
             }
+            
             fetchNotesFromCoreData()
             animateCells()
         }
@@ -313,16 +317,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     @objc func handleLeftButton() {
         feedbackOnPress()
         navigationController?.pushViewController(SettingsController(style: .insetGrouped), animated: true)
-    }
-    
-    func isSelectedColorFromDefaults(key: String) -> Bool {
-        let colorTheme = defaults.string(forKey: "noteColorTheme")
-        
-        if colorTheme == key {
-            return true
-        } else {
-            return false
-        }
     }
     
     func searchBarIsEmpty() -> Bool {
@@ -363,17 +357,19 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         let sortBy = defaults.string(forKey: "sortBy")
         var sortDescriptor: NSSortDescriptor?
         
-        if sortBy == "content" {
+        switch sortBy {
+        case "content":
             sortDescriptor = NSSortDescriptor(key: "content", ascending: true)
-            
-        } else if sortBy == "date" {
+        case "date":
             sortDescriptor = NSSortDescriptor(key: "modifiedDate", ascending: false)
-            
-        } else if sortBy == "color" {
+        case "color":
             sortDescriptor = NSSortDescriptor(key: "color", ascending: false)
-            
-        } else if sortBy == "reminders" {
+        case "reminders":
             sortDescriptor = NSSortDescriptor(key: "isReminder", ascending: false)
+        case .none:
+            sortDescriptor = NSSortDescriptor(key: "modifiedDate", ascending: false)
+        case .some(_):
+            sortDescriptor = NSSortDescriptor(key: "modifiedDate", ascending: false)
         }
         
         fetchRequest.sortDescriptors = [sortDescriptor] as? [NSSortDescriptor]
@@ -400,12 +396,12 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if CellStates.shouldSelectMultiple == false {
+        if CellStates.shouldSelectMultiple {
+            print("Multiple Tap")
+            
+        } else {
             print("Normal Tap")
             cellSingleTap(indexPath: indexPath)
-            
-        } else if CellStates.shouldSelectMultiple == true {
-            print("Multiple Tap")
         }
     }
     
@@ -461,11 +457,11 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         let actionController = SkypeActionController()
         
-        if defaults.bool(forKey: "darkModeEnabled") == false {
-            actionController.backgroundColor = cellColor
-            
-        } else if defaults.bool(forKey: "darkModeEnabled") == true {
+        if defaults.bool(forKey: "darkModeEnabled") {
             actionController.backgroundColor = InterfaceColors.actionSheetColor
+            
+        } else {
+            actionController.backgroundColor = cellColor
         }
         
         actionController.addAction(Action("Share note", style: .default, handler: { _ in
@@ -507,11 +503,13 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     
     func setupMultiSelectionToolBar() {
         let toolBar = navigationController?.toolbar
-        if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") == true {
+        
+        if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") {
             toolBar?.tintColor = .white
             toolBar?.barTintColor = UIColor.grayBackground
             toolBar?.sizeToFit()
-        } else if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") == true {
+            
+        } else if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") {
             toolBar?.tintColor = .white
             toolBar?.barTintColor = .black
             toolBar?.sizeToFit()
@@ -587,8 +585,39 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     }
     
     func deleteNote(indexPath: IndexPath) {
-        if isFiltering() == false {
+        if isFiltering() {
+            let filteredNote = filteredNotes[indexPath.row]
+            
+            // remove pending notification
+            let notificationUUID = filteredNote.notificationUUID ?? "empty error in SavedNoteController"
+            let center = UNUserNotificationCenter.current()
+            center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
+            
+            // remove notification on badge if already delivered but not opened
+            let isReminder = filteredNote.isReminder
+            if isReminder {
+                let reminderDate = filteredNote.reminderDate ?? "07/02/2000 11:11 PM"
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
+                
+                let formattedReminderDate = dateFormatter.date(from: reminderDate) ?? Date()
+                let currentDate = Date()
+                
+                if currentDate >= formattedReminderDate {
+                    UIApplication.shared.applicationIconBadgeNumber -= 1
+                }
+            }
+            
+            filteredNotes.remove(at: indexPath.row)
+            
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate
+            let managedContext = appDelegate?.persistentContainer.viewContext
+            managedContext?.delete(filteredNote)
+            
+        } else {
             let note = notes[indexPath.row]
+            
             // remove pending notification
             let notificationUUID = note.notificationUUID ?? "empty error in SavedNoteController"
             let center = UNUserNotificationCenter.current()
@@ -596,7 +625,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             
             // remove notification on badge if already delivered but not opened
             let isReminder = note.isReminder
-            if isReminder == true {
+            if isReminder {
                 let reminderDate = note.reminderDate ?? "07/02/2000 11:11 PM"
                 
                 let dateFormatter = DateFormatter()
@@ -615,36 +644,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             let appDelegate = UIApplication.shared.delegate as? AppDelegate
             let managedContext = appDelegate?.persistentContainer.viewContext
             managedContext?.delete(note)
-            
-        } else {
-            let filteredNote = filteredNotes[indexPath.row]
-            
-            // remove pending notification
-            let notificationUUID = filteredNote.notificationUUID ?? "empty error in SavedNoteController"
-            let center = UNUserNotificationCenter.current()
-            center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
-            
-            // remove notification on badge if already delivered but not opened
-            let isReminder = filteredNote.isReminder
-            if isReminder == true {
-                let reminderDate = filteredNote.reminderDate ?? "07/02/2000 11:11 PM"
-                
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
-                let formattedReminderDate = dateFormatter.date(from: reminderDate) ?? Date()
-                
-                let currentDate = Date()
-                
-                if currentDate >= formattedReminderDate {
-                    UIApplication.shared.applicationIconBadgeNumber -= 1
-                }
-            }
-            
-            filteredNotes.remove(at: indexPath.row)
-            
-            let appDelegate = UIApplication.shared.delegate as? AppDelegate
-            let managedContext = appDelegate?.persistentContainer.viewContext
-            managedContext?.delete(filteredNote)
         }
         
         CoreDataManager.shared.enqueue { context in
@@ -662,12 +661,12 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     }
     
     func feedbackOnPress() {
-        if UIDevice.current.hasTapticEngine == true {
+        if UIDevice.current.hasTapticEngine {
             // iPhone 6s and iPhone 6s Plus
             let peek = SystemSoundID(1519)
             AudioServicesPlaySystemSoundWithCompletion(peek, nil)
             
-        } else if UIDevice.current.hasHapticFeedback == true {
+        } else if UIDevice.current.hasHapticFeedback {
             // iPhone 7 and newer
             let generator = UIImpactFeedbackGenerator(style: .medium)
             generator.impactOccurred()
@@ -732,12 +731,12 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             cell.dateLabel.textColor = .black
         }
         
-        if defaults.bool(forKey: "darkModeEnabled") == true {
-            if defaults.bool(forKey: "vibrantDarkModeEnabled") == true {
+        if defaults.bool(forKey: "darkModeEnabled") {
+            if defaults.bool(forKey: "vibrantDarkModeEnabled") {
                 cell.contentView.backgroundColor = cellColor
                 cell.contentView.tintColor = cellColor
                 
-            } else if defaults.bool(forKey: "pureDarkModeEnabled") == true {
+            } else if defaults.bool(forKey: "pureDarkModeEnabled") {
                 cell.contentView.backgroundColor = UIColor.offBlackBackground
                 cell.contentView.tintColor = UIColor.offBlackBackground
             }
@@ -747,10 +746,10 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             cell.contentView.tintColor = cellColor
         }
         
-        if isReminder == true {
+        if isReminder ?? false {
             cell.layer.borderWidth = 5.5
             
-            if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") == true {
+            if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") {
                 cell.layer.borderColor = UIColor.grayBackground.adjust(by: 10)?.cgColor
                 cell.layer.cornerRadius = 5
                 
@@ -769,7 +768,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.main.scale
         
-        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+        if !UserDefaults.standard.bool(forKey: "darkModeEnabled") {
             cell.layer.addShadow(color: UIColor.darkGray)
         }
         
@@ -796,9 +795,9 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+        if !UserDefaults.standard.bool(forKey: "useSystemMode") && !UserDefaults.standard.bool(forKey: "darkModeEnabled") {
             return .darkContent
-        } else if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+        } else if !UserDefaults.standard.bool(forKey: "useSystemMode") && UserDefaults.standard.bool(forKey: "darkModeEnabled") {
             return .lightContent
         } else if UserDefaults.standard.bool(forKey: "useSystemMode") && traitCollection.userInterfaceStyle == .light {
             return .darkContent

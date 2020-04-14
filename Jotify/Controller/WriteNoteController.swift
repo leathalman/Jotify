@@ -68,18 +68,19 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         writeNoteView.inputTextView.placeholder = placeholder
     }
     
+    // work on??
     func setupDynamicBackground() {
         if defaults.bool(forKey: "vibrantDarkModeEnabled") {
             writeNoteView.backgroundColor = UIColor.grayBackground
         } else if defaults.bool(forKey: "pureDarkModeEnabled") {
             writeNoteView.backgroundColor = .black
-        } else if defaults.bool(forKey: "darkModeEnabled") == false {
+        } else if !defaults.bool(forKey: "darkModeEnabled") {
             writeNoteView.backgroundColor = StoredColors.noteColor
         }
     }
     
     func setupDynamicKeyboardColor() {
-        if UserDefaults.standard.bool(forKey: "useSystemMode") == false {
+        if !UserDefaults.standard.bool(forKey: "useSystemMode") {
             if UserDefaults.standard.bool(forKey: "darkModeEnabled") {
                 writeNoteView.inputTextView.keyboardAppearance = .dark
                 writeNoteView.inputTextView.overrideUserInterfaceStyle = .dark
@@ -148,15 +149,14 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     }
     
     @objc func handleSend() {
-        if writeNoteView.inputTextView.text == "" {
-        } else {
+        if !writeNoteView.inputTextView.text.isEmpty {
             StoredColors.noteColorString = UIColor.stringFromColor(color: StoredColors.noteColor)
             
             let date = Date.timeIntervalSinceReferenceDate
             saveNote(content: writeNoteView.inputTextView.text, color: StoredColors.noteColorString, date: date)
             writeNoteView.inputTextView.text = ""
             
-            if defaults.bool(forKey: "useRandomColor") == true {
+            if defaults.bool(forKey: "useRandomColor") {
                 writeNoteView.getRandomColor(previousColor: StoredColors.noteColor)
             }
         }
@@ -201,16 +201,16 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
             return true
         }
         
-        if defaults.bool(forKey: "useMultilineInput") == false {
-            // dismiss keyboard on return key
-            textView.resignFirstResponder()
-            handleSend()
-            
-        } else if defaults.bool(forKey: "useMultilineInput") == true {
+        if defaults.bool(forKey: "useMultilineInput") {
             // print new line on return
             if text == "\n" {
                 textView.text += "\n"
             }
+            
+        } else {
+            // dismiss keyboard on return key
+            textView.resignFirstResponder()
+            handleSend()
         }
         
         return false

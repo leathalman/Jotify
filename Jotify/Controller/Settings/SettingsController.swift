@@ -39,37 +39,27 @@ class SettingsController: UITableViewController {
     }
     
     func setupDynamicViewElements() {
-        if darkModeEnabled() == true {
+        if darkModeEnabled() {
             if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") {
                 themes.setupVibrantDarkMode()
-                
                 view.backgroundColor = InterfaceColors.viewBackgroundColor
-                
                 tableView.separatorColor = InterfaceColors.separatorColor
-                
                 tableView.reloadData()
-                
                 setupDarkPersistentNavigationBar()
-            } else if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") == true {
+                
+            } else if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") {
                 themes.setupPureDarkMode()
-                
                 view.backgroundColor = InterfaceColors.viewBackgroundColor
-                
                 tableView.separatorColor = InterfaceColors.separatorColor
-                
                 tableView.reloadData()
-                
                 setupDarkPersistentNavigationBar()
             }
             
-        } else if darkModeEnabled() == false {
+        } else {
             view.backgroundColor = InterfaceColors.viewBackgroundColor
-            
             tableView.separatorColor = nil
-            
             themes.setupDefaultMode()
             tableView.reloadData()
-            
             setupDefaultPersistentNavigationBar()
         }
     }
@@ -201,74 +191,7 @@ class SettingsController: UITableViewController {
                 default:
                     print("default")
                 }
-            } else {
-                switch indexPath.row {
-                case 0:
-                    let cell = tableView.cellForRow(at: indexPath)
-                    cell?.isSelected = false
-                    
-                    PremiumView.shared.presentPremiumView(viewController: self)
-                case 1:
-                    let cell = tableView.cellForRow(at: indexPath)
-                    cell?.isSelected = false
-                    
-                    JotifyProducts.store.restorePurchases()
-                    checkForRestore()
-                case 2:
-                    let writeNoteController = WriteNoteController()
-                    writeNoteController.presentFirstLaunchOnboarding(viewController: self, tintColor: StoredColors.noteColor)
-                    
-                    let cell = tableView.cellForRow(at: indexPath)
-                    cell?.isSelected = false
-                    
-                case 3:
-                    let alert = UIAlertController(title: "Are you sure?", message: "This will reset all settings to default.", preferredStyle: .alert)
-                    
-                    let cell = tableView.cellForRow(at: indexPath)
-                    cell?.isSelected = false
-                    
-                    alert.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: { _ in
-                        
-                        self.defaults.set("default", forKey: "noteColorTheme")
-                        let appearanceSettingsController = AppearanceSettingsController()
-                        appearanceSettingsController.fetchData()
-                        appearanceSettingsController.setNewColorsForExistingNotes()
-                        
-                        self.defaults.set(true, forKey: "useRandomColor")
-                        self.defaults.set("date", forKey: "sortBy")
-                        self.defaults.set(true, forKey: "showAlertOnDelete")
-                        self.defaults.set(true, forKey: "showAlertOnSort")
-                        self.defaults.set(false, forKey: "darkModeEnabled")
-                        self.defaults.set(false, forKey: "vibrantDarkModeEnabled")
-                        self.defaults.set(false, forKey: "pureDarkModeEnabled")
-                        self.defaults.set(true, forKey: "isFirstLaunch")
-                        self.defaults.set(false, forKey: "useBiometrics")
-                        self.defaults.set("Start typing or swipe left for saved notes...", forKey: "writeNotePlaceholder")
-                        self.defaults.set(false, forKey: "useMultilineInput")
-                    }))
-                    
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                    present(alert, animated: true)
-                    
-                case 4:
-                    print("Delete all data")
-                    let cell = tableView.cellForRow(at: indexPath)
-                    cell?.isSelected = false
-                    
-                    let alert = UIAlertController(title: "Are you sure?", message: "This will permanently delete all data saved in both iCloud and saved locally on this device.", preferredStyle: .alert)
-                    
-                    alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
-                        self.deleteAllNotes(entity: "Note")
-                    }))
-                    
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                    present(alert, animated: true)
-                    
-                default:
-                    print("default")
-                }
             }
-            
         }
     }
     
@@ -291,59 +214,30 @@ class SettingsController: UITableViewController {
             switch indexPath.row {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-                
                 cell.textLabel?.text = "\(general[indexPath.row])"
-                
                 cell.backgroundColor = UIColor.white
                 cell.backgroundColor = InterfaceColors.cellColor
-                
-                setupDynamicCells(cell: cell, enableArrow: true)
-                
                 cell.accessoryType = .disclosureIndicator
+
+                setupDynamicCells(cell: cell, enableArrow: true)
                 
                 return cell
                 
-            case 1:
+            case 1, 2, 3:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-                
                 cell.textLabel?.text = "\(general[indexPath.row])"
-                
-                setupDynamicCells(cell: cell, enableArrow: true)
-                
                 cell.accessoryType = .disclosureIndicator
                 
-                return cell
-                
-            case 2:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-                
-                cell.textLabel?.text = "\(general[indexPath.row])"
-                
                 setupDynamicCells(cell: cell, enableArrow: true)
-                
-                cell.accessoryType = .disclosureIndicator
-                
-                return cell
-                
-            case 3:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-                
-                cell.textLabel?.text = "\(general[indexPath.row])"
-                
-                setupDynamicCells(cell: cell, enableArrow: true)
-                
-                cell.accessoryType = .disclosureIndicator
                 
                 return cell
                 
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-                
                 cell.textLabel?.text = "\(general[indexPath.row])"
+                cell.accessoryType = .disclosureIndicator
                 
                 setupDynamicCells(cell: cell, enableArrow: true)
-                
-                cell.accessoryType = .disclosureIndicator
                 
                 return cell
             }
@@ -351,26 +245,16 @@ class SettingsController: UITableViewController {
         } else if indexPath.section == 1 {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-                    
-                    if defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
-                        cell.textLabel?.text = "\(advanced2[indexPath.row])"
-                    } else {
-                        cell.textLabel?.text = "\(advanced1[indexPath.row])"
-                    }
+            
+            if defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
+                cell.textLabel?.text = "\(advanced2[indexPath.row])"
+            } else {
+                cell.textLabel?.text = "\(advanced1[indexPath.row])"
+            }
             
             if defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
                 switch indexPath.row {
-                case 0:
-                    cell.backgroundColor = UIColor.white
-                    cell.backgroundColor = InterfaceColors.cellColor
-                    cell.textLabel?.textColor = UIColor.lightBlue
-                    setupHighlightCorrection(cell: cell)
-                case 1:
-                    cell.backgroundColor = UIColor.white
-                    cell.backgroundColor = InterfaceColors.cellColor
-                    cell.textLabel?.textColor = UIColor.lightBlue
-                    setupHighlightCorrection(cell: cell)
-                case 2:
+                case 0, 1, 2:
                     cell.backgroundColor = UIColor.white
                     cell.backgroundColor = InterfaceColors.cellColor
                     cell.textLabel?.textColor = UIColor.lightBlue
@@ -386,22 +270,7 @@ class SettingsController: UITableViewController {
                 
             } else {
                 switch indexPath.row {
-                case 0:
-                    cell.backgroundColor = UIColor.white
-                    cell.backgroundColor = InterfaceColors.cellColor
-                    cell.textLabel?.textColor = UIColor.lightBlue
-                    setupHighlightCorrection(cell: cell)
-                case 1:
-                    cell.backgroundColor = UIColor.white
-                    cell.backgroundColor = InterfaceColors.cellColor
-                    cell.textLabel?.textColor = UIColor.lightBlue
-                    setupHighlightCorrection(cell: cell)
-                case 2:
-                    cell.backgroundColor = UIColor.white
-                    cell.backgroundColor = InterfaceColors.cellColor
-                    cell.textLabel?.textColor = UIColor.lightBlue
-                    setupHighlightCorrection(cell: cell)
-                case 3:
+                case 0, 1, 2, 3:
                     cell.backgroundColor = UIColor.white
                     cell.backgroundColor = InterfaceColors.cellColor
                     cell.textLabel?.textColor = UIColor.lightBlue
@@ -426,6 +295,7 @@ class SettingsController: UITableViewController {
         }
     }
     
+    //MARK: TODO: Make a better function for restoring purchases, currently could show the wrong result...
     func checkForRestore() {
         print(UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.Premium"))
         if UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.Premium") == true {
@@ -455,8 +325,8 @@ class SettingsController: UITableViewController {
         
         setupHighlightCorrection(cell: cell)
         
-        if enableArrow == true {
-            if darkModeEnabled() == true {
+        if enableArrow {
+            if darkModeEnabled() {
                 cell.accessoryView = UIImageView(image: UIImage(systemName: "chevron.right.circle"))
                 
             } else {
@@ -466,25 +336,23 @@ class SettingsController: UITableViewController {
     }
     
     func setupHighlightCorrection(cell: UITableViewCell) {
-        if defaults.bool(forKey: "useSystemMode") == false && defaults.bool(forKey: "darkModeEnabled") == false {
+        if !defaults.bool(forKey: "useSystemMode") && !defaults.bool(forKey: "darkModeEnabled") {
             let backgroundView = UIView()
             backgroundView.backgroundColor = UIColor.cellHighlightDefault
             cell.selectedBackgroundView = backgroundView
-        } else if defaults.bool(forKey: "useSystemMode") == false && defaults.bool(forKey: "darkModeEnabled") {
+            
+        } else if !defaults.bool(forKey: "useSystemMode") && defaults.bool(forKey: "darkModeEnabled") {
             let backgroundView = UIView()
             backgroundView.backgroundColor = UIColor.cellHighlightDark
             cell.selectedBackgroundView = backgroundView
+            
         } else {
             cell.selectedBackgroundView = nil
         }
     }
     
     func darkModeEnabled() -> Bool {
-        if defaults.bool(forKey: "darkModeEnabled") == true {
-            return true
-        } else {
-            return false
-        }
+        return defaults.bool(forKey: "darkModeEnabled")
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -498,9 +366,9 @@ class SettingsController: UITableViewController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+        if !UserDefaults.standard.bool(forKey: "useSystemMode") && !UserDefaults.standard.bool(forKey: "darkModeEnabled") {
             return .darkContent
-        } else if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+        } else if !UserDefaults.standard.bool(forKey: "useSystemMode") && !UserDefaults.standard.bool(forKey: "darkModeEnabled") {
             return .lightContent
         } else if UserDefaults.standard.bool(forKey: "useSystemMode") && traitCollection.userInterfaceStyle == .light {
             return .darkContent

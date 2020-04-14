@@ -68,21 +68,22 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     }
     
     func fetchNotificaitonUUID() {
-        if isFiltering == false {
-            let notificationUUID = notes[index].notificationUUID ?? ""
+        if isFiltering {
+            let notificationUUID = filteredNotes[index].notificationUUID ?? ""
             RemindersData.notificationUUID = notificationUUID
             
-        } else if isFiltering == true {
-            let notificationUUID = filteredNotes[index].notificationUUID ?? ""
+        } else {
+            let notificationUUID = notes[index].notificationUUID ?? ""
             RemindersData.notificationUUID = notificationUUID
         }
     }
     
     func setupDynamicKeyboardColor() {
-        if UserDefaults.standard.bool(forKey: "useSystemMode") == false {
+        if !UserDefaults.standard.bool(forKey: "useSystemMode") {
             if UserDefaults.standard.bool(forKey: "darkModeEnabled") {
                 writeNoteView.inputTextView.keyboardAppearance = .dark
                 writeNoteView.inputTextView.overrideUserInterfaceStyle = .dark
+                
             } else {
                 writeNoteView.inputTextView.keyboardAppearance = .default
                 writeNoteView.inputTextView.overrideUserInterfaceStyle = .light
@@ -91,12 +92,12 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     }
     
     func removeReminderIfDelivered() {
-        if checkIfReminderHasBeenDelivered() == true {
-            if isFiltering == false {
-                notes[index].isReminder = false
-                
-            } else if isFiltering == true {
+        if checkIfReminderHasBeenDelivered() {
+            if isFiltering {
                 filteredNotes[index].isReminder = false
+                
+            } else {
+                notes[index].isReminder = false
             }
             
             CoreDataManager.shared.enqueue { context in
@@ -111,12 +112,12 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
             UIApplication.shared.applicationIconBadgeNumber -= 1
             
         } else {
-            if isFiltering == false {
-                let reminderDate = notes[index].reminderDate ?? "July 1, 2000 at 12:00 AM"
+            if isFiltering {
+                let reminderDate = filteredNotes[index].reminderDate ?? "July 1, 2000 at 12:00 AM"
                 getReminderDateStringToDisplayForUser(reminderDate: reminderDate)
                 
-            } else if isFiltering == true {
-                let reminderDate = filteredNotes[index].reminderDate ?? "July 1, 2000 at 12:00 AM"
+            } else {
+                let reminderDate = notes[index].reminderDate ?? "July 1, 2000 at 12:00 AM"
                 getReminderDateStringToDisplayForUser(reminderDate: reminderDate)
             }
         }
@@ -140,19 +141,19 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     }
     
     func checkIfReminderHasBeenDelivered() -> Bool {
-        if isFiltering == false {
-            let notificationUUID = notes[index].notificationUUID
+        if isFiltering {
+            let notificationUUID = filteredNotes[index].notificationUUID
             
             if notificationUUID == "cleared" {
-                notes[index].notificationUUID = "cleared"
+                filteredNotes[index].notificationUUID = "cleared"
                 return true
             }
             
-            let isReminder = notes[index].isReminder
-            RemindersData.isReminder = notes[index].isReminder
+            let isReminder = filteredNotes[index].isReminder
+            RemindersData.isReminder = filteredNotes[index].isReminder
             
             if isReminder == true {
-                let reminderDate = notes[index].reminderDate ?? "07/02/2000 11:11 PM"
+                let reminderDate = filteredNotes[index].reminderDate ?? "07/02/2000 11:11 PM"
                 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
@@ -167,19 +168,19 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
                 }
             }
             
-        } else if isFiltering == true {
-            let notificationUUID = filteredNotes[index].notificationUUID
+        } else {
+            let notificationUUID = notes[index].notificationUUID
             
             if notificationUUID == "cleared" {
-                filteredNotes[index].notificationUUID = "cleared"
+                notes[index].notificationUUID = "cleared"
                 return true
             }
             
-            let isReminder = filteredNotes[index].isReminder
-            RemindersData.isReminder = filteredNotes[index].isReminder
+            let isReminder = notes[index].isReminder
+            RemindersData.isReminder = notes[index].isReminder
             
             if isReminder == true {
-                let reminderDate = filteredNotes[index].reminderDate ?? "07/02/2000 11:11 PM"
+                let reminderDate = notes[index].reminderDate ?? "07/02/2000 11:11 PM"
                 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
@@ -206,21 +207,21 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
             self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             self?.navigationController?.navigationBar.barStyle = .black
             
-            if self?.defaults.bool(forKey: "darkModeEnabled") == true {
-                if self?.defaults.bool(forKey: "vibrantDarkModeEnabled") == true {
+            if self?.defaults.bool(forKey: "darkModeEnabled") ?? false {
+                if self?.defaults.bool(forKey: "vibrantDarkModeEnabled") ?? true {
                     self?.navigationController?.navigationBar.backgroundColor = self?.backgroundColor
                     self?.navigationController?.navigationBar.barTintColor = self?.backgroundColor
                     
-                } else if self?.defaults.bool(forKey: "pureDarkModeEnabled") == true {
+                } else if self?.defaults.bool(forKey: "pureDarkModeEnabled") ?? false {
                     self?.navigationController?.navigationBar.backgroundColor = InterfaceColors.viewBackgroundColor
                     self?.navigationController?.navigationBar.barTintColor = InterfaceColors.viewBackgroundColor
                 }
                 
-            } else if self?.defaults.bool(forKey: "darkModeEnabled") == false {
+            } else {
                 self?.navigationController?.navigationBar.backgroundColor = self?.backgroundColor
                 self?.navigationController?.navigationBar.barTintColor = self?.backgroundColor
             }
-        }, completion: nil)
+            }, completion: nil)
     }
     
     func setupView() {
@@ -231,16 +232,16 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         StoredColors.reminderColor = backgroundColor
         UIApplication.shared.windows.first?.backgroundColor = backgroundColor
         
-        if defaults.bool(forKey: "darkModeEnabled") == true {
-            if defaults.bool(forKey: "vibrantDarkModeEnabled") == true {
+        if defaults.bool(forKey: "darkModeEnabled") {
+            if defaults.bool(forKey: "vibrantDarkModeEnabled") {
                 writeNoteView.backgroundColor = backgroundColor
                 textView.backgroundColor = backgroundColor
-            } else if defaults.bool(forKey: "pureDarkModeEnabled") == true {
+            } else if defaults.bool(forKey: "pureDarkModeEnabled") {
                 writeNoteView.backgroundColor = InterfaceColors.viewBackgroundColor
                 textView.backgroundColor = InterfaceColors.viewBackgroundColor
             }
             
-        } else if defaults.bool(forKey: "darkModeEnabled") == false {
+        } else {
             writeNoteView.backgroundColor = backgroundColor
             textView.backgroundColor = backgroundColor
         }
@@ -274,13 +275,13 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     }
     
     @objc func handleReminder() {
-        if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+        if !defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
             PremiumView.shared.presentPremiumView(viewController: self)
         } else {
             let savedNoteController = SavedNoteController()
             savedNoteController.feedbackOnPress()
             
-            if RemindersData.isReminder == false || RemindersData.reminderDate.isEmpty {
+            if !RemindersData.isReminder || RemindersData.reminderDate.isEmpty {
                 reminderIsNotSet()
             } else {
                 alreadySetReminder()
@@ -297,7 +298,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         reminderExistsController.notes = notes
         reminderExistsController.filteredNotes = filteredNotes
         reminderExistsController.isFiltering = isFiltering
-        if popupHeight == 0 {
+        if popupHeight.isZero {
             popupHeight = view.bounds.height
         }
         reminderExistsController.popupHeight = popupHeight + 170
@@ -308,7 +309,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     func reminderIsNotSet() {
         let reminderController = ReminderController()
         
-        if isFiltering == true {
+        if isFiltering {
             reminderController.filteredNotes = filteredNotes
             reminderController.isFiltering = true
             
@@ -322,7 +323,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         
         print("PopupHeight is \(popupHeight)")
         
-        if popupHeight == 0 {
+        if popupHeight.isZero {
             popupHeight = view.bounds.height
         }
         reminderController.popupHeight = popupHeight
@@ -341,25 +342,25 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         
         center.requestAuthorization(options: [.alert, .badge, .sound]) { granted, _ in
             if granted {
-                // print("Notifications granted")
+                 print("Notifications granted")
             } else {
-                // print("Notifications denied")
+                 print("Notifications denied")
             }
         }
     }
     
     func updateContent(index: Int, newContent: String) {
-        if isFiltering == false {
-            if notes[index].content != newContent {
-                notes[index].content = newContent
-                notes[index].modifiedDate = Date.timeIntervalSinceReferenceDate
-                print("Note: date updated")
-            }
-            
-        } else if isFiltering == true {
+        if isFiltering {
             if filteredNotes[index].content != newContent {
                 filteredNotes[index].content = newContent
                 filteredNotes[index].modifiedDate = Date.timeIntervalSinceReferenceDate
+                print("Note: date updated")
+            }
+            
+        } else {
+            if notes[index].content != newContent {
+                notes[index].content = newContent
+                notes[index].modifiedDate = Date.timeIntervalSinceReferenceDate
                 print("Note: date updated")
             }
         }

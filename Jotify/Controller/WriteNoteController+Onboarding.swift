@@ -69,7 +69,7 @@ extension WriteNoteController {
         
         var configuration = WhatsNewViewController.Configuration()
         
-        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+        if UserDefaults.standard.bool(forKey: "darkModeEnabled") {
             configuration.apply(theme: .darkDefault)
             configuration.backgroundColor = UIColor.grayBackground
             
@@ -84,12 +84,12 @@ extension WriteNoteController {
         configuration.completionButton.insets.bottom = 30
         configuration.apply(animation: .fade)
         
-        if UserDefaults.standard.bool(forKey: "useRandomColor") == true {
+        if UserDefaults.standard.bool(forKey: "useRandomColor") {
             configuration.titleView.titleColor = StoredColors.noteColor
             configuration.detailButton?.titleColor = StoredColors.noteColor
             configuration.completionButton.backgroundColor = StoredColors.noteColor
             
-        } else if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
+        } else {
             configuration.titleView.titleColor = StoredColors.staticNoteColor
             configuration.detailButton?.titleColor = StoredColors.staticNoteColor
             configuration.completionButton.backgroundColor = StoredColors.staticNoteColor
@@ -144,7 +144,7 @@ extension WriteNoteController {
         
         var configuration = WhatsNewViewController.Configuration()
         
-        if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+        if UserDefaults.standard.bool(forKey: "darkModeEnabled") {
             configuration.apply(theme: .darkDefault)
             configuration.backgroundColor = UIColor.grayBackground
             
@@ -159,12 +159,12 @@ extension WriteNoteController {
         configuration.completionButton.insets.bottom = 30
         configuration.apply(animation: .fade)
         
-        if UserDefaults.standard.bool(forKey: "useRandomColor") == true {
+        if UserDefaults.standard.bool(forKey: "useRandomColor") {
             configuration.titleView.titleColor = StoredColors.noteColor
             configuration.detailButton?.titleColor = StoredColors.noteColor
             configuration.completionButton.backgroundColor = StoredColors.noteColor
             
-        } else if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
+        } else {
             configuration.titleView.titleColor = StoredColors.staticNoteColor
             configuration.detailButton?.titleColor = StoredColors.staticNoteColor
             configuration.completionButton.backgroundColor = StoredColors.staticNoteColor
