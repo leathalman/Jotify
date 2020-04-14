@@ -29,15 +29,13 @@ class ThemeSelectionController: UITableViewController {
     }
     
     func setupDynamicElements() {
-        if settingsController.darkModeEnabled() == false {
+        if settingsController.darkModeEnabled() {
             view.backgroundColor = InterfaceColors.viewBackgroundColor
-            
-            tableView.separatorColor = nil
-            
-        } else if settingsController.darkModeEnabled() == true {
-            view.backgroundColor = InterfaceColors.viewBackgroundColor
-            
             tableView.separatorColor = InterfaceColors.separatorColor
+            
+        } else {
+            view.backgroundColor = InterfaceColors.viewBackgroundColor
+            tableView.separatorColor = nil
         }
     }
     
@@ -51,27 +49,27 @@ class ThemeSelectionController: UITableViewController {
         
         switch indexPath.row {
         case 0:
-            if isSelectedColorFromDefaults(key: "default", indexPath: indexPath) == true {
+            if isSelectedColorFromDefaults(key: "default", indexPath: indexPath) {
                 cell.accessoryType = .checkmark
             }
         case 1:
-            if isSelectedColorFromDefaults(key: "sunset", indexPath: indexPath) == true {
+            if isSelectedColorFromDefaults(key: "sunset", indexPath: indexPath) {
                 cell.accessoryType = .checkmark
             }
         case 2:
-            if isSelectedColorFromDefaults(key: "kypool", indexPath: indexPath) == true {
+            if isSelectedColorFromDefaults(key: "kypool", indexPath: indexPath) {
                 cell.accessoryType = .checkmark
             }
         case 3:
-            if isSelectedColorFromDefaults(key: "celestial", indexPath: indexPath) == true {
+            if isSelectedColorFromDefaults(key: "celestial", indexPath: indexPath) {
                 cell.accessoryType = .checkmark
             }
         case 4:
-            if isSelectedColorFromDefaults(key: "scarletAzure", indexPath: indexPath) == true {
+            if isSelectedColorFromDefaults(key: "scarletAzure", indexPath: indexPath) {
                 cell.accessoryType = .checkmark
             }
         case 5:
-            if isSelectedColorFromDefaults(key: "appleVibrant", indexPath: indexPath) == true {
+            if isSelectedColorFromDefaults(key: "appleVibrant", indexPath: indexPath) {
                 cell.accessoryType = .checkmark
             }
         default:
@@ -91,13 +89,14 @@ class ThemeSelectionController: UITableViewController {
             
             lastIndexPath = indexPath as NSIndexPath
         }
+        
         switch indexPath.row {
         case 0:
             defaults.set("default", forKey: "noteColorTheme")
             setNewColorsForExistingNotesIfNotStatic()
             
         case 1:
-            if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+            if !defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
                 PremiumView.shared.presentPremiumView(viewController: self)
                 tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.accessoryType = .checkmark
                 tableView.cellForRow(at: indexPath)?.accessoryType = .none
@@ -108,7 +107,7 @@ class ThemeSelectionController: UITableViewController {
             }
             
         case 2:
-            if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+            if !defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
                 PremiumView.shared.presentPremiumView(viewController: self)
                 tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.accessoryType = .checkmark
                 tableView.cellForRow(at: indexPath)?.accessoryType = .none
@@ -119,7 +118,7 @@ class ThemeSelectionController: UITableViewController {
             }
             
         case 3:
-            if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+            if !defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
                 PremiumView.shared.presentPremiumView(viewController: self)
                 tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.accessoryType = .checkmark
                 tableView.cellForRow(at: indexPath)?.accessoryType = .none
@@ -130,7 +129,7 @@ class ThemeSelectionController: UITableViewController {
             }
             
         case 4:
-            if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+            if !defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
                 PremiumView.shared.presentPremiumView(viewController: self)
                 tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.accessoryType = .checkmark
                 tableView.cellForRow(at: indexPath)?.accessoryType = .none
@@ -141,7 +140,7 @@ class ThemeSelectionController: UITableViewController {
             }
             
         case 5:
-            if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+            if !defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
                 PremiumView.shared.presentPremiumView(viewController: self)
                 tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.accessoryType = .checkmark
                 tableView.cellForRow(at: indexPath)?.accessoryType = .none
@@ -161,7 +160,7 @@ class ThemeSelectionController: UITableViewController {
     }
     
     func setNewColorsForExistingNotesIfNotStatic() {
-        if defaults.bool(forKey: "useRandomColor") == true {
+        if defaults.bool(forKey: "useRandomColor") {
             let appearanceController = AppearanceSettingsController()
             appearanceController.fetchData()
             appearanceController.setNewColorsForExistingNotes()
@@ -231,16 +230,16 @@ class ThemeSelectionController: UITableViewController {
         if UserDefaults.standard.bool(forKey: "useSystemMode") {
             if UserDefaults.standard.bool(forKey: "darkModeEnabled") {
                 setupDarkPersistentNavigationBar()
-            } else if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+            } else {
                 setupDefaultPersistentNavigationBar()
             }
         }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+        if !UserDefaults.standard.bool(forKey: "useSystemMode") && !UserDefaults.standard.bool(forKey: "darkModeEnabled") {
             return .darkContent
-        } else if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+        } else if !UserDefaults.standard.bool(forKey: "useSystemMode") && UserDefaults.standard.bool(forKey: "darkModeEnabled") {
             return .lightContent
         } else if UserDefaults.standard.bool(forKey: "useSystemMode") && traitCollection.userInterfaceStyle == .light {
             return .darkContent

@@ -29,8 +29,7 @@ class AboutSettingsController: UIViewController {
     }
 
     @objc func changeIcon() {
-        if UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.Premium") == true {
-
+        if UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.Premium") {
             let iconName = UIApplication.shared.alternateIconName
             if UIApplication.shared.supportsAlternateIcons {
                 if iconName == "Golden2" {
@@ -64,7 +63,7 @@ class AboutSettingsController: UIViewController {
                                               animations: { self.aboutSettingsView.icon.image = UIImage(named: "goldLarge") },
                                               completion: nil)
                             
-                            if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+                            if UserDefaults.standard.bool(forKey: "darkModeEnabled") {
                                 UIView.transition(with: self.aboutSettingsView.iconText,
                                                   duration: 0.25,
                                                   options: .transitionCrossDissolve,
@@ -82,29 +81,20 @@ class AboutSettingsController: UIViewController {
                     }
                 }
             }
+            
         } else {
-            print("Premium not enabled")
+            print("Premium not enabled!")
         }
     }
     
     func setupDefaultPersistentNavigationBar() {
-        navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
-        navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         navigationController?.navigationBar.barStyle = .default
-        navigationController?.navigationBar.isTranslucent = false
     }
     
     func setupDarkPersistentNavigationBar() {
-        navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
-        navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.isTranslucent = false
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -115,10 +105,10 @@ class AboutSettingsController: UIViewController {
         
         let iconName = UIApplication.shared.alternateIconName
         if UIApplication.shared.supportsAlternateIcons {
-            if iconName == "Golden2", UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+            if iconName == "Golden2", UserDefaults.standard.bool(forKey: "darkModeEnabled") {
                 aboutSettingsView.iconText.image = UIImage(named: "goldTextAlt")
                 
-            } else if iconName == "Golden2", UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+            } else if iconName == "Golden2", !UserDefaults.standard.bool(forKey: "darkModeEnabled") {
                 aboutSettingsView.iconText.image = UIImage(named: "goldText")
                 
             } else {
@@ -127,18 +117,24 @@ class AboutSettingsController: UIViewController {
         }
         
         if UserDefaults.standard.bool(forKey: "useSystemMode") {
+            navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
+            navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
+            navigationController?.navigationBar.shadowImage = UIImage()
+            navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+            navigationController?.navigationBar.isTranslucent = false
+            
             if UserDefaults.standard.bool(forKey: "darkModeEnabled") {
                 setupDarkPersistentNavigationBar()
-            } else if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+            } else if !UserDefaults.standard.bool(forKey: "darkModeEnabled") {
                 setupDefaultPersistentNavigationBar()
             }
         }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+        if !UserDefaults.standard.bool(forKey: "useSystemMode") && !UserDefaults.standard.bool(forKey: "darkModeEnabled") {
             return .darkContent
-        } else if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+        } else if !UserDefaults.standard.bool(forKey: "useSystemMode") && UserDefaults.standard.bool(forKey: "darkModeEnabled") {
             return .lightContent
         } else if UserDefaults.standard.bool(forKey: "useSystemMode") && traitCollection.userInterfaceStyle == .light {
             return .darkContent

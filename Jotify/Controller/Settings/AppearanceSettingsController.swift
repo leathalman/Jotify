@@ -45,12 +45,12 @@ class AppearanceSettingsController: UITableViewController {
     }
     
     func setupDynamicElements() {
-        if settingsController.darkModeEnabled() == false {
+        if !settingsController.darkModeEnabled() {
             view.backgroundColor = InterfaceColors.viewBackgroundColor
             tableView.separatorColor = nil
             setupDefaultPersistentNavigationBar()
             
-        } else if settingsController.darkModeEnabled() == true {
+        } else if settingsController.darkModeEnabled() {
             view.backgroundColor = InterfaceColors.viewBackgroundColor
             tableView.separatorColor = .white
             setupDarkPersistentNavigationBar()
@@ -78,13 +78,12 @@ class AppearanceSettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
+        switch indexPath.section {
+        case 0:
             tableView.cellForRow(at: indexPath)?.accessoryType = .none
-            
-        } else if indexPath.section == 1 {
+        case 1:
             navigationController?.pushViewController(ThemeSelectionController(style: .insetGrouped), animated: true)
-            
-        } else if indexPath.section == 2 {
+        case 2:
             switch indexPath.row {
             case 0:
                 let alert = UIAlertController(title: "Placeholder", message: "Input a custom message for the placeholder.", preferredStyle: .alert)
@@ -115,19 +114,20 @@ class AppearanceSettingsController: UITableViewController {
                 }))
                 
                 present(alert, animated: true, completion: nil)
-                
             case 1:
                 print("Tapped")
             default:
                 print("Tapped")
             }
+        default:
+            tableView.cellForRow(at: indexPath)?.accessoryType = .none
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell") as! SettingsCell
         
-        if indexPath.section == 0 && UserDefaults.standard.bool(forKey: "useSystemMode") == false {
+        if indexPath.section == 0 && !UserDefaults.standard.bool(forKey: "useSystemMode") {
             // when user decides to not use System Light or Dark mode
             // show 3 cells
             // allow for bottom two to have independent functions
@@ -141,7 +141,7 @@ class AppearanceSettingsController: UITableViewController {
                 cell.selectionStyle = .none
                 cell.switchButton.addTarget(self, action: #selector(useSystemMode(sender:)), for: .valueChanged)
 
-                if defaults.bool(forKey: "useSystemMode") == true {
+                if defaults.bool(forKey: "useSystemMode") {
                     cell.switchButton.isOn = true
                 } else {
                     cell.switchButton.isOn = false
@@ -156,7 +156,7 @@ class AppearanceSettingsController: UITableViewController {
                 cell.textLabel?.text = "\(darks2[indexPath.row])"
                 cell.selectionStyle = .none
                 cell.switchButton.addTarget(self, action: #selector(vibrantDarkModeSwitchPressed(sender:)), for: .valueChanged)
-                if defaults.bool(forKey: "vibrantDarkModeEnabled") == true {
+                if defaults.bool(forKey: "vibrantDarkModeEnabled") {
                     cell.switchButton.isOn = true
                 } else {
                     cell.switchButton.isOn = false
@@ -173,7 +173,7 @@ class AppearanceSettingsController: UITableViewController {
                 cell.selectionStyle = .none
                 cell.switchButton.addTarget(self, action: #selector(pureDarkModeSwitchPressed(sender:)), for: .valueChanged)
                 
-                if defaults.bool(forKey: "pureDarkModeEnabled") == true {
+                if defaults.bool(forKey: "pureDarkModeEnabled") {
                     cell.switchButton.isOn = true
                 } else {
                     cell.switchButton.isOn = false
@@ -187,7 +187,7 @@ class AppearanceSettingsController: UITableViewController {
                 return cell
             }
             
-        } else if indexPath.section == 0 && UserDefaults.standard.bool(forKey: "useSystemMode") == true {
+        } else if indexPath.section == 0 && UserDefaults.standard.bool(forKey: "useSystemMode") {
             // when the user decided to use System Light or Dark Mode
             // toggle on means only show 1 cell
             switch indexPath.row {
@@ -200,7 +200,7 @@ class AppearanceSettingsController: UITableViewController {
                 cell.selectionStyle = .none
                 cell.switchButton.addTarget(self, action: #selector(useSystemMode(sender:)), for: .valueChanged)
 
-                if defaults.bool(forKey: "useSystemMode") == true {
+                if defaults.bool(forKey: "useSystemMode") {
                     cell.switchButton.isOn = true
                 } else {
                     cell.switchButton.isOn = false
@@ -244,7 +244,7 @@ class AppearanceSettingsController: UITableViewController {
                 cell.selectionStyle = .none
                 cell.switchButton.addTarget(self, action: #selector(enableMultilineInputSwitchPressed(sender:)), for: .valueChanged)
                 
-                if defaults.bool(forKey: "useMultilineInput") == true {
+                if defaults.bool(forKey: "useMultilineInput") {
                     cell.switchButton.isOn = true
                 } else {
                     cell.switchButton.isOn = false
@@ -267,7 +267,7 @@ class AppearanceSettingsController: UITableViewController {
             cell.selectionStyle = .none
             cell.switchButton.addTarget(self, action: #selector(randomColorSwitchPressed), for: .valueChanged)
             
-            if defaults.bool(forKey: "useRandomColor") == true {
+            if defaults.bool(forKey: "useRandomColor") {
                 cell.switchButton.isOn = true
             } else {
                 cell.switchButton.isOn = false
@@ -286,31 +286,29 @@ class AppearanceSettingsController: UITableViewController {
             var newColor = String()
             let colorTheme = defaults.string(forKey: "noteColorTheme")
             
-            if colorTheme == "default" {
+            switch colorTheme {
+            case "default":
                 newColor = UIColor.defaultColorsStrings.randomElement() ?? "white"
                 newBackgroundColor = UIColor.defaultColors.randomElement() ?? UIColor.white
-                
-            } else if colorTheme == "sunset" {
+            case "sunset":
                 newColor = UIColor.sunsetColorsStrings.randomElement() ?? "white"
                 newBackgroundColor = UIColor.sunsetColors.randomElement() ?? UIColor.white
-                
-            } else if colorTheme == "kypool" {
+            case "kypool":
                 newColor = UIColor.kypoolColorsStrings.randomElement() ?? "white"
                 newBackgroundColor = UIColor.kypoolColors.randomElement() ?? UIColor.white
-                
-            } else if colorTheme == "celestial" {
+            case "celestial":
                 newColor = UIColor.celestialColorsStrings.randomElement() ?? "white"
                 newBackgroundColor = UIColor.celestialColors.randomElement() ?? UIColor.white
-                
-            } else if colorTheme == "appleVibrant" {
+            case "appleVibrant":
                 newColor = UIColor.appleVibrantColorsStrings.randomElement() ?? "white"
                 newBackgroundColor = UIColor.appleVibrantColors.randomElement() ?? UIColor.white
-                
-            } else if colorTheme == "scarletAzure" {
+            case "scarletAzure":
                 newColor = UIColor.scarletAzureColorsString.randomElement() ?? "white"
                 newBackgroundColor = UIColor.scarletAzureColors.randomElement() ?? UIColor.white
+            default:
+                newColor = UIColor.defaultColorsStrings.randomElement() ?? "white"
+                newBackgroundColor = UIColor.defaultColors.randomElement() ?? UIColor.white
             }
-
             
             note.color = newColor
         }
@@ -328,7 +326,7 @@ class AppearanceSettingsController: UITableViewController {
     }
     
     @objc func useSystemMode(sender: UISwitch) {
-        if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+        if !defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
             PremiumView.shared.presentPremiumView(viewController: self)
             sender.isOn = false
             
@@ -353,7 +351,7 @@ class AppearanceSettingsController: UITableViewController {
     }
     
     @objc func vibrantDarkModeSwitchPressed(sender: UISwitch) {
-        if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+        if !defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
             PremiumView.shared.presentPremiumView(viewController: self)
             sender.isOn = false
             
@@ -381,7 +379,7 @@ class AppearanceSettingsController: UITableViewController {
     }
     
     @objc func pureDarkModeSwitchPressed(sender: UISwitch) {
-        if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+        if !defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
             PremiumView.shared.presentPremiumView(viewController: self)
             sender.isOn = false
             
@@ -409,7 +407,7 @@ class AppearanceSettingsController: UITableViewController {
     }
     
     @objc func enableMultilineInputSwitchPressed(sender: UISwitch) {
-        if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+        if !defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
             PremiumView.shared.presentPremiumView(viewController: self)
             sender.isOn = false
             
@@ -474,7 +472,7 @@ class AppearanceSettingsController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0:
-            if defaults.bool(forKey: "useSystemMode") == false {
+            if !defaults.bool(forKey: "useSystemMode") {
                 return "Vibrant dark mode retains the color of your notes while pure dark mode replaces these colors with black."
             } else {
                 return "Jotify can automatically match your system's preference, or you can chose to toggle light/dark mode manually."
@@ -528,9 +526,9 @@ class AppearanceSettingsController: UITableViewController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+        if !UserDefaults.standard.bool(forKey: "useSystemMode") && !UserDefaults.standard.bool(forKey: "darkModeEnabled") {
             return .darkContent
-        } else if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+        } else if !UserDefaults.standard.bool(forKey: "useSystemMode") && UserDefaults.standard.bool(forKey: "darkModeEnabled") {
             return .lightContent
         } else if UserDefaults.standard.bool(forKey: "useSystemMode") && traitCollection.userInterfaceStyle == .light {
             return .darkContent

@@ -3,12 +3,13 @@ platform :ios, '12.0'
 
 target 'Jotify' do
   use_frameworks!
-  
+
 # Used in WriteNoteView.swift to create a UITextView with a placeholder
 pod'MultilineTextField'
 
 # CollectionView layout for SavedNoteController.swift
-pod'Blueprints'
+# Ignore warnings from Blueprints
+pod'Blueprints', :inhibit_warnings => true
 
 # Used to animate cells in CollectionView on sort
 pod'ViewAnimator'

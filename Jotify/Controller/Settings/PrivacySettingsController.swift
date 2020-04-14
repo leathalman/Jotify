@@ -42,15 +42,13 @@ class PrivacySettingsController: UITableViewController {
     }
     
     func setupDynamicElements() {
-        if settingsController.darkModeEnabled() == false {
+        if settingsController.darkModeEnabled() {
             view.backgroundColor = InterfaceColors.viewBackgroundColor
-            
-            tableView.separatorColor = nil
-            
-        } else if settingsController.darkModeEnabled() == true {
-            view.backgroundColor = InterfaceColors.viewBackgroundColor
-            
             tableView.separatorColor = InterfaceColors.separatorColor
+            
+        } else {
+            view.backgroundColor = InterfaceColors.viewBackgroundColor
+            tableView.separatorColor = nil
         }
     }
     
@@ -62,26 +60,26 @@ class PrivacySettingsController: UITableViewController {
                 
         unlockButton.center = window.center
         
-        if defaults.bool(forKey: "useRandomColor") == false {
+        if !defaults.bool(forKey: "useRandomColor")  {
             unlockButton.backgroundColor = defaults.color(forKey: "staticNoteColor") ?? UIColor.white
             
         } else {
-            if isSelectedColorFromDefaults(key: "default") == true {
+            if isSelectedColorFromDefaults(key: "default") {
                 unlockButton.backgroundColor = UIColor.defaultColors.randomElement() ?? UIColor.blue2
                 
-            } else if isSelectedColorFromDefaults(key: "sunset") == true {
+            } else if isSelectedColorFromDefaults(key: "sunset") {
                 unlockButton.backgroundColor = UIColor.sunsetColors.randomElement() ?? UIColor.blue2
                 
-            } else if isSelectedColorFromDefaults(key: "kypool") == true {
+            } else if isSelectedColorFromDefaults(key: "kypool") {
                 unlockButton.backgroundColor = UIColor.kypoolColors.randomElement() ?? UIColor.blue2
                 
-            } else if isSelectedColorFromDefaults(key: "celestial") == true {
+            } else if isSelectedColorFromDefaults(key: "celestial") {
                 unlockButton.backgroundColor = UIColor.celestialColors.randomElement() ?? UIColor.blue2
                 
-            } else if isSelectedColorFromDefaults(key: "appleVibrant") == true {
+            } else if isSelectedColorFromDefaults(key: "appleVibrant") {
                 unlockButton.backgroundColor = UIColor.appleVibrantColors.randomElement() ?? UIColor.blue2
                 
-            } else if isSelectedColorFromDefaults(key: "scarletAzure") == true {
+            } else if isSelectedColorFromDefaults(key: "scarletAzure") {
                 unlockButton.backgroundColor = UIColor.scarletAzureColors.randomElement() ?? UIColor.blue2
             }
         }
@@ -133,7 +131,8 @@ class PrivacySettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
+        switch indexPath.section {
+        case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
             cell.textLabel?.text = "\(biometrics[indexPath.row])"
             
@@ -142,7 +141,7 @@ class PrivacySettingsController: UITableViewController {
             cell.selectionStyle = .none
             cell.switchButton.addTarget(self, action: #selector(useBiometricsSwitchPressed(sender:)), for: .valueChanged)
             
-            if defaults.bool(forKey: "useBiometrics") == true {
+            if defaults.bool(forKey: "useBiometrics") {
                 cell.switchButton.isOn = true
             } else {
                 cell.switchButton.isOn = false
@@ -150,7 +149,7 @@ class PrivacySettingsController: UITableViewController {
             
             return cell
             
-        } else {
+        default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
             
             cell.backgroundColor = UIColor.white
@@ -160,7 +159,7 @@ class PrivacySettingsController: UITableViewController {
     }
     
     @objc func useBiometricsSwitchPressed(sender: UISwitch) {
-        if defaults.bool(forKey: "com.austinleath.Jotify.Premium") == false {
+        if !defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
             PremiumView.shared.presentPremiumView(viewController: self)
             sender.isOn = false
             
@@ -244,16 +243,16 @@ class PrivacySettingsController: UITableViewController {
         if UserDefaults.standard.bool(forKey: "useSystemMode") {
             if UserDefaults.standard.bool(forKey: "darkModeEnabled") {
                 setupDarkPersistentNavigationBar()
-            } else if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+            } else if !UserDefaults.standard.bool(forKey: "darkModeEnabled") {
                 setupDefaultPersistentNavigationBar()
             }
         }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+        if !UserDefaults.standard.bool(forKey: "useSystemMode") && !UserDefaults.standard.bool(forKey: "darkModeEnabled") {
             return .darkContent
-        } else if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+        } else if !UserDefaults.standard.bool(forKey: "useSystemMode") && UserDefaults.standard.bool(forKey: "darkModeEnabled") {
             return .lightContent
         } else if UserDefaults.standard.bool(forKey: "useSystemMode") && traitCollection.userInterfaceStyle == .light {
             return .darkContent

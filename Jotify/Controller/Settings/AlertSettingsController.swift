@@ -27,20 +27,19 @@ class AlertSettingsController: UITableViewController {
     }
     
     func setupDynamicElements() {
-        if settingsController.darkModeEnabled() == false {
+        if settingsController.darkModeEnabled() {
             view.backgroundColor = InterfaceColors.viewBackgroundColor
-            
-            tableView.separatorColor = nil
-            
-        } else if settingsController.darkModeEnabled() == true {
-            view.backgroundColor = InterfaceColors.viewBackgroundColor
-            
             tableView.separatorColor = InterfaceColors.separatorColor
+            
+        } else {
+            view.backgroundColor = InterfaceColors.viewBackgroundColor
+            tableView.separatorColor = nil
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
+        switch indexPath.section {
+        case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
             cell.textLabel?.text = "\(delete[indexPath.row])"
             
@@ -56,8 +55,7 @@ class AlertSettingsController: UITableViewController {
             }
             
             return cell
-            
-        } else if indexPath.section == 1 {
+        case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
             
             settingsController.setupDynamicCells(cell: cell, enableArrow: false)
@@ -73,8 +71,7 @@ class AlertSettingsController: UITableViewController {
             }
             
             return cell
-            
-        } else {
+        default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
             
             cell.backgroundColor = UIColor.white
@@ -164,9 +161,9 @@ class AlertSettingsController: UITableViewController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+        if !UserDefaults.standard.bool(forKey: "useSystemMode") && !UserDefaults.standard.bool(forKey: "darkModeEnabled") {
             return .darkContent
-        } else if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+        } else if !UserDefaults.standard.bool(forKey: "useSystemMode") && UserDefaults.standard.bool(forKey: "darkModeEnabled") {
             return .lightContent
         } else if UserDefaults.standard.bool(forKey: "useSystemMode") && traitCollection.userInterfaceStyle == .light {
             return .darkContent

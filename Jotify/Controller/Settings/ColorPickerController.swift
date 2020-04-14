@@ -67,7 +67,7 @@ class ColorPickerController: UIViewController {
         
         setupClearNavigationBar()
         
-        if defaults.bool(forKey: "darkModeEnabled") == true {
+        if defaults.bool(forKey: "darkModeEnabled") {
             colorPicker.hexLabel.textColor = UIColor.white
             contentView.backgroundColor = UIColor.grayBackground
         }
@@ -95,7 +95,7 @@ class ColorPickerController: UIViewController {
         for note in notes {
             var newColor = String()
             
-            if defaults.bool(forKey: "useRandomColor") == false {
+            if !defaults.bool(forKey: "useRandomColor") {
                 newColor = "staticNoteColor"
                 newBackgroundColor = defaults.color(forKey: "staticNoteColor") ?? UIColor.white
             }
@@ -141,7 +141,7 @@ class ColorPickerController: UIViewController {
         let themes = Themes()
         themes.triggerSystemMode(mode: traitCollection)
         
-        if defaults.bool(forKey: "darkModeEnabled") == true {
+        if defaults.bool(forKey: "darkModeEnabled") {
             colorPicker.hexLabel.textColor = UIColor.white
             contentView.backgroundColor = UIColor.grayBackground
         } else {
@@ -151,9 +151,9 @@ class ColorPickerController: UIViewController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
+        if !UserDefaults.standard.bool(forKey: "useSystemMode") && !UserDefaults.standard.bool(forKey: "darkModeEnabled") {
             return .darkContent
-        } else if UserDefaults.standard.bool(forKey: "useSystemMode") == false && UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
+        } else if !UserDefaults.standard.bool(forKey: "useSystemMode") && UserDefaults.standard.bool(forKey: "darkModeEnabled") {
             return .lightContent
         } else if UserDefaults.standard.bool(forKey: "useSystemMode") && traitCollection.userInterfaceStyle == .light {
             return .darkContent
