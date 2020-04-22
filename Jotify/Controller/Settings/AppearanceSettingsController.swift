@@ -12,9 +12,7 @@ import UIKit
 
 class AppearanceSettingsController: UITableViewController {
     var notes: [Note] = []
-    
-    let themes = Themes()
-    
+        
     let sections: Array = ["Dark Mode", "Themes", "Text", "Other"]
     let darks: Array = ["Use System Light/Dark Mode"]
     let darks2: Array = ["Use System Light/Dark Mode", "Vibrant Dark Mode", "Pure Dark Mode"]
@@ -335,7 +333,7 @@ class AppearanceSettingsController: UITableViewController {
                 print("use system mode enabled")
                 defaults.set(true, forKey: "useSystemMode")
                 
-                themes.triggerSystemMode(mode: self.traitCollection)
+                Themes().triggerSystemMode(mode: self.traitCollection)
                 
                 viewWillAppear(true)
                 self.tableView.reloadData()
@@ -361,7 +359,7 @@ class AppearanceSettingsController: UITableViewController {
                 defaults.set(true, forKey: "vibrantDarkModeEnabled")
                 defaults.set(false, forKey: "pureDarkModeEnabled")
                 defaults.set(true, forKey: "darkModeEnabled")
-                themes.setupVibrantDarkMode()
+                Themes().setupVibrantDarkMode()
                 
                 viewWillAppear(true)
                 self.tableView.reloadData()
@@ -370,7 +368,7 @@ class AppearanceSettingsController: UITableViewController {
                 print("vibrant dark mode disabled")
                 defaults.set(false, forKey: "vibrantDarkModeEnabled")
                 defaults.set(false, forKey: "darkModeEnabled")
-                themes.setupDefaultMode()
+                Themes().setupDefaultMode()
                 
                 viewWillAppear(true)
                 self.tableView.reloadData()
@@ -389,7 +387,7 @@ class AppearanceSettingsController: UITableViewController {
                 defaults.set(true, forKey: "pureDarkModeEnabled")
                 defaults.set(false, forKey: "vibrantDarkModeEnabled")
                 defaults.set(true, forKey: "darkModeEnabled")
-                themes.setupPureDarkMode()
+                Themes().setupPureDarkMode()
                 
                 viewWillAppear(true)
                 self.tableView.reloadData()
@@ -398,7 +396,7 @@ class AppearanceSettingsController: UITableViewController {
                 print("pure dark mode disabled")
                 defaults.set(false, forKey: "pureDarkModeEnabled")
                 defaults.set(false, forKey: "darkModeEnabled")
-                themes.setupDefaultMode()
+                Themes().setupDefaultMode()
                 
                 viewWillAppear(true)
                 self.tableView.reloadData()
@@ -520,7 +518,7 @@ class AppearanceSettingsController: UITableViewController {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {        
-        themes.triggerSystemMode(mode: traitCollection)
+        Themes().triggerSystemMode(mode: traitCollection)
         setupDynamicElements()
         tableView.reloadData()
     }

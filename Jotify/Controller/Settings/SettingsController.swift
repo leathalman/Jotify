@@ -14,9 +14,7 @@ class SettingsController: UITableViewController {
     let general: Array = ["About", "Appearance", "Privacy", "Alerts"]
     let advanced1: Array = ["Get Premium", "Restore Purchases", "Show Tutorial", "Reset Settings to Default", "Delete All Data"]
     let advanced2: Array = ["Restore Purchases", "Show Tutorial", "Reset Settings to Default", "Delete All Data"]
-    
-    let themes = Themes()
-    
+        
     let defaults = UserDefaults.standard
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,28 +37,28 @@ class SettingsController: UITableViewController {
     }
     
     func setupDynamicViewElements() {
+        Themes().setupPersistentNavigationBar(navController: navigationController ?? UINavigationController())
+        
         if darkModeEnabled() {
             if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") {
-                themes.setupVibrantDarkMode()
+                Themes().setupVibrantDarkMode()
                 view.backgroundColor = InterfaceColors.viewBackgroundColor
                 tableView.separatorColor = InterfaceColors.separatorColor
                 tableView.reloadData()
-                setupDarkPersistentNavigationBar()
                 
             } else if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") {
-                themes.setupPureDarkMode()
+                Themes().setupPureDarkMode()
                 view.backgroundColor = InterfaceColors.viewBackgroundColor
                 tableView.separatorColor = InterfaceColors.separatorColor
                 tableView.reloadData()
-                setupDarkPersistentNavigationBar()
             }
             
         } else {
             view.backgroundColor = InterfaceColors.viewBackgroundColor
             tableView.separatorColor = nil
-            themes.setupDefaultMode()
+            Themes().setupDefaultMode()
             tableView.reloadData()
-            setupDefaultPersistentNavigationBar()
+            ()
         }
     }
     
@@ -68,26 +66,6 @@ class SettingsController: UITableViewController {
         var frame = CGRect.zero
         frame.size.height = .leastNormalMagnitude
         tableView.tableHeaderView = UIView(frame: frame)
-    }
-    
-    func setupDefaultPersistentNavigationBar() {
-        navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
-        navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        navigationController?.navigationBar.barStyle = .default
-        navigationController?.navigationBar.isTranslucent = false
-    }
-    
-    func setupDarkPersistentNavigationBar() {
-        navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
-        navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.isTranslucent = false
     }
     
     func deleteAllNotes(entity: String) {
@@ -360,7 +338,7 @@ class SettingsController: UITableViewController {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {       
-        themes.triggerSystemMode(mode: traitCollection)
+        Themes().triggerSystemMode(mode: traitCollection)
         setupDynamicViewElements()
         tableView.reloadData()
     }

@@ -204,8 +204,7 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        let themes = Themes()
-        themes.triggerSystemMode(mode: traitCollection)
+        Themes().triggerSystemMode(mode: traitCollection)
         setupDynamicColors()
     }
 }

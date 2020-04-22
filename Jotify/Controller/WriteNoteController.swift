@@ -13,8 +13,6 @@ import UIKit
 class WriteNoteController: UIViewController, UITextViewDelegate {
     let writeNoteView = WriteNoteView()
     
-    let themes = Themes()
-    
     let defaults = UserDefaults.standard
     
     let receiptFetcher = ReceiptFetcher()
@@ -29,7 +27,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        themes.triggerSystemMode(mode: traitCollection)
+        Themes().triggerSystemMode(mode: traitCollection)
         setupPlaceholder()
         setupDynamicBackground()
         setupDynamicKeyboardColor()
@@ -231,7 +229,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
             writeNoteView.inputTextView.frame = frame
         }
         
-        themes.triggerSystemMode(mode: traitCollection)
+        Themes().triggerSystemMode(mode: traitCollection)
         setupDynamicBackground()
     }
     

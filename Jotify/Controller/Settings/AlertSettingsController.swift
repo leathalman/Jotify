@@ -125,39 +125,12 @@ class AlertSettingsController: UITableViewController {
         return 60
     }
     
-    func setupDefaultPersistentNavigationBar() {
-        navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
-        navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        navigationController?.navigationBar.barStyle = .default
-        navigationController?.navigationBar.isTranslucent = false
-    }
-    
-    func setupDarkPersistentNavigationBar() {
-        navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
-        navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.isTranslucent = false
-    }
-    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        let themes = Themes()
-        themes.triggerSystemMode(mode: traitCollection)
+        Themes().triggerSystemMode(mode: traitCollection)
         setupDynamicElements()
         tableView.reloadData()
         
-        if UserDefaults.standard.bool(forKey: "useSystemMode") {
-            if UserDefaults.standard.bool(forKey: "darkModeEnabled") {
-                setupDarkPersistentNavigationBar()
-            } else if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
-                setupDefaultPersistentNavigationBar()
-            }
-        }
+        Themes().setupPersistentNavigationBar(navController: navigationController ?? UINavigationController())
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

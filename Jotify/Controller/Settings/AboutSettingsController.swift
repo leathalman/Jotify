@@ -87,19 +87,8 @@ class AboutSettingsController: UIViewController {
         }
     }
     
-    func setupDefaultPersistentNavigationBar() {
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        navigationController?.navigationBar.barStyle = .default
-    }
-    
-    func setupDarkPersistentNavigationBar() {
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.barStyle = .black
-    }
-    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        let themes = Themes()
-        themes.triggerSystemMode(mode: traitCollection)
+        Themes().triggerSystemMode(mode: traitCollection)
         aboutSettingsView.versionLabel.textColor = InterfaceColors.fontColor
         aboutSettingsView.backgroundColor = InterfaceColors.viewBackgroundColor
         
@@ -123,11 +112,7 @@ class AboutSettingsController: UIViewController {
             navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
             navigationController?.navigationBar.isTranslucent = false
             
-            if UserDefaults.standard.bool(forKey: "darkModeEnabled") {
-                setupDarkPersistentNavigationBar()
-            } else if !UserDefaults.standard.bool(forKey: "darkModeEnabled") {
-                setupDefaultPersistentNavigationBar()
-            }
+            Themes().setupPersistentNavigationBar(navController: navigationController ?? UINavigationController())
         }
     }
     

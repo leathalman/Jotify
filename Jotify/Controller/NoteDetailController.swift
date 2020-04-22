@@ -199,6 +199,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         return false
     }
     
+    //WORK ON THIS
     func setupPersistentNavigationBar() {
         guard navigationController?.topViewController === self else { return }
         transitionCoordinator?.animate(alongsideTransition: { [weak self] _ in

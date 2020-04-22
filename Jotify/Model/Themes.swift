@@ -70,4 +70,25 @@ class Themes {
             }
         }
     }
+    
+    func darkModeEnabled() -> Bool {
+        return UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    }
+    
+    func setupPersistentNavigationBar(navController: UINavigationController) {
+        navController.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
+        navController.navigationBar.barTintColor = InterfaceColors.navigationBarColor
+        navController.navigationBar.shadowImage = UIImage()
+        navController.navigationBar.setBackgroundImage(nil, for: .default)
+        navController.navigationBar.isTranslucent = false
+        
+        if darkModeEnabled() {
+            navController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            navController.navigationBar.barStyle = .black
+            
+        } else {
+            navController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+            navController.navigationBar.barStyle = .default
+        }
+    }
 }

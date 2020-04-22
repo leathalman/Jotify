@@ -138,8 +138,7 @@ class ColorPickerController: UIViewController {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        let themes = Themes()
-        themes.triggerSystemMode(mode: traitCollection)
+        Themes().triggerSystemMode(mode: traitCollection)
         
         if defaults.bool(forKey: "darkModeEnabled") {
             colorPicker.hexLabel.textColor = UIColor.white

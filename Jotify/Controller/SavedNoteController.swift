@@ -137,6 +137,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         UIBarButtonItem.appearance().setTitleTextAttributes(cancelButtonAttributes as? [NSAttributedString.Key : Any], for: UIControl.State.normal)
         
         setupDynamicSearchBar()
+        Themes().setupPersistentNavigationBar(navController: navigationController ?? UINavigationController())
         
         if defaults.bool(forKey: "darkModeEnabled") {
             searchController.searchBar.barTintColor = InterfaceColors.searchBarColor
@@ -149,8 +150,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             
             UIApplication.shared.windows.first?.backgroundColor = InterfaceColors.viewBackgroundColor
             
-            setupDarkPersistentNavigationBar()
-            
         } else {
             searchController.searchBar.barTintColor = InterfaceColors.searchBarColor
             searchController.searchBar.backgroundImage = nil
@@ -162,7 +161,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             
             UIApplication.shared.windows.first?.backgroundColor = InterfaceColors.viewBackgroundColor
             
-            setupDefaultPersistentNavigationBar()
         }
     }
     
@@ -190,24 +188,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         searchController.searchBar.backgroundImage = UIImage()
         searchController.overrideUserInterfaceStyle = .dark
         searchController.searchBar.overrideUserInterfaceStyle = .dark
-    }
-    
-    func setupDefaultPersistentNavigationBar() {
-        navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
-        navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        navigationController?.navigationBar.barStyle = .default
-    }
-    
-    func setupDarkPersistentNavigationBar() {
-        navigationController?.navigationBar.backgroundColor = InterfaceColors.navigationBarColor
-        navigationController?.navigationBar.barTintColor = InterfaceColors.navigationBarColor
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.barStyle = .black
     }
     
     func setupSearchBar() {
@@ -788,8 +768,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             collectionView.reloadData()
         }
         
-        let themes = Themes()
-        themes.triggerSystemMode(mode: traitCollection)
+        Themes().triggerSystemMode(mode: traitCollection)
         setupDynamicViewElements()
         collectionView.reloadData()
     }

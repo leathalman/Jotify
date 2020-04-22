@@ -12,7 +12,6 @@ import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    let themes = Themes()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -37,12 +36,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
             if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") == true {
-                themes.setupVibrantDarkMode()
+                Themes().setupVibrantDarkMode()
             } else if UserDefaults.standard.bool(forKey: "pureDarkModeEnabled") {
-                themes.setupPureDarkMode()
+                Themes().setupPureDarkMode()
             }
         } else {
-            themes.setupDefaultMode()
+            Themes().setupDefaultMode()
         }
         
         switch Config.appConfiguration {
