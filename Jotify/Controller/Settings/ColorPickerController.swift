@@ -150,15 +150,7 @@ class ColorPickerController: UIViewController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if !UserDefaults.standard.bool(forKey: "useSystemMode") && !UserDefaults.standard.bool(forKey: "darkModeEnabled") {
-            return .darkContent
-        } else if !UserDefaults.standard.bool(forKey: "useSystemMode") && UserDefaults.standard.bool(forKey: "darkModeEnabled") {
-            return .lightContent
-        } else if UserDefaults.standard.bool(forKey: "useSystemMode") && traitCollection.userInterfaceStyle == .light {
-            return .darkContent
-        } else {
-            return .lightContent
-        }
+        return Themes().setStatusBar(traitCollection: traitCollection)
     }
 }
 
