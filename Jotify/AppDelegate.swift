@@ -16,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        JotifyProducts.store.restorePurchases()
+        
         let center = UNUserNotificationCenter.current()
         center.delegate = self
         
@@ -47,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         switch Config.appConfiguration {
         case .Debug:
             print("Debug")
-            UserDefaults.standard.set(true, forKey: "com.austinleath.Jotify.Premium")
+//            UserDefaults.standard.set(true, forKey: "com.austinleath.Jotify.Premium")
         case .TestFlight:
             print("Testflight")
         case .AppStore:
