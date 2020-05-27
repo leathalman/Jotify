@@ -23,7 +23,7 @@ First of all you have to import the library  `import MultilineTextField`.
 
 After that just create an instance of the view an customize its properties:
 
-````
+```swift
 let textField = MultiplelineTextField(frame: textFieldFrame)
 textField.leftView = UIImageView(image: image)
 // or use the convenience property:
@@ -35,7 +35,7 @@ textField.placeholderColor = UIColor.red
 textField.isPlaceholderScrollEnabled = true
 textField.leftViewOrigin = CGPoint(x: 8, y: 8)
 someView.addSubview(textField)
-````
+```
 
 ## Example
 
@@ -47,8 +47,13 @@ It requires Swift 4 and Xcode 9 or above
 
 ## Installation
 
-MultilineTextField is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+MultilineTextField is available through Swift Package Manager and also [CocoaPods](http://cocoapods.org).
+
+### Swift Package Manager
+Select File > Swift Packages > Add Package Dependency. Enter `https://github.com/rlaguilar/MultilineTextField.git` in the "Choose Package Repository" dialog.
+
+### CocoaPods
+Simply add the following line to your Podfile:
 
 ```ruby
 pod 'MultilineTextField'

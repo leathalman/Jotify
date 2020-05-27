@@ -362,6 +362,7 @@ open class ActionController<ActionViewType: UICollectionViewCell, ActionDataType
 
         let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: settings.cancelView.height))
         cancelButton.addTarget(self, action: #selector(ActionController.cancelButtonDidTouch(_:)), for: .touchUpInside)
+        cancelButton.setTitleColor(settings.cancelView.titleColor, for: UIControl.State())
         cancelButton.setTitle(settings.cancelView.title, for: UIControl.State())
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
 
@@ -667,20 +668,15 @@ open class ActionController<ActionViewType: UICollectionViewCell, ActionDataType
         var bottomInset = settings.cancelView.showCancel ? initialContentInset.bottom + settings.cancelView.height : initialContentInset.bottom
         var topInset = height - contentHeight - safeAreaInsets.bottom
 
-        if settings.cancelView.showCancel {
-            topInset -= settings.cancelView.height
-        }
-
-        topInset = max(topInset, 30)
+        topInset = max(topInset, safeAreaInsets.top + 30)
 
         bottomInset += safeAreaInsets.bottom
         leftInset += safeAreaInsets.left
         rightInset += safeAreaInsets.right
-        topInset += safeAreaInsets.top
 
         collectionView.contentInset = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
         if !settings.behavior.useDynamics {
-            collectionView.contentOffset.y = -height + contentHeight + bottomInset
+            collectionView.contentOffset.y = -topInset
         }
     }
 

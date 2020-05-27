@@ -18,9 +18,6 @@ class ColorPickerController: UIViewController {
     lazy var colorPicker: ChromaColorPicker = {
         let colorPicker = ChromaColorPicker(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
         colorPicker.delegate = self
-        colorPicker.padding = 5
-        colorPicker.stroke = 3
-        colorPicker.hexLabel.textColor = UIColor.black
         colorPicker.translatesAutoresizingMaskIntoConstraints = false
         return colorPicker
     }()
@@ -68,7 +65,6 @@ class ColorPickerController: UIViewController {
         setupClearNavigationBar()
         
         if defaults.bool(forKey: "darkModeEnabled") {
-            colorPicker.hexLabel.textColor = UIColor.white
             contentView.backgroundColor = UIColor.grayBackground
         }
     }
@@ -85,7 +81,7 @@ class ColorPickerController: UIViewController {
             self?.navigationController?.navigationBar.backgroundColor = .clear
             self?.navigationController?.navigationBar.barTintColor = .gray
             self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        }, completion: nil)
+            }, completion: nil)
     }
     
     func setStaticColorForNotes() {
@@ -141,10 +137,8 @@ class ColorPickerController: UIViewController {
         Themes().triggerSystemMode(mode: traitCollection)
         
         if defaults.bool(forKey: "darkModeEnabled") {
-            colorPicker.hexLabel.textColor = UIColor.white
             contentView.backgroundColor = UIColor.grayBackground
         } else {
-            colorPicker.hexLabel.textColor = UIColor.black
             contentView.backgroundColor = UIColor.white
         }
     }
@@ -155,7 +149,7 @@ class ColorPickerController: UIViewController {
 }
 
 extension ColorPickerController: ChromaColorPickerDelegate {
-    func colorPickerDidChooseColor(_ colorPicker: ChromaColorPicker, color: UIColor) {
+    func colorPickerHandleDidChange(_ colorPicker: ChromaColorPicker, handle: ChromaColorHandle, to color: UIColor) {
         view.backgroundColor = color
         
         defaults.set(color, forKey: "staticNoteColor")
@@ -166,11 +160,12 @@ extension ColorPickerController: ChromaColorPickerDelegate {
         
         UIView.animate(withDuration: 0.2,
                        animations: {
-                           self.view.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
-                       }, completion: { _ in
-                           UIView.animate(withDuration: 0.2, animations: {
-                               self.view.transform = CGAffineTransform.identity
-                           })
+                        self.view.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.2, animations: {
+                self.view.transform = CGAffineTransform.identity
+            })
         })
     }
+    
 }

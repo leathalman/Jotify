@@ -8,8 +8,7 @@
 
 import UIKit
 
-class BottomPopupPresentAnimator: NSObject, UIViewControllerAnimatedTransitioning {
-    
+final class BottomPopupPresentAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     private unowned var attributesOwner: BottomPresentableViewController
     
     init(attributesOwner: BottomPresentableViewController) {
@@ -17,7 +16,7 @@ class BottomPopupPresentAnimator: NSObject, UIViewControllerAnimatedTransitionin
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return attributesOwner.getPopupPresentDuration()
+        return attributesOwner.popupPresentDuration
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {

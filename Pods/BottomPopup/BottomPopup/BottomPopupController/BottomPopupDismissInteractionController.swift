@@ -12,12 +12,12 @@ protocol BottomPopupDismissInteractionControllerDelegate: class {
     func dismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat)
 }
 
-class BottomPopupDismissInteractionController: UIPercentDrivenInteractiveTransition {
-    
+final class BottomPopupDismissInteractionController: UIPercentDrivenInteractiveTransition {
     private let kMinPercentOfVisiblePartToCompleteAnimation = CGFloat(0.5)
     private let kSwipeDownThreshold = CGFloat(1000)
     private weak var presentedViewController: BottomPresentableViewController?
     private weak var transitioningDelegate: BottomPopupTransitionHandler?
+    private unowned var attributesDelegate: BottomPopupAttributesDelegate
     weak var delegate: BottomPopupDismissInteractionControllerDelegate?
     
     private var currentPercent: CGFloat = 0 {
@@ -26,9 +26,10 @@ class BottomPopupDismissInteractionController: UIPercentDrivenInteractiveTransit
         }
     }
     
-    init(presentedViewController: BottomPresentableViewController?) {
+    init(presentedViewController: BottomPresentableViewController?, attributesDelegate: BottomPopupAttributesDelegate) {
         self.presentedViewController = presentedViewController
         self.transitioningDelegate = presentedViewController?.transitioningDelegate as? BottomPopupTransitionHandler
+        self.attributesDelegate = attributesDelegate
         super.init()
         preparePanGesture(in: presentedViewController?.view)
     }
@@ -47,6 +48,8 @@ class BottomPopupDismissInteractionController: UIPercentDrivenInteractiveTransit
     }
     
     @objc private func handlePanGesture(_ pan: UIPanGestureRecognizer) {
+        guard attributesDelegate.popupShouldBeganDismiss else { return }
+            
         let translationY = pan.translation(in: presentedViewController?.view).y
         currentPercent = min(max(translationY/(presentedViewController?.view.frame.size.height ?? 0), 0), 1)
         

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9B6AC7C1DBA10CBFB04F374B /* Pods_Jotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3C025699629E8C8FD896B4 /* Pods_Jotify.framework */; };
+		40383F919C25A820B4F11373 /* Pods_Jotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A323702C4BB17879EB5635A /* Pods_Jotify.framework */; };
 		F6070B8A22D50796005E4CF3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6070B8922D50796005E4CF3 /* EmptyView.swift */; };
 		F608ECEB2352703E00ABFD48 /* AlertSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F608ECEA2352703E00ABFD48 /* AlertSettingsController.swift */; };
 		F61EC8BC2348E1BA00FB0A63 /* WhatsNewViewController+TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61EC89D2348E1B900FB0A63 /* WhatsNewViewController+TitleView.swift */; };
@@ -91,11 +91,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0C3C025699629E8C8FD896B4 /* Pods_Jotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		134E86D639FF0CE5ED6FEF08 /* Pods-Jotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.release.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.release.xcconfig"; sourceTree = "<group>"; };
-		68C1B4D116CC7FA198355723 /* Pods-Jotify.testflight.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.testflight.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.testflight.xcconfig"; sourceTree = "<group>"; };
-		77AB5562845EB3AEFA1502C6 /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.debug.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
-		B3D4F129EFF4F09451251D56 /* Pods-Jotify.release (development).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.release (development).xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.release (development).xcconfig"; sourceTree = "<group>"; };
+		5A38D5DED763274A2FC92A00 /* Pods-Jotify.testflight.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.testflight.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.testflight.xcconfig"; sourceTree = "<group>"; };
+		63C1D362A727BA97CDA0FF44 /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.debug.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
+		8A323702C4BB17879EB5635A /* Pods_Jotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2FEA98E85D131BC44F77230 /* Pods-Jotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.release.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.release.xcconfig"; sourceTree = "<group>"; };
 		F6070B8922D50796005E4CF3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		F608ECEA2352703E00ABFD48 /* AlertSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSettingsController.swift; sourceTree = "<group>"; };
 		F61EC89D2348E1B900FB0A63 /* WhatsNewViewController+TitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WhatsNewViewController+TitleView.swift"; sourceTree = "<group>"; };
@@ -190,7 +189,7 @@
 			files = (
 				F6B7BF902391CF600057FB8B /* StoreKit.framework in Frameworks */,
 				F650E16A22C001A8008D29AD /* CloudKit.framework in Frameworks */,
-				9B6AC7C1DBA10CBFB04F374B /* Pods_Jotify.framework in Frameworks */,
+				40383F919C25A820B4F11373 /* Pods_Jotify.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,10 +199,9 @@
 		2D64917A04CDEE1AF0C566DF /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				77AB5562845EB3AEFA1502C6 /* Pods-Jotify.debug.xcconfig */,
-				134E86D639FF0CE5ED6FEF08 /* Pods-Jotify.release.xcconfig */,
-				B3D4F129EFF4F09451251D56 /* Pods-Jotify.release (development).xcconfig */,
-				68C1B4D116CC7FA198355723 /* Pods-Jotify.testflight.xcconfig */,
+				63C1D362A727BA97CDA0FF44 /* Pods-Jotify.debug.xcconfig */,
+				D2FEA98E85D131BC44F77230 /* Pods-Jotify.release.xcconfig */,
+				5A38D5DED763274A2FC92A00 /* Pods-Jotify.testflight.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -371,7 +369,7 @@
 			children = (
 				F6B7BF8F2391CF600057FB8B /* StoreKit.framework */,
 				F650E14922BFF36D008D29AD /* CloudKit.framework */,
-				0C3C025699629E8C8FD896B4 /* Pods_Jotify.framework */,
+				8A323702C4BB17879EB5635A /* Pods_Jotify.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -476,11 +474,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F650E14422BFF35C008D29AD /* Build configuration list for PBXNativeTarget "Jotify" */;
 			buildPhases = (
-				BE12C9D3FFB401E6F8195CD4 /* [CP] Check Pods Manifest.lock */,
+				586FA9496B271435E52D762D /* [CP] Check Pods Manifest.lock */,
 				F650E12922BFF35A008D29AD /* Sources */,
 				F650E12A22BFF35A008D29AD /* Frameworks */,
 				F650E12B22BFF35A008D29AD /* Resources */,
-				A2C2AAC43F93FE05D6FF5325 /* [CP] Embed Pods Frameworks */,
+				2179B9C8DF3337A2E1CFFDBF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -547,7 +545,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A2C2AAC43F93FE05D6FF5325 /* [CP] Embed Pods Frameworks */ = {
+		2179B9C8DF3337A2E1CFFDBF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -564,7 +562,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Jotify/Pods-Jotify-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BE12C9D3FFB401E6F8195CD4 /* [CP] Check Pods Manifest.lock */ = {
+		586FA9496B271435E52D762D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -795,7 +793,7 @@
 		};
 		F650E14522BFF35C008D29AD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 77AB5562845EB3AEFA1502C6 /* Pods-Jotify.debug.xcconfig */;
+			baseConfigurationReference = 63C1D362A727BA97CDA0FF44 /* Pods-Jotify.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Default;
 				CLANG_ENABLE_MODULES = YES;
@@ -831,7 +829,7 @@
 		};
 		F650E14622BFF35C008D29AD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 134E86D639FF0CE5ED6FEF08 /* Pods-Jotify.release.xcconfig */;
+			baseConfigurationReference = D2FEA98E85D131BC44F77230 /* Pods-Jotify.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Default;
 				CLANG_ENABLE_MODULES = YES;
@@ -912,7 +910,7 @@
 		};
 		F6D1817F239C973000EAB85C /* TestFlight */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 68C1B4D116CC7FA198355723 /* Pods-Jotify.testflight.xcconfig */;
+			baseConfigurationReference = 5A38D5DED763274A2FC92A00 /* Pods-Jotify.testflight.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Default;
 				CLANG_ENABLE_MODULES = YES;

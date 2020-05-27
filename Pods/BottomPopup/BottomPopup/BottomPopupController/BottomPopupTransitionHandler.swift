@@ -8,10 +8,9 @@
 
 import UIKit
 
-class BottomPopupTransitionHandler: NSObject, UIViewControllerTransitioningDelegate {
-    
-    private var presentAnimator: BottomPopupPresentAnimator!
-    private var dismissAnimator: BottomPopupDismissAnimator!
+final class BottomPopupTransitionHandler: NSObject, UIViewControllerTransitioningDelegate {
+    private let presentAnimator: BottomPopupPresentAnimator
+    private let dismissAnimator: BottomPopupDismissAnimator
     private var interactionController: BottomPopupDismissInteractionController?
     private unowned var popupViewController: BottomPresentableViewController
     fileprivate weak var popupDelegate: BottomPopupDelegate?
@@ -28,15 +27,15 @@ class BottomPopupTransitionHandler: NSObject, UIViewControllerTransitioningDeleg
     //MARK: Public
     func notifyViewLoaded(withPopupDelegate delegate: BottomPopupDelegate?) {
         self.popupDelegate = delegate
-        if popupViewController.shouldPopupDismissInteractivelty() {
-            interactionController = BottomPopupDismissInteractionController(presentedViewController: popupViewController)
+        if popupViewController.popupShouldDismissInteractivelty {
+            interactionController = BottomPopupDismissInteractionController(presentedViewController: popupViewController, attributesDelegate: popupViewController)
             interactionController?.delegate = self
         }
     }
     
     //MARK: Specific animators
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        return BottomPopupPresentationController(presentedViewController: presented, presenting: presenting, usingHeight: popupViewController.getPopupHeight(), andDimmingViewAlpha: popupViewController.getDimmingViewAlpha())
+        return BottomPopupPresentationController(presentedViewController: presented, presenting: presenting, attributesDelegate: popupViewController)
     }
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {

@@ -1,5 +1,5 @@
 // The MIT License (MIT)
-// Copyright © 2019 Ivan Vorobei (hello@ivanvorobei.by)
+// Copyright © 2019 Ivan Varabei (varabeis@icloud.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,21 +21,43 @@
 
 import UIKit
 
+/**
+ Base class with fast presenting.
+ */
 public enum SPAlert {
     
-    
+    /**
+     Present with presets.
+     
+     - parameter title: Main text in alert.
+     - parameter message: Subtitle in alert. Optional.
+     - parameter preset: Сonfigureв preset with layout and icons.
+     */
     public static func present(title: String, message: String? = nil, preset: SPAlertPreset) {
         let alertView = SPAlertView(title: title, message: message, preset: preset)
         alertView.present()
     }
     
+    /**
+     Present with image.
+     
+     - parameter title: Main text in alert.
+     - parameter message: Subtitle in alert. Optional.
+     - parameter image: Custom `UIImage` for alert. No need recize it before.
+     */
     public static func present(title: String, message: String? = nil, image: UIImage) {
         let alertView = SPAlertView(title: title, message: message, image: image)
         alertView.present()
     }
     
-    public static func present(message: String) {
+    /**
+     Present only message, without icon.
+     
+     - parameter haptic: Pass with vibro using with present alet.
+     */
+    public static func present(message: String, haptic: SPAlertHaptic = .none) {
         let alertView = SPAlertView(message: message)
+        alertView.haptic = haptic
         alertView.present()
     }
 }

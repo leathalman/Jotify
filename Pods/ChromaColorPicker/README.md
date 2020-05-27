@@ -1,136 +1,113 @@
-# ChromaColorPicker :art:
-![Supported Version](https://img.shields.io/badge/Swift-4.2-yellow.svg)
-![Platform](https://img.shields.io/badge/platform-iOS-lightgray.svg)
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Carthage](https://img.shields.io/badge/Carthage-✔-green.svg)
-![CocoaPods](https://img.shields.io/badge/CocoaPods-1.7.2-green.svg)
+<p align="center">
+    <img src=".github/Logo.png" width="480" max-width="90%" alt="ChromaColorPicker 2.0" />
+</p>
 
-*An intuitive iOS color picker built in Swift.*
+<p align="center">
+  <img src="https://img.shields.io/badge/Swift-5.0-orange.svg" />
+  <img src="https://img.shields.io/badge/platform-iOS-lightgray.svg" />
+  <img src="https://img.shields.io/badge/license-MIT-blue.svg" />
+  <img src="https://img.shields.io/badge/Cocoapods-✔-green.svg" />
+  <img src="https://img.shields.io/badge/Carthage-✔-green.svg" />
+  <img src="https://travis-ci.com/joncardasis/ChromaColorPicker.svg?branch=master" />
+</p>
 
-Supports hue and grayscale modes to make choosing the right color easy and fun!
+An intuitive HSB color picker built in Swift. Supports multiple selection handles and is customizable to your needs.
 
-<div>
-  <img src="../assets/Screenshot-With-BG.png?raw=true" height="350" style="margin:8px;">
-  <img src="../assets/Screenshot-Grayscale.png?raw=true" height="350" style="margin:8px;">
-</div>
+<p align="center">
+    <img src=".github/ChromaColorPicker.gif" width="365" alt="ChromaColorPicker GIF" />
+</p>
 
-## :exclamation: Project Status :exclamation:
-*Nov 10, 2018*
+<details>
+<summary><b>Looking for version 1.x?</b></summary>
+Version 1.x.x can be found on the <b>legacy</b> branch. While the pod is still available, it is deprecated and projects should migrate to 2.0.<br/>
+<img src="../assets/Screenshot-With-BG.png?raw=true" height="350">
+</details>
 
-After some time away from my OSS projects, I am revisiting a number of them. ChromaColorPicker will be recieving updates over the coming weeks. If you'd like to recieve development builds (not recommended for production as the API may change), check out the `develop` branch.
+## Examples
+```Swift
+let colorPicker = ChromaColorPicker(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+addSubview(colorPicker)
 
-Some changes you can look forward to are:
-  - [ ] A new, easier to use, API for using the picker.
-    - For migration purposes, I plan to bridge the current API to a new one while people migate.
-  - [ ] An updated style for the picker which is more appealing.
-  - [ ] A rewrite of layout logic using Autolayout.
-  - [ ] Multiple types of color pickers to fit your needs (Hue selection (current), color spectrum, etc).
+// Optional: Attach a ChromaBrightnessSlider to a ChromaColorPicker
+let brightnessSlider = ChromaBrightnessSlider(frame: CGRect(x: 0, y: 0, width: 280, height: 32))
+addSubview(brightnessSlider)
 
+colorPicker.connect(brightnessSlider) // or `brightnessSlider.connect(to: colorPicker)`
+```
+
+- View the _Example_ app for more.
+
+## Usage
+### Multiple Handles
+```Swift
+// Add handle at color
+let peachColor = UIColor(red: 1, green: 203 / 255, blue: 164 / 255, alpha: 1)
+colorPicker.addHandle(at: peachColor)
+
+// Add handle with reference
+let customHandle = ChromaColorHandle()
+customHandle.color = UIColor.purple
+colorPicker.addHandle(customHandle)
+
+// Add handle and keep reference
+let handle = colorPicker.addHandle(at: .blue)
+```
+
+### Custom Handle Icon
+```Swift
+let homeHandle = ChomaColorHandle(color: .blue)
+let imageView = UIImageView(image: #imageLiteral(resourceName: "home-icon").withRenderingMode(.alwaysTemplate))
+imageView.contentMode = .scaleAspectFit
+imageView.tintColor = .white
+homeHandle.accessoryView = imageView
+homeHandle.accessoryViewEdgeInsets = UIEdgeInsets(top: 2, left: 4, bottom: 4, right: 4)
+
+colorPicker.addHandle(homeHandle)
+```
 
 ## Installation
 ### Carthage
-```
+```bash
 github "joncardasis/ChromaColorPicker"
 ```
 
 ### Cocoapods
-```
+```bash
 pod 'ChromaColorPicker'
 ```
 ### Manually
-Add all files from the ChromaColorPicker folder to your project.
+Add all files from the `Source` folder to your project.
 
+## Components
+| Component | Description |
+| :-------: | :---------: |
+| ChromaColorPicker | An HSB color picker with support for adding multiple color selection handles. |
+| ChromaBrightnessSlider | A slider UIControl which can be attached to any `ChromaColorPicker` via the `connect(to:)` method. ChromaBrightnessSlider can also function as a stand-alone UIControl. |
 
-## Examples
-```Swift
-let neatColorPicker = ChromaColorPicker(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-neatColorPicker.delegate = self //ChromaColorPickerDelegate
-neatColorPicker.padding = 5
-neatColorPicker.stroke = 3
-neatColorPicker.hexLabel.textColor = UIColor.white
+## Supported UIControlEvents
+Both `ChromaBrightnessSlider` and `ChromaColorPicker` conform to UIControl. Each send UIControlEvents which can be observed via via `UIControl`'s `addTarget` method.
 
-view.addSubview(neatColorPicker)
-```
-<img src="../assets/demo.gif?raw=true" width="225">
+_ChromaColorPicker_
+| Event              | Description  |
+| :-----------------:|:-------------|
+| `.valueChanged`    | Called whenever the color has changed. |
+| `.touchUpInside`   | Called when a handle is released. |
 
-If the ChromaColorPicker or any of its properties are later updated after being added to a view, the `layout()` function should be called to update the view.
-
-```Swift
-let neatColorPicker = ChromaColorPicker(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-view.addSubview(neatColorPicker)
-
-neatColorPicker.padding = 0
-neatColorPicker.hexLabel.hidden = true
-
-neatColorPicker.layout()
-```
-
-You can also set the color of the picker anytime by using the `adjustToColor(color:)` function.
+_ChromaBrightnessSlider_
+| Event              | Description  |
+| :-----------------:|:-------------|
+| `.touchDown`       | Called when a the slider is grabbed. |
+| `.valueChanged`    | Called whenever the slider is moved and the value has changed. |
+| `.touchUpInside`   | Called when the slider handle is released. |
 
 ```Swift
-let neatColorPicker = ChromaColorPicker(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-...
-neatColorPicker.adjustToColor(UIColor.green)
-...
+// Example
+brightnessSlider.addTarget(self, action: #selector(sliderDidValueChange(_:)), for: .valueChanged)
+
+@objc func sliderDidValueChange(_ slider: ChromaBrightnessSlider) {
+  print("new color: \(slider.currentColor)")
+}
 ```
-
-### Enable Grayscale Support
-A toggle button can be enabled/disabled to allow for grayscale selections by using the `supportsShadesOfGray` property.
-
-```Swift
-let neatColorPicker = ChromaColorPicker(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-...
-neatColorPicker.supportsShadesOfGray = true // Normally false be default
-```
-
-
-## Customization
-<img src="../assets/Design_Breakdown.png?raw=true" width="350">
-
-### Properties
-
-| Property        | Description           |
-| :-------------:          |:-------------|
-| delegate                 | ChromaColorPickerDelegate |
-| padding                  | The padding on each side of the view (default=10)    |
-| stroke                   | The stroke of the rainbow track (default=1)    |
-| currentColor | The currently set color by the control. It is displayed in the add button. Use `adjustToColor(color: UIColor)` to update the color.|
-| currentAngle | The angle which the handle is currently sitting at. Can be changed and the view can be re-drawn using `layout()` to show the change.
-| handleSize | Returns the size of the handle. |
-| supportsShadesOfGray | True/False if a toggle for supporting grayscale colors should be shown. |
-
-### Functions
-| Function        | Description           |
-| :-------------:          |:-------------|
-|layout() | Layout the entire picker and all its subviews.|
-|adjustToColor(color: ) | Updates the picker to a specific color.|
-
-### Sub-Components
-Sub-Components can be hidden and customized to the preferred liking.
-
-| Component        | Description           |
-| :-------------:          |:-------------|
-| hexLabel | A UILabel which displays the hex value of the current color. |
-| shadeSlider | A custom slider which adjusts the shade of the current color. |
-| addButton | A custom UIButton in the center of the control. The `colorPickerDidChooseColor(colorPicker: color:)` delegate function is called when this is tapped. |
-| handleView | A ChromaHandle (custom UIView) which displays the current color and can be moved around the circle.|
-| handleLine | A line which is drawn from the addButton to the handleView. |
-| colorToggleButton | A custom UIButton which appears if `supportsShadesOfGray` is set to true and will switch the picker to a grayscale mode if pressed.|
-
-### Supported UIControlEvents
-`.touchDown`       -> called when the handle is first grabbed
-
-`.touchUpInside`   -> called when handle is let go
-
-`.valueChanged`    -> called whenever the color has changed hue or shade
-
-`.touchDragInside` -> called when the handle has moved by a drag action
-
-`.editingDidEnd`   -> called when either the handle is let go or slider is let go
-
-
-## Additional Info
-Check out the [Wiki](https://github.com/joncardasis/ChromaColorPicker/wiki/Challenges-and-Solutions) if you're interested in reading into how the color wheel was created.
 
 ## License
 ChromaColorPicker is available under the MIT license. See the LICENSE file for more info.

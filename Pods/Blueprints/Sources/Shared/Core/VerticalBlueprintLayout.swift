@@ -1,7 +1,7 @@
 #if os(macOS)
-  import Cocoa
+import Cocoa
 #else
-  import UIKit
+import UIKit
 #endif
 
 @objc open class VerticalBlueprintLayout: BlueprintLayout {
@@ -51,12 +51,12 @@
   ///   - stickyFooters: A Boolean value indicating whether footers pin to the top of the collection view bounds during scrolling.
   ///   - animator: The animator that should be used for the layout, defaults to `DefaultLayoutAnimator`.
   @objc public convenience init(itemSize: CGSize = CGSize(width: 50, height: 50),
-                          minimumInteritemSpacing: CGFloat = 0,
-                          minimumLineSpacing: CGFloat = 10,
-                          sectionInset: EdgeInsets = EdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
-                          stickyHeaders: Bool = false,
-                          stickyFooters: Bool = false,
-                          animator: BlueprintLayoutAnimator = DefaultLayoutAnimator(animation: .automatic)) {
+                                minimumInteritemSpacing: CGFloat = 0,
+                                minimumLineSpacing: CGFloat = 10,
+                                sectionInset: EdgeInsets = EdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+                                stickyHeaders: Bool = false,
+                                stickyFooters: Bool = false,
+                                animator: BlueprintLayoutAnimator = DefaultLayoutAnimator(animation: .automatic)) {
     self.init(itemsPerRow: 0.0,
               itemSize: itemSize,
               estimatedItemSize: .zero,
@@ -80,13 +80,13 @@
   ///   - stickyFooters: A Boolean value indicating whether footers pin to the top of the collection view bounds during scrolling.
   ///   - animator: The animator that should be used for the layout, defaults to `DefaultLayoutAnimator`.
   @objc public convenience init(itemsPerRow: CGFloat = 0.0,
-                          height: CGFloat = 50,
-                          minimumInteritemSpacing: CGFloat = 0,
-                          minimumLineSpacing: CGFloat = 10,
-                          sectionInset: EdgeInsets = EdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
-                          stickyHeaders: Bool = false,
-                          stickyFooters: Bool = false,
-                          animator: BlueprintLayoutAnimator = DefaultLayoutAnimator()) {
+                                height: CGFloat = 50,
+                                minimumInteritemSpacing: CGFloat = 0,
+                                minimumLineSpacing: CGFloat = 10,
+                                sectionInset: EdgeInsets = EdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+                                stickyHeaders: Bool = false,
+                                stickyFooters: Bool = false,
+                                animator: BlueprintLayoutAnimator = DefaultLayoutAnimator()) {
     let size = CGSize(width: 50, height: height)
     self.init(itemsPerRow: itemsPerRow,
               itemSize: size,
@@ -105,125 +105,138 @@
 
   override open func prepare() {
     guard prepareAllowed else {
-        return
+      return
     }
     prepareAllowed = false
 
     super.prepare()
 
-    var layoutAttributes = [[LayoutAttributes]]()
-    var threshold: CGFloat = 0.0
-
-    if let collectionViewWidth = collectionView?.documentRect.width {
-      threshold = collectionViewWidth
-    }
-
+    let sections = numberOfSections
+    var layoutAttributes = Array<[LayoutAttributes]>.init(repeating: [LayoutAttributes](),
+                                                          count: sections)
+    var threshold: CGFloat = collectionViewWidth
     var nextY: CGFloat = 0
 
-    for section in 0..<numberOfSections {
-      guard numberOfItemsInSection(section) > 0 else {
+    for section in 0..<sections {
+      let numberOfItems = numberOfItemsInSection(section)
+      guard numberOfItems > 0 else {
         continue
       }
-
-      var firstItem: LayoutAttributes? = nil
-      var previousItem: LayoutAttributes? = nil
+      var previousAttribute: LayoutAttributes? = nil
       var headerAttribute: SupplementaryLayoutAttributes? = nil
-      var footerAttribute: SupplementaryLayoutAttributes? = nil
       let sectionIndexPath = IndexPath(item: 0, section: section)
+      let sectionsMinimumInteritemSpacing = resolveMinimumInteritemSpacing(forSectionAt: section)
+      let sectionsMinimumLineSpacing = resolveMinimumLineSpacing(forSectionAt: section)
+      let headerSize = resolveSizeForSupplementaryView(ofKind: .header, at: sectionIndexPath)
 
-      if headerReferenceSize.height > 0 {
-        let layoutAttribute = createSupplementaryLayoutAttribute(
-          ofKind: .header,
-          indexPath: sectionIndexPath,
-          atY: nextY
+      if headerSize.height > 0 {
+        let layoutAttribute = SupplementaryLayoutAttributes(
+          forSupplementaryViewOfKind: BlueprintSupplementaryKind.header.collectionViewSupplementaryType,
+          with: sectionIndexPath
         )
-        layoutAttribute.zIndex = numberOfSections
+        layoutAttribute.size = headerSize
+        layoutAttribute.zIndex = section + numberOfItems
         layoutAttribute.min = nextY
-        layoutAttribute.frame.size.width = collectionView?.documentRect.width ?? headerReferenceSize.width
-        layoutAttributes.append([layoutAttribute])
+        layoutAttribute.frame.origin.x = 0
+        layoutAttribute.frame.origin.y = nextY
+        layoutAttributes[section].append(layoutAttribute)
         headerAttribute = layoutAttribute
         nextY = layoutAttribute.frame.maxY
       }
 
       nextY += sectionInset.top
       var sectionMaxY: CGFloat = 0
+      let perRow = Int(itemsPerRow ?? 1)
 
-      for item in 0..<numberOfItemsInSection(section) {
+      for item in 0..<numberOfItems {
         let indexPath = IndexPath(item: item, section: section)
-        let layoutAttribute = LayoutAttributes.init(forCellWith: indexPath)
+        let layoutAttribute = LayoutAttributes(forCellWith: indexPath)
 
-        defer { previousItem = layoutAttribute }
+        defer { previousAttribute = layoutAttribute }
 
         layoutAttribute.size = resolveSizeForItem(at: indexPath)
 
-        if let previousItem = previousItem {
-          var minY: CGFloat = previousItem.frame.origin.y
-          var maxY: CGFloat = previousItem.frame.maxY
+        if let previousItem = previousAttribute {
+          if perRow > 1,
+            perRow > perRow - 1,
+            perRow - 1 < layoutAttributes[section].count {
+            let lookupAttributes = layoutAttributes[section].filter({ $0.representedElementCategory == .cellItem })
+            var minimumYAttributes = lookupAttributes.sorted(by: { $0.frame.maxY < $1.frame.maxY })
 
-          // Properly align the current item with the previous item at the same
-          // x offset. This helps ensure that the layout renders correctly when
-          // using layout attributes with dynamic height.
-          if let itemsPerRow = itemsPerRow,
-            itemsPerRow > 1,
-            item > Int(itemsPerRow) - 1,
-            Int(itemsPerRow) - 1 < layoutAttributes[section].count {
-            let previousXOffset = item - Int(itemsPerRow - indexOffsetForSectionHeaders())
-            let lookupAttribute = layoutAttributes[section][previousXOffset]
-            maxY = lookupAttribute.frame.maxY
-            minY = lookupAttribute.frame.maxY + minimumLineSpacing
+            if lookupAttributes.count < perRow {
+              layoutAttribute.frame.origin.x = previousItem.frame.maxX + sectionsMinimumInteritemSpacing
+              layoutAttribute.frame.origin.y = previousItem.frame.minY
+            } else if !lookupAttributes.isEmpty,
+              let minimumYAttribute = lookupAttributes.filter({ $0.frame.maxY == minimumYAttributes.first!.frame.maxY }).first {
+              layoutAttribute.frame.origin.x = minimumYAttribute.frame.minX
+              layoutAttribute.frame.origin.y = minimumYAttribute.frame.maxY + sectionsMinimumLineSpacing
+              while minimumYAttributes.contains(where: { $0.frame.minY == layoutAttribute.frame.minY && $0.frame.minX == layoutAttribute.frame.minX }) {
+                guard let minimumYAttribute = minimumYAttributes.first else {
+                  break
+                }
+                minimumYAttributes.removeFirst()
+                layoutAttribute.frame.origin.x = minimumYAttribute.frame.minX
+                layoutAttribute.frame.origin.y = minimumYAttribute.frame.maxY + sectionsMinimumLineSpacing
+              }
+            }
+          } else {
+            layoutAttribute.frame.origin.x = previousItem.frame.maxX + sectionsMinimumInteritemSpacing
+            layoutAttribute.frame.origin.y = previousItem.frame.minY
           }
-
-          layoutAttribute.frame.origin.x = previousItem.frame.maxX + minimumInteritemSpacing
-          layoutAttribute.frame.origin.y = minY
-
           if layoutAttribute.frame.maxX > threshold {
             layoutAttribute.frame.origin.x = sectionInset.left
-            layoutAttribute.frame.origin.y = maxY + minimumLineSpacing
+            layoutAttribute.frame.origin.y = previousItem.frame.maxY + sectionsMinimumLineSpacing
           }
-
           sectionMaxY = max(sectionMaxY, layoutAttribute.frame.maxY)
         } else {
-          firstItem = layoutAttribute
           layoutAttribute.frame.origin.x = sectionInset.left
           layoutAttribute.frame.origin.y = nextY
           sectionMaxY = layoutAttribute.frame.maxY
         }
 
-        if section == layoutAttributes.count {
-          layoutAttributes.append([layoutAttribute])
-        } else {
-          layoutAttributes[section].append(layoutAttribute)
-        }
+        layoutAttributes[section].append(layoutAttribute)
       }
 
-      if let previousItem = previousItem {
+      headerAttribute?.max = sectionMaxY + sectionInset.bottom - headerSize.height
+
+      if let previousItem = previousAttribute {
+        let sectionsFooterReferenceSize = resolveSizeForSupplementaryView(ofKind: .footer, at: sectionIndexPath)
+        let previousY = nextY
         nextY = previousItem.frame.maxY
-        if footerReferenceSize.height > 0 {
-          let layoutAttribute = createSupplementaryLayoutAttribute(
-            ofKind: .footer,
-            indexPath: sectionIndexPath,
-            atY: sectionMaxY + sectionInset.bottom
+        if sectionsFooterReferenceSize.height > 0 {
+          let layoutAttribute = SupplementaryLayoutAttributes(
+            forSupplementaryViewOfKind: BlueprintSupplementaryKind.footer.collectionViewSupplementaryType,
+            with: sectionIndexPath
           )
+          layoutAttribute.size = sectionsFooterReferenceSize
+          layoutAttribute.zIndex = section + numberOfItems
+          layoutAttribute.min = headerAttribute?.frame.maxY ?? previousY
+          layoutAttribute.max = sectionMaxY + sectionInset.bottom
+          layoutAttribute.frame.origin.x = 0
+          layoutAttribute.frame.origin.y = sectionMaxY + sectionInset.bottom
           layoutAttributes[section].append(layoutAttribute)
-          layoutAttribute.zIndex = numberOfSections
-          layoutAttribute.min = headerAttribute?.frame.origin.y ?? nextY
-          footerAttribute = layoutAttribute
           nextY = layoutAttribute.frame.maxY
+        } else {
+          nextY = sectionMaxY + sectionInset.bottom
         }
-
-        contentSize.height = sectionMaxY - headerReferenceSize.height + sectionInset.bottom
+        contentSize.height = sectionMaxY - headerSize.height + sectionInset.bottom
         headerAttribute?.max = contentSize.height
-        footerAttribute?.max = contentSize.height
       }
-
-      previousItem = nil
+      previousAttribute = nil
       headerAttribute = nil
-      footerAttribute = nil
-      firstItem = nil
     }
 
+    let indexOffset = 1
+    let lastHeaderReferenceHeight = resolveSizeForSupplementaryView(ofKind: .header, at: IndexPath(item: 0, section: numberOfSections - indexOffset)).height
+    let lastFooterReferenceHeight: CGFloat
+    if numberOfSections < 0 {
+      lastFooterReferenceHeight = resolveSizeForSupplementaryView(ofKind: .footer, at: IndexPath(item: numberOfItemsInSection(numberOfSections - indexOffset), section: numberOfSections - indexOffset)).height
+    } else {
+      lastFooterReferenceHeight = footerReferenceSize.height
+    }
+
+    contentSize.height += lastHeaderReferenceHeight + lastFooterReferenceHeight
     contentSize.width = threshold
-    contentSize.height += headerReferenceSize.height + footerReferenceSize.height
 
     self.contentSize = contentSize
     createCache(with: layoutAttributes)

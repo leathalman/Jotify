@@ -190,34 +190,22 @@ internal extension PageboyViewController {
             existingZIndex = nil
         }
         
-        let pageViewController = UIPageViewController(transitionStyle: .scroll,
+        let pageViewController = PatchedPageViewController(transitionStyle: .scroll,
                                                       navigationOrientation: navigationOrientation,
                                                       options: pageViewControllerOptions)
         pageViewController.delegate = self
         pageViewController.dataSource = self
         self.pageViewController = pageViewController
         
-        #if swift(>=4.2)
         addChild(pageViewController)
-        #else
-        addChild(pageViewController)
-        #endif
         if let existingZIndex = existingZIndex {
             view.insertSubview(pageViewController.view, at: existingZIndex)
         } else {
             view.addSubview(pageViewController.view)
-            #if swift(>=4.2)
             view.sendSubviewToBack(pageViewController.view)
-            #else
-            view.sendSubviewToBack(pageViewController.view)
-            #endif
         }
         pageViewController.view.pinToSuperviewEdges()
-        #if swift(>=4.2)
         pageViewController.didMove(toParent: self)
-        #else
-        pageViewController.didMove(toParent: self)
-        #endif
         
         pageViewController.scrollView?.delegate = self
         pageViewController.view.backgroundColor = .clear
@@ -230,11 +218,7 @@ internal extension PageboyViewController {
     
     private func destroyCurrentPageViewController() {
         pageViewController?.view.removeFromSuperview()
-        #if swift(>=4.2)
         pageViewController?.removeFromParent()
-        #else
-        pageViewController?.removeFromParent()
-        #endif
         pageViewController = nil
     }
     
@@ -246,7 +230,6 @@ internal extension PageboyViewController {
         setUpPageViewController(reloadViewControllers: false)
     }
     
-    #if swift(>=4.2)
     /// The options to be passed to a UIPageViewController instance.
     var pageViewControllerOptions: [UIPageViewController.OptionsKey: Any]? {
         var options = [UIPageViewController.OptionsKey: Any]()
@@ -260,21 +243,6 @@ internal extension PageboyViewController {
         }
         return options
     }
-    #else
-    /// The options to be passed to a UIPageViewController instance.
-    var pageViewControllerOptions: [String: Any]? {
-        var options = [String: Any]()
-        
-        if interPageSpacing > 0.0 {
-            options[convertFromUIPageViewControllerOptionsKey(UIPageViewController.OptionsKey.interPageSpacing)] = interPageSpacing
-        }
-        
-        guard !options.isEmpty else {
-            return nil
-        }
-        return options
-    }
-    #endif
 }
 
 // MARK: - UIPageViewControllerDataSource, PageboyViewControllerDataSource
@@ -311,15 +279,4 @@ extension PageboyViewController: UIPageViewControllerDataSource {
         }
         return nil
     }
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToOptionalUIPageViewControllerOptionsKeyDictionary(_ input: [String: Any]?) -> [UIPageViewController.OptionsKey: Any]? {
-	guard let input = input else { return nil }
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIPageViewController.OptionsKey(rawValue: key), value)})
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIPageViewControllerOptionsKey(_ input: UIPageViewController.OptionsKey) -> String {
-	return input.rawValue
 }

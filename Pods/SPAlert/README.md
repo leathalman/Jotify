@@ -1,24 +1,54 @@
 # SPAlert
 
-**Popup from Apple Music & Feedback in AppStore**. Contains `Done` & `Heart` presets. `Done` preset present with animation. Also support Dark Mode. I clone Apple's alerts as much as possible. You can find this alerts in AppStore after feedback, after added song to library in Apple Music.
+**Popup from Apple Music & Feedback in AppStore**. Contains `Done`, `Heart`, `Error` and other presets. Supports Dark Mode. I tried to recreate Apple's alerts as much as possible. You can find these alerts in the AppStore after feedback and after you add a song to your library in Apple Music.
 
 <p float="left">
-    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Resources/Preview-Done.gif" width="250">
-    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Resources/Preview-Heart.gif" width="250">
-    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Resources/Preview-Message.gif" width="250">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Preview%20-%20Done.gif" width="230">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Preview%20-%20Heart.gif" width="230">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Preview%20-%20Message.gif" width="230">
 </p>
 
-You can download example [Debts - Spending tracker](https://itunes.apple.com/app/id1446635818) app from AppStore.  
-For **buy source code** of app in preview, go to:
+And more:
 
-[![xcode-shop.com](https://github.com/ivanvorobei/SPPermission/blob/master/Resources/Buttons/Xcode%20Shop%20Button%20-%203.svg)](https://xcode-shop.com)
+<p float="left">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Miniature%20-%20Doc.svg" width="50">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Miniature%20-%20Bookmark.svg" width="50">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Miniature%20-%20Moon.svg" width="50">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Miniature%20-%20Star.svg" width="50">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Miniature%20-%20Flag.svg" width="50">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Miniature%20-%20Exclamation.svg" width="50">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Miniature%20-%20Question.svg" width="50">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Miniature%20-%20Message.svg" width="50">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Miniature%20-%20Bolt.svg" width="50">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Miniature%20-%20Eject.svg" width="50">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Miniature%20-%20Card.svg" width="50">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Miniature%20-%20Cart.svg" width="50">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Miniature%20-%20Like.svg" width="50">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Miniature%20-%20Dislike.svg" width="50">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Miniature%20-%20Privacy.svg" width="50">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Miniature%20-%20Rotate.svg" width="50">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Miniature%20-%20Search.svg" width="50">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Miniature%20-%20Add.svg" width="50">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Miniature%20-%20Error.svg" width="50">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Miniature%20-%20Shuffle.svg" width="50">
+    <img src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Miniature%20-%20Repeat.svg" width="50">
+</p>
 
-See project's backers in [Sponsors](https://github.com/ivanvorobei/SPAlert#sponsors) section.
+If you like the project, please do not forget to `star ★` this repository and follow me on GitHub. To help out with the project, see the [Сooperation](#сooperation) section.
+
+For an example of this plugin in use, check this app: _Debts - Spending tracker_ for [iOS](https://itunes.apple.com/app/id1446635818) and [macOS](https://apps.apple.com/app/id1496914334). You can buy source code this apps in my store for iOS developers:
+
+[![xcode-shop.com](https://github.com/ivanvorobei/SPPermissions/blob/master/Assets/Buttons/xcode-shop.svg)](https://xcode-shop.com)
+[![https://github.com/ivanvorobei](https://github.com/ivanvorobei/SPPermissions/blob/master/Assets/Buttons/follow-me-on-github.svg)](https://github.com/ivanvorobei)
 
 ## Navigate
 
 - [Requirements](#requirements)
 - [Installation](#installation)
+    - [CocoaPods](#cocoapods)
+    - [Swift Package Manager](#swift-package-manager)
+    - [Carthage](#carthage)
+    - [Manually](#manually)
 - [Quick Start](#quick-start)
 - [Usage](#usage)
     - [Duration](#duration)
@@ -27,14 +57,7 @@ See project's backers in [Sponsors](https://github.com/ivanvorobei/SPAlert#spons
     - [Dismiss by Tap](#dismiss-by-tap)
     - [Haptic](#haptic)   
     - [Corner Radius](#corner-radius)
-- [Required Presets](#required-presets)
-- [Sponsors](#sponsors)
-- [Other Projects +gif](#my-projects)
-	- [SPStorkController](#spstorkcontroller)
-    - [SPLarkController](#splarkcontroller)
-    - [SPPermission](#sppermission)
-    - [Awesome iOS UI](https://github.com/ivanvorobei/awesome-ios-ui)
-    - [SwiftUI Examples](https://github.com/ivanvorobei/SwiftUI)
+- [Сooperation](#сooperation)
 - [License](#license)
 
 ## Requirements
@@ -51,40 +74,55 @@ Swift `4.2` & `5.0`. Ready for use on iOS 10+
 pod 'SPAlert'
 ```
 
+### Swift Package Manager
+
+The [Swift Package Manager](https://swift.org/package-manager/) is a tool for managing the distribution of Swift code. It’s integrated with the Swift build system to automate the process of downloading, compiling, and linking dependencies.
+
+To integrate `SPAlert` into your Xcode project using Xcode 11, specify it in `File > Swift Packages > Add`:
+
+```ogdl
+https://github.com/ivanvorobei/SPAlert
+```
+
+### Carthage
+
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate `SPAlert` into your Xcode project using Carthage, specify it in your `Cartfile`:
+
+```ogdl
+github "ivanvorobei/SPAlert"
+```
+
 ### Manually
 
-If you prefer not to use any of the aforementioned dependency managers, you can integrate `SPAlert` into your project manually. Put `Source/SPAlert` folder in your Xcode project. Make sure to enable `Copy items if needed` and `Create groups`.
+If you prefer not to use any of dependency managers, you can integrate `SPAlert` into your project manually. Put `Source/SPAlert` folder in your Xcode project. Make sure to enable `Copy items if needed` and `Create groups`.
 
 ## Quick Start
 
-For best experience, I recommend call alerts by `SPAlert`. These functions are updated regularly and show as Apple way. I focus on presets: 
+For best experience, I recommend presenting the alerts by calling the class functions on `SPAlert`. These functions are updated regularly and show the alerts "the Apple way". I focus on presets: 
 
 ```swift
 SPAlert.present(title: "Added to Library", preset: .done)
 ```
 
-Currently there are few presets. If you want **to add a new preset**, create a [issue](https://github.com/ivanvorobei/SPAlert/issues) and describe how you see it. I will try to quickly add new presets.
-
-
-If you want use custom image, use func:
+For using a custom image:
 
 ```swift 
 SPAlert.present(title: "Love", message: "We'll recommend more like this in For You", image: UIImage(named: "Heart")!)
 ```
 
-For show simple text message, use:
+For showing a simple text message:
 
 ```swift 
-SPAlert.present(message: "Empty UITextField")
+SPAlert.present(message: "Text!")
 ```
 
 ## Usage
 
-Sometimes it may require deep customization. In this section, I will show you what you can do.
+If you require deep customization, this section will show you what you can do.
 
 ### Duration
 
-To change the time that the `SPAlert` will be shown, use property `duration`:
+If you want the `SPAlert` to be shwon longer, use the `duration` property:
 
 ```swift 
 let alertView = SPAlertView(title: "Added to Library", message: nil, preset: SPAlertPreset.done)
@@ -94,11 +132,11 @@ alertView.present()
 
 ### Dark Mode
 
-<img align="left" src="https://github.com/ivanvorobei/SPAlert/blob/master/Resources/Dark-Mode-Preview.jpg" width="220">
+<img align="left" src="https://github.com/ivanvorobei/SPAlert/blob/master/Assets/Readme/Preview%20-%20DarkMode.jpg" width="220">
 
-The default mode is `Dark Mode`. No additional configuration is required. As soon as the user change the interface to dark, all alerts will appear dark.
+Dark Mode needs no additional configuration. As soon as the user changes their interface to dark, all alerts will follow suit.
 
-For check state of user appearance I am use `traitCollection`:
+This is achieved by checking the `userInterfaceStyle` property on `traitCollection`.:
 
 ```swift
 if self.traitCollection.userInterfaceStyle == .dark {
@@ -106,22 +144,22 @@ if self.traitCollection.userInterfaceStyle == .dark {
 }
 ```
 
-It available sice iOS 12, for early using always Light Mode. 
+It is available since iOS 12, for earlier iOS versions the alerts will always be shown in Light Mode. 
 
 ### Layout
 
-Here you can change the sizes and spaces:
+To change the size and spacing of the alerts:
 
 ```swift
 alertView.layout.topSpace = 18
 alertView.layout.iconHeight = 25
 ```
 
-For more properties see class.
+For more properties see the class.
 
 ### Dismiss by Tap
 
-If you click on the alert, it will disappear ahead of time. This can be disabled:
+If you tap the alert, it will disappear ahead of time. This can be disabled:
 
 ```swift
 alertView.dismissByTap = false
@@ -129,64 +167,28 @@ alertView.dismissByTap = false
 
 ### Haptic
 
-If you use presets, the vibro-response will be start automatically. For customize this, you need set property `haptic`:
+If you use presets, the vibro-response will be started automatically. To customize this, you need set the `haptic` property:
 
 ```swift
 alertView.haptic = .success
 ```
 
-For disable haptic, set it to `.none`.
+To disable haptics, set it to `.none`.
 
 ### Corner Radius
 
-I use a corner radius like an Apple. If you need to change it, see the property `cornerRadius`: 
+You can change the corner radius by setting the `cornerRadius` property:
 
 ```swift
 alertView.layer.cornerRadius = 40
 ```
 
-## Required Presets
+## Сooperation
 
-I will add new types and presets as needed. I will add animation and custom layout to them for a better experience. To know what presets need to be done, please inform me. You do not need to be shy. Make a new [issue](https://github.com/ivanvorobei/SPAlert/issues) and describe what kind of graphics or animation you would like. I will try to quickly add new items.
+This project is free to use, but developing it takes time. Contributing to this project is a huge help. Here is list of tasks that need to be done:
 
-## Sponsors
-
-Support me with a monthly donation and help me continue activities. After payment I add you to list of sponsor **in my all projects** with link to your profile. [Become a sponsors](https://www.patreon.com/ivanvorobei)
-
-<a href="https://github.com/zubara21/" target="_blank"><img src="https://github.api.ivanvorobei.by/sponsors/zubara21.jpg" width="100"></a>
-<a href="https://github.com/sparrowganz/" target="_blank"><img src="https://github.api.ivanvorobei.by/sponsors/sparrowganz.jpg" width="100"></a>
-<a href="https://github.com/shatk0vskiy/" target="_blank"><img src="https://github.api.ivanvorobei.by/sponsors/shatk0vskiy.jpg" width="100"></a>
-<a href="https://www.patreon.com/ivanvorobei" target="_blank"><img src="https://github.api.ivanvorobei.by/sponsors/add.jpg" width="100"></a>
-
-## My projects
-
-<img align="left" src="https://github.com/ivanvorobei/SPStorkController/blob/master/Resources/Preview.gif" width="220"/>
-
-### SPStorkController
-
-[SPStorkController](https://github.com/ivanvorobei/SPStorkController) is сontroller **as in Apple Music, Podcasts and Mail** apps. Simple adding close button and centering arrow indicator. Customizable height. Using custom TransitionDelegate. Check scroll's bounce for more interactive. Simple adding close button and centering arrow indicator. You can download example [Debts - Spending tracker](https://itunes.apple.com/app/id1446635818) app from AppStore.
-
-Alert you can find in [SPAlert](https://github.com/ivanvorobei/SPAlert) project. If you want to **buy source code** of app in preview, please, go to [xcode-shop.com](https://xcode-shop.com)
-
----
-
-<img align="left" src="https://github.com/ivanvorobei/SPPermission/blob/master/Resources/Preview.gif" width="220"/>
-
-### SPPermission
-
-[SPPermission](https://github.com/ivanvorobei/SPPermission) allow request permissions **with native dialog** UI and interactive animations. Also you can request permissions without dialog. Check state any permission. You can start using this project with just two lines of code and easy customisation.
-
-You can buy example Dialog & Dinamic animations in [xcode-shop.com](https://xcode-shop.com/ui-elements), see [preview](https://xcode-shop.com/assets/preview/dinamic-alert.mov).
-
----
-
-<img align="left" src="https://github.com/ivanvorobei/SPLarkController/blob/master/Resources/Preview.gif" width="220"/>
-
-### SPLarkController
-
-[SPLarkController](https://github.com/ivanvorobei/SPLarkController) transition between controllers. Translate to top. Make **settings screen** for application. You can add **buttons and switches**. The amount cells is not limited. You can start using project with just two lines of code and easy customisation. For implement settings as in preiew, see section [Settings Controller](https://github.com/ivanvorobei/SPLarkController#settings-controller).
-
-You can download example app [Code - Learn Swift & Design](https://itunes.apple.com/app/id1453325619) from AppStore. If you want to **buy source code** of app this app, please, go to [xcode-shop.com](https://xcode-shop.com).
+- Add documentation in the source files (description of public methods and parameters). 
+- Help me translate my app [Debts - Spending tracker](https://itunes.apple.com/app/id1446635818) for other languages. 
 
 ## License
 

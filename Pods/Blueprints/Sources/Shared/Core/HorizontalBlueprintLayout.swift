@@ -126,90 +126,91 @@
 
     super.prepare()
 
-    var layoutAttributes = [[LayoutAttributes]]()
+    let sections = numberOfSections
+    var layoutAttributes = Array<[LayoutAttributes]>.init(repeating: [LayoutAttributes](),
+                                                          count: sections)
     var contentSize: CGSize = .zero
     var nextX: CGFloat = 0
     var widthOfSection: CGFloat = 0
 
-    for section in 0..<numberOfSections {
-      widthOfSection = 0
-      guard numberOfItemsInSection(section) > 0 else {
+    for section in 0..<sections {
+      let numberOfItems = numberOfItemsInSection(section)
+      guard numberOfItems > 0 else {
         continue
       }
-
+      widthOfSection = 0
       var firstItem: LayoutAttributes? = nil
       var previousItem: LayoutAttributes? = nil
       var headerAttribute: SupplementaryLayoutAttributes? = nil
       var footerAttribute: SupplementaryLayoutAttributes? = nil
       let sectionIndexPath = IndexPath(item: 0, section: section)
+      let sectionsMinimumInteritemSpacing = resolveMinimumInteritemSpacing(forSectionAt: section)
+      let sectionsMinimumLineSpacing = resolveMinimumLineSpacing(forSectionAt: section)
+      let headerSize = resolveSizeForSupplementaryView(ofKind: .header, at: sectionIndexPath)
 
-      if headerReferenceSize.height > 0 {
-        let layoutAttribute: SupplementaryLayoutAttributes = createSupplementaryLayoutAttribute(
-          ofKind: .header,
-          indexPath: sectionIndexPath,
-          atX: nextX
+      if headerSize.height > 0 {
+        let layoutAttribute = SupplementaryLayoutAttributes(
+          forSupplementaryViewOfKind: BlueprintSupplementaryKind.header.collectionViewSupplementaryType,
+          with: sectionIndexPath
         )
+        layoutAttribute.size = headerSize
+        layoutAttribute.zIndex = section + numberOfItems
         layoutAttribute.min = nextX
+        layoutAttribute.frame.origin.x = nextX
+        layoutAttribute.frame.origin.y = 0
+        layoutAttributes[section].append(layoutAttribute)
         headerAttribute = layoutAttribute
-        layoutAttributes.append([layoutAttribute])
       }
 
-      for item in 0..<numberOfItemsInSection(section) {
+      var sectionMaxY: CGFloat = 0
+
+      for item in 0..<numberOfItems {
         let indexPath = IndexPath(item: item, section: section)
-        let layoutAttribute = LayoutAttributes.init(forCellWith: indexPath)
+        let layoutAttribute = LayoutAttributes(forCellWith: indexPath)
 
         defer { previousItem = layoutAttribute }
 
         layoutAttribute.size = resolveSizeForItem(at: indexPath)
-        layoutAttribute.frame.origin.y = sectionInset.top + headerReferenceSize.height
+        layoutAttribute.frame.origin.y = sectionInset.top + headerSize.height
 
         if item > 0, let previousItem = previousItem {
-          layoutAttribute.frame.origin.x = previousItem.frame.maxX + minimumInteritemSpacing
+          layoutAttribute.frame.origin.x = previousItem.frame.maxX + sectionsMinimumInteritemSpacing
 
           if itemsPerColumn > 1 && !(item % itemsPerColumn == 0) {
             layoutAttribute.frame.origin.x = previousItem.frame.origin.x
-            layoutAttribute.frame.origin.y = previousItem.frame.maxY + minimumLineSpacing
+            layoutAttribute.frame.origin.y = previousItem.frame.maxY + sectionsMinimumLineSpacing
           } else {
-            widthOfSection += layoutAttribute.size.width + minimumInteritemSpacing
+            widthOfSection += layoutAttribute.size.width + sectionsMinimumInteritemSpacing
           }
         } else {
           firstItem = layoutAttribute
-          contentSize.height = layoutAttribute.size.height
-
-          if itemsPerColumn > 1 {
-            contentSize.height += minimumLineSpacing
-            contentSize.height *= CGFloat(itemsPerColumn)
-            contentSize.height -= minimumLineSpacing
-          }
-
-          contentSize.height += sectionInset.top + sectionInset.bottom
           layoutAttribute.frame.origin.x = nextX + sectionInset.left
           widthOfSection += sectionInset.left + sectionInset.right + layoutAttribute.size.width
         }
 
-        if section == layoutAttributes.count {
-          layoutAttributes.append([layoutAttribute])
-        } else {
-          layoutAttributes[section].append(layoutAttribute)
-        }
+        sectionMaxY = max(sectionMaxY, layoutAttribute.frame.maxY)
+        layoutAttributes[section].append(layoutAttribute)
       }
 
       if let previousItem = previousItem, let firstItem = firstItem {
         contentSize.width = previousItem.frame.maxX + sectionInset.right
 
-        if footerReferenceSize.height > 0 {
-          let layoutAttribute = createSupplementaryLayoutAttribute(
-            ofKind: .footer,
-            indexPath: sectionIndexPath,
-            atX: nextX
+        let footerSize = resolveSizeForSupplementaryView(ofKind: .footer, at: sectionIndexPath)
+        if footerSize.height > 0 {
+          let layoutAttribute = SupplementaryLayoutAttributes(
+            forSupplementaryViewOfKind: BlueprintSupplementaryKind.footer.collectionViewSupplementaryType,
+            with: sectionIndexPath
           )
+          layoutAttribute.size = footerSize
+          layoutAttribute.zIndex = section + numberOfItems
           layoutAttribute.min = nextX
-          layoutAttribute.frame.origin.y = contentSize.height + footerReferenceSize.height
+          layoutAttribute.frame.origin.x = 0
+          layoutAttribute.frame.origin.y = sectionMaxY + sectionInset.bottom
           layoutAttributes[section].append(layoutAttribute)
           footerAttribute = layoutAttribute
         }
 
-        if let collectionView = collectionView, let supplementaryWidth = supplementaryWidth {
+        if let collectionView = collectionView {
           let supplementaryX = max(
             min(collectionView.contentOffset.x, previousItem.frame.maxX - supplementaryWidth + sectionInset.left),
             firstItem.frame.origin.x - sectionInset.left
@@ -230,6 +231,7 @@
           }
         }
 
+        contentSize.height = sectionMaxY - headerSize.height + sectionInset.bottom
         nextX += widthOfSection
       }
 
@@ -243,7 +245,16 @@
     }
 
     if contentSize.height > 0 {
-      contentSize.height += headerReferenceSize.height + footerReferenceSize.height
+      let headers = layoutAttributes.flatMap({ $0 }).filter({ $0.representedElementKind == CollectionView.collectionViewHeaderType })
+      if let maxHeader = (headers.max { $0.frame.height < $1.frame.height }) {
+        let maxHeaderHeight = maxHeader.frame.height
+        contentSize.height += maxHeaderHeight
+      }
+      let footers = layoutAttributes.flatMap({ $0 }).filter({ $0.representedElementKind == CollectionView.collectionViewFooterType })
+      if let maxFooter = (footers.max { $0.frame.height < $1.frame.height }) {
+        let maxFooterHeight = maxFooter.frame.height
+        contentSize.height += maxFooterHeight
+      }
     }
 
     self.contentSize = contentSize
