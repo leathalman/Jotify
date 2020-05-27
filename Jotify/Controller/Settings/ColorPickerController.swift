@@ -16,12 +16,13 @@ class ColorPickerController: UIViewController {
     let defaults = UserDefaults.standard
     
     lazy var brightnessSlider: ChromaBrightnessSlider = {
-        let slider = ChromaBrightnessSlider(frame: CGRect(x: 0, y: 0, width: 280, height: 32))
+        let slider = ChromaBrightnessSlider()
+        slider.translatesAutoresizingMaskIntoConstraints = false
         return slider
     }()
     
     lazy var colorPicker: ChromaColorPicker = {
-        let colorPicker = ChromaColorPicker(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+        let colorPicker = ChromaColorPicker()
         colorPicker.delegate = self
         colorPicker.translatesAutoresizingMaskIntoConstraints = false
         return colorPicker
@@ -29,7 +30,6 @@ class ColorPickerController: UIViewController {
     
     lazy var contentView: UIView = {
         let contentView = UIView()
-        contentView.frame = CGRect(x: 0, y: 0, width: 350, height: 350)
         contentView.backgroundColor = UIColor.white
         contentView.layer.cornerRadius = 15
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -68,17 +68,17 @@ class ColorPickerController: UIViewController {
         contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         contentView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -navigationBarHeight).isActive = true
         contentView.widthAnchor.constraint(equalToConstant: 350).isActive = true
-        contentView.heightAnchor.constraint(equalToConstant: 350).isActive = true
+        contentView.heightAnchor.constraint(equalToConstant: 450).isActive = true
         
         colorPicker.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        colorPicker.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -navigationBarHeight).isActive = true
+        colorPicker.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -navigationBarHeight - 40).isActive = true
         colorPicker.widthAnchor.constraint(equalToConstant: 300).isActive = true
         colorPicker.heightAnchor.constraint(equalToConstant: 300).isActive = true
         
         brightnessSlider.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        brightnessSlider.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        brightnessSlider.topAnchor.constraint(equalTo: colorPicker.topAnchor, constant: 20).isActive = true
-        brightnessSlider.bottomAnchor.constraint(equalTo: colorPicker.bottomAnchor).isActive = true
+        brightnessSlider.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 120).isActive = true
+        brightnessSlider.widthAnchor.constraint(equalToConstant: 280).isActive = true
+        brightnessSlider.heightAnchor.constraint(equalToConstant: 32).isActive = true
 
         setupClearNavigationBar()
         
