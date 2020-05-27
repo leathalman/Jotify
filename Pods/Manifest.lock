@@ -1,27 +1,27 @@
 PODS:
-  - Blueprints (0.11.1)
-  - BottomPopup (0.5.0)
-  - ChromaColorPicker (1.7.2)
-  - MultilineTextField (0.2.3)
-  - OpenSSL-Universal (1.0.2.19):
-    - OpenSSL-Universal/Static (= 1.0.2.19)
-  - OpenSSL-Universal/Static (1.0.2.19)
-  - Pageboy (3.2.2)
-  - SPAlert (1.1.1)
-  - ViewAnimator (2.5.1)
-  - XLActionController (5.0.0):
-    - XLActionController/Core (= 5.0.0)
-  - XLActionController/Core (5.0.0)
-  - XLActionController/Skype (5.0.0):
+  - Blueprints (0.13.1)
+  - BottomPopup (0.5.5)
+  - ChromaColorPicker (2.0.2)
+  - MultilineTextField (1.0.0)
+  - OpenSSL-Universal (1.0.2.20):
+    - OpenSSL-Universal/Static (= 1.0.2.20)
+  - OpenSSL-Universal/Static (1.0.2.20)
+  - Pageboy (3.6.0)
+  - SPAlert (2.1.4)
+  - ViewAnimator (2.7.0)
+  - XLActionController (5.0.2):
+    - XLActionController/Core (= 5.0.2)
+  - XLActionController/Core (5.0.2)
+  - XLActionController/Skype (5.0.2):
     - XLActionController/Core
 
 DEPENDENCIES:
   - Blueprints
-  - BottomPopup
+  - BottomPopup (~> 0.5.5)
   - ChromaColorPicker
   - MultilineTextField
   - OpenSSL-Universal
-  - Pageboy (~> 3.2)
+  - Pageboy
   - SPAlert
   - ViewAnimator
   - XLActionController
@@ -40,16 +40,16 @@ SPEC REPOS:
     - XLActionController
 
 SPEC CHECKSUMS:
-  Blueprints: 97e61f353b7836e6183b7ded19ed44d90a13b82e
-  BottomPopup: d487f2fd398805f07e4563a29cf79233f531cbe7
-  ChromaColorPicker: 78194fbae9f342d3781ac178c4d92c7652197d18
-  MultilineTextField: 10965d9c3e05a182181bd7971eb009c7607001ae
-  OpenSSL-Universal: 8b48cc0d10c1b2923617dfe5c178aa9ed2689355
-  Pageboy: b6e8f5082c23ef2490ddf21339fb6e19673d1453
-  SPAlert: 292690a27df49ff131d532a0a39d89b08dd93e4d
-  ViewAnimator: 173932c659a43c5a15c665878750d92801ae2cf1
-  XLActionController: d7dea0b162bd3977311bcba7d377b88d6b87a7b4
+  Blueprints: ddd6ab1e455c98471aaef2fdd0b09b5f9b53af5b
+  BottomPopup: c63feed938e7bed2894736d4a07b84cd1f608003
+  ChromaColorPicker: 307585f2dc23d4d72f24cad320c1e08825cb5c09
+  MultilineTextField: bb965487257ce72f880d313074d419cac34024ff
+  OpenSSL-Universal: ff34003318d5e1163e9529b08470708e389ffcdd
+  Pageboy: 490c26be405987158660bb45ee2f404567395007
+  SPAlert: 1a8afa1c6ac86a82ab5b2cfdf7f9a51e68cb6c0c
+  ViewAnimator: 5af1c6f3b310f012bf081259c43717aa54fbae73
+  XLActionController: f1f2226d2c6629db197d4a41f2da907085a4cb9d
 
-PODFILE CHECKSUM: ac4e6a7cc0c3a3489d616c8b3eae77266d0d1224
+PODFILE CHECKSUM: 4c68175794656208add9ef85e0c1d405f68d5a35
 
 COCOAPODS: 1.7.1

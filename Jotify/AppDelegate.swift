@@ -54,6 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Testflight")
         case .AppStore:
             print("AppStore")
+            handleReceiptValidation()
+            JotifyProducts.store.restorePurchases()
         }
                 
         return true
@@ -173,6 +175,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
+        }
+    }
+    
+    // MARK: - Receipt Validation
+    func handleReceiptValidation() {
+        let receiptFetcher = ReceiptFetcher()
+        
+        // fetch receipt if receipt file doesn't exist yet
+        receiptFetcher.fetchReceipt()
+        
+        // validage receipt
+        let receiptValidator = ReceiptValidator()
+        let validationResult = receiptValidator.validateReceipt()
+
+        switch validationResult {
+        case .success(let receipt):
+            // receipt validation success
+            // Work with parsed receipt data.
+            print("original receipt app version is \(receipt.originalAppVersion ?? "n/a")")
+            grantPremiumToPreviousUser(receipt: receipt)
+        case .error(let error):
+            // receipt validation failed, refer to enum ReceiptValidationError
+            print("error is \(error.localizedDescription)")
+        }
+    }
+    
+    func grantPremiumToPreviousUser(receipt: ParsedReceipt) {
+        let originalAppVersionString = receipt.originalAppVersion
+        
+        // the last build version when the app is still a paid app
+        if originalAppVersionString == "1.0" || originalAppVersionString == "1.1.0" || originalAppVersionString == "1.1.1" || originalAppVersionString == "1.1.2" || originalAppVersionString == "1.1.3" {
+            // grant user premium
+            UserDefaults.standard.set(true, forKey: "com.austinleath.Jotify.Premium")
+            print("premium granted from receipt")
         }
     }
 }

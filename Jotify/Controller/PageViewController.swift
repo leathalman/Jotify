@@ -19,7 +19,8 @@ class PageViewController: PageboyViewController, PageboyViewControllerDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewControllers = [savedNotesController, writeNotesController]
+//        viewControllers = [savedNotesController, writeNotesController]
+        viewControllers = [UINavigationController(rootViewController: ColorPickerController())]
         
         dataSource = self
         isScrollEnabled = true
@@ -36,6 +37,6 @@ class PageViewController: PageboyViewController, PageboyViewControllerDataSource
     }
     
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
-        return Page.at(index: 1)
+        return Page.at(index: 0)
     }
 }

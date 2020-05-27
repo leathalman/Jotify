@@ -29,14 +29,12 @@ public extension BottomPopupDelegate {
 }
 
 public protocol BottomPopupAttributesDelegate: class {
-    var popupHeight: CGFloat { get }
-    var popupTopCornerRadius: CGFloat { get }
-    var popupPresentDuration: Double { get }
-    var popupDismissDuration: Double { get }
-    var popupShouldDismissInteractivelty: Bool { get }
-    var popupDimmingViewAlpha: CGFloat { get }
-    var popupShouldBeganDismiss: Bool { get }
-    var popupViewAccessibilityIdentifier: String { get }
+    func getPopupHeight() -> CGFloat
+    func getPopupTopCornerRadius() -> CGFloat
+    func getPopupPresentDuration() -> Double
+    func getPopupDismissDuration() -> Double
+    func shouldPopupDismissInteractivelty() -> Bool
+    func getDimmingViewAlpha() -> CGFloat
 }
 
 public struct BottomPopupConstants {
@@ -45,7 +43,5 @@ public struct BottomPopupConstants {
     static let kDefaultPresentDuration = 0.5
     static let kDefaultDismissDuration = 0.5
     static let dismissInteractively = true
-    static let shouldBeganDismiss = true
     static let kDimmingViewDefaultAlphaValue: CGFloat = 0.5
-    static let defaultPopupViewAccessibilityIdentifier: String = "bottomPopupView"
 }

@@ -8,13 +8,15 @@
 
 import UIKit
 
-final class BottomPopupPresentationController: UIPresentationController {
-    private var dimmingView: UIView!
-    private unowned var attributesDelegate: BottomPopupAttributesDelegate
+class BottomPopupPresentationController: UIPresentationController {
+    
+    fileprivate var dimmingView: UIView!
+    fileprivate let popupHeight: CGFloat
+    fileprivate let dimmingViewAlpha: CGFloat
     
     override var frameOfPresentedViewInContainerView: CGRect {
         get {
-            return CGRect(origin: CGPoint(x: 0, y: UIScreen.main.bounds.size.height - attributesDelegate.popupHeight), size: CGSize(width: presentedViewController.view.frame.size.width, height: attributesDelegate.popupHeight))
+            return CGRect(origin: CGPoint(x: 0, y: UIScreen.main.bounds.size.height - popupHeight), size: CGSize(width: presentedViewController.view.frame.size.width, height: popupHeight))
         }
     }
     
@@ -29,8 +31,9 @@ final class BottomPopupPresentationController: UIPresentationController {
         })
     }
     
-    init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?, attributesDelegate: BottomPopupAttributesDelegate) {
-        self.attributesDelegate = attributesDelegate
+    init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?, usingHeight height: CGFloat, andDimmingViewAlpha dimmingAlpha: CGFloat) {
+        self.popupHeight = height
+        self.dimmingViewAlpha = dimmingAlpha
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
         setupDimmingView()
     }
@@ -41,7 +44,7 @@ final class BottomPopupPresentationController: UIPresentationController {
     
     override func presentationTransitionWillBegin() {
         containerView?.insertSubview(dimmingView, at: 0)
-        changeDimmingViewAlphaAlongWithAnimation(to: attributesDelegate.popupDimmingViewAlpha)
+        changeDimmingViewAlphaAlongWithAnimation(to: dimmingViewAlpha)
     }
     
     override func dismissalTransitionWillBegin() {
@@ -49,12 +52,10 @@ final class BottomPopupPresentationController: UIPresentationController {
     }
     
     @objc private func handleTap(_ tap: UITapGestureRecognizer) {
-        guard attributesDelegate.popupShouldBeganDismiss else { return }
         presentedViewController.dismiss(animated: true, completion: nil)
     }
     
     @objc private func handleSwipe(_ swipe: UISwipeGestureRecognizer) {
-        guard attributesDelegate.popupShouldBeganDismiss else { return }
         presentedViewController.dismiss(animated: true, completion: nil)
     }
 }

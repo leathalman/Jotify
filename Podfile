@@ -1,5 +1,5 @@
 # Pods for Jotify
-platform :ios, '12.0'
+platform :ios, '13.0'
 
 target 'Jotify' do
   use_frameworks!
@@ -25,7 +25,8 @@ target 'Jotify' do
   pod'ChromaColorPicker'
 
   # Fantastic framework for customizing height of presenting viewcontrollers
-  pod'BottomPopup'
+  # Preferred the setup of 0.5.5, so not updated
+  pod'BottomPopup', '~> 0.5.5'
 
   # Used for displaying confirmations to users when reminders are created or deleted
   pod'SPAlert'

@@ -15,6 +15,11 @@ class ColorPickerController: UIViewController {
     
     let defaults = UserDefaults.standard
     
+    lazy var brightnessSlider: ChromaBrightnessSlider = {
+        let slider = ChromaBrightnessSlider(frame: CGRect(x: 0, y: 0, width: 280, height: 32))
+        return slider
+    }()
+    
     lazy var colorPicker: ChromaColorPicker = {
         let colorPicker = ChromaColorPicker(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
         colorPicker.delegate = self
@@ -39,6 +44,10 @@ class ColorPickerController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+    }
+    
+    func setupView() {
         view.backgroundColor = UIColor.gray
         
         var image = UIImage(named: "cancel")
@@ -49,8 +58,12 @@ class ColorPickerController: UIViewController {
         
         let navigationBarHeight = navigationController!.navigationBar.frame.height
         
+        colorPicker.addHandle(at: UIColor(red: 1, green: 203 / 255, blue: 164 / 255, alpha: 1))
+        colorPicker.connect(brightnessSlider)
+        
         view.addSubview(contentView)
         view.addSubview(colorPicker)
+        view.addSubview(brightnessSlider)
         
         contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         contentView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -navigationBarHeight).isActive = true
@@ -62,6 +75,11 @@ class ColorPickerController: UIViewController {
         colorPicker.widthAnchor.constraint(equalToConstant: 300).isActive = true
         colorPicker.heightAnchor.constraint(equalToConstant: 300).isActive = true
         
+        brightnessSlider.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        brightnessSlider.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        brightnessSlider.topAnchor.constraint(equalTo: colorPicker.topAnchor, constant: 20).isActive = true
+        brightnessSlider.bottomAnchor.constraint(equalTo: colorPicker.bottomAnchor).isActive = true
+
         setupClearNavigationBar()
         
         if defaults.bool(forKey: "darkModeEnabled") {
@@ -158,14 +176,14 @@ extension ColorPickerController: ChromaColorPickerDelegate {
         StoredColors.staticNoteColor = color
         navigationController?.navigationBar.barTintColor = color
         
-        UIView.animate(withDuration: 0.2,
-                       animations: {
-                        self.view.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
-        }, completion: { _ in
-            UIView.animate(withDuration: 0.2, animations: {
-                self.view.transform = CGAffineTransform.identity
-            })
-        })
+//        UIView.animate(withDuration: 0.2,
+//                       animations: {
+//                        self.view.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+//        }, completion: { _ in
+//            UIView.animate(withDuration: 0.2, animations: {
+//                self.view.transform = CGAffineTransform.identity
+//            })
+//        })
     }
     
 }

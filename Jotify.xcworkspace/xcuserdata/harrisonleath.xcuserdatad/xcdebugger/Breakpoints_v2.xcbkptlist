@@ -1,49 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
-   uuid = "39E70BF8-2506-455D-A922-81117ADD148F"
+   uuid = "7F67EF58-9035-4C09-9693-CCD47699C02F"
    type = "0"
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
          <BreakpointContent
-            uuid = "A60F9472-A036-4005-B546-A47EAA6871DA"
-            shouldBeEnabled = "Yes"
+            uuid = "F25BCBBA-654F-48E7-BA6B-C84278FCBA8E"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            symbolName = "objc_weak_error"
+            symbolName = "UIViewAlertForUnsatisfiableConstraints"
             moduleName = "">
             <Locations>
                <Location
-                  uuid = "A60F9472-A036-4005-B546-A47EAA6871DA - 91d0cb68f9756aa8"
+                  uuid = "F25BCBBA-654F-48E7-BA6B-C84278FCBA8E - ba3ad5676a792f38"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "objc_weak_error"
-                  moduleName = "libobjc.A.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  offsetFromSymbolStart = "0">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
-         <BreakpointContent
-            uuid = "A0D0C446-FCDD-4EA9-9A6B-3BC8C8C2681E"
-            shouldBeEnabled = "Yes"
-            condition = "$arg3 == nil"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            symbolName = "[UIImage imageNamed:]"
-            moduleName = "">
-            <Locations>
-               <Location
-                  uuid = "A0D0C446-FCDD-4EA9-9A6B-3BC8C8C2681E - 9cc70c83f07c02e4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "+[UIImage imageNamed:]"
+                  symbolName = "UIViewAlertForUnsatisfiableConstraints"
                   moduleName = "UIKitCore"
                   usesParentBreakpointCondition = "Yes"
                   offsetFromSymbolStart = "0">

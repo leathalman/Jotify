@@ -9,6 +9,7 @@
 import UIKit
 
 open class BottomPopupViewController: UIViewController, BottomPopupAttributesDelegate {
+    
     private var transitionHandler: BottomPopupTransitionHandler?
     open weak var popupDelegate: BottomPopupDelegate?
     
@@ -31,7 +32,7 @@ open class BottomPopupViewController: UIViewController, BottomPopupAttributesDel
         super.viewDidLoad()
         transitionHandler?.notifyViewLoaded(withPopupDelegate: popupDelegate)
         popupDelegate?.bottomPopupViewLoaded()
-        self.view.accessibilityIdentifier = popupViewAccessibilityIdentifier
+        self.view.accessibilityIdentifier = "bottomPopupView"
     }
     
     open override  func viewWillAppear(_ animated: Bool) {
@@ -68,28 +69,36 @@ open class BottomPopupViewController: UIViewController, BottomPopupAttributesDel
     }
     
     private func curveTopCorners() {
-        let path = UIBezierPath(roundedRect: self.view.bounds, byRoundingCorners: [.topLeft, .topRight], cornerRadii: CGSize(width: popupTopCornerRadius, height: 0))
+        let path = UIBezierPath(roundedRect: self.view.bounds, byRoundingCorners: [.topLeft, .topRight], cornerRadii: CGSize(width: getPopupTopCornerRadius(), height: 0))
         let maskLayer = CAShapeLayer()
         maskLayer.frame = self.view.bounds
         maskLayer.path = path.cgPath
         self.view.layer.mask = maskLayer
     }
     
-    //MARK: BottomPopupAttributesDelegate Variables
+    //MARK: BottomPopupAttributesDelegate Methods
     
-    open var popupHeight: CGFloat { return BottomPopupConstants.kDefaultHeight }
+    open func shouldPopupDismissInteractivelty() -> Bool {
+        return BottomPopupConstants.dismissInteractively
+    }
     
-    open var popupTopCornerRadius: CGFloat { return BottomPopupConstants.kDefaultTopCornerRadius }
+    open func getPopupHeight() -> CGFloat {
+        return BottomPopupConstants.kDefaultHeight
+    }
     
-    open var popupPresentDuration: Double { return BottomPopupConstants.kDefaultPresentDuration }
+    open func getPopupTopCornerRadius() -> CGFloat {
+        return BottomPopupConstants.kDefaultTopCornerRadius
+    }
     
-    open var popupDismissDuration: Double { return BottomPopupConstants.kDefaultDismissDuration }
+    open func getPopupPresentDuration() -> Double {
+        return BottomPopupConstants.kDefaultPresentDuration
+    }
     
-    open var popupShouldDismissInteractivelty: Bool { return BottomPopupConstants.dismissInteractively }
+    open func getPopupDismissDuration() -> Double {
+        return BottomPopupConstants.kDefaultDismissDuration
+    }
     
-    open var popupDimmingViewAlpha: CGFloat { return BottomPopupConstants.kDimmingViewDefaultAlphaValue }
-    
-    open var popupShouldBeganDismiss: Bool { return BottomPopupConstants.shouldBeganDismiss }
-    
-    open var popupViewAccessibilityIdentifier: String { return BottomPopupConstants.defaultPopupViewAccessibilityIdentifier }
+    open func getDimmingViewAlpha() -> CGFloat {
+        return BottomPopupConstants.kDimmingViewDefaultAlphaValue
+    }
 }

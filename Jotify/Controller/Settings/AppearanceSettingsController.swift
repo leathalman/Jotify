@@ -14,8 +14,8 @@ class AppearanceSettingsController: UITableViewController {
     var notes: [Note] = []
         
     let sections: Array = ["Dark Mode", "Themes", "Text", "Other"]
-    let darks: Array = ["Use System Light/Dark Mode"]
-    let darks2: Array = ["Use System Light/Dark Mode", "Vibrant Dark Mode", "Pure Dark Mode"]
+    let darks: Array = ["Use System Mode"]
+    let darks2: Array = ["Use System Mode", "Vibrant Dark Mode", "Pure Dark Mode"]
     let text: Array = ["Custom Placeholder", "Enable Multiline Input"]
     let other: Array = ["Random Colors"]
     
