@@ -12,6 +12,8 @@ Jotify is an iOS app used for lightning fast note-taking and reminders, all writ
 
 Jotify utilizes NSPersistentCloudKitContainer, allowing Jotify to sync notes between a user's devices seamlessly. Notes are stored locally on device using CoreData and are uploaded to iCloud using Apple's CloudKit. Jotify is avaliable for both iPhone and iPad.
 
+<b>Jotify now supports Mac Catalyst! Check out the "mac" branch to see for yourself.</b>
+
 ## Testflight
 
 Want to test the lastest features as they come out? Check out Jotify on [Testflight](https://testflight.apple.com/join/EnJVSmNy)!
