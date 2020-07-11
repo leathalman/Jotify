@@ -64,6 +64,7 @@
 		F666D4B222CFED2D00DECE27 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */; };
 		F67B92DE22D2E083002C6985 /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B92DD22D2E083002C6985 /* SettingsSwitchCell.swift */; };
 		F67B92E022D2E785002C6985 /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B92DF22D2E785002C6985 /* ColorPickerController.swift */; };
+		F68097B824BA53D9006BDD0C /* ReceiptHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68097B724BA53D9006BDD0C /* ReceiptHandler.swift */; };
 		F686D84D22C9269D00C6F555 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F686D84C22C9269D00C6F555 /* PageViewController.swift */; };
 		F68D639122F7890100DEB4AA /* AppearanceSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68D639022F7890100DEB4AA /* AppearanceSettingsController.swift */; };
 		F68D639322F7894700DEB4AA /* PrivacySettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68D639222F7894700DEB4AA /* PrivacySettingsController.swift */; };
@@ -154,6 +155,7 @@
 		F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 		F67B92DD22D2E083002C6985 /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
 		F67B92DF22D2E785002C6985 /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
+		F68097B724BA53D9006BDD0C /* ReceiptHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptHandler.swift; sourceTree = "<group>"; };
 		F686D84C22C9269D00C6F555 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		F68D639022F7890100DEB4AA /* AppearanceSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsController.swift; sourceTree = "<group>"; };
 		F68D639222F7894700DEB4AA /* PrivacySettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySettingsController.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 				F6A7E4C3238F243200D3E6AF /* IAPHandler.swift */,
 				F6A7E4C5238F244800D3E6AF /* JotifyProducts.swift */,
 				F6D1816C239C748700EAB85C /* ReceiptFetcher.swift */,
+				F68097B724BA53D9006BDD0C /* ReceiptHandler.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -632,6 +635,7 @@
 				F692D97723B1CB2C00E47109 /* UINavigationController+Extensions.swift in Sources */,
 				F65E479F2324B12A00FCAEF3 /* UserDefaults+Extensions.swift in Sources */,
 				F61EC8BE2348E1BA00FB0A63 /* WhatsNewViewController+HapticFeedback.swift in Sources */,
+				F68097B824BA53D9006BDD0C /* ReceiptHandler.swift in Sources */,
 				F61EC8CA2348E1BA00FB0A63 /* Sequence+WhatsNew.swift in Sources */,
 				F61EC8BC2348E1BA00FB0A63 /* WhatsNewViewController+TitleView.swift in Sources */,
 				F6B2083722DE22860098CF9F /* Themes.swift in Sources */,

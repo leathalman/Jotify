@@ -14,7 +14,7 @@ class SettingsController: UITableViewController {
     let general: Array = ["About", "Appearance", "Privacy", "Alerts"]
     let advanced1: Array = ["Get Premium", "Restore Purchases", "Show Tutorial", "Reset Settings to Default", "Delete All Data"]
     let advanced2: Array = ["Restore Purchases", "Show Tutorial", "Reset Settings to Default", "Delete All Data"]
-        
+    
     let defaults = UserDefaults.standard
     
     override func viewWillAppear(_ animated: Bool) {
@@ -114,6 +114,7 @@ class SettingsController: UITableViewController {
                     let cell = tableView.cellForRow(at: indexPath)
                     cell?.isSelected = false
                     
+                    ReceiptHandler().handleReceiptValidation()
                     JotifyProducts.store.restorePurchases()
                     checkForRestore()
                 case 1:
@@ -169,6 +170,73 @@ class SettingsController: UITableViewController {
                 default:
                     print("default")
                 }
+            } else {
+                switch indexPath.row {
+                case 0:
+                    let cell = tableView.cellForRow(at: indexPath)
+                    cell?.isSelected = false
+                    
+                    PremiumView.shared.presentPremiumView(viewController: self)
+                case 1:
+                    let cell = tableView.cellForRow(at: indexPath)
+                    cell?.isSelected = false
+                    
+                    ReceiptHandler().handleReceiptValidation()
+                    JotifyProducts.store.restorePurchases()
+                    checkForRestore()
+                case 2:
+                    let writeNoteController = WriteNoteController()
+                    writeNoteController.presentFirstLaunchOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+                    
+                    let cell = tableView.cellForRow(at: indexPath)
+                    cell?.isSelected = false
+                    
+                case 3:
+                    let alert = UIAlertController(title: "Are you sure?", message: "This will reset all settings to default.", preferredStyle: .alert)
+                    
+                    let cell = tableView.cellForRow(at: indexPath)
+                    cell?.isSelected = false
+                    
+                    alert.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: { _ in
+                        
+                        self.defaults.set("default", forKey: "noteColorTheme")
+                        let appearanceSettingsController = AppearanceSettingsController()
+                        appearanceSettingsController.fetchData()
+                        appearanceSettingsController.setNewColorsForExistingNotes()
+                        
+                        self.defaults.set(true, forKey: "useRandomColor")
+                        self.defaults.set("date", forKey: "sortBy")
+                        self.defaults.set(true, forKey: "showAlertOnDelete")
+                        self.defaults.set(true, forKey: "showAlertOnSort")
+                        self.defaults.set(false, forKey: "darkModeEnabled")
+                        self.defaults.set(false, forKey: "vibrantDarkModeEnabled")
+                        self.defaults.set(false, forKey: "pureDarkModeEnabled")
+                        self.defaults.set(true, forKey: "isFirstLaunch")
+                        self.defaults.set(false, forKey: "useBiometrics")
+                        self.defaults.set("Start typing or swipe left for saved notes...", forKey: "writeNotePlaceholder")
+                        self.defaults.set(false, forKey: "useMultilineInput")
+                    }))
+                    
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    present(alert, animated: true)
+                    
+                case 4:
+                    print("Delete all data")
+                    let cell = tableView.cellForRow(at: indexPath)
+                    cell?.isSelected = false
+                    
+                    let alert = UIAlertController(title: "Are you sure?", message: "This will permanently delete all data saved in both iCloud and saved locally on this device.", preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+                        self.deleteAllNotes(entity: "Note")
+                    }))
+                    
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    present(alert, animated: true)
+                    
+                default:
+                    print("default")
+                }
             }
         }
     }
@@ -196,7 +264,7 @@ class SettingsController: UITableViewController {
                 cell.backgroundColor = UIColor.white
                 cell.backgroundColor = InterfaceColors.cellColor
                 cell.accessoryType = .disclosureIndicator
-
+                
                 setupDynamicCells(cell: cell, enableArrow: true)
                 
                 return cell
