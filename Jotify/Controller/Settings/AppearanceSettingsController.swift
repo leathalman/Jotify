@@ -12,7 +12,7 @@ import UIKit
 
 class AppearanceSettingsController: UITableViewController {
     var notes: [Note] = []
-        
+    
     let sections: Array = ["Dark Mode", "Themes", "Text", "Other"]
     let darks: Array = ["Use System Mode"]
     let darks2: Array = ["Use System Mode", "Vibrant Dark Mode", "Pure Dark Mode"]
@@ -138,7 +138,7 @@ class AppearanceSettingsController: UITableViewController {
                 cell.textLabel?.text = "\(darks2[indexPath.row])"
                 cell.selectionStyle = .none
                 cell.switchButton.addTarget(self, action: #selector(useSystemMode(sender:)), for: .valueChanged)
-
+                
                 if defaults.bool(forKey: "useSystemMode") {
                     cell.switchButton.isOn = true
                 } else {
@@ -197,7 +197,7 @@ class AppearanceSettingsController: UITableViewController {
                 cell.textLabel?.text = "\(darks[indexPath.row])"
                 cell.selectionStyle = .none
                 cell.switchButton.addTarget(self, action: #selector(useSystemMode(sender:)), for: .valueChanged)
-
+                
                 if defaults.bool(forKey: "useSystemMode") {
                     cell.switchButton.isOn = true
                 } else {
@@ -324,84 +324,68 @@ class AppearanceSettingsController: UITableViewController {
     }
     
     @objc func useSystemMode(sender: UISwitch) {
-        if !defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
-            PremiumView.shared.presentPremiumView(viewController: self)
-            sender.isOn = false
+        if sender.isOn {
+            print("use system mode enabled")
+            defaults.set(true, forKey: "useSystemMode")
+            
+            Themes().triggerSystemMode(mode: self.traitCollection)
+            
+            viewWillAppear(true)
+            self.tableView.reloadData()
             
         } else {
-            if sender.isOn {
-                print("use system mode enabled")
-                defaults.set(true, forKey: "useSystemMode")
-                
-                Themes().triggerSystemMode(mode: self.traitCollection)
-                
-                viewWillAppear(true)
-                self.tableView.reloadData()
-                
-            } else {
-                print("use system mode disabled")
-                defaults.set(false, forKey: "useSystemMode")
-                
-                viewWillAppear(true)
-                self.tableView.reloadData()
-            }
+            print("use system mode disabled")
+            defaults.set(false, forKey: "useSystemMode")
+            
+            viewWillAppear(true)
+            self.tableView.reloadData()
         }
+        
     }
     
     @objc func vibrantDarkModeSwitchPressed(sender: UISwitch) {
-        if !defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
-            PremiumView.shared.presentPremiumView(viewController: self)
-            sender.isOn = false
+        if sender.isOn {
+            print("vibrant dark mode enabled")
+            defaults.set(true, forKey: "vibrantDarkModeEnabled")
+            defaults.set(false, forKey: "pureDarkModeEnabled")
+            defaults.set(true, forKey: "darkModeEnabled")
+            Themes().setupVibrantDarkMode()
+            
+            viewWillAppear(true)
+            self.tableView.reloadData()
             
         } else {
-            if sender.isOn {
-                print("vibrant dark mode enabled")
-                defaults.set(true, forKey: "vibrantDarkModeEnabled")
-                defaults.set(false, forKey: "pureDarkModeEnabled")
-                defaults.set(true, forKey: "darkModeEnabled")
-                Themes().setupVibrantDarkMode()
-                
-                viewWillAppear(true)
-                self.tableView.reloadData()
-                
-            } else {
-                print("vibrant dark mode disabled")
-                defaults.set(false, forKey: "vibrantDarkModeEnabled")
-                defaults.set(false, forKey: "darkModeEnabled")
-                Themes().setupDefaultMode()
-                
-                viewWillAppear(true)
-                self.tableView.reloadData()
-            }
+            print("vibrant dark mode disabled")
+            defaults.set(false, forKey: "vibrantDarkModeEnabled")
+            defaults.set(false, forKey: "darkModeEnabled")
+            Themes().setupDefaultMode()
+            
+            viewWillAppear(true)
+            self.tableView.reloadData()
         }
     }
     
     @objc func pureDarkModeSwitchPressed(sender: UISwitch) {
-        if !defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
-            PremiumView.shared.presentPremiumView(viewController: self)
-            sender.isOn = false
+        if sender.isOn {
+            print("pure dark mode enabled")
+            defaults.set(true, forKey: "pureDarkModeEnabled")
+            defaults.set(false, forKey: "vibrantDarkModeEnabled")
+            defaults.set(true, forKey: "darkModeEnabled")
+            Themes().setupPureDarkMode()
+            
+            viewWillAppear(true)
+            self.tableView.reloadData()
             
         } else {
-            if sender.isOn {
-                print("pure dark mode enabled")
-                defaults.set(true, forKey: "pureDarkModeEnabled")
-                defaults.set(false, forKey: "vibrantDarkModeEnabled")
-                defaults.set(true, forKey: "darkModeEnabled")
-                Themes().setupPureDarkMode()
-                
-                viewWillAppear(true)
-                self.tableView.reloadData()
-                
-            } else {
-                print("pure dark mode disabled")
-                defaults.set(false, forKey: "pureDarkModeEnabled")
-                defaults.set(false, forKey: "darkModeEnabled")
-                Themes().setupDefaultMode()
-                
-                viewWillAppear(true)
-                self.tableView.reloadData()
-            }
+            print("pure dark mode disabled")
+            defaults.set(false, forKey: "pureDarkModeEnabled")
+            defaults.set(false, forKey: "darkModeEnabled")
+            Themes().setupDefaultMode()
+            
+            viewWillAppear(true)
+            self.tableView.reloadData()
         }
+        
     }
     
     @objc func enableMultilineInputSwitchPressed(sender: UISwitch) {

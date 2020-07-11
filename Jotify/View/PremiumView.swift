@@ -28,11 +28,6 @@ class PremiumView {
                     image: UIImage(named: "reminder")
                 ),
                 WhatsNew.Item(
-                    title: "Dark Mode",
-                    subtitle: "Unlock access to vibrant and pure dark modes to make your notes look even better.",
-                    image: UIImage(named: "moon")
-                ),
-                WhatsNew.Item(
                     title: "Biometric Unlock",
                     subtitle: "Lock and unlock Jotify by using TouchID or FaceID. The ultimate way to make your notes even more private and secure.",
                     image: UIImage(named: "lock")
