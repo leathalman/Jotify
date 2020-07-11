@@ -141,7 +141,6 @@ extension IAPHelper: SKPaymentTransactionObserver {
         print("restore... \(productIdentifier)")
         deliverPurchaseNotificationFor(identifier: productIdentifier)
         SKPaymentQueue.default().finishTransaction(transaction)
-        UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.Premium")
     }
     
     private func fail(transaction: SKPaymentTransaction) {

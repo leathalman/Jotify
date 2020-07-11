@@ -114,9 +114,9 @@ class SettingsController: UITableViewController {
                     let cell = tableView.cellForRow(at: indexPath)
                     cell?.isSelected = false
                     
+                    notifyUserOfRestore()
                     ReceiptHandler().handleReceiptValidation()
                     JotifyProducts.store.restorePurchases()
-                    checkForRestore()
                 case 1:
                     let writeNoteController = WriteNoteController()
                     writeNoteController.presentFirstLaunchOnboarding(viewController: self, tintColor: StoredColors.noteColor)
@@ -181,9 +181,9 @@ class SettingsController: UITableViewController {
                     let cell = tableView.cellForRow(at: indexPath)
                     cell?.isSelected = false
                     
+                    notifyUserOfRestore()
                     ReceiptHandler().handleReceiptValidation()
                     JotifyProducts.store.restorePurchases()
-                    checkForRestore()
                 case 2:
                     let writeNoteController = WriteNoteController()
                     writeNoteController.presentFirstLaunchOnboarding(viewController: self, tintColor: StoredColors.noteColor)
@@ -341,27 +341,6 @@ class SettingsController: UITableViewController {
         }
     }
     
-    //MARK: TODO: Make a better function for restoring purchases, currently could show the wrong result...
-    func checkForRestore() {
-        print(UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.Premium"))
-        if UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.Premium") == true {
-            let alert = UIAlertController(title: "Congratulations!", message: "You successfully restored your purchase! Enjoy Jotify premium!", preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "Yay!", style: .cancel, handler: { _ in
-                
-            }))
-            present(alert, animated: true)
-            
-        } else if UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.Premium") == false {
-            let alert = UIAlertController(title: "Not quite.", message: "It looks like you have not bought premium yet. Please consider supporting Jotify!", preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { _ in
-                
-            }))
-            present(alert, animated: true)
-        }
-    }
-    
     func setupDynamicCells(cell: UITableViewCell, enableArrow: Bool) {
         cell.backgroundColor = UIColor.white
         cell.backgroundColor = InterfaceColors.cellColor
@@ -395,6 +374,37 @@ class SettingsController: UITableViewController {
         } else {
             cell.selectedBackgroundView = nil
         }
+    }
+    
+    func notifyUserOfRestore() {
+        // setups observer for IAPHandler
+        NotificationCenter.default.addObserver(self, selector: #selector(self.handleIAPNotification(notification:)), name: .IAPHelperPurchaseNotification, object: nil)
+    }
+    
+    @objc func handleIAPNotification(notification: Notification) {
+        // will not account for receipt validator
+        if notification.object as! String == "com.austinleath.Jotify.Premium" || notification.object as! String == "com.austinleath.Jotify.premium" {
+            // if purchased
+            let alert = UIAlertController(title: "Congratulations!", message: "You successfully restored your purchase! Enjoy Jotify premium!", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Yay!", style: .cancel, handler: { _ in
+                
+            }))
+            present(alert, animated: true)
+            self.tableView.reloadData()
+        } else {
+            // if not purchased
+            let alert = UIAlertController(title: "Not quite.", message: "It looks like you have not bought premium yet. Please consider supporting Jotify!", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { _ in
+                
+            }))
+            present(alert, animated: true)
+        }
+    }
+
+    func showIAPAlert() {
+        
     }
     
     func darkModeEnabled() -> Bool {

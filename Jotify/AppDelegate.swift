@@ -46,12 +46,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         switch Config.appConfiguration {
         case .Debug:
-            print("Debug")
+            print("debug")
 //            UserDefaults.standard.set(true, forKey: "com.austinleath.Jotify.Premium")
         case .TestFlight:
-            print("Testflight")
+            print("testflight")
         case .AppStore:
-            print("AppStore")
+            print("appStore")
         }
                 
         return true

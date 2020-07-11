@@ -106,12 +106,20 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     }
     
     func requestReview() {
-        let shortVersionKey = "CFBundleShortVersionString"
-        let currentVersion = Bundle.main.infoDictionary![shortVersionKey] as? String
-        
-        if notes.count > 9 && defaults.value(forKey: "lastReviewRequest") as? String != currentVersion {
-            SKStoreReviewController.requestReview()
-            defaults.set(currentVersion, forKey: "lastReviewRequest")
+        // only trigger on Appstore version
+        switch Config.appConfiguration {
+        case .Debug:
+            print("review request blocked - debug")
+        case .TestFlight:
+            print("review request blocked - testflight")
+        case .AppStore:
+            let shortVersionKey = "CFBundleShortVersionString"
+            let currentVersion = Bundle.main.infoDictionary![shortVersionKey] as? String
+            
+            if notes.count > 9 && defaults.value(forKey: "lastReviewRequest") as? String != currentVersion {
+                SKStoreReviewController.requestReview()
+                defaults.set(currentVersion, forKey: "lastReviewRequest")
+            }
         }
     }
     
