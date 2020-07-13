@@ -40,14 +40,14 @@
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Light</string>
+					<string>defaultIcon</string>
 				</array>
 			</dict>
 			<key>Golden2</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Golden2</string>
+					<string>goldIcon</string>
 				</array>
 			</dict>
 		</dict>
