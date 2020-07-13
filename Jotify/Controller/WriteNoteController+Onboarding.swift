@@ -23,16 +23,10 @@ extension WriteNoteController {
             print("same version")
             
         } else {
-            // replace with `if let previousVersion = previousVersion {` if you need the exact value
             if previousVersion != nil {
                 // new version
                 print("new version")
 //                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
-                
-                // if user has premium, go ahead and enable automatic light/dark mode
-                if UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.Premium") {
-                    UserDefaults.standard.set(true, forKey: "useSystemMode")
-                }
                 
             } else {
                 // first launch, restore purchases

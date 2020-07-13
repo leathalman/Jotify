@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             Themes().setupDefaultMode()
         }
-        
+                
         switch Config.appConfiguration {
         case .Debug:
             print("debug")
