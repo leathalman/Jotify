@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             "vibrantDarkModeEnabled": false,
             "pureDarkModeEnabled": false,
             "useBiometrics": false,
-            "writeNotePlaceholder": "Start typing or swipe left for saved notes...",
+            "writeNotePlaceholder": "Start typing or swipe right for saved notes...",
             "com.austinleath.Jotify.Premium": false,
             "useSystemMode": true,
         ])
