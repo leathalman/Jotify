@@ -143,12 +143,13 @@ extension WriteNoteController {
         
         var configuration = WhatsNewViewController.Configuration()
         
-        if UserDefaults.standard.bool(forKey: "darkModeEnabled") {
-            configuration.apply(theme: .darkDefault)
-            configuration.backgroundColor = UIColor.grayBackground
-            
-        } else {
-            configuration.apply(theme: .default)
+        if UserDefaults.standard.bool(forKey: "useSystemMode") {
+            if self.traitCollection.userInterfaceStyle == .dark {
+                configuration.apply(theme: .darkDefault)
+                configuration.backgroundColor = UIColor.grayBackground
+            } else {
+                configuration.apply(theme: .default)
+            }
         }
         
         configuration.titleView.insets = UIEdgeInsets(top: 40, left: 20, bottom: 15, right: 15)

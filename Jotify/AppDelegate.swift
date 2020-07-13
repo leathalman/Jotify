@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             "com.austinleath.Jotify.Premium": false,
             "useSystemMode": true,
         ])
-        
+                
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {
             if UserDefaults.standard.bool(forKey: "vibrantDarkModeEnabled") == true {
                 Themes().setupVibrantDarkMode()
