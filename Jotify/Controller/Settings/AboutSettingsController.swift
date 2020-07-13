@@ -32,9 +32,9 @@ class AboutSettingsController: UIViewController {
         if UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.Premium") {
             let iconName = UIApplication.shared.alternateIconName
             if UIApplication.shared.supportsAlternateIcons {
-                if iconName == "Golden2" {
+                if iconName == "goldIcon" {
                     print("current icon is \(String(describing: iconName)), change to primary icon")
-                    UIApplication.shared.setAlternateIconName("Default") { error in
+                    UIApplication.shared.setAlternateIconName("defaultIcon") { error in
                         if let error = error {
                             print(error.localizedDescription)
                         } else {
@@ -53,7 +53,7 @@ class AboutSettingsController: UIViewController {
 
                 } else {
                     print("current icon is primary icon, change to alternative icon")
-                    UIApplication.shared.setAlternateIconName("Golden2") { error in
+                    UIApplication.shared.setAlternateIconName("goldIcon") { error in
                         if let error = error {
                             print(error.localizedDescription)
                         } else {
@@ -83,7 +83,7 @@ class AboutSettingsController: UIViewController {
             }
             
         } else {
-            print("Premium not enabled!")
+            print("premium not enabled!")
         }
     }
     
@@ -94,10 +94,10 @@ class AboutSettingsController: UIViewController {
         
         let iconName = UIApplication.shared.alternateIconName
         if UIApplication.shared.supportsAlternateIcons {
-            if iconName == "Golden2", UserDefaults.standard.bool(forKey: "darkModeEnabled") {
+            if iconName == "goldIcon", UserDefaults.standard.bool(forKey: "darkModeEnabled") {
                 aboutSettingsView.iconText.image = UIImage(named: "goldTextAlt")
                 
-            } else if iconName == "Golden2", !UserDefaults.standard.bool(forKey: "darkModeEnabled") {
+            } else if iconName == "goldIcon", !UserDefaults.standard.bool(forKey: "darkModeEnabled") {
                 aboutSettingsView.iconText.image = UIImage(named: "goldText")
                 
             } else {

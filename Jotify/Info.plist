@@ -12,20 +12,20 @@
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
-			<key>Default</key>
+			<key>defaultIcon</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Light</string>
+					<string>defaultIcon</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
-			<key>Golden2</key>
+			<key>goldIcon</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Golden2</string>
+					<string>goldIcon</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>

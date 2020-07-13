@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             "sortBy": "date",
             "showAlertOnDelete": true,
             "showAlertOnSort": true,
-            "darkModeEnabled": false,
             "vibrantDarkModeEnabled": false,
             "pureDarkModeEnabled": false,
             "useBiometrics": false,

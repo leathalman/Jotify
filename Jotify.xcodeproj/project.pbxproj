@@ -37,10 +37,9 @@
 		F61EC8D52348EE5200FB0A63 /* WriteNoteController+Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61EC8D42348EE5200FB0A63 /* WriteNoteController+Onboarding.swift */; };
 		F637FD2A2349422400288369 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F637FD292349422400288369 /* CoreDataManager.swift */; };
 		F63A0C7922DE031E00B8A480 /* VerticalAlignLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63A0C7822DE031E00B8A480 /* VerticalAlignLabel.swift */; };
-		F63C488D23EF7CE300310CFF /* Golden2@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F63C488923EF7CE200310CFF /* Golden2@2x~ipad.png */; };
-		F63C488E23EF7CE300310CFF /* Golden2@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F63C488A23EF7CE200310CFF /* Golden2@3x~ipad.png */; };
-		F63C488F23EF7CE300310CFF /* Light@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F63C488B23EF7CE200310CFF /* Light@3x~ipad.png */; };
-		F63C489023EF7CE300310CFF /* Light@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F63C488C23EF7CE300310CFF /* Light@2x~ipad.png */; };
+		F63C488D23EF7CE300310CFF /* goldIcon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F63C488923EF7CE200310CFF /* goldIcon@2x~ipad.png */; };
+		F63C488E23EF7CE300310CFF /* goldIcon@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F63C488A23EF7CE200310CFF /* goldIcon@3x~ipad.png */; };
+		F63C489023EF7CE300310CFF /* defaultIcon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F63C488C23EF7CE300310CFF /* defaultIcon@2x~ipad.png */; };
 		F63C489623EFBC7500310CFF /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63C489523EFBC7500310CFF /* UIColor+Extensions.swift */; };
 		F63C489823EFBC9D00310CFF /* StoredColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63C489723EFBC9D00310CFF /* StoredColors.swift */; };
 		F63C489A23EFBCC500310CFF /* UIColor+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63C489923EFBCC500310CFF /* UIColor+Formatting.swift */; };
@@ -62,6 +61,7 @@
 		F65E479F2324B12A00FCAEF3 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65E479E2324B12A00FCAEF3 /* UserDefaults+Extensions.swift */; };
 		F65E47A12324B15F00FCAEF3 /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65E47A02324B15F00FCAEF3 /* CALayer+Extensions.swift */; };
 		F666D4B222CFED2D00DECE27 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */; };
+		F677E2DD24BBEC1700E63124 /* defaultIcon@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F677E2DC24BBEC1700E63124 /* defaultIcon@3x~ipad.png */; };
 		F67B92DE22D2E083002C6985 /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B92DD22D2E083002C6985 /* SettingsSwitchCell.swift */; };
 		F67B92E022D2E785002C6985 /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B92DF22D2E785002C6985 /* ColorPickerController.swift */; };
 		F68097B824BA53D9006BDD0C /* ReceiptHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68097B724BA53D9006BDD0C /* ReceiptHandler.swift */; };
@@ -74,12 +74,12 @@
 		F69E5DC0231AE14800872345 /* ThemeSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E5DBF231AE14800872345 /* ThemeSelectionController.swift */; };
 		F69E5DC2231B120200872345 /* ReminderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E5DC1231B120200872345 /* ReminderController.swift */; };
 		F6A2C7232340E87A0031A81B /* ReminderExistsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A2C7222340E87A0031A81B /* ReminderExistsController.swift */; };
-		F6A7E4C0238F128A00D3E6AF /* Light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6A7E4BF238F128A00D3E6AF /* Light@2x.png */; };
-		F6A7E4C2238F128F00D3E6AF /* Light@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6A7E4C1238F128F00D3E6AF /* Light@3x.png */; };
+		F6A7E4C0238F128A00D3E6AF /* defaultIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6A7E4BF238F128A00D3E6AF /* defaultIcon@2x.png */; };
+		F6A7E4C2238F128F00D3E6AF /* defaultIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6A7E4C1238F128F00D3E6AF /* defaultIcon@3x.png */; };
 		F6A7E4C4238F243200D3E6AF /* IAPHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A7E4C3238F243200D3E6AF /* IAPHandler.swift */; };
 		F6A7E4C6238F244800D3E6AF /* JotifyProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A7E4C5238F244800D3E6AF /* JotifyProducts.swift */; };
-		F6AEC561238CE28B0068706B /* Golden2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6AEC560238CE28B0068706B /* Golden2@3x.png */; };
-		F6AEC563238CE2C00068706B /* Golden2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6AEC562238CE2C00068706B /* Golden2@2x.png */; };
+		F6AEC561238CE28B0068706B /* goldIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6AEC560238CE28B0068706B /* goldIcon@3x.png */; };
+		F6AEC563238CE2C00068706B /* goldIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6AEC562238CE2C00068706B /* goldIcon@2x.png */; };
 		F6B2083722DE22860098CF9F /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B2083622DE22860098CF9F /* Themes.swift */; };
 		F6B7BF8E239189700057FB8B /* PremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B7BF8D239189700057FB8B /* PremiumView.swift */; };
 		F6B7BF902391CF600057FB8B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6B7BF8F2391CF600057FB8B /* StoreKit.framework */; };
@@ -125,10 +125,9 @@
 		F61EC8D42348EE5200FB0A63 /* WriteNoteController+Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WriteNoteController+Onboarding.swift"; sourceTree = "<group>"; };
 		F637FD292349422400288369 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		F63A0C7822DE031E00B8A480 /* VerticalAlignLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalAlignLabel.swift; sourceTree = "<group>"; };
-		F63C488923EF7CE200310CFF /* Golden2@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Golden2@2x~ipad.png"; sourceTree = "<group>"; };
-		F63C488A23EF7CE200310CFF /* Golden2@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Golden2@3x~ipad.png"; sourceTree = "<group>"; };
-		F63C488B23EF7CE200310CFF /* Light@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Light@3x~ipad.png"; sourceTree = "<group>"; };
-		F63C488C23EF7CE300310CFF /* Light@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Light@2x~ipad.png"; sourceTree = "<group>"; };
+		F63C488923EF7CE200310CFF /* goldIcon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "goldIcon@2x~ipad.png"; sourceTree = "<group>"; };
+		F63C488A23EF7CE200310CFF /* goldIcon@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "goldIcon@3x~ipad.png"; sourceTree = "<group>"; };
+		F63C488C23EF7CE300310CFF /* defaultIcon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "defaultIcon@2x~ipad.png"; sourceTree = "<group>"; };
 		F63C489123EFBBE900310CFF /* UIColor+Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Themes.swift"; sourceTree = "<group>"; };
 		F63C489523EFBC7500310CFF /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		F63C489723EFBC9D00310CFF /* StoredColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredColors.swift; sourceTree = "<group>"; };
@@ -153,6 +152,7 @@
 		F65E479E2324B12A00FCAEF3 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		F65E47A02324B15F00FCAEF3 /* CALayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
 		F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
+		F677E2DC24BBEC1700E63124 /* defaultIcon@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "defaultIcon@3x~ipad.png"; sourceTree = "<group>"; };
 		F67B92DD22D2E083002C6985 /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
 		F67B92DF22D2E785002C6985 /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
 		F68097B724BA53D9006BDD0C /* ReceiptHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptHandler.swift; sourceTree = "<group>"; };
@@ -165,12 +165,12 @@
 		F69E5DBF231AE14800872345 /* ThemeSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectionController.swift; sourceTree = "<group>"; };
 		F69E5DC1231B120200872345 /* ReminderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderController.swift; sourceTree = "<group>"; };
 		F6A2C7222340E87A0031A81B /* ReminderExistsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderExistsController.swift; sourceTree = "<group>"; };
-		F6A7E4BF238F128A00D3E6AF /* Light@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Light@2x.png"; sourceTree = "<group>"; };
-		F6A7E4C1238F128F00D3E6AF /* Light@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Light@3x.png"; sourceTree = "<group>"; };
+		F6A7E4BF238F128A00D3E6AF /* defaultIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "defaultIcon@2x.png"; sourceTree = "<group>"; };
+		F6A7E4C1238F128F00D3E6AF /* defaultIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "defaultIcon@3x.png"; sourceTree = "<group>"; };
 		F6A7E4C3238F243200D3E6AF /* IAPHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHandler.swift; sourceTree = "<group>"; };
 		F6A7E4C5238F244800D3E6AF /* JotifyProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JotifyProducts.swift; sourceTree = "<group>"; };
-		F6AEC560238CE28B0068706B /* Golden2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Golden2@3x.png"; sourceTree = "<group>"; };
-		F6AEC562238CE2C00068706B /* Golden2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Golden2@2x.png"; sourceTree = "<group>"; };
+		F6AEC560238CE28B0068706B /* goldIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "goldIcon@3x.png"; sourceTree = "<group>"; };
+		F6AEC562238CE2C00068706B /* goldIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "goldIcon@2x.png"; sourceTree = "<group>"; };
 		F6B2083622DE22860098CF9F /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
 		F6B7BF8D239189700057FB8B /* PremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumView.swift; sourceTree = "<group>"; };
 		F6B7BF8F2391CF600057FB8B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -447,14 +447,14 @@
 		F6AEC557238CE02C0068706B /* App Icons */ = {
 			isa = PBXGroup;
 			children = (
-				F63C488923EF7CE200310CFF /* Golden2@2x~ipad.png */,
-				F63C488A23EF7CE200310CFF /* Golden2@3x~ipad.png */,
-				F63C488C23EF7CE300310CFF /* Light@2x~ipad.png */,
-				F63C488B23EF7CE200310CFF /* Light@3x~ipad.png */,
-				F6A7E4BF238F128A00D3E6AF /* Light@2x.png */,
-				F6A7E4C1238F128F00D3E6AF /* Light@3x.png */,
-				F6AEC562238CE2C00068706B /* Golden2@2x.png */,
-				F6AEC560238CE28B0068706B /* Golden2@3x.png */,
+				F63C488923EF7CE200310CFF /* goldIcon@2x~ipad.png */,
+				F63C488A23EF7CE200310CFF /* goldIcon@3x~ipad.png */,
+				F63C488C23EF7CE300310CFF /* defaultIcon@2x~ipad.png */,
+				F677E2DC24BBEC1700E63124 /* defaultIcon@3x~ipad.png */,
+				F6A7E4BF238F128A00D3E6AF /* defaultIcon@2x.png */,
+				F6A7E4C1238F128F00D3E6AF /* defaultIcon@3x.png */,
+				F6AEC562238CE2C00068706B /* goldIcon@2x.png */,
+				F6AEC560238CE28B0068706B /* goldIcon@3x.png */,
 			);
 			path = "App Icons";
 			sourceTree = "<group>";
@@ -531,17 +531,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6AEC561238CE28B0068706B /* Golden2@3x.png in Resources */,
+				F6AEC561238CE28B0068706B /* goldIcon@3x.png in Resources */,
 				F650E14022BFF35C008D29AD /* LaunchScreen.storyboard in Resources */,
 				F6D18172239C7B1100EAB85C /* AppleIncRootCertificate.cer in Resources */,
-				F6A7E4C0238F128A00D3E6AF /* Light@2x.png in Resources */,
-				F6A7E4C2238F128F00D3E6AF /* Light@3x.png in Resources */,
+				F6A7E4C0238F128A00D3E6AF /* defaultIcon@2x.png in Resources */,
+				F6A7E4C2238F128F00D3E6AF /* defaultIcon@3x.png in Resources */,
 				F650E13D22BFF35C008D29AD /* Assets.xcassets in Resources */,
-				F6AEC563238CE2C00068706B /* Golden2@2x.png in Resources */,
-				F63C489023EF7CE300310CFF /* Light@2x~ipad.png in Resources */,
-				F63C488E23EF7CE300310CFF /* Golden2@3x~ipad.png in Resources */,
-				F63C488D23EF7CE300310CFF /* Golden2@2x~ipad.png in Resources */,
-				F63C488F23EF7CE300310CFF /* Light@3x~ipad.png in Resources */,
+				F6AEC563238CE2C00068706B /* goldIcon@2x.png in Resources */,
+				F63C489023EF7CE300310CFF /* defaultIcon@2x~ipad.png in Resources */,
+				F677E2DD24BBEC1700E63124 /* defaultIcon@3x~ipad.png in Resources */,
+				F63C488E23EF7CE300310CFF /* goldIcon@3x~ipad.png in Resources */,
+				F63C488D23EF7CE300310CFF /* goldIcon@2x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
