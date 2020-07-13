@@ -9,9 +9,10 @@
 import UIKit
 
 class AlertSettingsController: UITableViewController {
-    let sections: Array = ["Delete", "Sort"]
+    let sections: Array = ["Delete", "Sort", "Rating"]
     let delete: Array = ["Show Alert on Delete"]
     let sort: Array = ["Show Alert on Sort"]
+    let rating: Array = ["Show Rating Prompt"]
     
     let settingsController = SettingsController()
     
@@ -62,9 +63,25 @@ class AlertSettingsController: UITableViewController {
             
             cell.textLabel?.text = "\(sort[indexPath.row])"
             cell.selectionStyle = .none
-            cell.switchButton.addTarget(self, action: #selector(showAlertOnDeleteSwitchPressed), for: .valueChanged)
+            cell.switchButton.addTarget(self, action: #selector(showAlertOnSortSwitchPressed), for: .valueChanged)
             
             if defaults.bool(forKey: "showAlertOnSort") == true {
+                cell.switchButton.isOn = true
+            } else {
+                cell.switchButton.isOn = false
+            }
+            
+            return cell
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
+            
+            settingsController.setupDynamicCells(cell: cell, enableArrow: false)
+            
+            cell.textLabel?.text = "\(rating[indexPath.row])"
+            cell.selectionStyle = .none
+            cell.switchButton.addTarget(self, action: #selector(showRatingPrompt), for: .valueChanged)
+            
+            if defaults.bool(forKey: "showRatingPrompt") == true {
                 cell.switchButton.isOn = true
             } else {
                 cell.switchButton.isOn = false
@@ -91,13 +108,36 @@ class AlertSettingsController: UITableViewController {
         }
     }
     
+    @objc func showAlertOnSortSwitchPressed(sender: UISwitch) {
+        if sender.isOn {
+            print("showAlertOnSort enabled")
+            defaults.set(true, forKey: "showAlertOnSort")
+            
+        } else {
+            print("showAlertOnSort disabled")
+            defaults.set(false, forKey: "showAlertOnSort")
+        }
+    }
+    
+    @objc func showRatingPrompt(sender: UISwitch) {
+        if sender.isOn {
+            print("showRatingPrompt enabled")
+            defaults.set(true, forKey: "showRatingPrompt")
+            
+        } else {
+            print("showRatingPrompt disabled")
+            defaults.set(false, forKey: "showRatingPrompt")
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0:
             return "By default Jotify displays an alert when you delete a note. To remove this confirmation, toggle the above setting."
         case 1:
             return "By default Jotify displays an alert to select which criteria you would like to sort by. To remove this alert, toggle the above setting."
-            
+        case 2:
+            return "By default Jotify displays a review prompt once every update if the user has more than 15 notes. To remove this prompt, toggle the above setting."
         default:
             return ""
         }
@@ -115,6 +155,8 @@ class AlertSettingsController: UITableViewController {
         if section == 0 {
             return 1
         } else if section == 1 {
+            return 1
+        } else if section == 2 {
             return 1
         } else {
             return 0

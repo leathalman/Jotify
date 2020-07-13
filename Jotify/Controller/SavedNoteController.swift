@@ -25,6 +25,8 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     
     let defaults = UserDefaults.standard
     
+    var pressed: CGFloat = 0
+    
     let iOSLayout = VerticalBlueprintLayout(
         itemsPerRow: 2.0,
         minimumInteritemSpacing: 10,
@@ -117,8 +119,11 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             let currentVersion = Bundle.main.infoDictionary![shortVersionKey] as? String
             
             if notes.count > 9 && defaults.value(forKey: "lastReviewRequest") as? String != currentVersion {
-                SKStoreReviewController.requestReview()
-                defaults.set(currentVersion, forKey: "lastReviewRequest")
+                if defaults.bool(forKey: "showRatingPrompt") {
+                    SKStoreReviewController.requestReview()
+                    defaults.set(currentVersion, forKey: "lastReviewRequest")
+                    
+                }
             }
         }
     }
@@ -272,8 +277,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             present(actionController, animated: true, completion: nil)
             
         } else if !defaults.bool(forKey: "showAlertOnSort") {
-            var pressed: CGFloat = 0
-            
             switch pressed {
             case 0:
                 print("Sort by content")
