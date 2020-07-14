@@ -104,7 +104,8 @@ class ColorPickerController: UIViewController {
     
     func setStaticColorForNotes() {
         let writeNoteView = WriteNoteView()
-        var newBackgroundColor = UIColor.white
+        // MARK: should stop notes from defaulting to white?
+        var newBackgroundColor = UIColor.grayBackground
         
         for note in notes {
             var newColor = String()
@@ -175,15 +176,6 @@ extension ColorPickerController: ChromaColorPickerDelegate {
         
         StoredColors.staticNoteColor = color
         navigationController?.navigationBar.barTintColor = color
-        
-//        UIView.animate(withDuration: 0.2,
-//                       animations: {
-//                        self.view.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
-//        }, completion: { _ in
-//            UIView.animate(withDuration: 0.2, animations: {
-//                self.view.transform = CGAffineTransform.identity
-//            })
-//        })
     }
     
 }

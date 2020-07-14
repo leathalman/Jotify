@@ -7,35 +7,86 @@
 //
 
 import Blueprints
-import Pageboy
 import UIKit
 
-class PageViewController: PageboyViewController, PageboyViewControllerDataSource {
-    var viewControllers = [UIViewController]()
-    
+class PageViewController: UIPageViewController {
+    var currentIndex = 0
+    var lastPosition: CGFloat = 0
+            
     let savedNotesController = UINavigationController(rootViewController: SavedNoteController(collectionViewLayout: UICollectionViewFlowLayout()))
     let writeNotesController = WriteNoteController()
     
+    lazy var orderedViewControllers: [UIViewController] = {
+        return [self.savedNotesController, self.writeNotesController]
+    }()
+    
+    override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
+        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        viewControllers = [savedNotesController, writeNotesController]
-        
+        setupPageController()
+    }
+    
+    func setupPageController() {
         dataSource = self
-        isScrollEnabled = true
-        bounces = false
+        delegate = self
+        
+        if let firstViewController = orderedViewControllers.last {
+            setViewControllers([firstViewController],
+                direction: .forward,
+                animated: true,
+                completion: nil)
+        }
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
-    func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
-        return viewControllers.count
+}
+
+extension PageViewController: UIPageViewControllerDelegate {
+}
+
+extension PageViewController: UIPageViewControllerDataSource {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+
+        guard let viewControllerIndex = orderedViewControllers.firstIndex(of: viewController) else {
+            return nil
+        }
+        
+        let previousIndex = viewControllerIndex - 1
+        
+        guard previousIndex >= 0 else {
+            return nil
+        }
+        
+        guard orderedViewControllers.count > previousIndex else {
+            return nil
+        }
+        
+        return orderedViewControllers[previousIndex]
     }
     
-    func viewController(for pageboyViewController: PageboyViewController,
-                        at index: PageboyViewController.PageIndex) -> UIViewController? {
-        return viewControllers[index]
-    }
-    
-    func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
-        return Page.at(index: 1)
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+
+        guard let viewControllerIndex = orderedViewControllers.firstIndex(of: viewController) else {
+            return nil
+        }
+        
+        let nextIndex = viewControllerIndex + 1
+        let orderedViewControllersCount = orderedViewControllers.count
+
+        guard orderedViewControllersCount != nextIndex else {
+            return nil
+        }
+        
+        guard orderedViewControllersCount > nextIndex else {
+            return nil
+        }
+        
+        return orderedViewControllers[nextIndex]
     }
 }
