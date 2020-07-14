@@ -25,11 +25,12 @@ extension WriteNoteController {
         } else {
             if previousVersion != nil {
                 // new version
+                // TODO: This crashes with colorspace issue
                 print("new version")
 //                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
                 
             } else {
-                // first launch, restore purchases
+                // first launch
                 print("first launch")
                 presentFirstLaunchOnboarding(viewController: self, tintColor: StoredColors.noteColor)
             }

@@ -7,7 +7,6 @@
 //
 
 import CoreData
-import Pageboy
 import UIKit
 
 class AppearanceSettingsController: UITableViewController {

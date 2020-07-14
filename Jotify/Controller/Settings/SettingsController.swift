@@ -400,7 +400,7 @@ class SettingsController: UITableViewController {
             self.tableView.reloadData()
         } else {
             // if not purchased
-            // MARK: NEED TO DOUBLE CHECK THAT THIS ACTUALLY TRIGGERS
+            // TODO: NEED TO DOUBLE CHECK THAT THIS ACTUALLY TRIGGERS
             let alert = UIAlertController(title: "Not quite.", message: "It looks like you have not bought premium yet. Please consider supporting Jotify!", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { _ in

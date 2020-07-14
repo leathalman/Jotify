@@ -16,7 +16,7 @@ import UIKit
 /// + Customizable left view
 /// + Customizable placeholder
 ///
-/// - TODO: The following features are still missing:
+/// - The following features are still missing:
 /// + Add support for displaying a right view
 /// + Configure when left/right views will be shown using `UITextField.leftViewMode`
 public class MultilineTextField: UITextView {

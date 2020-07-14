@@ -66,10 +66,13 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     func setupDynamicBackground() {
         if defaults.bool(forKey: "vibrantDarkModeEnabled") {
             writeNoteView.backgroundColor = UIColor.grayBackground
+            UIApplication.shared.windows.first?.backgroundColor = UIColor.grayBackground
         } else if defaults.bool(forKey: "pureDarkModeEnabled") {
-            writeNoteView.backgroundColor = .black
+            writeNoteView.backgroundColor = UIColor.black
+            UIApplication.shared.windows.first?.backgroundColor = UIColor.black
         } else if !defaults.bool(forKey: "darkModeEnabled") {
             writeNoteView.backgroundColor = StoredColors.noteColor
+            UIApplication.shared.windows.first?.backgroundColor = StoredColors.noteColor
         }
     }
     

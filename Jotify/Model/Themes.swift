@@ -58,6 +58,7 @@ class Themes {
                 UserDefaults.standard.set(false, forKey: "darkModeEnabled")
                 UserDefaults.standard.set(false, forKey: "vibrantDarkModeEnabled")
                 UserDefaults.standard.set(false, forKey: "pureDarkModeEnabled")
+                UIApplication.shared.windows.first?.backgroundColor = StoredColors.noteColor
             } else if mode.userInterfaceStyle == .dark {
                 setupVibrantDarkMode()
                 UserDefaults.standard.set(true, forKey: "darkModeEnabled")

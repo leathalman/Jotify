@@ -153,28 +153,24 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         setupDynamicSearchBar()
         Themes().setupPersistentNavigationBar(navController: navigationController ?? UINavigationController())
         
+        UIApplication.shared.windows.first?.backgroundColor = InterfaceColors.viewBackgroundColor
+        
+        emptyView.descriptionLabel.backgroundColor = InterfaceColors.viewBackgroundColor
+        emptyView.titleLabel.backgroundColor = InterfaceColors.viewBackgroundColor
+        
         if defaults.bool(forKey: "darkModeEnabled") {
             searchController.searchBar.barTintColor = InterfaceColors.searchBarColor
             searchController.searchBar.backgroundImage = UIImage()
             
-            emptyView.descriptionLabel.backgroundColor = InterfaceColors.viewBackgroundColor
             emptyView.descriptionLabel.textColor = .white
-            emptyView.titleLabel.backgroundColor = InterfaceColors.viewBackgroundColor
             emptyView.titleLabel.textColor = .white
-            
-            UIApplication.shared.windows.first?.backgroundColor = InterfaceColors.viewBackgroundColor
             
         } else {
             searchController.searchBar.barTintColor = InterfaceColors.searchBarColor
             searchController.searchBar.backgroundImage = nil
             
-            emptyView.descriptionLabel.backgroundColor = InterfaceColors.viewBackgroundColor
             emptyView.descriptionLabel.textColor = .black
-            emptyView.titleLabel.backgroundColor = InterfaceColors.viewBackgroundColor
             emptyView.titleLabel.textColor = .black
-            
-            UIApplication.shared.windows.first?.backgroundColor = InterfaceColors.viewBackgroundColor
-            
         }
     }
     
@@ -484,6 +480,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         actionController.addAction(Action("Select multiple", style: .default, handler: { _ in
             print("Select multiple")
             CellStates.shouldSelectMultiple = true
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
             self.setupMultiSelectionToolBar()
             
         }))
@@ -532,6 +529,8 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             collectionView.deselectItem(at: value, animated: true)
         }
         
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
+        
         CellStates.shouldSelectMultiple = false
     }
     
@@ -563,6 +562,8 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                 print("Could not save. \(error), \(error.userInfo)")
             }
         }
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
         
         fetchNotesFromCoreData()
     }
@@ -809,3 +810,4 @@ extension SavedNoteController: UISearchResultsUpdating {
         filterContentForSearchText(searchController.searchBar.text!)
     }
 }
+

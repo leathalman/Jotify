@@ -104,7 +104,7 @@ class ColorPickerController: UIViewController {
     
     func setStaticColorForNotes() {
         let writeNoteView = WriteNoteView()
-        // MARK: should stop notes from defaulting to white?
+        // TODO: should stop notes from defaulting to white?
         var newBackgroundColor = UIColor.grayBackground
         
         for note in notes {

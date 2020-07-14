@@ -30,6 +30,8 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
     }
     
     func setupPageController() {
+        view.backgroundColor = UIColor.clear
+
         dataSource = self
         delegate = self
         

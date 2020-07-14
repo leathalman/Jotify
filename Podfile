@@ -18,9 +18,6 @@ target 'Jotify' do
   pod'XLActionController'
   pod'XLActionController/Skype'
 
-  # UIPageController for navigation across multiple views
-  pod'Pageboy'
-
   # Used for picking a static color for notes
   pod'ChromaColorPicker'
 
