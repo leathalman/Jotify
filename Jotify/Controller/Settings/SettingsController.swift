@@ -19,6 +19,7 @@ class SettingsController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+
         setupDynamicViewElements()
         removeExtraHeaderView()
     }
@@ -27,6 +28,11 @@ class SettingsController: UITableViewController {
         super.viewDidLoad()
         
         tableView.contentInset = .zero
+        
+        tableView.isUserInteractionEnabled = true
+        tableView.isScrollEnabled = true
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
         
         navigationItem.title = "Settings"
         

@@ -9,7 +9,7 @@
 import Blueprints
 import UIKit
 
-class PageViewController: UIPageViewController {
+class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
     var currentIndex = 0
     var lastPosition: CGFloat = 0
             
@@ -35,19 +35,28 @@ class PageViewController: UIPageViewController {
         
         if let firstViewController = orderedViewControllers.last {
             setViewControllers([firstViewController],
-                direction: .forward,
-                animated: true,
-                completion: nil)
+                               direction: .forward,
+                               animated: true,
+                               completion: nil)
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(enableSwipe(notification:)), name:NSNotification.Name(rawValue: "enableSwipe"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(disableSwipe(notification:)), name:NSNotification.Name(rawValue: "disableSwipe"), object: nil)
     }
+    
+    @objc func disableSwipe(notification: Notification){
+        self.dataSource = nil
+    }
+
+    @objc func enableSwipe(notification: Notification){
+        self.dataSource = self
+    }
+    
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-}
-
-extension PageViewController: UIPageViewControllerDelegate {
 }
 
 extension PageViewController: UIPageViewControllerDataSource {

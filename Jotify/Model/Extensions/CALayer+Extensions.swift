@@ -17,22 +17,3 @@ extension CALayer {
         self.masksToBounds = false
     }
 }
-
-extension UIPageViewController {
-
-    func enableSwipeGesture() {
-        for view in self.view.subviews {
-            if let subView = view as? UIScrollView {
-                subView.isScrollEnabled = true
-            }
-        }
-    }
-
-    func disableSwipeGesture() {
-        for view in self.view.subviews {
-            if let subView = view as? UIScrollView {
-                subView.isScrollEnabled = false
-            }
-        }
-    }
-}

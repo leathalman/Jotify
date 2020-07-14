@@ -64,12 +64,13 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        requestReview()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
         fetchNotesFromCoreData()
-        requestReview()
         resetAppBadgeIfAllRemindersCleared()
     }
     
