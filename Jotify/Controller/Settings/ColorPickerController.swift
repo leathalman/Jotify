@@ -95,7 +95,7 @@ class ColorPickerController: UIViewController {
             defaults.set(defaultColor, forKey: "staticNoteColor")
             setStaticColorForNotes()
         }
-        
+        self.playHapticFeedback()
         navigationController?.popViewController(animated: true)
     }
     

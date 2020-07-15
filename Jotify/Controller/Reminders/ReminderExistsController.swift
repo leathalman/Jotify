@@ -100,9 +100,8 @@ class ReminderExistsController: BottomPopupViewController {
     
     @objc func removePressed(sender: UIButton) {
         print("Remove notification")
-        let reminderController = ReminderController()
-        reminderController.feedbackOnPress()
-        
+        self.playHapticFeedback()
+
         if isFiltering {
             let notificationUUID = filteredNotes[index].notificationUUID ?? "empty error in ReminderExistsController"
             let center = UNUserNotificationCenter.current()
@@ -138,8 +137,7 @@ class ReminderExistsController: BottomPopupViewController {
     
     @objc func cancelPressed(sender: UIButton) {
         print("Cancel removing notification")
-        let reminderController = ReminderController()
-        reminderController.feedbackOnPress()
+        self.playHapticFeedback()
         dismiss(animated: true, completion: nil)
     }
     

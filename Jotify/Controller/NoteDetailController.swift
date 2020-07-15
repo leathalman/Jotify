@@ -279,9 +279,8 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         if !defaults.bool(forKey: "com.austinleath.Jotify.Premium") {
             PremiumView.shared.presentPremiumView(viewController: self)
         } else {
-            let savedNoteController = SavedNoteController()
-            savedNoteController.feedbackOnPress()
-            
+            self.playHapticFeedback()
+
             if !RemindersData.isReminder || RemindersData.reminderDate.isEmpty {
                 reminderIsNotSet()
             } else {
@@ -333,8 +332,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     }
     
     @objc func handleCancel() {
-        let savedNoteController = SavedNoteController()
-        savedNoteController.feedbackOnPress()
+        self.playHapticFeedback()
         navigationController?.popViewController(animated: true)
     }
     

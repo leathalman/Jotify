@@ -71,6 +71,7 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.timeZone = NSTimeZone.local
+        //TODO: This line crashes application in iOS 14 Beta 2
         datePicker.setValue(UIColor.white, forKeyPath: "textColor")
         
         view.addSubview(titleLabel)
@@ -130,7 +131,7 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     }
     
     @objc func setReminder(sender: UIButton) {
-        feedbackOnPress()
+        self.playHapticFeedback()
         scheduleNotification()
         
         // add dark mode support too
@@ -180,19 +181,6 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         
         // set acutal note to isReminder true
         updateContentWithReminder(reminderDate: dateFromPicker, notificationUUID: uuid, reminderDateDisplay: reminderDateString)
-    }
-    
-    func feedbackOnPress() {
-        if UIDevice.current.hasTapticEngine {
-            // iPhone 6s and iPhone 6s Plus
-            let peek = SystemSoundID(1519)
-            AudioServicesPlaySystemSoundWithCompletion(peek, nil)
-            
-        } else if UIDevice.current.hasHapticFeedback {
-            // iPhone 7 and newer
-            let generator = UIImpactFeedbackGenerator(style: .medium)
-            generator.impactOccurred()
-        }
     }
     
     override func getPopupHeight() -> CGFloat {

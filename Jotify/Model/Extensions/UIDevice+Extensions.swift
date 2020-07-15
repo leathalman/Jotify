@@ -36,12 +36,7 @@ extension UIDevice {
     }
     
     var hasTapticEngine: Bool {
-        return platform == .iPhone6S || platform == .iPhone6SPlus ||
-            platform == .iPhone7 || platform == .iPhone7Plus
-    }
-    
-    var hasHapticFeedback: Bool {
-        return platform == .iPhone7 || platform == .iPhone7Plus
+        return platform == .iPhone6S || platform == .iPhone6SPlus
     }
     
     static let modelName: String = {

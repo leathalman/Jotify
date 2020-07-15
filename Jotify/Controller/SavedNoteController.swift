@@ -212,7 +212,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     }
     
     @objc func handleRightButton() {
-        feedbackOnPress()
+        self.playHapticFeedback()
         
         let actionController = SkypeActionController()
         
@@ -303,7 +303,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     }
     
     @objc func handleLeftButton() {
-        feedbackOnPress()
+        self.playHapticFeedback()
         navigationController?.pushViewController(SettingsController(style: .insetGrouped), animated: true)
     }
     
@@ -389,6 +389,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             
         } else {
             print("Normal Tap")
+            self.playHapticFeedback()
             cellSingleTap(indexPath: indexPath)
         }
     }
@@ -650,19 +651,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         DispatchQueue.main.async {
             self.collectionView.reloadData()
-        }
-    }
-    
-    func feedbackOnPress() {
-        if UIDevice.current.hasTapticEngine {
-            // iPhone 6s and iPhone 6s Plus
-            let peek = SystemSoundID(1519)
-            AudioServicesPlaySystemSoundWithCompletion(peek, nil)
-            
-        } else if UIDevice.current.hasHapticFeedback {
-            // iPhone 7 and newer
-            let generator = UIImpactFeedbackGenerator(style: .medium)
-            generator.impactOccurred()
         }
     }
     
