@@ -14,6 +14,8 @@ class ColorPickerController: UIViewController {
     var notes: [Note] = []
     
     let defaults = UserDefaults.standard
+    let defaultColor = UIColor(red: 0.62, green: 0.78, blue: 1, alpha: 1)
+    var colorChanged = false
     
     lazy var brightnessSlider: ChromaBrightnessSlider = {
         let slider = ChromaBrightnessSlider()
@@ -48,7 +50,7 @@ class ColorPickerController: UIViewController {
     }
     
     func setupView() {
-        view.backgroundColor = UIColor.gray
+        view.backgroundColor = defaultColor
         
         var image = UIImage(named: "cancel")
         image = image?.withRenderingMode(.alwaysOriginal)
@@ -58,7 +60,7 @@ class ColorPickerController: UIViewController {
         
         let navigationBarHeight = navigationController!.navigationBar.frame.height
         
-        colorPicker.addHandle(at: UIColor(red: 1, green: 203 / 255, blue: 164 / 255, alpha: 1))
+        colorPicker.addHandle(at: defaultColor)
         colorPicker.connect(brightnessSlider)
         
         view.addSubview(contentView)
@@ -88,6 +90,12 @@ class ColorPickerController: UIViewController {
     }
     
     @objc func handleCancel() {
+        if !colorChanged {
+            StoredColors.staticNoteColor = defaultColor
+            defaults.set(defaultColor, forKey: "staticNoteColor")
+            setStaticColorForNotes()
+        }
+        
         navigationController?.popViewController(animated: true)
     }
     
@@ -97,14 +105,13 @@ class ColorPickerController: UIViewController {
             self?.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
             self?.navigationController?.navigationBar.shadowImage = UIImage()
             self?.navigationController?.navigationBar.backgroundColor = .clear
-            self?.navigationController?.navigationBar.barTintColor = .gray
+            self?.navigationController?.navigationBar.barTintColor = self?.defaultColor
             self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             }, completion: nil)
     }
     
     func setStaticColorForNotes() {
         let writeNoteView = WriteNoteView()
-        // TODO: should stop notes from defaulting to white?
         var newBackgroundColor = UIColor.grayBackground
         
         for note in notes {
@@ -112,7 +119,7 @@ class ColorPickerController: UIViewController {
             
             if !defaults.bool(forKey: "useRandomColor") {
                 newColor = "staticNoteColor"
-                newBackgroundColor = defaults.color(forKey: "staticNoteColor") ?? UIColor.white
+                newBackgroundColor = defaults.color(forKey: "staticNoteColor") ?? UIColor.blue2
             }
             
             note.color = newColor
@@ -170,6 +177,7 @@ class ColorPickerController: UIViewController {
 extension ColorPickerController: ChromaColorPickerDelegate {
     func colorPickerHandleDidChange(_ colorPicker: ChromaColorPicker, handle: ChromaColorHandle, to color: UIColor) {
         view.backgroundColor = color
+        colorChanged = true
         
         defaults.set(color, forKey: "staticNoteColor")
         setStaticColorForNotes()

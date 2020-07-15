@@ -54,7 +54,7 @@ class WriteNoteView: UIView {
     
     func getRandomColor(previousColor: UIColor) {
         let colorTheme = UserDefaults.standard.string(forKey: "noteColorTheme")
-        var randomColor: UIColor = .white
+        var randomColor: UIColor = .blue2
         
         randomColor = pickRandomColorFromTheme(colorTheme: colorTheme ?? "default")
         
@@ -64,7 +64,7 @@ class WriteNoteView: UIView {
             randomColor = pickRandomColorFromTheme(colorTheme: colorTheme ?? "default")
         }
         
-        // set global value to equal generated value
+        // set global value to equal generated color
         StoredColors.noteColor = randomColor
         
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == false {
