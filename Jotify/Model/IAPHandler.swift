@@ -29,12 +29,12 @@ open class IAPHelper: NSObject  {
             
             if purchased {
                 purchasedProductIdentifiers.insert(productIdentifier)
-                
                 print("Previously purchased: \(productIdentifier)")
                 
             } else {
-                
                 print("Not purchased: \(productIdentifier)")
+                NotificationCenter.default.post(name: .IAPHelperPurchaseNotification, object: "RestoreFailed")
+                
             }
         }
         super.init()

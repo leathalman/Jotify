@@ -389,6 +389,9 @@ class SettingsController: UITableViewController {
     
     @objc func handleIAPNotification(notification: Notification) {
         // will not account for receipt validator
+        
+        print(notification)
+        
         if notification.object as! String == "com.austinleath.Jotify.Premium" || notification.object as! String == "com.austinleath.Jotify.premium" {
             // if purchased
             let alert = UIAlertController(title: "Congratulations!", message: "You successfully restored your purchase! Enjoy Jotify premium!", preferredStyle: .alert)
@@ -398,6 +401,7 @@ class SettingsController: UITableViewController {
             }))
             present(alert, animated: true)
             self.tableView.reloadData()
+            
         } else {
             // if not purchased
             // TODO: NEED TO DOUBLE CHECK THAT THIS ACTUALLY TRIGGERS
