@@ -194,7 +194,7 @@ class ThemeSelectionController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return "Each theme has at least 8 colors which will be applied at random."
+        return "Each theme has at least 8 colors which will be applied at random. Themes will not show if \"Random Colors\" are disabled."
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
