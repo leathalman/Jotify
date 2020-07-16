@@ -806,15 +806,6 @@
 				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Blueprints\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/ChromaColorPicker\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/MultilineTextField\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Pageboy\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/ViewAnimator\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/XLActionController\"",
-				);
 				INFOPLIST_FILE = Jotify/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

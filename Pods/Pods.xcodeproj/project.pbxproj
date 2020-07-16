@@ -15,6 +15,7 @@
 			dependencies = (
 			);
 			name = "OpenSSL-Universal";
+			productName = "OpenSSL-Universal";
 		};
 /* End PBXAggregateTarget section */
 
@@ -205,7 +206,7 @@
 		09E8EB377C4CDDC5600F99F98893059E /* BlueprintLayoutAnimationType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayoutAnimationType.swift; path = Sources/Shared/Core/BlueprintLayoutAnimationType.swift; sourceTree = "<group>"; };
 		0A2D3E0BE2A3107E23DBAA908327E8BD /* ocsp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ocsp.h; path = ios/include/openssl/ocsp.h; sourceTree = "<group>"; };
 		0B24C059E6D891BA8AFFB00719D200CD /* BottomPopupTransitionHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BottomPopupTransitionHandler.swift; path = BottomPopup/BottomPopupController/BottomPopupTransitionHandler.swift; sourceTree = "<group>"; };
-		0D04501C97E68E376442A07241A66134 /* MultilineTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MultilineTextField.framework; path = MultilineTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D04501C97E68E376442A07241A66134 /* MultilineTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MultilineTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DF3B0F90727F580B65C7F2915D2C3B5 /* SPAlertIconRepeatView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SPAlertIconRepeatView.swift; path = Source/SPAlert/Views/Icons/SPAlertIconRepeatView.swift; sourceTree = "<group>"; };
 		12E82FA48555A013C4E7DEC97D2C5B10 /* txt_db.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = txt_db.h; path = ios/include/openssl/txt_db.h; sourceTree = "<group>"; };
 		154139D1526F3B114C5BE4421C605C2B /* ViewAnimator-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ViewAnimator-prefix.pch"; sourceTree = "<group>"; };
@@ -312,7 +313,7 @@
 		775A1DE7E7EE36432F2A6709F2D33C84 /* BottomPopupUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BottomPopupUtils.swift; path = BottomPopup/BottomPopupController/BottomPopupUtils.swift; sourceTree = "<group>"; };
 		7A7897A0E8D1579D3F83ABCF118C11A6 /* evp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = evp.h; path = ios/include/openssl/evp.h; sourceTree = "<group>"; };
 		7B59B6E2F7321F31B1447D41A8568936 /* kssl.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = kssl.h; path = ios/include/openssl/kssl.h; sourceTree = "<group>"; };
-		7B9604203FA8A0C56DF4DACFDB41ACA4 /* BottomPopup.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BottomPopup.framework; path = BottomPopup.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B9604203FA8A0C56DF4DACFDB41ACA4 /* BottomPopup.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BottomPopup.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C46F7798D50E66CB514C6A3B4CBDE5B /* SliderHandleView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SliderHandleView.swift; path = "Source/Supporting Views/SliderHandleView.swift"; sourceTree = "<group>"; };
 		7C79B7DF44FF16CA4A3F7ECD740D2744 /* asn1t.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = asn1t.h; path = ios/include/openssl/asn1t.h; sourceTree = "<group>"; };
 		7C9CACF12920BA8E6E2FF3E07D6AF1CB /* ChromaBrightnessSlider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChromaBrightnessSlider.swift; path = Source/ChromaBrightnessSlider.swift; sourceTree = "<group>"; };
@@ -333,11 +334,11 @@
 		94E5B50B5B5440FE84B974676B88CFEA /* opensslconf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = opensslconf.h; path = ios/include/openssl/opensslconf.h; sourceTree = "<group>"; };
 		95CCA80E9544E17D4E96944A80B4805F /* cmac.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cmac.h; path = ios/include/openssl/cmac.h; sourceTree = "<group>"; };
 		97A1A413D182CAA7623763C0D24B7A7B /* ViewAnimator-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ViewAnimator-dummy.m"; sourceTree = "<group>"; };
-		9929FDEC1F03F5EE9C6961F15B0DBDA9 /* Pods_Jotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Jotify.framework; path = "Pods-Jotify.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9929FDEC1F03F5EE9C6961F15B0DBDA9 /* Pods_Jotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9948965D06EEA141296CFD59937694AC /* rand.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rand.h; path = ios/include/openssl/rand.h; sourceTree = "<group>"; };
 		9C252AEBD36A68F6CC35E4CB18D8F83D /* SPAlertIconDoneView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SPAlertIconDoneView.swift; path = Source/SPAlert/Views/Icons/SPAlertIconDoneView.swift; sourceTree = "<group>"; };
 		9C8FAE918187F189E76928DA677030A5 /* ChromaColorPicker-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ChromaColorPicker-Info.plist"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9D9F7DE9D8F0AA9A734A24189E323186 /* BlueprintLayout+iOS+tvOS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BlueprintLayout+iOS+tvOS.swift"; path = "Sources/iOS+tvOS/Extensions/BlueprintLayout+iOS+tvOS.swift"; sourceTree = "<group>"; };
 		A0809A909139A1CDBD9E8719D68A08F2 /* BottomPopupPresentAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BottomPopupPresentAnimator.swift; path = BottomPopup/BottomPopupController/BottomPopupPresentAnimator.swift; sourceTree = "<group>"; };
 		A0E0A45E7DEA040FDE5DE90C7EF5BB0A /* ViewAnimator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ViewAnimator.release.xcconfig; sourceTree = "<group>"; };
@@ -346,7 +347,7 @@
 		A373A9AFFE3DDDC09EEBC905405FDA4B /* x509.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = x509.h; path = ios/include/openssl/x509.h; sourceTree = "<group>"; };
 		A5373EC3A34FE4A434CBCF5D0C061DCF /* MultilineTextField-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MultilineTextField-dummy.m"; sourceTree = "<group>"; };
 		A645CE80E2183102093818D03A044A1F /* SPAlertIconSearchView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SPAlertIconSearchView.swift; path = Source/SPAlert/Views/Icons/SPAlertIconSearchView.swift; sourceTree = "<group>"; };
-		A76921F7329D552AD6FA723972B6337A /* ViewAnimator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ViewAnimator.framework; path = ViewAnimator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A76921F7329D552AD6FA723972B6337A /* ViewAnimator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ViewAnimator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7A0433F132192488C59654E7299932D /* Blueprints.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Blueprints.debug.xcconfig; sourceTree = "<group>"; };
 		A83475BC8F3F1008D8F01B1EBF6BD2C5 /* asn1_mac.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = asn1_mac.h; path = ios/include/openssl/asn1_mac.h; sourceTree = "<group>"; };
 		AB1E67CA4BA559FAD819EB14A5AB9C4F /* ActionCell.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = ActionCell.xib; path = Resource/ActionCell.xib; sourceTree = "<group>"; };
@@ -354,7 +355,7 @@
 		AC2855E3FABC5E8702FAEDA66CAFF87D /* sha.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sha.h; path = ios/include/openssl/sha.h; sourceTree = "<group>"; };
 		AE789929A3D54796C82BB15308262836 /* aes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = aes.h; path = ios/include/openssl/aes.h; sourceTree = "<group>"; };
 		AEB1E10D6103593363B6B38B38CB58EB /* SPAlert-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SPAlert-Info.plist"; sourceTree = "<group>"; };
-		AFC52F7C6302C9DB6F6442CB512B12A1 /* XLActionController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = XLActionController.framework; path = XLActionController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFC52F7C6302C9DB6F6442CB512B12A1 /* XLActionController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XLActionController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B00A7B26536B94C3814306C966570858 /* opensslv.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = opensslv.h; path = ios/include/openssl/opensslv.h; sourceTree = "<group>"; };
 		B0C0AFBADB7A5135468AB2748FED8081 /* BlueprintLayoutAnimator+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BlueprintLayoutAnimator+Extensions.swift"; path = "Sources/Shared/Core/BlueprintLayoutAnimator+Extensions.swift"; sourceTree = "<group>"; };
 		B0D02336A051F900ECA939E85C04E66A /* UIView+DropShadow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIView+DropShadow.swift"; path = "Source/Extensions/UIView+DropShadow.swift"; sourceTree = "<group>"; };
@@ -372,7 +373,7 @@
 		BC70943875B9424736DED2CB8BF50666 /* Direction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Direction.swift; path = ViewAnimator/Classes/Models/Direction.swift; sourceTree = "<group>"; };
 		BD0FD7CD7F4D995F1EBA62EED3C92C06 /* BinarySearch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BinarySearch.swift; path = Sources/Shared/Core/BinarySearch.swift; sourceTree = "<group>"; };
 		BE34BBAED49EB5FCA85998A1EFADB4AF /* crypto.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto.h; path = ios/include/openssl/crypto.h; sourceTree = "<group>"; };
-		BE629661A28417489F63DBC74196BBD6 /* SPAlert.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SPAlert.framework; path = SPAlert.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE629661A28417489F63DBC74196BBD6 /* SPAlert.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SPAlert.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF7BE01415A998023B66CD756D1F641E /* BlueprintLayoutAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BlueprintLayoutAnimator.swift; path = Sources/Shared/Core/BlueprintLayoutAnimator.swift; sourceTree = "<group>"; };
 		C01F99FD78C3BA8D67BDA0E1E3611473 /* XLActionController.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = XLActionController.release.xcconfig; sourceTree = "<group>"; };
 		C04AE1C2281293DD6141B77DDA04E6D9 /* ViewAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ViewAnimator.swift; path = ViewAnimator/Classes/ViewAnimator.swift; sourceTree = "<group>"; };
@@ -391,7 +392,7 @@
 		CCF5FEBBA4C4784BB25CE30EDFC4C29E /* modes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = modes.h; path = ios/include/openssl/modes.h; sourceTree = "<group>"; };
 		CD67EF8EEC95A6D1974B22D1B2659022 /* SPAlertIconAnimatable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SPAlertIconAnimatable.swift; path = Source/SPAlert/Protocol/SPAlertIconAnimatable.swift; sourceTree = "<group>"; };
 		D1B3E2184B8A4BD10BCF3C9017B6F27D /* ui.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ui.h; path = ios/include/openssl/ui.h; sourceTree = "<group>"; };
-		D40FF0F11E7F2EF29D1A92D25FB2D60D /* ChromaColorPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ChromaColorPicker.framework; path = ChromaColorPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D40FF0F11E7F2EF29D1A92D25FB2D60D /* ChromaColorPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ChromaColorPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4B979755E875A72A0AE9A6F3E70BEFD /* ssl2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ssl2.h; path = ios/include/openssl/ssl2.h; sourceTree = "<group>"; };
 		D62E3FE0DBD9DCA6FC4ECBEDDE1B22BD /* ssl23.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ssl23.h; path = ios/include/openssl/ssl23.h; sourceTree = "<group>"; };
 		D78F9C5183596775C5A0BE02B5390D37 /* obj_mac.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = obj_mac.h; path = ios/include/openssl/obj_mac.h; sourceTree = "<group>"; };
@@ -405,7 +406,7 @@
 		E0A71B93AFC72AE98001EF5B5ABCA218 /* SPAlertView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SPAlertView.swift; path = Source/SPAlert/Views/SPAlertView.swift; sourceTree = "<group>"; };
 		E225D8B8D9C0DDBB186E9C98478FE395 /* hmac.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = hmac.h; path = ios/include/openssl/hmac.h; sourceTree = "<group>"; };
 		E35388E5218EAB0AFC7D5822EA7DB7D5 /* SPAlertIconErrorView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SPAlertIconErrorView.swift; path = Source/SPAlert/Views/Icons/SPAlertIconErrorView.swift; sourceTree = "<group>"; };
-		E3D4F55A323EFF248A7A3DC7BA61BCC5 /* Blueprints.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Blueprints.framework; path = Blueprints.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3D4F55A323EFF248A7A3DC7BA61BCC5 /* Blueprints.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Blueprints.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E455BB8461D7AB8DDB8EEDD025196463 /* MosaicBlueprintPatternController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MosaicBlueprintPatternController.swift; path = Sources/Shared/Mosaic/MosaicBlueprintPatternController.swift; sourceTree = "<group>"; };
 		E4809107F2E8B4943F0B683744276BDB /* TypeAlias.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TypeAlias.swift; path = Sources/Shared/Core/TypeAlias.swift; sourceTree = "<group>"; };
 		E4973974762075DF1AF0A44631E66193 /* BottomPopup.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = BottomPopup.modulemap; sourceTree = "<group>"; };
@@ -651,7 +652,6 @@
 				62CC31876E031A0BBF73E748AC387EC5 /* VerticalMosaicBlueprintLayout.swift */,
 				649AEC01CD151EA9C6D5052B0C990470 /* Support Files */,
 			);
-			name = Blueprints;
 			path = Blueprints;
 			sourceTree = "<group>";
 		};
@@ -704,7 +704,6 @@
 				1F9DC6209A0BDFB27F0C34423046CE03 /* Static */,
 				E0991F4D366C96D5B032E267FB9F51D7 /* Support Files */,
 			);
-			name = "OpenSSL-Universal";
 			path = "OpenSSL-Universal";
 			sourceTree = "<group>";
 		};
@@ -721,7 +720,6 @@
 				4C5966714B3EB5FC77B292FC8931F3A3 /* BottomPopupViewController.swift */,
 				C4D9B2CF6172BD509B159630BB8B7117 /* Support Files */,
 			);
-			name = BottomPopup;
 			path = BottomPopup;
 			sourceTree = "<group>";
 		};
@@ -770,7 +768,6 @@
 				2940836A6DD506271E829832525EECFD /* ViewAnimatorConfig.swift */,
 				C898A13420CCAC1EA6F50BF9219D8CC2 /* Support Files */,
 			);
-			name = ViewAnimator;
 			path = ViewAnimator;
 			sourceTree = "<group>";
 		};
@@ -796,7 +793,6 @@
 				D3AEE5FB1737501AF66557AB7BC19E5F /* Skype */,
 				92EA2FC37CFF55BB6B58ECDF4F867679 /* Support Files */,
 			);
-			name = XLActionController;
 			path = XLActionController;
 			sourceTree = "<group>";
 		};
@@ -806,7 +802,6 @@
 				5AEA3DAAEE8F553956C99764EDA2851A /* MultilineTextField.swift */,
 				D1487993F81D52120A20418F810BDEF2 /* Support Files */,
 			);
-			name = MultilineTextField;
 			path = MultilineTextField;
 			sourceTree = "<group>";
 		};
@@ -897,7 +892,6 @@
 				E0A71B93AFC72AE98001EF5B5ABCA218 /* SPAlertView.swift */,
 				B372019C504AEAB649F6F0ACBC5DB759 /* Support Files */,
 			);
-			name = SPAlert;
 			path = SPAlert;
 			sourceTree = "<group>";
 		};
@@ -978,7 +972,6 @@
 				657C7FB839CF697D2EF3DD0141437BB8 /* UIView+Utils.swift */,
 				D15BC26EB230F66511302ACDCDBB0D39 /* Support Files */,
 			);
-			name = ChromaColorPicker;
 			path = ChromaColorPicker;
 			sourceTree = "<group>";
 		};
@@ -2177,7 +2170,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2289,7 +2282,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2363,7 +2356,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
