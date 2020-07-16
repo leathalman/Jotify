@@ -31,7 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             "writeNotePlaceholder": "Start typing or swipe right for saved notes...",
             "com.austinleath.Jotify.Premium": false,
             "useSystemMode": true,
-            "showRatingPrompt": true
+            "showRatingPrompt": true,
+            "useHaptics": true
         ])
                 
         if UserDefaults.standard.bool(forKey: "darkModeEnabled") == true {

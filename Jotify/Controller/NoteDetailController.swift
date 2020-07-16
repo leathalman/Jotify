@@ -226,6 +226,8 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     }
     
     func setupView() {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
+
         view = writeNoteView
         
         let textView = writeNoteView.inputTextView

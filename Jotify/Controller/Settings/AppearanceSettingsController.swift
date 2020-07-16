@@ -16,7 +16,7 @@ class AppearanceSettingsController: UITableViewController {
     let darks: Array = ["Use System Mode"]
     let darks2: Array = ["Use System Mode", "Vibrant Dark Mode", "Pure Dark Mode"]
     let text: Array = ["Custom Placeholder", "Enable Multiline Input"]
-    let other: Array = ["Random Colors"]
+    let other: Array = ["Use Haptics", "Random Colors"]
     
     let settingsController = SettingsController()
     
@@ -111,8 +111,6 @@ class AppearanceSettingsController: UITableViewController {
                 }))
                 
                 present(alert, animated: true, completion: nil)
-            case 1:
-                print("Tapped")
             default:
                 print("Tapped")
             }
@@ -256,22 +254,46 @@ class AppearanceSettingsController: UITableViewController {
             }
             
         } else if indexPath.section == 3 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
-            
-            settingsController.setupDynamicCells(cell: cell, enableArrow: false)
-            
-            cell.textLabel?.text = "\(other[indexPath.row])"
-            cell.selectionStyle = .none
-            cell.switchButton.addTarget(self, action: #selector(randomColorSwitchPressed), for: .valueChanged)
-            
-            if defaults.bool(forKey: "useRandomColor") {
-                cell.switchButton.isOn = true
-            } else {
-                cell.switchButton.isOn = false
+            switch indexPath.row {
+            case 0:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
+                
+                settingsController.setupDynamicCells(cell: cell, enableArrow: false)
+                
+                cell.textLabel?.text = "\(other[indexPath.row])"
+                cell.selectionStyle = .none
+                cell.switchButton.addTarget(self, action: #selector(toggleHapticsSwitchPressed), for: .valueChanged)
+                
+                if defaults.bool(forKey: "useHaptics") {
+                    cell.switchButton.isOn = true
+                } else {
+                    cell.switchButton.isOn = false
+                }
+                
+                return cell
+            case 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
+                
+                settingsController.setupDynamicCells(cell: cell, enableArrow: false)
+                
+                cell.textLabel?.text = "\(other[indexPath.row])"
+                cell.selectionStyle = .none
+                cell.switchButton.addTarget(self, action: #selector(randomColorSwitchPressed), for: .valueChanged)
+                
+                if defaults.bool(forKey: "useRandomColor") {
+                    cell.switchButton.isOn = true
+                } else {
+                    cell.switchButton.isOn = false
+                }
+                
+                return cell
+            default:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+                print("cell outside of bounds")
+                return cell
             }
-            
-            return cell
         }
+        
         return cell
     }
     
@@ -425,6 +447,17 @@ class AppearanceSettingsController: UITableViewController {
             let colorPickerController = ColorPickerController()
             
             navigationController?.pushViewController(colorPickerController, animated: true)
+        }
+    }
+    
+    @objc func toggleHapticsSwitchPressed(sender: UISwitch) {
+        if sender.isOn {
+            print("haptics enabled")
+            defaults.set(true, forKey: "useHaptics")
+            
+        } else {
+            print("haptics disabled")
+            defaults.set(false, forKey: "useHaptics")
         }
     }
     

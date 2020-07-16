@@ -15,21 +15,23 @@ extension UIViewController {
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
-
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
     func playHapticFeedback() {
-        if UIDevice.current.hasTapticEngine {
-            // iPhone 6s and iPhone 6s Plus
-            let peek = SystemSoundID(1519)
-            AudioServicesPlaySystemSoundWithCompletion(peek, nil)
-            
-        } else {
-            // iPhone 7 and newer
-            let generator = UIImpactFeedbackGenerator(style: .medium)
-            generator.impactOccurred()
+        if UserDefaults.standard.bool(forKey: "useHaptics") {
+            if UIDevice.current.hasTapticEngine {
+                // iPhone 6s and iPhone 6s Plus
+                let peek = SystemSoundID(1519)
+                AudioServicesPlaySystemSoundWithCompletion(peek, nil)
+                
+            } else {
+                // iPhone 7 and newer
+                let generator = UIImpactFeedbackGenerator(style: .medium)
+                generator.impactOccurred()
+            }
         }
     }
 }
