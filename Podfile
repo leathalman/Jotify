@@ -30,5 +30,14 @@ target 'Jotify' do
 
   # Used for verifying purchase receipts for users who bought Jotify as a paid application
   pod'OpenSSL-Universal'
+  
+  # Used to handle supported device architecture
+  post_install do |installer|
+      installer.pods_project.targets.each do |target|
+          target.build_configurations.each do |config|
+              config.build_settings['DEBUG_INFORMATION_FORMAT'] = 'dwarf'
+          end
+      end
+  end
 
 end
