@@ -32,7 +32,6 @@ To run this project you will need to use Xcode 11 and iOS 13. **Jotify does not 
 - [Blueprints](https://github.com/zenangst/Blueprints) - CollectionView layout for SavedNoteController.swift
 - [ViewAnimator](https://github.com/marcosgriselli/ViewAnimator) - Used to animate cells in CollectionView on sort
 - [XLActionController](https://github.com/xmartlabs/XLActionController) - Used for ActionSheet in SavedNoteController.swift
-- [PageBoy](https://github.com/uias/Pageboy) - UIPageController for navigation across multiple views
 - [ChromaColorPicker](https://github.com/joncardasis/ChromaColorPicker) - Used for picking a static color for notes
 - [WhatsNewKit](https://github.com/SvenTiigi/WhatsNewKit) - Used for displaying information about app updates and onboarding
 - [BottomPopup](https://github.com/ergunemr/BottomPopup) - Used for presenting ViewControllers at a custom height
