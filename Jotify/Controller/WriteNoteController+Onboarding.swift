@@ -25,9 +25,9 @@ extension WriteNoteController {
         } else {
             if previousVersion != nil {
                 // new version
-                // TODO: This crashes with colorspace issue
+                // TODO: This crashes in iOS 14 Beta 2 using Xcode 12 with colorspace issue
                 print("new version")
-//                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
                 
             } else {
                 // first launch
@@ -39,23 +39,23 @@ extension WriteNoteController {
     }
     
     func presentUpdateOnboarding(viewController: UIViewController, tintColor: UIColor) {
-        // Jotify v1.2.2 Onboarding
+        // Jotify v1.2.4 Onboarding
         let whatsNew = WhatsNew(
-            title: "What's New - v1.2.2",
+            title: "What's New - v1.2.4",
             items: [
                 WhatsNew.Item(
-                    title: "Major Changes - SALE!",
-                    subtitle: "• There is a limited time sale on Jotify Premium! Get it for only 99 cents (50% off)!\n• Jotify now has a 6th color scheme, \"Scarlet Azure\", check it out in settings!",
+                    title: "Major Changes",
+                    subtitle: "• Jotify has a brand new color picker! Check it out in Settings -> Appearance\n• Dark mode is now free for every user. ",
                     image: UIImage(named: "bell")
                 ),
                 WhatsNew.Item(
                     title: "Minor Improvements",
-                    subtitle: "• Added dark icon support for iPad! If you own Jotify Premium, you can enable this by settings -> about -> click on the Jotify icon.",
+                    subtitle: "• You can now disable the review prompt in Settings -> Alerts\n• You can disable haptic feedback in Settings -> Appearance\n• Major under-the-hood improvements to paging.",
                     image: UIImage(named: "add")
                 ),
                 WhatsNew.Item(
                     title: "Bug Fixes",
-                    subtitle: "• Fixed a bug where using mass delete would not correctly update the app badge.\n• Fixed a bug that would incorrectly sort notes when searching.",
+                    subtitle: "• Random color algorithm now correctly chooses a color after relaunch.\n• Added dark mode support for introductory onboarding screen.\n• Added dynamic enabling/disabling of gesture control in settings.\n• Restore function now behaves properly.\n• Color picker no longer defaults to white if no color is selected.\n• Fixed bug where default app icon was not properly aligned.\n• Fixed bug where haptic feedback was not working on iPhone X and newer.\n• Updated dependencies. Removed Pageboy as a dependency.",
                     image: UIImage(named: "bugFix")
                 ),
             ]
