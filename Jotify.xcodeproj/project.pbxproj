@@ -89,7 +89,40 @@
 		F6D1817B239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D1817A239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift */; };
 		F6DE443123FCB82F00A45347 /* SKProduct+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DE443023FCB82F00A45347 /* SKProduct+Extensions.swift */; };
 		F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */; };
+		F6F7D48F2534D45100C4BDD2 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F7D48E2534D45100C4BDD2 /* WidgetKit.framework */; };
+		F6F7D4912534D45100C4BDD2 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F7D4902534D45100C4BDD2 /* SwiftUI.framework */; };
+		F6F7D4942534D45100C4BDD2 /* StaticWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F7D4932534D45100C4BDD2 /* StaticWidget.swift */; };
+		F6F7D4962534D45300C4BDD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6F7D4952534D45300C4BDD2 /* Assets.xcassets */; };
+		F6F7D49A2534D45300C4BDD2 /* StaticWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F6F7D48D2534D45100C4BDD2 /* StaticWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F6F7D4A12534D46A00C4BDD2 /* GroupDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F7D4A02534D46A00C4BDD2 /* GroupDataManager.swift */; };
+		F6F7D4A22534D46A00C4BDD2 /* GroupDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F7D4A02534D46A00C4BDD2 /* GroupDataManager.swift */; };
+		F6F7D4C92534E50000C4BDD2 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65E479E2324B12A00FCAEF3 /* UserDefaults+Extensions.swift */; };
+		F6F7D4D72534EA4500C4BDD2 /* UIColor+SU.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F7D4D62534EA4500C4BDD2 /* UIColor+SU.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F6F7D4982534D45300C4BDD2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F650E12522BFF35A008D29AD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F6F7D48C2534D45100C4BDD2;
+			remoteInfo = StaticWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F6F7D49B2534D45300C4BDD2 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F6F7D49A2534D45300C4BDD2 /* StaticWidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5A38D5DED763274A2FC92A00 /* Pods-Jotify.testflight.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.testflight.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.testflight.xcconfig"; sourceTree = "<group>"; };
@@ -182,6 +215,15 @@
 		F6D1817C239C7C6600EAB85C /* pkcs7_union_accessors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pkcs7_union_accessors.h; sourceTree = "<group>"; };
 		F6DE443023FCB82F00A45347 /* SKProduct+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKProduct+Extensions.swift"; sourceTree = "<group>"; };
 		F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteView.swift; sourceTree = "<group>"; };
+		F6F7D48D2534D45100C4BDD2 /* StaticWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StaticWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6F7D48E2534D45100C4BDD2 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		F6F7D4902534D45100C4BDD2 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		F6F7D4932534D45100C4BDD2 /* StaticWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticWidget.swift; sourceTree = "<group>"; };
+		F6F7D4952534D45300C4BDD2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F6F7D4972534D45300C4BDD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F6F7D4A02534D46A00C4BDD2 /* GroupDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDataManager.swift; sourceTree = "<group>"; };
+		F6F7D4AD2534E10B00C4BDD2 /* StaticWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StaticWidgetExtension.entitlements; sourceTree = "<group>"; };
+		F6F7D4D62534EA4500C4BDD2 /* UIColor+SU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+SU.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +234,15 @@
 				F6B7BF902391CF600057FB8B /* StoreKit.framework in Frameworks */,
 				F650E16A22C001A8008D29AD /* CloudKit.framework in Frameworks */,
 				40383F919C25A820B4F11373 /* Pods_Jotify.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6F7D48A2534D45100C4BDD2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6F7D4912534D45100C4BDD2 /* SwiftUI.framework in Frameworks */,
+				F6F7D48F2534D45100C4BDD2 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,7 +381,9 @@
 		F650E12422BFF35A008D29AD = {
 			isa = PBXGroup;
 			children = (
+				F6F7D4AD2534E10B00C4BDD2 /* StaticWidgetExtension.entitlements */,
 				F650E12F22BFF35A008D29AD /* Jotify */,
+				F6F7D4922534D45100C4BDD2 /* StaticWidget */,
 				F650E12E22BFF35A008D29AD /* Products */,
 				F650E14822BFF36D008D29AD /* Frameworks */,
 				F61EC89B2348E1B900FB0A63 /* Sources */,
@@ -342,6 +395,7 @@
 			isa = PBXGroup;
 			children = (
 				F650E12D22BFF35A008D29AD /* Jotify.app */,
+				F6F7D48D2534D45100C4BDD2 /* StaticWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -372,6 +426,8 @@
 				F6B7BF8F2391CF600057FB8B /* StoreKit.framework */,
 				F650E14922BFF36D008D29AD /* CloudKit.framework */,
 				8A323702C4BB17879EB5635A /* Pods_Jotify.framework */,
+				F6F7D48E2534D45100C4BDD2 /* WidgetKit.framework */,
+				F6F7D4902534D45100C4BDD2 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -402,6 +458,7 @@
 				F6A7E4C5238F244800D3E6AF /* JotifyProducts.swift */,
 				F6D1816C239C748700EAB85C /* ReceiptFetcher.swift */,
 				F68097B724BA53D9006BDD0C /* ReceiptHandler.swift */,
+				F6F7D4A02534D46A00C4BDD2 /* GroupDataManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -470,6 +527,17 @@
 			path = Receipt;
 			sourceTree = "<group>";
 		};
+		F6F7D4922534D45100C4BDD2 /* StaticWidget */ = {
+			isa = PBXGroup;
+			children = (
+				F6F7D4932534D45100C4BDD2 /* StaticWidget.swift */,
+				F6F7D4D62534EA4500C4BDD2 /* UIColor+SU.swift */,
+				F6F7D4952534D45300C4BDD2 /* Assets.xcassets */,
+				F6F7D4972534D45300C4BDD2 /* Info.plist */,
+			);
+			path = StaticWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -482,15 +550,34 @@
 				F650E12A22BFF35A008D29AD /* Frameworks */,
 				F650E12B22BFF35A008D29AD /* Resources */,
 				9282FE761C63AE7542F462C3 /* [CP] Embed Pods Frameworks */,
+				F6F7D49B2534D45300C4BDD2 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F6F7D4992534D45300C4BDD2 /* PBXTargetDependency */,
 			);
 			name = Jotify;
 			productName = Jotify;
 			productReference = F650E12D22BFF35A008D29AD /* Jotify.app */;
 			productType = "com.apple.product-type.application";
+		};
+		F6F7D48C2534D45100C4BDD2 /* StaticWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F6F7D49F2534D45300C4BDD2 /* Build configuration list for PBXNativeTarget "StaticWidgetExtension" */;
+			buildPhases = (
+				F6F7D4892534D45100C4BDD2 /* Sources */,
+				F6F7D48A2534D45100C4BDD2 /* Frameworks */,
+				F6F7D48B2534D45100C4BDD2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StaticWidgetExtension;
+			productName = StaticWidgetExtension;
+			productReference = F6F7D48D2534D45100C4BDD2 /* StaticWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -498,13 +585,16 @@
 		F650E12522BFF35A008D29AD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
+				LastSwiftUpdateCheck = 1200;
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Harrison Leath";
 				TargetAttributes = {
 					F650E12C22BFF35A008D29AD = {
 						CreatedOnToolsVersion = 11.0;
 						LastSwiftMigration = 1120;
+					};
+					F6F7D48C2534D45100C4BDD2 = {
+						CreatedOnToolsVersion = 12.0.1;
 					};
 				};
 			};
@@ -522,6 +612,7 @@
 			projectRoot = "";
 			targets = (
 				F650E12C22BFF35A008D29AD /* Jotify */,
+				F6F7D48C2534D45100C4BDD2 /* StaticWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -542,6 +633,14 @@
 				F677E2DD24BBEC1700E63124 /* defaultIcon@3x~ipad.png in Resources */,
 				F63C488E23EF7CE300310CFF /* goldIcon@3x~ipad.png in Resources */,
 				F63C488D23EF7CE300310CFF /* goldIcon@2x~ipad.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6F7D48B2534D45100C4BDD2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6F7D4962534D45300C4BDD2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,6 +710,7 @@
 				F6B7BF8E239189700057FB8B /* PremiumView.swift in Sources */,
 				F69E5DC0231AE14800872345 /* ThemeSelectionController.swift in Sources */,
 				F63C489623EFBC7500310CFF /* UIColor+Extensions.swift in Sources */,
+				F6F7D4A12534D46A00C4BDD2 /* GroupDataManager.swift in Sources */,
 				F61EC8CD2348E1BA00FB0A63 /* WhatsNewButtonViewController.swift in Sources */,
 				F6969F5E22DA1AFD00C4E8FF /* AboutSettingsController.swift in Sources */,
 				F61EC8BF2348E1BA00FB0A63 /* WhatsNewViewController+Animation.swift in Sources */,
@@ -665,7 +765,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F6F7D4892534D45100C4BDD2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6F7D4942534D45100C4BDD2 /* StaticWidget.swift in Sources */,
+				F6F7D4C92534E50000C4BDD2 /* UserDefaults+Extensions.swift in Sources */,
+				F6F7D4A22534D46A00C4BDD2 /* GroupDataManager.swift in Sources */,
+				F6F7D4D72534EA4500C4BDD2 /* UIColor+SU.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F6F7D4992534D45300C4BDD2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F6F7D48C2534D45100C4BDD2 /* StaticWidgetExtension */;
+			targetProxy = F6F7D4982534D45300C4BDD2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F650E13E22BFF35C008D29AD /* LaunchScreen.storyboard */ = {
@@ -801,11 +920,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 63C1D362A727BA97CDA0FF44 /* Pods-Jotify.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = Default;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 58;
+				CURRENT_PROJECT_VERSION = 59;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Jotify/Info.plist;
@@ -814,7 +934,7 @@
 					"@executable_path/Frameworks",
 				);
 				LD_VERIFY_BITCODE = NO;
-				MARKETING_VERSION = 1.2.4;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Jotify/Jotify-Bridging-Header.h";
@@ -828,11 +948,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D2FEA98E85D131BC44F77230 /* Pods-Jotify.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = Default;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 58;
+				CURRENT_PROJECT_VERSION = 59;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Jotify/Info.plist;
@@ -841,7 +962,7 @@
 					"@executable_path/Frameworks",
 				);
 				LD_VERIFY_BITCODE = NO;
-				MARKETING_VERSION = 1.2.4;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Jotify/Jotify-Bridging-Header.h";
@@ -910,11 +1031,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5A38D5DED763274A2FC92A00 /* Pods-Jotify.testflight.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = Default;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 58;
+				CURRENT_PROJECT_VERSION = 59;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Jotify/Info.plist;
@@ -923,10 +1045,85 @@
 					"@executable_path/Frameworks",
 				);
 				LD_VERIFY_BITCODE = NO;
-				MARKETING_VERSION = 1.2.4;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Jotify/Jotify-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = TestFlight;
+		};
+		F6F7D49C2534D45300C4BDD2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = StaticWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 59;
+				DEVELOPMENT_TEAM = G69P7XTUQ3;
+				INFOPLIST_FILE = StaticWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.3.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify.StaticWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F6F7D49D2534D45300C4BDD2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = StaticWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 59;
+				DEVELOPMENT_TEAM = G69P7XTUQ3;
+				INFOPLIST_FILE = StaticWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.3.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify.StaticWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F6F7D49E2534D45300C4BDD2 /* TestFlight */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = StaticWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 59;
+				DEVELOPMENT_TEAM = G69P7XTUQ3;
+				INFOPLIST_FILE = StaticWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.3.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify.StaticWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -951,6 +1148,16 @@
 				F650E14522BFF35C008D29AD /* Debug */,
 				F650E14622BFF35C008D29AD /* Release */,
 				F6D1817F239C973000EAB85C /* TestFlight */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F6F7D49F2534D45300C4BDD2 /* Build configuration list for PBXNativeTarget "StaticWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F6F7D49C2534D45300C4BDD2 /* Debug */,
+				F6F7D49D2534D45300C4BDD2 /* Release */,
+				F6F7D49E2534D45300C4BDD2 /* TestFlight */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

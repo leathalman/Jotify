@@ -8,6 +8,7 @@
 
 import UIKit
 import UserNotifications
+import WidgetKit
 
 struct EditingData {
     static var index = Int()
@@ -55,6 +56,15 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         updateContent(index: index, newContent: writeNoteView.inputTextView.text)
+        GroupDataManager().writeData(path: "widgetContent", content: writeNoteView.inputTextView.text)
+        GroupDataManager().writeData(path: "widgetColor", content: UIColor.stringFromColor(color: backgroundColor))
+        GroupDataManager().writeData(path: "widgetDate", content: navigationTitle)
+
+        print(UIColor.stringFromColor(color: backgroundColor))
+        
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
         
         EditingData.isEditing = false
     }
