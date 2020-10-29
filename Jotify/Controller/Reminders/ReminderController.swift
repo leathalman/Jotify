@@ -71,8 +71,10 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.timeZone = NSTimeZone.local
-        //TODO: This line crashes application in iOS 14 Beta 2
         datePicker.setValue(UIColor.white, forKeyPath: "textColor")
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        }
         
         view.addSubview(titleLabel)
         view.addSubview(datePicker)
@@ -184,11 +186,12 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     }
     
     override func getPopupHeight() -> CGFloat {
-        if !popupHeight.isZero {
-            return popupHeight / 11 + 80 + datePicker.frame.height + 30
-        } else {
-            return 80 + (screenHeight / 11) + datePicker.frame.height + 30
-        }
+//        if !popupHeight.isZero {
+//            return popupHeight / 11 + 80 + datePicker.frame.height + 30
+//        } else {
+//            return 80 + (screenHeight / 11) + datePicker.frame.height + 30
+//        }
+        return 400
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

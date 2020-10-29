@@ -25,9 +25,8 @@ extension WriteNoteController {
         } else {
             if previousVersion != nil {
                 // new version
-                // TODO: This crashes in iOS 14 Beta 2 using Xcode 12 with colorspace issue
                 print("new version")
-                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+//                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
                 
             } else {
                 // first launch
