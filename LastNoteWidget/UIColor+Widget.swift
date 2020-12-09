@@ -1,8 +1,8 @@
 //
-//  UIColor+SU.swift
-//  StaticWidgetExtension
+//  UIColor+Widget.swift
+//  Jotify
 //
-//  Created by Harrison Leath on 10/12/20.
+//  Created by Harrison Leath on 12/9/20.
 //  Copyright © 2020 Harrison Leath. All rights reserved.
 //
 
@@ -70,19 +70,9 @@ extension UIColor {
     static let lBlue = UIColor(r: 58, g: 101, b: 137)
     static let lRed = UIColor(r: 201, g: 129, b: 150)
     static let lGold = UIColor(r: 233, g: 189, b: 124)
-    
-    static func thing (string: String) -> Color {
-        if string == "red4" {
-            print("ran")
-            return Color(UIColor.red4)
-        }
-        
-        print("ran1")
-        return Color.green
-    }
 }
 
-class ColorCrap {
+class WidgetColorInterpretor {
     func colorFromString(string: String) -> Color {
 //        if UserDefaults.standard.bool(forKey: "useRandomColor") == false {
 //            return Color(UserDefaults.standard.color(forKey: "staticNoteColor") ?? .white)
@@ -202,3 +192,4 @@ class ColorCrap {
         }
     }
 }
+

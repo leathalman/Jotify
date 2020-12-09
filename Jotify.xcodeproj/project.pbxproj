@@ -87,26 +87,27 @@
 		F6D18172239C7B1100EAB85C /* AppleIncRootCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = F6D18171239C7B1000EAB85C /* AppleIncRootCertificate.cer */; };
 		F6D18179239C7BEE00EAB85C /* pkcs7_union_accessors.c in Sources */ = {isa = PBXBuildFile; fileRef = F6D18178239C7BEE00EAB85C /* pkcs7_union_accessors.c */; };
 		F6D1817B239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D1817A239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift */; };
+		F6D1F1C22581922D00D3BDB4 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F7D48E2534D45100C4BDD2 /* WidgetKit.framework */; };
+		F6D1F1C32581922D00D3BDB4 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F7D4902534D45100C4BDD2 /* SwiftUI.framework */; };
+		F6D1F1C92581923000D3BDB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6D1F1C82581923000D3BDB4 /* Assets.xcassets */; };
+		F6D1F1CB2581923000D3BDB4 /* LastNoteWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F6D1F1C72581922D00D3BDB4 /* LastNoteWidget.intentdefinition */; };
+		F6D1F1CC2581923000D3BDB4 /* LastNoteWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F6D1F1C72581922D00D3BDB4 /* LastNoteWidget.intentdefinition */; };
+		F6D1F1CF2581923000D3BDB4 /* LastNoteWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F6D1F1C12581922D00D3BDB4 /* LastNoteWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F6D1F1E42581926E00D3BDB4 /* UIColor+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D1F1DC2581926A00D3BDB4 /* UIColor+Widget.swift */; };
+		F6D1F1E72581928000D3BDB4 /* GroupDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F7D4A02534D46A00C4BDD2 /* GroupDataManager.swift */; };
+		F6D1F1ED258192A800D3BDB4 /* LastNoteWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D1F1D82581924B00D3BDB4 /* LastNoteWidget.swift */; };
 		F6DE443123FCB82F00A45347 /* SKProduct+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DE443023FCB82F00A45347 /* SKProduct+Extensions.swift */; };
 		F6EEBF9222CC561A0087A1D3 /* WriteNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */; };
-		F6F7D48F2534D45100C4BDD2 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F7D48E2534D45100C4BDD2 /* WidgetKit.framework */; };
-		F6F7D4912534D45100C4BDD2 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F7D4902534D45100C4BDD2 /* SwiftUI.framework */; };
-		F6F7D4942534D45100C4BDD2 /* StaticWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F7D4932534D45100C4BDD2 /* StaticWidget.swift */; };
-		F6F7D4962534D45300C4BDD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6F7D4952534D45300C4BDD2 /* Assets.xcassets */; };
-		F6F7D49A2534D45300C4BDD2 /* StaticWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F6F7D48D2534D45100C4BDD2 /* StaticWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F6F7D4A12534D46A00C4BDD2 /* GroupDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F7D4A02534D46A00C4BDD2 /* GroupDataManager.swift */; };
-		F6F7D4A22534D46A00C4BDD2 /* GroupDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F7D4A02534D46A00C4BDD2 /* GroupDataManager.swift */; };
-		F6F7D4C92534E50000C4BDD2 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65E479E2324B12A00FCAEF3 /* UserDefaults+Extensions.swift */; };
-		F6F7D4D72534EA4500C4BDD2 /* UIColor+SU.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F7D4D62534EA4500C4BDD2 /* UIColor+SU.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		F6F7D4982534D45300C4BDD2 /* PBXContainerItemProxy */ = {
+		F6D1F1CD2581923000D3BDB4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F650E12522BFF35A008D29AD /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = F6F7D48C2534D45100C4BDD2;
-			remoteInfo = StaticWidgetExtension;
+			remoteGlobalIDString = F6D1F1C02581922D00D3BDB4;
+			remoteInfo = LastNoteWidgetExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -117,7 +118,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				F6F7D49A2534D45300C4BDD2 /* StaticWidgetExtension.appex in Embed App Extensions */,
+				F6D1F1CF2581923000D3BDB4 /* LastNoteWidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -213,17 +214,18 @@
 		F6D18178239C7BEE00EAB85C /* pkcs7_union_accessors.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pkcs7_union_accessors.c; sourceTree = "<group>"; };
 		F6D1817A239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyLocalReceiptValidator.swift; sourceTree = "<group>"; };
 		F6D1817C239C7C6600EAB85C /* pkcs7_union_accessors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pkcs7_union_accessors.h; sourceTree = "<group>"; };
+		F6D1F1C12581922D00D3BDB4 /* LastNoteWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LastNoteWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6D1F1C72581922D00D3BDB4 /* LastNoteWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = LastNoteWidget.intentdefinition; sourceTree = "<group>"; };
+		F6D1F1C82581923000D3BDB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F6D1F1CA2581923000D3BDB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F6D1F1D82581924B00D3BDB4 /* LastNoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastNoteWidget.swift; sourceTree = "<group>"; };
+		F6D1F1DC2581926A00D3BDB4 /* UIColor+Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Widget.swift"; sourceTree = "<group>"; };
+		F6D1F1EA2581928D00D3BDB4 /* LastNoteWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LastNoteWidgetExtension.entitlements; sourceTree = "<group>"; };
 		F6DE443023FCB82F00A45347 /* SKProduct+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKProduct+Extensions.swift"; sourceTree = "<group>"; };
 		F6EEBF9122CC561A0087A1D3 /* WriteNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteView.swift; sourceTree = "<group>"; };
-		F6F7D48D2534D45100C4BDD2 /* StaticWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StaticWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6F7D48E2534D45100C4BDD2 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		F6F7D4902534D45100C4BDD2 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		F6F7D4932534D45100C4BDD2 /* StaticWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticWidget.swift; sourceTree = "<group>"; };
-		F6F7D4952534D45300C4BDD2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F6F7D4972534D45300C4BDD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6F7D4A02534D46A00C4BDD2 /* GroupDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDataManager.swift; sourceTree = "<group>"; };
-		F6F7D4AD2534E10B00C4BDD2 /* StaticWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StaticWidgetExtension.entitlements; sourceTree = "<group>"; };
-		F6F7D4D62534EA4500C4BDD2 /* UIColor+SU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+SU.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,12 +239,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F6F7D48A2534D45100C4BDD2 /* Frameworks */ = {
+		F6D1F1BE2581922D00D3BDB4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6F7D4912534D45100C4BDD2 /* SwiftUI.framework in Frameworks */,
-				F6F7D48F2534D45100C4BDD2 /* WidgetKit.framework in Frameworks */,
+				F6D1F1C32581922D00D3BDB4 /* SwiftUI.framework in Frameworks */,
+				F6D1F1C22581922D00D3BDB4 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,9 +383,9 @@
 		F650E12422BFF35A008D29AD = {
 			isa = PBXGroup;
 			children = (
-				F6F7D4AD2534E10B00C4BDD2 /* StaticWidgetExtension.entitlements */,
+				F6D1F1EA2581928D00D3BDB4 /* LastNoteWidgetExtension.entitlements */,
 				F650E12F22BFF35A008D29AD /* Jotify */,
-				F6F7D4922534D45100C4BDD2 /* StaticWidget */,
+				F6D1F1C42581922D00D3BDB4 /* LastNoteWidget */,
 				F650E12E22BFF35A008D29AD /* Products */,
 				F650E14822BFF36D008D29AD /* Frameworks */,
 				F61EC89B2348E1B900FB0A63 /* Sources */,
@@ -395,7 +397,7 @@
 			isa = PBXGroup;
 			children = (
 				F650E12D22BFF35A008D29AD /* Jotify.app */,
-				F6F7D48D2534D45100C4BDD2 /* StaticWidgetExtension.appex */,
+				F6D1F1C12581922D00D3BDB4 /* LastNoteWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -527,15 +529,16 @@
 			path = Receipt;
 			sourceTree = "<group>";
 		};
-		F6F7D4922534D45100C4BDD2 /* StaticWidget */ = {
+		F6D1F1C42581922D00D3BDB4 /* LastNoteWidget */ = {
 			isa = PBXGroup;
 			children = (
-				F6F7D4932534D45100C4BDD2 /* StaticWidget.swift */,
-				F6F7D4D62534EA4500C4BDD2 /* UIColor+SU.swift */,
-				F6F7D4952534D45300C4BDD2 /* Assets.xcassets */,
-				F6F7D4972534D45300C4BDD2 /* Info.plist */,
+				F6D1F1D82581924B00D3BDB4 /* LastNoteWidget.swift */,
+				F6D1F1DC2581926A00D3BDB4 /* UIColor+Widget.swift */,
+				F6D1F1C72581922D00D3BDB4 /* LastNoteWidget.intentdefinition */,
+				F6D1F1C82581923000D3BDB4 /* Assets.xcassets */,
+				F6D1F1CA2581923000D3BDB4 /* Info.plist */,
 			);
-			path = StaticWidget;
+			path = LastNoteWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -555,28 +558,28 @@
 			buildRules = (
 			);
 			dependencies = (
-				F6F7D4992534D45300C4BDD2 /* PBXTargetDependency */,
+				F6D1F1CE2581923000D3BDB4 /* PBXTargetDependency */,
 			);
 			name = Jotify;
 			productName = Jotify;
 			productReference = F650E12D22BFF35A008D29AD /* Jotify.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F6F7D48C2534D45100C4BDD2 /* StaticWidgetExtension */ = {
+		F6D1F1C02581922D00D3BDB4 /* LastNoteWidgetExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F6F7D49F2534D45300C4BDD2 /* Build configuration list for PBXNativeTarget "StaticWidgetExtension" */;
+			buildConfigurationList = F6D1F1D02581923000D3BDB4 /* Build configuration list for PBXNativeTarget "LastNoteWidgetExtension" */;
 			buildPhases = (
-				F6F7D4892534D45100C4BDD2 /* Sources */,
-				F6F7D48A2534D45100C4BDD2 /* Frameworks */,
-				F6F7D48B2534D45100C4BDD2 /* Resources */,
+				F6D1F1BD2581922D00D3BDB4 /* Sources */,
+				F6D1F1BE2581922D00D3BDB4 /* Frameworks */,
+				F6D1F1BF2581922D00D3BDB4 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = StaticWidgetExtension;
-			productName = StaticWidgetExtension;
-			productReference = F6F7D48D2534D45100C4BDD2 /* StaticWidgetExtension.appex */;
+			name = LastNoteWidgetExtension;
+			productName = LastNoteWidgetExtension;
+			productReference = F6D1F1C12581922D00D3BDB4 /* LastNoteWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -585,7 +588,7 @@
 		F650E12522BFF35A008D29AD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1200;
+				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Harrison Leath";
 				TargetAttributes = {
@@ -593,8 +596,8 @@
 						CreatedOnToolsVersion = 11.0;
 						LastSwiftMigration = 1120;
 					};
-					F6F7D48C2534D45100C4BDD2 = {
-						CreatedOnToolsVersion = 12.0.1;
+					F6D1F1C02581922D00D3BDB4 = {
+						CreatedOnToolsVersion = 12.2;
 					};
 				};
 			};
@@ -612,7 +615,7 @@
 			projectRoot = "";
 			targets = (
 				F650E12C22BFF35A008D29AD /* Jotify */,
-				F6F7D48C2534D45100C4BDD2 /* StaticWidgetExtension */,
+				F6D1F1C02581922D00D3BDB4 /* LastNoteWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -636,11 +639,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F6F7D48B2534D45100C4BDD2 /* Resources */ = {
+		F6D1F1BF2581922D00D3BDB4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6F7D4962534D45300C4BDD2 /* Assets.xcassets in Resources */,
+				F6D1F1C92581923000D3BDB4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -735,6 +738,7 @@
 				F692D97723B1CB2C00E47109 /* UINavigationController+Extensions.swift in Sources */,
 				F65E479F2324B12A00FCAEF3 /* UserDefaults+Extensions.swift in Sources */,
 				F61EC8BE2348E1BA00FB0A63 /* WhatsNewViewController+HapticFeedback.swift in Sources */,
+				F6D1F1CC2581923000D3BDB4 /* LastNoteWidget.intentdefinition in Sources */,
 				F68097B824BA53D9006BDD0C /* ReceiptHandler.swift in Sources */,
 				F61EC8CA2348E1BA00FB0A63 /* Sequence+WhatsNew.swift in Sources */,
 				F61EC8BC2348E1BA00FB0A63 /* WhatsNewViewController+TitleView.swift in Sources */,
@@ -765,24 +769,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F6F7D4892534D45100C4BDD2 /* Sources */ = {
+		F6D1F1BD2581922D00D3BDB4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6F7D4942534D45100C4BDD2 /* StaticWidget.swift in Sources */,
-				F6F7D4C92534E50000C4BDD2 /* UserDefaults+Extensions.swift in Sources */,
-				F6F7D4A22534D46A00C4BDD2 /* GroupDataManager.swift in Sources */,
-				F6F7D4D72534EA4500C4BDD2 /* UIColor+SU.swift in Sources */,
+				F6D1F1CB2581923000D3BDB4 /* LastNoteWidget.intentdefinition in Sources */,
+				F6D1F1ED258192A800D3BDB4 /* LastNoteWidget.swift in Sources */,
+				F6D1F1E42581926E00D3BDB4 /* UIColor+Widget.swift in Sources */,
+				F6D1F1E72581928000D3BDB4 /* GroupDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		F6F7D4992534D45300C4BDD2 /* PBXTargetDependency */ = {
+		F6D1F1CE2581923000D3BDB4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F6F7D48C2534D45100C4BDD2 /* StaticWidgetExtension */;
-			targetProxy = F6F7D4982534D45300C4BDD2 /* PBXContainerItemProxy */;
+			target = F6D1F1C02581922D00D3BDB4 /* LastNoteWidgetExtension */;
+			targetProxy = F6D1F1CD2581923000D3BDB4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1054,24 +1058,22 @@
 			};
 			name = TestFlight;
 		};
-		F6F7D49C2534D45300C4BDD2 /* Debug */ = {
+		F6D1F1D12581923000D3BDB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = StaticWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = LastNoteWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 59;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
-				INFOPLIST_FILE = StaticWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				INFOPLIST_FILE = LastNoteWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify.StaticWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify.LastNoteWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1079,24 +1081,22 @@
 			};
 			name = Debug;
 		};
-		F6F7D49D2534D45300C4BDD2 /* Release */ = {
+		F6D1F1D22581923000D3BDB4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = StaticWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = LastNoteWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 59;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
-				INFOPLIST_FILE = StaticWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				INFOPLIST_FILE = LastNoteWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify.StaticWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify.LastNoteWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1104,24 +1104,22 @@
 			};
 			name = Release;
 		};
-		F6F7D49E2534D45300C4BDD2 /* TestFlight */ = {
+		F6D1F1D32581923000D3BDB4 /* TestFlight */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = StaticWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = LastNoteWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 59;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
-				INFOPLIST_FILE = StaticWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				INFOPLIST_FILE = LastNoteWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify.StaticWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify.LastNoteWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1152,12 +1150,12 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F6F7D49F2534D45300C4BDD2 /* Build configuration list for PBXNativeTarget "StaticWidgetExtension" */ = {
+		F6D1F1D02581923000D3BDB4 /* Build configuration list for PBXNativeTarget "LastNoteWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F6F7D49C2534D45300C4BDD2 /* Debug */,
-				F6F7D49D2534D45300C4BDD2 /* Release */,
-				F6F7D49E2534D45300C4BDD2 /* TestFlight */,
+				F6D1F1D12581923000D3BDB4 /* Debug */,
+				F6D1F1D22581923000D3BDB4 /* Release */,
+				F6D1F1D32581923000D3BDB4 /* TestFlight */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

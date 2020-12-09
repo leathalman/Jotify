@@ -59,8 +59,6 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         GroupDataManager().writeData(path: "widgetContent", content: writeNoteView.inputTextView.text)
         GroupDataManager().writeData(path: "widgetColor", content: UIColor.stringFromColor(color: backgroundColor))
         GroupDataManager().writeData(path: "widgetDate", content: navigationTitle)
-
-        print(UIColor.stringFromColor(color: backgroundColor))
         
         if #available(iOS 14.0, *) {
             WidgetCenter.shared.reloadAllTimelines()
