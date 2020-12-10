@@ -71,7 +71,5 @@ class CoreDataManager {
                 print("Could not fetch. \(error), \(error.userInfo)")
             }
         }
-        
     }
-    
 }

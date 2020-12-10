@@ -46,10 +46,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if !notes.isEmpty {
-            setupSearchBar()
-        }
-        
         updateCollectionViewData()
         setupDynamicViewElements()
     }
@@ -155,6 +151,10 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     }
     
     func setupDynamicViewElements() {
+        if !notes.isEmpty {
+            setupSearchBar()
+        }
+        
         collectionView.backgroundColor = InterfaceColors.viewBackgroundColor
         
         let cancelButtonAttributes: NSDictionary = [NSAttributedString.Key.foregroundColor: self.view.tintColor ?? UIColor.systemBlue]
@@ -345,13 +345,13 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     
     func sortNotes() {
         let context = CoreDataManager.shared.appDelegate?.persistentContainer.viewContext
-        
+
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Note")
         fetchRequest.returnsObjectsAsFaults = false
-        
+
         let sortBy = defaults.string(forKey: "sortBy")
         var sortDescriptor: NSSortDescriptor?
-        
+
         switch sortBy {
         case "content":
             sortDescriptor = NSSortDescriptor(key: "content", ascending: true)
@@ -366,16 +366,17 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         case .some(_):
             sortDescriptor = NSSortDescriptor(key: "modifiedDate", ascending: false)
         }
-        
+
         fetchRequest.sortDescriptors = [sortDescriptor] as? [NSSortDescriptor]
-        
+
         CoreDataManager.shared.enqueue { _ in
             do {
                 self.notes = try context!.fetch(fetchRequest) as! [Note]
+                NoteData.notes = self.notes
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
-                
+
             } catch let error as NSError {
                 print("Could not fetch. \(error), \(error.userInfo)")
             }
