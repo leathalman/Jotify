@@ -559,14 +559,13 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                 UIApplication.shared.applicationIconBadgeNumber -= 1
             }
             
-            
             CoreDataManager.shared.appDelegate?.persistentContainer.viewContext.delete(note)
-//            NoteData.notes = self.notes
         }
-                
+        
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
         
-//        updateCollectionViewData()
+        NoteData.notes = self.notes
+        updateCollectionViewData()
     }
     
     func shareNote(text: String) {
