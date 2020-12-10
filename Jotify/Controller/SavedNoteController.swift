@@ -546,25 +546,32 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         let selectedItems = collectionView.indexPathsForSelectedItems ?? []
         
         var selectedNotes: [Note] = []
-        var count = 0
         
         for value in selectedItems {
             selectedNotes.append(notes[value.row])
-            notes.remove(at: selectedItems[count].row)
-            count+=1
         }
         
         for note in selectedNotes {
             if note.isReminder == true {
                 UIApplication.shared.applicationIconBadgeNumber -= 1
             }
-            
             CoreDataManager.shared.appDelegate?.persistentContainer.viewContext.delete(note)
         }
         
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
+        CoreDataManager.shared.enqueue { context in
+                    do {
+                        try context.save()
+                        
+                    } catch let error as NSError {
+                        print("Could not save. \(error), \(error.userInfo)")
+                    }
+                }
         
-        NoteData.notes = self.notes
+        updateCollectionViewData()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
         updateCollectionViewData()
     }
     

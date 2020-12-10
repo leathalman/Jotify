@@ -28,7 +28,6 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         setupPlaceholder()
         setupDynamicBackground()
         setupDynamicKeyboardColor()
-        print("notes array: \(EditingData.notes.count)")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
