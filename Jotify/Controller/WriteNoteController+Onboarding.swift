@@ -27,6 +27,7 @@ extension WriteNoteController {
                 // new version
                 print("new version")
 //                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+                createWidgetSamepleData()
                 
             } else {
                 // first launch
