@@ -66,7 +66,6 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
                 let visibleViewController = pageViewController.viewControllers?.first,
                 let index = orderedViewControllers.firstIndex(of: visibleViewController)
             {
-                print(index)
                 currentIndex = index
                 
             }

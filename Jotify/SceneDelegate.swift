@@ -74,6 +74,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
     
+//    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+//        print("URL OPENED")
+//    }
+    
     @objc func unlockPressed(sender: UIButton) {
         let privacyController = PrivacySettingsController()
         privacyController.authenticateUserWithBioMetrics(window: window!)

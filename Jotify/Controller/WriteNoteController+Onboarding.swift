@@ -32,6 +32,7 @@ extension WriteNoteController {
                 // first launch
                 print("first launch")
                 presentFirstLaunchOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+                createWidgetSamepleData()
             }
             standard.set(currentVersion, forKey: shortVersionKey)
         }
@@ -96,6 +97,13 @@ extension WriteNoteController {
         DispatchQueue.main.async {
             viewController.present(whatsNewViewController, animated: true)
         }
+    }
+    
+    func createWidgetSamepleData() {
+        GroupDataManager().writeData(path: "widgetContent", content: "Have you written a note yet? You should do that.")
+        GroupDataManager().writeData(path: "widgetColor", content: UIColor.stringFromColor(color: UIColor.blue2))
+        GroupDataManager().writeData(path: "widgetDate", content: "July 2, 2002")
+//        WidgetCenter.shared.reloadAllTimelines()
     }
     
     func presentFirstLaunchOnboarding(viewController: UIViewController, tintColor: UIColor) {
