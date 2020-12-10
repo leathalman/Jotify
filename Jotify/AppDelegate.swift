@@ -44,6 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             Themes().setupDefaultMode()
         }
+        
+        CoreDataManager.shared.fetchNotes()
                         
         switch Config.appConfiguration {
         case .Debug:

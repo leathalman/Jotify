@@ -28,6 +28,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         setupPlaceholder()
         setupDynamicBackground()
         setupDynamicKeyboardColor()
+        print("notes array: \(EditingData.notes.count)")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -131,15 +132,8 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     }
     
     func saveNote(content: String, color: String, date: Double) {
-        CoreDataManager.shared.enqueue { context in
-            do {
-                self.setNoteValues(context: context, content: content, color: color, date: date)
-                try context.save()
-                
-            } catch let error as NSError {
-                print("Could not save. \(error), \(error.userInfo)")
-            }
-        }
+        setNoteValues(context: (CoreDataManager.shared.appDelegate?.persistentContainer.viewContext)!, content: content, color: color, date: date)
+        CoreDataManager.shared.fetchNotes()
     }
     
     func setNoteValues(context: NSManagedObjectContext, content: String, color: String, date: Double) {
@@ -162,6 +156,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         let dateString = dateFormatter.string(from: updateDate)
         
         note.setValue(dateString, forKey: "dateString")
+        
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

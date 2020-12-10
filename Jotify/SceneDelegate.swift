@@ -68,7 +68,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let privacyController = PrivacySettingsController()
         privacyController.removeBlurView(window: window!)
-                
+        
         renumberBadgesOfPendingNotifications()
         appDelegate?.saveNoteBeforeExiting()
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
@@ -87,46 +87,35 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // once reminders are delivered it will override the badge number
         // so it will increment correctly as long as the notifications have been delivered
         // but a new reminder scheduled after the others have been delivered will still be badge = 1
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().getPendingNotificationRequests { pendingNotificationRequests in
-                if pendingNotificationRequests.count > 0 {
-                    let notificationRequests = pendingNotificationRequests
-                        .filter { $0.trigger is UNCalendarNotificationTrigger }
-                        .sorted(by: { (r1, r2) -> Bool in
-                            let r1Trigger = r1.trigger as! UNCalendarNotificationTrigger
-                            let r2Trigger = r2.trigger as! UNCalendarNotificationTrigger
-                            let r1Date = r1Trigger.nextTriggerDate()!
-                            let r2Date = r2Trigger.nextTriggerDate()!
-                            
-                            return r1Date.compare(r2Date) == .orderedAscending
-                        })
-                    
-                    let identifiers = notificationRequests.map { $0.identifier }
-                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
-                    
-                    notificationRequests.enumerated().forEach { index, request in
-                        if let trigger = request.trigger {
-                            let content = UNMutableNotificationContent()
-                            content.body = request.content.body
-                            content.sound = .default
-                            content.badge = (index + 1) as NSNumber
-                            
-                            let request = UNNotificationRequest(identifier: request.identifier, content: content, trigger: trigger)
-                            UNUserNotificationCenter.current().add(request)
-                        }
+        UNUserNotificationCenter.current().getPendingNotificationRequests { pendingNotificationRequests in
+            if pendingNotificationRequests.count > 0 {
+                let notificationRequests = pendingNotificationRequests
+                    .filter { $0.trigger is UNCalendarNotificationTrigger }
+                    .sorted(by: { (r1, r2) -> Bool in
+                        let r1Trigger = r1.trigger as! UNCalendarNotificationTrigger
+                        let r2Trigger = r2.trigger as! UNCalendarNotificationTrigger
+                        let r1Date = r1Trigger.nextTriggerDate()!
+                        let r2Date = r2Trigger.nextTriggerDate()!
+                        
+                        return r1Date.compare(r2Date) == .orderedAscending
+                    })
+                
+                let identifiers = notificationRequests.map { $0.identifier }
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+                
+                notificationRequests.enumerated().forEach { index, request in
+                    if let trigger = request.trigger {
+                        let content = UNMutableNotificationContent()
+                        content.body = request.content.body
+                        content.sound = .default
+                        content.badge = (index + 1) as NSNumber
+                        
+                        let request = UNNotificationRequest(identifier: request.identifier, content: content, trigger: trigger)
+                        UNUserNotificationCenter.current().add(request)
                     }
                 }
             }
-        } else if let pendingNotifications = UIApplication.shared.scheduledLocalNotifications, pendingNotifications.count > 0 {
-            let notifications = pendingNotifications
-                .filter { $0.fireDate != nil }
-                .sorted(by: { n1, n2 in n1.fireDate!.compare(n2.fireDate!) == .orderedAscending })
-            
-            notifications.forEach { UIApplication.shared.cancelLocalNotification($0) }
-            notifications.enumerated().forEach { index, notification in
-                notification.applicationIconBadgeNumber = index + 1
-                UIApplication.shared.scheduleLocalNotification(notification)
-            }
         }
+        
     }
 }

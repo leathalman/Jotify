@@ -50,7 +50,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             setupSearchBar()
         }
         
-        fetchNotesFromCoreData()
+        updateCollectionViewData()
         setupDynamicViewElements()
     }
     
@@ -70,8 +70,19 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
-        fetchNotesFromCoreData()
+        updateCollectionViewData()
         resetAppBadgeIfAllRemindersCleared()
+    }
+    
+    func updateCollectionViewData() {
+        CoreDataManager.shared.fetchNotes()
+        notes = NoteData.notes
+                
+        print("notes count: \(NoteData.notes.capacity)")
+        
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
     
     func setupView() {
@@ -247,25 +258,25 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             
             actionController.addAction(Action("Sort by date", style: .default, handler: { _ in
                 self.defaults.set("date", forKey: "sortBy")
-                self.fetchNotesFromCoreData()
+                self.sortNotes()
                 self.animateCells()
                 
             }))
             actionController.addAction(Action("Sort by color", style: .default, handler: { _ in
                 self.defaults.set("color", forKey: "sortBy")
-                self.fetchNotesFromCoreData()
+                self.sortNotes()
                 self.animateCells()
                 
             }))
             actionController.addAction(Action("Sort by content", style: .default, handler: { _ in
                 self.defaults.set("content", forKey: "sortBy")
-                self.fetchNotesFromCoreData()
+                self.sortNotes()
                 self.animateCells()
                 
             }))
             actionController.addAction(Action("Sort by reminders", style: .default, handler: { _ in
                 self.defaults.set("reminders", forKey: "sortBy")
-                self.fetchNotesFromCoreData()
+                self.sortNotes()
                 self.animateCells()
                 
             }))
@@ -297,7 +308,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                 pressed = 0
             }
             
-            fetchNotesFromCoreData()
+            sortNotes()
             animateCells()
         }
     }
@@ -332,12 +343,8 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         return searchController.isActive && !searchBarIsEmpty()
     }
     
-    func fetchNotesFromCoreData() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
+    func sortNotes() {
+        let context = CoreDataManager.shared.appDelegate?.persistentContainer.viewContext
         
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Note")
         fetchRequest.returnsObjectsAsFaults = false
@@ -364,7 +371,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         CoreDataManager.shared.enqueue { _ in
             do {
-                self.notes = try managedContext.fetch(fetchRequest) as! [Note]
+                self.notes = try context!.fetch(fetchRequest) as! [Note]
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
@@ -373,7 +380,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                 print("Could not fetch. \(error), \(error.userInfo)")
             }
         }
-        
     }
     
     func animateCells() {
@@ -566,7 +572,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
         
-        fetchNotesFromCoreData()
+        updateCollectionViewData()
     }
     
     func shareNote(text: String) {

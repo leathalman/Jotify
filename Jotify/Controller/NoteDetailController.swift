@@ -374,14 +374,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
             }
         }
         
-        CoreDataManager.shared.enqueue { context in
-            do {
-                try context.save()
-                
-            } catch let error as NSError {
-                print("Could not save. \(error), \(error.userInfo)")
-            }
-        }
+        CoreDataManager.shared.fetchNotes()
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

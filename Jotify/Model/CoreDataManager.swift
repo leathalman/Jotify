@@ -9,6 +9,10 @@
 import CoreData
 import UIKit
 
+struct NoteData {
+    static var notes = [Note]()
+}
+
 class CoreDataManager {
     static let shared = CoreDataManager()
     
@@ -34,4 +38,40 @@ class CoreDataManager {
             }
         }
     }
+    
+    func fetchNotes() {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Note")
+        fetchRequest.returnsObjectsAsFaults = false
+        
+        let sortBy = UserDefaults.standard.string(forKey: "sortBy")
+        var sortDescriptor: NSSortDescriptor?
+        
+        switch sortBy {
+        case "content":
+            sortDescriptor = NSSortDescriptor(key: "content", ascending: true)
+        case "date":
+            sortDescriptor = NSSortDescriptor(key: "modifiedDate", ascending: false)
+        case "color":
+            sortDescriptor = NSSortDescriptor(key: "color", ascending: false)
+        case "reminders":
+            sortDescriptor = NSSortDescriptor(key: "isReminder", ascending: false)
+        case .none:
+            sortDescriptor = NSSortDescriptor(key: "modifiedDate", ascending: false)
+        case .some(_):
+            sortDescriptor = NSSortDescriptor(key: "modifiedDate", ascending: false)
+        }
+        
+        fetchRequest.sortDescriptors = [sortDescriptor] as? [NSSortDescriptor]
+        
+        CoreDataManager.shared.enqueue { _ in
+            do {
+                NoteData.notes = try self.context.fetch(fetchRequest) as! [Note]
+                
+            } catch let error as NSError {
+                print("Could not fetch. \(error), \(error.userInfo)")
+            }
+        }
+        
+    }
+    
 }
