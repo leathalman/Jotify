@@ -545,13 +545,13 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     @objc func deleteSelectedCells() {
         let selectedItems = collectionView.indexPathsForSelectedItems ?? []
         
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        let managedContext = appDelegate?.persistentContainer.viewContext
-        
         var selectedNotes: [Note] = []
+        var count = 0
         
         for value in selectedItems {
             selectedNotes.append(notes[value.row])
+            notes.remove(at: selectedItems[count].row)
+            count+=1
         }
         
         for note in selectedNotes {
@@ -559,21 +559,14 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                 UIApplication.shared.applicationIconBadgeNumber -= 1
             }
             
-            managedContext?.delete(note)
+            
+            CoreDataManager.shared.appDelegate?.persistentContainer.viewContext.delete(note)
+//            NoteData.notes = self.notes
         }
-        
-        CoreDataManager.shared.enqueue { context in
-            do {
-                try context.save()
                 
-            } catch let error as NSError {
-                print("Could not save. \(error), \(error.userInfo)")
-            }
-        }
-        
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
         
-        updateCollectionViewData()
+//        updateCollectionViewData()
     }
     
     func shareNote(text: String) {
@@ -612,9 +605,8 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             
             filteredNotes.remove(at: indexPath.row)
             
-            let appDelegate = UIApplication.shared.delegate as? AppDelegate
-            let managedContext = appDelegate?.persistentContainer.viewContext
-            managedContext?.delete(filteredNote)
+            CoreDataManager.shared.appDelegate?.persistentContainer.viewContext.delete(filteredNote)
+            self.notes = NoteData.notes
             
         } else {
             let note = notes[indexPath.row]
@@ -641,10 +633,8 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             }
             
             notes.remove(at: indexPath.row)
-            
-            let appDelegate = UIApplication.shared.delegate as? AppDelegate
-            let managedContext = appDelegate?.persistentContainer.viewContext
-            managedContext?.delete(note)
+            CoreDataManager.shared.appDelegate?.persistentContainer.viewContext.delete(note)
+            NoteData.notes = self.notes
         }
         
         CoreDataManager.shared.enqueue { context in
