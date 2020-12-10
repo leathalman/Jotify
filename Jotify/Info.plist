@@ -68,6 +68,10 @@
 	<true/>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Unlock Jotify to access your notes</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>ConfigurationIntent</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
