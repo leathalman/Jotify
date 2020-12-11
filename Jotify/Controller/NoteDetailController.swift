@@ -40,13 +40,11 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         setupView()
         fetchNotificaitonUUID()
         setupNotifications()
-        updateWidget()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         updateContent(newContent: writeNoteView.inputTextView.text)
-        updateWidget()
     }
     
     func fetchNotificaitonUUID() {
@@ -70,16 +68,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     func removeReminderIfDelivered() {
         if checkIfReminderHasBeenDelivered() {
             NoteData.recentNote.isReminder = false
-            
-            CoreDataManager.shared.enqueue { context in
-                do {
-                    try context.save()
-                    
-                } catch let error as NSError {
-                    print("Could not save. \(error), \(error.userInfo)")
-                }
-            }
-            
+            CoreDataManager.shared.saveContext()
             UIApplication.shared.applicationIconBadgeNumber -= 1
             
         } else {

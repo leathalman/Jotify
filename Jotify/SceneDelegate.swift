@@ -70,12 +70,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         privacyController.removeBlurView(window: window!)
         
         renumberBadgesOfPendingNotifications()
-        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+        CoreDataManager.shared.saveContext()
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         print("URL OPENED")
-        CoreDataManager.shared.setLastNote()
+        CoreDataManager.shared.fetchNotes()
+        NoteData.recentNote = NoteData.notes.first
         
         let pageViewController = PageViewController()
         window?.rootViewController = pageViewController

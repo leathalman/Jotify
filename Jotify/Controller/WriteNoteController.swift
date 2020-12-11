@@ -11,17 +11,16 @@ import MultilineTextField
 import WidgetKit
 import UIKit
 
+struct EditingData {
+    static var writeNoteViewText = String()
+}
+
 class WriteNoteController: UIViewController, UITextViewDelegate {
     let writeNoteView = WriteNoteView()
     
     let defaults = UserDefaults.standard
-        
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupView()
-        setupNotifications()
-        presentOnboarding()
-    }
+    
+    var tempNoteCount = 0
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -31,14 +30,21 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         setupDynamicKeyboardColor()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(true)
-        writeNoteView.inputTextView.resignFirstResponder()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupView()
+        setupNotifications()
+        presentOnboarding()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         handleSend()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        writeNoteView.inputTextView.resignFirstResponder()
     }
     
     func setupView() {
@@ -120,8 +126,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
             StoredColors.noteColorString = UIColor.stringFromColor(color: StoredColors.noteColor)
             UserDefaults.standard.setValue(StoredColors.noteColorString, forKey: "previousColor")
             
-            let date = Date.timeIntervalSinceReferenceDate
-            saveNote(content: writeNoteView.inputTextView.text, color: StoredColors.noteColorString, date: date)
+            saveNote(content: writeNoteView.inputTextView.text, color: StoredColors.noteColorString, date: Date.timeIntervalSinceReferenceDate)
             writeNoteView.inputTextView.text = ""
             
             // userdefaults so previous color persists through relaunch
@@ -131,10 +136,12 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         }
     }
     
+    func textViewDidChange(_ textView: UITextView) {
+        EditingData.writeNoteViewText = writeNoteView.inputTextView.text
+    }
+    
     func saveNote(content: String, color: String, date: Double) {
         setNoteValues(context: (CoreDataManager.shared.appDelegate?.persistentContainer.viewContext)!, content: content, color: color, date: date)
-        GroupDataManager().writeData(path: "widgetContent", content: content)
-        GroupDataManager().writeData(path: "widgetColor", content: color)
         
         let updateDate = Date(timeIntervalSinceReferenceDate: date)
         let dateFormatter = DateFormatter()
@@ -143,10 +150,13 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         let dateString = dateFormatter.string(from: updateDate)
         
         GroupDataManager().writeData(path: "widgetDate", content: dateString)
+        GroupDataManager().writeData(path: "widgetContent", content: content)
+        GroupDataManager().writeData(path: "widgetColor", content: color)
         
         if #available(iOS 14.0, *) {
             WidgetCenter.shared.reloadAllTimelines()
         }
+        
         CoreDataManager.shared.fetchNotes()
     }
     
@@ -170,7 +180,6 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         let dateString = dateFormatter.string(from: updateDate)
         
         note.setValue(dateString, forKey: "dateString")
-        
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
