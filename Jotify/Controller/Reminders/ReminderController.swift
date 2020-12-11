@@ -82,6 +82,7 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         NoteData.recentNote.reminderDate = reminderDate
         NoteData.recentNote.notificationUUID = notificationUUID
         NoteData.recentNote.reminderDateDisplay = reminderDateDisplay
+        NoteData.recentNote.modifiedDate = Date.timeIntervalSinceReferenceDate
         
         CoreDataManager.shared.saveContext()
     }

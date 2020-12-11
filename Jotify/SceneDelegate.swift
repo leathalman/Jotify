@@ -70,14 +70,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         privacyController.removeBlurView(window: window!)
         
         renumberBadgesOfPendingNotifications()
-        appDelegate?.saveNoteBeforeExiting()
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         print("URL OPENED")
         CoreDataManager.shared.setLastNote()
-        window?.rootViewController?.present(NoteDetailController(), animated: true, completion: nil)
+        
+        let controller = DeepLinkNoteDetailController()
+        
+        if let window = self.window, let rootViewController = window.rootViewController {
+            var currentController = rootViewController
+            while let presentedController = currentController.presentedViewController {
+                currentController = presentedController
+            }
+            controller.modalPresentationStyle = .fullScreen
+            currentController.present(controller, animated: true, completion: nil)
+        }
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
     }
     
     @objc func unlockPressed(sender: UIButton) {

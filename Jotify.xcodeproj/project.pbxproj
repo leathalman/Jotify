@@ -78,6 +78,7 @@
 		F6A7E4C2238F128F00D3E6AF /* defaultIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6A7E4C1238F128F00D3E6AF /* defaultIcon@3x.png */; };
 		F6A7E4C4238F243200D3E6AF /* IAPHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A7E4C3238F243200D3E6AF /* IAPHandler.swift */; };
 		F6A7E4C6238F244800D3E6AF /* JotifyProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A7E4C5238F244800D3E6AF /* JotifyProducts.swift */; };
+		F6ACF5AF25831B550088F35D /* DeepLinkNoteDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6ACF5AE25831B550088F35D /* DeepLinkNoteDetailController.swift */; };
 		F6AEC561238CE28B0068706B /* goldIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6AEC560238CE28B0068706B /* goldIcon@3x.png */; };
 		F6AEC563238CE2C00068706B /* goldIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6AEC562238CE2C00068706B /* goldIcon@2x.png */; };
 		F6B2083722DE22860098CF9F /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B2083622DE22860098CF9F /* Themes.swift */; };
@@ -203,6 +204,7 @@
 		F6A7E4C1238F128F00D3E6AF /* defaultIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "defaultIcon@3x.png"; sourceTree = "<group>"; };
 		F6A7E4C3238F243200D3E6AF /* IAPHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHandler.swift; sourceTree = "<group>"; };
 		F6A7E4C5238F244800D3E6AF /* JotifyProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JotifyProducts.swift; sourceTree = "<group>"; };
+		F6ACF5AE25831B550088F35D /* DeepLinkNoteDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkNoteDetailController.swift; sourceTree = "<group>"; };
 		F6AEC560238CE28B0068706B /* goldIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "goldIcon@3x.png"; sourceTree = "<group>"; };
 		F6AEC562238CE2C00068706B /* goldIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "goldIcon@2x.png"; sourceTree = "<group>"; };
 		F6B2083622DE22860098CF9F /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 			children = (
 				F6A2C7212340E8530031A81B /* Reminders */,
 				F644968522C16422009CC386 /* NoteDetailController.swift */,
+				F6ACF5AE25831B550088F35D /* DeepLinkNoteDetailController.swift */,
 				F650E15022BFFB12008D29AD /* SavedNoteController.swift */,
 				F650E15322BFFB12008D29AD /* WriteNoteController.swift */,
 				F61EC8D42348EE5200FB0A63 /* WriteNoteController+Onboarding.swift */,
@@ -713,6 +716,7 @@
 				F6B7BF8E239189700057FB8B /* PremiumView.swift in Sources */,
 				F69E5DC0231AE14800872345 /* ThemeSelectionController.swift in Sources */,
 				F63C489623EFBC7500310CFF /* UIColor+Extensions.swift in Sources */,
+				F6ACF5AF25831B550088F35D /* DeepLinkNoteDetailController.swift in Sources */,
 				F6F7D4A12534D46A00C4BDD2 /* GroupDataManager.swift in Sources */,
 				F61EC8CD2348E1BA00FB0A63 /* WhatsNewButtonViewController.swift in Sources */,
 				F6969F5E22DA1AFD00C4E8FF /* AboutSettingsController.swift in Sources */,

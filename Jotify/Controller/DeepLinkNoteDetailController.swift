@@ -1,21 +1,22 @@
 //
-//  NoteDetailController.swift
+//  DeepLinkNoteDetailController.swift
 //  Jotify
 //
-//  Created by Harrison Leath on 6/24/19.
-//  Copyright © 2019 Harrison Leath. All rights reserved.
+//  Created by Harrison Leath on 12/10/20.
+//  Copyright © 2020 Harrison Leath. All rights reserved.
 //
 
 import UIKit
 import UserNotifications
 import WidgetKit
 
-class NoteDetailController: UIViewController, UITextViewDelegate {
+class DeepLinkNoteDetailController: UIViewController, UITextViewDelegate {
     var navigationTitle: String = ""
     var backgroundColor: UIColor = .white
     
     var datePicker: UIDatePicker = UIDatePicker()
     let toolBar = UIToolbar()
+    var navbar = UINavigationBar()
     
     let writeNoteView = WriteNoteView()
     
@@ -122,7 +123,6 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     }
     
     func checkIfReminderHasBeenDelivered() -> Bool {
-        
         let notificationUUID = NoteData.recentNote.notificationUUID ?? ""
         
         if notificationUUID == "cleared" {
@@ -152,40 +152,47 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     }
     
     func setupPersistentNavigationBar() {
-        guard navigationController?.topViewController === self else { return }
-        transitionCoordinator?.animate(alongsideTransition: { [weak self] _ in
-            self?.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            self?.navigationController?.navigationBar.shadowImage = UIImage()
-            self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-            self?.navigationController?.navigationBar.barStyle = .black
-            
-            if self?.defaults.bool(forKey: "darkModeEnabled") ?? false {
-                if self?.defaults.bool(forKey: "vibrantDarkModeEnabled") ?? true {
-                    self?.navigationController?.navigationBar.backgroundColor = self?.backgroundColor
-                    self?.navigationController?.navigationBar.barTintColor = self?.backgroundColor
-                    
-                } else if self?.defaults.bool(forKey: "pureDarkModeEnabled") ?? false {
-                    self?.navigationController?.navigationBar.backgroundColor = InterfaceColors.viewBackgroundColor
-                    self?.navigationController?.navigationBar.barTintColor = InterfaceColors.viewBackgroundColor
-                }
+        navbar.setBackgroundImage(UIImage(), for: .default)
+        navbar.shadowImage = UIImage()
+        navbar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navbar.barStyle = .black
+        
+        if defaults.bool(forKey: "darkModeEnabled") {
+            if defaults.bool(forKey: "vibrantDarkModeEnabled") {
+                navbar.backgroundColor = backgroundColor
+                navbar.barTintColor = backgroundColor
                 
-            } else {
-                self?.navigationController?.navigationBar.backgroundColor = self?.backgroundColor
-                self?.navigationController?.navigationBar.barTintColor = self?.backgroundColor
+            } else if defaults.bool(forKey: "pureDarkModeEnabled") {
+                navbar.backgroundColor = InterfaceColors.viewBackgroundColor
+                navbar.barTintColor = InterfaceColors.viewBackgroundColor
             }
-            }, completion: nil)
+            
+        } else {
+            navbar.backgroundColor = backgroundColor
+            navbar.barTintColor = backgroundColor
+        }
     }
     
     func setupView() {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
-
         view = writeNoteView
         
         let textView = writeNoteView.inputTextView
         
+        let height: CGFloat = 20
+        var statusBarHeight: CGFloat = 0
+        if #available(iOS 13.0, *) {
+            let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+            statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+            
+        } else {
+            statusBarHeight = UIApplication.shared.statusBarFrame.height
+        }
+        
+        navbar = UINavigationBar(frame: CGRect(x: 0, y: statusBarHeight, width: UIScreen.main.bounds.width, height: height))
+        navbar.backgroundColor = UIColor.white
+        navbar.delegate = self as? UINavigationBarDelegate
+        
         backgroundColor = UIColor.colorFromString(string: NoteData.recentNote.color ?? "blue2")
-        navigationTitle = NoteData.recentNote.dateString ?? "July 2, 2002"
-        navigationController?.navigationItem.title = NoteData.recentNote.dateString ?? "July 2, 2002"
 
         StoredColors.reminderColor = backgroundColor
         UIApplication.shared.windows.first?.backgroundColor = backgroundColor
@@ -207,7 +214,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         textView.tintColor = .white
         navigationBarHeight = navigationController?.navigationBar.bounds.height ?? 0
         
-        writeNoteView.inputTextView.frame = CGRect(x: 0, y: 15, width: UIDevice.current.screenWidth, height: UIDevice.current.screenHeight - navigationBarHeight - 30)
+        writeNoteView.inputTextView.frame = CGRect(x: 0, y: statusBarHeight*2 + 15, width: UIDevice.current.screenWidth, height: UIDevice.current.screenHeight - navigationBarHeight - 30)
         
         textView.text = NoteData.recentNote.content ?? "Note data did not load properly"
         textView.font = UIFont.boldSystemFont(ofSize: 18)
@@ -218,18 +225,22 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         textView.isPlaceholderScrollEnabled = true
         textView.delegate = self
         
-        navigationItem.title = navigationTitle
-        navigationItem.setHidesBackButton(true, animated: true)
+        let navItem = UINavigationItem()
+        navigationTitle = NoteData.recentNote.dateString ?? "July 2, 2002"
+        navItem.title = navigationTitle
         
         var cancel = UIImage(named: "cancel")
         cancel = cancel?.withRenderingMode(.alwaysOriginal)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: cancel, style: .plain, target: self, action: #selector(handleCancel))
-        
+        navItem.rightBarButtonItem = UIBarButtonItem(image: cancel, style: .plain, target: self, action: #selector(handleCancel))
+                
         var alarm = UIImage(named: "alarm.fill")
         alarm = alarm?.withRenderingMode(.alwaysOriginal)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: alarm, style: .plain, target: self, action: #selector(handleReminder))
+        navItem.leftBarButtonItem = UIBarButtonItem(image: alarm, style: .plain, target: self, action: #selector(handleReminder))
         
+        navbar.items = [navItem]
         hideKeyboardWhenTappedAround()
+        
+        view.addSubview(navbar)
     }
     
     @objc func handleReminder() {
@@ -267,7 +278,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     
     @objc func handleCancel() {
         self.playHapticFeedback()
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
     func requestNotificationPermission() {
@@ -286,14 +297,16 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         if NoteData.recentNote.content != newContent {
             NoteData.recentNote.content = newContent
             NoteData.recentNote.modifiedDate = Date.timeIntervalSinceReferenceDate
-            print("Note: updated")
+            print("Note: date updated")
         }
         
         CoreDataManager.shared.fetchNotes()
     }
     
-    func textViewDidChange(_ textView: UITextView) {
-        updateContent(newContent: textView.text)
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        // set newContent everytime character is changed
+//        EditingData.newContent = textView.text
+        return true
     }
     
     func setupNotifications() {
