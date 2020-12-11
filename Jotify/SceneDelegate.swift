@@ -77,18 +77,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         print("URL OPENED")
         CoreDataManager.shared.setLastNote()
         
+        let pageViewController = PageViewController()
+        window?.rootViewController = pageViewController
+        
         let controller = DeepLinkNoteDetailController()
-        
-        if let window = self.window, let rootViewController = window.rootViewController {
-            var currentController = rootViewController
-            while let presentedController = currentController.presentedViewController {
-                currentController = presentedController
-            }
-            controller.modalPresentationStyle = .fullScreen
-            currentController.present(controller, animated: true, completion: nil)
-        }
-        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
+        controller.modalPresentationStyle = .fullScreen
+        pageViewController.present(controller, animated: true, completion: nil)
     }
     
     @objc func unlockPressed(sender: UIButton) {
