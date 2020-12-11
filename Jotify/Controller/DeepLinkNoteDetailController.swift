@@ -41,29 +41,11 @@ class DeepLinkNoteDetailController: UIViewController, UITextViewDelegate {
         setupView()
         fetchNotificaitonUUID()
         setupNotifications()
-        setEditingData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         updateContent(newContent: writeNoteView.inputTextView.text)
-        GroupDataManager().writeData(path: "widgetContent", content: writeNoteView.inputTextView.text)
-        GroupDataManager().writeData(path: "widgetColor", content: UIColor.stringFromColor(color: backgroundColor))
-        GroupDataManager().writeData(path: "widgetDate", content: navigationTitle)
-        
-        if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadAllTimelines()
-        }
-        
-//        EditingData.isEditing = false
-    }
-    
-    func setEditingData() {
-//        EditingData.index = index
-//        EditingData.notes = notes
-        // use isEditing to determine if we are on the NoteDetailController
-        // if we are, then call function to save data
-//        EditingData.isEditing = true
     }
     
     func fetchNotificaitonUUID() {
@@ -293,6 +275,21 @@ class DeepLinkNoteDetailController: UIViewController, UITextViewDelegate {
         }
     }
     
+    func updateWidget() {
+        GroupDataManager().writeData(path: "widgetContent", content: writeNoteView.inputTextView.text)
+        GroupDataManager().writeData(path: "widgetColor", content: UIColor.stringFromColor(color: backgroundColor))
+        GroupDataManager().writeData(path: "widgetDate", content: navigationTitle)
+        
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        updateContent(newContent: textView.text)
+        updateWidget()
+    }
+    
     func updateContent(newContent: String) {
         if NoteData.recentNote.content != newContent {
             NoteData.recentNote.content = newContent
@@ -301,12 +298,6 @@ class DeepLinkNoteDetailController: UIViewController, UITextViewDelegate {
         }
         
         CoreDataManager.shared.fetchNotes()
-    }
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        // set newContent everytime character is changed
-//        EditingData.newContent = textView.text
-        return true
     }
     
     func setupNotifications() {

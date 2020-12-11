@@ -40,29 +40,11 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         setupView()
         fetchNotificaitonUUID()
         setupNotifications()
-        setEditingData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         updateContent(newContent: writeNoteView.inputTextView.text)
-        GroupDataManager().writeData(path: "widgetContent", content: writeNoteView.inputTextView.text)
-        GroupDataManager().writeData(path: "widgetColor", content: UIColor.stringFromColor(color: backgroundColor))
-        GroupDataManager().writeData(path: "widgetDate", content: navigationTitle)
-        
-        if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadAllTimelines()
-        }
-        
-//        EditingData.isEditing = false
-    }
-    
-    func setEditingData() {
-//        EditingData.index = index
-//        EditingData.notes = notes
-        // use isEditing to determine if we are on the NoteDetailController
-        // if we are, then call function to save data
-//        EditingData.isEditing = true
     }
     
     func fetchNotificaitonUUID() {
@@ -292,8 +274,19 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         CoreDataManager.shared.fetchNotes()
     }
     
+    func updateWidget() {
+        GroupDataManager().writeData(path: "widgetContent", content: writeNoteView.inputTextView.text)
+        GroupDataManager().writeData(path: "widgetColor", content: UIColor.stringFromColor(color: backgroundColor))
+        GroupDataManager().writeData(path: "widgetDate", content: navigationTitle)
+        
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
+    }
+    
     func textViewDidChange(_ textView: UITextView) {
         updateContent(newContent: textView.text)
+        updateWidget()
     }
     
     func setupNotifications() {
