@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WidgetKit
 
 extension WriteNoteController {
     func presentOnboarding() {
@@ -104,7 +105,9 @@ extension WriteNoteController {
         GroupDataManager().writeData(path: "widgetContent", content: "Have you written a note yet? You should do that.")
         GroupDataManager().writeData(path: "widgetColor", content: UIColor.stringFromColor(color: UIColor.blue2))
         GroupDataManager().writeData(path: "widgetDate", content: "July 2, 2002")
-//        WidgetCenter.shared.reloadAllTimelines()
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
     }
     
     func presentFirstLaunchOnboarding(viewController: UIViewController, tintColor: UIColor) {

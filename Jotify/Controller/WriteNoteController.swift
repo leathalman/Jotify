@@ -8,6 +8,7 @@
 
 import CoreData
 import MultilineTextField
+import WidgetKit
 import UIKit
 
 class WriteNoteController: UIViewController, UITextViewDelegate {
@@ -132,6 +133,20 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     
     func saveNote(content: String, color: String, date: Double) {
         setNoteValues(context: (CoreDataManager.shared.appDelegate?.persistentContainer.viewContext)!, content: content, color: color, date: date)
+        GroupDataManager().writeData(path: "widgetContent", content: content)
+        GroupDataManager().writeData(path: "widgetColor", content: color)
+        
+        let updateDate = Date(timeIntervalSinceReferenceDate: date)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.long
+        dateFormatter.timeZone = .current
+        let dateString = dateFormatter.string(from: updateDate)
+        
+        GroupDataManager().writeData(path: "widgetDate", content: dateString)
+        
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
         CoreDataManager.shared.fetchNotes()
     }
     

@@ -42,12 +42,28 @@ struct LastNoteEntry: TimelineEntry {
     let dateString: String
 }
 
+struct ContentView: View {
+    var widgetColor: Color = WidgetColorInterpretor().colorFromString(string: GroupDataManager().readData(path: "widgetColor"))
+    
+    var entry: Provider.Entry
+    
+    var body: some View {
+        widgetColor.overlay(
+            VStack(alignment: .center, spacing: 6) {
+                Text(entry.content).font(.system(size: 15, weight: .bold, design: .default)).multilineTextAlignment(.leading)
+                Spacer()
+                Text(entry.dateString).font(.system(size: 13, weight: .medium, design: .default)).multilineTextAlignment(.center)
+            }
+            .padding(.all, 12)
+        )
+    }
+    
+}
+
 struct LastNoteEntryView : View {
     @Environment(\.widgetFamily) var widgetFamily
     
     var entry: Provider.Entry
-    
-    var widgetColor: Color = WidgetColorInterpretor().colorFromString(string: GroupDataManager().readData(path: "widgetColor"))
     
     var deeplinkURL: URL {
         URL(string: "lastnotewidget-link://widgetFamily/\(widgetFamily)")!
@@ -55,17 +71,12 @@ struct LastNoteEntryView : View {
     
     var body: some View {
         if widgetFamily == .systemSmall {
-            widgetColor.overlay(
-                VStack(alignment: .center, spacing: 6) {
-                    Text(entry.content).font(.system(size: 15, weight: .bold, design: .default)).multilineTextAlignment(.leading)
-                    Spacer()
-                    Text(entry.dateString).font(.system(size: 13, weight: .medium, design: .default)).multilineTextAlignment(.center)
-                }
-                .padding(.all, 12)
-            )
-            .widgetURL(deeplinkURL)
+            ContentView(entry: entry).widgetURL(deeplinkURL)
+        } else {
+            Link(destination: deeplinkURL) {
+                ContentView(entry: entry)
+            }
         }
-        
     }
 }
 

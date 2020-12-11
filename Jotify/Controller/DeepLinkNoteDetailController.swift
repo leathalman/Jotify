@@ -41,11 +41,13 @@ class DeepLinkNoteDetailController: UIViewController, UITextViewDelegate {
         setupView()
         fetchNotificaitonUUID()
         setupNotifications()
+        updateWidget()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         updateContent(newContent: writeNoteView.inputTextView.text)
+        updateWidget()
     }
     
     func fetchNotificaitonUUID() {
@@ -173,7 +175,7 @@ class DeepLinkNoteDetailController: UIViewController, UITextViewDelegate {
         navbar = UINavigationBar(frame: CGRect(x: 0, y: statusBarHeight, width: UIScreen.main.bounds.width, height: height))
         navbar.backgroundColor = UIColor.white
         navbar.delegate = self as? UINavigationBarDelegate
-        
+
         backgroundColor = UIColor.colorFromString(string: NoteData.recentNote.color ?? "blue2")
 
         StoredColors.reminderColor = backgroundColor
@@ -210,19 +212,21 @@ class DeepLinkNoteDetailController: UIViewController, UITextViewDelegate {
         let navItem = UINavigationItem()
         navigationTitle = NoteData.recentNote.dateString ?? "July 2, 2002"
         navItem.title = navigationTitle
+        navItem.hidesBackButton = true
         
         var cancel = UIImage(named: "cancel")
         cancel = cancel?.withRenderingMode(.alwaysOriginal)
-        navItem.rightBarButtonItem = UIBarButtonItem(image: cancel, style: .plain, target: self, action: #selector(handleCancel))
+        let rightItem = UIBarButtonItem(image: cancel, style: .plain, target: self, action: #selector(handleCancel))
+        navItem.rightBarButtonItem = rightItem
                 
         var alarm = UIImage(named: "alarm.fill")
         alarm = alarm?.withRenderingMode(.alwaysOriginal)
         navItem.leftBarButtonItem = UIBarButtonItem(image: alarm, style: .plain, target: self, action: #selector(handleReminder))
         
         navbar.items = [navItem]
-        hideKeyboardWhenTappedAround()
-        
         view.addSubview(navbar)
+
+        hideKeyboardWhenTappedAround()
     }
     
     @objc func handleReminder() {

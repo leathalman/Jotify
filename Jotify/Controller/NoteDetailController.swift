@@ -40,11 +40,13 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         setupView()
         fetchNotificaitonUUID()
         setupNotifications()
+        updateWidget()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         updateContent(newContent: writeNoteView.inputTextView.text)
+        updateWidget()
     }
     
     func fetchNotificaitonUUID() {
