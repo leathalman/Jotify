@@ -15,11 +15,6 @@ class ReminderExistsController: BottomPopupViewController {
     var noteColor = StoredColors.reminderColor
     var reminderDate = RemindersData.reminderDate
     
-    var index: Int = 0
-    var notes: [Note] = []
-    var filteredNotes: [Note] = []
-    var isFiltering: Bool = false
-    
     var popupHeight: CGFloat = 0
     
     lazy var titleLabel: UILabel = {
@@ -101,30 +96,14 @@ class ReminderExistsController: BottomPopupViewController {
     @objc func removePressed(sender: UIButton) {
         print("Remove notification")
         self.playHapticFeedback()
-
-        if isFiltering {
-            let notificationUUID = filteredNotes[index].notificationUUID ?? "empty error in ReminderExistsController"
-            let center = UNUserNotificationCenter.current()
-            center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
-            filteredNotes[index].notificationUUID = "cleared"
-            filteredNotes[index].isReminder = false
-            
-        } else {
-            let notificationUUID = notes[index].notificationUUID ?? "empty error in ReminderExistsController"
-            let center = UNUserNotificationCenter.current()
-            center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
-            notes[index].notificationUUID = "cleared"
-            notes[index].isReminder = false
-        }
         
-        CoreDataManager.shared.enqueue { context in
-            do {
-                try context.save()
-                
-            } catch let error as NSError {
-                print("Could not save. \(error), \(error.userInfo)")
-            }
-        }
+        let notificationUUID = NoteData.recentNote.notificationUUID ?? "empty error in ReminderExistsController"
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
+        NoteData.recentNote.notificationUUID = "cleared"
+        NoteData.recentNote.isReminder = false
+        
+        CoreDataManager.shared.saveContext()
         
         RemindersData.isReminder = false
         

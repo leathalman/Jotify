@@ -258,41 +258,18 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         
         // pass note data so that ReminderExistsController can directly edit the CoreData object
         let reminderExistsController = ReminderExistsController()
-//        reminderExistsController.index = index
-        reminderExistsController.notes = notes
-        reminderExistsController.filteredNotes = filteredNotes
-        reminderExistsController.isFiltering = isFiltering
+        
         if popupHeight.isZero {
             popupHeight = view.bounds.height
         }
         reminderExistsController.popupHeight = popupHeight + 170
         
-        present(reminderExistsController, animated: true, completion: nil)
+        present(ReminderExistsController(), animated: true, completion: nil)
     }
     
     func reminderIsNotSet() {
-        let reminderController = ReminderController()
-        
-        if isFiltering {
-            reminderController.filteredNotes = filteredNotes
-            reminderController.isFiltering = true
-            
-        } else {
-            reminderController.notes = notes
-        }
-        
-//        reminderController.index = index
-        reminderController.reminderBodyText = writeNoteView.inputTextView.text
         requestNotificationPermission()
-        
-        print("PopupHeight is \(popupHeight)")
-        
-        if popupHeight.isZero {
-            popupHeight = view.bounds.height
-        }
-        reminderController.popupHeight = popupHeight
-        
-        present(reminderController, animated: true, completion: nil)
+        present(ReminderController(), animated: true, completion: nil)
     }
     
     @objc func handleCancel() {

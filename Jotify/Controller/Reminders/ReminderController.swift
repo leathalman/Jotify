@@ -19,17 +19,8 @@ struct RemindersData {
 }
 
 class ReminderController: BottomPopupViewController, UNUserNotificationCenterDelegate {
-    var notes: [Note] = []
-    var filteredNotes: [Note] = []
-    var isFiltering: Bool = false
-    var index: Int = 0
-    
     var noteColor = StoredColors.reminderColor
-    var reminderBodyText = String()
-    
     let datePicker: UIDatePicker = UIDatePicker()
-    
-    var popupHeight: CGFloat = 0
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -128,8 +119,8 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         let uuid = UUID().uuidString
         
         let content = UNMutableNotificationContent()
-        content.body = reminderBodyText
-        content.userInfo = ["reminderBodyText": reminderBodyText]
+        content.body = NoteData.recentNote.content ?? "Error retrieving note content"
+        content.userInfo = ["reminderBodyText": NoteData.recentNote.content ?? "Error retrieving note content"]
         content.sound = UNNotificationSound.default
         content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
         
