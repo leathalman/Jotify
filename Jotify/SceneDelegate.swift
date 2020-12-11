@@ -79,6 +79,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let pageViewController = PageViewController()
         window?.rootViewController = pageViewController
+        pageViewController.currentIndex = 0
+        pageViewController.goToPreviousPage()
         
         let controller = DeepLinkNoteDetailController()
         controller.modalPresentationStyle = .fullScreen
