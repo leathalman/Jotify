@@ -9,6 +9,7 @@
 import CoreData
 import UIKit
 import UserNotifications
+import WidgetKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -67,6 +68,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NoteData.tempNote = NoteData.notes.first
             NoteData.tempNote.content = EditingData.writeNoteViewText
             NoteData.tempNote.color = UIColor.stringFromColor(color: StoredColors.noteColor)
+            
+            GroupDataManager().writeData(path: "widgetDate", content: NoteData.tempNote.dateString ?? "Date not found")
+            GroupDataManager().writeData(path: "widgetContent", content: EditingData.writeNoteViewText)
+            GroupDataManager().writeData(path: "widgetColor", content: UIColor.stringFromColor(color: StoredColors.noteColor))
+            
+            if #available(iOS 14.0, *) {
+                WidgetCenter.shared.reloadAllTimelines()
+            }
+            
             CoreDataManager.shared.fetchNotes()
         }
         saveContext()

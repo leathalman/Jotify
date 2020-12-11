@@ -11,6 +11,7 @@ import Blueprints
 import CoreData
 import UIKit
 import StoreKit
+import WidgetKit
 import ViewAnimator
 import XLActionController
 
@@ -603,6 +604,14 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             notes.remove(at: indexPath.row)
             CoreDataManager.shared.appDelegate?.persistentContainer.viewContext.delete(note)
             NoteData.notes = self.notes
+        }
+        
+        GroupDataManager().writeData(path: "widgetDate", content: NoteData.notes.first?.dateString ?? "Date not found 2")
+        GroupDataManager().writeData(path: "widgetContent", content: NoteData.notes.first?.content ?? "Example content")
+        GroupDataManager().writeData(path: "widgetColor", content: NoteData.notes.first?.color ?? "blue2")
+        
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
         }
         
         CoreDataManager.shared.saveContext()
