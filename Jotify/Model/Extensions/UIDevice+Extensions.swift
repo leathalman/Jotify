@@ -35,6 +35,14 @@ extension UIDevice {
         }
     }
     
+    var screenWidth: CGFloat {
+        return UIScreen.main.bounds.width
+    }
+    
+    var screenHeight: CGFloat {
+        return UIScreen.main.bounds.height
+    }
+    
     var hasTapticEngine: Bool {
         return platform == .iPhone6S || platform == .iPhone6SPlus
     }

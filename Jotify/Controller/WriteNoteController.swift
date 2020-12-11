@@ -46,7 +46,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         view.addGestureRecognizer(tap)
         
-        writeNoteView.inputTextView.frame = CGRect(x: 0, y: 100, width: writeNoteView.screenWidth, height: writeNoteView.screenHeight / 4)
+        writeNoteView.inputTextView.frame = CGRect(x: 0, y: 100, width: UIDevice.current.screenWidth, height: UIDevice.current.screenHeight / 4)
         
         writeNoteView.inputTextView.isScrollEnabled = false
         writeNoteView.inputTextView.delegate = self
@@ -102,10 +102,10 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         
         if notification.name == UIResponder.keyboardWillHideNotification {
             writeNoteView.inputTextView.contentInset = .zero
-            writeNoteView.inputTextView.frame = CGRect(x: 0, y: 100, width: view.bounds.width, height: writeNoteView.screenHeight / 4)
+            writeNoteView.inputTextView.frame = CGRect(x: 0, y: 100, width: view.bounds.width, height: UIDevice.current.screenHeight / 4)
         } else {
             writeNoteView.inputTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height + 42, right: 0)
-            writeNoteView.inputTextView.frame = CGRect(x: 0, y: 40, width: view.bounds.width, height: writeNoteView.screenHeight)
+            writeNoteView.inputTextView.frame = CGRect(x: 0, y: 40, width: view.bounds.width, height: UIDevice.current.screenHeight)
         }
         
         writeNoteView.inputTextView.scrollIndicatorInsets = writeNoteView.inputTextView.contentInset
@@ -182,14 +182,14 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         super.viewWillTransition(to: size, with: coordinator)
         // more accurately returns new screen size
         // used each time the window is resized
-        let frame = CGRect(x: 0, y: 100, width: size.width, height: writeNoteView.screenHeight / 4)
+        let frame = CGRect(x: 0, y: 100, width: size.width, height: UIDevice.current.screenHeight / 4)
         writeNoteView.inputTextView.frame = frame
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         // used to support adaptive interfaces with iPadOS on first launch
         if traitCollection.horizontalSizeClass == .compact {
-            let frame = CGRect(x: 0, y: 100, width: view.bounds.width, height: writeNoteView.screenHeight / 4)
+            let frame = CGRect(x: 0, y: 100, width: view.bounds.width, height: UIDevice.current.screenHeight / 4)
             writeNoteView.inputTextView.frame = frame
         }
         

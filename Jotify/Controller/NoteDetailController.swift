@@ -11,18 +11,15 @@ import UserNotifications
 import WidgetKit
 
 struct EditingData {
-    static var index = Int()
-    static var newContent = String()
-    static var notes = [Note]()
-    static var isEditing = Bool()
-    static var width = CGFloat()
+//    static var index = Int()
+//    static var newContent = String()
+//    static var notes = [Note]()
+//    static var isEditing = Bool()
 }
 
 class NoteDetailController: UIViewController, UITextViewDelegate {
     var navigationTitle: String = ""
     var backgroundColor: UIColor = .white
-    var detailText: String = ""
-    var index: Int = 0
     
     var datePicker: UIDatePicker = UIDatePicker()
     let toolBar = UIToolbar()
@@ -47,15 +44,15 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
         fetchNotificaitonUUID()
         setupNotifications()
-        setupView()
         setEditingData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        updateContent(index: index, newContent: writeNoteView.inputTextView.text)
+        updateContent(newContent: writeNoteView.inputTextView.text)
         GroupDataManager().writeData(path: "widgetContent", content: writeNoteView.inputTextView.text)
         GroupDataManager().writeData(path: "widgetColor", content: UIColor.stringFromColor(color: backgroundColor))
         GroupDataManager().writeData(path: "widgetDate", content: navigationTitle)
@@ -64,26 +61,20 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
             WidgetCenter.shared.reloadAllTimelines()
         }
         
-        EditingData.isEditing = false
+//        EditingData.isEditing = false
     }
     
     func setEditingData() {
-        EditingData.index = index
-        EditingData.notes = notes
+//        EditingData.index = index
+//        EditingData.notes = notes
         // use isEditing to determine if we are on the NoteDetailController
         // if we are, then call function to save data
-        EditingData.isEditing = true
+//        EditingData.isEditing = true
     }
     
     func fetchNotificaitonUUID() {
-        if isFiltering {
-            let notificationUUID = filteredNotes[index].notificationUUID ?? ""
-            RemindersData.notificationUUID = notificationUUID
-            
-        } else {
-            let notificationUUID = notes[index].notificationUUID ?? ""
-            RemindersData.notificationUUID = notificationUUID
-        }
+        let notificationUUID = NoteData.recentNote.notificationUUID ?? ""
+        RemindersData.notificationUUID = notificationUUID
     }
     
     func setupDynamicKeyboardColor() {
@@ -101,12 +92,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     
     func removeReminderIfDelivered() {
         if checkIfReminderHasBeenDelivered() {
-            if isFiltering {
-                filteredNotes[index].isReminder = false
-                
-            } else {
-                notes[index].isReminder = false
-            }
+            NoteData.recentNote.isReminder = false
             
             CoreDataManager.shared.enqueue { context in
                 do {
@@ -120,14 +106,8 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
             UIApplication.shared.applicationIconBadgeNumber -= 1
             
         } else {
-            if isFiltering {
-                let reminderDate = filteredNotes[index].reminderDate ?? "July 1, 2000 at 12:00 AM"
-                getReminderDateStringToDisplayForUser(reminderDate: reminderDate)
-                
-            } else {
-                let reminderDate = notes[index].reminderDate ?? "July 1, 2000 at 12:00 AM"
-                getReminderDateStringToDisplayForUser(reminderDate: reminderDate)
-            }
+            let reminderDate = NoteData.recentNote.reminderDate ?? "July 1, 2000 at 12:00 AM"
+            getReminderDateStringToDisplayForUser(reminderDate: reminderDate)
         }
     }
     
@@ -149,65 +129,35 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     }
     
     func checkIfReminderHasBeenDelivered() -> Bool {
-        if isFiltering {
-            let notificationUUID = filteredNotes[index].notificationUUID
-            
-            if notificationUUID == "cleared" {
-                filteredNotes[index].notificationUUID = "cleared"
-                return true
-            }
-            
-            let isReminder = filteredNotes[index].isReminder
-            RemindersData.isReminder = filteredNotes[index].isReminder
-            
-            if isReminder == true {
-                let reminderDate = filteredNotes[index].reminderDate ?? "07/02/2000 11:11 PM"
-                
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
-                let formattedReminderDate = dateFormatter.date(from: reminderDate) ?? Date()
-                
-                let currentDate = Date()
-                
-                if currentDate >= formattedReminderDate {
-                    return true
-                } else {
-                    return false
-                }
-            }
-            
-        } else {
-            let notificationUUID = notes[index].notificationUUID
-            
-            if notificationUUID == "cleared" {
-                notes[index].notificationUUID = "cleared"
-                return true
-            }
-            
-            let isReminder = notes[index].isReminder
-            RemindersData.isReminder = notes[index].isReminder
-            
-            if isReminder == true {
-                let reminderDate = notes[index].reminderDate ?? "07/02/2000 11:11 PM"
-                
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
-                let formattedReminderDate = dateFormatter.date(from: reminderDate) ?? Date()
-                
-                let currentDate = Date()
-                
-                if currentDate >= formattedReminderDate {
-                    return true
-                } else {
-                    return false
-                }
-            }
+        
+        let notificationUUID = NoteData.recentNote.notificationUUID ?? ""
+        
+        if notificationUUID == "cleared" {
+            NoteData.recentNote.notificationUUID = "cleared"
+            return true
         }
         
+        let isReminder = NoteData.recentNote.isReminder
+        RemindersData.isReminder = NoteData.recentNote.isReminder
+        
+        if isReminder == true {
+            let reminderDate = NoteData.recentNote.reminderDate ?? "07/02/2000 11:11 PM"
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
+            let formattedReminderDate = dateFormatter.date(from: reminderDate) ?? Date()
+            
+            let currentDate = Date()
+            
+            if currentDate >= formattedReminderDate {
+                return true
+            } else {
+                return false
+            }
+        }
         return false
     }
     
-    //WORK ON THIS
     func setupPersistentNavigationBar() {
         guard navigationController?.topViewController === self else { return }
         transitionCoordinator?.animate(alongsideTransition: { [weak self] _ in
@@ -240,6 +190,10 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         
         let textView = writeNoteView.inputTextView
         
+        backgroundColor = UIColor.colorFromString(string: NoteData.recentNote.color ?? "blue2")
+        navigationTitle = NoteData.recentNote.dateString ?? "July 2, 2002"
+        navigationController?.navigationItem.title = NoteData.recentNote.dateString ?? "July 2, 2002"
+
         StoredColors.reminderColor = backgroundColor
         UIApplication.shared.windows.first?.backgroundColor = backgroundColor
         
@@ -259,12 +213,12 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         
         textView.tintColor = .white
         navigationBarHeight = navigationController?.navigationBar.bounds.height ?? 0
-        print("Current width: \(EditingData.width)")
-        writeNoteView.inputTextView.frame = CGRect(x: 0, y: 15, width: EditingData.width, height: writeNoteView.screenHeight - navigationBarHeight - 30)
-        textView.text = detailText
+        
+        writeNoteView.inputTextView.frame = CGRect(x: 0, y: 15, width: UIDevice.current.screenWidth, height: UIDevice.current.screenHeight - navigationBarHeight - 30)
+        
+        textView.text = NoteData.recentNote.content ?? "Note data did not load properly"
         textView.font = UIFont.boldSystemFont(ofSize: 18)
         textView.placeholder = ""
-        
         textView.alwaysBounceVertical = true
         textView.isUserInteractionEnabled = true
         textView.isScrollEnabled = true
@@ -304,7 +258,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         
         // pass note data so that ReminderExistsController can directly edit the CoreData object
         let reminderExistsController = ReminderExistsController()
-        reminderExistsController.index = index
+//        reminderExistsController.index = index
         reminderExistsController.notes = notes
         reminderExistsController.filteredNotes = filteredNotes
         reminderExistsController.isFiltering = isFiltering
@@ -327,7 +281,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
             reminderController.notes = notes
         }
         
-        reminderController.index = index
+//        reminderController.index = index
         reminderController.reminderBodyText = writeNoteView.inputTextView.text
         requestNotificationPermission()
         
@@ -358,20 +312,11 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         }
     }
     
-    func updateContent(index: Int, newContent: String) {
-        if isFiltering {
-            if filteredNotes[index].content != newContent {
-                filteredNotes[index].content = newContent
-                filteredNotes[index].modifiedDate = Date.timeIntervalSinceReferenceDate
-                print("Note: date updated")
-            }
-            
-        } else {
-            if notes[index].content != newContent {
-                notes[index].content = newContent
-                notes[index].modifiedDate = Date.timeIntervalSinceReferenceDate
-                print("Note: date updated")
-            }
+    func updateContent(newContent: String) {
+        if NoteData.recentNote.content != newContent {
+            NoteData.recentNote.content = newContent
+            NoteData.recentNote.modifiedDate = Date.timeIntervalSinceReferenceDate
+            print("Note: date updated")
         }
         
         CoreDataManager.shared.fetchNotes()
@@ -379,8 +324,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         // set newContent everytime character is changed
-        EditingData.newContent = textView.text
-        
+//        EditingData.newContent = textView.text
         return true
     }
     
@@ -415,7 +359,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
         super.viewWillTransition(to: size, with: coordinator)
         // more accurately returns new screen size
         // used each time the window is resized
-        let frame = CGRect(x: 0, y: 15, width: size.width, height: writeNoteView.screenHeight - navigationBarHeight - 30)
+        let frame = CGRect(x: 0, y: 15, width: size.width, height: UIDevice.current.screenHeight - navigationBarHeight - 30)
         writeNoteView.inputTextView.frame = frame
         popupHeight = size.height + 40
     }
@@ -423,7 +367,7 @@ class NoteDetailController: UIViewController, UITextViewDelegate {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         // used to support adaptive interfaces with iPadOS on first launch
         if traitCollection.horizontalSizeClass == .compact {
-            let frame = CGRect(x: 0, y: 15, width: view.bounds.width, height: writeNoteView.screenHeight - navigationBarHeight - 30)
+            let frame = CGRect(x: 0, y: 15, width: view.bounds.width, height: UIDevice.current.screenHeight - navigationBarHeight - 30)
             writeNoteView.inputTextView.frame = frame
             popupHeight = view.bounds.height + 40
         }

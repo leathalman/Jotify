@@ -73,8 +73,6 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     func updateCollectionViewData() {
         CoreDataManager.shared.fetchNotes()
         notes = NoteData.notes
-                
-        print("notes count: \(NoteData.notes.capacity)")
         
         DispatchQueue.main.async {
             self.collectionView.reloadData()
@@ -345,13 +343,13 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     
     func sortNotes() {
         let context = CoreDataManager.shared.appDelegate?.persistentContainer.viewContext
-
+        
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Note")
         fetchRequest.returnsObjectsAsFaults = false
-
+        
         let sortBy = defaults.string(forKey: "sortBy")
         var sortDescriptor: NSSortDescriptor?
-
+        
         switch sortBy {
         case "content":
             sortDescriptor = NSSortDescriptor(key: "content", ascending: true)
@@ -366,9 +364,9 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         case .some(_):
             sortDescriptor = NSSortDescriptor(key: "modifiedDate", ascending: false)
         }
-
+        
         fetchRequest.sortDescriptors = [sortDescriptor] as? [NSSortDescriptor]
-
+        
         CoreDataManager.shared.enqueue { _ in
             do {
                 self.notes = try context!.fetch(fetchRequest) as! [Note]
@@ -376,7 +374,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
-
+                
             } catch let error as NSError {
                 print("Could not fetch. \(error), \(error.userInfo)")
             }
@@ -402,43 +400,14 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     }
     
     func cellSingleTap(indexPath: IndexPath) {
-        let noteDetailController = NoteDetailController()
-        
-        var note = notes[indexPath.row]
-        
         if isFiltering() {
-            note = filteredNotes[indexPath.row]
-            noteDetailController.filteredNotes = filteredNotes
-            noteDetailController.isFiltering = true
+            NoteData.recentNote = filteredNotes[indexPath.row]
             
         } else {
-            note = notes[indexPath.row]
-            noteDetailController.notes = notes
+            NoteData.recentNote = notes[indexPath.row]
         }
         
-        let modifiedDate = note.value(forKey: "modifiedDate")
-        let color = note.value(forKey: "color") as! String
-        let content = note.value(forKey: "content") as! String
-        
-        let updateDate = Date(timeIntervalSinceReferenceDate: modifiedDate as! TimeInterval)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.long
-        dateFormatter.timeZone = .current
-        let dateString = dateFormatter.string(from: updateDate)
-        
-        noteDetailController.navigationController?.navigationItem.title = dateString
-        noteDetailController.navigationTitle = dateString
-        
-        var cellColor: UIColor = .blue2
-        cellColor = UIColor.colorFromString(string: color)
-        
-        noteDetailController.backgroundColor = cellColor
-        noteDetailController.detailText = content
-        noteDetailController.index = indexPath.row
-        
-        EditingData.width = view.bounds.width
-        
-        navigationController?.pushViewController(noteDetailController, animated: true)
+        navigationController?.pushViewController(NoteDetailController(), animated: true)
     }
     
     @objc func longTouchHandler(sender: UILongPressGestureRecognizer) {
@@ -558,14 +527,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             CoreDataManager.shared.appDelegate?.persistentContainer.viewContext.delete(note)
         }
         
-        CoreDataManager.shared.enqueue { context in
-                    do {
-                        try context.save()
-                        
-                    } catch let error as NSError {
-                        print("Could not save. \(error), \(error.userInfo)")
-                    }
-                }
+        CoreDataManager.shared.saveContext()
         
         updateCollectionViewData()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
@@ -643,14 +605,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             NoteData.notes = self.notes
         }
         
-        CoreDataManager.shared.enqueue { context in
-            do {
-                try context.save()
-                
-            } catch let error as NSError {
-                print("Could not save. \(error), \(error.userInfo)")
-            }
-        }
+        CoreDataManager.shared.saveContext()
         
         DispatchQueue.main.async {
             self.collectionView.reloadData()

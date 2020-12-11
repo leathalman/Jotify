@@ -10,16 +10,8 @@ import MultilineTextField
 import UIKit
 
 class WriteNoteView: UIView {
-    public var screenWidth: CGFloat {
-        return UIScreen.main.bounds.width
-    }
-    
-    public var screenHeight: CGFloat {
-        return UIScreen.main.bounds.height
-    }
-    
     lazy var inputTextView: MultilineTextField = {
-        let frame = CGRect(x: 0, y: 100, width: screenWidth, height: screenHeight - 100)
+        let frame = CGRect(x: 0, y: 100, width: UIDevice.current.screenWidth, height: UIDevice.current.screenHeight - 100)
         let textField = MultilineTextField(frame: frame)
         textField.backgroundColor = .clear
         textField.placeholderColor = .white

@@ -19,14 +19,6 @@ struct RemindersData {
 }
 
 class ReminderController: BottomPopupViewController, UNUserNotificationCenterDelegate {
-    public var screenWidth: CGFloat {
-        return UIScreen.main.bounds.width
-    }
-    
-    public var screenHeight: CGFloat {
-        return UIScreen.main.bounds.height
-    }
-    
     var notes: [Note] = []
     var filteredNotes: [Note] = []
     var isFiltering: Bool = false
@@ -88,34 +80,19 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
         datePicker.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
         datePicker.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
-        confirmButton.heightAnchor.constraint(equalToConstant: screenHeight / 11).isActive = true
+        confirmButton.heightAnchor.constraint(equalToConstant: UIDevice.current.screenHeight / 11).isActive = true
         confirmButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true
         confirmButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         confirmButton.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 10).isActive = true
     }
     
     func updateContentWithReminder(reminderDate: String, notificationUUID: String, reminderDateDisplay: String) {
-        if isFiltering {
-            filteredNotes[index].isReminder = true
-                 filteredNotes[index].reminderDate = reminderDate
-                 filteredNotes[index].notificationUUID = notificationUUID
-                 filteredNotes[index].reminderDateDisplay = reminderDateDisplay
-            
-        } else {
-            notes[index].isReminder = true
-                  notes[index].reminderDate = reminderDate
-                  notes[index].notificationUUID = notificationUUID
-                  notes[index].reminderDateDisplay = reminderDateDisplay
-        }
+        NoteData.recentNote.isReminder = true
+        NoteData.recentNote.reminderDate = reminderDate
+        NoteData.recentNote.notificationUUID = notificationUUID
+        NoteData.recentNote.reminderDateDisplay = reminderDateDisplay
         
-        CoreDataManager.shared.enqueue { context in
-            do {
-                try context.save()
-                
-            } catch let error as NSError {
-                print("Could not save. \(error), \(error.userInfo)")
-            }
-        }
+        CoreDataManager.shared.saveContext()
     }
     
     func setupDynamicColors() {
@@ -186,11 +163,6 @@ class ReminderController: BottomPopupViewController, UNUserNotificationCenterDel
     }
     
     override func getPopupHeight() -> CGFloat {
-//        if !popupHeight.isZero {
-//            return popupHeight / 11 + 80 + datePicker.frame.height + 30
-//        } else {
-//            return 80 + (screenHeight / 11) + datePicker.frame.height + 30
-//        }
         return 400
     }
     

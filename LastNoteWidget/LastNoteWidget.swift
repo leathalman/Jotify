@@ -44,17 +44,17 @@ struct LastNoteEntry: TimelineEntry {
 
 struct LastNoteEntryView : View {
     @Environment(\.widgetFamily) var widgetFamily
-
+    
     var entry: Provider.Entry
     
     var widgetColor: Color = WidgetColorInterpretor().colorFromString(string: GroupDataManager().readData(path: "widgetColor"))
     
-//    var deeplinkURL: URL {
-//            URL(string: "lastnotewidget-link://widgetFamily/\(widgetFamily)")!
-//        }
-        
+    var deeplinkURL: URL {
+        URL(string: "lastnotewidget-link://widgetFamily/\(widgetFamily)")!
+    }
+    
     var body: some View {
-//        if widgetFamily == .systemSmall {
+        if widgetFamily == .systemSmall {
             widgetColor.overlay(
                 VStack(alignment: .center, spacing: 6) {
                     Text(entry.content).font(.system(size: 15, weight: .bold, design: .default)).multilineTextAlignment(.leading)
@@ -63,8 +63,8 @@ struct LastNoteEntryView : View {
                 }
                 .padding(.all, 12)
             )
-//            .widgetURL(deeplinkURL)
-//        }
+            .widgetURL(deeplinkURL)
+        }
         
     }
 }
@@ -72,7 +72,7 @@ struct LastNoteEntryView : View {
 @main
 struct LastNote: Widget {
     let kind: String = "LastNote"
-
+    
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             LastNoteEntryView(entry: entry)

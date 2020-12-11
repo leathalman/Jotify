@@ -74,9 +74,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
     
-//    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-//        print("URL OPENED")
-//    }
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        print("URL OPENED")
+        CoreDataManager.shared.setLastNote()
+        window?.rootViewController?.present(NoteDetailController(), animated: true, completion: nil)
+    }
     
     @objc func unlockPressed(sender: UIButton) {
         let privacyController = PrivacySettingsController()

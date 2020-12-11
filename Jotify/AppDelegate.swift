@@ -202,22 +202,22 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
     
     func saveNoteBeforeExiting() {
-        if EditingData.isEditing == true {
-            let noteDetailController = NoteDetailController()
-            let index = EditingData.index
-            let newContent = EditingData.newContent
-            let notes = EditingData.notes
-            noteDetailController.notes = notes
-            
-            if newContent.count >= 1 {
-                noteDetailController.updateContent(index: index, newContent: newContent)
-                print("Note data successfully saved.")
-            } else {
-                print("New note data is too short to save.")
-            }
-            
-        } else {
-            print("No new note data to save.")
-        }
+//        if EditingData.isEditing == true {
+//            let noteDetailController = NoteDetailController()
+//            let index = EditingData.index
+//            let newContent = EditingData.newContent
+//            let notes = EditingData.notes
+//            noteDetailController.notes = notes
+//            
+//            if newContent.count >= 1 {
+//                noteDetailController.updateContent(index: index, newContent: newContent)
+//                print("Note data successfully saved.")
+//            } else {
+//                print("New note data is too short to save.")
+//            }
+//            
+//        } else {
+//            print("No new note data to save.")
+//        }
     }
 }

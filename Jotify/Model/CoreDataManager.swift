@@ -11,6 +11,7 @@ import UIKit
 
 struct NoteData {
     static var notes = [Note]()
+    static var recentNote: Note!
 }
 
 class CoreDataManager {
@@ -69,6 +70,22 @@ class CoreDataManager {
                 
             } catch let error as NSError {
                 print("Could not fetch. \(error), \(error.userInfo)")
+            }
+        }
+    }
+    
+    func setLastNote() {
+        fetchNotes()
+        NoteData.recentNote = NoteData.notes.first
+    }
+    
+    func saveContext() {
+        CoreDataManager.shared.enqueue { context in
+            do {
+                try context.save()
+                
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
             }
         }
     }
