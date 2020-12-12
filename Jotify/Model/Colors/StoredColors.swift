@@ -10,7 +10,6 @@ import UIKit
 
 struct StoredColors {
     static var noteColor = UIColor()
-    static var noteColorString = String()
     static var staticNoteColor = UIColor()
     static var reminderColor = UIColor()
 }

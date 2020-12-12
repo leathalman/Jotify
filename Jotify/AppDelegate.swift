@@ -65,19 +65,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         if EditingData.writeNoteViewText != "" {
-            NoteData.tempNote = NoteData.notes.first
-            NoteData.tempNote.content = EditingData.writeNoteViewText
-            NoteData.tempNote.color = UIColor.stringFromColor(color: StoredColors.noteColor)
+            CoreDataManager.shared.createNote(content: EditingData.writeNoteViewText, date: Date.timeIntervalSinceReferenceDate, color: StoredColors.noteColor)
             
-            GroupDataManager().writeData(path: "widgetDate", content: NoteData.tempNote.dateString ?? "Date not found")
+            GroupDataManager().writeData(path: "widgetDate", content: Date.timeIntervalSinceReferenceDate.formattedString())
             GroupDataManager().writeData(path: "widgetContent", content: EditingData.writeNoteViewText)
             GroupDataManager().writeData(path: "widgetColor", content: UIColor.stringFromColor(color: StoredColors.noteColor))
             
             if #available(iOS 14.0, *) {
                 WidgetCenter.shared.reloadAllTimelines()
             }
-            
-            CoreDataManager.shared.fetchNotes()
         }
         saveContext()
     }

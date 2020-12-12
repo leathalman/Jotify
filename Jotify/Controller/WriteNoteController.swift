@@ -17,10 +17,7 @@ struct EditingData {
 
 class WriteNoteController: UIViewController, UITextViewDelegate {
     let writeNoteView = WriteNoteView()
-    
     let defaults = UserDefaults.standard
-    
-    var tempNoteCount = 0
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -84,8 +81,8 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     }
     
     func setupDynamicKeyboardColor() {
-        if !UserDefaults.standard.bool(forKey: "useSystemMode") {
-            if UserDefaults.standard.bool(forKey: "darkModeEnabled") {
+        if !defaults.bool(forKey: "useSystemMode") {
+            if defaults.bool(forKey: "darkModeEnabled") {
                 writeNoteView.inputTextView.keyboardAppearance = .dark
                 writeNoteView.inputTextView.overrideUserInterfaceStyle = .dark
             } else {
@@ -123,15 +120,17 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     
     @objc func handleSend() {
         if !writeNoteView.inputTextView.text.isEmpty {
-            StoredColors.noteColorString = UIColor.stringFromColor(color: StoredColors.noteColor)
-            UserDefaults.standard.setValue(StoredColors.noteColorString, forKey: "previousColor")
+            defaults.setValue(UIColor.stringFromColor(color: StoredColors.noteColor), forKey: "previousColor")
+                        
+            CoreDataManager.shared.createNote(content: writeNoteView.inputTextView.text, date: Date.timeIntervalSinceReferenceDate, color: StoredColors.noteColor)
             
-            saveNote(content: writeNoteView.inputTextView.text, color: StoredColors.noteColorString, date: Date.timeIntervalSinceReferenceDate)
+            CoreDataManager.shared.fetchNotes()
+            
             writeNoteView.inputTextView.text = ""
             
             // userdefaults so previous color persists through relaunch
             if defaults.bool(forKey: "useRandomColor") {
-                writeNoteView.getRandomColor(previousColor: UIColor.colorFromString(string: UserDefaults.standard.string(forKey: "previousColor") ?? "blue2"))
+                writeNoteView.getRandomColor(previousColor: UIColor.colorFromString(string: defaults.string(forKey: "previousColor") ?? "blue2"))
             }
         }
     }
@@ -140,47 +139,47 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         EditingData.writeNoteViewText = writeNoteView.inputTextView.text
     }
     
-    func saveNote(content: String, color: String, date: Double) {
-        setNoteValues(context: (CoreDataManager.shared.appDelegate?.persistentContainer.viewContext)!, content: content, color: color, date: date)
-        
-        let updateDate = Date(timeIntervalSinceReferenceDate: date)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.long
-        dateFormatter.timeZone = .current
-        let dateString = dateFormatter.string(from: updateDate)
-        
-        GroupDataManager().writeData(path: "widgetDate", content: dateString)
-        GroupDataManager().writeData(path: "widgetContent", content: content)
-        GroupDataManager().writeData(path: "widgetColor", content: color)
-        
-        if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadAllTimelines()
-        }
-        
-        CoreDataManager.shared.fetchNotes()
-    }
+//    func saveNote(content: String, color: String, date: Double) {
+//        CoreDataManager.shared.createNote(content: content, date: date, color: color)
+//
+//        let updateDate = Date(timeIntervalSinceReferenceDate: date)
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateStyle = DateFormatter.Style.long
+//        dateFormatter.timeZone = .current
+//        let dateString = dateFormatter.string(from: updateDate)
+//
+//        GroupDataManager().writeData(path: "widgetDate", content: dateString)
+//        GroupDataManager().writeData(path: "widgetContent", content: content)
+//        GroupDataManager().writeData(path: "widgetColor", content: color)
+//
+//        if #available(iOS 14.0, *) {
+//            WidgetCenter.shared.reloadAllTimelines()
+//        }
+//
+//        CoreDataManager.shared.fetchNotes()
+//    }
     
-    func setNoteValues(context: NSManagedObjectContext, content: String, color: String, date: Double) {
-        let entity = NSEntityDescription.entity(forEntityName: "Note", in: context)!
-        let note = NSManagedObject(entity: entity, insertInto: context)
-        
-        note.setValue(content, forKeyPath: "content")
-        note.setValue(color, forKey: "color")
-        note.setValue(date, forKey: "date")
-        
-        note.setValue(date, forKey: "createdDate")
-        note.setValue(date, forKey: "modifiedDate")
-        note.setValue(false, forKey: "isReminder")
-        note.setValue("", forKey: "reminderDate")
-                
-        let updateDate = Date(timeIntervalSinceReferenceDate: date)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.long
-        dateFormatter.timeZone = .current
-        let dateString = dateFormatter.string(from: updateDate)
-        
-        note.setValue(dateString, forKey: "dateString")
-    }
+//    func setNoteValues(context: NSManagedObjectContext, content: String, color: String, date: Double) {
+//        let entity = NSEntityDescription.entity(forEntityName: "Note", in: context)!
+//        let note = NSManagedObject(entity: entity, insertInto: context)
+//
+//        note.setValue(content, forKeyPath: "content")
+//        note.setValue(color, forKey: "color")
+//        note.setValue(date, forKey: "date")
+//
+//        note.setValue(date, forKey: "createdDate")
+//        note.setValue(date, forKey: "modifiedDate")
+//        note.setValue(false, forKey: "isReminder")
+//        note.setValue("", forKey: "reminderDate")
+//
+//        let updateDate = Date(timeIntervalSinceReferenceDate: date)
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateStyle = DateFormatter.Style.long
+//        dateFormatter.timeZone = .current
+//        let dateString = dateFormatter.string(from: updateDate)
+//
+//        note.setValue(dateString, forKey: "dateString")
+//    }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if (text as NSString).rangeOfCharacter(from: CharacterSet.newlines).location == NSNotFound {

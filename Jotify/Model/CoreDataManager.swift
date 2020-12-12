@@ -12,7 +12,6 @@ import UIKit
 struct NoteData {
     static var notes = [Note]()
     static var recentNote: Note!
-    static var tempNote: Note!
 }
 
 class CoreDataManager {
@@ -41,6 +40,7 @@ class CoreDataManager {
         }
     }
     
+    //save changes from operations (create/delete) to context
     func saveContext() {
         CoreDataManager.shared.enqueue { context in
             do {
@@ -52,6 +52,27 @@ class CoreDataManager {
         }
     }
     
+    //create new Note object in context
+    //automatically sets:
+    //  reminder = false
+    //  reminderData = ""
+    func createNote(content: String, date: Double, color: UIColor) {
+        let entity = NSEntityDescription.entity(forEntityName: "Note", in: context)!
+        let note = NSManagedObject(entity: entity, insertInto: context)
+        
+        note.setValue(content, forKeyPath: "content")
+        note.setValue(UIColor.stringFromColor(color: color), forKey: "color")
+        note.setValue(date, forKey: "date")
+        
+        note.setValue(date, forKey: "createdDate")
+        note.setValue(date, forKey: "modifiedDate")
+        note.setValue(false, forKey: "isReminder")
+        note.setValue("", forKey: "reminderDate")
+        
+        note.setValue(date.formattedString(), forKey: "dateString")
+    }
+    
+    //update NoteData.notes, essentially used to update SavedNoteController datasource
     func fetchNotes() {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Note")
         fetchRequest.returnsObjectsAsFaults = false

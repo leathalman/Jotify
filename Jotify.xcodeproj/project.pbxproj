@@ -60,6 +60,7 @@
 		F65E479D2324B10500FCAEF3 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65E479C2324B10500FCAEF3 /* UIViewController+Extensions.swift */; };
 		F65E479F2324B12A00FCAEF3 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65E479E2324B12A00FCAEF3 /* UserDefaults+Extensions.swift */; };
 		F65E47A12324B15F00FCAEF3 /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65E47A02324B15F00FCAEF3 /* CALayer+Extensions.swift */; };
+		F6613B78258557A2005C6A77 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6613B77258557A2005C6A77 /* Double+Extensions.swift */; };
 		F666D4B222CFED2D00DECE27 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */; };
 		F677E2DD24BBEC1700E63124 /* defaultIcon@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F677E2DC24BBEC1700E63124 /* defaultIcon@3x~ipad.png */; };
 		F67B92DE22D2E083002C6985 /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B92DD22D2E083002C6985 /* SettingsSwitchCell.swift */; };
@@ -186,6 +187,7 @@
 		F65E479C2324B10500FCAEF3 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		F65E479E2324B12A00FCAEF3 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		F65E47A02324B15F00FCAEF3 /* CALayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
+		F6613B77258557A2005C6A77 /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		F666D4B122CFED2D00DECE27 /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 		F677E2DC24BBEC1700E63124 /* defaultIcon@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "defaultIcon@3x~ipad.png"; sourceTree = "<group>"; };
 		F67B92DD22D2E083002C6985 /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
@@ -493,6 +495,7 @@
 				F692D97623B1CB2C00E47109 /* UINavigationController+Extensions.swift */,
 				F6DE443023FCB82F00A45347 /* SKProduct+Extensions.swift */,
 				F63C489523EFBC7500310CFF /* UIColor+Extensions.swift */,
+				F6613B77258557A2005C6A77 /* Double+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -764,6 +767,7 @@
 				F63C489C23EFBF7C00310CFF /* UIColor+Themes.swift in Sources */,
 				F6A7E4C4238F243200D3E6AF /* IAPHandler.swift in Sources */,
 				F650E13322BFF35A008D29AD /* SceneDelegate.swift in Sources */,
+				F6613B78258557A2005C6A77 /* Double+Extensions.swift in Sources */,
 				F67B92E022D2E785002C6985 /* ColorPickerController.swift in Sources */,
 				F65E479D2324B10500FCAEF3 /* UIViewController+Extensions.swift in Sources */,
 				F61EC8C92348E1BA00FB0A63 /* UIColor+Defaults.swift in Sources */,
@@ -933,7 +937,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 72;
+				CURRENT_PROJECT_VERSION = 73;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Jotify/Info.plist;
@@ -961,7 +965,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 72;
+				CURRENT_PROJECT_VERSION = 73;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Jotify/Info.plist;
@@ -1044,7 +1048,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 72;
+				CURRENT_PROJECT_VERSION = 73;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Jotify/Info.plist;
@@ -1069,7 +1073,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = LastNoteWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 72;
+				CURRENT_PROJECT_VERSION = 73;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				INFOPLIST_FILE = LastNoteWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
@@ -1094,7 +1098,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = LastNoteWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 72;
+				CURRENT_PROJECT_VERSION = 73;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				INFOPLIST_FILE = LastNoteWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
@@ -1119,7 +1123,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = LastNoteWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 72;
+				CURRENT_PROJECT_VERSION = 73;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				INFOPLIST_FILE = LastNoteWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
