@@ -28,6 +28,7 @@ class CoreDataManager {
         self.context = appDelegate!.persistentContainer.viewContext
         persistentContainerQueue.maxConcurrentOperationCount = 1
         context.automaticallyMergesChangesFromParent = true
+//        context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
     }
     
     func enqueue(block: @escaping (_ context: NSManagedObjectContext) -> Void) {

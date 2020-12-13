@@ -61,6 +61,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         super.viewDidLoad()
         setupView()
         requestReview()
+//        WidgetManager().updateWidgetToRecentNote()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

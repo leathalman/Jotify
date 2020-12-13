@@ -11,7 +11,7 @@ import WidgetKit
 class WidgetManager {
     
     func updateWidgetToRecentNote() {
-        GroupDataManager().writeData(path: "widgetDate", content: NoteData.notes.first?.dateString ?? "Date not found 2")
+        GroupDataManager().writeData(path: "widgetDate", content: NoteData.notes.first?.dateString ?? "Date not found")
         GroupDataManager().writeData(path: "widgetContent", content: NoteData.notes.first?.content ?? "Example content")
         GroupDataManager().writeData(path: "widgetColor", content: NoteData.notes.first?.color ?? "blue2")
         

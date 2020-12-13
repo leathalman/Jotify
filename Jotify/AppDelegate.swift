@@ -45,10 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             Themes().setupDefaultMode()
         }
-        
-        CoreDataManager.shared.fetchNotes()
-        WidgetManager().updateWidgetToRecentNote()
-                        
+                                
         switch Config.appConfiguration {
         case .Debug:
             print("debug")
@@ -58,6 +55,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case .AppStore:
             print("appStore")
         }
+        
+        CoreDataManager.shared.fetchNotes()
                 
         return true
     }
@@ -135,11 +134,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var persistentContainer: NSPersistentCloudKitContainer = {
         let container = NSPersistentCloudKitContainer(name: "Jotify")
         
-        // set a merge policy when queues do not work properly
-        // you never want a merge conflict to exist becuase data will be lost
-        // only set for backup cases
-//        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        
         // get the store description
         guard let description = container.persistentStoreDescriptions.first else {
             fatalError("Could not retrieve a persistent store description.")
@@ -149,6 +143,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let id = "iCloud.com.austinleath.Jotify"
         let options = NSPersistentCloudKitContainerOptions(containerIdentifier: id)
         description.cloudKitContainerOptions = options
+        container.viewContext.automaticallyMergesChangesFromParent = true
         
         container.loadPersistentStores(completionHandler: { _, error in
             if let error = error as NSError? {
