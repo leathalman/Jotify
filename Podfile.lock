@@ -3,9 +3,6 @@ PODS:
   - BottomPopup (0.5.5)
   - ChromaColorPicker (2.0.2)
   - MultilineTextField (1.0.0)
-  - OpenSSL-Universal (1.0.2.20):
-    - OpenSSL-Universal/Static (= 1.0.2.20)
-  - OpenSSL-Universal/Static (1.0.2.20)
   - SPAlert (2.1.4)
   - ViewAnimator (2.7.0)
   - XLActionController (5.0.2):
@@ -19,7 +16,6 @@ DEPENDENCIES:
   - BottomPopup (~> 0.5.5)
   - ChromaColorPicker
   - MultilineTextField
-  - OpenSSL-Universal
   - SPAlert
   - ViewAnimator
   - XLActionController
@@ -31,7 +27,6 @@ SPEC REPOS:
     - BottomPopup
     - ChromaColorPicker
     - MultilineTextField
-    - OpenSSL-Universal
     - SPAlert
     - ViewAnimator
     - XLActionController
@@ -41,11 +36,10 @@ SPEC CHECKSUMS:
   BottomPopup: c63feed938e7bed2894736d4a07b84cd1f608003
   ChromaColorPicker: 307585f2dc23d4d72f24cad320c1e08825cb5c09
   MultilineTextField: bb965487257ce72f880d313074d419cac34024ff
-  OpenSSL-Universal: ff34003318d5e1163e9529b08470708e389ffcdd
   SPAlert: 1a8afa1c6ac86a82ab5b2cfdf7f9a51e68cb6c0c
   ViewAnimator: 5af1c6f3b310f012bf081259c43717aa54fbae73
   XLActionController: f1f2226d2c6629db197d4a41f2da907085a4cb9d
 
-PODFILE CHECKSUM: ce1590ab66ce4d6627dabe6e34968e0ffb218622
+PODFILE CHECKSUM: bac4f4ce07a5c4f9788c68b78b16e4cfbdc9df52
 
 COCOAPODS: 1.9.3

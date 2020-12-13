@@ -121,7 +121,7 @@ class SettingsController: UITableViewController {
                     cell?.isSelected = false
                     
                     notifyUserOfRestore()
-                    ReceiptHandler().handleReceiptValidation()
+//                    ReceiptHandler().handleReceiptValidation()
                     JotifyProducts.store.restorePurchases()
                 case 1:
                     let writeNoteController = WriteNoteController()
@@ -188,7 +188,7 @@ class SettingsController: UITableViewController {
                     cell?.isSelected = false
                     
                     notifyUserOfRestore()
-                    ReceiptHandler().handleReceiptValidation()
+//                    ReceiptHandler().handleReceiptValidation()
                     JotifyProducts.store.restorePurchases()
                 case 2:
                     let writeNoteController = WriteNoteController()

@@ -87,9 +87,6 @@
 		F6B7BF8E239189700057FB8B /* PremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B7BF8D239189700057FB8B /* PremiumView.swift */; };
 		F6B7BF902391CF600057FB8B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6B7BF8F2391CF600057FB8B /* StoreKit.framework */; };
 		F6D1816D239C748700EAB85C /* ReceiptFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D1816C239C748700EAB85C /* ReceiptFetcher.swift */; };
-		F6D18172239C7B1100EAB85C /* AppleIncRootCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = F6D18171239C7B1000EAB85C /* AppleIncRootCertificate.cer */; };
-		F6D18179239C7BEE00EAB85C /* pkcs7_union_accessors.c in Sources */ = {isa = PBXBuildFile; fileRef = F6D18178239C7BEE00EAB85C /* pkcs7_union_accessors.c */; };
-		F6D1817B239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D1817A239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift */; };
 		F6D1F1C22581922D00D3BDB4 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F7D48E2534D45100C4BDD2 /* WidgetKit.framework */; };
 		F6D1F1C32581922D00D3BDB4 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F7D4902534D45100C4BDD2 /* SwiftUI.framework */; };
 		F6D1F1C92581923000D3BDB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6D1F1C82581923000D3BDB4 /* Assets.xcassets */; };
@@ -215,11 +212,6 @@
 		F6B7BF8D239189700057FB8B /* PremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumView.swift; sourceTree = "<group>"; };
 		F6B7BF8F2391CF600057FB8B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F6D1816C239C748700EAB85C /* ReceiptFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptFetcher.swift; sourceTree = "<group>"; };
-		F6D1816E239C7AC900EAB85C /* Jotify-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Jotify-Bridging-Header.h"; sourceTree = "<group>"; };
-		F6D18171239C7B1000EAB85C /* AppleIncRootCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleIncRootCertificate.cer; sourceTree = "<group>"; };
-		F6D18178239C7BEE00EAB85C /* pkcs7_union_accessors.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pkcs7_union_accessors.c; sourceTree = "<group>"; };
-		F6D1817A239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyLocalReceiptValidator.swift; sourceTree = "<group>"; };
-		F6D1817C239C7C6600EAB85C /* pkcs7_union_accessors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pkcs7_union_accessors.h; sourceTree = "<group>"; };
 		F6D1F1C12581922D00D3BDB4 /* LastNoteWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LastNoteWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6D1F1C72581922D00D3BDB4 /* LastNoteWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = LastNoteWidget.intentdefinition; sourceTree = "<group>"; };
 		F6D1F1C82581923000D3BDB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -412,7 +404,6 @@
 			isa = PBXGroup;
 			children = (
 				F6AEC557238CE02C0068706B /* App Icons */,
-				F6D1817D239C823100EAB85C /* Receipt */,
 				F650E15A22BFFB19008D29AD /* Model */,
 				F650E15F22BFFB20008D29AD /* View */,
 				F650E14F22BFFB12008D29AD /* Controller */,
@@ -423,7 +414,6 @@
 				F650E13C22BFF35C008D29AD /* Assets.xcassets */,
 				F650E13E22BFF35C008D29AD /* LaunchScreen.storyboard */,
 				F650E14122BFF35C008D29AD /* Info.plist */,
-				F6D1816E239C7AC900EAB85C /* Jotify-Bridging-Header.h */,
 			);
 			path = Jotify;
 			sourceTree = "<group>";
@@ -527,17 +517,6 @@
 			path = "App Icons";
 			sourceTree = "<group>";
 		};
-		F6D1817D239C823100EAB85C /* Receipt */ = {
-			isa = PBXGroup;
-			children = (
-				F6D1817C239C7C6600EAB85C /* pkcs7_union_accessors.h */,
-				F6D18171239C7B1000EAB85C /* AppleIncRootCertificate.cer */,
-				F6D1817A239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift */,
-				F6D18178239C7BEE00EAB85C /* pkcs7_union_accessors.c */,
-			);
-			path = Receipt;
-			sourceTree = "<group>";
-		};
 		F6D1F1C42581922D00D3BDB4 /* LastNoteWidget */ = {
 			isa = PBXGroup;
 			children = (
@@ -636,7 +615,6 @@
 			files = (
 				F6AEC561238CE28B0068706B /* goldIcon@3x.png in Resources */,
 				F650E14022BFF35C008D29AD /* LaunchScreen.storyboard in Resources */,
-				F6D18172239C7B1100EAB85C /* AppleIncRootCertificate.cer in Resources */,
 				F6A7E4C0238F128A00D3E6AF /* defaultIcon@2x.png in Resources */,
 				F6A7E4C2238F128F00D3E6AF /* defaultIcon@3x.png in Resources */,
 				F650E13D22BFF35C008D29AD /* Assets.xcassets in Resources */,
@@ -708,7 +686,6 @@
 				F61EC8C22348E1BA00FB0A63 /* WhatsNewViewController+DetailButton.swift in Sources */,
 				F61EC8C52348E1BA00FB0A63 /* WhatsNew+Item.swift in Sources */,
 				F61EC8C12348E1BA00FB0A63 /* WhatsNewViewController+Configuration.swift in Sources */,
-				F6D18179239C7BEE00EAB85C /* pkcs7_union_accessors.c in Sources */,
 				F61EC8C42348E1BA00FB0A63 /* WhatsNew+Version.swift in Sources */,
 				F61EC8C82348E1BA00FB0A63 /* NSLayoutConstraint+Activate.swift in Sources */,
 				F650E17022C00AE3008D29AD /* SavedNoteController.swift in Sources */,
@@ -730,7 +707,6 @@
 				F68D639322F7894700DEB4AA /* PrivacySettingsController.swift in Sources */,
 				F61EC8D32348E1BA00FB0A63 /* WhatsNewVersionStore.swift in Sources */,
 				F60E9B092585AB16002CCCBA /* WidgetManager.swift in Sources */,
-				F6D1817B239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift in Sources */,
 				F65E47A12324B15F00FCAEF3 /* CALayer+Extensions.swift in Sources */,
 				F69E5DC2231B120200872345 /* ReminderController.swift in Sources */,
 				F6070B8A22D50796005E4CF3 /* EmptyView.swift in Sources */,
@@ -945,6 +921,7 @@
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Jotify/Info.plist;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -953,10 +930,10 @@
 				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Jotify/Jotify-Bridging-Header.h";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Debug;
 		};
@@ -973,6 +950,7 @@
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Jotify/Info.plist;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -981,9 +959,9 @@
 				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Jotify/Jotify-Bridging-Header.h";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Release;
 		};
@@ -1056,6 +1034,7 @@
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Jotify/Info.plist;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1064,9 +1043,9 @@
 				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Jotify/Jotify-Bridging-Header.h";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = TestFlight;
 		};
@@ -1090,6 +1069,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify.LastNoteWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1115,6 +1095,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify.LastNoteWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1140,6 +1121,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify.LastNoteWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
