@@ -85,7 +85,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let controller = DeepLinkNoteDetailController()
         controller.modalPresentationStyle = .fullScreen
-        pageViewController.present(controller, animated: true, completion: nil)
+        
+        DispatchQueue.main.async {
+            pageViewController.present(controller, animated: false, completion: nil)
+        }
     }
     
     @objc func unlockPressed(sender: UIButton) {

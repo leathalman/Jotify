@@ -121,6 +121,8 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     @objc func handleSend() {
         if !writeNoteView.inputTextView.text.isEmpty {
             defaults.setValue(UIColor.stringFromColor(color: StoredColors.noteColor), forKey: "previousColor")
+            
+            EditingData.writeNoteViewText = ""
                         
             CoreDataManager.shared.createNote(content: writeNoteView.inputTextView.text, date: Date.timeIntervalSinceReferenceDate, color: StoredColors.noteColor)
             

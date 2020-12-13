@@ -46,16 +46,15 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         updateCollectionViewData()
         setupDynamicViewElements()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(true)
-        navigationItem.searchController = nil
-        navigationController?.setToolbarHidden(true, animated: false)
-        CellStates.shouldSelectMultiple = false
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
+        updateCollectionViewData()
+        resetAppBadgeIfAllRemindersCleared()
     }
     
     override func viewDidLoad() {
@@ -64,11 +63,11 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         requestReview()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
-        updateCollectionViewData()
-        resetAppBadgeIfAllRemindersCleared()
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        navigationItem.searchController = nil
+        navigationController?.setToolbarHidden(true, animated: false)
+        CellStates.shouldSelectMultiple = false
     }
     
     func updateCollectionViewData() {
@@ -513,12 +512,13 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
     }
     
     @objc func deleteSelectedCells() {
-        let selectedItems = collectionView.indexPathsForSelectedItems ?? []
-        
+        let selectedPaths = collectionView.indexPathsForSelectedItems ?? []
+        var selectedIndexes: [Int] = []
         var selectedNotes: [Note] = []
         
-        for value in selectedItems {
-            selectedNotes.append(notes[value.row])
+        for path in selectedPaths {
+            selectedNotes.append(notes[path.row])
+            selectedIndexes.append(path.row)
         }
         
         for note in selectedNotes {
@@ -530,12 +530,14 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         
         CoreDataManager.shared.saveContext()
         
-        updateCollectionViewData()
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
-        updateCollectionViewData()
+        notes = notes
+            .enumerated()
+            .filter { !selectedIndexes.contains($0.offset) }
+            .map { $0.element }
+        
+        NoteData.notes = notes
+
+        collectionView.deleteItems(at: selectedPaths)
     }
     
     func shareNote(text: String) {
