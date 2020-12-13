@@ -144,6 +144,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let options = NSPersistentCloudKitContainerOptions(containerIdentifier: id)
         description.cloudKitContainerOptions = options
         container.viewContext.automaticallyMergesChangesFromParent = true
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         
         container.loadPersistentStores(completionHandler: { _, error in
             if let error = error as NSError? {
