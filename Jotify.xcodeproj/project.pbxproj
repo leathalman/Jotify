@@ -10,6 +10,7 @@
 		40383F919C25A820B4F11373 /* Pods_Jotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A323702C4BB17879EB5635A /* Pods_Jotify.framework */; };
 		F6070B8A22D50796005E4CF3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6070B8922D50796005E4CF3 /* EmptyView.swift */; };
 		F608ECEB2352703E00ABFD48 /* AlertSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F608ECEA2352703E00ABFD48 /* AlertSettingsController.swift */; };
+		F60E9B092585AB16002CCCBA /* WidgetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60E9B082585AB16002CCCBA /* WidgetManager.swift */; };
 		F61EC8BC2348E1BA00FB0A63 /* WhatsNewViewController+TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61EC89D2348E1B900FB0A63 /* WhatsNewViewController+TitleView.swift */; };
 		F61EC8BD2348E1BA00FB0A63 /* WhatsNewViewController+CompletionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61EC89E2348E1B900FB0A63 /* WhatsNewViewController+CompletionButton.swift */; };
 		F61EC8BE2348E1BA00FB0A63 /* WhatsNewViewController+HapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61EC89F2348E1B900FB0A63 /* WhatsNewViewController+HapticFeedback.swift */; };
@@ -134,6 +135,7 @@
 		D2FEA98E85D131BC44F77230 /* Pods-Jotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.release.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.release.xcconfig"; sourceTree = "<group>"; };
 		F6070B8922D50796005E4CF3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		F608ECEA2352703E00ABFD48 /* AlertSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSettingsController.swift; sourceTree = "<group>"; };
+		F60E9B082585AB16002CCCBA /* WidgetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetManager.swift; sourceTree = "<group>"; };
 		F61EC89D2348E1B900FB0A63 /* WhatsNewViewController+TitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WhatsNewViewController+TitleView.swift"; sourceTree = "<group>"; };
 		F61EC89E2348E1B900FB0A63 /* WhatsNewViewController+CompletionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WhatsNewViewController+CompletionButton.swift"; sourceTree = "<group>"; };
 		F61EC89F2348E1B900FB0A63 /* WhatsNewViewController+HapticFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WhatsNewViewController+HapticFeedback.swift"; sourceTree = "<group>"; };
@@ -466,6 +468,7 @@
 				F68097B724BA53D9006BDD0C /* ReceiptHandler.swift */,
 				F637FD292349422400288369 /* CoreDataManager.swift */,
 				F6F7D4A02534D46A00C4BDD2 /* GroupDataManager.swift */,
+				F60E9B082585AB16002CCCBA /* WidgetManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -726,6 +729,7 @@
 				F61EC8BF2348E1BA00FB0A63 /* WhatsNewViewController+Animation.swift in Sources */,
 				F68D639322F7894700DEB4AA /* PrivacySettingsController.swift in Sources */,
 				F61EC8D32348E1BA00FB0A63 /* WhatsNewVersionStore.swift in Sources */,
+				F60E9B092585AB16002CCCBA /* WidgetManager.swift in Sources */,
 				F6D1817B239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift in Sources */,
 				F65E47A12324B15F00FCAEF3 /* CALayer+Extensions.swift in Sources */,
 				F69E5DC2231B120200872345 /* ReminderController.swift in Sources */,

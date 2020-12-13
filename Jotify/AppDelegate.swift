@@ -47,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         CoreDataManager.shared.fetchNotes()
+        WidgetManager().updateWidgetToRecentNote()
                         
         switch Config.appConfiguration {
         case .Debug:
@@ -70,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             GroupDataManager().writeData(path: "widgetDate", content: Date.timeIntervalSinceReferenceDate.formattedString())
             GroupDataManager().writeData(path: "widgetContent", content: EditingData.writeNoteViewText)
             GroupDataManager().writeData(path: "widgetColor", content: UIColor.stringFromColor(color: StoredColors.noteColor))
-            
+                        
             if #available(iOS 14.0, *) {
                 WidgetCenter.shared.reloadAllTimelines()
             }

@@ -122,13 +122,12 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         if !writeNoteView.inputTextView.text.isEmpty {
             defaults.setValue(UIColor.stringFromColor(color: StoredColors.noteColor), forKey: "previousColor")
             
-            EditingData.writeNoteViewText = ""
-                        
             CoreDataManager.shared.createNote(content: writeNoteView.inputTextView.text, date: Date.timeIntervalSinceReferenceDate, color: StoredColors.noteColor)
-            
             CoreDataManager.shared.fetchNotes()
             
             writeNoteView.inputTextView.text = ""
+            EditingData.writeNoteViewText = ""
+            WidgetManager().updateWidgetToRecentNote()
             
             // userdefaults so previous color persists through relaunch
             if defaults.bool(forKey: "useRandomColor") {

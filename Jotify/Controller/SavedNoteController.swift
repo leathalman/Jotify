@@ -522,9 +522,26 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         }
         
         for note in selectedNotes {
-            if note.isReminder == true {
-                UIApplication.shared.applicationIconBadgeNumber -= 1
+            // remove pending notification
+            let notificationUUID = note.notificationUUID ?? "empty error in SavedNoteController"
+            let center = UNUserNotificationCenter.current()
+            center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
+            
+            // remove notification on badge if already delivered but not opened
+            if note.isReminder {
+                let reminderDate = note.reminderDate ?? "07/02/2000 11:11 PM"
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
+                let formattedReminderDate = dateFormatter.date(from: reminderDate) ?? Date()
+                
+                let currentDate = Date()
+                
+                if currentDate >= formattedReminderDate {
+                    UIApplication.shared.applicationIconBadgeNumber -= 1
+                }
             }
+            
             CoreDataManager.shared.appDelegate?.persistentContainer.viewContext.delete(note)
         }
         
@@ -538,6 +555,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
         NoteData.notes = notes
 
         collectionView.deleteItems(at: selectedPaths)
+        WidgetManager().updateWidgetToRecentNote()
     }
     
     func shareNote(text: String) {
@@ -559,8 +577,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
             
             // remove notification on badge if already delivered but not opened
-            let isReminder = filteredNote.isReminder
-            if isReminder {
+            if filteredNote.isReminder {
                 let reminderDate = filteredNote.reminderDate ?? "07/02/2000 11:11 PM"
                 
                 let dateFormatter = DateFormatter()
@@ -588,8 +605,7 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
             
             // remove notification on badge if already delivered but not opened
-            let isReminder = note.isReminder
-            if isReminder {
+            if note.isReminder {
                 let reminderDate = note.reminderDate ?? "07/02/2000 11:11 PM"
                 
                 let dateFormatter = DateFormatter()
@@ -608,16 +624,8 @@ class SavedNoteController: UICollectionViewController, UISearchBarDelegate {
             NoteData.notes = self.notes
         }
         
-        GroupDataManager().writeData(path: "widgetDate", content: NoteData.notes.first?.dateString ?? "Date not found 2")
-        GroupDataManager().writeData(path: "widgetContent", content: NoteData.notes.first?.content ?? "Example content")
-        GroupDataManager().writeData(path: "widgetColor", content: NoteData.notes.first?.color ?? "blue2")
-        
-        if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadAllTimelines()
-        }
-        
+        WidgetManager().updateWidgetToRecentNote()
         CoreDataManager.shared.saveContext()
-        
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
