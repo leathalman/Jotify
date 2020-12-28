@@ -93,8 +93,6 @@
 		F6D1F1C22581922D00D3BDB4 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F7D48E2534D45100C4BDD2 /* WidgetKit.framework */; };
 		F6D1F1C32581922D00D3BDB4 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F7D4902534D45100C4BDD2 /* SwiftUI.framework */; };
 		F6D1F1C92581923000D3BDB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6D1F1C82581923000D3BDB4 /* Assets.xcassets */; };
-		F6D1F1CB2581923000D3BDB4 /* LastNoteWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F6D1F1C72581922D00D3BDB4 /* LastNoteWidget.intentdefinition */; };
-		F6D1F1CC2581923000D3BDB4 /* LastNoteWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F6D1F1C72581922D00D3BDB4 /* LastNoteWidget.intentdefinition */; };
 		F6D1F1CF2581923000D3BDB4 /* LastNoteWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F6D1F1C12581922D00D3BDB4 /* LastNoteWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F6D1F1E42581926E00D3BDB4 /* UIColor+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D1F1DC2581926A00D3BDB4 /* UIColor+Widget.swift */; };
 		F6D1F1E72581928000D3BDB4 /* GroupDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F7D4A02534D46A00C4BDD2 /* GroupDataManager.swift */; };
@@ -221,7 +219,6 @@
 		F6D1817A239C7C1800EAB85C /* SwiftyLocalReceiptValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyLocalReceiptValidator.swift; sourceTree = "<group>"; };
 		F6D1817C239C7C6600EAB85C /* pkcs7_union_accessors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pkcs7_union_accessors.h; sourceTree = "<group>"; };
 		F6D1F1C12581922D00D3BDB4 /* LastNoteWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LastNoteWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		F6D1F1C72581922D00D3BDB4 /* LastNoteWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = LastNoteWidget.intentdefinition; sourceTree = "<group>"; };
 		F6D1F1C82581923000D3BDB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F6D1F1CA2581923000D3BDB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6D1F1D82581924B00D3BDB4 /* LastNoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastNoteWidget.swift; sourceTree = "<group>"; };
@@ -543,7 +540,6 @@
 			children = (
 				F6D1F1D82581924B00D3BDB4 /* LastNoteWidget.swift */,
 				F6D1F1DC2581926A00D3BDB4 /* UIColor+Widget.swift */,
-				F6D1F1C72581922D00D3BDB4 /* LastNoteWidget.intentdefinition */,
 				F6D1F1C82581923000D3BDB4 /* Assets.xcassets */,
 				F6D1F1CA2581923000D3BDB4 /* Info.plist */,
 			);
@@ -749,7 +745,6 @@
 				F692D97723B1CB2C00E47109 /* UINavigationController+Extensions.swift in Sources */,
 				F65E479F2324B12A00FCAEF3 /* UserDefaults+Extensions.swift in Sources */,
 				F61EC8BE2348E1BA00FB0A63 /* WhatsNewViewController+HapticFeedback.swift in Sources */,
-				F6D1F1CC2581923000D3BDB4 /* LastNoteWidget.intentdefinition in Sources */,
 				F68097B824BA53D9006BDD0C /* ReceiptHandler.swift in Sources */,
 				F61EC8CA2348E1BA00FB0A63 /* Sequence+WhatsNew.swift in Sources */,
 				F61EC8BC2348E1BA00FB0A63 /* WhatsNewViewController+TitleView.swift in Sources */,
@@ -785,7 +780,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6D1F1CB2581923000D3BDB4 /* LastNoteWidget.intentdefinition in Sources */,
 				F6D1F1ED258192A800D3BDB4 /* LastNoteWidget.swift in Sources */,
 				F6D1F1E42581926E00D3BDB4 /* UIColor+Widget.swift in Sources */,
 				F6D1F1E72581928000D3BDB4 /* GroupDataManager.swift in Sources */,
@@ -941,7 +935,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Jotify/Info.plist;
@@ -969,7 +963,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Jotify/Info.plist;
@@ -1052,7 +1046,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Jotify/Info.plist;
@@ -1077,7 +1071,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = LastNoteWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				INFOPLIST_FILE = LastNoteWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
@@ -1102,7 +1096,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = LastNoteWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				INFOPLIST_FILE = LastNoteWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
@@ -1127,7 +1121,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = LastNoteWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				INFOPLIST_FILE = LastNoteWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;

@@ -29,8 +29,6 @@ struct Provider: TimelineProvider {
         let entry = LastNoteEntry(date: currentDate, content: content, dateString: dateString)
         entries.append(entry)
         
-        print("WIDGET STUFF: \( GroupDataManager().readData(path: "widgetColor"))")
-        
         let timeline = Timeline(entries: entries, policy: .never)
         completion(timeline)
     }
@@ -89,7 +87,7 @@ struct LastNote: Widget {
             LastNoteEntryView(entry: entry)
         }
         .configurationDisplayName("Last Note")
-        .description("Displays your most recent note.")
+        .description("Updates dynamically to display your most recent note.")
     }
 }
 
