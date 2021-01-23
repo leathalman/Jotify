@@ -1,0 +1,6 @@
+framework module MultilineTextField {
+  umbrella header "MultilineTextField-umbrella.h"
+
+  export *
+  module * { export * }
+}

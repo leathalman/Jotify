@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>318577606861-socf26cdvvoqppc64tdcu4vc26jh3aun.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.318577606861-socf26cdvvoqppc64tdcu4vc26jh3aun</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD0y3N8ClxvxEdCvEvQT8Z7-5-fsCvcnAk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>318577606861</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.austinleath.Jotify</string>
+	<key>PROJECT_ID</key>
+	<string>jotify-175f8</string>
+	<key>STORAGE_BUCKET</key>
+	<string>jotify-175f8.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:318577606861:ios:ac65ee6f8d7cec14dea984</string>
+</dict>
+</plist>

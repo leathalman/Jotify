@@ -1,0 +1,525 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D468660ACBD45E5CD1B0E4CD /* Pods_Jotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7077D1FD53AC3A2DF5B8A96 /* Pods_Jotify.framework */; };
+		F620BD2625B338C7005BE77B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F620BD2525B338C7005BE77B /* GoogleService-Info.plist */; };
+		F652AB6525B87CF2006D7747 /* EditingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652AB6425B87CF2006D7747 /* EditingController.swift */; };
+		F67F002425B32EE600313D61 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002325B32EE600313D61 /* AuthManager.swift */; };
+		F67F002725B32EEC00313D61 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002625B32EEC00313D61 /* DataManager.swift */; };
+		F67F002A25B32F5B00313D61 /* NoteCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002925B32F5B00313D61 /* NoteCollection.swift */; };
+		F67F002D25B32F6300313D61 /* DraftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002C25B32F6300313D61 /* DraftView.swift */; };
+		F67F003025B32F6700313D61 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002F25B32F6700313D61 /* NoteCell.swift */; };
+		F67F003225B32F6B00313D61 /* VerticalAlignLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F003125B32F6B00313D61 /* VerticalAlignLabel.swift */; };
+		F67F003525B32F7400313D61 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F003425B32F7400313D61 /* LoginController.swift */; };
+		F67F003825B32F7900313D61 /* NoteCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F003725B32F7900313D61 /* NoteCollectionController.swift */; };
+		F67F003A25B32F7D00313D61 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F003925B32F7D00313D61 /* PageViewController.swift */; };
+		F67F003D25B32F8100313D61 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F003C25B32F8100313D61 /* SignUpController.swift */; };
+		F67F004025B32F8700313D61 /* WriteNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F003F25B32F8700313D61 /* WriteNoteController.swift */; };
+		F67FFFF125B32E1F00313D61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67FFFF025B32E1F00313D61 /* AppDelegate.swift */; };
+		F67FFFF325B32E1F00313D61 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67FFFF225B32E1F00313D61 /* SceneDelegate.swift */; };
+		F67FFFFA25B32E2000313D61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F67FFFF925B32E2000313D61 /* Assets.xcassets */; };
+		F67FFFFD25B32E2000313D61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F67FFFFB25B32E2000313D61 /* LaunchScreen.storyboard */; };
+		F6B9D4B825B6175D00A0446C /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9D4B725B6175D00A0446C /* UIViewController+Extensions.swift */; };
+		F6B9D4C725B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9D4C625B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift */; };
+		F6B9D4CA25B629C800A0446C /* Double+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9D4C925B629C800A0446C /* Double+Date.swift */; };
+		F6C2EBB725BA728000EC6582 /* EditingController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C2EBB625BA728000EC6582 /* EditingController+Keyboard.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1129B93197342E6D106D25C2 /* Pods-Jotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.release.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.release.xcconfig"; sourceTree = "<group>"; };
+		A7077D1FD53AC3A2DF5B8A96 /* Pods_Jotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF4FA6AF11CB6D0F6E0E14F3 /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.debug.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
+		F620BD2525B338C7005BE77B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F652AB6425B87CF2006D7747 /* EditingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingController.swift; sourceTree = "<group>"; };
+		F67F002325B32EE600313D61 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		F67F002625B32EEC00313D61 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		F67F002925B32F5B00313D61 /* NoteCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteCollection.swift; sourceTree = "<group>"; };
+		F67F002C25B32F6300313D61 /* DraftView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftView.swift; sourceTree = "<group>"; };
+		F67F002F25B32F6700313D61 /* NoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
+		F67F003125B32F6B00313D61 /* VerticalAlignLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalAlignLabel.swift; sourceTree = "<group>"; };
+		F67F003425B32F7400313D61 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		F67F003725B32F7900313D61 /* NoteCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteCollectionController.swift; sourceTree = "<group>"; };
+		F67F003925B32F7D00313D61 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		F67F003C25B32F8100313D61 /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
+		F67F003F25B32F8700313D61 /* WriteNoteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteNoteController.swift; sourceTree = "<group>"; };
+		F67FFFED25B32E1F00313D61 /* Jotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F67FFFF025B32E1F00313D61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F67FFFF225B32E1F00313D61 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		F67FFFF925B32E2000313D61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F67FFFFC25B32E2000313D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F67FFFFE25B32E2000313D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F6B9D4B725B6175D00A0446C /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		F6B9D4C625B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WriteNoteController+KeyboardNotifications.swift"; sourceTree = "<group>"; };
+		F6B9D4C925B629C800A0446C /* Double+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Date.swift"; sourceTree = "<group>"; };
+		F6C2EBB625BA728000EC6582 /* EditingController+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingController+Keyboard.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F67FFFEA25B32E1F00313D61 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D468660ACBD45E5CD1B0E4CD /* Pods_Jotify.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6F5C812E31E5B77289E9442B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AF4FA6AF11CB6D0F6E0E14F3 /* Pods-Jotify.debug.xcconfig */,
+				1129B93197342E6D106D25C2 /* Pods-Jotify.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		C642498CF2E465CD8F066A65 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A7077D1FD53AC3A2DF5B8A96 /* Pods_Jotify.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F67F001F25B32EC100313D61 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F67F002325B32EE600313D61 /* AuthManager.swift */,
+				F67F002625B32EEC00313D61 /* DataManager.swift */,
+				F67F002925B32F5B00313D61 /* NoteCollection.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F67F002025B32EC500313D61 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F67F002C25B32F6300313D61 /* DraftView.swift */,
+				F67F002F25B32F6700313D61 /* NoteCell.swift */,
+				F67F003125B32F6B00313D61 /* VerticalAlignLabel.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F67F002125B32ECC00313D61 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F6B9D4B125B6160700A0446C /* Login */,
+				F67F003925B32F7D00313D61 /* PageViewController.swift */,
+				F652AB6425B87CF2006D7747 /* EditingController.swift */,
+				F67F003725B32F7900313D61 /* NoteCollectionController.swift */,
+				F67F003F25B32F8700313D61 /* WriteNoteController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F67FFFE425B32E1F00313D61 = {
+			isa = PBXGroup;
+			children = (
+				F67FFFEF25B32E1F00313D61 /* Jotify */,
+				F67FFFEE25B32E1F00313D61 /* Products */,
+				6F5C812E31E5B77289E9442B /* Pods */,
+				C642498CF2E465CD8F066A65 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F67FFFEE25B32E1F00313D61 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F67FFFED25B32E1F00313D61 /* Jotify.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F67FFFEF25B32E1F00313D61 /* Jotify */ = {
+			isa = PBXGroup;
+			children = (
+				F67FFFF025B32E1F00313D61 /* AppDelegate.swift */,
+				F67FFFF225B32E1F00313D61 /* SceneDelegate.swift */,
+				F6B9D4B625B6173B00A0446C /* Extensions */,
+				F67F002025B32EC500313D61 /* View */,
+				F67F002125B32ECC00313D61 /* Controller */,
+				F67F001F25B32EC100313D61 /* Model */,
+				F67FFFF925B32E2000313D61 /* Assets.xcassets */,
+				F67FFFFB25B32E2000313D61 /* LaunchScreen.storyboard */,
+				F620BD2525B338C7005BE77B /* GoogleService-Info.plist */,
+				F67FFFFE25B32E2000313D61 /* Info.plist */,
+			);
+			path = Jotify;
+			sourceTree = "<group>";
+		};
+		F6B9D4B125B6160700A0446C /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				F67F003425B32F7400313D61 /* LoginController.swift */,
+				F67F003C25B32F8100313D61 /* SignUpController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		F6B9D4B625B6173B00A0446C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F6C2EBB525BA726B00EC6582 /* Keyboard */,
+				F6B9D4B725B6175D00A0446C /* UIViewController+Extensions.swift */,
+				F6B9D4C925B629C800A0446C /* Double+Date.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F6C2EBB525BA726B00EC6582 /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				F6B9D4C625B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift */,
+				F6C2EBB625BA728000EC6582 /* EditingController+Keyboard.swift */,
+			);
+			path = Keyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F67FFFEC25B32E1F00313D61 /* Jotify */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F67F000125B32E2000313D61 /* Build configuration list for PBXNativeTarget "Jotify" */;
+			buildPhases = (
+				0B232FC76E07230BA3CCD2F2 /* [CP] Check Pods Manifest.lock */,
+				F67FFFE925B32E1F00313D61 /* Sources */,
+				F67FFFEA25B32E1F00313D61 /* Frameworks */,
+				F67FFFEB25B32E1F00313D61 /* Resources */,
+				0B3B063E829521FDFCFFCDC2 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Jotify;
+			productName = Jotify;
+			productReference = F67FFFED25B32E1F00313D61 /* Jotify.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F67FFFE525B32E1F00313D61 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1230;
+				LastUpgradeCheck = 1230;
+				TargetAttributes = {
+					F67FFFEC25B32E1F00313D61 = {
+						CreatedOnToolsVersion = 12.3;
+					};
+				};
+			};
+			buildConfigurationList = F67FFFE825B32E1F00313D61 /* Build configuration list for PBXProject "Jotify" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F67FFFE425B32E1F00313D61;
+			productRefGroup = F67FFFEE25B32E1F00313D61 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F67FFFEC25B32E1F00313D61 /* Jotify */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F67FFFEB25B32E1F00313D61 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F67FFFFD25B32E2000313D61 /* LaunchScreen.storyboard in Resources */,
+				F67FFFFA25B32E2000313D61 /* Assets.xcassets in Resources */,
+				F620BD2625B338C7005BE77B /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0B232FC76E07230BA3CCD2F2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Jotify-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0B3B063E829521FDFCFFCDC2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Jotify/Pods-Jotify-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Jotify/Pods-Jotify-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Jotify/Pods-Jotify-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F67FFFE925B32E1F00313D61 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6B9D4CA25B629C800A0446C /* Double+Date.swift in Sources */,
+				F67F003D25B32F8100313D61 /* SignUpController.swift in Sources */,
+				F67F004025B32F8700313D61 /* WriteNoteController.swift in Sources */,
+				F67F002725B32EEC00313D61 /* DataManager.swift in Sources */,
+				F67F003825B32F7900313D61 /* NoteCollectionController.swift in Sources */,
+				F6B9D4C725B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift in Sources */,
+				F652AB6525B87CF2006D7747 /* EditingController.swift in Sources */,
+				F67F003A25B32F7D00313D61 /* PageViewController.swift in Sources */,
+				F6C2EBB725BA728000EC6582 /* EditingController+Keyboard.swift in Sources */,
+				F67F002425B32EE600313D61 /* AuthManager.swift in Sources */,
+				F6B9D4B825B6175D00A0446C /* UIViewController+Extensions.swift in Sources */,
+				F67F002A25B32F5B00313D61 /* NoteCollection.swift in Sources */,
+				F67F003225B32F6B00313D61 /* VerticalAlignLabel.swift in Sources */,
+				F67FFFF125B32E1F00313D61 /* AppDelegate.swift in Sources */,
+				F67F002D25B32F6300313D61 /* DraftView.swift in Sources */,
+				F67FFFF325B32E1F00313D61 /* SceneDelegate.swift in Sources */,
+				F67F003025B32F6700313D61 /* NoteCell.swift in Sources */,
+				F67F003525B32F7400313D61 /* LoginController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F67FFFFB25B32E2000313D61 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F67FFFFC25B32E2000313D61 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F67F000025B32E2000313D61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F67F000225B32E2000313D61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF4FA6AF11CB6D0F6E0E14F3 /* Pods-Jotify.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 90;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = G69P7XTUQ3;
+				INFOPLIST_FILE = Jotify/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F67F000325B32E2000313D61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1129B93197342E6D106D25C2 /* Pods-Jotify.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 90;
+				DEVELOPMENT_TEAM = G69P7XTUQ3;
+				INFOPLIST_FILE = Jotify/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F67FFFFF25B32E2000313D61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F67F000125B32E2000313D61 /* Build configuration list for PBXNativeTarget "Jotify" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F67F000225B32E2000313D61 /* Debug */,
+				F67F000325B32E2000313D61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F67FFFE825B32E1F00313D61 /* Build configuration list for PBXProject "Jotify" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F67FFFFF25B32E2000313D61 /* Debug */,
+				F67F000025B32E2000313D61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F67FFFE525B32E1F00313D61 /* Project object */;
+}
