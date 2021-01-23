@@ -27,37 +27,37 @@ extension WriteNoteController {
             if previousVersion != nil {
                 // new version
                 print("new version")
-//                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
-                createWidgetSamepleData()
-                
+                presentUpdateOnboarding(viewController: self, tintColor: StoredColors.noteColor)
+                WidgetManager().updateWidgetToRecentNote()
+
             } else {
                 // first launch
                 print("first launch")
                 presentFirstLaunchOnboarding(viewController: self, tintColor: StoredColors.noteColor)
-                createWidgetSamepleData()
+                WidgetManager().createSampleData()
             }
             standard.set(currentVersion, forKey: shortVersionKey)
         }
     }
     
     func presentUpdateOnboarding(viewController: UIViewController, tintColor: UIColor) {
-        // Jotify v1.2.4 Onboarding
+        // Jotify v1.3.0 Onboarding
         let whatsNew = WhatsNew(
-            title: "What's New - v1.2.4",
+            title: "What's New - v1.3.0",
             items: [
                 WhatsNew.Item(
                     title: "Major Changes",
-                    subtitle: "• Jotify has a brand new color picker! Check it out in Settings -> Appearance\n• Dark mode is now free for every user. ",
+                    subtitle: "• Introducing widgets for Jotify! You can now view your most recent note from the comfort of your home screen.\n• Notes now automatically save as you type them. Whether you are creating or editing a note, Jotify stores this data dynamically.",
                     image: UIImage(named: "bell")
                 ),
                 WhatsNew.Item(
                     title: "Minor Improvements",
-                    subtitle: "• You can now disable the review prompt in Settings -> Alerts\n• You can disable haptic feedback in Settings -> Appearance\n• Major under-the-hood improvements to paging.",
+                    subtitle: "• Complete under-the-hood rewrite of how data is managed and retrieved which will allow for more robust feature development in the future.",
                     image: UIImage(named: "add")
                 ),
                 WhatsNew.Item(
                     title: "Bug Fixes",
-                    subtitle: "• Random color algorithm now correctly chooses a color after relaunch.\n• Added dark mode support for introductory onboarding screen.\n• Added dynamic enabling/disabling of gesture control in settings.\n• Restore function now behaves properly.\n• Color picker no longer defaults to white if no color is selected.\n• Fixed bug where default app icon was not properly aligned.\n• Fixed bug where haptic feedback was not working on iPhone X and newer.\n• Updated dependencies. Removed Pageboy as a dependency.",
+                    subtitle: "• Fixed a bug where multi-delete was not behaving properly.",
                     image: UIImage(named: "bugFix")
                 ),
             ]
@@ -98,15 +98,6 @@ extension WriteNoteController {
         
         DispatchQueue.main.async {
             viewController.present(whatsNewViewController, animated: true)
-        }
-    }
-    
-    func createWidgetSamepleData() {
-        GroupDataManager().writeData(path: "widgetContent", content: "Have you written a note yet? You should do that.")
-        GroupDataManager().writeData(path: "widgetColor", content: UIColor.stringFromColor(color: UIColor.blue2))
-        GroupDataManager().writeData(path: "widgetDate", content: "July 2, 2002")
-        if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadAllTimelines()
         }
     }
     
