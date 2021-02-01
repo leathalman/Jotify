@@ -7,7 +7,7 @@
 
 import UIKit
 
-//super class for authentication workflow
+//superclass for authentication workflow
 class AuthenticationController: UIViewController {
     
     //view elements
@@ -114,7 +114,7 @@ class AuthenticationController: UIViewController {
         case "Sign Up":
             title = "Already have an account?"
         case "Log In":
-            title = "Need to make an account?"
+            title = "Need to create an account?"
         default:
             print("failed to present authentication controller")
         }
@@ -123,9 +123,9 @@ class AuthenticationController: UIViewController {
     
     func setupConstraints() {
         //constraints for title textview
-        textView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25).isActive = true
+        textView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         textView.topAnchor.constraint(equalTo: view.topAnchor, constant: 130).isActive = true
-        textView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true
+        textView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
         textView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
         //constraints for the username textfield
@@ -136,7 +136,7 @@ class AuthenticationController: UIViewController {
         
         //constraints for the password textfield
         passwordField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        passwordField.topAnchor.constraint(equalTo: usernameField.bottomAnchor, constant: 30).isActive = true
+        passwordField.topAnchor.constraint(equalTo: usernameField.bottomAnchor, constant: 18).isActive = true
         passwordField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
         passwordField.heightAnchor.constraint(equalToConstant: 60).isActive = true
         

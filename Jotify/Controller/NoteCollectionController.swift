@@ -65,10 +65,8 @@ class NoteCollectionController: UICollectionViewController {
     
     func setupNavigationBar() {
         navigationItem.title = "Saved Notes"
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barTintColor = .mineShaft
-        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.enablePersistence()
+        navigationController?.setColor(color: .mineShaft)
     }
     
     //action handlers
@@ -88,7 +86,8 @@ class NoteCollectionController: UICollectionViewController {
     
     //temp func for logging out
     @objc func handleLeftNavButton() {
-        AuthManager.signOut()
+//        AuthManager.signOut()
+        navigationController?.pushViewController(GeneralSettingsController(), animated: true)
     }
     
     //collectionView Logic

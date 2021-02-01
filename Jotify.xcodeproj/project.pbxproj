@@ -31,7 +31,12 @@
 		F6B9D4C725B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9D4C625B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift */; };
 		F6B9D4CA25B629C800A0446C /* Double+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9D4C925B629C800A0446C /* Double+Date.swift */; };
 		F6C2EBB725BA728000EC6582 /* EditingController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C2EBB625BA728000EC6582 /* EditingController+Keyboard.swift */; };
+		F6D2771225C8C00E00ECFCCC /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D2771125C8C00E00ECFCCC /* SettingsCell.swift */; };
+		F6D2771625C8C01C00ECFCCC /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D2771525C8C01C00ECFCCC /* SettingsSwitchCell.swift */; };
+		F6D2771925C8C37C00ECFCCC /* UINavigationController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D2771825C8C37C00ECFCCC /* UINavigationController+Extensions.swift */; };
 		F6F185A625C85F98001FD5FA /* UITextView+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185A525C85F98001FD5FA /* UITextView+Padding.swift */; };
+		F6F185AE25C86AB4001FD5FA /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185AD25C86AB4001FD5FA /* SettingsController.swift */; };
+		F6F185B225C86ABF001FD5FA /* GeneralSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185B125C86ABF001FD5FA /* GeneralSettingsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,7 +68,12 @@
 		F6B9D4C625B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WriteNoteController+KeyboardNotifications.swift"; sourceTree = "<group>"; };
 		F6B9D4C925B629C800A0446C /* Double+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Date.swift"; sourceTree = "<group>"; };
 		F6C2EBB625BA728000EC6582 /* EditingController+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingController+Keyboard.swift"; sourceTree = "<group>"; };
+		F6D2771125C8C00E00ECFCCC /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		F6D2771525C8C01C00ECFCCC /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
+		F6D2771825C8C37C00ECFCCC /* UINavigationController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extensions.swift"; sourceTree = "<group>"; };
 		F6F185A525C85F98001FD5FA /* UITextView+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Padding.swift"; sourceTree = "<group>"; };
+		F6F185AD25C86AB4001FD5FA /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		F6F185B125C86ABF001FD5FA /* GeneralSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +118,7 @@
 		F67F002025B32EC500313D61 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F6D2771025C8BFEC00ECFCCC /* Settings */,
 				F67F002C25B32F6300313D61 /* DraftView.swift */,
 				F67F002F25B32F6700313D61 /* NoteCell.swift */,
 				F67F003125B32F6B00313D61 /* VerticalAlignLabel.swift */,
@@ -118,6 +129,7 @@
 		F67F002125B32ECC00313D61 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				F6F185AC25C86A77001FD5FA /* Settings */,
 				F6B9D4B125B6160700A0446C /* Login */,
 				F67F003925B32F7D00313D61 /* PageViewController.swift */,
 				F652AB6425B87CF2006D7747 /* EditingController.swift */,
@@ -180,6 +192,7 @@
 				F67D1B6925BF7A1100B28071 /* UIColor+Extensions.swift */,
 				F6F185A525C85F98001FD5FA /* UITextView+Padding.swift */,
 				F6B9D4C925B629C800A0446C /* Double+Date.swift */,
+				F6D2771825C8C37C00ECFCCC /* UINavigationController+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -191,6 +204,24 @@
 				F6C2EBB625BA728000EC6582 /* EditingController+Keyboard.swift */,
 			);
 			path = Keyboard;
+			sourceTree = "<group>";
+		};
+		F6D2771025C8BFEC00ECFCCC /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				F6D2771125C8C00E00ECFCCC /* SettingsCell.swift */,
+				F6D2771525C8C01C00ECFCCC /* SettingsSwitchCell.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		F6F185AC25C86A77001FD5FA /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				F6F185AD25C86AB4001FD5FA /* SettingsController.swift */,
+				F6F185B125C86ABF001FD5FA /* GeneralSettingsController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,19 +345,24 @@
 				F67F003825B32F7900313D61 /* NoteCollectionController.swift in Sources */,
 				F6B9D4C725B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift in Sources */,
 				F652AB6525B87CF2006D7747 /* EditingController.swift in Sources */,
+				F6F185B225C86ABF001FD5FA /* GeneralSettingsController.swift in Sources */,
 				F67F003A25B32F7D00313D61 /* PageViewController.swift in Sources */,
 				F6C2EBB725BA728000EC6582 /* EditingController+Keyboard.swift in Sources */,
 				F67F002425B32EE600313D61 /* AuthManager.swift in Sources */,
 				F6B9D4B825B6175D00A0446C /* UIViewController+Extensions.swift in Sources */,
 				F67D1B6A25BF7A1100B28071 /* UIColor+Extensions.swift in Sources */,
+				F6D2771925C8C37C00ECFCCC /* UINavigationController+Extensions.swift in Sources */,
 				F67F002A25B32F5B00313D61 /* NoteCollection.swift in Sources */,
+				F6D2771225C8C00E00ECFCCC /* SettingsCell.swift in Sources */,
 				F6490CF125C797CC000F66E5 /* AuthenticationController.swift in Sources */,
 				F67F003225B32F6B00313D61 /* VerticalAlignLabel.swift in Sources */,
 				F67D1B6725BF794F00B28071 /* LoginController.swift in Sources */,
+				F6F185AE25C86AB4001FD5FA /* SettingsController.swift in Sources */,
 				F67FFFF125B32E1F00313D61 /* AppDelegate.swift in Sources */,
 				F67F002D25B32F6300313D61 /* DraftView.swift in Sources */,
 				F6F185A625C85F98001FD5FA /* UITextView+Padding.swift in Sources */,
 				F67FFFF325B32E1F00313D61 /* SceneDelegate.swift in Sources */,
+				F6D2771625C8C01C00ECFCCC /* SettingsSwitchCell.swift in Sources */,
 				F67F003025B32F6700313D61 /* NoteCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,7 +444,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 91;
+				CURRENT_PROJECT_VERSION = 92;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				INFOPLIST_FILE = Jotify/Info.plist;
@@ -433,7 +469,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 91;
+				CURRENT_PROJECT_VERSION = 92;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				INFOPLIST_FILE = Jotify/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

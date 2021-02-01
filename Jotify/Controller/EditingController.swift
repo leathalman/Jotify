@@ -43,16 +43,12 @@ class EditingController: UIViewController, UITextViewDelegate {
     
     func setupNavBar() {
         navigationItem.title = note?.timestamp.getDate()
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barTintColor = .systemBlue
-        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-
+        navigationController?.enablePersistence()
+        navigationController?.setColor(color: .systemBlue)
+        
         var cancel = UIImage(named: "cancel")
         cancel = cancel?.withRenderingMode(.alwaysOriginal)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: cancel, style: .plain, target: self, action: #selector(handleCancel))
-        
-        navigationItem.setHidesBackButton(true, animated: true)
     }
    
     //action handlers
