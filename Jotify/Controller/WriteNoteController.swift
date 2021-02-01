@@ -9,6 +9,8 @@ import UIKit
 
 class WriteNoteController: UIViewController, UITextViewDelegate {
     let draftView = DraftView()
+    
+    //used within timer logic to determine and save current note dynamically
     var hasCreatedDocument = false
     var timer: Timer?
     var documentID: String?
@@ -35,13 +37,13 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         view.addGestureRecognizer(tap)
     }
     
-    //textview logic
+    //whenever the area around the textView is tapped, bring up the keyboard
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         draftView.textField.becomeFirstResponder()
     }
     
-    //definitely some room for error here...
-    //if not careful, im sure this documentID stuff can crash the app
+    //invalidate timer, reset timer-related variables, and do a final update on the document
+    //clean up the UI by emptying the textView and resigning keyboard
     @objc func handleSend() {
         if !draftView.textField.text.isEmpty {
             DataManager.updateNote(content: draftView.textField.text, uid: documentID ?? "") { (success) in
@@ -73,24 +75,12 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         if !draftView.textField.text.isEmpty {
             DataManager.updateNote(content: draftView.textField.text, uid: documentID ?? "") { (success) in
                 //handle success here
-                print("NOTE UPDATED WITH TEXT: \(self.draftView.textField.text)")
             }
         }
     }
     
-    //this will act weird if if the user immediately leaves the app... so maybe add some character qualitifer??
-    //like 2 letters or more to make the doc??
-    //could probably add some function to check if the text is identical to prevent taht extra
-    //write call, but we'll see
-    //DOESNT account for edge case of writing note, and then deleting it from draftview
+    //whenever user types, update the document and reset the timer
     func textViewDidChange(_ textView: UITextView) {
-        //set var to true
-        //create the note here
-        //save the note if user resigns the app?
-        //could use the same timer function to save after 2 seconds or something...
-        //and then figure out how handling send needs to work... I guess you could just
-        //upadate instead of creating, this added an additional write to the database...
-        //but I think that doesnt REALLY matter too much
         if !hasCreatedDocument {
             documentID = DataManager.createNote(content: draftView.textField.text, timestamp: Date.timeIntervalSinceReferenceDate)
             hasCreatedDocument = true

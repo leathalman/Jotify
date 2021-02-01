@@ -9,14 +9,16 @@
 /* Begin PBXBuildFile section */
 		D468660ACBD45E5CD1B0E4CD /* Pods_Jotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7077D1FD53AC3A2DF5B8A96 /* Pods_Jotify.framework */; };
 		F620BD2625B338C7005BE77B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F620BD2525B338C7005BE77B /* GoogleService-Info.plist */; };
+		F6490CF125C797CC000F66E5 /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6490CF025C797CC000F66E5 /* AuthenticationController.swift */; };
 		F652AB6525B87CF2006D7747 /* EditingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652AB6425B87CF2006D7747 /* EditingController.swift */; };
+		F67D1B6725BF794F00B28071 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D1B6625BF794F00B28071 /* LoginController.swift */; };
+		F67D1B6A25BF7A1100B28071 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D1B6925BF7A1100B28071 /* UIColor+Extensions.swift */; };
 		F67F002425B32EE600313D61 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002325B32EE600313D61 /* AuthManager.swift */; };
 		F67F002725B32EEC00313D61 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002625B32EEC00313D61 /* DataManager.swift */; };
 		F67F002A25B32F5B00313D61 /* NoteCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002925B32F5B00313D61 /* NoteCollection.swift */; };
 		F67F002D25B32F6300313D61 /* DraftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002C25B32F6300313D61 /* DraftView.swift */; };
 		F67F003025B32F6700313D61 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002F25B32F6700313D61 /* NoteCell.swift */; };
 		F67F003225B32F6B00313D61 /* VerticalAlignLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F003125B32F6B00313D61 /* VerticalAlignLabel.swift */; };
-		F67F003525B32F7400313D61 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F003425B32F7400313D61 /* LoginController.swift */; };
 		F67F003825B32F7900313D61 /* NoteCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F003725B32F7900313D61 /* NoteCollectionController.swift */; };
 		F67F003A25B32F7D00313D61 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F003925B32F7D00313D61 /* PageViewController.swift */; };
 		F67F003D25B32F8100313D61 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F003C25B32F8100313D61 /* SignUpController.swift */; };
@@ -36,14 +38,16 @@
 		A7077D1FD53AC3A2DF5B8A96 /* Pods_Jotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF4FA6AF11CB6D0F6E0E14F3 /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.debug.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
 		F620BD2525B338C7005BE77B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F6490CF025C797CC000F66E5 /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
 		F652AB6425B87CF2006D7747 /* EditingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingController.swift; sourceTree = "<group>"; };
+		F67D1B6625BF794F00B28071 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		F67D1B6925BF7A1100B28071 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		F67F002325B32EE600313D61 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		F67F002625B32EEC00313D61 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		F67F002925B32F5B00313D61 /* NoteCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteCollection.swift; sourceTree = "<group>"; };
 		F67F002C25B32F6300313D61 /* DraftView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftView.swift; sourceTree = "<group>"; };
 		F67F002F25B32F6700313D61 /* NoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		F67F003125B32F6B00313D61 /* VerticalAlignLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalAlignLabel.swift; sourceTree = "<group>"; };
-		F67F003425B32F7400313D61 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		F67F003725B32F7900313D61 /* NoteCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteCollectionController.swift; sourceTree = "<group>"; };
 		F67F003925B32F7D00313D61 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		F67F003C25B32F8100313D61 /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
@@ -159,8 +163,9 @@
 		F6B9D4B125B6160700A0446C /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				F67F003425B32F7400313D61 /* LoginController.swift */,
 				F67F003C25B32F8100313D61 /* SignUpController.swift */,
+				F67D1B6625BF794F00B28071 /* LoginController.swift */,
+				F6490CF025C797CC000F66E5 /* AuthenticationController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -170,6 +175,7 @@
 			children = (
 				F6C2EBB525BA726B00EC6582 /* Keyboard */,
 				F6B9D4B725B6175D00A0446C /* UIViewController+Extensions.swift */,
+				F67D1B6925BF7A1100B28071 /* UIColor+Extensions.swift */,
 				F6B9D4C925B629C800A0446C /* Double+Date.swift */,
 			);
 			path = Extensions;
@@ -309,13 +315,15 @@
 				F6C2EBB725BA728000EC6582 /* EditingController+Keyboard.swift in Sources */,
 				F67F002425B32EE600313D61 /* AuthManager.swift in Sources */,
 				F6B9D4B825B6175D00A0446C /* UIViewController+Extensions.swift in Sources */,
+				F67D1B6A25BF7A1100B28071 /* UIColor+Extensions.swift in Sources */,
 				F67F002A25B32F5B00313D61 /* NoteCollection.swift in Sources */,
+				F6490CF125C797CC000F66E5 /* AuthenticationController.swift in Sources */,
 				F67F003225B32F6B00313D61 /* VerticalAlignLabel.swift in Sources */,
+				F67D1B6725BF794F00B28071 /* LoginController.swift in Sources */,
 				F67FFFF125B32E1F00313D61 /* AppDelegate.swift in Sources */,
 				F67F002D25B32F6300313D61 /* DraftView.swift in Sources */,
 				F67FFFF325B32E1F00313D61 /* SceneDelegate.swift in Sources */,
 				F67F003025B32F6700313D61 /* NoteCell.swift in Sources */,
-				F67F003525B32F7400313D61 /* LoginController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,7 +404,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 90;
+				CURRENT_PROJECT_VERSION = 91;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				INFOPLIST_FILE = Jotify/Info.plist;
@@ -421,7 +429,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 90;
+				CURRENT_PROJECT_VERSION = 91;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				INFOPLIST_FILE = Jotify/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

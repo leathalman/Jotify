@@ -64,7 +64,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             print("logged in")
         } else {
             print("not logged in")
-            window!.rootViewController?.present(LoginController(), animated: true)
+            let lg = LoginController()
+            lg.modalPresentationStyle = .fullScreen
+            window!.rootViewController?.present(lg, animated: false)
         }
     }
 

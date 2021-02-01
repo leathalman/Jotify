@@ -54,14 +54,14 @@ class NoteCollectionController: UICollectionViewController {
         } else if UIDevice.current.userInterfaceIdiom == .phone {
             collectionView.setCollectionViewLayout(iOSLayout, animated: true)
         }
-        collectionView.backgroundColor = UIColor(red: 40/255, green: 40/255, blue: 40/255, alpha: 1)
+        collectionView.backgroundColor = .mineShaft
         collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
     }
     
     func setupNavigationBar() {
         navigationItem.title = "Saved Notes"
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barTintColor = UIColor(red: 40/255, green: 40/255, blue: 40/255, alpha: 1)
+        navigationController?.navigationBar.barTintColor = .mineShaft
         navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
     }

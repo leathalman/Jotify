@@ -1,82 +1,55 @@
 //
-//  LoginController.swift
-//  Zurich
+//  Login.swift
+//  Jotify
 //
-//  Created by Harrison Leath on 1/11/21.
+//  Created by Harrison Leath on 1/25/21.
 //
 
 import UIKit
 
-class LoginController: UIViewController {
-    
-    lazy var usernameField: UITextField = {
-        let frame = CGRect(x: 20, y: 100, width: UIScreen.main.bounds.width / 1.4, height: 100)
-        let textField = UITextField(frame: frame)
-        textField.backgroundColor = .red
-        textField.textColor = .white
-        textField.font = UIFont.boldSystemFont(ofSize: 32)
-        textField.placeholder = "Username"
-        textField.autocapitalizationType = .none
-        return textField
-    }()
-    
-    lazy var passwordField: UITextField = {
-        let frame = CGRect(x: 20, y: 225, width: UIScreen.main.bounds.width / 1.4, height: 100)
-        let textField = UITextField(frame: frame)
-        textField.backgroundColor = .red
-        textField.textColor = .white
-        textField.font = UIFont.boldSystemFont(ofSize: 32)
-        textField.placeholder = "Password"
-        textField.autocapitalizationType = .none
-        return textField
-    }()
-    
-    lazy var submitButton: UIButton = {
-        let frame = CGRect(x: 20, y: 300, width: 200, height: 100)
-        let button = UIButton(frame: frame)
-        button.backgroundColor = .purple
-        button.setTitle("Login", for: .normal)
-        button.addTarget(self, action: #selector(didSubmitLogin), for: .touchUpInside)
-        return button
-    }()
-    
-    lazy var loginInButton: UIButton = {
-        let frame = CGRect(x: 20, y: 425, width: 200, height: 100)
-        let button = UIButton(frame: frame)
-        button.backgroundColor = .purple
-        button.setTitle("Sign Up Instead", for: .normal)
-        button.addTarget(self, action: #selector(didPresentSignUp), for: .touchUpInside)
-        return button
-    }()
+class LoginController: AuthenticationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .green
-        view.addSubview(usernameField)
-        view.addSubview(passwordField)
-        view.addSubview(submitButton)
-        view.addSubview(loginInButton)
+        setupView()
     }
     
+    //customize generic view from AuthenticationController for login
+    func setupView() {
+        view.backgroundColor = .mineShaft
+        changeColorOfVCButton()
+        submitButton.setTitle("Log In", for: .normal)
+        submitButton.addTarget(self, action: #selector(didSubmitLogin), for: .touchUpInside)
+        changeVCButton.addTarget(self, action: #selector(changeVC), for: .touchUpInside)
+    }
+    
+    //objc function for signing a user in when button is pressed
     @objc func didSubmitLogin() {
-        let authManager = AuthManager()
         guard let email = usernameField.text, let password = passwordField.text else { return }
-        authManager.login(email: email, pass: password) {[weak self] (success) in
-            guard let `self` = self else { return }
-            var message: String = ""
-            if (success) {
-                message = "User was sucessfully logged in."
+        AuthManager.login(email: email, pass: password) { (success, message) in
+            if !success! {
+                let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
             } else {
-                message = "There was an error."
+                self.dismiss(animated: true, completion: nil)
             }
-            let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            self.present(alertController, animated: true, completion: nil)
         }
     }
     
-    @objc func didPresentSignUp() {
-        present(SignUpController(), animated: true)
+    func changeColorOfVCButton() {
+        let firstAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
+        let secondAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemBlue, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 3
+        
+        let firstString = NSMutableAttributedString(string: "Need to sign up? ", attributes: firstAttributes)
+        let secondString = NSAttributedString(string: "Press here.", attributes: secondAttributes)
+        
+        firstString.append(secondString)
+        firstString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, firstString.length))
+        
+        changeVCButton.setAttributedTitle(firstString, for: .normal)
     }
-    
 }
