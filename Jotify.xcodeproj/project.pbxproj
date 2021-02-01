@@ -31,6 +31,7 @@
 		F6B9D4C725B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9D4C625B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift */; };
 		F6B9D4CA25B629C800A0446C /* Double+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9D4C925B629C800A0446C /* Double+Date.swift */; };
 		F6C2EBB725BA728000EC6582 /* EditingController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C2EBB625BA728000EC6582 /* EditingController+Keyboard.swift */; };
+		F6F185A625C85F98001FD5FA /* UITextView+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185A525C85F98001FD5FA /* UITextView+Padding.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		F6B9D4C625B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WriteNoteController+KeyboardNotifications.swift"; sourceTree = "<group>"; };
 		F6B9D4C925B629C800A0446C /* Double+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Date.swift"; sourceTree = "<group>"; };
 		F6C2EBB625BA728000EC6582 /* EditingController+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingController+Keyboard.swift"; sourceTree = "<group>"; };
+		F6F185A525C85F98001FD5FA /* UITextView+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Padding.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 				F6C2EBB525BA726B00EC6582 /* Keyboard */,
 				F6B9D4B725B6175D00A0446C /* UIViewController+Extensions.swift */,
 				F67D1B6925BF7A1100B28071 /* UIColor+Extensions.swift */,
+				F6F185A525C85F98001FD5FA /* UITextView+Padding.swift */,
 				F6B9D4C925B629C800A0446C /* Double+Date.swift */,
 			);
 			path = Extensions;
@@ -322,6 +325,7 @@
 				F67D1B6725BF794F00B28071 /* LoginController.swift in Sources */,
 				F67FFFF125B32E1F00313D61 /* AppDelegate.swift in Sources */,
 				F67F002D25B32F6300313D61 /* DraftView.swift in Sources */,
+				F6F185A625C85F98001FD5FA /* UITextView+Padding.swift in Sources */,
 				F67FFFF325B32E1F00313D61 /* SceneDelegate.swift in Sources */,
 				F67F003025B32F6700313D61 /* NoteCell.swift in Sources */,
 			);

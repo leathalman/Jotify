@@ -56,6 +56,11 @@ class NoteCollectionController: UICollectionViewController {
         }
         collectionView.backgroundColor = .mineShaft
         collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
+        
+        //navigation bar item customization
+        let leftItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(handleLeftNavButton))
+        navigationItem.leftBarButtonItem = leftItem
+        navigationItem.setHidesBackButton(true, animated: true)
     }
     
     func setupNavigationBar() {
@@ -79,6 +84,11 @@ class NoteCollectionController: UICollectionViewController {
         }))
         actionController.addAction(Action("Cancel", style: .cancel, handler: nil))
         present(actionController, animated: true, completion: nil)
+    }
+    
+    //temp func for logging out
+    @objc func handleLeftNavButton() {
+        AuthManager.signOut()
     }
     
     //collectionView Logic

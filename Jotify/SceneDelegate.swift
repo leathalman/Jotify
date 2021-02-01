@@ -16,8 +16,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
-        setupWindows(scene: scene)
-        checkLogin()
+        //check if user is logged in
+        if !AuthManager().uid.isEmpty {
+            print("logged in")
+            setupWindows(scene: scene, vc: PageViewController())
+        } else {
+            print("not logged in")
+            setupWindows(scene: scene, vc: SignUpController())
+        }
         
         guard let _ = (scene as? UIWindowScene) else { return }
     }
@@ -50,26 +56,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
     
-    func setupWindows(scene: UIScene) {
+    func setupWindows(scene: UIScene, vc: UIViewController) {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = PageViewController()
+            window.rootViewController = vc
             self.window = window
             window.makeKeyAndVisible()
         }
     }
-    
-    func checkLogin() {
-        if !AuthManager().uid.isEmpty {
-            print("logged in")
-        } else {
-            print("not logged in")
-            let lg = LoginController()
-            lg.modalPresentationStyle = .fullScreen
-            window!.rootViewController?.present(lg, animated: false)
-        }
-    }
-
-
 }
 

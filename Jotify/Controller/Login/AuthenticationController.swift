@@ -10,6 +10,7 @@ import UIKit
 //super class for authentication workflow
 class AuthenticationController: UIViewController {
     
+    //view elements
     let textView: UITextView = {
         let view = UITextView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -22,10 +23,14 @@ class AuthenticationController: UIViewController {
     let usernameField: UITextField = {
         let text = UITextField()
         text.translatesAutoresizingMaskIntoConstraints = false
-        text.placeholder = "Example@me.com"
+        text.placeholder = "Email"
+        text.backgroundColor = UIColor.mineShaft.adjust(by: -2)
+        text.layer.cornerRadius = 10
         text.textColor = .white
         text.font = .boldSystemFont(ofSize: 25)
-        text.borderStyle = .roundedRect
+        text.borderStyle = .none
+        text.autocapitalizationType = .none
+        text.autocorrectionType = .no
         return text
     }()
     
@@ -33,9 +38,11 @@ class AuthenticationController: UIViewController {
         let text = UITextField()
         text.translatesAutoresizingMaskIntoConstraints = false
         text.placeholder = "Password"
+        text.backgroundColor = UIColor.mineShaft.adjust(by: -2)
+        text.layer.cornerRadius = 10
         text.textColor = .white
         text.font = .boldSystemFont(ofSize: 25)
-        text.borderStyle = .roundedRect
+        text.borderStyle = .none
         text.isSecureTextEntry = true
         return text
     }()
@@ -43,20 +50,19 @@ class AuthenticationController: UIViewController {
     let submitButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .clear
-        button.layer.cornerRadius = 5
-        button.layer.borderWidth = 5
-        button.layer.borderColor = UIColor.systemBlue.cgColor
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 10
+        button.titleLabel?.font = .boldSystemFont(ofSize: 20)
         return button
     }()
     
     let changeVCButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .clear
-        button.layer.cornerRadius = 5
-        button.layer.borderWidth = 5
-        button.layer.borderColor = UIColor.systemBlue.cgColor
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 10
+        button.titleLabel?.font = .boldSystemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(changeVC), for: .touchUpInside)
         return button
     }()
     
@@ -73,28 +79,18 @@ class AuthenticationController: UIViewController {
     
     //objc function for switching between login and signup
     @objc func changeVC() {
-        self.dismiss(animated: true, completion: nil)
-        let keyWindow = UIApplication.shared.connectedScenes
-                .filter({$0.activationState == .foregroundActive})
-                .map({$0 as? UIWindowScene})
-                .compactMap({$0})
-                .first?.windows
-                .filter({$0.isKeyWindow}).first
+        //change rootViewController based on requested controller
         switch submitButton.titleLabel?.text {
         case "Sign Up":
-            let lg = LoginController()
-            lg.modalPresentationStyle = .fullScreen
-            keyWindow?.rootViewController?.present(lg, animated: true, completion: nil)
+            self.setRootViewController(vc: LoginController())
         case "Log In":
-            let sn = SignUpController()
-            sn.modalPresentationStyle = .fullScreen
-            keyWindow?.rootViewController?.present(sn, animated: true, completion: nil)
+            self.setRootViewController(vc: SignUpController())
         default:
             print("failed to present authentication controller")
         }
     }
     
-    //add attributes to string
+    //create string with attributes for title textView
     func changeColorOfTextView() {
         let firstAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 60)]
         let secondAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemBlue, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 60)]
@@ -103,15 +99,26 @@ class AuthenticationController: UIViewController {
         paragraphStyle.lineSpacing = 3
         
         let firstString = NSMutableAttributedString(string: "Welcome to ", attributes: firstAttributes)
-        let secondString = NSAttributedString(string: "Jotify", attributes: secondAttributes)
-        let thirdString = NSAttributedString(string: ".", attributes: firstAttributes)
+        let secondString = NSAttributedString(string: "Jotify.", attributes: secondAttributes)
         
         firstString.append(secondString)
-        firstString.append(thirdString)
-        
         firstString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, firstString.length))
         
         textView.attributedText = firstString
+    }
+    
+    //change title of VC button based on current VC presented
+    func changeColorOfVCButton() {
+        var title = ""
+        switch submitButton.titleLabel?.text {
+        case "Sign Up":
+            title = "Already have an account?"
+        case "Log In":
+            title = "Need to make an account?"
+        default:
+            print("failed to present authentication controller")
+        }
+        changeVCButton.setTitle(title, for: .normal)
     }
     
     func setupConstraints() {
@@ -124,25 +131,28 @@ class AuthenticationController: UIViewController {
         //constraints for the username textfield
         usernameField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         usernameField.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 60).isActive = true
-        usernameField.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true
+        usernameField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
         usernameField.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
         //constraints for the password textfield
         passwordField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         passwordField.topAnchor.constraint(equalTo: usernameField.bottomAnchor, constant: 30).isActive = true
-        passwordField.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true
+        passwordField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
         passwordField.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
         //constraints for the signup button
         submitButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         submitButton.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: 45).isActive = true
-        submitButton.widthAnchor.constraint(equalTo: passwordField.widthAnchor, multiplier: 0.5).isActive = true
+        submitButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
         submitButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         //constraints for change VC button
         changeVCButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         changeVCButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80).isActive = true
-        changeVCButton.widthAnchor.constraint(equalToConstant: 360).isActive = true
+        changeVCButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
         changeVCButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        usernameField.setLeftPadding(12)
+        passwordField.setLeftPadding(12)
     }
 }

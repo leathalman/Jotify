@@ -8,7 +8,7 @@
 import UIKit
 
 class SignUpController: AuthenticationController {
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -17,10 +17,9 @@ class SignUpController: AuthenticationController {
     //customize generic view from AuthenticationController for sign up
     func setupView() {
         view.backgroundColor = .mineShaft
-        changeColorOfVCButton()
         submitButton.setTitle("Sign Up", for: .normal)
         submitButton.addTarget(self, action: #selector(didSubmitSignUp), for: .touchUpInside)
-        changeVCButton.addTarget(self, action: #selector(changeVC), for: .touchUpInside)
+        changeColorOfVCButton()
     }
     
     //objc function for signing a user in when button is pressed
@@ -32,24 +31,9 @@ class SignUpController: AuthenticationController {
                 alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
             } else {
-                self.dismiss(animated: true, completion: nil)
+                //change rootViewController to PageViewController w/ animation
+                self.setRootViewController(vc: PageViewController())
             }
         }
-    }
-    
-    func changeColorOfVCButton() {
-        let firstAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
-        let secondAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemBlue, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
-        
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 3
-        
-        let firstString = NSMutableAttributedString(string: "Need to log in? ", attributes: firstAttributes)
-        let secondString = NSAttributedString(string: "Press here.", attributes: secondAttributes)
-        
-        firstString.append(secondString)
-        firstString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, firstString.length))
-        
-        changeVCButton.setAttributedTitle(firstString, for: .normal)
     }
 }
