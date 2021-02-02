@@ -13,7 +13,6 @@ extension UINavigationController {
         navigationBar.shadowImage = UIImage()
         navigationBar.setBackgroundImage(nil, for: .default)
         navigationBar.isTranslucent = false
-        navigationItem.setHidesBackButton(true, animated: true)
     }
     
     func setColor(color: UIColor) {

@@ -34,6 +34,7 @@
 		F6D2771225C8C00E00ECFCCC /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D2771125C8C00E00ECFCCC /* SettingsCell.swift */; };
 		F6D2771625C8C01C00ECFCCC /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D2771525C8C01C00ECFCCC /* SettingsSwitchCell.swift */; };
 		F6D2771925C8C37C00ECFCCC /* UINavigationController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D2771825C8C37C00ECFCCC /* UINavigationController+Extensions.swift */; };
+		F6DFF0C625C8FF9D004D6468 /* UserSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DFF0C525C8FF9D004D6468 /* UserSettingsController.swift */; };
 		F6F185A625C85F98001FD5FA /* UITextView+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185A525C85F98001FD5FA /* UITextView+Padding.swift */; };
 		F6F185AE25C86AB4001FD5FA /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185AD25C86AB4001FD5FA /* SettingsController.swift */; };
 		F6F185B225C86ABF001FD5FA /* GeneralSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185B125C86ABF001FD5FA /* GeneralSettingsController.swift */; };
@@ -71,6 +72,7 @@
 		F6D2771125C8C00E00ECFCCC /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		F6D2771525C8C01C00ECFCCC /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
 		F6D2771825C8C37C00ECFCCC /* UINavigationController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extensions.swift"; sourceTree = "<group>"; };
+		F6DFF0C525C8FF9D004D6468 /* UserSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsController.swift; sourceTree = "<group>"; };
 		F6F185A525C85F98001FD5FA /* UITextView+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Padding.swift"; sourceTree = "<group>"; };
 		F6F185AD25C86AB4001FD5FA /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		F6F185B125C86ABF001FD5FA /* GeneralSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsController.swift; sourceTree = "<group>"; };
@@ -177,9 +179,9 @@
 		F6B9D4B125B6160700A0446C /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				F6490CF025C797CC000F66E5 /* AuthenticationController.swift */,
 				F67F003C25B32F8100313D61 /* SignUpController.swift */,
 				F67D1B6625BF794F00B28071 /* LoginController.swift */,
-				F6490CF025C797CC000F66E5 /* AuthenticationController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -220,6 +222,7 @@
 			children = (
 				F6F185AD25C86AB4001FD5FA /* SettingsController.swift */,
 				F6F185B125C86ABF001FD5FA /* GeneralSettingsController.swift */,
+				F6DFF0C525C8FF9D004D6468 /* UserSettingsController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				F67F002D25B32F6300313D61 /* DraftView.swift in Sources */,
 				F6F185A625C85F98001FD5FA /* UITextView+Padding.swift in Sources */,
 				F67FFFF325B32E1F00313D61 /* SceneDelegate.swift in Sources */,
+				F6DFF0C625C8FF9D004D6468 /* UserSettingsController.swift in Sources */,
 				F6D2771625C8C01C00ECFCCC /* SettingsSwitchCell.swift in Sources */,
 				F67F003025B32F6700313D61 /* NoteCell.swift in Sources */,
 			);

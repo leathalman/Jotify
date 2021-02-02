@@ -11,34 +11,27 @@ import UIKit
 class SettingsController: UITableViewController {
     //number of sections found in each VC
     var sections: [String] = []
+    var section1Content: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        removeExtraHeaderView()
-        tableView.contentInset = .zero
-        tableView.isUserInteractionEnabled = true
-        tableView.isScrollEnabled = true
+        view.backgroundColor = .mineShaft
+        navigationController?.enablePersistence()
         tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
-        
-        navigationController?.enablePersistence()
-        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
-    }
-    
-    func removeExtraHeaderView() {
-        var frame = CGRect.zero
-        frame.size.height = .leastNormalMagnitude
-        tableView.tableHeaderView = UIView(frame: frame)
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return section1Content.count
+        } else {
+            return 0
+        }
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

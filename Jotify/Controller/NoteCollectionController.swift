@@ -40,6 +40,7 @@ class NoteCollectionController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setupNavigationBar()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
     }
     
     override func viewDidLoad() {
@@ -86,8 +87,7 @@ class NoteCollectionController: UICollectionViewController {
     
     //temp func for logging out
     @objc func handleLeftNavButton() {
-//        AuthManager.signOut()
-        navigationController?.pushViewController(GeneralSettingsController(), animated: true)
+        navigationController?.pushViewController(GeneralSettingsController(style: .insetGrouped), animated: true)
     }
     
     //collectionView Logic

@@ -21,13 +21,14 @@ class EditingController: UIViewController, UITextViewDelegate {
         setupView()
         setupNavBar()
         setupNotifications()
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
+        //check this out, seems to cause a bug TODO
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         updateContent(content: draftView.textField.text)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
     }
     
     //view configuration
@@ -45,6 +46,7 @@ class EditingController: UIViewController, UITextViewDelegate {
         navigationItem.title = note?.timestamp.getDate()
         navigationController?.enablePersistence()
         navigationController?.setColor(color: .systemBlue)
+        navigationItem.setHidesBackButton(true, animated: true)
         
         var cancel = UIImage(named: "cancel")
         cancel = cancel?.withRenderingMode(.alwaysOriginal)
