@@ -24,7 +24,4 @@ extension UIColor {
         }
         return nil
     }
-    
-    //dark-greyish
-    static let mineShaft = UIColor(r: 40, g: 40, b: 40)
 }

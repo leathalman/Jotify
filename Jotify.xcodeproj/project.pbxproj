@@ -35,6 +35,8 @@
 		F6D2771625C8C01C00ECFCCC /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D2771525C8C01C00ECFCCC /* SettingsSwitchCell.swift */; };
 		F6D2771925C8C37C00ECFCCC /* UINavigationController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D2771825C8C37C00ECFCCC /* UINavigationController+Extensions.swift */; };
 		F6DFF0C625C8FF9D004D6468 /* UserSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DFF0C525C8FF9D004D6468 /* UserSettingsController.swift */; };
+		F6DFF0CC25C90617004D6468 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DFF0CB25C90617004D6468 /* ColorManager.swift */; };
+		F6DFF0D025C90635004D6468 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DFF0CF25C90635004D6468 /* CustomColors.swift */; };
 		F6F185A625C85F98001FD5FA /* UITextView+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185A525C85F98001FD5FA /* UITextView+Padding.swift */; };
 		F6F185AE25C86AB4001FD5FA /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185AD25C86AB4001FD5FA /* SettingsController.swift */; };
 		F6F185B225C86ABF001FD5FA /* GeneralSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185B125C86ABF001FD5FA /* GeneralSettingsController.swift */; };
@@ -73,6 +75,8 @@
 		F6D2771525C8C01C00ECFCCC /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
 		F6D2771825C8C37C00ECFCCC /* UINavigationController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extensions.swift"; sourceTree = "<group>"; };
 		F6DFF0C525C8FF9D004D6468 /* UserSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsController.swift; sourceTree = "<group>"; };
+		F6DFF0CB25C90617004D6468 /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
+		F6DFF0CF25C90635004D6468 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		F6F185A525C85F98001FD5FA /* UITextView+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Padding.swift"; sourceTree = "<group>"; };
 		F6F185AD25C86AB4001FD5FA /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		F6F185B125C86ABF001FD5FA /* GeneralSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsController.swift; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 			children = (
 				F67FFFF025B32E1F00313D61 /* AppDelegate.swift */,
 				F67FFFF225B32E1F00313D61 /* SceneDelegate.swift */,
+				F6DFF0C925C90604004D6468 /* Other */,
 				F6B9D4B625B6173B00A0446C /* Extensions */,
 				F67F002025B32EC500313D61 /* View */,
 				F67F002125B32ECC00313D61 /* Controller */,
@@ -215,6 +220,23 @@
 				F6D2771525C8C01C00ECFCCC /* SettingsSwitchCell.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		F6DFF0C925C90604004D6468 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				F6DFF0CA25C9060B004D6468 /* Colors */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		F6DFF0CA25C9060B004D6468 /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				F6DFF0CB25C90617004D6468 /* ColorManager.swift */,
+				F6DFF0CF25C90635004D6468 /* CustomColors.swift */,
+			);
+			path = Colors;
 			sourceTree = "<group>";
 		};
 		F6F185AC25C86A77001FD5FA /* Settings */ = {
@@ -346,8 +368,10 @@
 				F67F004025B32F8700313D61 /* WriteNoteController.swift in Sources */,
 				F67F002725B32EEC00313D61 /* DataManager.swift in Sources */,
 				F67F003825B32F7900313D61 /* NoteCollectionController.swift in Sources */,
+				F6DFF0D025C90635004D6468 /* CustomColors.swift in Sources */,
 				F6B9D4C725B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift in Sources */,
 				F652AB6525B87CF2006D7747 /* EditingController.swift in Sources */,
+				F6DFF0CC25C90617004D6468 /* ColorManager.swift in Sources */,
 				F6F185B225C86ABF001FD5FA /* GeneralSettingsController.swift in Sources */,
 				F67F003A25B32F7D00313D61 /* PageViewController.swift in Sources */,
 				F6C2EBB725BA728000EC6582 /* EditingController+Keyboard.swift in Sources */,
@@ -448,7 +472,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 92;
+				CURRENT_PROJECT_VERSION = 93;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				INFOPLIST_FILE = Jotify/Info.plist;
@@ -473,7 +497,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 92;
+				CURRENT_PROJECT_VERSION = 93;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				INFOPLIST_FILE = Jotify/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

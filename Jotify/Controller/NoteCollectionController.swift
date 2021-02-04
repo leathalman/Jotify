@@ -10,6 +10,10 @@ import Blueprints
 import XLActionController
 
 class NoteCollectionController: UICollectionViewController {
+    //create instance of ColorManager, so indexes array doesn't
+    //get refilled constantly, causing colors to repeat
+    let colorManager = ColorManager()
+
     //update collection view when model changes
     var noteCollection: NoteCollection? {
         didSet {
@@ -100,7 +104,7 @@ class NoteCollectionController: UICollectionViewController {
         
         cell.textLabel.text = noteCollection?.notes[indexPath.row].content
         cell.dateLabel.text = noteCollection?.notes[indexPath.row].timestamp.getDate()
-        cell.backgroundColor = .systemBlue
+        cell.backgroundColor = colorManager.getRandomColor(theme: UIColor.kypoolColors)
         
         cell.layer.cornerRadius = 5
         cell.layer.shouldRasterize = true
