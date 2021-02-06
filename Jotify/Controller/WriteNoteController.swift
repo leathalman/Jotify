@@ -30,7 +30,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     //view configuration
     func setupView() {
         view = draftView
-        draftView.backgroundColor = .systemBlue
+        draftView.backgroundColor = ColorManager.mostRecentColor
         draftView.textField.delegate = self
         draftView.textField.frame = CGRect(x: 0, y: 100, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 4)
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
@@ -52,6 +52,8 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
             timer?.invalidate()
             hasCreatedDocument = false
             draftView.textField.text = ""
+            ColorManager.setMostRecentColor(theme: UIColor.defaultColors)
+            view.backgroundColor = ColorManager.mostRecentColor
         }
         draftView.textField.resignFirstResponder()
     }
@@ -82,7 +84,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     //whenever user types, update the document and reset the timer
     func textViewDidChange(_ textView: UITextView) {
         if !hasCreatedDocument {
-            documentID = DataManager.createNote(content: draftView.textField.text, timestamp: Date.timeIntervalSinceReferenceDate)
+            documentID = DataManager.createNote(content: draftView.textField.text, timestamp: Date.timeIntervalSinceReferenceDate, color: ColorManager.mostRecentColor.getString())
             hasCreatedDocument = true
         } else if !draftView.textField.text.isEmpty {
             resetTimer()

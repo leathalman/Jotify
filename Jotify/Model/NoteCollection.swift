@@ -15,5 +15,6 @@ struct Note {
     var content: String
     var timestamp: Double
     var uid: String
+    var color: String
 }
 

@@ -10,10 +10,7 @@ import Blueprints
 import XLActionController
 
 class NoteCollectionController: UICollectionViewController {
-    //create instance of ColorManager, so indexes array doesn't
-    //get refilled constantly, causing colors to repeat
-    let colorManager = ColorManager()
-
+    
     //update collection view when model changes
     var noteCollection: NoteCollection? {
         didSet {
@@ -89,7 +86,7 @@ class NoteCollectionController: UICollectionViewController {
         present(actionController, animated: true, completion: nil)
     }
     
-    //temp func for logging out
+    
     @objc func handleLeftNavButton() {
         navigationController?.pushViewController(GeneralSettingsController(style: .insetGrouped), animated: true)
     }
@@ -104,7 +101,7 @@ class NoteCollectionController: UICollectionViewController {
         
         cell.textLabel.text = noteCollection?.notes[indexPath.row].content
         cell.dateLabel.text = noteCollection?.notes[indexPath.row].timestamp.getDate()
-        cell.backgroundColor = colorManager.getRandomColor(theme: UIColor.kypoolColors)
+        cell.backgroundColor = noteCollection?.notes[indexPath.row].color.getColor()
         
         cell.layer.cornerRadius = 5
         cell.layer.shouldRasterize = true

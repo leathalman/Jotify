@@ -36,13 +36,14 @@ class DataManager {
     
     //create note document with 2 fields, timestamp and content
     //returns documentID so doc can be updated immediately...
-    static func createNote(content: String, timestamp: Double) -> String {
+    static func createNote(content: String, timestamp: Double, color: String) -> String {
         if AuthManager().uid.isEmpty { return ""}
         let db = Firestore.firestore()
         var ref: DocumentReference? = nil
         ref = db.collection("notes").document(AuthManager().uid).collection("userNotes").addDocument(data: [
             "content": content,
             "timestamp": timestamp,
+            "color": color
         ]) { error in
             if let error = error {
                 print("Error adding document: \(error)")
@@ -84,7 +85,8 @@ class DataManager {
                 let content = diff.document.get("content") as? String ?? ""
                 let timestamp = diff.document.get("timestamp") as? Double ?? 0
                 let uid = diff.document.documentID
-                let note = Note(content: content, timestamp: timestamp, uid: uid)
+                let color = diff.document.get("color") as? String ?? ""
+                let note = Note(content: content, timestamp: timestamp, uid: uid, color: color)
                 
                 if (diff.type == .added) {
 //                    print("New note: \(diff.document.data())")

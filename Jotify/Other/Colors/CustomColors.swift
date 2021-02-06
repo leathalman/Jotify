@@ -14,14 +14,8 @@ extension UIColor {
     static let mineShaft = UIColor(r: 40, g: 40, b: 40)
     
     // default
-    static let lightRed = UIColor(r: 254, g: 129, b: 118)
-    static let lightRedBack = UIColor(r: 221, g: 86, b: 75)
     static let medRed = UIColor(r: 254, g: 151, b: 114)
-    static let lightOrange = UIColor(r: 254, g: 171, b: 109)
     static let medOrange = UIColor(r: 253, g: 193, b: 104)
-    static let lightYellow = UIColor(r: 254, g: 215, b: 119)
-    static let medYellow = UIColor(r: 253, g: 224, b: 119)
-    static let lightGreen = UIColor(r: 192, g: 223, b: 129)
     static let medGreen = UIColor(r: 155, g: 215, b: 112)
     static let heavyGreen = UIColor(r: 121, g: 190, b: 168)
     static let lightBlue = UIColor(r: 96, g: 156, b: 225)
@@ -67,8 +61,10 @@ extension UIColor {
     static let lRed = UIColor(r: 201, g: 129, b: 150)
     static let lGold = UIColor(r: 233, g: 189, b: 124)
     
-    static var defaultColors = [lightRed, medRed, lightOrange, medOrange, lightYellow, medYellow, lightGreen, medGreen, heavyGreen, lightBlue, medBlue, lightPurple, medPurple]
-//    static var defaultColorsStrings = ["lightRed", "medRed", "lightOrange", "medOrange", "lightYellow", "medYellow", "lightGreen", "medGreen", "heavyGreen", "lightBlue", "medBlue", "lightPurple", "medPurple"]
+    static var test = [UIColor.systemRed, UIColor.systemBlue]
+    
+    static var defaultColors = [medRed, medOrange, medGreen, heavyGreen, lightBlue, medBlue, lightPurple, medPurple]
+//    static var defaultColorsStrings = ["medRed", "medOrange", "medGreen", "heavyGreen", "lightBlue", "medBlue", "lightPurple", "medPurple"]
     
     static var sunsetColors = [blue1, blue2, purple1, lightBlue1, lightBlue2, orange1, red1, red2]
 //    static var sunsetColorsStrings = ["blue1", "blue2", "purple1", "lightBlue1", "lightBlue2", "orange1", "red1", "red2"]

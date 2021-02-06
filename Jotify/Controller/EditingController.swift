@@ -34,7 +34,7 @@ class EditingController: UIViewController, UITextViewDelegate {
     //view configuration
     func setupView() {
         view = draftView
-        draftView.backgroundColor = .systemBlue
+        draftView.backgroundColor = note?.color.getColor()
         draftView.textField.text = note?.content
         draftView.textField.placeholder = ""
         draftView.textField.delegate = self
@@ -45,7 +45,7 @@ class EditingController: UIViewController, UITextViewDelegate {
     func setupNavBar() {
         navigationItem.title = note?.timestamp.getDate()
         navigationController?.enablePersistence()
-        navigationController?.setColor(color: .systemBlue)
+        navigationController?.setColor(color: note?.color.getColor() ?? .systemRed)
         navigationItem.setHidesBackButton(true, animated: true)
         
         var cancel = UIImage(named: "cancel")

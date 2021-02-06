@@ -11,6 +11,7 @@
 		F620BD2625B338C7005BE77B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F620BD2525B338C7005BE77B /* GoogleService-Info.plist */; };
 		F6490CF125C797CC000F66E5 /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6490CF025C797CC000F66E5 /* AuthenticationController.swift */; };
 		F652AB6525B87CF2006D7747 /* EditingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652AB6425B87CF2006D7747 /* EditingController.swift */; };
+		F6539A7325CB9338007D5DF1 /* ColorStringModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6539A7225CB9338007D5DF1 /* ColorStringModifier.swift */; };
 		F67D1B6725BF794F00B28071 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D1B6625BF794F00B28071 /* LoginController.swift */; };
 		F67D1B6A25BF7A1100B28071 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D1B6925BF7A1100B28071 /* UIColor+Extensions.swift */; };
 		F67F002425B32EE600313D61 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002325B32EE600313D61 /* AuthManager.swift */; };
@@ -49,6 +50,7 @@
 		F620BD2525B338C7005BE77B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F6490CF025C797CC000F66E5 /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
 		F652AB6425B87CF2006D7747 /* EditingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingController.swift; sourceTree = "<group>"; };
+		F6539A7225CB9338007D5DF1 /* ColorStringModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStringModifier.swift; sourceTree = "<group>"; };
 		F67D1B6625BF794F00B28071 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		F67D1B6925BF7A1100B28071 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		F67F002325B32EE600313D61 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 			children = (
 				F6DFF0CB25C90617004D6468 /* ColorManager.swift */,
 				F6DFF0CF25C90635004D6468 /* CustomColors.swift */,
+				F6539A7225CB9338007D5DF1 /* ColorStringModifier.swift */,
 			);
 			path = Colors;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				F67F004025B32F8700313D61 /* WriteNoteController.swift in Sources */,
 				F67F002725B32EEC00313D61 /* DataManager.swift in Sources */,
 				F67F003825B32F7900313D61 /* NoteCollectionController.swift in Sources */,
+				F6539A7325CB9338007D5DF1 /* ColorStringModifier.swift in Sources */,
 				F6DFF0D025C90635004D6468 /* CustomColors.swift in Sources */,
 				F6B9D4C725B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift in Sources */,
 				F652AB6525B87CF2006D7747 /* EditingController.swift in Sources */,
@@ -472,7 +476,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				INFOPLIST_FILE = Jotify/Info.plist;
@@ -497,7 +501,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				INFOPLIST_FILE = Jotify/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
