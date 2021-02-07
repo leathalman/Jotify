@@ -12,7 +12,7 @@ class GeneralSettingsController: SettingsController {
     override func viewDidLoad() {
         super.viewDidLoad()
         super.sections = ["General"]
-        super.section1Content = ["User"]
+        super.section1Content = ["Account", "Appearance"]
         navigationItem.title = "Settings"
     }
     
@@ -20,7 +20,9 @@ class GeneralSettingsController: SettingsController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            navigationController?.pushViewController(UserSettingsController(style: .insetGrouped), animated: true)
+            navigationController?.pushViewController(AccountSettingsController(style: .insetGrouped), animated: true)
+        case 1:
+            navigationController?.pushViewController(AppearanceSettingsController(style: .insetGrouped), animated: true)
         default:
             print("default")
         }
@@ -30,7 +32,7 @@ class GeneralSettingsController: SettingsController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
         cell.textLabel?.text = "\(super.section1Content[indexPath.row])"
         cell.accessoryType = .disclosureIndicator
-        cell.accessoryView = UIImageView(image: UIImage(systemName: "chevron.right.circle"))
+        cell.accessoryView = UIImageView(image: UIImage(systemName: "chevron.right.circle.fill"))
         return cell
     }
 }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		D468660ACBD45E5CD1B0E4CD /* Pods_Jotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7077D1FD53AC3A2DF5B8A96 /* Pods_Jotify.framework */; };
 		F620BD2625B338C7005BE77B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F620BD2525B338C7005BE77B /* GoogleService-Info.plist */; };
+		F638E64A25CEEFC7005FA371 /* AppearanceSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F638E64925CEEFC7005FA371 /* AppearanceSettingsController.swift */; };
+		F638E65225CEF36B005FA371 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F638E65125CEF36B005FA371 /* SettingsManager.swift */; };
 		F6490CF125C797CC000F66E5 /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6490CF025C797CC000F66E5 /* AuthenticationController.swift */; };
 		F652AB6525B87CF2006D7747 /* EditingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652AB6425B87CF2006D7747 /* EditingController.swift */; };
 		F6539A7325CB9338007D5DF1 /* ColorStringModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6539A7225CB9338007D5DF1 /* ColorStringModifier.swift */; };
@@ -35,7 +37,7 @@
 		F6D2771225C8C00E00ECFCCC /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D2771125C8C00E00ECFCCC /* SettingsCell.swift */; };
 		F6D2771625C8C01C00ECFCCC /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D2771525C8C01C00ECFCCC /* SettingsSwitchCell.swift */; };
 		F6D2771925C8C37C00ECFCCC /* UINavigationController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D2771825C8C37C00ECFCCC /* UINavigationController+Extensions.swift */; };
-		F6DFF0C625C8FF9D004D6468 /* UserSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DFF0C525C8FF9D004D6468 /* UserSettingsController.swift */; };
+		F6DFF0C625C8FF9D004D6468 /* AccountSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DFF0C525C8FF9D004D6468 /* AccountSettingsController.swift */; };
 		F6DFF0CC25C90617004D6468 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DFF0CB25C90617004D6468 /* ColorManager.swift */; };
 		F6DFF0D025C90635004D6468 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DFF0CF25C90635004D6468 /* CustomColors.swift */; };
 		F6F185A625C85F98001FD5FA /* UITextView+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185A525C85F98001FD5FA /* UITextView+Padding.swift */; };
@@ -48,6 +50,8 @@
 		A7077D1FD53AC3A2DF5B8A96 /* Pods_Jotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF4FA6AF11CB6D0F6E0E14F3 /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.debug.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
 		F620BD2525B338C7005BE77B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F638E64925CEEFC7005FA371 /* AppearanceSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsController.swift; sourceTree = "<group>"; };
+		F638E65125CEF36B005FA371 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		F6490CF025C797CC000F66E5 /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
 		F652AB6425B87CF2006D7747 /* EditingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingController.swift; sourceTree = "<group>"; };
 		F6539A7225CB9338007D5DF1 /* ColorStringModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStringModifier.swift; sourceTree = "<group>"; };
@@ -76,7 +80,7 @@
 		F6D2771125C8C00E00ECFCCC /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		F6D2771525C8C01C00ECFCCC /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
 		F6D2771825C8C37C00ECFCCC /* UINavigationController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extensions.swift"; sourceTree = "<group>"; };
-		F6DFF0C525C8FF9D004D6468 /* UserSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsController.swift; sourceTree = "<group>"; };
+		F6DFF0C525C8FF9D004D6468 /* AccountSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsController.swift; sourceTree = "<group>"; };
 		F6DFF0CB25C90617004D6468 /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 		F6DFF0CF25C90635004D6468 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		F6F185A525C85F98001FD5FA /* UITextView+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Padding.swift"; sourceTree = "<group>"; };
@@ -113,11 +117,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F638E64E25CEF2AC005FA371 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				F67F002625B32EEC00313D61 /* DataManager.swift */,
+				F67F002325B32EE600313D61 /* AuthManager.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
 		F67F001F25B32EC100313D61 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F67F002325B32EE600313D61 /* AuthManager.swift */,
-				F67F002625B32EEC00313D61 /* DataManager.swift */,
+				F638E64E25CEF2AC005FA371 /* Firebase */,
 				F67F002925B32F5B00313D61 /* NoteCollection.swift */,
 			);
 			path = Model;
@@ -228,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				F6DFF0CA25C9060B004D6468 /* Colors */,
+				F638E65125CEF36B005FA371 /* SettingsManager.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -247,7 +260,8 @@
 			children = (
 				F6F185AD25C86AB4001FD5FA /* SettingsController.swift */,
 				F6F185B125C86ABF001FD5FA /* GeneralSettingsController.swift */,
-				F6DFF0C525C8FF9D004D6468 /* UserSettingsController.swift */,
+				F6DFF0C525C8FF9D004D6468 /* AccountSettingsController.swift */,
+				F638E64925CEEFC7005FA371 /* AppearanceSettingsController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -374,6 +388,7 @@
 				F6539A7325CB9338007D5DF1 /* ColorStringModifier.swift in Sources */,
 				F6DFF0D025C90635004D6468 /* CustomColors.swift in Sources */,
 				F6B9D4C725B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift in Sources */,
+				F638E64A25CEEFC7005FA371 /* AppearanceSettingsController.swift in Sources */,
 				F652AB6525B87CF2006D7747 /* EditingController.swift in Sources */,
 				F6DFF0CC25C90617004D6468 /* ColorManager.swift in Sources */,
 				F6F185B225C86ABF001FD5FA /* GeneralSettingsController.swift in Sources */,
@@ -393,7 +408,8 @@
 				F67F002D25B32F6300313D61 /* DraftView.swift in Sources */,
 				F6F185A625C85F98001FD5FA /* UITextView+Padding.swift in Sources */,
 				F67FFFF325B32E1F00313D61 /* SceneDelegate.swift in Sources */,
-				F6DFF0C625C8FF9D004D6468 /* UserSettingsController.swift in Sources */,
+				F638E65225CEF36B005FA371 /* SettingsManager.swift in Sources */,
+				F6DFF0C625C8FF9D004D6468 /* AccountSettingsController.swift in Sources */,
 				F6D2771625C8C01C00ECFCCC /* SettingsSwitchCell.swift in Sources */,
 				F67F003025B32F6700313D61 /* NoteCell.swift in Sources */,
 			);

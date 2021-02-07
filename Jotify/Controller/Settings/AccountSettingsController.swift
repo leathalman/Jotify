@@ -7,13 +7,13 @@
 
 import UIKit
 
-class UserSettingsController: SettingsController {
+class AccountSettingsController: SettingsController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         super.sections = ["Account"]
         super.section1Content = ["Reset Password", "Logout"]
-        navigationItem.title = "User Settings"
+        navigationItem.title = "Account"
     }
     
     //tableView logic
@@ -41,7 +41,6 @@ class UserSettingsController: SettingsController {
             AuthManager.signOut()
             let alertController = UIAlertController(title: nil, message: "User successfully logged out.", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                print("do something here")
                 self.setRootViewController(vc: LoginController())
             }))
             self.present(alertController, animated: true, completion: nil)

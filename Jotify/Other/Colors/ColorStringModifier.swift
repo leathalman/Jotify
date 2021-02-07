@@ -105,6 +105,26 @@ extension String {
             return .blue2
         }
     }
+    
+    //take self(string) and return a color array from themes in CustomColors.swift
+    func getColorArray() -> Array<UIColor> {
+        switch self {
+        case "Default":
+            return UIColor.defaultColors
+        case "Sunset":
+            return UIColor.sunsetColors
+        case "Kypool":
+            return UIColor.kypoolColors
+        case "Celestial":
+            return UIColor.celestialColors
+        case "Apple Vibrant":
+            return UIColor.appleVibrantColors
+        case "Scarlet Azure":
+            return UIColor.scarletAzureColors
+        default:
+            return UIColor.defaultColors
+        }
+    }
 }
 
 extension UIColor {

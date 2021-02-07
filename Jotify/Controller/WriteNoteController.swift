@@ -15,6 +15,12 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     var timer: Timer?
     var documentID: String?
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        //update background color each time view will appear in case noteColor has changed
+        view.backgroundColor = ColorManager.noteColor
+    }
+    
     //life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +36,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     //view configuration
     func setupView() {
         view = draftView
-        draftView.backgroundColor = ColorManager.mostRecentColor
+        draftView.backgroundColor = ColorManager.noteColor
         draftView.textField.delegate = self
         draftView.textField.frame = CGRect(x: 0, y: 100, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 4)
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
@@ -52,8 +58,11 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
             timer?.invalidate()
             hasCreatedDocument = false
             draftView.textField.text = ""
-            ColorManager.setMostRecentColor(theme: UIColor.defaultColors)
-            view.backgroundColor = ColorManager.mostRecentColor
+            ColorManager.setNoteColor(theme: SettingsManager.theme.getColorArray())
+            //animate transition between background colors
+            UIView.animate(withDuration: 0.25, animations: {
+                self.view.backgroundColor = ColorManager.noteColor
+            })
         }
         draftView.textField.resignFirstResponder()
     }
@@ -84,7 +93,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     //whenever user types, update the document and reset the timer
     func textViewDidChange(_ textView: UITextView) {
         if !hasCreatedDocument {
-            documentID = DataManager.createNote(content: draftView.textField.text, timestamp: Date.timeIntervalSinceReferenceDate, color: ColorManager.mostRecentColor.getString())
+            documentID = DataManager.createNote(content: draftView.textField.text, timestamp: Date.timeIntervalSinceReferenceDate, color: ColorManager.noteColor.getString())
             hasCreatedDocument = true
         } else if !draftView.textField.text.isEmpty {
             resetTimer()

@@ -60,24 +60,11 @@ extension UIColor {
     static let lBlue = UIColor(r: 58, g: 101, b: 137)
     static let lRed = UIColor(r: 201, g: 129, b: 150)
     static let lGold = UIColor(r: 233, g: 189, b: 124)
-    
-    static var test = [UIColor.systemRed, UIColor.systemBlue]
-    
+        
     static var defaultColors = [medRed, medOrange, medGreen, heavyGreen, lightBlue, medBlue, lightPurple, medPurple]
-//    static var defaultColorsStrings = ["medRed", "medOrange", "medGreen", "heavyGreen", "lightBlue", "medBlue", "lightPurple", "medPurple"]
-    
     static var sunsetColors = [blue1, blue2, purple1, lightBlue1, lightBlue2, orange1, red1, red2]
-//    static var sunsetColorsStrings = ["blue1", "blue2", "purple1", "lightBlue1", "lightBlue2", "orange1", "red1", "red2"]
-    
     static var kypoolColors = [pink1, pink2, red3, red4, green1, green2, blue3, blue4]
-//    static var kypoolColorsStrings = ["pink1", "pink2", "red3", "red4", "green1", "green2", "blue3", "blue4"]
-    
     static var celestialColors = [green3, green4, purple2, purple3, blue5, blue6, darkRed1, darkRed2]
-//    static var celestialColorsStrings = ["green3", "green4", "purple2", "purple3", "blue5", "blue6", "darkRed1", "darkRed2"]
-    
-    static var appleVibrantColors = [.systemRed, .systemBlue, .systemGreen, .systemPink, UIColor.systemOrange, .systemPurple, .systemTeal, .systemYellow]
-//    static var appleVibrantColorsStrings = ["systemRed", "systemBlue", "systemGreen", "systemPink", "systemOrange", "systemPurple", "systemTeal", "systemYellow"]
-    
+    static var appleVibrantColors = [UIColor.systemRed, .systemBlue, .systemGreen, .systemPink, .systemOrange, .systemPurple, .systemTeal, .systemYellow]
     static var scarletAzureColors = [lGold, dBlue, lRed, lBlue, dRed, dGold]
-//    static var scarletAzureColorsString = ["lGold", "dBlue", "lRed", "lBlue", "dRed", "dGold"]
 }
