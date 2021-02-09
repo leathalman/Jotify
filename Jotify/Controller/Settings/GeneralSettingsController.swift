@@ -12,7 +12,7 @@ class GeneralSettingsController: SettingsController {
     override func viewDidLoad() {
         super.viewDidLoad()
         super.sections = ["General"]
-        super.section1Content = ["Account", "Appearance"]
+        super.section1 = ["Account", "Appearance"]
         navigationItem.title = "Settings"
     }
     
@@ -30,7 +30,7 @@ class GeneralSettingsController: SettingsController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-        cell.textLabel?.text = "\(super.section1Content[indexPath.row])"
+        cell.textLabel?.text = "\(super.section1[indexPath.row])"
         cell.accessoryType = .disclosureIndicator
         cell.accessoryView = UIImageView(image: UIImage(systemName: "chevron.right.circle.fill"))
         return cell

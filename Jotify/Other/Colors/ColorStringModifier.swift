@@ -8,7 +8,7 @@
 import UIKit
 
 extension String {
-
+    
     func getColor() -> UIColor {
         switch self {
         // theme - default
@@ -101,6 +101,14 @@ extension String {
             return .systemOrange
         case "systemPurple":
             return .systemPurple
+        case "geranium": return .geranium
+        case "chineseViolet": return .chineseViolet
+        case "viridian": return .viridian
+        case "tealBlue": return .tealBlue
+        case "spanishOrange": return .spanishOrange
+        case "gamboge": return .gamboge
+        case "rose": return .rose
+        case "cornflower": return .cornflower
         default: // also case "systemYellow"
             return .blue2
         }
@@ -121,6 +129,7 @@ extension String {
             return UIColor.appleVibrantColors
         case "Scarlet Azure":
             return UIColor.scarletAzureColors
+        case "New Default": return UIColor.newDefault
         default:
             return UIColor.defaultColors
         }
@@ -223,6 +232,14 @@ extension UIColor {
             return "systemPurple"
         case .systemTeal:
             return "systemTeal"
+        case .geranium: return "geranium"
+        case .chineseViolet: return "chineseViolet"
+        case .viridian: return "viridian"
+        case .tealBlue: return "tealBlue"
+        case .spanishOrange: return "spanishOrange"
+        case .gamboge: return "gamboge"
+        case .rose: return "rose"
+        case .cornflower: return "cornflower"
         default: // also case .systemYellow
             return "systemYellow"
         }

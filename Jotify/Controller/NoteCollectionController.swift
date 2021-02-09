@@ -41,12 +41,13 @@ class NoteCollectionController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setupNavigationBar()
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewElements()
+        updateStats()
     }
     
     //view configuration
@@ -69,6 +70,11 @@ class NoteCollectionController: UICollectionViewController {
         navigationItem.title = "Saved Notes"
         navigationController?.enablePersistence()
         navigationController?.setColor(color: .mineShaft)
+    }
+    
+    //update stats through SettingsManager for use in AccountSettingsController.swift
+    func updateStats() {
+        SettingsManager.numOfNotes = noteCollection?.notes.count ?? 0
     }
     
     //action handlers
@@ -102,6 +108,7 @@ class NoteCollectionController: UICollectionViewController {
         cell.textLabel.text = noteCollection?.notes[indexPath.row].content
         cell.dateLabel.text = noteCollection?.notes[indexPath.row].timestamp.getDate()
         cell.backgroundColor = noteCollection?.notes[indexPath.row].color.getColor()
+//        cell.backgroundColor = UIColor(hex: "#E09D00")
         
         cell.layer.cornerRadius = 5
         cell.layer.shouldRasterize = true
@@ -128,6 +135,15 @@ class NoteCollectionController: UICollectionViewController {
             iPadOSLayout.itemsPerRow = 3.0
         }
         collectionView.collectionViewLayout.invalidateLayout()
+        
+        if traitCollection.userInterfaceStyle == .light {
+            collectionView.backgroundColor = .white
+            navigationController?.setColor(color: .white)
+        } else if traitCollection.userInterfaceStyle == .dark {
+            collectionView.backgroundColor = .mineShaft
+            navigationController?.setColor(color: .mineShaft)
+        }
+        
     }
 }
 

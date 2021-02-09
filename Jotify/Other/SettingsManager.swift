@@ -14,6 +14,9 @@ class SettingsManager {
     //list of user settings
     static var theme: String = ""
     
+    //stats for settings
+    static var numOfNotes: Int = 0
+    
     //get values from user defaults and expose them in static vars in SettingsManager
     //so they can be accessed across the application
     func retrieveSettingsFromDefaults() {

@@ -25,6 +25,14 @@ class AuthManager {
         return ""
     }
     
+    //current user object, should never return nil b/c of pseudo guard statment
+    public var metadata: UserMetadata? {
+        if Auth.auth().currentUser != nil {
+            return Auth.auth().currentUser!.metadata
+        }
+        return nil
+    }
+    
     //signs user out of firebase
     static func signOut() {
         do { try Auth.auth().signOut() }

@@ -15,7 +15,7 @@ class SavedNoteCell: UICollectionViewCell {
         let label = VerticalAlignLabel()
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        label.textColor = UIColor.white
+        label.textColor = .white
         label.text = "Loading..."
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = UIColor.clear
@@ -29,7 +29,7 @@ class SavedNoteCell: UICollectionViewCell {
     let dateLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = UIColor.white
+        label.textColor = .white
         label.text = "January 1, 2020"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

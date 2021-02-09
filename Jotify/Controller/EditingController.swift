@@ -82,8 +82,4 @@ class EditingController: UIViewController, UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         resetTimer()
     }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
 }

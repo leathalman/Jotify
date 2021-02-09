@@ -62,7 +62,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
     @objc func disableSwipe(notification: Notification){
         self.dataSource = nil
     }
-    
+
     @objc func enableSwipe(notification: Notification){
         self.dataSource = self
     }

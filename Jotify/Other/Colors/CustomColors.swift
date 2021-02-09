@@ -53,13 +53,23 @@ extension UIColor {
     static let darkRed1 = UIColor(r: 184, g: 56, b: 123)
     static let darkRed2 = UIColor(r: 212, g: 63, b: 141)
     
-    // scarlet azure
+    //scarlet azure
     static let dBlue = UIColor(r: 192, g: 108, b: 132)
     static let dRed = UIColor(r: 53, g: 92, b: 125)
     static let dGold = UIColor(r: 232, g: 188, b: 118)
     static let lBlue = UIColor(r: 58, g: 101, b: 137)
     static let lRed = UIColor(r: 201, g: 129, b: 150)
     static let lGold = UIColor(r: 233, g: 189, b: 124)
+    
+    //new default
+    static let geranium = UIColor(hex: "#D11C1B")
+    static let chineseViolet = UIColor(hex: "#675676")
+    static let viridian = UIColor(hex: "#34836C")
+    static let tealBlue = UIColor(hex: "#2F809D")
+    static let spanishOrange = UIColor(hex: "E06500")
+    static let gamboge = UIColor(hex: "#CC8828")
+    static let rose = UIColor(hex: "#C92C6B")
+    static let cornflower = UIColor(hex: "#344A98")
         
     static var defaultColors = [medRed, medOrange, medGreen, heavyGreen, lightBlue, medBlue, lightPurple, medPurple]
     static var sunsetColors = [blue1, blue2, purple1, lightBlue1, lightBlue2, orange1, red1, red2]
@@ -67,4 +77,6 @@ extension UIColor {
     static var celestialColors = [green3, green4, purple2, purple3, blue5, blue6, darkRed1, darkRed2]
     static var appleVibrantColors = [UIColor.systemRed, .systemBlue, .systemGreen, .systemPink, .systemOrange, .systemPurple, .systemTeal, .systemYellow]
     static var scarletAzureColors = [lGold, dBlue, lRed, lBlue, dRed, dGold]
+    
+    static var newDefault = [geranium, chineseViolet, viridian, tealBlue, spanishOrange, gamboge, rose, cornflower]
 }

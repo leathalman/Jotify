@@ -55,9 +55,12 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
             DataManager.updateNote(content: draftView.textField.text, uid: documentID ?? "") { (success) in
                 //handle success here
             }
+            //stop timer so notes doesn't update outside of this view (WriteNoteController)
             timer?.invalidate()
+            //reset hasCreatedDocument so view will be prepared to create another note
             hasCreatedDocument = false
             draftView.textField.text = ""
+            //set a new noteColor from theme
             ColorManager.setNoteColor(theme: SettingsManager.theme.getColorArray())
             //animate transition between background colors
             UIView.animate(withDuration: 0.25, animations: {

@@ -14,7 +14,7 @@ class AppearanceSettingsController: SettingsController {
     override func viewDidLoad() {
         super.viewDidLoad()
         super.sections = ["Themes"]
-        super.section1Content = ["Default", "Sunset", "Kypool", "Celestial", "Scarlet Azure", "Apple Vibrant"]
+        super.section1 = ["Default", "Sunset", "Kypool", "Celestial", "Scarlet Azure", "Apple Vibrant", "New Default"]
         navigationItem.title = "Appearance"
     }
     
@@ -33,7 +33,7 @@ class AppearanceSettingsController: SettingsController {
         }
         
         //udpate userdefaults with new theme (using text displayed in UI)
-        UserDefaults.standard.setValue(section1Content[indexPath.row], forKey: "theme")
+        UserDefaults.standard.setValue(section1[indexPath.row], forKey: "theme")
         //update settings from userdefaults
         SettingsManager().retrieveSettingsFromDefaults()
         //empty index array since not all color themes have the same number of colors
@@ -46,10 +46,10 @@ class AppearanceSettingsController: SettingsController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
         
-        cell.textLabel?.text = "\(super.section1Content[indexPath.row])"
+        cell.textLabel?.text = "\(super.section1[indexPath.row])"
         cell.selectionStyle = .none
         
-        if SettingsManager.theme == section1Content[indexPath.row] {
+        if SettingsManager.theme == section1[indexPath.row] {
             cell.accessoryType = .checkmark
             lastIndexPath = indexPath as NSIndexPath
         }
