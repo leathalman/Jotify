@@ -57,19 +57,21 @@ class NoteCollectionController: UICollectionViewController {
         } else if UIDevice.current.userInterfaceIdiom == .phone {
             collectionView.setCollectionViewLayout(iOSLayout, animated: true)
         }
-        collectionView.backgroundColor = .mineShaft
-        collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
         
         //navigation bar item customization
         let leftItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(handleLeftNavButton))
         navigationItem.leftBarButtonItem = leftItem
         navigationItem.setHidesBackButton(true, animated: true)
+        
+        collectionView.backgroundColor = ThemeManager.bgColor
+        collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
     }
     
     func setupNavigationBar() {
         navigationItem.title = "Saved Notes"
         navigationController?.enablePersistence()
-        navigationController?.setColor(color: .mineShaft)
+        navigationController?.setColor(color: ThemeManager.bgColor)
+        navigationController?.navigationBar.titleTextAttributes = nil
     }
     
     //update stats through SettingsManager for use in AccountSettingsController.swift
@@ -99,6 +101,15 @@ class NoteCollectionController: UICollectionViewController {
     
     //collectionView Logic
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        //noteCollection.notes.count will return nil if no notes exist on launch, will return 0 if user deletes a note
+        //and num of objs in array go to 0
+        if (noteCollection?.notes.count == nil) || (noteCollection?.notes.count == 0){
+            collectionView.backgroundView = EmptyNoteView()
+        } else {
+            //remove backgroundView if array of notes isn't empty
+            collectionView.backgroundView = nil
+        }
+        
         return noteCollection?.notes.count ?? 0
     }
     
@@ -108,12 +119,11 @@ class NoteCollectionController: UICollectionViewController {
         cell.textLabel.text = noteCollection?.notes[indexPath.row].content
         cell.dateLabel.text = noteCollection?.notes[indexPath.row].timestamp.getDate()
         cell.backgroundColor = noteCollection?.notes[indexPath.row].color.getColor()
-//        cell.backgroundColor = UIColor(hex: "#E09D00")
         
         cell.layer.cornerRadius = 5
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.main.scale
-    
+        
         cell.contentView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTouchHandler(sender:))))
         
         return cell
@@ -136,14 +146,8 @@ class NoteCollectionController: UICollectionViewController {
         }
         collectionView.collectionViewLayout.invalidateLayout()
         
-        if traitCollection.userInterfaceStyle == .light {
-            collectionView.backgroundColor = .white
-            navigationController?.setColor(color: .white)
-        } else if traitCollection.userInterfaceStyle == .dark {
-            collectionView.backgroundColor = .mineShaft
-            navigationController?.setColor(color: .mineShaft)
-        }
-        
+        collectionView.backgroundColor = ThemeManager.bgColor
+        navigationController?.setColor(color: ThemeManager.bgColor)
     }
 }
 
@@ -156,7 +160,6 @@ extension NoteCollectionController: CollectionViewFlowLayoutDelegate {
         } else {
             height = 110
         }
-        
         return CGSize(width: UIScreen.main.bounds.width, height: height)
     }
 }

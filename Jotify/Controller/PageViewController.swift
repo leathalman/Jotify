@@ -27,6 +27,13 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
         super.viewDidLoad()
         setupPageController()
         
+        //setup the color system for background with light/dark mode
+        if traitCollection.userInterfaceStyle == .light {
+            ThemeManager.bgColor = .white
+        } else if traitCollection.userInterfaceStyle == .dark {
+            ThemeManager.bgColor = .mineShaft
+        }
+        
         DataManager.observeNoteChange { (collection, success) in
             if success! {
                 let controller = self.noteCollectionController.viewControllers.first as! NoteCollectionController
@@ -76,6 +83,14 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
                 
             }
         }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if traitCollection.userInterfaceStyle == .light {
+            ThemeManager.bgColor = .white
+        } else if traitCollection.userInterfaceStyle == .dark {
+            ThemeManager.bgColor = .mineShaft
+        }
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -14,7 +14,7 @@ class AppearanceSettingsController: SettingsController {
     override func viewDidLoad() {
         super.viewDidLoad()
         super.sections = ["Themes"]
-        super.section1 = ["Default", "Sunset", "Kypool", "Celestial", "Scarlet Azure", "Apple Vibrant", "New Default"]
+        super.section1 = ["Default"]
         navigationItem.title = "Appearance"
     }
     

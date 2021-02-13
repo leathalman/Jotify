@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D468660ACBD45E5CD1B0E4CD /* Pods_Jotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7077D1FD53AC3A2DF5B8A96 /* Pods_Jotify.framework */; };
+		F611D0DE25D841FA00E6D860 /* EmptyNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F611D0DD25D841FA00E6D860 /* EmptyNoteView.swift */; };
+		F611D0E125D84D1E00E6D860 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F611D0E025D84D1E00E6D860 /* ThemeManager.swift */; };
 		F620BD2625B338C7005BE77B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F620BD2525B338C7005BE77B /* GoogleService-Info.plist */; };
 		F638E64A25CEEFC7005FA371 /* AppearanceSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F638E64925CEEFC7005FA371 /* AppearanceSettingsController.swift */; };
 		F638E65225CEF36B005FA371 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F638E65125CEF36B005FA371 /* SettingsManager.swift */; };
@@ -49,6 +51,8 @@
 		1129B93197342E6D106D25C2 /* Pods-Jotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.release.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.release.xcconfig"; sourceTree = "<group>"; };
 		A7077D1FD53AC3A2DF5B8A96 /* Pods_Jotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF4FA6AF11CB6D0F6E0E14F3 /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.debug.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
+		F611D0DD25D841FA00E6D860 /* EmptyNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNoteView.swift; sourceTree = "<group>"; };
+		F611D0E025D84D1E00E6D860 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		F620BD2525B338C7005BE77B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F638E64925CEEFC7005FA371 /* AppearanceSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsController.swift; sourceTree = "<group>"; };
 		F638E65125CEF36B005FA371 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
@@ -126,6 +130,15 @@
 			path = Firebase;
 			sourceTree = "<group>";
 		};
+		F675D27F25D5767F009AD59F /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				F638E65125CEF36B005FA371 /* SettingsManager.swift */,
+				F611D0E025D84D1E00E6D860 /* ThemeManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		F67F001F25B32EC100313D61 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +155,7 @@
 				F67F002C25B32F6300313D61 /* DraftView.swift */,
 				F67F002F25B32F6700313D61 /* NoteCell.swift */,
 				F67F003125B32F6B00313D61 /* VerticalAlignLabel.swift */,
+				F611D0DD25D841FA00E6D860 /* EmptyNoteView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -239,8 +253,8 @@
 		F6DFF0C925C90604004D6468 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				F675D27F25D5767F009AD59F /* Managers */,
 				F6DFF0CA25C9060B004D6468 /* Colors */,
-				F638E65125CEF36B005FA371 /* SettingsManager.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -407,7 +421,9 @@
 				F67FFFF125B32E1F00313D61 /* AppDelegate.swift in Sources */,
 				F67F002D25B32F6300313D61 /* DraftView.swift in Sources */,
 				F6F185A625C85F98001FD5FA /* UITextView+Padding.swift in Sources */,
+				F611D0E125D84D1E00E6D860 /* ThemeManager.swift in Sources */,
 				F67FFFF325B32E1F00313D61 /* SceneDelegate.swift in Sources */,
+				F611D0DE25D841FA00E6D860 /* EmptyNoteView.swift in Sources */,
 				F638E65225CEF36B005FA371 /* SettingsManager.swift in Sources */,
 				F6DFF0C625C8FF9D004D6468 /* AccountSettingsController.swift in Sources */,
 				F6D2771625C8C01C00ECFCCC /* SettingsSwitchCell.swift in Sources */,

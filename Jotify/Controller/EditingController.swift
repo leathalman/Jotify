@@ -45,7 +45,8 @@ class EditingController: UIViewController, UITextViewDelegate {
     func setupNavBar() {
         navigationItem.title = note?.timestamp.getDate()
         navigationController?.enablePersistence()
-        navigationController?.setColor(color: note?.color.getColor() ?? .systemRed)
+        navigationController?.setColor(color: note?.color.getColor() ?? .systemBlue)
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         navigationItem.setHidesBackButton(true, animated: true)
         
         var cancel = UIImage(named: "cancel")
