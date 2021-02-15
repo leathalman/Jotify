@@ -109,4 +109,9 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         let frame = CGRect(x: 0, y: 100, width: size.width, height: size.height / 4)
         draftView.textField.frame = frame
     }
+    
+    //traitcollection: light/dark mode support with status bar
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        handleStatusBarStyle(style: .lightContent)
+    }
 }

@@ -41,6 +41,7 @@ class NoteCollectionController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setupNavigationBar()
+        handleStatusBarStyle(style: .darkContent)
 //        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
     }
     
@@ -48,6 +49,12 @@ class NoteCollectionController: UICollectionViewController {
         super.viewDidLoad()
         setupViewElements()
         updateStats()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        //change status bar style to white when leaving viewcontroller
+        handleStatusBarStyle(style: .lightContent)
     }
     
     //view configuration
@@ -145,9 +152,9 @@ class NoteCollectionController: UICollectionViewController {
             iPadOSLayout.itemsPerRow = 3.0
         }
         collectionView.collectionViewLayout.invalidateLayout()
-        
         collectionView.backgroundColor = ThemeManager.bgColor
         navigationController?.setColor(color: ThemeManager.bgColor)
+        handleStatusBarStyle(style: .darkContent)
     }
 }
 

@@ -40,4 +40,16 @@ extension UIViewController {
         window?.makeKeyAndVisible()
         UIView.transition(with: window!, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
     }
+    
+    //change StatusBarStyle in parent, PageViewController
+    //override and always make style light if in dark mode
+    func handleStatusBarStyle(style: UIStatusBarStyle) {
+        let rootVC = UIApplication.shared.windows.first!.rootViewController as! PageViewController
+        if traitCollection.userInterfaceStyle == .dark {
+            rootVC.statusBarStyle = .lightContent
+        } else {
+            rootVC.statusBarStyle = style
+        }
+        rootVC.setNeedsStatusBarAppearanceUpdate()
+    }
 }

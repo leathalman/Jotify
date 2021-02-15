@@ -8,8 +8,9 @@
 import UIKit
 
 class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
-    
     var currentIndex = 1
+    
+    var statusBarStyle: UIStatusBarStyle = .lightContent
     
     let noteCollectionController = UINavigationController(rootViewController: NoteCollectionController(collectionViewLayout: UICollectionViewFlowLayout()))
     let writeNotesController = WriteNoteController()
@@ -29,7 +30,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
         
         //setup the color system for background with light/dark mode
         if traitCollection.userInterfaceStyle == .light {
-            ThemeManager.bgColor = .white
+            ThemeManager.bgColor = UIColor.white.adjust(by: -6) ?? .white
         } else if traitCollection.userInterfaceStyle == .dark {
             ThemeManager.bgColor = .mineShaft
         }
@@ -86,10 +87,14 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if traitCollection.userInterfaceStyle == .light {
-            ThemeManager.bgColor = .white
+            ThemeManager.bgColor = UIColor.white.adjust(by: -10) ?? .white
         } else if traitCollection.userInterfaceStyle == .dark {
             ThemeManager.bgColor = .mineShaft
         }
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return statusBarStyle
     }
     
     required init?(coder: NSCoder) {

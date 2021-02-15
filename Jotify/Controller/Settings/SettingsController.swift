@@ -14,10 +14,17 @@ class SettingsController: UITableViewController {
     var section1: [String] = []
     var section2: [String] = []
     
+    override func viewWillAppear(_ animated: Bool) {
+        handleStatusBarStyle(style: .darkContent)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .mineShaft
+        view.backgroundColor = ThemeManager.bgColor
+        
+        navigationController?.setColor(color: ThemeManager.bgColor)
         navigationController?.enablePersistence()
+        
         tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
     }
@@ -41,5 +48,12 @@ class SettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        handleStatusBarStyle(style: .darkContent)
+        view.backgroundColor = ThemeManager.bgColor
+        navigationController?.setColor(color: ThemeManager.bgColor)
+        
     }
 }
