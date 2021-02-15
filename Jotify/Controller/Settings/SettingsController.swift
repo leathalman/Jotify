@@ -20,6 +20,11 @@ class SettingsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //fixes issue where tableview becomes unresponsive when disabling swipe
+        tableView.contentInset = .zero
+        tableView.isUserInteractionEnabled = true
+        tableView.isScrollEnabled = true
+        
         view.backgroundColor = ThemeManager.bgColor
         
         navigationController?.setColor(color: ThemeManager.bgColor)

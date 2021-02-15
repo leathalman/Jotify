@@ -42,19 +42,13 @@ class NoteCollectionController: UICollectionViewController {
         super.viewWillAppear(true)
         setupNavigationBar()
         handleStatusBarStyle(style: .darkContent)
-//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewElements()
         updateStats()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        //change status bar style to white when leaving viewcontroller
-        handleStatusBarStyle(style: .lightContent)
     }
     
     //view configuration

@@ -15,20 +15,25 @@ class EditingController: UIViewController, UITextViewDelegate {
     
     var timer: Timer?
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        //change status bar style to white
+        handleStatusBarStyle(style: .lightContent)
+    }
+    
     //life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupNavBar()
         setupNotifications()
-        //check this out, seems to cause a bug TODO
-//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         updateContent(content: draftView.textField.text)
-//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
     }
     
     //view configuration

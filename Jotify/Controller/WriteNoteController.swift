@@ -19,6 +19,8 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         super.viewWillAppear(true)
         //update background color each time view will appear in case noteColor has changed
         view.backgroundColor = ColorManager.noteColor
+        //change status bar style to white
+        handleStatusBarStyle(style: .lightContent)
     }
     
     //life cycle
