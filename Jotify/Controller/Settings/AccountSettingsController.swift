@@ -24,31 +24,39 @@ class AccountSettingsController: SettingsController {
         case 1:
             switch indexPath.row {
             case 0:
-                //ask firebase to send password recovery email and alert user if successful or error
-                //deselect row once action is completed
-                AuthManager.forgotPassword(email: AuthManager().email) { (success, message) in
-                    if success! {
-                        print("recovery email sent")
-                        let alertController = UIAlertController(title: nil, message: "Password recovery email successfully sent to \(AuthManager().email)", preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        self.present(alertController, animated: true, completion: nil)
-                    } else {
-                        print("recovery email was unable to be sent")
-                        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        self.present(alertController, animated: true, completion: nil)
+                let alertController = UIAlertController(title: nil, message: "Are you sure you want to reset your password?", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: {(action) in
+                    //ask firebase to send password recovery email and alert user if successful or error
+                    //deselect row once action is completed
+                    AuthManager.forgotPassword(email: AuthManager().email) { (success, message) in
+                        if success! {
+                            print("recovery email sent")
+                            let alertController = UIAlertController(title: nil, message: "Password recovery email successfully sent to \(AuthManager().email)", preferredStyle: .alert)
+                            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self.present(alertController, animated: true, completion: nil)
+                        } else {
+                            print("recovery email was unable to be sent")
+                            let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+                            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self.present(alertController, animated: true, completion: nil)
+                        }
                     }
-                    tableView.deselectRow(at: indexPath, animated: true)
-                }
-            case 1:
-                //sign out user and set the rootViewController back to loginController
-                AuthManager.signOut()
-                let alertController = UIAlertController(title: nil, message: "User successfully logged out.", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                    self.setRootViewController(vc: LoginController())
                 }))
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
-                tableView.deselectRow(at: indexPath, animated: true)
+            case 1:
+                let alertController = UIAlertController(title: nil, message: "Are you sure you want to log out?", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: {(action) in
+                    //sign out user and set the rootViewController back to loginController
+                    AuthManager.signOut()
+                    let alertController = UIAlertController(title: nil, message: "User successfully logged out.", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                        self.setRootViewController(vc: LoginController())
+                    }))
+                    self.present(alertController, animated: true, completion: nil)
+                }))
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
             default:
                 print("default")
             }

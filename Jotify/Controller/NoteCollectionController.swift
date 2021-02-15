@@ -86,7 +86,7 @@ class NoteCollectionController: UICollectionViewController {
         let indexPath = collectionView.indexPathForItem(at: location)
         
         let actionController = SkypeActionController()
-        actionController.backgroundColor = .systemBlue
+        actionController.backgroundColor = ColorManager.noteColor
         actionController.addAction(Action("Delete note", style: .default, handler: { _ in
             DataManager.deleteNote(docID: (self.noteCollection?.notes[indexPath!.row].uid)!) { _ in }
             //display error in UI

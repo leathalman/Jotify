@@ -23,10 +23,10 @@ class AuthenticationController: UIViewController {
     let usernameField: UITextField = {
         let text = UITextField()
         text.translatesAutoresizingMaskIntoConstraints = false
-        text.placeholder = "Email"
         text.backgroundColor = UIColor.mineShaft.adjust(by: -2)
         text.layer.cornerRadius = 10
         text.textColor = .white
+        text.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.adjust(by: -40) as Any])
         text.font = .boldSystemFont(ofSize: 25)
         text.borderStyle = .none
         text.autocapitalizationType = .none
@@ -37,10 +37,10 @@ class AuthenticationController: UIViewController {
     let passwordField: UITextField = {
         let text = UITextField()
         text.translatesAutoresizingMaskIntoConstraints = false
-        text.placeholder = "Password"
         text.backgroundColor = UIColor.mineShaft.adjust(by: -2)
         text.layer.cornerRadius = 10
         text.textColor = .white
+        text.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.adjust(by: -40) as Any])
         text.font = .boldSystemFont(ofSize: 25)
         text.borderStyle = .none
         text.isSecureTextEntry = true
@@ -73,8 +73,8 @@ class AuthenticationController: UIViewController {
         view.addSubview(submitButton)
         view.addSubview(changeVCButton)
         setupConstraints()
-        self.hideKeyboardWhenTappedAround()
         changeColorOfTextView()
+        self.hideKeyboardWhenTappedAround()
     }
     
     //objc function for switching between login and signup
@@ -155,4 +155,9 @@ class AuthenticationController: UIViewController {
         usernameField.setLeftPadding(12)
         passwordField.setLeftPadding(12)
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
 }
