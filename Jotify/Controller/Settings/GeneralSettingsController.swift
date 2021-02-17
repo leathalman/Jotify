@@ -14,7 +14,7 @@ class GeneralSettingsController: SettingsController {
         super.sections = ["General"]
         super.section1 = ["Account", "Appearance"]
         navigationItem.title = "Settings"
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
     }
     
     //tableView logic
@@ -26,7 +26,7 @@ class GeneralSettingsController: SettingsController {
         case 1:
             navigationController?.pushViewController(AppearanceSettingsController(style: .insetGrouped), animated: true)
         default:
-            print("default")
+            print("")
         }
     }
     

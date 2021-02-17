@@ -77,7 +77,7 @@ class NoteCollectionController: UICollectionViewController {
     
     //update stats through SettingsManager for use in AccountSettingsController.swift
     func updateStats() {
-        SettingsManager.numOfNotes = noteCollection?.notes.count ?? 0
+        SettingsManager.numOfNotes = noteCollection?.FBNotes.count ?? 0
     }
     
     //action handlers
@@ -88,7 +88,7 @@ class NoteCollectionController: UICollectionViewController {
         let actionController = SkypeActionController()
         actionController.backgroundColor = ColorManager.noteColor
         actionController.addAction(Action("Delete note", style: .default, handler: { _ in
-            DataManager.deleteNote(docID: (self.noteCollection?.notes[indexPath!.row].uid)!) { _ in }
+            DataManager.deleteNote(docID: (self.noteCollection?.FBNotes[indexPath!.row].id)!) { _ in }
             //display error in UI
         }))
         actionController.addAction(Action("Cancel", style: .cancel, handler: nil))
@@ -104,22 +104,22 @@ class NoteCollectionController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //noteCollection.notes.count will return nil if no notes exist on launch, will return 0 if user deletes a note
         //and num of objs in array go to 0
-        if (noteCollection?.notes.count == nil) || (noteCollection?.notes.count == 0){
+        if (noteCollection?.FBNotes.count == nil) || (noteCollection?.FBNotes.count == 0){
             collectionView.backgroundView = EmptyNoteView()
         } else {
             //remove backgroundView if array of notes isn't empty
             collectionView.backgroundView = nil
         }
         
-        return noteCollection?.notes.count ?? 0
+        return noteCollection?.FBNotes.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedNoteCell", for: indexPath) as? SavedNoteCell else { fatalError("Wrong cell class dequeued") }
         
-        cell.textLabel.text = noteCollection?.notes[indexPath.row].content
-        cell.dateLabel.text = noteCollection?.notes[indexPath.row].timestamp.getDate()
-        cell.backgroundColor = noteCollection?.notes[indexPath.row].color.getColor()
+        cell.textLabel.text = noteCollection?.FBNotes[indexPath.row].content
+        cell.dateLabel.text = noteCollection?.FBNotes[indexPath.row].timestamp.getDate()
+        cell.backgroundColor = noteCollection?.FBNotes[indexPath.row].color.getColor()
         
         cell.layer.cornerRadius = 5
         cell.layer.shouldRasterize = true
@@ -133,7 +133,7 @@ class NoteCollectionController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.playHapticFeedback()
         let controller = EditingController()
-        controller.note = (noteCollection?.notes[indexPath.row])!
+        controller.note = (noteCollection?.FBNotes[indexPath.row])!
         controller.noteCollection = noteCollection
         navigationController?.pushViewController(controller, animated: true)
     }

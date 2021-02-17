@@ -36,7 +36,7 @@ class DataManager {
     
     //create note document with 2 fields, timestamp and content
     //returns documentID so doc can be updated immediately...
-    static func createNote(content: String, timestamp: Double, color: String) -> String {
+    @discardableResult static func createNote(content: String, timestamp: Double, color: String) -> String {
         if AuthManager().uid.isEmpty { return ""}
         let db = Firestore.firestore()
         var ref: DocumentReference? = nil
@@ -84,27 +84,27 @@ class DataManager {
             snapshot.documentChanges.forEach { diff in
                 let content = diff.document.get("content") as? String ?? ""
                 let timestamp = diff.document.get("timestamp") as? Double ?? 0
-                let uid = diff.document.documentID
+                let id = diff.document.documentID
                 let color = diff.document.get("color") as? String ?? ""
-                let note = Note(content: content, timestamp: timestamp, uid: uid, color: color)
+                let note = FBNote(content: content, timestamp: timestamp, id: id, color: color)
                 
                 if (diff.type == .added) {
 //                    print("New note: \(diff.document.data())")
-                    collection.notes.insert(note, at: 0)
+                    collection.FBNotes.insert(note, at: 0)
                     
                 }
                 if (diff.type == .modified) {
                     print("Modified note: \(diff.document.data())")
-                    if let noteIndex = collection.notes.firstIndex(where: { $0.uid == uid}) {
-                        collection.notes.remove(at: noteIndex)
+                    if let noteIndex = collection.FBNotes.firstIndex(where: { $0.id == id}) {
+                        collection.FBNotes.remove(at: noteIndex)
                         //could also just append to array normally since array is sorted below
-                        collection.notes.insert(note, at: 0)
+                        collection.FBNotes.insert(note, at: 0)
                     }
-                    collection.notes.sort { ($0.timestamp) > ($1.timestamp) }
+                    collection.FBNotes.sort { ($0.timestamp) > ($1.timestamp) }
                 }
                 if (diff.type == .removed) {
                     print("Removed note: \(diff.document.data())")
-                    collection.notes = collection.notes.filter {$0.uid != diff.document.documentID }
+                    collection.FBNotes = collection.FBNotes.filter {$0.id != diff.document.documentID }
                 }
                 completionHandler(collection, true)
             }

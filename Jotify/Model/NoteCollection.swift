@@ -6,15 +6,19 @@
 //
 
 import Foundation
+import CoreData
 
 class NoteCollection {
-    var notes: [Note] = []
+    //model for array of firebase notes
+    var FBNotes: [FBNote] = []
 }
 
-struct Note {
+//model for a firebase note
+//"note" is reserved for deprecated implementation of CloudKit notes
+struct FBNote {
     var content: String
     var timestamp: Double
-    var uid: String
+    var id: String
     var color: String
 }
 

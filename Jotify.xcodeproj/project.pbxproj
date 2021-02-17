@@ -32,10 +32,13 @@
 		F67FFFF325B32E1F00313D61 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67FFFF225B32E1F00313D61 /* SceneDelegate.swift */; };
 		F67FFFFA25B32E2000313D61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F67FFFF925B32E2000313D61 /* Assets.xcassets */; };
 		F67FFFFD25B32E2000313D61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F67FFFFB25B32E2000313D61 /* LaunchScreen.storyboard */; };
+		F6B9AE0C25DCC871008467C6 /* MigrationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9AE0B25DCC871008467C6 /* MigrationHandler.swift */; };
 		F6B9D4B825B6175D00A0446C /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9D4B725B6175D00A0446C /* UIViewController+Extensions.swift */; };
 		F6B9D4C725B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9D4C625B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift */; };
 		F6B9D4CA25B629C800A0446C /* Double+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9D4C925B629C800A0446C /* Double+Date.swift */; };
 		F6C2EBB725BA728000EC6582 /* EditingController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C2EBB625BA728000EC6582 /* EditingController+Keyboard.swift */; };
+		F6CF5DDF25DAEF2F006E576E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CF5DDE25DAEF2F006E576E /* CloudKit.framework */; };
+		F6CF5DF325DAF38D006E576E /* Jotify.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F6CF5DF125DAF38D006E576E /* Jotify.xcdatamodeld */; };
 		F6D2771225C8C00E00ECFCCC /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D2771125C8C00E00ECFCCC /* SettingsCell.swift */; };
 		F6D2771625C8C01C00ECFCCC /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D2771525C8C01C00ECFCCC /* SettingsSwitchCell.swift */; };
 		F6D2771925C8C37C00ECFCCC /* UINavigationController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D2771825C8C37C00ECFCCC /* UINavigationController+Extensions.swift */; };
@@ -77,10 +80,14 @@
 		F67FFFF925B32E2000313D61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F67FFFFC25B32E2000313D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F67FFFFE25B32E2000313D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F6B9AE0B25DCC871008467C6 /* MigrationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationHandler.swift; sourceTree = "<group>"; };
 		F6B9D4B725B6175D00A0446C /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		F6B9D4C625B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WriteNoteController+KeyboardNotifications.swift"; sourceTree = "<group>"; };
 		F6B9D4C925B629C800A0446C /* Double+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Date.swift"; sourceTree = "<group>"; };
 		F6C2EBB625BA728000EC6582 /* EditingController+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingController+Keyboard.swift"; sourceTree = "<group>"; };
+		F6CF5DDC25DAEF2B006E576E /* Jotify.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jotify.entitlements; sourceTree = "<group>"; };
+		F6CF5DDE25DAEF2F006E576E /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		F6CF5DF225DAF38D006E576E /* Jotify.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Jotify.xcdatamodel; sourceTree = "<group>"; };
 		F6D2771125C8C00E00ECFCCC /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		F6D2771525C8C01C00ECFCCC /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
 		F6D2771825C8C37C00ECFCCC /* UINavigationController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extensions.swift"; sourceTree = "<group>"; };
@@ -98,6 +105,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D468660ACBD45E5CD1B0E4CD /* Pods_Jotify.framework in Frameworks */,
+				F6CF5DDF25DAEF2F006E576E /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +124,7 @@
 		C642498CF2E465CD8F066A65 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F6CF5DDE25DAEF2F006E576E /* CloudKit.framework */,
 				A7077D1FD53AC3A2DF5B8A96 /* Pods_Jotify.framework */,
 			);
 			name = Frameworks;
@@ -142,8 +151,9 @@
 		F67F001F25B32EC100313D61 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F638E64E25CEF2AC005FA371 /* Firebase */,
 				F67F002925B32F5B00313D61 /* NoteCollection.swift */,
+				F6CF5DE125DAF04E006E576E /* CloudKit */,
+				F638E64E25CEF2AC005FA371 /* Firebase */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -202,6 +212,8 @@
 				F67F002125B32ECC00313D61 /* Controller */,
 				F67F001F25B32EC100313D61 /* Model */,
 				F67FFFF925B32E2000313D61 /* Assets.xcassets */,
+				F6CF5DF125DAF38D006E576E /* Jotify.xcdatamodeld */,
+				F6CF5DDC25DAEF2B006E576E /* Jotify.entitlements */,
 				F67FFFFB25B32E2000313D61 /* LaunchScreen.storyboard */,
 				F620BD2525B338C7005BE77B /* GoogleService-Info.plist */,
 				F67FFFFE25B32E2000313D61 /* Info.plist */,
@@ -239,6 +251,14 @@
 				F6C2EBB625BA728000EC6582 /* EditingController+Keyboard.swift */,
 			);
 			path = Keyboard;
+			sourceTree = "<group>";
+		};
+		F6CF5DE125DAF04E006E576E /* CloudKit */ = {
+			isa = PBXGroup;
+			children = (
+				F6B9AE0B25DCC871008467C6 /* MigrationHandler.swift */,
+			);
+			path = CloudKit;
 			sourceTree = "<group>";
 		};
 		F6D2771025C8BFEC00ECFCCC /* Settings */ = {
@@ -405,6 +425,7 @@
 				F638E64A25CEEFC7005FA371 /* AppearanceSettingsController.swift in Sources */,
 				F652AB6525B87CF2006D7747 /* EditingController.swift in Sources */,
 				F6DFF0CC25C90617004D6468 /* ColorManager.swift in Sources */,
+				F6CF5DF325DAF38D006E576E /* Jotify.xcdatamodeld in Sources */,
 				F6F185B225C86ABF001FD5FA /* GeneralSettingsController.swift in Sources */,
 				F67F003A25B32F7D00313D61 /* PageViewController.swift in Sources */,
 				F6C2EBB725BA728000EC6582 /* EditingController+Keyboard.swift in Sources */,
@@ -422,6 +443,7 @@
 				F67F002D25B32F6300313D61 /* DraftView.swift in Sources */,
 				F6F185A625C85F98001FD5FA /* UITextView+Padding.swift in Sources */,
 				F611D0E125D84D1E00E6D860 /* ThemeManager.swift in Sources */,
+				F6B9AE0C25DCC871008467C6 /* MigrationHandler.swift in Sources */,
 				F67FFFF325B32E1F00313D61 /* SceneDelegate.swift in Sources */,
 				F611D0DE25D841FA00E6D860 /* EmptyNoteView.swift in Sources */,
 				F638E65225CEF36B005FA371 /* SettingsManager.swift in Sources */,
@@ -506,9 +528,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 94;
+				CURRENT_PROJECT_VERSION = 95;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				INFOPLIST_FILE = Jotify/Info.plist;
@@ -531,9 +554,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 94;
+				CURRENT_PROJECT_VERSION = 95;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				INFOPLIST_FILE = Jotify/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -632,6 +656,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F6CF5DF125DAF38D006E576E /* Jotify.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F6CF5DF225DAF38D006E576E /* Jotify.xcdatamodel */,
+			);
+			currentVersion = F6CF5DF225DAF38D006E576E /* Jotify.xcdatamodel */;
+			path = Jotify.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F67FFFE525B32E1F00313D61 /* Project object */;
 }

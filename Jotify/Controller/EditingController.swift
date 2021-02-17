@@ -10,7 +10,7 @@ import UIKit
 class EditingController: UIViewController, UITextViewDelegate {
     let draftView = DraftView()
     
-    var note: Note?
+    var note: FBNote?
     var noteCollection: NoteCollection?
     
     var timer: Timer?
@@ -68,7 +68,7 @@ class EditingController: UIViewController, UITextViewDelegate {
     //datamanager interface
     func updateContent(content: String) {
         if draftView.textField.text != note?.content {
-            DataManager.updateNote(content: draftView.textField.text, uid: note?.uid ?? "") { (success) in
+            DataManager.updateNote(content: draftView.textField.text, uid: note?.id ?? "") { (success) in
                 //display error in UI
             }
         }

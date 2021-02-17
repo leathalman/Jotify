@@ -35,12 +35,15 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
             ThemeManager.bgColor = .mineShaft
         }
         
+        //get data from Firebase
         DataManager.observeNoteChange { (collection, success) in
             if success! {
                 let controller = self.noteCollectionController.viewControllers.first as! NoteCollectionController
                 controller.noteCollection = collection
             }
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(migrateDataFromCloudKit), name: .NSManagedObjectContextObjectsDidChange, object: MigrationHandler().context)
         
         for subview in self.view.subviews {
             if let scrollView = subview as? UIScrollView {
@@ -73,6 +76,22 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
 
     @objc func enableSwipe(notification: Notification){
         self.dataSource = self
+    }
+    
+    //migrates data from CloudKit to Firebase
+    @objc func migrateDataFromCloudKit() {
+        //if user has not migrated and the fetchrequest returns objects then create a new FBNote for each CDNote
+        print("Has migrated: \(UserDefaults.standard.bool(forKey: "hasMigrated"))")
+        print("Notes migrated: \(MigrationHandler.CDNotes.count)")
+        if !UserDefaults.standard.bool(forKey: "hasMigrated") {
+            if MigrationHandler.CDNotes.count != 0 {
+                for note in MigrationHandler.CDNotes {
+                    DataManager.createNote(content: note.content ?? "", timestamp: note.modifiedDate, color: ColorManager.noteColor.getString())
+                    ColorManager.setNoteColor(theme: UIColor.defaultTheme)
+                }
+                UserDefaults.standard.setValue(true, forKey: "hasMigrated")
+            }
+        }
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
