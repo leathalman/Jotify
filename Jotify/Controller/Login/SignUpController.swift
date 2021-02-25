@@ -31,6 +31,7 @@ class SignUpController: AuthenticationController {
                 alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
             } else {
+                DataManager.createUserSettings { (success) in }
                 //change rootViewController to PageViewController w/ animation
                 self.setRootViewController(vc: PageViewController())
             }

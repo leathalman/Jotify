@@ -30,11 +30,17 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
         
         //setup the color system for background with light/dark mode
         if traitCollection.userInterfaceStyle == .light {
-            ThemeManager.bgColor = UIColor.white.adjust(by: -6) ?? .white
+            ColorManager.bgColor = UIColor.white.adjust(by: -4) ?? .white
         } else if traitCollection.userInterfaceStyle == .dark {
-            ThemeManager.bgColor = .mineShaft
+            ColorManager.bgColor = .mineShaft
         }
         
+        if !UserDefaults.standard.bool(forKey: "hasMigrated") {
+            print("Has migrated?: \(UserDefaults.standard.bool(forKey: "hasMigrated"))")
+            //notify when notes are fetched from context, CloudKit
+            NotificationCenter.default.addObserver(self, selector: #selector(migrateDataFromCloudKit), name: .NSManagedObjectContextObjectsDidChange, object: MigrationHandler().context)
+        }
+
         //get data from Firebase
         DataManager.observeNoteChange { (collection, success) in
             if success! {
@@ -42,8 +48,6 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
                 controller.noteCollection = collection
             }
         }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(migrateDataFromCloudKit), name: .NSManagedObjectContextObjectsDidChange, object: MigrationHandler().context)
         
         for subview in self.view.subviews {
             if let scrollView = subview as? UIScrollView {
@@ -53,6 +57,47 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
         }
     }
     
+    @objc func migrateDataFromCloudKit() {
+        print("Called migration stuff")
+        print(MigrationHandler.CDNotes.count)
+        if !MigrationHandler.CDNotes.isEmpty {
+            NotificationCenter.default.removeObserver(self)
+            for note in MigrationHandler.CDNotes {
+                DataManager.createNote(content: note.content ?? "", timestamp: note.modifiedDate, color: ColorManager.noteColor.getString())
+                ColorManager.setNoteColor(theme: UIColor.defaultTheme)
+            }
+            UserDefaults.standard.setValue(true, forKey: "hasMigrated")
+        }
+    }
+    
+//    //migrates data from CloudKit to Firebase
+//    @objc func migrateDataFromCloudKit() {
+//        //if user has not migrated and the fetchrequest returns objects then create a new FBNote for each CDNote
+//        if !UserDefaults.standard.bool(forKey: "hasMigrated") {
+//            print("NUM OF FETCH: \(MigrationHandler.CDNotes.count)")
+//            if MigrationHandler.CDNotes.count != 0 {
+//                for note in MigrationHandler.CDNotes {
+//                    if let noteIndex = migratedNotes.firstIndex(where: { $0 == note.content})  {
+//                        print("duplicate note:\(String(describing: note.content))")
+////                        MigrationHandler.CDNotes.remove(at: noteIndex)
+//                    } else {
+//                        DataManager.createNote(content: note.content ?? "", timestamp: note.modifiedDate, color: ColorManager.noteColor.getString())
+//                        ColorManager.setNoteColor(theme: UIColor.defaultTheme)
+//                        print("migrated notes: \(migratedNotes.count)")
+//                        print("this is the note added: \(note.content)")
+////                        print(migratedNotes)
+//                    }
+//                }
+//
+//                UserDefaults.standard.setValue(true, forKey: "hasMigrated")
+//
+//                DataManager.updateUserSettings(setting: "hasMigrated", value: true) { (success) in
+//                    print("Migration complete")
+//                }
+//            }
+//        }
+//    }
+    
     func setupPageController() {
         view.backgroundColor = UIColor.clear
         
@@ -60,10 +105,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
         delegate = self
         
         if let firstViewController = orderedViewControllers.last {
-            setViewControllers([firstViewController],
-                               direction: .forward,
-                               animated: true,
-                               completion: nil)
+            setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(enableSwipe(notification:)), name:NSNotification.Name(rawValue: "enableSwipe"), object: nil)
@@ -78,37 +120,20 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
         self.dataSource = self
     }
     
-    //migrates data from CloudKit to Firebase
-    @objc func migrateDataFromCloudKit() {
-        //if user has not migrated and the fetchrequest returns objects then create a new FBNote for each CDNote
-        print("Has migrated: \(UserDefaults.standard.bool(forKey: "hasMigrated"))")
-        print("Notes migrated: \(MigrationHandler.CDNotes.count)")
-        if !UserDefaults.standard.bool(forKey: "hasMigrated") {
-            if MigrationHandler.CDNotes.count != 0 {
-                for note in MigrationHandler.CDNotes {
-                    DataManager.createNote(content: note.content ?? "", timestamp: note.modifiedDate, color: ColorManager.noteColor.getString())
-                    ColorManager.setNoteColor(theme: UIColor.defaultTheme)
-                }
-                UserDefaults.standard.setValue(true, forKey: "hasMigrated")
-            }
-        }
-    }
-    
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
             if completed,
                 let visibleViewController = pageViewController.viewControllers?.first,
                 let index = orderedViewControllers.firstIndex(of: visibleViewController)
             {
                 currentIndex = index
-                
             }
         }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if traitCollection.userInterfaceStyle == .light {
-            ThemeManager.bgColor = UIColor.white.adjust(by: -10) ?? .white
+            ColorManager.bgColor = UIColor.white.adjust(by: -4) ?? .white
         } else if traitCollection.userInterfaceStyle == .dark {
-            ThemeManager.bgColor = .mineShaft
+            ColorManager.bgColor = .mineShaft
         }
     }
     

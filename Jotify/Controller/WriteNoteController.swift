@@ -63,7 +63,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
             hasCreatedDocument = false
             draftView.textField.text = ""
             //set a new noteColor from theme
-            ColorManager.setNoteColor(theme: SettingsManager.theme.getColorArray())
+            ColorManager.setNoteColor(theme: ColorManager.theme)
             //animate transition between background colors
             UIView.animate(withDuration: 0.25, animations: {
                 self.view.backgroundColor = ColorManager.noteColor

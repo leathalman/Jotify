@@ -11,6 +11,9 @@ class ColorManager {
     
     static var noteColor: UIColor = .systemBlue
     static var indexes = [Int]()
+    static var bgColor = UIColor()
+    //current note color theme
+    static var theme = [UIColor]()
 
     //a static instance of ColorManager must be created to persist the value of indexes
     //fill an array of indexes that correspond to the array as a parameter

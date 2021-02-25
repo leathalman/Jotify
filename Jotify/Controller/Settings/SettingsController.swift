@@ -25,9 +25,9 @@ class SettingsController: UITableViewController {
         tableView.isUserInteractionEnabled = true
         tableView.isScrollEnabled = true
         
-        view.backgroundColor = ThemeManager.bgColor
+        view.backgroundColor = ColorManager.bgColor
         
-        navigationController?.setColor(color: ThemeManager.bgColor)
+        navigationController?.setColor(color: ColorManager.bgColor)
         navigationController?.enablePersistence()
         
         tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
@@ -57,8 +57,7 @@ class SettingsController: UITableViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         handleStatusBarStyle(style: .darkContent)
-        view.backgroundColor = ThemeManager.bgColor
-        navigationController?.setColor(color: ThemeManager.bgColor)
-        
+        view.backgroundColor = ColorManager.bgColor
+        navigationController?.setColor(color: ColorManager.bgColor)
     }
 }

@@ -48,7 +48,12 @@ class NoteCollectionController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewElements()
-        updateStats()
+        
+//        for note in noteCollection!.FBNotes {
+//            DataManager.deleteNote(docID: note.id) { (success) in
+//                //
+//            }
+//        }
     }
     
     //view configuration
@@ -64,20 +69,15 @@ class NoteCollectionController: UICollectionViewController {
         navigationItem.leftBarButtonItem = leftItem
         navigationItem.setHidesBackButton(true, animated: true)
         
-        collectionView.backgroundColor = ThemeManager.bgColor
+        collectionView.backgroundColor = ColorManager.bgColor
         collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
     }
     
     func setupNavigationBar() {
-        navigationItem.title = "Saved Notes"
+        navigationItem.title = noteCollection?.FBNotes.count.description
         navigationController?.enablePersistence()
-        navigationController?.setColor(color: ThemeManager.bgColor)
+        navigationController?.setColor(color: ColorManager.bgColor)
         navigationController?.navigationBar.titleTextAttributes = nil
-    }
-    
-    //update stats through SettingsManager for use in AccountSettingsController.swift
-    func updateStats() {
-        SettingsManager.numOfNotes = noteCollection?.FBNotes.count ?? 0
     }
     
     //action handlers
@@ -86,7 +86,11 @@ class NoteCollectionController: UICollectionViewController {
         let indexPath = collectionView.indexPathForItem(at: location)
         
         let actionController = SkypeActionController()
-        actionController.backgroundColor = ColorManager.noteColor
+        if traitCollection.userInterfaceStyle == .light {
+            actionController.backgroundColor = ColorManager.noteColor
+        } else {
+            actionController.backgroundColor = .mineShaft
+        }
         actionController.addAction(Action("Delete note", style: .default, handler: { _ in
             DataManager.deleteNote(docID: (self.noteCollection?.FBNotes[indexPath!.row].id)!) { _ in }
             //display error in UI
@@ -146,8 +150,8 @@ class NoteCollectionController: UICollectionViewController {
             iPadOSLayout.itemsPerRow = 3.0
         }
         collectionView.collectionViewLayout.invalidateLayout()
-        collectionView.backgroundColor = ThemeManager.bgColor
-        navigationController?.setColor(color: ThemeManager.bgColor)
+        collectionView.backgroundColor = ColorManager.bgColor
+        navigationController?.setColor(color: ColorManager.bgColor)
         handleStatusBarStyle(style: .darkContent)
     }
 }

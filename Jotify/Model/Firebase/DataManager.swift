@@ -14,23 +14,47 @@ class DataManager {
         if AuthManager().uid.isEmpty { return }
         let db = Firestore.firestore()
         db.collection("users").document(AuthManager().uid).setData([
-            "colorScheme": "white",
+            "theme": "Default",
+            "hasMigrated": false,
         ]) { (error) in
             if let error = error {
                 print("Error deleting document: \(error.localizedDescription)")
                 completionHandler(false)
             } else {
+                print("User settings created successfully")
                 completionHandler(true)
             }
         }
     }
     
     //reads the user settings in users -> user uid (fields)
-    static func retrieveUserSettings(completetionHandler: @escaping (Bool?) -> Void) {
+    static func retrieveUserSettings(completetionHandler: @escaping (Settings?, Bool?) -> Void) {
         if AuthManager().uid.isEmpty { return }
         let db = Firestore.firestore()
         db.collection("users").document(AuthManager().uid).getDocument { (snapshot, error) in
-            //do something with data retrieved
+            if let error = error {
+                print("Error deleting document: \(error.localizedDescription)")
+                completetionHandler(nil, false)
+            } else {
+                print("User settings retrieved successfully")
+                let settings = Settings(theme: snapshot?.get("theme") as? String ?? "Default", hasMigrated: snapshot?.get("hasMigrated") as? Bool ?? true)
+                completetionHandler(settings, true)
+            }
+        }
+    }
+    
+    //update the given setting with a value
+    static func updateUserSettings(setting: String, value: Any, completetionHandler: @escaping (Bool?) -> Void) {
+        if AuthManager().uid.isEmpty { return }
+        let db = Firestore.firestore()
+        db.collection("users").document(AuthManager().uid).updateData([
+            setting: value,
+        ]) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+                completetionHandler(false)
+            }
+            completetionHandler(true)
         }
     }
     

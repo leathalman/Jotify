@@ -11,9 +11,8 @@ class AccountSettingsController: SettingsController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.sections = ["Stats", "Account"]
-        super.section1 = ["Total Notes: \(SettingsManager.numOfNotes)", "Date Joined: \(AuthManager().metadata?.creationDate?.timeIntervalSinceReferenceDate.getDate() ?? "error")"]
-        super.section2 = ["Reset Password", "Logout"]
+        super.sections = [AuthManager().email]
+        super.section1 = ["Reset Password", "Logout"]
         navigationItem.title = "Account"
     }
     
@@ -21,7 +20,7 @@ class AccountSettingsController: SettingsController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.section {
-        case 1:
+        case 0:
             switch indexPath.row {
             case 0:
                 let alertController = UIAlertController(title: nil, message: "Are you sure you want to reset your password?", preferredStyle: .alert)
@@ -58,31 +57,21 @@ class AccountSettingsController: SettingsController {
                 alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
             default:
-                print("default")
+                print("")
             }
         default:
-            print("default")
+            print("")
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-        
-        switch indexPath.section {
-        case 0:
-            cell.textLabel?.text = "\(super.section1[indexPath.row])"
-            cell.isUserInteractionEnabled = false
-        case 1:
-            cell.textLabel?.text = "\(super.section2[indexPath.row])"
-            switch indexPath.row {
-            case 1:
-                cell.textLabel?.textColor = .systemRed
-            default:
-                print("default")
-            }
-        default:
-            return cell
+        cell.textLabel?.text = "\(super.section1[indexPath.row])"
+
+        if indexPath.row == 1 {
+            cell.textLabel?.textColor = .systemRed
         }
+        
         return cell
     }
 }

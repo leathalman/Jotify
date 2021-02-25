@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CoreData
 
 class NoteCollection {
     //model for array of firebase notes

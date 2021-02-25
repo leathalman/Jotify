@@ -15,12 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
-        //setup Userdefaults and access existing defaults
-        registerDefaults()
-        SettingsManager().retrieveSettingsFromDefaults()
+        //get settings from firebase
+        User.retrieveSettingsFromFirebase()
         
         //setup the color system for notes
-        ColorManager.setNoteColor(theme: SettingsManager.theme.getColorArray())
+        ColorManager.theme = UserDefaults.standard.string(forKey: "theme")?.getColorArray() ?? UIColor.defaultTheme
+        ColorManager.setNoteColor(theme: ColorManager.theme)
+        
+        //register defaults with set values
+        setupDefaults()
         
         return true
     }
@@ -39,11 +42,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
-    //create list of default values for user settings in UserDefaults
-    func registerDefaults() {
+    func setupDefaults() {
         UserDefaults.standard.register(defaults: [
-            "theme": "Default",
-            "hasMigrated": false,
+            "hasMigrated": "false",
+            "theme": "Default"
         ])
     }
     

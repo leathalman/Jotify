@@ -32,15 +32,17 @@ class AppearanceSettingsController: SettingsController {
             lastIndexPath = indexPath as NSIndexPath
         }
         
-        //udpate userdefaults with new theme (using text displayed in UI)
-        UserDefaults.standard.setValue(section1[indexPath.row], forKey: "theme")
-        //update settings from userdefaults
-        SettingsManager().retrieveSettingsFromDefaults()
+        DataManager.updateUserSettings(setting: "theme", value: section1[indexPath.row]) { (success) in
+            if success! {
+                User.retrieveSettingsFromFirebase()
+            }
+        }
+                
         //empty index array since not all color themes have the same number of colors
         //prevents outOfBounds error
         ColorManager.indexes.removeAll()
         //update mostRecentColor variable with new themne
-        ColorManager.setNoteColor(theme: SettingsManager.theme.getColorArray())
+        ColorManager.setNoteColor(theme: ColorManager.theme)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -49,7 +51,7 @@ class AppearanceSettingsController: SettingsController {
         cell.textLabel?.text = "\(super.section1[indexPath.row])"
         cell.selectionStyle = .none
         
-        if SettingsManager.theme == section1[indexPath.row] {
+        if User.settings?.theme == section1[indexPath.row] {
             cell.accessoryType = .checkmark
             lastIndexPath = indexPath as NSIndexPath
         }

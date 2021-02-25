@@ -20,7 +20,7 @@ class LoginController: AuthenticationController {
         button.addTarget(self, action: #selector(handleForgotPassword), for: .touchUpInside)
         return button
     }()
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -46,6 +46,7 @@ class LoginController: AuthenticationController {
                 alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
             } else {
+                User.retrieveSettingsFromFirebase()
                 //change rootViewController to PageViewController w/ animation
                 self.setRootViewController(vc: PageViewController())
             }
