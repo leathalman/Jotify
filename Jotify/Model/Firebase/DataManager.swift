@@ -36,7 +36,7 @@ class DataManager {
                 print("Error deleting document: \(error.localizedDescription)")
                 completetionHandler(nil, false)
             } else {
-                print("User settings retrieved successfully")
+//                print("User settings retrieved successfully")
                 let settings = Settings(theme: snapshot?.get("theme") as? String ?? "Default", hasMigrated: snapshot?.get("hasMigrated") as? Bool ?? true)
                 completetionHandler(settings, true)
             }

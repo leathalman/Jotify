@@ -13,7 +13,6 @@ struct Settings {
 }
 
 class User {
-    
     static var settings: Settings?
     
     static func retrieveSettingsFromFirebase() {

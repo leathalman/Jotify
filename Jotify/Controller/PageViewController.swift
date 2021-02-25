@@ -35,10 +35,21 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
             ColorManager.bgColor = .mineShaft
         }
         
-        if !UserDefaults.standard.bool(forKey: "hasMigrated") {
-            print("Has migrated?: \(UserDefaults.standard.bool(forKey: "hasMigrated"))")
-            //notify when notes are fetched from context, CloudKit
-            NotificationCenter.default.addObserver(self, selector: #selector(migrateDataFromCloudKit), name: .NSManagedObjectContextObjectsDidChange, object: MigrationHandler().context)
+        //retrieve settings from Firebase here instead of AppDelegate
+        //cloud settings > local settings
+        //if cloud settings hasn't migrated check with local settings
+        //if local settings hasn't migrated check too, then initialize CloudKit and start migration process
+        DataManager.retrieveUserSettings { (settings, success) in
+            if success! {
+                User.settings = settings!
+//                print("Theme: \(String(describing: settings?.theme))")
+//                print("hasMigrated: \(String(describing: settings?.hasMigrated))")
+                if !UserDefaults.standard.bool(forKey: "hasMigrated") && !(settings!.hasMigrated) {
+                    print("Has migrated?: \(UserDefaults.standard.bool(forKey: "hasMigrated"))")
+                    //notify when notes are fetched from context, CloudKit
+                    NotificationCenter.default.addObserver(self, selector: #selector(self.migrateDataFromCloudKit), name: .NSManagedObjectContextObjectsDidChange, object: MigrationHandler().context)
+                }
+            }
         }
 
         //get data from Firebase
@@ -58,8 +69,6 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
     }
     
     @objc func migrateDataFromCloudKit() {
-        print("Called migration stuff")
-        print(MigrationHandler.CDNotes.count)
         if !MigrationHandler.CDNotes.isEmpty {
             NotificationCenter.default.removeObserver(self)
             for note in MigrationHandler.CDNotes {
@@ -67,36 +76,9 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
                 ColorManager.setNoteColor(theme: UIColor.defaultTheme)
             }
             UserDefaults.standard.setValue(true, forKey: "hasMigrated")
+            DataManager.updateUserSettings(setting: "hasMigrated", value: true) { (success) in }
         }
     }
-    
-//    //migrates data from CloudKit to Firebase
-//    @objc func migrateDataFromCloudKit() {
-//        //if user has not migrated and the fetchrequest returns objects then create a new FBNote for each CDNote
-//        if !UserDefaults.standard.bool(forKey: "hasMigrated") {
-//            print("NUM OF FETCH: \(MigrationHandler.CDNotes.count)")
-//            if MigrationHandler.CDNotes.count != 0 {
-//                for note in MigrationHandler.CDNotes {
-//                    if let noteIndex = migratedNotes.firstIndex(where: { $0 == note.content})  {
-//                        print("duplicate note:\(String(describing: note.content))")
-////                        MigrationHandler.CDNotes.remove(at: noteIndex)
-//                    } else {
-//                        DataManager.createNote(content: note.content ?? "", timestamp: note.modifiedDate, color: ColorManager.noteColor.getString())
-//                        ColorManager.setNoteColor(theme: UIColor.defaultTheme)
-//                        print("migrated notes: \(migratedNotes.count)")
-//                        print("this is the note added: \(note.content)")
-////                        print(migratedNotes)
-//                    }
-//                }
-//
-//                UserDefaults.standard.setValue(true, forKey: "hasMigrated")
-//
-//                DataManager.updateUserSettings(setting: "hasMigrated", value: true) { (success) in
-//                    print("Migration complete")
-//                }
-//            }
-//        }
-//    }
     
     func setupPageController() {
         view.backgroundColor = UIColor.clear

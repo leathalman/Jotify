@@ -15,9 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
-        //get settings from firebase
-        User.retrieveSettingsFromFirebase()
-        
         //setup the color system for notes
         ColorManager.theme = UserDefaults.standard.string(forKey: "theme")?.getColorArray() ?? UIColor.defaultTheme
         ColorManager.setNoteColor(theme: ColorManager.theme)
