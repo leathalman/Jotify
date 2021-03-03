@@ -20,7 +20,7 @@ class NoteCollectionController: UICollectionViewController {
         }
     }
     
-    //layout for collectionView
+    //layouts for collectionView
     let iOSLayout = VerticalBlueprintLayout(
         itemsPerRow: 2.0,
         minimumInteritemSpacing: 10,
@@ -74,7 +74,7 @@ class NoteCollectionController: UICollectionViewController {
     }
     
     func setupNavigationBar() {
-        navigationItem.title = noteCollection?.FBNotes.count.description
+        navigationItem.title = "Saved Notes"
         navigationController?.enablePersistence()
         navigationController?.setColor(color: ColorManager.bgColor)
         navigationController?.navigationBar.titleTextAttributes = nil
@@ -101,7 +101,13 @@ class NoteCollectionController: UICollectionViewController {
     
     
     @objc func handleLeftNavButton() {
-        navigationController?.pushViewController(GeneralSettingsController(style: .insetGrouped), animated: true)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let vc = GeneralSettingsController(style: .insetGrouped)
+            vc.modalPresentationStyle = .formSheet
+            navigationController?.present(vc, animated: true, completion: nil)
+        } else if UIDevice.current.userInterfaceIdiom == .phone {
+            navigationController?.pushViewController(GeneralSettingsController(style: .insetGrouped), animated: true)
+        }
     }
     
     //collectionView Logic

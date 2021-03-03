@@ -148,8 +148,8 @@
 		F67F001F25B32EC100313D61 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F675D27F25D5767F009AD59F /* Managers */,
 				F67F002925B32F5B00313D61 /* NoteCollection.swift */,
+				F675D27F25D5767F009AD59F /* Managers */,
 				F6CF5DE125DAF04E006E576E /* CloudKit */,
 				F638E64E25CEF2AC005FA371 /* Firebase */,
 			);

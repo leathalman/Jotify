@@ -22,9 +22,21 @@ class GeneralSettingsController: SettingsController {
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row {
         case 0:
-            navigationController?.pushViewController(AccountSettingsController(style: .insetGrouped), animated: true)
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                let vc = AccountSettingsController(style: .insetGrouped)
+                vc.modalPresentationStyle = .formSheet
+                present(vc, animated: true, completion: nil)
+            } else if UIDevice.current.userInterfaceIdiom == .phone {
+                navigationController?.pushViewController(AccountSettingsController(style: .insetGrouped), animated: true)
+            }
         case 1:
-            navigationController?.pushViewController(AppearanceSettingsController(style: .insetGrouped), animated: true)
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                let vc = AppearanceSettingsController(style: .insetGrouped)
+                vc.modalPresentationStyle = .formSheet
+                present(vc, animated: true, completion: nil)
+            } else if UIDevice.current.userInterfaceIdiom == .phone {
+                navigationController?.pushViewController(AppearanceSettingsController(style: .insetGrouped), animated: true)
+            }
         default:
             print("")
         }

@@ -123,14 +123,22 @@ class AuthenticationController: UIViewController {
     
     func setupConstraints() {
         //constraints for title textview
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            textView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        } else {
+            textView.topAnchor.constraint(equalTo: view.topAnchor, constant: 130).isActive = true
+        }
         textView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        textView.topAnchor.constraint(equalTo: view.topAnchor, constant: 130).isActive = true
         textView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
         textView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
         //constraints for the username textfield
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            usernameField.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 15).isActive = true
+        } else {
+            usernameField.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 60).isActive = true
+        }
         usernameField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        usernameField.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 60).isActive = true
         usernameField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
         usernameField.heightAnchor.constraint(equalToConstant: 60).isActive = true
         

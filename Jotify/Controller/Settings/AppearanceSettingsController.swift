@@ -14,7 +14,7 @@ class AppearanceSettingsController: SettingsController {
     override func viewDidLoad() {
         super.viewDidLoad()
         super.sections = ["Themes"]
-        super.section1 = ["Default"]
+        super.section1 = ["Default", "Kypool"]
         navigationItem.title = "Appearance"
     }
     
@@ -35,6 +35,8 @@ class AppearanceSettingsController: SettingsController {
         DataManager.updateUserSettings(setting: "theme", value: section1[indexPath.row]) { (success) in
             if success! {
                 User.retrieveSettingsFromFirebase()
+                UserDefaults.standard.setValue(self.section1[indexPath.row], forKey: "theme")
+                ColorManager.setNoteColor(theme: self.section1[indexPath.row].getColorArray())
             }
         }
                 
@@ -55,6 +57,7 @@ class AppearanceSettingsController: SettingsController {
             cell.accessoryType = .checkmark
             lastIndexPath = indexPath as NSIndexPath
         }
+        
         return cell
     }
 }

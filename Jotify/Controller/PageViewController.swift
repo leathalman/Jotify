@@ -42,9 +42,16 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
         DataManager.retrieveUserSettings { (settings, success) in
             if success! {
                 User.settings = settings!
-//                print("Theme: \(String(describing: settings?.theme))")
-//                print("hasMigrated: \(String(describing: settings?.hasMigrated))")
-                if !UserDefaults.standard.bool(forKey: "hasMigrated") && !(settings!.hasMigrated) {
+                
+                if UserDefaults.standard.string(forKey: "theme") ?? "" != settings?.theme {
+                    //setup the color system for notes
+                    ColorManager.theme = settings?.theme.getColorArray() ?? UIColor.defaultTheme
+                    ColorManager.setNoteColor(theme: ColorManager.theme)
+                    //set the theme in userdefaults, so theme is available before network request is finished
+                    UserDefaults.standard.setValue(settings!.theme, forKey: "theme")
+                }
+                
+                if !(settings!.hasMigrated) && !UserDefaults.standard.bool(forKey: "hasMigrated") {
                     print("Has migrated?: \(UserDefaults.standard.bool(forKey: "hasMigrated"))")
                     //notify when notes are fetched from context, CloudKit
                     NotificationCenter.default.addObserver(self, selector: #selector(self.migrateDataFromCloudKit), name: .NSManagedObjectContextObjectsDidChange, object: MigrationHandler().context)
@@ -52,7 +59,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
             }
         }
 
-        //get data from Firebase
+        //get notes from Firebase
         DataManager.observeNoteChange { (collection, success) in
             if success! {
                 let controller = self.noteCollectionController.viewControllers.first as! NoteCollectionController
@@ -68,6 +75,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
         }
     }
     
+    //if fetch request from CloudKit returns objects, duplicate each object in Firebase
     @objc func migrateDataFromCloudKit() {
         if !MigrationHandler.CDNotes.isEmpty {
             NotificationCenter.default.removeObserver(self)

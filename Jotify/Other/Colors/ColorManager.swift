@@ -9,7 +9,7 @@ import UIKit
 
 class ColorManager {
     
-    static var noteColor: UIColor = .systemBlue
+    static var noteColor = UIColor()
     static var indexes = [Int]()
     static var bgColor = UIColor()
     //current note color theme
@@ -21,7 +21,7 @@ class ColorManager {
     //repeat when indexes is empty
     static func setNoteColor(theme: Array<UIColor>) {
         if ColorManager.indexes.count == 0 {
-//            print("Filling indexes array")
+            print("Filling indexes array")
             ColorManager.indexes = Array(0..<theme.count)
         }
         let randomIndex = Int(arc4random_uniform(UInt32(ColorManager.indexes.count)))

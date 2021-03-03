@@ -20,6 +20,16 @@ extension String {
         case "gamboge": return .gamboge
         case "rose": return .rose
         case "cornflower": return .cornflower
+        //kypool
+        case "fuchsia": return .fuchsia
+        case "fuchsiaPlus": return .fuchsiaPlus
+        case "fireOpal": return .fireOpal
+        case "fireOpalPlus": return .fireOpalPlus
+        case "aquamarine": return .aquamarine
+        case "aquamarinePlus": return .aquamarinePlus
+        case "blueCrayola": return .blueCrayola
+        case "blueCrayolaPlus": return .blueCrayolaPlus
+        //error
         default: return .systemBlue
         }
     }
@@ -28,6 +38,7 @@ extension String {
     func getColorArray() -> Array<UIColor> {
         switch self {
         case "Default": return UIColor.defaultTheme
+        case "Kypool": return UIColor.kypoolTheme
         default:
             return UIColor.defaultTheme
         }
@@ -47,6 +58,16 @@ extension UIColor {
         case .gamboge: return "gamboge"
         case .rose: return "rose"
         case .cornflower: return "cornflower"
+        //kypool
+        case .fuchsia: return "fuchsia"
+        case .fuchsiaPlus: return "fuchsiaPlus"
+        case .fireOpal: return "fireOpal"
+        case .fireOpalPlus: return "fireOpalPlus"
+        case .aquamarine: return "aquamarine"
+        case .aquamarinePlus: return "aquamarinePlus"
+        case .blueCrayola: return "blueCrayola"
+        case .blueCrayolaPlus: return "blueCrayolaPlus"
+        //error
         default: return "systemBlue"
         }
     }
