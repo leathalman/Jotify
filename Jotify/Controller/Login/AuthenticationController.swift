@@ -50,7 +50,7 @@ class AuthenticationController: UIViewController {
     let submitButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .systemBlue
+        button.backgroundColor = ColorManager.noteColor
         button.layer.cornerRadius = 10
         button.titleLabel?.font = .boldSystemFont(ofSize: 20)
         return button
@@ -59,7 +59,7 @@ class AuthenticationController: UIViewController {
     let changeVCButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .systemBlue
+        button.backgroundColor = ColorManager.noteColor
         button.layer.cornerRadius = 10
         button.titleLabel?.font = .boldSystemFont(ofSize: 20)
         button.addTarget(self, action: #selector(changeVC), for: .touchUpInside)
@@ -93,7 +93,7 @@ class AuthenticationController: UIViewController {
     //create string with attributes for title textView
     func changeColorOfTextView() {
         let firstAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 60)]
-        let secondAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemBlue, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 60)]
+        let secondAttributes = [NSAttributedString.Key.foregroundColor: ColorManager.noteColor, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 60)]
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 3

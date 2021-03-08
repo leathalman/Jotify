@@ -10,7 +10,6 @@ import Blueprints
 import XLActionController
 
 class NoteCollectionController: UICollectionViewController {
-    
     //update collection view when model changes
     var noteCollection: NoteCollection? {
         didSet {
@@ -48,12 +47,6 @@ class NoteCollectionController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewElements()
-        
-//        for note in noteCollection!.FBNotes {
-//            DataManager.deleteNote(docID: note.id) { (success) in
-//                //
-//            }
-//        }
     }
     
     //view configuration
@@ -92,13 +85,16 @@ class NoteCollectionController: UICollectionViewController {
             actionController.backgroundColor = .mineShaft
         }
         actionController.addAction(Action("Delete note", style: .default, handler: { _ in
-            DataManager.deleteNote(docID: (self.noteCollection?.FBNotes[indexPath!.row].id)!) { _ in }
-            //display error in UI
+            //            DataManager.deleteNote(docID: (self.noteCollection?.FBNotes[indexPath!.row].id)!) { _ in }
+            DataManager.deleteNote(docID: (self.noteCollection?.FBNotes[indexPath!.row].id)!) { (success) in
+                if success! {
+//                    AnalyticsManager.logEvent(named: "note_deleted", description: "note stuff")
+                }
+            }
         }))
         actionController.addAction(Action("Cancel", style: .cancel, handler: nil))
         present(actionController, animated: true, completion: nil)
     }
-    
     
     @objc func handleLeftNavButton() {
         if UIDevice.current.userInterfaceIdiom == .pad {
@@ -114,7 +110,7 @@ class NoteCollectionController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //noteCollection.notes.count will return nil if no notes exist on launch, will return 0 if user deletes a note
         //and num of objs in array go to 0
-        if (noteCollection?.FBNotes.count == nil) || (noteCollection?.FBNotes.count == 0){
+        if (noteCollection?.FBNotes.count == nil) || (noteCollection?.FBNotes.count == 0) {
             collectionView.backgroundView = EmptyNoteView()
         } else {
             //remove backgroundView if array of notes isn't empty

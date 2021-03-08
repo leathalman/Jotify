@@ -11,7 +11,7 @@
 		F611D0DE25D841FA00E6D860 /* EmptyNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F611D0DD25D841FA00E6D860 /* EmptyNoteView.swift */; };
 		F620BD2625B338C7005BE77B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F620BD2525B338C7005BE77B /* GoogleService-Info.plist */; };
 		F638E64A25CEEFC7005FA371 /* AppearanceSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F638E64925CEEFC7005FA371 /* AppearanceSettingsController.swift */; };
-		F638E65225CEF36B005FA371 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F638E65125CEF36B005FA371 /* SettingsManager.swift */; };
+		F638E65225CEF36B005FA371 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F638E65125CEF36B005FA371 /* UserManager.swift */; };
 		F6490CF125C797CC000F66E5 /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6490CF025C797CC000F66E5 /* AuthenticationController.swift */; };
 		F652AB6525B87CF2006D7747 /* EditingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652AB6425B87CF2006D7747 /* EditingController.swift */; };
 		F6539A7325CB9338007D5DF1 /* ColorStringModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6539A7225CB9338007D5DF1 /* ColorStringModifier.swift */; };
@@ -31,6 +31,7 @@
 		F67FFFF325B32E1F00313D61 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67FFFF225B32E1F00313D61 /* SceneDelegate.swift */; };
 		F67FFFFA25B32E2000313D61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F67FFFF925B32E2000313D61 /* Assets.xcassets */; };
 		F67FFFFD25B32E2000313D61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F67FFFFB25B32E2000313D61 /* LaunchScreen.storyboard */; };
+		F6AA650325F5AFD3002362A4 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA650225F5AFD3002362A4 /* AnalyticsManager.swift */; };
 		F6B9AE0C25DCC871008467C6 /* MigrationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9AE0B25DCC871008467C6 /* MigrationHandler.swift */; };
 		F6B9D4B825B6175D00A0446C /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9D4B725B6175D00A0446C /* UIViewController+Extensions.swift */; };
 		F6B9D4C725B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9D4C625B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift */; };
@@ -56,7 +57,7 @@
 		F611D0DD25D841FA00E6D860 /* EmptyNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNoteView.swift; sourceTree = "<group>"; };
 		F620BD2525B338C7005BE77B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F638E64925CEEFC7005FA371 /* AppearanceSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsController.swift; sourceTree = "<group>"; };
-		F638E65125CEF36B005FA371 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		F638E65125CEF36B005FA371 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		F6490CF025C797CC000F66E5 /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
 		F652AB6425B87CF2006D7747 /* EditingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingController.swift; sourceTree = "<group>"; };
 		F6539A7225CB9338007D5DF1 /* ColorStringModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStringModifier.swift; sourceTree = "<group>"; };
@@ -78,6 +79,7 @@
 		F67FFFF925B32E2000313D61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F67FFFFC25B32E2000313D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F67FFFFE25B32E2000313D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F6AA650225F5AFD3002362A4 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		F6B9AE0B25DCC871008467C6 /* MigrationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationHandler.swift; sourceTree = "<group>"; };
 		F6B9D4B725B6175D00A0446C /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		F6B9D4C625B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WriteNoteController+KeyboardNotifications.swift"; sourceTree = "<group>"; };
@@ -140,7 +142,8 @@
 		F675D27F25D5767F009AD59F /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				F638E65125CEF36B005FA371 /* SettingsManager.swift */,
+				F638E65125CEF36B005FA371 /* UserManager.swift */,
+				F6AA650225F5AFD3002362A4 /* AnalyticsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6AA650325F5AFD3002362A4 /* AnalyticsManager.swift in Sources */,
 				F6B9D4CA25B629C800A0446C /* Double+Date.swift in Sources */,
 				F67F003D25B32F8100313D61 /* SignUpController.swift in Sources */,
 				F67F004025B32F8700313D61 /* WriteNoteController.swift in Sources */,
@@ -442,7 +446,7 @@
 				F6B9AE0C25DCC871008467C6 /* MigrationHandler.swift in Sources */,
 				F67FFFF325B32E1F00313D61 /* SceneDelegate.swift in Sources */,
 				F611D0DE25D841FA00E6D860 /* EmptyNoteView.swift in Sources */,
-				F638E65225CEF36B005FA371 /* SettingsManager.swift in Sources */,
+				F638E65225CEF36B005FA371 /* UserManager.swift in Sources */,
 				F6DFF0C625C8FF9D004D6468 /* AccountSettingsController.swift in Sources */,
 				F6D2771625C8C01C00ECFCCC /* SettingsSwitchCell.swift in Sources */,
 				F67F003025B32F6700313D61 /* NoteCell.swift in Sources */,
@@ -527,7 +531,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 96;
+				CURRENT_PROJECT_VERSION = 93;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				INFOPLIST_FILE = Jotify/Info.plist;
@@ -553,7 +557,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 96;
+				CURRENT_PROJECT_VERSION = 93;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				INFOPLIST_FILE = Jotify/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

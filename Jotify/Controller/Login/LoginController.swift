@@ -13,7 +13,7 @@ class LoginController: AuthenticationController {
     let forgotPasswordButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .systemBlue
+        button.backgroundColor = ColorManager.noteColor
         button.layer.cornerRadius = 10
         button.titleLabel?.font = .boldSystemFont(ofSize: 20)
         button.setTitle("Forgot Password?", for: .normal)
