@@ -28,7 +28,9 @@ extension UIViewController {
     }
     
     //set a new rootViewController with animation
-    func setRootViewController(vc: UIViewController) {
+    //**crashes when changing between light and dark mode bc
+    //keywindow returns nil on force unwrapped instance of window
+    func setRootViewController(duration: Double, vc: UIViewController) {
         let window = UIApplication.shared.connectedScenes
             .filter({$0.activationState == .foregroundActive})
             .map({$0 as? UIWindowScene})
@@ -38,8 +40,20 @@ extension UIViewController {
         
         window?.rootViewController = vc
         window?.makeKeyAndVisible()
-        UIView.transition(with: window!, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
+        UIView.transition(with: window!, duration: duration, options: .transitionCrossDissolve, animations: nil, completion: nil)
     }
+    
+    //gets the current rootViewController from connected scenes
+    //**can crash under untested conditions due to force unwrap of window
+    func getRootViewController() -> UIViewController {
+        return (UIApplication.shared.connectedScenes
+                    .filter({$0.activationState == .foregroundActive})
+                    .map({$0 as? UIWindowScene})
+                    .compactMap({$0})
+                    .first?.windows
+                    .filter({$0.isKeyWindow}).first?.rootViewController)!
+    }
+    
     
     //change StatusBarStyle in parent, PageViewController
     //override and always make style light if in dark mode

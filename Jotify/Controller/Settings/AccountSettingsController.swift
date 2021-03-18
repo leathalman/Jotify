@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class AccountSettingsController: SettingsController {
     
@@ -50,7 +51,7 @@ class AccountSettingsController: SettingsController {
                     AuthManager.signOut()
                     let alertController = UIAlertController(title: nil, message: "User successfully logged out.", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                        self.setRootViewController(vc: LoginController())
+                        self.setRootViewController(duration: 0.4, vc: UIHostingController(rootView: LogInView()))
                     }))
                     self.present(alertController, animated: true, completion: nil)
                 }))

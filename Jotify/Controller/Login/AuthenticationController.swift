@@ -6,166 +6,72 @@
 //
 
 import UIKit
+import SwiftUI
 
 //superclass for authentication workflow
 class AuthenticationController: UIViewController {
     
-    //view elements
-    let textView: UITextView = {
-        let view = UITextView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.isUserInteractionEnabled = false
-        view.layer.masksToBounds = true
-        view.backgroundColor = .clear
-        return view
-    }()
+    let signUp = UIHostingController(rootView: SignUpView())
+    let logIn = UIHostingController(rootView: LogInView())
     
-    let usernameField: UITextField = {
-        let text = UITextField()
-        text.translatesAutoresizingMaskIntoConstraints = false
-        text.backgroundColor = UIColor.mineShaft.adjust(by: -2)
-        text.layer.cornerRadius = 10
-        text.textColor = .white
-        text.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.adjust(by: -40) as Any])
-        text.font = .boldSystemFont(ofSize: 25)
-        text.borderStyle = .none
-        text.autocapitalizationType = .none
-        text.autocorrectionType = .no
-        return text
-    }()
-    
-    let passwordField: UITextField = {
-        let text = UITextField()
-        text.translatesAutoresizingMaskIntoConstraints = false
-        text.backgroundColor = UIColor.mineShaft.adjust(by: -2)
-        text.layer.cornerRadius = 10
-        text.textColor = .white
-        text.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.adjust(by: -40) as Any])
-        text.font = .boldSystemFont(ofSize: 25)
-        text.borderStyle = .none
-        text.isSecureTextEntry = true
-        return text
-    }()
-    
-    let submitButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = ColorManager.noteColor
-        button.layer.cornerRadius = 10
-        button.titleLabel?.font = .boldSystemFont(ofSize: 20)
-        return button
-    }()
-    
-    let changeVCButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = ColorManager.noteColor
-        button.layer.cornerRadius = 10
-        button.titleLabel?.font = .boldSystemFont(ofSize: 20)
-        button.addTarget(self, action: #selector(changeVC), for: .touchUpInside)
-        return button
-    }()
-    
-    override func viewDidLoad() {
-        view.addSubview(textView)
-        view.addSubview(usernameField)
-        view.addSubview(passwordField)
-        view.addSubview(submitButton)
-        view.addSubview(changeVCButton)
-        setupConstraints()
-        changeColorOfTextView()
-        self.hideKeyboardWhenTappedAround()
-    }
-    
-    //objc function for switching between login and signup
-    @objc func changeVC() {
-        //change rootViewController based on requested controller
-        switch submitButton.titleLabel?.text {
-        case "Sign Up":
-            self.setRootViewController(vc: LoginController())
-        case "Log In":
-            self.setRootViewController(vc: SignUpController())
-        default:
-            print("failed to present authentication controller")
+    func userDidSubmitSignUp(email: String, password: String) {
+        AuthManager.createUser(email: email, password: password) { (success, message) in
+            if !success! {
+                let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                self.getRootViewController().present(alertController, animated: true, completion: nil)
+            } else {
+                DataManager.createUserSettings { (success) in }
+                //change rootViewController to PageViewController w/ animation
+                self.setRootViewController(duration: 0.2, vc: PageViewController())
+            }
         }
     }
     
-    //create string with attributes for title textView
-    func changeColorOfTextView() {
-        let firstAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 60)]
-        let secondAttributes = [NSAttributedString.Key.foregroundColor: ColorManager.noteColor, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 60)]
-        
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 3
-        
-        let firstString = NSMutableAttributedString(string: "Welcome to ", attributes: firstAttributes)
-        let secondString = NSAttributedString(string: "Jotify.", attributes: secondAttributes)
-        
-        firstString.append(secondString)
-        firstString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, firstString.length))
-        
-        textView.attributedText = firstString
+    func userDidSubmitLogIn(email: String, password: String) {
+        AuthManager.login(email: email, pass: password) { (success, message) in
+            if !success! {
+                let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                self.getRootViewController().present(alertController, animated: true, completion: nil)
+            } else {
+                User.retrieveSettingsFromFirebase()
+                //change rootViewController to PageViewController w/ animation
+                self.setRootViewController(duration: 0.2, vc: PageViewController())
+            }
+        }
     }
     
-    //change title of VC button based on current VC presented
-    func changeColorOfVCButton() {
-        var title = ""
-        switch submitButton.titleLabel?.text {
-        case "Sign Up":
-            title = "Already have an account?"
-        case "Log In":
-            title = "Need to create an account?"
-        default:
-            print("failed to present authentication controller")
+    func userDidForgetPassword() {
+        let alertController = UIAlertController(title: nil, message: "What email is your account under?", preferredStyle: .alert)
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Enter an email."
         }
-        changeVCButton.setTitle(title, for: .normal)
+        alertController.addAction(UIAlertAction(title: "Send", style: .default, handler: { (action) in
+            AuthManager.forgotPassword(email: (alertController.textFields?.first?.text)!) { (success, message) in
+                if success! {
+                    print("recovery email sent")
+                    let alertController = UIAlertController(title: nil, message: "Password recovery email successfully sent to \(alertController.textFields?.first?.text ?? "")", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.getRootViewController().present(alertController, animated: true, completion: nil)
+                } else {
+                    print("recovery email was unable to be sent")
+                    let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.getRootViewController().present(alertController, animated: true, completion: nil)
+                }
+            }
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.getRootViewController().present(alertController, animated: true, completion: nil)
     }
     
-    func setupConstraints() {
-        //constraints for title textview
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            textView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-        } else {
-            textView.topAnchor.constraint(equalTo: view.topAnchor, constant: 130).isActive = true
-        }
-        textView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        textView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
-        textView.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        
-        //constraints for the username textfield
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            usernameField.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 15).isActive = true
-        } else {
-            usernameField.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 60).isActive = true
-        }
-        usernameField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        usernameField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
-        usernameField.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        
-        //constraints for the password textfield
-        passwordField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        passwordField.topAnchor.constraint(equalTo: usernameField.bottomAnchor, constant: 18).isActive = true
-        passwordField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
-        passwordField.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        
-        //constraints for the signup button
-        submitButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        submitButton.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: 45).isActive = true
-        submitButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
-        submitButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        //constraints for change VC button
-        changeVCButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        changeVCButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80).isActive = true
-        changeVCButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
-        changeVCButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        usernameField.setLeftPadding(12)
-        passwordField.setLeftPadding(12)
+    func presentSignUp() {
+        self.setRootViewController(duration: 0.4, vc: signUp)
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    func presentLogIn() {
+        self.setRootViewController(duration: 0.4, vc: logIn)
     }
     
 }

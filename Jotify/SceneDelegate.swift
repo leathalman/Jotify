@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -22,9 +23,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             setupWindows(scene: scene, vc: PageViewController())
         } else {
             print("not logged in")
-            setupWindows(scene: scene, vc: SignUpController())
+            setupWindows(scene: scene, vc: UIHostingController(rootView: SignUpView()))
         }
-        
+                            
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 
@@ -62,6 +63,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = vc
             self.window = window
             window.makeKeyAndVisible()
+            
+            //setup gesture recognizer for SwiftUI views
+            let tapGesture = AnyGestureRecognizer(target: window, action:#selector(UIView.endEditing))
+            tapGesture.requiresExclusiveTouchType = false
+            tapGesture.cancelsTouchesInView = false
+            tapGesture.delegate = self
+            window.addGestureRecognizer(tapGesture)
         }
     }
 }

@@ -12,6 +12,8 @@ extension UIColor {
     
     //MISC: dark-greyish
     static let mineShaft = UIColor(r: 40, g: 40, b: 40)
+    static let lightTrail = UIColor(r: 239, g: 243, b: 244)
+    static let gainsboro = UIColor(hex: "#E8ECED")
     
     //default v2 theme
     static let geranium = UIColor(hex: "#E95452")
