@@ -77,6 +77,7 @@ class NoteCollectionController: UICollectionViewController {
     @objc func longTouchHandler(sender: UILongPressGestureRecognizer) {
         let location = sender.location(in: collectionView)
         let indexPath = collectionView.indexPathForItem(at: location)
+        let note = noteCollection?.FBNotes[indexPath!.row]
         
         let actionController = SkypeActionController()
         if traitCollection.userInterfaceStyle == .light {
@@ -84,11 +85,26 @@ class NoteCollectionController: UICollectionViewController {
         } else {
             actionController.backgroundColor = .mineShaft
         }
+        actionController.addAction(Action("Share note", style: .default, handler: { _ in
+            print("Share note")
+            let objectsToShare = [note?.content ?? "Note could not be found."] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            activityVC.excludedActivityTypes = [UIActivity.ActivityType.addToReadingList]
+            
+            //required properties for iPad's popoverPresentationController, otherwise crash
+            if let popoverController = activityVC.popoverPresentationController {
+                popoverController.sourceRect = CGRect(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2, width: 0, height: 0)
+                popoverController.sourceView = self.view
+                popoverController.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+            }
+            
+            self.present(activityVC, animated: true, completion: nil)
+            AnalyticsManager.logEvent(named: "share_note", description: "share_note")
+        }))
         actionController.addAction(Action("Delete note", style: .default, handler: { _ in
-            //            DataManager.deleteNote(docID: (self.noteCollection?.FBNotes[indexPath!.row].id)!) { _ in }
-            DataManager.deleteNote(docID: (self.noteCollection?.FBNotes[indexPath!.row].id)!) { (success) in
+            DataManager.deleteNote(docID: note!.id) { (success) in
                 if success! {
-//                    AnalyticsManager.logEvent(named: "note_deleted", description: "note stuff")
+                    AnalyticsManager.logEvent(named: "note_deleted", description: "note_deleted")
                 }
             }
         }))
@@ -97,12 +113,15 @@ class NoteCollectionController: UICollectionViewController {
     }
     
     @objc func handleLeftNavButton() {
+        //initialize settings controller and pass note collection for theme changing
+        let vc = GeneralSettingsController(style: .insetGrouped)
+        vc.noteCollection = noteCollection
+        
         if UIDevice.current.userInterfaceIdiom == .pad {
-            let vc = GeneralSettingsController(style: .insetGrouped)
             vc.modalPresentationStyle = .formSheet
             navigationController?.present(vc, animated: true, completion: nil)
         } else if UIDevice.current.userInterfaceIdiom == .phone {
-            navigationController?.pushViewController(GeneralSettingsController(style: .insetGrouped), animated: true)
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
     

@@ -68,7 +68,7 @@ class EditingController: UIViewController, UITextViewDelegate {
     //datamanager interface
     func updateContent(content: String) {
         if draftView.textField.text != note?.content {
-            DataManager.updateNote(content: draftView.textField.text, uid: note?.id ?? "") { (success) in
+            DataManager.updateNoteContent(content: draftView.textField.text, uid: note?.id ?? "") { (success) in
                 //display error in UI
             }
         }

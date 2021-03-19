@@ -78,13 +78,28 @@ class DataManager {
         return ref?.documentID ?? ""
     }
     
-    //update the content of a single document
-    static func updateNote(content: String, uid: String, completionHandler: @escaping (Bool?) -> Void) {
+    //update the content (and timestamp) of a single document
+    static func updateNoteContent(content: String, uid: String, completionHandler: @escaping (Bool?) -> Void) {
         if AuthManager().uid.isEmpty { return }
         let db = Firestore.firestore()
         db.collection("notes").document(AuthManager().uid).collection("userNotes").document(uid).updateData([
             "content": content,
             "timestamp": Date.timeIntervalSinceReferenceDate,
+        ]) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+                completionHandler(false)
+            }
+            completionHandler(true)
+        }
+    }
+    
+    //update color of a single document
+    static func updateNoteColor(color: String, uid: String, completionHandler: @escaping (Bool?) -> Void) {
+        if AuthManager().uid.isEmpty { return }
+        let db = Firestore.firestore()
+        db.collection("notes").document(AuthManager().uid).collection("userNotes").document(uid).updateData([
+            "color": color,
         ]) { error in
             if let error = error {
                 print("Error adding document: \(error)")

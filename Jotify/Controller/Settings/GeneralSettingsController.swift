@@ -14,7 +14,6 @@ class GeneralSettingsController: SettingsController {
         super.sections = ["General"]
         super.section1 = ["Account", "Appearance"]
         navigationItem.title = "Settings"
-//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
     }
     
     //tableView logic
@@ -22,20 +21,21 @@ class GeneralSettingsController: SettingsController {
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row {
         case 0:
+            let vc = AccountSettingsController(style: .insetGrouped)
             if UIDevice.current.userInterfaceIdiom == .pad {
-                let vc = AccountSettingsController(style: .insetGrouped)
                 vc.modalPresentationStyle = .formSheet
                 present(vc, animated: true, completion: nil)
             } else if UIDevice.current.userInterfaceIdiom == .phone {
-                navigationController?.pushViewController(AccountSettingsController(style: .insetGrouped), animated: true)
+                navigationController?.pushViewController(vc, animated: true)
             }
         case 1:
+            let vc = AppearanceSettingsController(style: .insetGrouped)
+            vc.noteCollection = self.noteCollection
             if UIDevice.current.userInterfaceIdiom == .pad {
-                let vc = AppearanceSettingsController(style: .insetGrouped)
                 vc.modalPresentationStyle = .formSheet
                 present(vc, animated: true, completion: nil)
             } else if UIDevice.current.userInterfaceIdiom == .phone {
-                navigationController?.pushViewController(AppearanceSettingsController(style: .insetGrouped), animated: true)
+                navigationController?.pushViewController(vc, animated: true)
             }
         default:
             print("")

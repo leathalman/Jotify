@@ -14,6 +14,8 @@ class SettingsController: UITableViewController {
     var section1: [String] = []
     var section2: [String] = []
     
+    var noteCollection: NoteCollection?
+    
     override func viewWillAppear(_ animated: Bool) {
         handleStatusBarStyle(style: .darkContent)
     }

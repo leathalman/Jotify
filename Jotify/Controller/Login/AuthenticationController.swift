@@ -21,6 +21,7 @@ class AuthenticationController: UIViewController {
                 alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 self.getRootViewController().present(alertController, animated: true, completion: nil)
             } else {
+                AnalyticsManager.logEvent(named: "sign_up", description: "sign_up")
                 DataManager.createUserSettings { (success) in }
                 //change rootViewController to PageViewController w/ animation
                 self.setRootViewController(duration: 0.2, vc: PageViewController())
@@ -35,6 +36,7 @@ class AuthenticationController: UIViewController {
                 alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 self.getRootViewController().present(alertController, animated: true, completion: nil)
             } else {
+                AnalyticsManager.logEvent(named: "log_in", description: "log_in")
                 User.retrieveSettingsFromFirebase()
                 //change rootViewController to PageViewController w/ animation
                 self.setRootViewController(duration: 0.2, vc: PageViewController())
@@ -53,6 +55,7 @@ class AuthenticationController: UIViewController {
                     print("recovery email sent")
                     let alertController = UIAlertController(title: nil, message: "Password recovery email successfully sent to \(alertController.textFields?.first?.text ?? "")", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    AnalyticsManager.logEvent(named: "password_reset", description: "password_reset")
                     self.getRootViewController().present(alertController, animated: true, completion: nil)
                 } else {
                     print("recovery email was unable to be sent")

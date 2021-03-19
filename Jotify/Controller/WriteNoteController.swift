@@ -54,7 +54,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     //clean up the UI by emptying the textView and resigning keyboard
     @objc func handleSend() {
         if !draftView.textField.text.isEmpty {
-            DataManager.updateNote(content: draftView.textField.text, uid: documentID ?? "") { (success) in
+            DataManager.updateNoteContent(content: draftView.textField.text, uid: documentID ?? "") { (success) in
                 //handle success here
             }
             //stop timer so notes doesn't update outside of this view (WriteNoteController)
@@ -68,6 +68,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
             UIView.animate(withDuration: 0.25, animations: {
                 self.view.backgroundColor = ColorManager.noteColor
             })
+            AnalyticsManager.logEvent(named: "note_created", description: "note_deleted")
         }
         draftView.textField.resignFirstResponder()
     }
@@ -89,7 +90,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     
     @objc func handleIdleEvent() {
         if !draftView.textField.text.isEmpty {
-            DataManager.updateNote(content: draftView.textField.text, uid: documentID ?? "") { (success) in
+            DataManager.updateNoteContent(content: draftView.textField.text, uid: documentID ?? "") { (success) in
                 //handle success here
             }
         }
