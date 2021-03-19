@@ -19,6 +19,9 @@ class NoteCollectionController: UICollectionViewController {
         }
     }
     
+    //global instance of searchController for NoteCollectionController
+    let searchController = UISearchController(searchResultsController: nil)
+    
     //layouts for collectionView
     let iOSLayout = VerticalBlueprintLayout(
         itemsPerRow: 2.0,

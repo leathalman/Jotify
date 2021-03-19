@@ -47,9 +47,9 @@ struct SignUpView: View {
             }
             .opacity(0.75)
             .padding(.init(top: 20, leading: 0, bottom: 5, trailing: 0))
-            
         }
         .padding()
+        .dismissKeyboardOnTap()
     }
 }
 

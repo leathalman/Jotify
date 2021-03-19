@@ -48,7 +48,7 @@ class AppearanceSettingsController: SettingsController {
         AnalyticsManager.logEvent(named: "theme_changed", description: "theme_changed")
         
         //ask user if they want to recolor all of their notes
-        changeColorOfExistingNotes()
+        changeColorOfExistingNotes(theme: section1[indexPath.row])
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -65,13 +65,11 @@ class AppearanceSettingsController: SettingsController {
         return cell
     }
     
-    //TODO - Make sure this works properly
-    func changeColorOfExistingNotes() {
+    func changeColorOfExistingNotes(theme: String) {
         let alertController = UIAlertController(title: "Theme Changed", message: "Would you like to recolor your existing notes too?", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
             for note in self.noteCollection!.FBNotes {
-                ColorManager.setNoteColor(theme: ColorManager.theme)
-                DataManager.updateNoteColor(color: ColorManager.noteColor.getString(), uid: note.id) { (success) in }
+                DataManager.updateNoteColor(color: ColorManager.setNoteColor(theme: theme.getColorArray()).getString(), uid: note.id) { (success) in }
             }
         }))
         alertController.addAction(UIAlertAction(title: "No", style: .default, handler: nil))

@@ -61,6 +61,7 @@ struct LogInView: View {
             
         }
         .padding()
+        .dismissKeyboardOnTap()
     }
 }
 

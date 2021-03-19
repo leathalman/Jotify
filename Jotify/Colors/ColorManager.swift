@@ -19,7 +19,7 @@ class ColorManager {
     //fill an array of indexes that correspond to the array as a parameter
     //remove elements from indexes array as they are selected from parameter array
     //repeat when indexes is empty
-    static func setNoteColor(theme: Array<UIColor>) {
+    @discardableResult static func setNoteColor(theme: Array<UIColor>) -> UIColor{
         if ColorManager.indexes.count == 0 {
             print("Filling indexes array")
             ColorManager.indexes = Array(0..<theme.count)
@@ -27,5 +27,6 @@ class ColorManager {
         let randomIndex = Int(arc4random_uniform(UInt32(ColorManager.indexes.count)))
         let anIndex = ColorManager.indexes.remove(at: randomIndex)
         ColorManager.noteColor = theme[anIndex]
+        return theme[anIndex]
     }
 }

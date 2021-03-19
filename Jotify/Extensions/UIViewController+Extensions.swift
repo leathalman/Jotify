@@ -54,7 +54,6 @@ extension UIViewController {
                     .filter({$0.isKeyWindow}).first?.rootViewController)!
     }
     
-    
     //change StatusBarStyle in parent, PageViewController
     //override and always make style light if in dark mode
     //**only call this method when PageViewController is present**

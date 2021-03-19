@@ -63,13 +63,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = vc
             self.window = window
             window.makeKeyAndVisible()
-            
-            //setup gesture recognizer for SwiftUI views
-            let tapGesture = AnyGestureRecognizer(target: window, action:#selector(UIView.endEditing))
-            tapGesture.requiresExclusiveTouchType = false
-            tapGesture.cancelsTouchesInView = false
-            tapGesture.delegate = self
-            window.addGestureRecognizer(tapGesture)
         }
     }
 }
