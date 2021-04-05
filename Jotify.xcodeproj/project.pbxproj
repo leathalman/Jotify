@@ -12,7 +12,6 @@
 		F620BD2625B338C7005BE77B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F620BD2525B338C7005BE77B /* GoogleService-Info.plist */; };
 		F622093D2602B00E001DFAC1 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F622093B2602B00E001DFAC1 /* LogInView.swift */; };
 		F622093E2602B00E001DFAC1 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F622093C2602B00E001DFAC1 /* SignUpView.swift */; };
-		F62209412602B032001DFAC1 /* AnyGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62209402602B032001DFAC1 /* AnyGestureRecognizer.swift */; };
 		F62209442602B07A001DFAC1 /* SceneDelegate+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62209432602B07A001DFAC1 /* SceneDelegate+Gestures.swift */; };
 		F62209472602F252001DFAC1 /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62209462602F252001DFAC1 /* AuthenticationController.swift */; };
 		F638E64A25CEEFC7005FA371 /* AppearanceSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F638E64925CEEFC7005FA371 /* AppearanceSettingsController.swift */; };
@@ -62,7 +61,6 @@
 		F620BD2525B338C7005BE77B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F622093B2602B00E001DFAC1 /* LogInView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		F622093C2602B00E001DFAC1 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
-		F62209402602B032001DFAC1 /* AnyGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyGestureRecognizer.swift; sourceTree = "<group>"; };
 		F62209432602B07A001DFAC1 /* SceneDelegate+Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+Gestures.swift"; sourceTree = "<group>"; };
 		F62209462602F252001DFAC1 /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
 		F638E64925CEEFC7005FA371 /* AppearanceSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsController.swift; sourceTree = "<group>"; };
@@ -246,7 +244,6 @@
 			isa = PBXGroup;
 			children = (
 				F62209432602B07A001DFAC1 /* SceneDelegate+Gestures.swift */,
-				F62209402602B032001DFAC1 /* AnyGestureRecognizer.swift */,
 			);
 			path = Gestures;
 			sourceTree = "<group>";
@@ -477,7 +474,6 @@
 				F6B9AE0C25DCC871008467C6 /* MigrationHandler.swift in Sources */,
 				F67FFFF325B32E1F00313D61 /* SceneDelegate.swift in Sources */,
 				F611D0DE25D841FA00E6D860 /* EmptyNoteView.swift in Sources */,
-				F62209412602B032001DFAC1 /* AnyGestureRecognizer.swift in Sources */,
 				F638E65225CEF36B005FA371 /* UserManager.swift in Sources */,
 				F6DFF0C625C8FF9D004D6468 /* AccountSettingsController.swift in Sources */,
 				F6D2771625C8C01C00ECFCCC /* SettingsSwitchCell.swift in Sources */,
