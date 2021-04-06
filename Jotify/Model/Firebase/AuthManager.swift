@@ -33,8 +33,21 @@ class AuthManager {
         return nil
     }
     
+    //
+    public var user: FirebaseAuth.User? {
+        if Auth.auth().currentUser != nil {
+            return Auth.auth().currentUser
+        }
+        return nil
+    }
+    
     //signs user out of firebase
     static func signOut() {
+        //check if user is signed in with Apple
+        if let providerId = Auth.auth().currentUser?.providerData.first?.providerID, providerId == "apple.com" {
+            // Clear saved user ID from Sign In with Apple
+            UserDefaults.standard.set(nil, forKey: "appleAuthorizedUserIdKey")
+        }
         do { try Auth.auth().signOut() }
         catch { print("User already logged out") }
     }

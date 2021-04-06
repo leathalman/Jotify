@@ -7,6 +7,7 @@
 
 import Firebase
 import CoreData
+import AuthenticationServices
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //register defaults with set values
         setupDefaults()
+        
+        didAppleIDStateRevokeWhileTerminated()
         
         return true
     }
@@ -44,6 +47,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             "hasMigrated": "false",
             "theme": "Default"
         ])
+    }
+    
+    //check to see if Apple credential revoked since last launch
+    func didAppleIDStateRevokeWhileTerminated() {
+        // Retrieve user ID saved in UserDefaults
+        if let userID = UserDefaults.standard.string(forKey: "appleAuthorizedUserIdKey") {
+            
+            // Check Apple ID credential state
+            ASAuthorizationAppleIDProvider().getCredentialState(forUserID: userID, completion: {
+                credentialState, error in
+                
+                switch(credentialState) {
+                case .authorized:
+                    print("Signed In with Apple, valid credential")
+                    break
+                case .notFound,
+                     .transferred,
+                     .revoked:
+                    // Credential no longer authorized...
+                    // Perform sign out
+                    AuthManager.signOut()
+                    break
+                @unknown default:
+                    break
+                }
+            })
+        }
     }
     
     //Temporary implementation of CoreData+CloudKit for transition process

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import AuthenticationServices
 
 class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
     var currentIndex = 1
@@ -23,6 +25,11 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        NotificationCenter.default.addObserver(self, selector: #selector(appleIDStateDidRevoked(_:)), name: ASAuthorizationAppleIDProvider.credentialRevokedNotification, object: nil)
+    }
+    
     //life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +41,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
         } else if traitCollection.userInterfaceStyle == .dark {
             ColorManager.bgColor = .mineShaft
         }
-        
+                
         //retrieve settings from Firebase here instead of AppDelegate
         //cloud settings > local settings
         //if cloud settings hasn't migrated check with local settings
@@ -57,7 +64,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
                 }
             }
         }
-
+        
         //get notes from Firebase
         DataManager.observeNoteChange { (collection, success) in
             if success! {
@@ -74,6 +81,11 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
                 break;
             }
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        NotificationCenter.default.removeObserver(self, name: ASAuthorizationAppleIDProvider.credentialRevokedNotification, object: nil)
     }
     
     //if fetch request from CloudKit returns objects, duplicate each object in Firebase
@@ -103,22 +115,29 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(disableSwipe(notification:)), name:NSNotification.Name(rawValue: "disableSwipe"), object: nil)
     }
     
+    //used to handle event when "Apple Credential Revoked" while app is in background
+    @objc func appleIDStateDidRevoked(_ notification: Notification) {
+        if let providerId = Auth.auth().currentUser?.providerData.first?.providerID, providerId == "apple.com" {
+            AuthManager.signOut()
+        }
+    }
+    
     @objc func disableSwipe(notification: Notification){
         self.dataSource = nil
     }
-
+    
     @objc func enableSwipe(notification: Notification){
         self.dataSource = self
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-            if completed,
-                let visibleViewController = pageViewController.viewControllers?.first,
-                let index = orderedViewControllers.firstIndex(of: visibleViewController)
-            {
-                currentIndex = index
-            }
+        if completed,
+           let visibleViewController = pageViewController.viewControllers?.first,
+           let index = orderedViewControllers.firstIndex(of: visibleViewController)
+        {
+            currentIndex = index
         }
+    }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if traitCollection.userInterfaceStyle == .light {
