@@ -33,7 +33,7 @@ class DataManager {
         let db = Firestore.firestore()
         db.collection("users").document(AuthManager().uid).getDocument { (snapshot, error) in
             if let error = error {
-                print("Error deleting document: \(error.localizedDescription)")
+                print("Error retrieving document: \(error.localizedDescription)")
                 completetionHandler(nil, false)
             } else {
 //                print("User settings retrieved successfully")

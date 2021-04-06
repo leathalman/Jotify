@@ -11,8 +11,11 @@ import SwiftUI
 //superclass for authentication workflow
 class AuthenticationController: UIViewController {
     
+    var currentNonce: String?
+
     let signUp = UIHostingController(rootView: SignUpView())
     let logIn = UIHostingController(rootView: LogInView())
+    let noteCollectionController = UINavigationController(rootViewController: NoteCollectionController(collectionViewLayout: UICollectionViewFlowLayout()))
     
     func userDidSubmitSignUp(email: String, password: String) {
         AuthManager.createUser(email: email, password: password) { (success, message) in
@@ -37,7 +40,7 @@ class AuthenticationController: UIViewController {
                 self.getRootViewController().present(alertController, animated: true, completion: nil)
             } else {
                 AnalyticsManager.logEvent(named: "log_in", description: "log_in")
-                User.retrieveSettingsFromFirebase()
+                User.updateSettings()
                 //change rootViewController to PageViewController w/ animation
                 self.setRootViewController(duration: 0.2, vc: PageViewController())
             }
@@ -65,7 +68,7 @@ class AuthenticationController: UIViewController {
                 }
             }
         }))
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
         self.getRootViewController().present(alertController, animated: true, completion: nil)
     }
     

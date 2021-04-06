@@ -15,11 +15,14 @@ struct Settings {
 class User {
     static var settings: Settings?
     
-    static func retrieveSettingsFromFirebase() {
+    //gets the current settings document from Firebase and updates the model
+    static func updateSettings() {
         //success should never be nil and settings should never be nil when success is true
         DataManager.retrieveUserSettings { (settings, success) in
             if success! {
                 User.settings = settings!
+            } else {
+                print("Error retrieving settings")
             }
         }
     }

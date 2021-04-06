@@ -41,11 +41,16 @@ struct LogInView: View {
                 }
             }
             Spacer()
+            DynamicSignInWithApple()
+                .frame(width: 280, height: 60)
+                .onTapGesture(perform: authController.presentSignInWithApple)
+            OrTextView()
             Button(action: {
                 authController.userDidSubmitLogIn(email: email, password: password)
             }) {
                 LoginButtonContent()
             }
+            .padding(.bottom)
             HStack {
                 Text("Don't have an account?")
                     .font(.subheadline)
@@ -71,8 +76,8 @@ struct LogInView_Previews: PreviewProvider {
             ForEach(ColorScheme.allCases, id: \.self) {
                 LogInView()
                     .preferredColorScheme($0)
+                    .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
             }
-            
         }
     }
 }
@@ -83,7 +88,6 @@ struct WelcomeText: View {
             .font(.system(size: 52))
             .fontWeight(.bold)
             .padding(.init(top: 0, leading: 20, bottom: 0, trailing: 20))
-        
     }
 }
 
@@ -133,13 +137,36 @@ struct ForgotPasswordContent: View {
     }
 }
 
+struct DynamicSignInWithApple: View {
+    @Environment(\.colorScheme) var colorScheme
+    var body: some View {
+        if colorScheme == .light {
+            SignInWithAppleBlack()
+        } else if colorScheme == .dark {
+            SignInWithAppleWhite()
+        }
+    }
+}
+
+struct OrTextView: View {
+    @Environment(\.colorScheme) var colorScheme
+    var body: some View {
+        Text("— or —")
+            .font(.headline)
+            .fontWeight(.bold)
+            .foregroundColor(colorScheme == .light ? .black : .white)
+            .opacity(colorScheme == .light ? 0.75 : 1.00)
+    }
+}
+
 struct LoginButtonContent: View {
     var body: some View {
         Text("Login")
-            .font(.headline)
+            .font(.system(size: 24))
+            .fontWeight(.semibold)
             .foregroundColor(.white)
             .padding()
-            .frame(width: 200, height: 50)
+            .frame(width: 280, height: 60)
             .background(Color.blue)
             .cornerRadius(10)
     }

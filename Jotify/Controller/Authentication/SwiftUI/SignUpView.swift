@@ -5,7 +5,9 @@
 //  Created by Harrison Leath on 3/17/21.
 //
 
+import UIKit
 import SwiftUI
+import AuthenticationServices
 
 struct SignUpView: View {
     @State var email: String = ""
@@ -30,11 +32,16 @@ struct SignUpView: View {
             EmailTextField(email: $email)
             PasswordTextField(password: $password)
             Spacer()
+            DynamicSignInWithApple()
+                .frame(width: 280, height: 60)
+                .onTapGesture(perform: authController.presentSignInWithApple)
+            OrTextView()
             Button(action: {
                 authController.userDidSubmitSignUp(email: email, password: password)
             }) {
                 SignUpButtonContent()
             }
+            .padding(.bottom)
             HStack {
                 Text("Already have an account?")
                     .font(.subheadline)
@@ -65,10 +72,11 @@ struct SignUpView_Previews: PreviewProvider {
 struct SignUpButtonContent: View {
     var body: some View {
         Text("Sign Up")
-            .font(.headline)
+            .font(.system(size: 24))
+            .fontWeight(.semibold)
             .foregroundColor(.white)
             .padding()
-            .frame(width: 200, height: 50)
+            .frame(width: 280, height: 60)
             .background(Color.blue)
             .cornerRadius(10)
     }

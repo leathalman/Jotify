@@ -28,19 +28,11 @@ extension UIViewController {
     }
     
     //set a new rootViewController with animation
-    //**crashes when changing between light and dark mode bc
-    //keywindow returns nil on force unwrapped instance of window
+    //crashes if window returns nil on UIView transition
     func setRootViewController(duration: Double, vc: UIViewController) {
-        let window = UIApplication.shared.connectedScenes
-            .filter({$0.activationState == .foregroundActive})
-            .map({$0 as? UIWindowScene})
-            .compactMap({$0})
-            .first?.windows
-            .filter({$0.isKeyWindow}).first
-        
-        window?.rootViewController = vc
-        window?.makeKeyAndVisible()
-        UIView.transition(with: window!, duration: duration, options: .transitionCrossDissolve, animations: nil, completion: nil)
+        UIApplication.shared.windows.first?.rootViewController = vc
+        UIApplication.shared.windows.first?.makeKeyAndVisible()
+        UIView.transition(with: UIApplication.shared.windows.first!, duration: duration, options: .transitionCrossDissolve, animations: nil, completion: nil)
     }
     
     //gets the current rootViewController from connected scenes

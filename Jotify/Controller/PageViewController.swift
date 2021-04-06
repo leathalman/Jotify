@@ -42,7 +42,6 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
         DataManager.retrieveUserSettings { (settings, success) in
             if success! {
                 User.settings = settings!
-                
                 if UserDefaults.standard.string(forKey: "theme") ?? "" != settings?.theme {
                     //setup the color system for notes
                     ColorManager.theme = settings?.theme.getColorArray() ?? UIColor.defaultTheme
@@ -64,6 +63,8 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
             if success! {
                 let controller = self.noteCollectionController.viewControllers.first as! NoteCollectionController
                 controller.noteCollection = collection
+            } else {
+                print("Error retrieving note collection")
             }
         }
         

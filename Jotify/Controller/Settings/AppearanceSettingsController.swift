@@ -34,7 +34,7 @@ class AppearanceSettingsController: SettingsController {
         
         DataManager.updateUserSettings(setting: "theme", value: section1[indexPath.row]) { (success) in
             if success! {
-                User.retrieveSettingsFromFirebase()
+                User.updateSettings()
                 UserDefaults.standard.setValue(self.section1[indexPath.row], forKey: "theme")
                 ColorManager.setNoteColor(theme: self.section1[indexPath.row].getColorArray())
             }

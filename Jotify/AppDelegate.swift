@@ -47,7 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     //Temporary implementation of CoreData+CloudKit for transition process
-    
     // MARK: - Core Data stack
     lazy var applicationDocumentsDirectory: URL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "com.MyApp" in the application's documents Application Support directory.
