@@ -66,7 +66,7 @@ class AppearanceSettingsController: SettingsController {
     }
     
     func changeColorOfExistingNotes(theme: String) {
-        let alertController = UIAlertController(title: "Theme Changed", message: "Would you like to recolor your existing notes too?", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Theme Changed to \(theme)", message: "Would you like to recolor your existing notes too?", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
             for note in self.noteCollection!.FBNotes {
                 DataManager.updateNoteColor(color: ColorManager.setNoteColor(theme: theme.getColorArray()).getString(), uid: note.id) { (success) in }
