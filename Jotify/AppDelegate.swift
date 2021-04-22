@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //register defaults with set values
         setupDefaults()
         
+        //check to see if Apple credential revoked since last launch
         didAppleIDStateRevokeWhileTerminated()
         
         return true

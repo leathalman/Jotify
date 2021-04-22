@@ -33,12 +33,12 @@ class AuthManager {
         return nil
     }
     
-    //
-    public var user: FirebaseAuth.User? {
-        if Auth.auth().currentUser != nil {
-            return Auth.auth().currentUser
+    //check if user is Signed In With Apple or is using Firebase email login
+    public var isSignedInWithApple: Bool {
+        if let providerId = Auth.auth().currentUser?.providerData.first?.providerID, providerId == "apple.com" {
+            return true
         }
-        return nil
+        return false
     }
     
     //signs user out of firebase

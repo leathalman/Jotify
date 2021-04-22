@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 import AuthenticationServices
 
 class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
@@ -117,7 +116,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate {
     
     //used to handle event when "Apple Credential Revoked" while app is in background
     @objc func appleIDStateDidRevoked(_ notification: Notification) {
-        if let providerId = Auth.auth().currentUser?.providerData.first?.providerID, providerId == "apple.com" {
+        if AuthManager().isSignedInWithApple {
             AuthManager.signOut()
         }
     }
