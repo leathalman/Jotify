@@ -101,7 +101,7 @@ extension AuthenticationController: ASAuthorizationControllerDelegate {
                 print("Error occured with Sign In with Apple")
             }
             //change rootViewController to PageViewController w/ animation
-            self.setRootViewController(duration: 0.2, vc: PageViewController())
+            self.setRootViewController(duration: 0.2, vc: PageBoyController())
             
             let db = Firestore.firestore()
             db.collection("users").document(AuthManager().uid).getDocument { (snapshot, error ) in

@@ -27,7 +27,7 @@ class AuthenticationController: UIViewController {
                 AnalyticsManager.logEvent(named: "sign_up", description: "sign_up")
                 DataManager.createUserSettings { (success) in }
                 //change rootViewController to PageViewController w/ animation
-                self.setRootViewController(duration: 0.2, vc: PageViewController())
+                self.setRootViewController(duration: 0.2, vc: PageBoyController())
             }
         }
     }
@@ -42,7 +42,7 @@ class AuthenticationController: UIViewController {
                 AnalyticsManager.logEvent(named: "log_in", description: "log_in")
                 User.updateSettings()
                 //change rootViewController to PageViewController w/ animation
-                self.setRootViewController(duration: 0.2, vc: PageViewController())
+                self.setRootViewController(duration: 0.2, vc: PageBoyController())
             }
         }
     }

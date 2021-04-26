@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //check if user is logged in
         if !AuthManager().uid.isEmpty {
             print("logged in")
-            setupWindows(scene: scene, vc: PageViewController())
+            setupWindows(scene: scene, vc: PageBoyController())
         } else {
             print("not logged in")
             setupWindows(scene: scene, vc: UIHostingController(rootView: SignUpView()))

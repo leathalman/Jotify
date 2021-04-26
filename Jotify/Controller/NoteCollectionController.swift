@@ -65,6 +65,9 @@ class NoteCollectionController: UICollectionViewController {
         navigationItem.leftBarButtonItem = leftItem
         navigationItem.setHidesBackButton(true, animated: true)
         
+        let rightItem = UIBarButtonItem(image: UIImage(systemName: "doc.badge.plus"), style: .plain, target: self, action: #selector(handleRightNavButton))
+        navigationItem.rightBarButtonItem = rightItem
+        
         collectionView.backgroundColor = ColorManager.bgColor
         collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
     }
@@ -126,6 +129,11 @@ class NoteCollectionController: UICollectionViewController {
         } else if UIDevice.current.userInterfaceIdiom == .phone {
             navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    @objc func handleRightNavButton() {
+        let rootVC = self.getRootViewController() as! PageBoyController
+        rootVC.scrollToWriteNoteController()
     }
     
     //collectionView Logic

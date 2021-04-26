@@ -28,7 +28,6 @@ extension UIViewController {
     }
     
     //set a new rootViewController with animation
-    //crashes if window returns nil on UIView transition
     func setRootViewController(duration: Double, vc: UIViewController) {
         UIApplication.shared.windows.first?.rootViewController = vc
         UIApplication.shared.windows.first?.makeKeyAndVisible()
@@ -36,7 +35,6 @@ extension UIViewController {
     }
     
     //gets the current rootViewController from connected scenes
-    //**can crash under untested conditions due to force unwrap of window
     func getRootViewController() -> UIViewController {
         return (UIApplication.shared.connectedScenes
                     .filter({$0.activationState == .foregroundActive})
@@ -50,7 +48,7 @@ extension UIViewController {
     //override and always make style light if in dark mode
     //**only call this method when PageViewController is present**
     func handleStatusBarStyle(style: UIStatusBarStyle) {
-        let rootVC = UIApplication.shared.windows.first!.rootViewController as! PageViewController
+        let rootVC = UIApplication.shared.windows.first!.rootViewController as! PageBoyController
         if traitCollection.userInterfaceStyle == .dark {
             rootVC.statusBarStyle = .lightContent
         } else {

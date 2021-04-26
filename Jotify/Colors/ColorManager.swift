@@ -21,7 +21,7 @@ class ColorManager {
     //repeat when indexes is empty
     @discardableResult static func setNoteColor(theme: Array<UIColor>) -> UIColor{
         if ColorManager.indexes.count == 0 {
-            print("Filling indexes array")
+//            print("Filling indexes array")
             ColorManager.indexes = Array(0..<theme.count)
         }
         let randomIndex = Int(arc4random_uniform(UInt32(ColorManager.indexes.count)))

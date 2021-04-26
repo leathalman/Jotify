@@ -15,6 +15,7 @@ target 'Jotify' do
   pod 'MultilineTextField'
   pod 'XLActionController'
   pod 'XLActionController/Skype'
+  pod 'Pageboy', '~> 3.6'
   
   post_install do |installer|
     installer.pods_project.targets.each do |target|
