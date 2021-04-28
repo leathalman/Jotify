@@ -7,7 +7,7 @@
 
 import UIKit
 import Blueprints
-import XLActionController
+import SwiftMessages
 
 class NoteCollectionController: UICollectionViewController {
     //update collection view when model changes
@@ -85,37 +85,37 @@ class NoteCollectionController: UICollectionViewController {
         let indexPath = collectionView.indexPathForItem(at: location)
         let note = noteCollection?.FBNotes[indexPath!.row]
         
-        let actionController = SkypeActionController()
-        if traitCollection.userInterfaceStyle == .light {
-            actionController.backgroundColor = ColorManager.noteColor
-        } else {
-            actionController.backgroundColor = .mineShaft
-        }
-        actionController.addAction(Action("Share note", style: .default, handler: { _ in
-            print("Share note")
-            let objectsToShare = [note?.content ?? "Note could not be found."] as [Any]
-            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-            activityVC.excludedActivityTypes = [UIActivity.ActivityType.addToReadingList]
-            
-            //required properties for iPad's popoverPresentationController, otherwise crash
-            if let popoverController = activityVC.popoverPresentationController {
-                popoverController.sourceRect = CGRect(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2, width: 0, height: 0)
-                popoverController.sourceView = self.view
-                popoverController.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
-            }
-            
-            self.present(activityVC, animated: true, completion: nil)
-            AnalyticsManager.logEvent(named: "share_note", description: "share_note")
-        }))
-        actionController.addAction(Action("Delete note", style: .default, handler: { _ in
-            DataManager.deleteNote(docID: note!.id) { (success) in
-                if success! {
-                    AnalyticsManager.logEvent(named: "note_deleted", description: "note_deleted")
-                }
-            }
-        }))
-        actionController.addAction(Action("Cancel", style: .cancel, handler: nil))
-        present(actionController, animated: true, completion: nil)
+        let menu: NoteOptionMenu = try! SwiftMessages.viewFromNib(named: "NoteOptionMenu")
+        menu.configureBackgroundView(width: 250)
+        
+        //configure title and actions
+        menu.titleLabel?.text = "Options"
+        menu.button1.setTitle("Share Note", for: .normal)
+        menu.button2.setTitle("Delete Note", for: .normal)
+        menu.button3.setTitle("Select Multiple", for: .normal)
+        menu.button4.setTitle("Cancel", for: .normal)
+        
+        menu.titleLabel?.font = .boldSystemFont(ofSize: 24)
+        menu.button1.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        menu.button2.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        menu.button3.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        menu.button4.titleLabel?.font = .boldSystemFont(ofSize: 16)
+
+        menu.button1.addTarget(self, action: #selector(shareNoteFromMenu(_:)), for: .touchUpInside)
+        menu.button1.params["content"] = note?.content
+        menu.button2.addTarget(self, action: #selector(deleteNoteFromMenu(_:)), for: .touchUpInside)
+        menu.button2.params["id"] = note?.id
+        menu.button4.addTarget(self, action: #selector(cancelOptionFromMenu), for: .touchUpInside)
+        
+        menu.backgroundView.backgroundColor = ColorManager.bgColor
+        menu.backgroundView.layer.cornerRadius = 10
+        
+        var config = SwiftMessages.defaultConfig
+        config.presentationStyle = .center
+        config.duration = .forever
+        config.dimMode = .blur(style: .dark, alpha: 1, interactive: true)
+        config.presentationContext  = .window(windowLevel: UIWindow.Level.statusBar)
+        SwiftMessages.show(config: config, view: menu)
     }
     
     @objc func handleLeftNavButton() {
@@ -134,6 +134,37 @@ class NoteCollectionController: UICollectionViewController {
     @objc func handleRightNavButton() {
         let rootVC = self.getRootViewController() as! PageBoyController
         rootVC.scrollToWriteNoteController()
+    }
+    
+    //NoteOptionMenu Actions
+    @objc func deleteNoteFromMenu(_ sender: PassableUIButton) {
+        DataManager.deleteNote(docID: sender.params["id"] as! String) { (success) in
+            if success! {
+                AnalyticsManager.logEvent(named: "note_deleted", description: "note_deleted")
+            }
+        }
+        SwiftMessages.hide()
+    }
+    
+    @objc func shareNoteFromMenu(_ sender: PassableUIButton) {
+        let objectsToShare = [sender.params["content"]]
+        let activityVC = UIActivityViewController(activityItems: objectsToShare as [Any], applicationActivities: nil)
+        activityVC.excludedActivityTypes = [UIActivity.ActivityType.addToReadingList]
+
+        //required properties for iPad's popoverPresentationController, otherwise crash
+        if let popoverController = activityVC.popoverPresentationController {
+            popoverController.sourceRect = CGRect(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2, width: 0, height: 0)
+            popoverController.sourceView = self.view
+            popoverController.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+        }
+
+        self.present(activityVC, animated: true, completion: nil)
+        AnalyticsManager.logEvent(named: "share_note", description: "share_note")
+        SwiftMessages.hide()
+    }
+    
+    @objc func cancelOptionFromMenu() {
+        SwiftMessages.hide()
     }
     
     //collectionView Logic

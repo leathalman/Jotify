@@ -13,9 +13,8 @@ target 'Jotify' do
   
   pod 'Blueprints', :inhibit_warnings => true
   pod 'MultilineTextField'
-  pod 'XLActionController'
-  pod 'XLActionController/Skype'
   pod 'Pageboy', '~> 3.6'
+  pod 'SwiftMessages', :inhibit_warnings => true
   
   post_install do |installer|
     installer.pods_project.targets.each do |target|
