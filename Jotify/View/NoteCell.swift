@@ -7,6 +7,10 @@
 
 import UIKit
 
+struct CellState {
+    static var shouldSelectMultiple = Bool()
+}
+
 class SavedNoteCell: UICollectionViewCell {
     private var initialFrame: CGRect?
     private var initialCornerRadius: CGFloat?
@@ -60,6 +64,15 @@ class SavedNoteCell: UICollectionViewCell {
         dateLabel.widthAnchor.constraint(equalTo: textLabel.widthAnchor).isActive = true
     }
     
+    override var isSelected: Bool {
+        didSet {
+            let noteColor = self.backgroundColor
+            if CellState.shouldSelectMultiple {
+                self.contentView.backgroundColor = isSelected ? UIColor.darkGray : noteColor
+            }
+        }
+    }
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

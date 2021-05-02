@@ -30,7 +30,7 @@ extension UIColor {
     static let fuchsiaPlus = UIColor(hex: "#EC4688")
     static let fireOpal = UIColor(hex: "#F77062")
     static let fireOpalPlus = UIColor(hex: "#E85D4E")
-    static let aquamarine = UIColor(hex: "#00E0AC")
+    static let aquamarine = UIColor(hex: "#006D77") //atl: 2a9d8f
     static let aquamarinePlus = UIColor(hex: "#12BA93")
     static let blueCrayola = UIColor(hex: "#2272FC")
     static let blueCrayolaPlus = UIColor(hex: "#1A61DB")

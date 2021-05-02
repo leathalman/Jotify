@@ -19,6 +19,9 @@ class NoteCollectionController: UICollectionViewController {
         }
     }
     
+    //used to track the cells selected while multi-selection is enabled
+    var selectedCells: [IndexPath] = []
+    
     //global instance of searchController for NoteCollectionController
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -44,12 +47,16 @@ class NoteCollectionController: UICollectionViewController {
         super.viewWillAppear(true)
         setupNavigationBar()
         handleStatusBarStyle(style: .darkContent)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewElements()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        hideToolbar()
     }
     
     //view configuration
@@ -59,6 +66,9 @@ class NoteCollectionController: UICollectionViewController {
         } else if UIDevice.current.userInterfaceIdiom == .phone {
             collectionView.setCollectionViewLayout(iOSLayout, animated: true)
         }
+        
+        CellState.shouldSelectMultiple = false
+        collectionView.allowsMultipleSelection = false
         
         //navigation bar item customization
         let leftItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(handleLeftNavButton))
@@ -100,11 +110,12 @@ class NoteCollectionController: UICollectionViewController {
         menu.button2.titleLabel?.font = .boldSystemFont(ofSize: 16)
         menu.button3.titleLabel?.font = .boldSystemFont(ofSize: 16)
         menu.button4.titleLabel?.font = .boldSystemFont(ofSize: 16)
-
+        
         menu.button1.addTarget(self, action: #selector(shareNoteFromMenu(_:)), for: .touchUpInside)
         menu.button1.params["content"] = note?.content
         menu.button2.addTarget(self, action: #selector(deleteNoteFromMenu(_:)), for: .touchUpInside)
         menu.button2.params["id"] = note?.id
+        menu.button3.addTarget(self, action: #selector(showToolbar), for: .touchUpInside)
         menu.button4.addTarget(self, action: #selector(cancelOptionFromMenu), for: .touchUpInside)
         
         menu.backgroundView.backgroundColor = ColorManager.bgColor
@@ -113,6 +124,7 @@ class NoteCollectionController: UICollectionViewController {
         var config = SwiftMessages.defaultConfig
         config.presentationStyle = .center
         config.duration = .forever
+        config.interactiveHide = false
         config.dimMode = .blur(style: .dark, alpha: 1, interactive: true)
         config.presentationContext  = .window(windowLevel: UIWindow.Level.statusBar)
         SwiftMessages.show(config: config, view: menu)
@@ -150,21 +162,62 @@ class NoteCollectionController: UICollectionViewController {
         let objectsToShare = [sender.params["content"]]
         let activityVC = UIActivityViewController(activityItems: objectsToShare as [Any], applicationActivities: nil)
         activityVC.excludedActivityTypes = [UIActivity.ActivityType.addToReadingList]
-
+        
         //required properties for iPad's popoverPresentationController, otherwise crash
         if let popoverController = activityVC.popoverPresentationController {
             popoverController.sourceRect = CGRect(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2, width: 0, height: 0)
             popoverController.sourceView = self.view
             popoverController.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
         }
-
+        
         self.present(activityVC, animated: true, completion: nil)
         AnalyticsManager.logEvent(named: "share_note", description: "share_note")
         SwiftMessages.hide()
     }
     
+    @objc func showToolbar() {
+        SwiftMessages.hide()
+        CellState.shouldSelectMultiple = true
+        collectionView.allowsMultipleSelection = true
+        
+        navigationController?.setToolbarHidden(false, animated: true)
+        
+        var items = [UIBarButtonItem]()
+        items.append(UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(hideToolbar)))
+        items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil))
+        items.append(UIBarButtonItem(title: "Delete", style: .done, target: self, action: #selector(deleteSelectedCells)))
+        toolbarItems = items
+    }
+    
     @objc func cancelOptionFromMenu() {
         SwiftMessages.hide()
+    }
+    
+    @objc func hideToolbar() {
+        navigationController?.setToolbarHidden(true, animated: true)
+        
+        for item in selectedCells {
+            collectionView.deselectItem(at: item, animated: true)
+        }
+        
+        //must copy the selectedCells array because if it is still populated,
+        //the cells with still be "selected" and still display in a gray color instead of
+        //thier original color on .reloadItems
+        let cellsToReload = selectedCells.map {$0}
+        selectedCells = []
+        collectionView.reloadItems(at: cellsToReload)
+        
+        CellState.shouldSelectMultiple = false
+        collectionView.allowsMultipleSelection = false
+    }
+    
+    @objc func deleteSelectedCells() {
+        for indexPath in selectedCells {
+            DataManager.deleteNote(docID: noteCollection?.FBNotes[indexPath.row].id ?? "") { success in
+                //handle success here
+            }
+        }
+        selectedCells = []
     }
     
     //collectionView Logic
@@ -186,7 +239,21 @@ class NoteCollectionController: UICollectionViewController {
         
         cell.textLabel.text = noteCollection?.FBNotes[indexPath.row].content
         cell.dateLabel.text = noteCollection?.FBNotes[indexPath.row].timestamp.getDate()
-        cell.backgroundColor = noteCollection?.FBNotes[indexPath.row].color.getColor()
+        let noteColor = noteCollection?.FBNotes[indexPath.row].color.getColor()
+        
+        if selectedCells.contains(indexPath) {
+            cell.backgroundColor = .darkGray
+            cell.contentView.backgroundColor = .darkGray
+            cell.layer.backgroundColor = UIColor.darkGray.cgColor
+        } else {
+            cell.backgroundColor = noteColor
+            cell.contentView.backgroundColor = noteColor
+            cell.layer.backgroundColor = noteColor?.cgColor
+        }
+        
+        cell.contentView.layer.cornerRadius = 5
+        cell.contentView.layer.shouldRasterize = true
+        cell.contentView.layer.rasterizationScale = UIScreen.main.scale
         
         cell.layer.cornerRadius = 5
         cell.layer.shouldRasterize = true
@@ -199,10 +266,31 @@ class NoteCollectionController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.playHapticFeedback()
-        let controller = EditingController()
-        controller.note = (noteCollection?.FBNotes[indexPath.row])!
-        controller.noteCollection = noteCollection
-        navigationController?.pushViewController(controller, animated: true)
+        
+        if CellState.shouldSelectMultiple {
+            if !selectedCells.contains(indexPath) {
+                selectedCells.append(indexPath)
+            }
+        } else {
+            let controller = EditingController()
+            controller.note = (noteCollection?.FBNotes[indexPath.row])!
+            controller.noteCollection = noteCollection
+            navigationController?.pushViewController(controller, animated: true)
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+        self.playHapticFeedback()
+        if let index = selectedCells.firstIndex(of: indexPath) {
+            selectedCells.remove(at: index)
+        }
+        if let selectedItems = collectionView.indexPathsForSelectedItems {
+            if selectedItems.contains(indexPath) {
+                collectionView.deselectItem(at: indexPath, animated: true)
+                return false
+            }
+        }
+        return true
     }
     
     //traitcollection: dynamic iPad layout and light/dark mode support

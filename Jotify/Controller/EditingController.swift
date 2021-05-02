@@ -27,13 +27,11 @@ class EditingController: UIViewController, UITextViewDelegate {
         setupView()
         setupNavBar()
         setupNotifications()
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         updateContent(content: draftView.textField.text)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
     }
     
     //view configuration

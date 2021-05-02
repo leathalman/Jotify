@@ -4,6 +4,8 @@ platform :ios, '13.0'
 target 'Jotify' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
+  # There are several implicit warning after the upgrade to Swift 5.4
+  inhibit_all_warnings!
   
   # Pods for Jotify
   pod 'Firebase/Analytics'
