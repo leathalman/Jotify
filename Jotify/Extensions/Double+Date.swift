@@ -8,7 +8,7 @@
 import Foundation
 
 extension Double {
-    //change double into formatted date
+    //change double into formatted date, ex: January 1, 2021
     func getDate() -> String {
         let updateDate = Date(timeIntervalSinceReferenceDate: self)
         let dateFormatter = DateFormatter()

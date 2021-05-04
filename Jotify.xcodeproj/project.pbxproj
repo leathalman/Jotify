@@ -23,6 +23,7 @@
 		F6703A1B2638DD1E009863E3 /* NoteOptionMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6703A1A2638DD1E009863E3 /* NoteOptionMenu.xib */; };
 		F6703A1E2638DE29009863E3 /* NoteOptionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6703A1D2638DE29009863E3 /* NoteOptionMenu.swift */; };
 		F6720AFD26364CF80071183C /* PageBoyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6720AFC26364CF80071183C /* PageBoyController.swift */; };
+		F678330E2640F4D6005429FF /* NoteCollectionController+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = F678330D2640F4D6005429FF /* NoteCollectionController+Search.swift */; };
 		F67D1B6A25BF7A1100B28071 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D1B6925BF7A1100B28071 /* UIColor+Extensions.swift */; };
 		F67F002425B32EE600313D61 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002325B32EE600313D61 /* AuthManager.swift */; };
 		F67F002725B32EEC00313D61 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002625B32EEC00313D61 /* DataManager.swift */; };
@@ -76,6 +77,7 @@
 		F6703A1A2638DD1E009863E3 /* NoteOptionMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoteOptionMenu.xib; sourceTree = "<group>"; };
 		F6703A1D2638DE29009863E3 /* NoteOptionMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteOptionMenu.swift; sourceTree = "<group>"; };
 		F6720AFC26364CF80071183C /* PageBoyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageBoyController.swift; sourceTree = "<group>"; };
+		F678330D2640F4D6005429FF /* NoteCollectionController+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteCollectionController+Search.swift"; sourceTree = "<group>"; };
 		F67D1B6925BF7A1100B28071 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		F67F002325B32EE600313D61 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		F67F002625B32EEC00313D61 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 				F6B9D4C925B629C800A0446C /* Double+Date.swift */,
 				F6D2771825C8C37C00ECFCCC /* UINavigationController+Extensions.swift */,
 				F6FFCE722638E71E0012307E /* PassableUIButton.swift */,
+				F678330D2640F4D6005429FF /* NoteCollectionController+Search.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -460,6 +463,7 @@
 				F62209442602B07A001DFAC1 /* SceneDelegate+Gestures.swift in Sources */,
 				F67F003825B32F7900313D61 /* NoteCollectionController.swift in Sources */,
 				F6A5F9462604E5F200E46105 /* DismissKeyboardSwiftUI.swift in Sources */,
+				F678330E2640F4D6005429FF /* NoteCollectionController+Search.swift in Sources */,
 				F6539A7325CB9338007D5DF1 /* ColorStringModifier.swift in Sources */,
 				F6DFF0D025C90635004D6468 /* CustomColors.swift in Sources */,
 				F6B9D4C725B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift in Sources */,

@@ -13,10 +13,10 @@ target 'Jotify' do
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
   
-  pod 'Blueprints', :inhibit_warnings => true
+  pod 'Blueprints'
   pod 'MultilineTextField'
   pod 'Pageboy', '~> 3.6'
-  pod 'SwiftMessages', :inhibit_warnings => true
+  pod 'SwiftMessages'
   
   post_install do |installer|
     installer.pods_project.targets.each do |target|

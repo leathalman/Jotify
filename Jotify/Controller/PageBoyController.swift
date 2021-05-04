@@ -52,6 +52,10 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
             ColorManager.bgColor = .mineShaft
         }
         
+        //assign the view a color, so that searchController in NoteCollectionController
+        //actually has a background color that matches everything else
+        view.backgroundColor = ColorManager.bgColor
+        
         setupNoteRetrieval()
         
         NotificationCenter.default.addObserver(self, selector: #selector(appleIDStateDidRevoked(_:)), name: ASAuthorizationAppleIDProvider.credentialRevokedNotification, object: nil)

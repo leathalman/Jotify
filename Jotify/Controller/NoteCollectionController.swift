@@ -19,6 +19,9 @@ class NoteCollectionController: UICollectionViewController {
         }
     }
     
+    //used to hold notes filtered by the search bar
+    var filteredNotes: [FBNote] = []
+    
     //used to track the cells selected while multi-selection is enabled
     var selectedCells: [IndexPath] = []
     
@@ -47,6 +50,16 @@ class NoteCollectionController: UICollectionViewController {
         super.viewWillAppear(true)
         setupNavigationBar()
         handleStatusBarStyle(style: .darkContent)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        print("Number of notes: \(noteCollection?.FBNotes.count)")
+//        if noteCollection?.FBNotes.count == nil || noteCollection?.FBNotes.count == 0 {
+//            navigationItem.searchController = nil
+//        } else {
+            setupSearchBar()
+//        }
     }
     
     override func viewDidLoad() {
@@ -91,6 +104,10 @@ class NoteCollectionController: UICollectionViewController {
     
     //action handlers
     @objc func longTouchHandler(sender: UILongPressGestureRecognizer) {
+        if searchController.isActive {
+            return
+        }
+        
         let location = sender.location(in: collectionView)
         let indexPath = collectionView.indexPathForItem(at: location)
         let note = noteCollection?.FBNotes[indexPath!.row]
@@ -229,6 +246,9 @@ class NoteCollectionController: UICollectionViewController {
         } else {
             //remove backgroundView if array of notes isn't empty
             collectionView.backgroundView = nil
+            if isFiltering {
+                return filteredNotes.count
+            }
         }
         
         return noteCollection?.FBNotes.count ?? 0
@@ -237,9 +257,15 @@ class NoteCollectionController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedNoteCell", for: indexPath) as? SavedNoteCell else { fatalError("Wrong cell class dequeued") }
         
-        cell.textLabel.text = noteCollection?.FBNotes[indexPath.row].content
-        cell.dateLabel.text = noteCollection?.FBNotes[indexPath.row].timestamp.getDate()
-        let noteColor = noteCollection?.FBNotes[indexPath.row].color.getColor()
+        var note = noteCollection?.FBNotes[indexPath.row]
+        
+        if isFiltering {
+            note = filteredNotes[indexPath.row]
+        }
+        
+        cell.textLabel.text = note?.content
+        cell.dateLabel.text = note?.timestamp.getDate()
+        let noteColor = note?.color.getColor()
         
         if selectedCells.contains(indexPath) {
             cell.backgroundColor = .darkGray
@@ -273,9 +299,13 @@ class NoteCollectionController: UICollectionViewController {
             }
         } else {
             let controller = EditingController()
-            controller.note = (noteCollection?.FBNotes[indexPath.row])!
             controller.noteCollection = noteCollection
+            controller.note = (noteCollection?.FBNotes[indexPath.row])!
+            if isFiltering {
+                controller.note = filteredNotes[indexPath.row]
+            }
             navigationController?.pushViewController(controller, animated: true)
+            navigationItem.searchController?.isActive = false
         }
     }
     
