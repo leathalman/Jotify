@@ -54,12 +54,13 @@ class NoteCollectionController: UICollectionViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        print("Number of notes: \(noteCollection?.FBNotes.count)")
-//        if noteCollection?.FBNotes.count == nil || noteCollection?.FBNotes.count == 0 {
-//            navigationItem.searchController = nil
-//        } else {
+//        print("Number of notes: \(noteCollection?.FBNotes.count)")
+        //initial fix for app crashing when no notes present in new account
+        if noteCollection?.FBNotes.count == nil || noteCollection?.FBNotes.count == 0 {
+            navigationItem.searchController = nil
+        } else {
             setupSearchBar()
-//        }
+        }
     }
     
     override func viewDidLoad() {
