@@ -52,25 +52,16 @@ class NoteCollectionController: UICollectionViewController {
         handleStatusBarStyle(style: .darkContent)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-//        print("Number of notes: \(noteCollection?.FBNotes.count)")
-        //initial fix for app crashing when no notes present in new account
-        if noteCollection?.FBNotes.count == nil || noteCollection?.FBNotes.count == 0 {
-            navigationItem.searchController = nil
-        } else {
-            setupSearchBar()
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewElements()
+        setupSearchBar()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
         hideToolbar()
+        navigationItem.searchController = nil
     }
     
     //view configuration
@@ -81,6 +72,13 @@ class NoteCollectionController: UICollectionViewController {
             collectionView.setCollectionViewLayout(iOSLayout, animated: true)
         }
         
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.isTranslucent = false
+        
+        extendedLayoutIncludesOpaqueBars = true
+        collectionView.frame = view.frame
+        collectionView.alwaysBounceVertical = true
+
         CellState.shouldSelectMultiple = false
         collectionView.allowsMultipleSelection = false
         

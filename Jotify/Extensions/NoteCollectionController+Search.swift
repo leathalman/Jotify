@@ -18,22 +18,23 @@ extension NoteCollectionController: UISearchBarDelegate {
         searchController.searchBar.scopeButtonTitles = ["Content", "Date"]
         searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
-        definesPresentationContext = true
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        let errorNote: [FBNote] = [FBNote(content: "", timestamp: 0, id: "", color: "blue")]
+        
         if searchController.searchBar.selectedScopeButtonIndex == 0 {
             filteredNotes = (noteCollection?.FBNotes.filter { (note: FBNote) -> Bool in
                 note.content.lowercased().contains(searchText.lowercased())
-            })!
-            
+            }) ?? errorNote
+
             collectionView.reloadData()
-            
+
         } else if searchController.searchBar.selectedScopeButtonIndex == 1 {
             filteredNotes = (noteCollection?.FBNotes.filter { (note: FBNote) -> Bool in
                 note.timestamp.getDate().lowercased().contains(searchText.lowercased())
-            })!
-            
+            }) ?? errorNote
+
             collectionView.reloadData()
         }
     }
