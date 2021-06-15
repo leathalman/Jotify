@@ -9,14 +9,17 @@ import UIKit
 
 extension UINavigationController {
     
-    func enablePersistence() {
-        navigationBar.shadowImage = UIImage()
-        navigationBar.setBackgroundImage(nil, for: .default)
-        navigationBar.isTranslucent = false
-    }
-    
-    func setColor(color: UIColor) {
-        navigationBar.backgroundColor = color
-        navigationBar.barTintColor = color
+    func configure(color: UIColor, isTextWhite: Bool? = false) {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = color
+        appearance.shadowColor = .clear
+        
+        if isTextWhite ?? false {
+            appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        }
+        
+        navigationBar.standardAppearance = appearance
+        navigationBar.scrollEdgeAppearance = navigationBar.standardAppearance
     }
 }

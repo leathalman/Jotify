@@ -29,8 +29,7 @@ class SettingsController: UITableViewController {
         
         view.backgroundColor = ColorManager.bgColor
         
-        navigationController?.setColor(color: ColorManager.bgColor)
-        navigationController?.enablePersistence()
+        navigationController?.configure(color: ColorManager.bgColor)
         
         tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
@@ -60,6 +59,6 @@ class SettingsController: UITableViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         handleStatusBarStyle(style: .darkContent)
         view.backgroundColor = ColorManager.bgColor
-        navigationController?.setColor(color: ColorManager.bgColor)
+        navigationController?.configure(color: ColorManager.bgColor)
     }
 }

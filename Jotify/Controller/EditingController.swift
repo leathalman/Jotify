@@ -47,8 +47,7 @@ class EditingController: UIViewController, UITextViewDelegate {
     
     func setupNavBar() {
         navigationItem.title = note?.timestamp.getDate()
-        navigationController?.enablePersistence()
-        navigationController?.setColor(color: note?.color.getColor() ?? .systemBlue)
+        navigationController?.configure(color: note?.color.getColor() ?? .systemBlue, isTextWhite: true)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         navigationItem.setHidesBackButton(true, animated: true)
         

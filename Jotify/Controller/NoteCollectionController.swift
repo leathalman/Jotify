@@ -49,17 +49,17 @@ class NoteCollectionController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setupNavigationBar()
+        setupSearchBar()
         handleStatusBarStyle(style: .darkContent)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewElements()
-        setupSearchBar()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(true)
+        super.viewDidDisappear(false)
         hideToolbar()
         navigationItem.searchController = nil
     }
@@ -71,9 +71,6 @@ class NoteCollectionController: UICollectionViewController {
         } else if UIDevice.current.userInterfaceIdiom == .phone {
             collectionView.setCollectionViewLayout(iOSLayout, animated: true)
         }
-        
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.navigationBar.isTranslucent = false
         
         extendedLayoutIncludesOpaqueBars = true
         collectionView.frame = view.frame
@@ -96,8 +93,7 @@ class NoteCollectionController: UICollectionViewController {
     
     func setupNavigationBar() {
         navigationItem.title = "Saved Notes"
-        navigationController?.enablePersistence()
-        navigationController?.setColor(color: ColorManager.bgColor)
+        navigationController?.configure(color: ColorManager.bgColor)
         navigationController?.navigationBar.titleTextAttributes = nil
     }
     
@@ -304,7 +300,6 @@ class NoteCollectionController: UICollectionViewController {
                 controller.note = filteredNotes[indexPath.row]
             }
             navigationController?.pushViewController(controller, animated: true)
-            navigationItem.searchController?.isActive = false
         }
     }
     
@@ -331,7 +326,7 @@ class NoteCollectionController: UICollectionViewController {
         }
         collectionView.collectionViewLayout.invalidateLayout()
         collectionView.backgroundColor = ColorManager.bgColor
-        navigationController?.setColor(color: ColorManager.bgColor)
+        navigationController?.configure(color: ColorManager.bgColor)
         handleStatusBarStyle(style: .darkContent)
     }
 }
