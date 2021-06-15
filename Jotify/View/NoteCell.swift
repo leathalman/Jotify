@@ -12,8 +12,6 @@ struct CellState {
 }
 
 class SavedNoteCell: UICollectionViewCell {
-    private var initialFrame: CGRect?
-    private var initialCornerRadius: CGFloat?
     
     var textLabel: VerticalAlignLabel = {
         let label = VerticalAlignLabel()
@@ -64,15 +62,29 @@ class SavedNoteCell: UICollectionViewCell {
         dateLabel.widthAnchor.constraint(equalTo: textLabel.widthAnchor).isActive = true
     }
     
-    override var isSelected: Bool {
-        didSet {
-            let noteColor = self.backgroundColor
-            if CellState.shouldSelectMultiple {
-                self.contentView.backgroundColor = isSelected ? UIColor.darkGray : noteColor
-            }
-        }
+    func shake() {
+        let shakeAnimation = CABasicAnimation(keyPath: "transform.rotation")
+        shakeAnimation.duration = 0.05
+        shakeAnimation.repeatCount = 2
+        shakeAnimation.autoreverses = true
+        let startAngle: Float = (-2) * 3.14159/180
+        let stopAngle = -startAngle
+        shakeAnimation.fromValue = NSNumber(value: startAngle as Float)
+        shakeAnimation.toValue = NSNumber(value: 3 * stopAngle as Float)
+        shakeAnimation.autoreverses = true
+        shakeAnimation.duration = 0.2
+        shakeAnimation.repeatCount = 10000
+        shakeAnimation.timeOffset = 290 * drand48()
+        
+        let layer: CALayer = self.layer
+        layer.add(shakeAnimation, forKey:"shaking")
+   }
+    
+    func stopShaking() {
+        let layer: CALayer = self.layer
+        layer.removeAnimation(forKey: "shaking")
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

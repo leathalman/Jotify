@@ -5,14 +5,6 @@
 //  Created by Harrison Leath on 4/25/21.
 //
 
-//
-//  PageViewController.swift
-//  Example
-//
-//  Created by Merrick Sapsford on 04/10/2020.
-//  Copyright © 2020 UI At Six. All rights reserved.
-//
-
 import UIKit
 import Pageboy
 import AuthenticationServices
@@ -52,9 +44,7 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
             ColorManager.bgColor = .mineShaft
         }
         
-        //assign the view a color, so that searchController in NoteCollectionController
-        //actually has a background color that matches everything else
-        view.backgroundColor = ColorManager.bgColor
+        view.backgroundColor = .clear
         
         setupNoteRetrieval()
         

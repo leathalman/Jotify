@@ -190,9 +190,15 @@ class NoteCollectionController: UICollectionViewController {
     @objc func showToolbar() {
         SwiftMessages.hide()
         CellState.shouldSelectMultiple = true
-        collectionView.allowsMultipleSelection = true
         
+        collectionView.allowsMultipleSelection = true
         navigationController?.setToolbarHidden(false, animated: true)
+        
+        let appearance = UIToolbarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = ColorManager.bgColor
+        navigationController?.toolbar.standardAppearance = appearance
+        navigationController?.toolbar.compactAppearance = appearance
         
         var items = [UIBarButtonItem]()
         items.append(UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(hideToolbar)))
@@ -261,15 +267,17 @@ class NoteCollectionController: UICollectionViewController {
         cell.textLabel.text = note?.content
         cell.dateLabel.text = note?.timestamp.getDate()
         let noteColor = note?.color.getColor()
-        
+                
         if selectedCells.contains(indexPath) {
             cell.backgroundColor = .darkGray
             cell.contentView.backgroundColor = .darkGray
             cell.layer.backgroundColor = UIColor.darkGray.cgColor
+            cell.shake()
         } else {
             cell.backgroundColor = noteColor
             cell.contentView.backgroundColor = noteColor
             cell.layer.backgroundColor = noteColor?.cgColor
+            cell.stopShaking()
         }
         
         cell.contentView.layer.cornerRadius = 5
@@ -291,7 +299,10 @@ class NoteCollectionController: UICollectionViewController {
         if CellState.shouldSelectMultiple {
             if !selectedCells.contains(indexPath) {
                 selectedCells.append(indexPath)
+            } else if let index = selectedCells.firstIndex(of: indexPath) {
+                selectedCells.remove(at: index)
             }
+            collectionView.reloadItems(at: [indexPath])
         } else {
             let controller = EditingController()
             controller.noteCollection = noteCollection
@@ -301,20 +312,6 @@ class NoteCollectionController: UICollectionViewController {
             }
             navigationController?.pushViewController(controller, animated: true)
         }
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
-        self.playHapticFeedback()
-        if let index = selectedCells.firstIndex(of: indexPath) {
-            selectedCells.remove(at: index)
-        }
-        if let selectedItems = collectionView.indexPathsForSelectedItems {
-            if selectedItems.contains(indexPath) {
-                collectionView.deselectItem(at: indexPath, animated: true)
-                return false
-            }
-        }
-        return true
     }
     
     //traitcollection: dynamic iPad layout and light/dark mode support
