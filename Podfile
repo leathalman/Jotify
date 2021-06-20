@@ -17,6 +17,7 @@ target 'Jotify' do
   pod 'MultilineTextField'
   pod 'Pageboy', '~> 3.6'
   pod 'SwiftMessages'
+  pod 'ViewAnimator', '~> 2.7.0'
   
   post_install do |installer|
     installer.pods_project.targets.each do |target|

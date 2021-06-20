@@ -8,6 +8,7 @@
 import UIKit
 import Blueprints
 import SwiftMessages
+import ViewAnimator
 
 class NoteCollectionController: UICollectionViewController {
     //update collection view when model changes
@@ -56,6 +57,7 @@ class NoteCollectionController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewElements()
+        animateVisibleCells()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -95,6 +97,13 @@ class NoteCollectionController: UICollectionViewController {
         navigationItem.title = "Saved Notes"
         navigationController?.configure(color: ColorManager.bgColor)
         navigationController?.navigationBar.titleTextAttributes = nil
+    }
+    
+    func animateVisibleCells() {
+        let animation = AnimationType.from(direction: .top, offset: 30.0)
+        collectionView?.performBatchUpdates({
+                    UIView.animate(views: self.collectionView.orderedVisibleCells, animations: [animation], completion: {})
+                }, completion: nil)
     }
     
     //action handlers
