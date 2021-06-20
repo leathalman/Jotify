@@ -51,9 +51,14 @@ class EditingController: UIViewController, UITextViewDelegate {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         navigationItem.setHidesBackButton(true, animated: true)
         
-        var cancel = UIImage(named: "cancel")
-        cancel = cancel?.withRenderingMode(.alwaysOriginal)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: cancel, style: .plain, target: self, action: #selector(handleCancel))
+        let timer = UIBarButtonItem(image: UIImage(systemName: "timer"), style: .plain, target: self, action: #selector(handleCancel))
+        timer.tintColor = UIColor.white
+        let ellipsis = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: self, action: #selector(handleCancel))
+        ellipsis.tintColor = UIColor.white
+        navigationItem.leftBarButtonItems = [timer, ellipsis]
+        let cancel = UIBarButtonItem(image: UIImage(systemName: "xmark.circle"), style: .plain, target: self, action: #selector(handleCancel))
+        cancel.tintColor = UIColor.white
+        navigationItem.rightBarButtonItem = cancel
     }
    
     //action handlers

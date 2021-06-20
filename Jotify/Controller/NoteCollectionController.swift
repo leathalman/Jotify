@@ -97,6 +97,14 @@ class NoteCollectionController: UICollectionViewController {
         navigationItem.title = "Saved Notes"
         navigationController?.configure(color: ColorManager.bgColor)
         navigationController?.navigationBar.titleTextAttributes = nil
+        
+        if traitCollection.userInterfaceStyle == .dark {
+            navigationItem.leftBarButtonItem?.tintColor = UIColor.white
+            navigationItem.rightBarButtonItem?.tintColor = UIColor.white
+        } else {
+            navigationItem.leftBarButtonItem?.tintColor = nil
+            navigationItem.rightBarButtonItem?.tintColor = nil
+        }
     }
     
     func animateVisibleCells() {
@@ -332,7 +340,8 @@ class NoteCollectionController: UICollectionViewController {
         }
         collectionView.collectionViewLayout.invalidateLayout()
         collectionView.backgroundColor = ColorManager.bgColor
-        navigationController?.configure(color: ColorManager.bgColor)
+//        navigationController?.configure(color: ColorManager.bgColor)
+        setupNavigationBar()
         handleStatusBarStyle(style: .darkContent)
     }
 }
