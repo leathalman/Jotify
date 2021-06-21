@@ -22,13 +22,13 @@ extension EditingController {
         let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
         
         if notification.name == UIResponder.keyboardWillHideNotification {
-            draftView.textField.contentInset = .zero
+            field.contentInset = .zero
         } else {
-            draftView.textField.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
+            field.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
         }
         
-        draftView.textField.scrollIndicatorInsets = draftView.textField.contentInset
-        draftView.textField.scrollRangeToVisible(draftView.textField.selectedRange)
+        field.scrollIndicatorInsets = field.contentInset
+        field.scrollRangeToVisible(field.selectedRange)
     }
 }
 

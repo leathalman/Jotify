@@ -9,16 +9,11 @@ import UIKit
 
 extension UINavigationController {
     
-    func configure(color: UIColor, isTextWhite: Bool? = false) {
+    func configure(bgColor: UIColor) {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = color
+        appearance.backgroundColor = bgColor
         appearance.shadowColor = .clear
-        
-        if isTextWhite ?? false {
-            appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
-        }
-        
         navigationBar.standardAppearance = appearance
         navigationBar.scrollEdgeAppearance = navigationBar.standardAppearance
     }

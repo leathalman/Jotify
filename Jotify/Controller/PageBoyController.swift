@@ -119,7 +119,7 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
         scrollToPage(.last, animated: true) { (vc, result, result2) in
             if result && result2 {
                 let writeNoteController = vc as! WriteNoteController
-                writeNoteController.draftView.textField.becomeFirstResponder()
+                writeNoteController.field.becomeFirstResponder()
             }
         }
     }

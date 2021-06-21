@@ -49,11 +49,7 @@ extension UIViewController {
     //**only call this method when PageViewController is present**
     func handleStatusBarStyle(style: UIStatusBarStyle) {
         let rootVC = UIApplication.shared.windows.first!.rootViewController as! PageBoyController
-        if traitCollection.userInterfaceStyle == .dark {
-            rootVC.statusBarStyle = .lightContent
-        } else {
-            rootVC.statusBarStyle = style
-        }
+        rootVC.statusBarStyle = style
         rootVC.setNeedsStatusBarAppearanceUpdate()
     }
 }

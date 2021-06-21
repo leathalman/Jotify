@@ -20,6 +20,9 @@
 		F6539A7325CB9338007D5DF1 /* ColorStringModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6539A7225CB9338007D5DF1 /* ColorStringModifier.swift */; };
 		F66D7C6B261BB99200E3405C /* SignInWithApple+Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66D7C6A261BB99200E3405C /* SignInWithApple+Firebase.swift */; };
 		F66E580F261B96E60045D0F3 /* SignInWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66E580E261B96E60045D0F3 /* SignInWithApple.swift */; };
+		F66F5C4B267FE3BD004CB9F1 /* GradientAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66F5C4A267FE3BD004CB9F1 /* GradientAnimator.swift */; };
+		F66F5C4D267FE3D3004CB9F1 /* UIView+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66F5C4C267FE3D3004CB9F1 /* UIView+Gradient.swift */; };
+		F66F5C50267FE48C004CB9F1 /* GradientThemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66F5C4F267FE48C004CB9F1 /* GradientThemes.swift */; };
 		F6703A1B2638DD1E009863E3 /* NoteOptionMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6703A1A2638DD1E009863E3 /* NoteOptionMenu.xib */; };
 		F6703A1E2638DE29009863E3 /* NoteOptionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6703A1D2638DE29009863E3 /* NoteOptionMenu.swift */; };
 		F6720AFD26364CF80071183C /* PageBoyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6720AFC26364CF80071183C /* PageBoyController.swift */; };
@@ -28,7 +31,6 @@
 		F67F002425B32EE600313D61 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002325B32EE600313D61 /* AuthManager.swift */; };
 		F67F002725B32EEC00313D61 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002625B32EEC00313D61 /* DataManager.swift */; };
 		F67F002A25B32F5B00313D61 /* NoteCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002925B32F5B00313D61 /* NoteCollection.swift */; };
-		F67F002D25B32F6300313D61 /* DraftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002C25B32F6300313D61 /* DraftView.swift */; };
 		F67F003025B32F6700313D61 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002F25B32F6700313D61 /* NoteCell.swift */; };
 		F67F003225B32F6B00313D61 /* VerticalAlignLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F003125B32F6B00313D61 /* VerticalAlignLabel.swift */; };
 		F67F003825B32F7900313D61 /* NoteCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F003725B32F7900313D61 /* NoteCollectionController.swift */; };
@@ -74,6 +76,9 @@
 		F6539A7225CB9338007D5DF1 /* ColorStringModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStringModifier.swift; sourceTree = "<group>"; };
 		F66D7C6A261BB99200E3405C /* SignInWithApple+Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignInWithApple+Firebase.swift"; sourceTree = "<group>"; };
 		F66E580E261B96E60045D0F3 /* SignInWithApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithApple.swift; sourceTree = "<group>"; };
+		F66F5C4A267FE3BD004CB9F1 /* GradientAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientAnimator.swift; sourceTree = "<group>"; };
+		F66F5C4C267FE3D3004CB9F1 /* UIView+Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Gradient.swift"; sourceTree = "<group>"; };
+		F66F5C4F267FE48C004CB9F1 /* GradientThemes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientThemes.swift; sourceTree = "<group>"; };
 		F6703A1A2638DD1E009863E3 /* NoteOptionMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoteOptionMenu.xib; sourceTree = "<group>"; };
 		F6703A1D2638DE29009863E3 /* NoteOptionMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteOptionMenu.swift; sourceTree = "<group>"; };
 		F6720AFC26364CF80071183C /* PageBoyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageBoyController.swift; sourceTree = "<group>"; };
@@ -82,7 +87,6 @@
 		F67F002325B32EE600313D61 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		F67F002625B32EEC00313D61 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		F67F002925B32F5B00313D61 /* NoteCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteCollection.swift; sourceTree = "<group>"; };
-		F67F002C25B32F6300313D61 /* DraftView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftView.swift; sourceTree = "<group>"; };
 		F67F002F25B32F6700313D61 /* NoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		F67F003125B32F6B00313D61 /* VerticalAlignLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalAlignLabel.swift; sourceTree = "<group>"; };
 		F67F003725B32F7900313D61 /* NoteCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteCollectionController.swift; sourceTree = "<group>"; };
@@ -164,6 +168,16 @@
 			path = Firebase;
 			sourceTree = "<group>";
 		};
+		F66F5C4E267FE3F4004CB9F1 /* GradientAnimator */ = {
+			isa = PBXGroup;
+			children = (
+				F66F5C4A267FE3BD004CB9F1 /* GradientAnimator.swift */,
+				F66F5C4C267FE3D3004CB9F1 /* UIView+Gradient.swift */,
+				F66F5C4F267FE48C004CB9F1 /* GradientThemes.swift */,
+			);
+			path = GradientAnimator;
+			sourceTree = "<group>";
+		};
 		F675D27F25D5767F009AD59F /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,7 +203,6 @@
 			children = (
 				F6FFCE752638EBA60012307E /* NoteOptionMenu */,
 				F6D2771025C8BFEC00ECFCCC /* Settings */,
-				F67F002C25B32F6300313D61 /* DraftView.swift */,
 				F67F002F25B32F6700313D61 /* NoteCell.swift */,
 				F67F003125B32F6B00313D61 /* VerticalAlignLabel.swift */,
 				F611D0DD25D841FA00E6D860 /* EmptyNoteView.swift */,
@@ -232,6 +245,7 @@
 		F67FFFEF25B32E1F00313D61 /* Jotify */ = {
 			isa = PBXGroup;
 			children = (
+				F66F5C4E267FE3F4004CB9F1 /* GradientAnimator */,
 				F6C2EBB525BA726B00EC6582 /* Keyboard */,
 				F68FBF7E26039DD700144D7A /* Gestures */,
 				F6DFF0CA25C9060B004D6468 /* Colors */,
@@ -470,9 +484,11 @@
 				F638E64A25CEEFC7005FA371 /* AppearanceSettingsController.swift in Sources */,
 				F652AB6525B87CF2006D7747 /* EditingController.swift in Sources */,
 				F6DFF0CC25C90617004D6468 /* ColorManager.swift in Sources */,
+				F66F5C50267FE48C004CB9F1 /* GradientThemes.swift in Sources */,
 				F6CF5DF325DAF38D006E576E /* Jotify.xcdatamodeld in Sources */,
 				F622093D2602B00E001DFAC1 /* LogInView.swift in Sources */,
 				F6F185B225C86ABF001FD5FA /* GeneralSettingsController.swift in Sources */,
+				F66F5C4B267FE3BD004CB9F1 /* GradientAnimator.swift in Sources */,
 				F6C2EBB725BA728000EC6582 /* EditingController+Keyboard.swift in Sources */,
 				F67F002425B32EE600313D61 /* AuthManager.swift in Sources */,
 				F66E580F261B96E60045D0F3 /* SignInWithApple.swift in Sources */,
@@ -482,6 +498,7 @@
 				F6D2771925C8C37C00ECFCCC /* UINavigationController+Extensions.swift in Sources */,
 				F6FFCE732638E71E0012307E /* PassableUIButton.swift in Sources */,
 				F67F002A25B32F5B00313D61 /* NoteCollection.swift in Sources */,
+				F66F5C4D267FE3D3004CB9F1 /* UIView+Gradient.swift in Sources */,
 				F6D2771225C8C00E00ECFCCC /* SettingsCell.swift in Sources */,
 				F622093E2602B00E001DFAC1 /* SignUpView.swift in Sources */,
 				F67F003225B32F6B00313D61 /* VerticalAlignLabel.swift in Sources */,
@@ -489,7 +506,6 @@
 				F6703A1E2638DE29009863E3 /* NoteOptionMenu.swift in Sources */,
 				F6F185AE25C86AB4001FD5FA /* SettingsController.swift in Sources */,
 				F67FFFF125B32E1F00313D61 /* AppDelegate.swift in Sources */,
-				F67F002D25B32F6300313D61 /* DraftView.swift in Sources */,
 				F6F185A625C85F98001FD5FA /* UITextView+Padding.swift in Sources */,
 				F6B9AE0C25DCC871008467C6 /* MigrationHandler.swift in Sources */,
 				F67FFFF325B32E1F00313D61 /* SceneDelegate.swift in Sources */,

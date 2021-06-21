@@ -9,6 +9,8 @@ import UIKit
 
 class ColorManager {
     
+    static var themes: [GradientThemes] = [.Amin, .BlueLagoon, .Celestial, .DIMIGO, .GentleCare, .Kyoopal, .Maldives, .NeonLife, .SolidStone, .Sunrise]
+    
     static var noteColor = UIColor()
     static var indexes = [Int]()
     static var bgColor = UIColor()

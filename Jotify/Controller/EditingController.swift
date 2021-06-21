@@ -5,12 +5,28 @@
 //  Created by Harrison Leath on 1/18/21.
 //
 
+import MultilineTextField
 import UIKit
 
 class EditingController: UIViewController, UITextViewDelegate {
-    let draftView = DraftView()
+    
+    lazy var field: MultilineTextField = {
+        let frame = CGRect(x: 0, y: 100, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 100)
+        let textField = MultilineTextField(frame: frame)
+        textField.backgroundColor = .clear
+        textField.placeholderColor = .white
+        textField.textColor = .white
+        textField.tintColor = .white
+        textField.isEditable = true
+        textField.leftViewOrigin = CGPoint(x: 8, y: 8)
+        textField.font = UIFont.boldSystemFont(ofSize: 32)
+        textField.textContainerInset = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
+        textField.placeholder = "Start typing or swipe right for saved notes..."
+        return textField
+    }()
     
     var note: FBNote?
+    var noteColor: UIColor?
     var noteCollection: NoteCollection?
     
     var timer: Timer?
@@ -18,12 +34,13 @@ class EditingController: UIViewController, UITextViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         //change status bar style to white
-        handleStatusBarStyle(style: .lightContent)
+        handleStatusBarStyle(style: noteColor?.isDarkColor ?? false ? .lightContent : .darkContent)
     }
     
     //life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        noteColor = note?.color.getNewColor()
         setupView()
         setupNavBar()
         setupNotifications()
@@ -31,33 +48,44 @@ class EditingController: UIViewController, UITextViewDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        updateContent(content: draftView.textField.text)
+        updateContent(content: field.text)
     }
     
     //view configuration
     func setupView() {
-        view = draftView
-        draftView.backgroundColor = note?.color.getColor()
-        draftView.textField.text = note?.content
-        draftView.textField.placeholder = ""
-        draftView.textField.delegate = self
-        draftView.textField.font = UIFont.boldSystemFont(ofSize: 18)
-        draftView.textField.frame = CGRect(x: 0, y: 15, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - (navigationController?.navigationBar.bounds.height ?? 0) - 30)
+        //color customization to support white/black dynamic type
+        field.backgroundColor = noteColor
+        field.textColor = noteColor?.isDarkColor ?? false ? .white : .black
+        
+        field.text = note?.content
+        field.placeholder = ""
+        field.delegate = self
+        field.font = UIFont.boldSystemFont(ofSize: 18)
+        field.frame = CGRect(x: 0, y: 15, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        
+        view.addSubview(field)
+        
+        handleStatusBarStyle(style: noteColor?.isDarkColor ?? false ? .lightContent : .darkContent)
     }
     
     func setupNavBar() {
+        //setup navigationbar elements
         navigationItem.title = note?.timestamp.getDate()
-        navigationController?.configure(color: note?.color.getColor() ?? .systemBlue, isTextWhite: true)
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        navigationController?.configure(bgColor: noteColor ?? .systemBlue)
+        navigationController?.navigationBar.standardAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor : noteColor?.isDarkColor ?? false ? UIColor.white : .black]
         navigationItem.setHidesBackButton(true, animated: true)
         
+        //define image and action for each navigation button
         let timer = UIBarButtonItem(image: UIImage(systemName: "timer"), style: .plain, target: self, action: #selector(handleCancel))
-        timer.tintColor = UIColor.white
         let ellipsis = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: self, action: #selector(handleCancel))
-        ellipsis.tintColor = UIColor.white
-        navigationItem.leftBarButtonItems = [timer, ellipsis]
         let cancel = UIBarButtonItem(image: UIImage(systemName: "xmark.circle"), style: .plain, target: self, action: #selector(handleCancel))
-        cancel.tintColor = UIColor.white
+
+        //handle tint color of each button based on view background color
+        timer.tintColor = noteColor?.isDarkColor ?? false ? .white : .black
+        ellipsis.tintColor = noteColor?.isDarkColor ?? false ? .white : .black
+        cancel.tintColor = noteColor?.isDarkColor ?? false ? .white : .black
+        
+        navigationItem.leftBarButtonItems = [timer, ellipsis]
         navigationItem.rightBarButtonItem = cancel
     }
    
@@ -69,8 +97,8 @@ class EditingController: UIViewController, UITextViewDelegate {
     
     //datamanager interface
     func updateContent(content: String) {
-        if draftView.textField.text != note?.content {
-            DataManager.updateNoteContent(content: draftView.textField.text, uid: note?.id ?? "") { (success) in
+        if field.text != note?.content {
+            DataManager.updateNoteContent(content: field.text, uid: note?.id ?? "") { (success) in
                 //display error in UI
             }
         }
@@ -84,7 +112,7 @@ class EditingController: UIViewController, UITextViewDelegate {
     }
     
     @objc func handleIdleEvent() {
-        updateContent(content: draftView.textField.text)
+        updateContent(content: field.text)
     }
     
     func textViewDidChange(_ textView: UITextView) {

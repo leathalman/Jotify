@@ -21,14 +21,14 @@ extension WriteNoteController {
         let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
 
         if notification.name == UIResponder.keyboardWillHideNotification {
-            draftView.textField.contentInset = .zero
-            draftView.textField.frame = CGRect(x: 0, y: 100, width: view.bounds.width, height: UIScreen.main.bounds.height / 4)
+            field.contentInset = .zero
+            field.frame = CGRect(x: 0, y: 100, width: view.bounds.width, height: UIScreen.main.bounds.height / 4)
         } else {
-            draftView.textField.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height + 42, right: 0)
-            draftView.textField.frame = CGRect(x: 0, y: 40, width: view.bounds.width, height: UIScreen.main.bounds.height)
+            field.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height + 42, right: 0)
+            field.frame = CGRect(x: 0, y: 40, width: view.bounds.width, height: UIScreen.main.bounds.height)
         }
 
-        draftView.textField.scrollIndicatorInsets = draftView.textField.contentInset
-        draftView.textField.scrollRangeToVisible(draftView.textField.selectedRange)
+        field.scrollIndicatorInsets = field.contentInset
+        field.scrollRangeToVisible(field.selectedRange)
     }
 }

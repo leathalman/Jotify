@@ -51,7 +51,7 @@ class NoteCollectionController: UICollectionViewController {
         super.viewWillAppear(true)
         setupNavigationBar()
         setupSearchBar()
-        handleStatusBarStyle(style: .darkContent)
+        activateStatusBar()
     }
     
     override func viewDidLoad() {
@@ -77,7 +77,7 @@ class NoteCollectionController: UICollectionViewController {
         extendedLayoutIncludesOpaqueBars = true
         collectionView.frame = view.frame
         collectionView.alwaysBounceVertical = true
-
+        
         CellState.shouldSelectMultiple = false
         collectionView.allowsMultipleSelection = false
         
@@ -95,23 +95,24 @@ class NoteCollectionController: UICollectionViewController {
     
     func setupNavigationBar() {
         navigationItem.title = "Saved Notes"
-        navigationController?.configure(color: ColorManager.bgColor)
-        navigationController?.navigationBar.titleTextAttributes = nil
+        navigationController?.configure(bgColor: ColorManager.bgColor)
         
-        if traitCollection.userInterfaceStyle == .dark {
-            navigationItem.leftBarButtonItem?.tintColor = UIColor.white
-            navigationItem.rightBarButtonItem?.tintColor = UIColor.white
-        } else {
-            navigationItem.leftBarButtonItem?.tintColor = nil
-            navigationItem.rightBarButtonItem?.tintColor = nil
-        }
+        var color = UIColor.white
+        if traitCollection.userInterfaceStyle == .light || traitCollection.userInterfaceStyle == .unspecified { color = .black }
+        navigationController?.navigationBar.standardAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor : color]
     }
     
     func animateVisibleCells() {
         let animation = AnimationType.from(direction: .top, offset: 30.0)
-        collectionView?.performBatchUpdates({
-                    UIView.animate(views: self.collectionView.orderedVisibleCells, animations: [animation], completion: {})
-                }, completion: nil)
+        collectionView?.performBatchUpdates({UIView.animate(views: self.collectionView.orderedVisibleCells, animations: [animation], completion: {})}, completion: nil)
+    }
+    
+    func activateStatusBar() {
+        if traitCollection.userInterfaceStyle == .light {
+            handleStatusBarStyle(style: .darkContent)
+        } else {
+            handleStatusBarStyle(style: .lightContent)
+        }
     }
     
     //action handlers
@@ -283,8 +284,12 @@ class NoteCollectionController: UICollectionViewController {
         
         cell.textLabel.text = note?.content
         cell.dateLabel.text = note?.timestamp.getDate()
-        let noteColor = note?.color.getColor()
-                
+        let noteColor = note?.color.getNewColor()
+        
+        //handle dynamic text color based on background color of cell
+        cell.textLabel.textColor = note?.color.getNewColor().isDarkColor ?? true ? .white : .black
+        cell.dateLabel.textColor = note?.color.getNewColor().isDarkColor ?? true ? .white : .black
+        
         if selectedCells.contains(indexPath) {
             cell.backgroundColor = .darkGray
             cell.contentView.backgroundColor = .darkGray
@@ -340,9 +345,8 @@ class NoteCollectionController: UICollectionViewController {
         }
         collectionView.collectionViewLayout.invalidateLayout()
         collectionView.backgroundColor = ColorManager.bgColor
-//        navigationController?.configure(color: ColorManager.bgColor)
         setupNavigationBar()
-        handleStatusBarStyle(style: .darkContent)
+        activateStatusBar()
     }
 }
 
