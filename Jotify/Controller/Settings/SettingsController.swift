@@ -17,7 +17,7 @@ class SettingsController: UITableViewController {
     var noteCollection: NoteCollection?
     
     override func viewWillAppear(_ animated: Bool) {
-        handleStatusBarStyle(style: .darkContent)
+        enableAutomaticStatusBarStyle()
     }
     
     override func viewDidLoad() {
@@ -57,7 +57,7 @@ class SettingsController: UITableViewController {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        handleStatusBarStyle(style: .darkContent)
+        enableAutomaticStatusBarStyle()
         view.backgroundColor = ColorManager.bgColor
         navigationController?.configure(bgColor: ColorManager.bgColor)
     }

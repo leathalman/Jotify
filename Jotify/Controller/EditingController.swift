@@ -16,8 +16,7 @@ class EditingController: UIViewController, UITextViewDelegate {
         textField.backgroundColor = .clear
         textField.placeholderColor = .white
         textField.textColor = .white
-        textField.tintColor = .white
-        textField.isEditable = true
+         textField.isEditable = true
         textField.leftViewOrigin = CGPoint(x: 8, y: 8)
         textField.font = UIFont.boldSystemFont(ofSize: 32)
         textField.textContainerInset = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
@@ -34,7 +33,7 @@ class EditingController: UIViewController, UITextViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         //change status bar style to white
-        handleStatusBarStyle(style: noteColor?.isDarkColor ?? false ? .lightContent : .darkContent)
+        setStatusBarStyle(style: noteColor?.isDarkColor ?? false ? .lightContent : .darkContent)
     }
     
     //life cycle
@@ -56,6 +55,7 @@ class EditingController: UIViewController, UITextViewDelegate {
         //color customization to support white/black dynamic type
         field.backgroundColor = noteColor
         field.textColor = noteColor?.isDarkColor ?? false ? .white : .black
+        field.tintColor = noteColor?.isDarkColor ?? false ? .white : .black
         
         field.text = note?.content
         field.placeholder = ""
@@ -65,7 +65,7 @@ class EditingController: UIViewController, UITextViewDelegate {
         
         view.addSubview(field)
         
-        handleStatusBarStyle(style: noteColor?.isDarkColor ?? false ? .lightContent : .darkContent)
+        setStatusBarStyle(style: noteColor?.isDarkColor ?? false ? .lightContent : .darkContent)
     }
     
     func setupNavBar() {

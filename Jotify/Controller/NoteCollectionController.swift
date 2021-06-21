@@ -51,7 +51,7 @@ class NoteCollectionController: UICollectionViewController {
         super.viewWillAppear(true)
         setupNavigationBar()
         setupSearchBar()
-        activateStatusBar()
+        enableAutomaticStatusBarStyle()
     }
     
     override func viewDidLoad() {
@@ -105,14 +105,6 @@ class NoteCollectionController: UICollectionViewController {
     func animateVisibleCells() {
         let animation = AnimationType.from(direction: .top, offset: 30.0)
         collectionView?.performBatchUpdates({UIView.animate(views: self.collectionView.orderedVisibleCells, animations: [animation], completion: {})}, completion: nil)
-    }
-    
-    func activateStatusBar() {
-        if traitCollection.userInterfaceStyle == .light {
-            handleStatusBarStyle(style: .darkContent)
-        } else {
-            handleStatusBarStyle(style: .lightContent)
-        }
     }
     
     //action handlers
@@ -346,7 +338,7 @@ class NoteCollectionController: UICollectionViewController {
         collectionView.collectionViewLayout.invalidateLayout()
         collectionView.backgroundColor = ColorManager.bgColor
         setupNavigationBar()
-        activateStatusBar()
+        enableAutomaticStatusBarStyle()
     }
 }
 

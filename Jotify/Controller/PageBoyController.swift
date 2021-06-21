@@ -59,13 +59,13 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
         DataManager.retrieveUserSettings { (settings, success) in
             if success! {
                 User.settings = settings!
-                if UserDefaults.standard.string(forKey: "theme") ?? "" != settings?.theme {
-                    //setup the color system for notes
-                    ColorManager.theme = settings?.theme.getColorArray() ?? UIColor.defaultTheme
-                    ColorManager.setNoteColor(theme: ColorManager.theme)
-                    //set the theme in userdefaults, so theme is available before network request is finished
-                    UserDefaults.standard.setValue(settings!.theme, forKey: "theme")
-                }
+//                if UserDefaults.standard.string(forKey: "theme") ?? "" != settings?.theme {
+//                    //setup the color system for notes
+//                    ColorManager.theme = settings?.theme.getColorArray() ?? UIColor.defaultTheme
+//                    ColorManager.setNoteColor(theme: ColorManager.theme)
+//                    //set the theme in userdefaults, so theme is available before network request is finished
+//                    UserDefaults.standard.setValue(settings!.theme, forKey: "theme")
+//                }
                 
                 if !(settings!.hasMigrated) && !UserDefaults.standard.bool(forKey: "hasMigrated") {
                     print("Has migrated?: \(UserDefaults.standard.bool(forKey: "hasMigrated"))")
@@ -91,8 +91,8 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
         if !MigrationHandler.CDNotes.isEmpty {
             NotificationCenter.default.removeObserver(self)
             for note in MigrationHandler.CDNotes {
-                DataManager.createNote(content: note.content ?? "", timestamp: note.modifiedDate, color: ColorManager.noteColor.getString())
-                ColorManager.setNoteColor(theme: UIColor.defaultTheme)
+                DataManager.createNote(content: note.content ?? "", timestamp: note.modifiedDate, color: ColorManager.noteColor.getNewString())
+                ColorManager.setNewNoteColor()
             }
             UserDefaults.standard.setValue(true, forKey: "hasMigrated")
             DataManager.updateUserSettings(setting: "hasMigrated", value: true) { (success) in }

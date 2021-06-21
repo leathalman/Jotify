@@ -16,8 +16,8 @@
 		F62209472602F252001DFAC1 /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62209462602F252001DFAC1 /* AuthenticationController.swift */; };
 		F638E64A25CEEFC7005FA371 /* AppearanceSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F638E64925CEEFC7005FA371 /* AppearanceSettingsController.swift */; };
 		F638E65225CEF36B005FA371 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F638E65125CEF36B005FA371 /* UserManager.swift */; };
+		F6425CC12680D286008C03A2 /* UIColor+StringInterpretor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6425CC02680D286008C03A2 /* UIColor+StringInterpretor.swift */; };
 		F652AB6525B87CF2006D7747 /* EditingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652AB6425B87CF2006D7747 /* EditingController.swift */; };
-		F6539A7325CB9338007D5DF1 /* ColorStringModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6539A7225CB9338007D5DF1 /* ColorStringModifier.swift */; };
 		F66D7C6B261BB99200E3405C /* SignInWithApple+Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66D7C6A261BB99200E3405C /* SignInWithApple+Firebase.swift */; };
 		F66E580F261B96E60045D0F3 /* SignInWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66E580E261B96E60045D0F3 /* SignInWithApple.swift */; };
 		F66F5C4B267FE3BD004CB9F1 /* GradientAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66F5C4A267FE3BD004CB9F1 /* GradientAnimator.swift */; };
@@ -53,7 +53,6 @@
 		F6D2771925C8C37C00ECFCCC /* UINavigationController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D2771825C8C37C00ECFCCC /* UINavigationController+Extensions.swift */; };
 		F6DFF0C625C8FF9D004D6468 /* AccountSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DFF0C525C8FF9D004D6468 /* AccountSettingsController.swift */; };
 		F6DFF0CC25C90617004D6468 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DFF0CB25C90617004D6468 /* ColorManager.swift */; };
-		F6DFF0D025C90635004D6468 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DFF0CF25C90635004D6468 /* CustomColors.swift */; };
 		F6F185A625C85F98001FD5FA /* UITextView+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185A525C85F98001FD5FA /* UITextView+Padding.swift */; };
 		F6F185AE25C86AB4001FD5FA /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185AD25C86AB4001FD5FA /* SettingsController.swift */; };
 		F6F185B225C86ABF001FD5FA /* GeneralSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185B125C86ABF001FD5FA /* GeneralSettingsController.swift */; };
@@ -72,8 +71,8 @@
 		F62209462602F252001DFAC1 /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
 		F638E64925CEEFC7005FA371 /* AppearanceSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsController.swift; sourceTree = "<group>"; };
 		F638E65125CEF36B005FA371 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		F6425CC02680D286008C03A2 /* UIColor+StringInterpretor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+StringInterpretor.swift"; sourceTree = "<group>"; };
 		F652AB6425B87CF2006D7747 /* EditingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingController.swift; sourceTree = "<group>"; };
-		F6539A7225CB9338007D5DF1 /* ColorStringModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStringModifier.swift; sourceTree = "<group>"; };
 		F66D7C6A261BB99200E3405C /* SignInWithApple+Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignInWithApple+Firebase.swift"; sourceTree = "<group>"; };
 		F66E580E261B96E60045D0F3 /* SignInWithApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithApple.swift; sourceTree = "<group>"; };
 		F66F5C4A267FE3BD004CB9F1 /* GradientAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientAnimator.swift; sourceTree = "<group>"; };
@@ -112,7 +111,6 @@
 		F6D2771825C8C37C00ECFCCC /* UINavigationController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extensions.swift"; sourceTree = "<group>"; };
 		F6DFF0C525C8FF9D004D6468 /* AccountSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsController.swift; sourceTree = "<group>"; };
 		F6DFF0CB25C90617004D6468 /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
-		F6DFF0CF25C90635004D6468 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		F6F185A525C85F98001FD5FA /* UITextView+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Padding.swift"; sourceTree = "<group>"; };
 		F6F185AD25C86AB4001FD5FA /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		F6F185B125C86ABF001FD5FA /* GeneralSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsController.swift; sourceTree = "<group>"; };
@@ -174,6 +172,8 @@
 				F66F5C4A267FE3BD004CB9F1 /* GradientAnimator.swift */,
 				F66F5C4C267FE3D3004CB9F1 /* UIView+Gradient.swift */,
 				F66F5C4F267FE48C004CB9F1 /* GradientThemes.swift */,
+				F6DFF0CB25C90617004D6468 /* ColorManager.swift */,
+				F6425CC02680D286008C03A2 /* UIColor+StringInterpretor.swift */,
 			);
 			path = GradientAnimator;
 			sourceTree = "<group>";
@@ -327,9 +327,6 @@
 		F6DFF0CA25C9060B004D6468 /* Colors */ = {
 			isa = PBXGroup;
 			children = (
-				F6DFF0CB25C90617004D6468 /* ColorManager.swift */,
-				F6DFF0CF25C90635004D6468 /* CustomColors.swift */,
-				F6539A7225CB9338007D5DF1 /* ColorStringModifier.swift */,
 			);
 			path = Colors;
 			sourceTree = "<group>";
@@ -478,8 +475,6 @@
 				F67F003825B32F7900313D61 /* NoteCollectionController.swift in Sources */,
 				F6A5F9462604E5F200E46105 /* DismissKeyboardSwiftUI.swift in Sources */,
 				F678330E2640F4D6005429FF /* NoteCollectionController+Search.swift in Sources */,
-				F6539A7325CB9338007D5DF1 /* ColorStringModifier.swift in Sources */,
-				F6DFF0D025C90635004D6468 /* CustomColors.swift in Sources */,
 				F6B9D4C725B622E200A0446C /* WriteNoteController+KeyboardNotifications.swift in Sources */,
 				F638E64A25CEEFC7005FA371 /* AppearanceSettingsController.swift in Sources */,
 				F652AB6525B87CF2006D7747 /* EditingController.swift in Sources */,
@@ -490,6 +485,7 @@
 				F6F185B225C86ABF001FD5FA /* GeneralSettingsController.swift in Sources */,
 				F66F5C4B267FE3BD004CB9F1 /* GradientAnimator.swift in Sources */,
 				F6C2EBB725BA728000EC6582 /* EditingController+Keyboard.swift in Sources */,
+				F6425CC12680D286008C03A2 /* UIColor+StringInterpretor.swift in Sources */,
 				F67F002425B32EE600313D61 /* AuthManager.swift in Sources */,
 				F66E580F261B96E60045D0F3 /* SignInWithApple.swift in Sources */,
 				F6B9D4B825B6175D00A0446C /* UIViewController+Extensions.swift in Sources */,

@@ -45,11 +45,20 @@ extension UIViewController {
     }
     
     //change StatusBarStyle in parent, PageViewController
-    //override and always make style light if in dark mode
+    //override and set a given status bar style
     //**only call this method when PageViewController is present**
-    func handleStatusBarStyle(style: UIStatusBarStyle) {
+    func setStatusBarStyle(style: UIStatusBarStyle) {
         let rootVC = UIApplication.shared.windows.first!.rootViewController as! PageBoyController
         rootVC.statusBarStyle = style
+        rootVC.setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    //change StatusBarStyle in parent, PageViewController
+    //override any previous customization and just use default style
+    //**only call this method when PageViewController is present**
+    func enableAutomaticStatusBarStyle() {
+        let rootVC = UIApplication.shared.windows.first!.rootViewController as! PageBoyController
+        rootVC.statusBarStyle = .default
         rootVC.setNeedsStatusBarAppearanceUpdate()
     }
 }

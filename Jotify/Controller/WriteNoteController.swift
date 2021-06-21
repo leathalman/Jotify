@@ -25,8 +25,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
         return textField
     }()
     
-//    let draftView = DraftView()
-    
+    //generate random theme
     var theme = ColorManager.themes.randomElement()
     
     //used within timer logic to determine and save current note dynamically
@@ -39,10 +38,8 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        //update background color each time view will appear in case noteColor has changed
-//        view.backgroundColor = ColorManager.noteColor
         //change status bar style to white
-        handleStatusBarStyle(style: .lightContent)
+        setStatusBarStyle(style: .lightContent)
     }
     
     //life cycle
@@ -61,7 +58,7 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     func setupView() {
         view.setGradient(theme: theme ?? .BlueLagoon)
         noteColor = theme?.colors().randomElement() ?? .bluelagoon1
-
+        
         field.delegate = self
         field.frame = CGRect(x: 0, y: 100, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 4)
         view.addSubview(field)
@@ -87,16 +84,14 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
             //reset hasCreatedDocument so view will be prepared to create another note
             hasCreatedDocument = false
             field.text = ""
-            //set a new noteColor from theme
-//            ColorManager.setNoteColor(theme: ColorManager.theme)
-            //animate transition between background colors
-            UIView.animate(withDuration: 0.25, animations: {
-                let newTheme = ColorManager.themes.randomElement()
-                self.theme = newTheme
-                self.noteColor = newTheme?.colors().randomElement() ?? .bluelagoon1
-                self.view.setGradient(theme: newTheme ?? .BlueLagoon)
-            })
-            AnalyticsManager.logEvent(named: "note_created", description: "note_deleted")
+            
+            //setup color and data for new note creation
+            let newTheme = ColorManager.themes.randomElement()
+            self.theme = newTheme
+            self.noteColor = newTheme?.colors().randomElement() ?? .bluelagoon1
+            self.view.setGradient(theme: newTheme ?? .BlueLagoon)
+            
+            AnalyticsManager.logEvent(named: "note_created", description: "note_created")
         }
         field.resignFirstResponder()
     }
@@ -143,6 +138,6 @@ class WriteNoteController: UIViewController, UITextViewDelegate {
     
     //traitcollection: light/dark mode support with status bar
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        handleStatusBarStyle(style: .lightContent)
+        setStatusBarStyle(style: .lightContent)
     }
 }
