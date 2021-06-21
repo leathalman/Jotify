@@ -170,9 +170,9 @@
 			isa = PBXGroup;
 			children = (
 				F66F5C4A267FE3BD004CB9F1 /* GradientAnimator.swift */,
-				F66F5C4C267FE3D3004CB9F1 /* UIView+Gradient.swift */,
 				F66F5C4F267FE48C004CB9F1 /* GradientThemes.swift */,
 				F6DFF0CB25C90617004D6468 /* ColorManager.swift */,
+				F66F5C4C267FE3D3004CB9F1 /* UIView+Gradient.swift */,
 				F6425CC02680D286008C03A2 /* UIColor+StringInterpretor.swift */,
 			);
 			path = GradientAnimator;

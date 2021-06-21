@@ -9,7 +9,7 @@ import UIKit
 
 class ColorManager {
     
-    static var themes: [GradientThemes] = [.Amin, .BlueLagoon, .Celestial, .DIMIGO, .GentleCare, .Kyoopal, .Maldives, .NeonLife, .SolidStone, .Sunrise]
+    static var themes: [GradientThemes] = [.Amin, .BlueLagoon, .Celestial, .Kyoopal, .Maldives, .NeonLife, .SolidStone, .Sunrise]
     static var allColors = GradientThemes.All.colors()
     
     static var noteColor = UIColor()

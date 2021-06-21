@@ -29,17 +29,10 @@ extension UIColor {
         case .maldives3: return "maldives3"
         case .maldives4: return "maldives4"
             
-        //DIMIGO
-        case .dimigo1: return "dimigo1"
-        case .dimigo2: return "dimigo2"
-        case .dimigo3: return "dimigo3"
-        case .dimigo4: return "dimigo4"
-            
         //neonlife
         case .neonlife1: return "neonlife1"
         case .neonlife2: return "neonlife2"
         case .neonlife3: return "neonlife3"
-        case .neonlife4: return "neonlife4"
             
         //bluelagoon
         case .bluelagoon1: return "bluelagoon1"
@@ -64,12 +57,6 @@ extension UIColor {
         case .solidstone2: return "solidstone2"
         case .solidstone3: return "solidstone3"
         case .solidstone4: return "solidstone4"
-            
-        //gentlecare
-        case .gentlecare1: return "gentlecare1"
-        case .gentlecare2: return "gentlecare2"
-        case .gentlecare3: return "gentlecare3"
-        case .gentlecare4: return "gentlecare4"
             
         //error
         default: return "systemBlue"
@@ -99,17 +86,10 @@ extension String {
         case "maldives3": return .maldives3
         case "maldives4": return .maldives4
             
-        //DIMIGO
-        case "dimigo1": return .dimigo1
-        case "dimigo2": return .dimigo2
-        case "dimigo3": return .dimigo3
-        case "dimigo4": return .dimigo4
-            
         //neonlife
         case "neonlife1": return .neonlife1
         case "neonlife2": return .neonlife2
         case "neonlife3": return .neonlife3
-        case "neonlife4": return .neonlife4
             
         //bluelagoon
         case "bluelagoon1": return .bluelagoon1
@@ -134,12 +114,6 @@ extension String {
         case "solidstone2": return .solidstone2
         case "solidstone3": return .solidstone3
         case "solidstone4": return .solidstone4
-            
-        //gentlecare
-        case "gentlecare1": return .gentlecare1
-        case "gentlecare2": return .gentlecare2
-        case "gentlecare3": return .gentlecare3
-        case "gentlecare4": return .gentlecare4
             
         //error
         default: return .systemBlue
