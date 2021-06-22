@@ -20,6 +20,7 @@ class ColorManager {
     //fill an array of indexes that correspond to the array as a parameter
     //remove elements from indexes array as they are selected from parameter array
     //repeat when indexes is empty
+    //TODO:: FIX THIS METHOD, DOESNT WORK
     @discardableResult static func setNewNoteColor() -> UIColor {
         let count = GradientThemes.All.colors().count
         if ColorManager.indexes.count == 0 {

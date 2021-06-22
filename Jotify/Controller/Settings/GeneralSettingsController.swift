@@ -12,7 +12,7 @@ class GeneralSettingsController: SettingsController {
     override func viewDidLoad() {
         super.viewDidLoad()
         super.sections = ["General"]
-        super.section1 = ["Account", "Appearance"]
+        super.section1 = ["Account"]
         navigationItem.title = "Settings"
     }
     

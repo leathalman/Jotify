@@ -15,7 +15,6 @@ extension UIColor {
         case .sunrise1: return "sunrise1"
         case .sunrise2: return "sunrise2"
         case .sunrise3: return "sunrise3"
-        case .sunrise4: return "sunrise4"
         
         //amin
         case .amin1: return "amin1"
@@ -72,7 +71,6 @@ extension String {
         case "sunrise1": return .sunrise1
         case "sunrise2": return .sunrise2
         case "sunrise3": return .sunrise3
-        case "sunrise4": return .sunrise4
             
         //amin
         case "amin1": return .amin1

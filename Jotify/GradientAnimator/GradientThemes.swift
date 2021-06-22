@@ -21,7 +21,7 @@ import UIKit
     public func colors() -> [UIColor] {
         switch self {
         case .Sunrise:
-            return [.sunrise1, .sunrise2, .sunrise3, .sunrise4]
+            return [.sunrise1, .sunrise2, .sunrise3]
         case .Amin:
             return [.amin1, .amin2, .amin3, .amin4]
         case .Maldives:
@@ -37,7 +37,7 @@ import UIKit
         case .SolidStone:
             return [.solidstone1, .solidstone2, .solidstone3, .solidstone4]
         case .All:
-            return [.sunrise1, .sunrise2, .sunrise3, .sunrise4, .amin1, .amin2, .amin3, .amin4, .maldives1, .maldives2, .maldives3, .maldives4, .neonlife1, .neonlife2, .neonlife3, .bluelagoon1, .bluelagoon2, .bluelagoon3, .bluelagoon4, .celestrial1, .celestrial2, .celestrial3, .celestrial4, .kypool1, .kypool2, .kypool3, .kypool4, .solidstone1, .solidstone2, .solidstone3, .solidstone4]
+            return [.sunrise1, .sunrise2, .sunrise3, .amin1, .amin2, .amin3, .amin4, .maldives1, .maldives2, .maldives3, .maldives4, .neonlife1, .neonlife2, .neonlife3, .bluelagoon1, .bluelagoon2, .bluelagoon3, .bluelagoon4, .celestrial1, .celestrial2, .celestrial3, .celestrial4, .kypool1, .kypool2, .kypool3, .kypool4, .solidstone1, .solidstone2, .solidstone3, .solidstone4]
         }
     }
 }
@@ -48,17 +48,16 @@ extension UIColor {
     static let lightTrail = UIColor(r: 239, g: 243, b: 244)
     static let gainsboro = UIColor(hex: "#E8ECED")
     
-    //sunrise - https://coolors.co/ffa17f-ad786a-42434f-00223e
+    //sunrise - https://coolors.co/ffa17f-42434f-00223e
     static let sunrise1 = UIColor(hex: "FFA17F")
-    static let sunrise2 = UIColor(hex: "AD786A")
-    static let sunrise3 = UIColor(hex: "42434F")
-    static let sunrise4 = UIColor(hex: "00223E")
+    static let sunrise2 = UIColor(hex: "42434F")
+    static let sunrise3 = UIColor(hex: "00223E")
     
     //amin - https://coolors.co/ff1b6b-b561a6-888bca-45caff
     static let amin1 = UIColor(hex: "#FF1B6B")
     static let amin2 = UIColor(hex: "#B561A6")
     static let amin3 = UIColor(hex: "#888BCA")
-    static let amin4 = UIColor(hex: "#45CAFF")
+    static let amin4 = UIColor(hex: "#0084B8")
     
     //maldives - https://coolors.co/f4c152-f5a782-f49180-e92027
     static let maldives1 = UIColor(hex: "#F4C152")

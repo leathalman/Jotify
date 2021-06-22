@@ -5,24 +5,9 @@
 //  Created by Harrison Leath on 1/18/21.
 //
 
-import MultilineTextField
 import UIKit
 
-class EditingController: UIViewController, UITextViewDelegate {
-    
-    lazy var field: MultilineTextField = {
-        let frame = CGRect(x: 0, y: 100, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 100)
-        let textField = MultilineTextField(frame: frame)
-        textField.backgroundColor = .clear
-        textField.placeholderColor = .white
-        textField.textColor = .white
-         textField.isEditable = true
-        textField.leftViewOrigin = CGPoint(x: 8, y: 8)
-        textField.font = UIFont.boldSystemFont(ofSize: 32)
-        textField.textContainerInset = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
-        textField.placeholder = "Start typing or swipe right for saved notes..."
-        return textField
-    }()
+class EditingController: ToolbarViewController, UITextViewDelegate {
     
     var note: FBNote?
     var noteColor: UIColor?
