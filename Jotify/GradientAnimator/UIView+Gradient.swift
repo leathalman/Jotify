@@ -9,13 +9,12 @@ import UIKit
 
 extension UIView {
     func setGradient(theme: GradientThemes){
-        UIView.animate(withDuration: 0.25, animations: {
-            self.removeGradient()
-            let gradientView = GradientAnimator(frame: self.frame, theme: theme, _startPoint: GradientPoints.bottomLeft, _endPoint: GradientPoints.topRight, _animationDuration: 3.0)
-            gradientView.tag = 007
-            self.insertSubview(gradientView, at: 0)
-            gradientView.startAnimate()
-        })
+        self.removeGradient()
+        let gradientView = GradientAnimator(frame: self.frame, theme: theme, _startPoint: GradientPoints.topRight, _endPoint: GradientPoints.bottomLeft, _animationDuration: 3.0)
+        gradientView.tag = 007
+        self.insertSubview(gradientView, at: 0)
+        gradientView.startAnimate()
+        
     }
     
     func removeGradient(){
