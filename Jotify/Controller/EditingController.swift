@@ -103,4 +103,19 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         resetTimer()
     }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if (text as NSString).rangeOfCharacter(from: CharacterSet.newlines).location == NSNotFound {
+            return true
+        }
+        if isBulletedList {
+            //make new line and add bullet where cursor is
+            field.addBulletOnReturn()
+        } else {
+            //make new line where cursor is
+            field.addNewLineOnReturn()
+        }
+        
+        return false
+    }
 }

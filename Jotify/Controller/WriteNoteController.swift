@@ -53,7 +53,11 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     
     //whenever the area around the textView is tapped, bring up the keyboard
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        field.becomeFirstResponder()
+        if field.isFirstResponder {
+            field.resignFirstResponder()
+        } else {
+            field.becomeFirstResponder()
+        }
     }
     
     //invalidate timer, reset timer-related variables, and do a final update on the document
@@ -84,7 +88,15 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
         if (text as NSString).rangeOfCharacter(from: CharacterSet.newlines).location == NSNotFound {
             return true
         }
-        handleSend()
+        
+        if isBulletedList {
+            field.addBulletOnReturn()
+        } else if isMultiline {
+            field.addNewLineOnReturn()
+        } else {
+            handleSend()
+        }
+        
         return false
     }
     
@@ -111,6 +123,10 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
         } else if !field.text.isEmpty {
             resetTimer()
         }
+    }
+    
+    override func keyboardSaveNote() {
+        handleSend()
     }
     
     //resize the textfield frame each time the window size changes

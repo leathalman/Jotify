@@ -27,7 +27,10 @@ class ToolbarViewController: UIViewController {
     }()
     
     var keyboardToolbar = UIToolbar()
-    var isBulletedList: Bool = false
+    
+    var isBulletedList: Bool = false  
+    var isMultiline: Bool = false
+    
     
     override func viewDidLoad() {
         setupToolbar()
@@ -36,26 +39,33 @@ class ToolbarViewController: UIViewController {
     //toolbar for
     func setupToolbar() {
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        let multiline = UIBarButtonItem(image: UIImage(systemName: "text.badge.plus"), style: .plain, target: self, action: #selector(addBullet))
+        let multiline = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.2.decrease.circle"), style: .plain, target: self, action: #selector(toggleMultilineInput))
         let colorpicker = UIBarButtonItem(image: UIImage(systemName: "eyedropper"), style: .plain, target: self, action: nil)
-        let list = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), style: .plain, target: self, action: nil)
+        let list = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), style: .plain, target: self, action: #selector(addBullet))
         let timer = UIBarButtonItem(image: UIImage(systemName: "timer"), style: .plain, target: self, action: nil)
-        let help = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: nil)
+        let help = UIBarButtonItem(image: UIImage(systemName: "arrow.down.app"), style: .plain, target: self, action: #selector(keyboardSaveNote))
         keyboardToolbar.items = [multiline, spacer, list, spacer, timer, spacer, colorpicker, spacer, help]
         keyboardToolbar.sizeToFit()
         field.inputAccessoryView = keyboardToolbar
     }
     
-    @objc func addBullet() {
-        let style = NSMutableParagraphStyle()
-        style.alignment = .left
-        style.headIndent = 20
-        
-        let title = NSMutableAttributedString(string: "\u{2022} I need to add bulleted text to textView in iOS app. I am looking at this link and this one and following their ideas. This is my code:", attributes: [NSAttributedString.Key.paragraphStyle: style, NSAttributedString.Key.foregroundColor:UIColor.blue])
-        
-        let titleStr = NSMutableAttributedString(string: "\n\n\u{2022} I need to add bulleted text to textView in iOS app. I am looking at this link and this one and following their ideas. This is my code:", attributes: [NSAttributedString.Key.paragraphStyle: style, NSAttributedString.Key.foregroundColor:UIColor.blue])
-        
-        title.append(titleStr)
-        field.attributedText = title
+    @objc func toggleMultilineInput() {
+        if isMultiline {
+            isMultiline = false
+        } else {
+            isMultiline = true
+        }
     }
+    
+    @objc func addBullet() {
+        if isBulletedList {
+            isBulletedList = false
+        } else {
+            isBulletedList = true
+            isMultiline = true
+            field.addBullet()
+        }
+    }
+    
+    @objc func keyboardSaveNote () { return }
 }

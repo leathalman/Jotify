@@ -1,0 +1,6 @@
+framework module SQRichTextEditor {
+  umbrella header "SQRichTextEditor-umbrella.h"
+
+  export *
+  module * { export * }
+}

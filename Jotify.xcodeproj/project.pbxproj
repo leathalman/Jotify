@@ -40,6 +40,7 @@
 		F67FFFF325B32E1F00313D61 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67FFFF225B32E1F00313D61 /* SceneDelegate.swift */; };
 		F67FFFFA25B32E2000313D61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F67FFFF925B32E2000313D61 /* Assets.xcassets */; };
 		F67FFFFD25B32E2000313D61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F67FFFFB25B32E2000313D61 /* LaunchScreen.storyboard */; };
+		F68E6F9E2683870700D34EDD /* MultilineTextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68E6F9D2683870700D34EDD /* MultilineTextField+Extensions.swift */; };
 		F6A5F9462604E5F200E46105 /* DismissKeyboardSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A5F9452604E5F200E46105 /* DismissKeyboardSwiftUI.swift */; };
 		F6AA650325F5AFD3002362A4 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA650225F5AFD3002362A4 /* AnalyticsManager.swift */; };
 		F6B9AE0C25DCC871008467C6 /* MigrationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9AE0B25DCC871008467C6 /* MigrationHandler.swift */; };
@@ -98,6 +99,7 @@
 		F67FFFF925B32E2000313D61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F67FFFFC25B32E2000313D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F67FFFFE25B32E2000313D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F68E6F9D2683870700D34EDD /* MultilineTextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultilineTextField+Extensions.swift"; sourceTree = "<group>"; };
 		F6A5F9452604E5F200E46105 /* DismissKeyboardSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissKeyboardSwiftUI.swift; sourceTree = "<group>"; };
 		F6AA650225F5AFD3002362A4 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		F6B9AE0B25DCC871008467C6 /* MigrationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationHandler.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				F6D2771825C8C37C00ECFCCC /* UINavigationController+Extensions.swift */,
 				F6FFCE722638E71E0012307E /* PassableUIButton.swift */,
 				F678330D2640F4D6005429FF /* NoteCollectionController+Search.swift */,
+				F68E6F9D2683870700D34EDD /* MultilineTextField+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 				F6C2EBB725BA728000EC6582 /* EditingController+Keyboard.swift in Sources */,
 				F6425CC12680D286008C03A2 /* UIColor+StringInterpretor.swift in Sources */,
 				F67F002425B32EE600313D61 /* AuthManager.swift in Sources */,
+				F68E6F9E2683870700D34EDD /* MultilineTextField+Extensions.swift in Sources */,
 				F66E580F261B96E60045D0F3 /* SignInWithApple.swift in Sources */,
 				F6B9D4B825B6175D00A0446C /* UIViewController+Extensions.swift in Sources */,
 				F67D1B6A25BF7A1100B28071 /* UIColor+Extensions.swift in Sources */,

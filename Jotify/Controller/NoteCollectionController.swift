@@ -228,12 +228,8 @@ class NoteCollectionController: UICollectionViewController {
             collectionView.deselectItem(at: item, animated: true)
         }
         
-        //must copy the selectedCells array because if it is still populated,
-        //the cells with still be "selected" and still display in a gray color instead of
-        //thier original color on .reloadItems
-        let cellsToReload = selectedCells.map {$0}
-        selectedCells = []
-        collectionView.reloadItems(at: cellsToReload)
+        //reload the entire array, fixes issue where second deletion fails to update UI
+        collectionView.reloadData()
         
         CellState.shouldSelectMultiple = false
         collectionView.allowsMultipleSelection = false
