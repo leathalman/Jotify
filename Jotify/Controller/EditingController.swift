@@ -50,6 +50,11 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
         
         view.addSubview(field)
         
+        //remove multiline input icon
+        keyboardToolbar.items?.remove(at: 0)
+        //remove save note icon
+        keyboardToolbar.items?.removeLast()
+        
         setStatusBarStyle(style: noteColor?.isDarkColor ?? false ? .lightContent : .darkContent)
     }
     

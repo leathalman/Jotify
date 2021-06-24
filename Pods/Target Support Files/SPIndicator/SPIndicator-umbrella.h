@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double SQRichTextEditorVersionNumber;
-FOUNDATION_EXPORT const unsigned char SQRichTextEditorVersionString[];
+FOUNDATION_EXPORT double SPIndicatorVersionNumber;
+FOUNDATION_EXPORT const unsigned char SPIndicatorVersionString[];
 

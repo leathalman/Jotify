@@ -7,6 +7,7 @@
 
 import UIKit
 import MultilineTextField
+import SPIndicator
 
 class ToolbarViewController: UIViewController {
     
@@ -34,6 +35,7 @@ class ToolbarViewController: UIViewController {
     
     override func viewDidLoad() {
         setupToolbar()
+        SPIndicatorConfiguration.duration = 1
     }
     
     //toolbar for
@@ -52,17 +54,21 @@ class ToolbarViewController: UIViewController {
     @objc func toggleMultilineInput() {
         if isMultiline {
             isMultiline = false
+            SPIndicator.present(title: "Multiline Input Disabled", preset: .error)
         } else {
             isMultiline = true
+            SPIndicator.present(title: "Multiline Input Enabled", preset: .done)
         }
     }
     
     @objc func addBullet() {
         if isBulletedList {
             isBulletedList = false
+            SPIndicator.present(title: "Bulleted List Disabled", preset: .error)
         } else {
             isBulletedList = true
             isMultiline = true
+            SPIndicator.present(title: "Bulleted List Enabled", preset: .done)
             field.addBullet()
         }
     }

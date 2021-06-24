@@ -24,7 +24,7 @@ extension WriteNoteController {
             field.contentInset = .zero
             field.frame = CGRect(x: 0, y: 100, width: view.bounds.width, height: UIScreen.main.bounds.height / 4)
         } else {
-            field.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height + 42, right: 0)
+            field.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: keyboardViewEndFrame.height + 42, right: 0)
             field.frame = CGRect(x: 0, y: 40, width: view.bounds.width, height: UIScreen.main.bounds.height)
         }
 

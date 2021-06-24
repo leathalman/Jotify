@@ -18,6 +18,7 @@ target 'Jotify' do
   pod 'Pageboy', '~> 3.6'
   pod 'SwiftMessages'
   pod 'ViewAnimator'
+  pod 'SPIndicator'
   
   post_install do |installer|
     installer.pods_project.targets.each do |target|
