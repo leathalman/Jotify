@@ -68,6 +68,12 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
             field.text = placeholder
             field.textColor = .almostWhite
             
+            //removed bulleted list from next note
+            if isBulletedList {
+                isMultiline = false
+                isBulletedList = false
+            }
+            
             //setup color and data for new note creation
             let newTheme = ColorManager.themes.randomElement()
             self.theme = newTheme
@@ -98,7 +104,7 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     //timer functions for "automatically" saving once a user stops typing
     func resetTimer() {
         timer?.invalidate()
-        let nextTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(handleIdleEvent), userInfo: nil, repeats: false)
+        let nextTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(handleIdleEvent), userInfo: nil, repeats: false)
         timer = nextTimer
     }
     

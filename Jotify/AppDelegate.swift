@@ -43,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.register(defaults: [
             "hasMigrated": "false",
             "theme": "Default"
+            "multilineInputEnabled": "false"
         ])
     }
     

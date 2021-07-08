@@ -30,8 +30,15 @@ class ToolbarViewController: UIViewController {
     let placeholder: String = "Start typing or swipe right for saved notes..."
     
     override func viewDidLoad() {
-        setupToolbar()
         SPIndicatorConfiguration.duration = 1
+
+        setupToolbar()
+        
+        if UserDefaults.standard.bool(forKey: "multilineInputEnabled") {
+            isMultiline = true
+        } else {
+            isMultiline = false
+        }
         
         //setup notifications for keyboard
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -56,9 +63,11 @@ class ToolbarViewController: UIViewController {
         if isMultiline {
             isMultiline = false
             SPIndicator.present(title: "Multiline Input Disabled", preset: .error)
+            UserDefaults.standard.setValue(false, forKey: "multilineInputEnabled")
         } else {
             isMultiline = true
             SPIndicator.present(title: "Multiline Input Enabled", preset: .done)
+            UserDefaults.standard.setValue(true, forKey: "multilineInputEnabled")
         }
     }
     
