@@ -32,9 +32,13 @@ class ToolbarViewController: UIViewController {
     override func viewDidLoad() {
         setupToolbar()
         SPIndicatorConfiguration.duration = 1
+        
+        //setup notifications for keyboard
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    //toolbar for
+    //toolbar UI setup
     func setupToolbar() {
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         let multiline = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.2.decrease.circle"), style: .plain, target: self, action: #selector(toggleMultilineInput))
@@ -47,6 +51,7 @@ class ToolbarViewController: UIViewController {
         field.inputAccessoryView = keyboardToolbar
     }
     
+    //toolbar action cofiguration
     @objc func toggleMultilineInput() {
         if isMultiline {
             isMultiline = false
@@ -70,4 +75,19 @@ class ToolbarViewController: UIViewController {
     }
     
     @objc func keyboardSaveNote () { return }
+    
+    //handle keyboard interaction with view
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let insets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+            field.contentInset = insets
+            field.scrollIndicatorInsets = insets
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        let insets = UIEdgeInsets.zero
+        field.contentInset = insets
+        field.scrollIndicatorInsets = insets
+    }
 }

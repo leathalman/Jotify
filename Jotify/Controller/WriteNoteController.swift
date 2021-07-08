@@ -41,7 +41,7 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     func setupView() {
         view.setGradient(theme: theme ?? .BlueLagoon)
         noteColor = theme?.colors().randomElement() ?? .bluelagoon1
-                
+        
         field.delegate = self
         view.addSubview(field)
         
@@ -63,7 +63,10 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
             timer?.invalidate()
             //reset hasCreatedDocument so view will be prepared to create another note
             hasCreatedDocument = false
-            field.text = ""
+            
+            //manually replace the placeholder to fix bug when pasting text then calling handleSend
+            field.text = placeholder
+            field.textColor = .almostWhite
             
             //setup color and data for new note creation
             let newTheme = ColorManager.themes.randomElement()

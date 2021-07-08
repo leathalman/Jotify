@@ -47,7 +47,6 @@
 		F6B9AE0C25DCC871008467C6 /* MigrationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9AE0B25DCC871008467C6 /* MigrationHandler.swift */; };
 		F6B9D4B825B6175D00A0446C /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9D4B725B6175D00A0446C /* UIViewController+Extensions.swift */; };
 		F6B9D4CA25B629C800A0446C /* Double+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9D4C925B629C800A0446C /* Double+Date.swift */; };
-		F6C2EBB725BA728000EC6582 /* EditingController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C2EBB625BA728000EC6582 /* EditingController+Keyboard.swift */; };
 		F6CF5DDF25DAEF2F006E576E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CF5DDE25DAEF2F006E576E /* CloudKit.framework */; };
 		F6CF5DF325DAF38D006E576E /* Jotify.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F6CF5DF125DAF38D006E576E /* Jotify.xcdatamodeld */; };
 		F6D2771225C8C00E00ECFCCC /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D2771125C8C00E00ECFCCC /* SettingsCell.swift */; };
@@ -106,7 +105,6 @@
 		F6B9AE0B25DCC871008467C6 /* MigrationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationHandler.swift; sourceTree = "<group>"; };
 		F6B9D4B725B6175D00A0446C /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		F6B9D4C925B629C800A0446C /* Double+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Date.swift"; sourceTree = "<group>"; };
-		F6C2EBB625BA728000EC6582 /* EditingController+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingController+Keyboard.swift"; sourceTree = "<group>"; };
 		F6CF5DDC25DAEF2B006E576E /* Jotify.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jotify.entitlements; sourceTree = "<group>"; };
 		F6CF5DDE25DAEF2F006E576E /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		F6CF5DF225DAF38D006E576E /* Jotify.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Jotify.xcdatamodel; sourceTree = "<group>"; };
@@ -305,7 +303,6 @@
 		F6C2EBB525BA726B00EC6582 /* Keyboard */ = {
 			isa = PBXGroup;
 			children = (
-				F6C2EBB625BA728000EC6582 /* EditingController+Keyboard.swift */,
 				F6A5F9452604E5F200E46105 /* DismissKeyboardSwiftUI.swift */,
 			);
 			path = Keyboard;
@@ -481,7 +478,6 @@
 				F622093D2602B00E001DFAC1 /* LogInView.swift in Sources */,
 				F6F185B225C86ABF001FD5FA /* GeneralSettingsController.swift in Sources */,
 				F66F5C4B267FE3BD004CB9F1 /* GradientAnimator.swift in Sources */,
-				F6C2EBB725BA728000EC6582 /* EditingController+Keyboard.swift in Sources */,
 				F6425CC12680D286008C03A2 /* UIColor+StringInterpretor.swift in Sources */,
 				F67F002425B32EE600313D61 /* AuthManager.swift in Sources */,
 				F66E580F261B96E60045D0F3 /* SignInWithApple.swift in Sources */,

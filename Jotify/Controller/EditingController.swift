@@ -27,7 +27,6 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
         noteColor = note?.color.getNewColor()
         setupView()
         setupNavBar()
-        setupNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
