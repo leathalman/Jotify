@@ -39,8 +39,8 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     
     //view configuration
     func setupView() {
-        view.setGradient(theme: theme ?? .BlueLagoon)
-        noteColor = theme?.colors().randomElement() ?? .bluelagoon1
+        view.setGradient(theme: theme ?? .olympia)
+        noteColor = theme?.colors().randomElement() ?? .olympia1
         
         field.delegate = self
         view.addSubview(field)
@@ -59,6 +59,17 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
             DataManager.updateNoteContent(content: field.text, uid: documentID ?? "") { (success) in
                 //handle success here
             }
+            
+            print("Color override is \(colorOverride)")
+            
+            if colorOverride != "" {
+                DataManager.updateNoteColor(color: colorOverride, uid: documentID ?? "") { success in
+                    //handle success here
+                    print("color overriden from selection")
+                }
+                colorOverride = ""
+            }
+            
             //stop timer so notes doesn't update outside of this view (WriteNoteController)
             timer?.invalidate()
             //reset hasCreatedDocument so view will be prepared to create another note
@@ -77,8 +88,8 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
             //setup color and data for new note creation
             let newTheme = ColorManager.themes.randomElement()
             self.theme = newTheme
-            self.noteColor = newTheme?.colors().randomElement() ?? .bluelagoon1
-            self.view.setGradient(theme: newTheme ?? .BlueLagoon)
+            self.noteColor = newTheme?.colors().randomElement() ?? .olympia1
+            self.view.setGradient(theme: newTheme ?? .olympia)
             
             AnalyticsManager.logEvent(named: "note_created", description: "note_created")
         }
@@ -135,11 +146,18 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     //whenever user types, update the document and reset the timer
     func textViewDidChange(_ textView: UITextView) {
         if !hasCreatedDocument {
-            documentID = DataManager.createNote(content: field.text, timestamp: Date.timeIntervalSinceReferenceDate, color: noteColor.getNewString())
+            documentID = DataManager.createNote(content: field.text, timestamp: Date.timeIntervalSinceReferenceDate, color: noteColor.getString())
             hasCreatedDocument = true
         } else if !field.text.isEmpty && field.textColor == .white {
             resetTimer()
         }
+    }
+    
+    //update UI to new color chosen from ColorGallery
+    override func updateColorOverride(color: String) {
+        colorOverride = color
+        view.removeGradient()
+        view.backgroundColor = color.getColor()
     }
     
     //setup constraints for multiline textfield

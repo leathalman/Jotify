@@ -35,7 +35,7 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
         bounces = false
         
         //set custom transition to allow time for keyboard to pop up when programmatically scrolling
-        transition = Transition(style: .push, duration: 0.25)
+        transition = Transition(style: .push, duration: 0.15)
         
         //setup the color system for background with light/dark mode
         if traitCollection.userInterfaceStyle == .light {
@@ -91,8 +91,8 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
         if !MigrationHandler.CDNotes.isEmpty {
             NotificationCenter.default.removeObserver(self)
             for note in MigrationHandler.CDNotes {
-                DataManager.createNote(content: note.content ?? "", timestamp: note.modifiedDate, color: ColorManager.noteColor.getNewString())
-                ColorManager.setNewNoteColor()
+                DataManager.createNote(content: note.content ?? "", timestamp: note.modifiedDate, color: ColorManager.noteColor.getString())
+                ColorManager.setNoteColor()
             }
             UserDefaults.standard.setValue(true, forKey: "hasMigrated")
             DataManager.updateUserSettings(setting: "hasMigrated", value: true) { (success) in }

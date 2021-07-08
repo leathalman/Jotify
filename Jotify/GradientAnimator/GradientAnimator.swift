@@ -39,7 +39,7 @@ open class GradientAnimator: UIView {
     private var startPoint: GradientPoints = GradientPoints.topRight
     private var endPoint: GradientPoints = GradientPoints.bottomLeft
     private var animationDuration : TimeInterval = 5.0
-    var gradientTheme: GradientThemes  = GradientThemes.Sunrise
+    var gradientTheme: GradientThemes  = GradientThemes.sunset
     
     
     public init(frame: CGRect,inputColors:[UIColor],_startPoint:GradientPoints,_endPoint:GradientPoints,_animationDuration:TimeInterval) {

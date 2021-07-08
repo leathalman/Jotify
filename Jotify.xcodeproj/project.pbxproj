@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D468660ACBD45E5CD1B0E4CD /* Pods_Jotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7077D1FD53AC3A2DF5B8A96 /* Pods_Jotify.framework */; };
+		F6048A012697662100C7B566 /* ColorGalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6048A002697662100C7B566 /* ColorGalleryController.swift */; };
 		F611D0DE25D841FA00E6D860 /* EmptyNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F611D0DD25D841FA00E6D860 /* EmptyNoteView.swift */; };
 		F618793C2696583800D825DA /* AdvancedSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F618793B2696583800D825DA /* AdvancedSettingsController.swift */; };
 		F620BD2625B338C7005BE77B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F620BD2525B338C7005BE77B /* GoogleService-Info.plist */; };
@@ -64,6 +65,7 @@
 		1129B93197342E6D106D25C2 /* Pods-Jotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.release.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.release.xcconfig"; sourceTree = "<group>"; };
 		A7077D1FD53AC3A2DF5B8A96 /* Pods_Jotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF4FA6AF11CB6D0F6E0E14F3 /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.debug.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
+		F6048A002697662100C7B566 /* ColorGalleryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGalleryController.swift; sourceTree = "<group>"; };
 		F611D0DD25D841FA00E6D860 /* EmptyNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNoteView.swift; sourceTree = "<group>"; };
 		F618793B2696583800D825DA /* AdvancedSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedSettingsController.swift; sourceTree = "<group>"; };
 		F620BD2525B338C7005BE77B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -173,9 +175,9 @@
 			children = (
 				F66F5C4A267FE3BD004CB9F1 /* GradientAnimator.swift */,
 				F66F5C4F267FE48C004CB9F1 /* GradientThemes.swift */,
+				F6425CC02680D286008C03A2 /* UIColor+StringInterpretor.swift */,
 				F6DFF0CB25C90617004D6468 /* ColorManager.swift */,
 				F66F5C4C267FE3D3004CB9F1 /* UIView+Gradient.swift */,
-				F6425CC02680D286008C03A2 /* UIColor+StringInterpretor.swift */,
 			);
 			path = GradientAnimator;
 			sourceTree = "<group>";
@@ -223,6 +225,7 @@
 				F67F003725B32F7900313D61 /* NoteCollectionController.swift */,
 				F67F003F25B32F8700313D61 /* WriteNoteController.swift */,
 				F670E014268123D9002960FE /* ToolbarViewController.swift */,
+				F6048A002697662100C7B566 /* ColorGalleryController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -473,6 +476,7 @@
 				F638E64A25CEEFC7005FA371 /* AppearanceSettingsController.swift in Sources */,
 				F652AB6525B87CF2006D7747 /* EditingController.swift in Sources */,
 				F6DFF0CC25C90617004D6468 /* ColorManager.swift in Sources */,
+				F6048A012697662100C7B566 /* ColorGalleryController.swift in Sources */,
 				F66F5C50267FE48C004CB9F1 /* GradientThemes.swift in Sources */,
 				F6CF5DF325DAF38D006E576E /* Jotify.xcdatamodeld in Sources */,
 				F622093D2602B00E001DFAC1 /* LogInView.swift in Sources */,

@@ -272,11 +272,11 @@ class NoteCollectionController: UICollectionViewController {
         
         cell.textLabel.text = note?.content
         cell.dateLabel.text = note?.timestamp.getDate()
-        let noteColor = note?.color.getNewColor()
+        let noteColor = note?.color.getColor()
         
         //handle dynamic text color based on background color of cell
-        cell.textLabel.textColor = note?.color.getNewColor().isDarkColor ?? true ? .white : .black
-        cell.dateLabel.textColor = note?.color.getNewColor().isDarkColor ?? true ? .white : .black
+        cell.textLabel.textColor = note?.color.getColor().isDarkColor ?? true ? .white : .black
+        cell.dateLabel.textColor = note?.color.getColor().isDarkColor ?? true ? .white : .black
         
         if selectedCells.contains(indexPath) {
             cell.backgroundColor = .darkGray

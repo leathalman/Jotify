@@ -9,7 +9,7 @@ import UIKit
 
 class ColorManager {
     
-    static var themes: [GradientThemes] = [.Amin, .BlueLagoon, .Celestial, .Kyoopal, .Maldives, .NeonLife, .SolidStone, .Sunrise]
+    static var themes: [GradientThemes] = [.minoas, .olympia, .caelestibus, .kyoopal, .sunrise, .eros, .caeruleum, .sunset]
     static var allColors = GradientThemes.All.colors()
     
     static var noteColor = UIColor()
@@ -21,7 +21,7 @@ class ColorManager {
     //remove elements from indexes array as they are selected from parameter array
     //repeat when indexes is empty
     //TODO:: FIX THIS METHOD, DOESNT WORK
-    @discardableResult static func setNewNoteColor() -> UIColor {
+    @discardableResult static func setNoteColor() -> UIColor {
         let count = GradientThemes.All.colors().count
         if ColorManager.indexes.count == 0 {
             ColorManager.indexes = Array(0..<count)

@@ -24,7 +24,7 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     //life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        noteColor = note?.color.getNewColor()
+        noteColor = note?.color.getColor()
         setupView()
         setupNavBar()
     }
@@ -120,5 +120,19 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
         }
         
         return false
+    }
+    
+    //handle color selection from ColorGallery
+    override func updateColorOverride(color: String) {
+        colorOverride = color
+        noteColor = color.getColor()
+        setupView()
+        setupNavBar()
+        
+        DataManager.updateNoteColor(color: color, uid: note!.id) { success in
+            //handle success here
+        }
+        
+        colorOverride = ""
     }
 }

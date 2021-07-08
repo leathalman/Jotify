@@ -8,7 +8,11 @@
 import UIKit
 import SPIndicator
 
-class ToolbarViewController: UIViewController {
+protocol ColorGalleryDelegate {
+    func updateColorOverride(color: String)
+}
+
+class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     
     lazy var field: UITextView = {
         let f = UITextView()
@@ -28,6 +32,9 @@ class ToolbarViewController: UIViewController {
     var isMultiline: Bool = false
     
     let placeholder: String = "Start typing or swipe right for saved notes..."
+    
+    //observe a color chosen through ColorGallery
+    var colorOverride = ""
     
     override func viewDidLoad() {
         SPIndicatorConfiguration.duration = 1
@@ -49,7 +56,7 @@ class ToolbarViewController: UIViewController {
     func setupToolbar() {
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         let multiline = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.2.decrease.circle"), style: .plain, target: self, action: #selector(toggleMultilineInput))
-        let colorpicker = UIBarButtonItem(image: UIImage(systemName: "eyedropper"), style: .plain, target: self, action: nil)
+        let colorpicker = UIBarButtonItem(image: UIImage(systemName: "eyedropper"), style: .plain, target: self, action: #selector(showColorGalleryController))
         let list = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), style: .plain, target: self, action: #selector(addBullet))
         let timer = UIBarButtonItem(image: UIImage(systemName: "timer"), style: .plain, target: self, action: nil)
         let help = UIBarButtonItem(image: UIImage(systemName: "arrow.down.app"), style: .plain, target: self, action: #selector(keyboardSaveNote))
@@ -84,6 +91,15 @@ class ToolbarViewController: UIViewController {
     }
     
     @objc func keyboardSaveNote () { return }
+    
+    @objc func showColorGalleryController() {
+        let gallery = ColorGalleryController(style: .insetGrouped)
+        gallery.delegate = self
+        present(gallery, animated: true, completion: nil)
+    }
+    
+    //empty method because it is designed to be overriden by child class
+    func updateColorOverride(color: String) { }
     
     //handle keyboard interaction with view
     @objc func keyboardWillShow(notification: NSNotification) {

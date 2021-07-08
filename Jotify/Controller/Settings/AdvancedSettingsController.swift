@@ -22,8 +22,8 @@ class AdvancedSettingsController: SettingsController {
         switch indexPath.row {
         case 0:
             for note in self.noteCollection!.FBNotes {
-                DataManager.updateNoteColor(color: ColorManager.noteColor.getNewString(), uid: note.id) { success in }
-                ColorManager.setNewNoteColor()
+                DataManager.updateNoteColor(color: ColorManager.noteColor.getString(), uid: note.id) { success in }
+                ColorManager.setNoteColor()
             }
             
             let alertController = UIAlertController(title: "Sucesss!", message: "The color of your notes has been reset.", preferredStyle: .alert)
