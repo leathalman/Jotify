@@ -12,7 +12,7 @@ class GeneralSettingsController: SettingsController {
     override func viewDidLoad() {
         super.viewDidLoad()
         super.sections = ["General"]
-        super.section1 = ["Account"]
+        super.section1 = ["Account", "Advanced"]
         navigationItem.title = "Settings"
     }
     
@@ -29,7 +29,7 @@ class GeneralSettingsController: SettingsController {
                 navigationController?.pushViewController(vc, animated: true)
             }
         case 1:
-            let vc = AppearanceSettingsController(style: .insetGrouped)
+            let vc = AdvancedSettingsController(style: .insetGrouped)
             vc.noteCollection = self.noteCollection
             if UIDevice.current.userInterfaceIdiom == .pad {
                 vc.modalPresentationStyle = .formSheet
@@ -37,6 +37,15 @@ class GeneralSettingsController: SettingsController {
             } else if UIDevice.current.userInterfaceIdiom == .phone {
                 navigationController?.pushViewController(vc, animated: true)
             }
+//        case 2:
+//            let vc = AppearanceSettingsController(style: .insetGrouped)
+//            vc.noteCollection = self.noteCollection
+//            if UIDevice.current.userInterfaceIdiom == .pad {
+//                vc.modalPresentationStyle = .formSheet
+//                present(vc, animated: true, completion: nil)
+//            } else if UIDevice.current.userInterfaceIdiom == .phone {
+//                navigationController?.pushViewController(vc, animated: true)
+//            }
         default:
             print("")
         }

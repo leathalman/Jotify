@@ -47,6 +47,7 @@ extension UIColor {
     static let mineShaft = UIColor(r: 40, g: 40, b: 40)
     static let lightTrail = UIColor(r: 239, g: 243, b: 244)
     static let gainsboro = UIColor(hex: "#E8ECED")
+    static let almostWhite = UIColor(r: 254, g: 254, b: 254)
     
     //sunrise - https://coolors.co/ffa17f-42434f-00223e
     static let sunrise1 = UIColor(hex: "FFA17F")

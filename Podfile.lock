@@ -327,7 +327,6 @@ PODS:
   - gRPC-Core/Interface (1.28.2)
   - GTMSessionFetcher/Core (1.5.0)
   - leveldb-library (1.22)
-  - MultilineTextField (1.0.0)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
     - nanopb/encode (= 1.30906.0)
@@ -347,7 +346,6 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Firestore
   - FirebaseFirestoreSwift
-  - MultilineTextField
   - Pageboy (~> 3.6)
   - SPIndicator
   - SwiftMessages
@@ -373,7 +371,6 @@ SPEC REPOS:
     - gRPC-Core
     - GTMSessionFetcher
     - leveldb-library
-    - MultilineTextField
     - nanopb
     - Pageboy
     - PromisesObjC
@@ -400,7 +397,6 @@ SPEC CHECKSUMS:
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
-  MultilineTextField: bb965487257ce72f880d313074d419cac34024ff
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   Pageboy: cf121b9dd48c63f3f281b2a9ec93d02e0f23879b
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
@@ -408,6 +404,6 @@ SPEC CHECKSUMS:
   SwiftMessages: 77b847d1405f99046ffbd0d856bc7d73e6892686
   ViewAnimator: 7512352ec4dec2901b980d16b1256d601c30a44c
 
-PODFILE CHECKSUM: f66342f9e37d0b8a3b244a6902559444a8a8788c
+PODFILE CHECKSUM: 8ac415a4c2f6564f3459323bea29e3e55ad7f45b
 
 COCOAPODS: 1.10.1

@@ -6,25 +6,20 @@
 //
 
 import UIKit
-import MultilineTextField
 import SPIndicator
 
 class ToolbarViewController: UIViewController {
     
-    //textfield for editing notes
-    lazy var field: MultilineTextField = {
-        let frame = CGRect(x: 0, y: 100, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 100)
-        let textField = MultilineTextField(frame: frame)
-        textField.backgroundColor = .clear
-        textField.placeholderColor = .white
-        textField.textColor = .white
-        textField.tintColor = .white
-        textField.isEditable = true
-        textField.leftViewOrigin = CGPoint(x: 8, y: 8)
-        textField.font = UIFont.boldSystemFont(ofSize: 32)
-        textField.textContainerInset = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
-        textField.placeholder = "Start typing or swipe right for saved notes..."
-        return textField
+    lazy var field: UITextView = {
+        let f = UITextView()
+        f.backgroundColor = .clear
+        f.textColor = .white
+        f.tintColor = .white
+        f.isEditable = true
+        f.font = UIFont.boldSystemFont(ofSize: 32)
+        f.textContainerInset = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
+        f.translatesAutoresizingMaskIntoConstraints = false
+        return f
     }()
     
     var keyboardToolbar = UIToolbar()
@@ -32,6 +27,7 @@ class ToolbarViewController: UIViewController {
     var isBulletedList: Bool = false  
     var isMultiline: Bool = false
     
+    let placeholder: String = "Start typing or swipe right for saved notes..."
     
     override func viewDidLoad() {
         setupToolbar()

@@ -30,7 +30,6 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        setupNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -42,28 +41,21 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     func setupView() {
         view.setGradient(theme: theme ?? .BlueLagoon)
         noteColor = theme?.colors().randomElement() ?? .bluelagoon1
-        
+                
         field.delegate = self
-        field.frame = CGRect(x: 0, y: 100, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         view.addSubview(field)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        view.addGestureRecognizer(tap)
-    }
-    
-    //whenever the area around the textView is tapped, bring up the keyboard
-    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        if field.isFirstResponder {
-            field.resignFirstResponder()
-        } else {
-            field.becomeFirstResponder()
-        }
+        //manually handle placeholder
+        field.text = "Start typing or swipe right for saved notes..."
+        field.textColor = .almostWhite
+        
+        setupConstraints()
     }
     
     //invalidate timer, reset timer-related variables, and do a final update on the document
     //clean up the UI by emptying the textView and resigning keyboard
     @objc func handleSend() {
-        if !field.text.isEmpty {
+        if !field.text.isEmpty && field.textColor == .white {
             DataManager.updateNoteContent(content: field.text, uid: documentID ?? "") { (success) in
                 //handle success here
             }
@@ -108,10 +100,26 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     }
     
     @objc func handleIdleEvent() {
-        if !field.text.isEmpty {
+        if !field.text.isEmpty && field.textColor == .white {
             DataManager.updateNoteContent(content: field.text, uid: documentID ?? "") { (success) in
                 //handle success here
             }
+        }
+    }
+    
+    //remove the placeholder when user begins to edit the TextView
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if field.textColor == .almostWhite {
+            field.text = ""
+            field.textColor = .white
+        }
+    }
+    
+    //add placeholder back when user is done editing
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if field.text.isEmpty {
+            field.text = placeholder
+            field.textColor = .almostWhite
         }
     }
     
@@ -120,20 +128,21 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
         if !hasCreatedDocument {
             documentID = DataManager.createNote(content: field.text, timestamp: Date.timeIntervalSinceReferenceDate, color: noteColor.getNewString())
             hasCreatedDocument = true
-        } else if !field.text.isEmpty {
+        } else if !field.text.isEmpty && field.textColor == .white {
             resetTimer()
         }
     }
     
-    override func keyboardSaveNote() {
-        handleSend()
+    //setup constraints for multiline textfield
+    func setupConstraints() {
+        field.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100).isActive = true
+        field.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        field.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        field.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     }
     
-    //resize the textfield frame each time the window size changes
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        let frame = CGRect(x: 0, y: 100, width: size.width, height: size.height / 4)
-        field.frame = frame
+    override func keyboardSaveNote() {
+        handleSend()
     }
     
     //traitcollection: light/dark mode support with status bar

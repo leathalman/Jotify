@@ -14,7 +14,6 @@ target 'Jotify' do
   pod 'FirebaseFirestoreSwift'
   
   pod 'Blueprints'
-  pod 'MultilineTextField'
   pod 'Pageboy', '~> 3.6'
   pod 'SwiftMessages'
   pod 'ViewAnimator'

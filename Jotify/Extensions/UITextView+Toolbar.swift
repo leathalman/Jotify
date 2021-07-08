@@ -1,13 +1,13 @@
 //
-//  MultilineTextField+Extensions.swift
+//  File.swift
 //  Jotify
 //
-//  Created by Harrison Leath on 6/23/21.
+//  Created by Harrison Leath on 7/8/21.
 //
 
-import MultilineTextField
+import UIKit
 
-extension MultilineTextField {
+extension UITextView {
     
     //add bullet at cursor (or replacing cursor's selection)
     func addBullet() {
@@ -29,5 +29,4 @@ extension MultilineTextField {
             self.replace(range, withText: "\n")
         }
     }
-    
 }

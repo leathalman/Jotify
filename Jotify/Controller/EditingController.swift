@@ -43,7 +43,6 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
         field.tintColor = noteColor?.isDarkColor ?? false ? .white : .black
         
         field.text = note?.content
-        field.placeholder = ""
         field.delegate = self
         field.font = UIFont.boldSystemFont(ofSize: 18)
         field.frame = CGRect(x: 0, y: 15, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
