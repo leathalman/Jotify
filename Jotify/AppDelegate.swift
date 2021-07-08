@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setupDefaults() {
         UserDefaults.standard.register(defaults: [
             "hasMigrated": "false",
-            "theme": "Default"
+            "theme": "Default",
             "multilineInputEnabled": "false"
         ])
     }
