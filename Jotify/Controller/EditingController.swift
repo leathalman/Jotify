@@ -27,6 +27,11 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
         noteColor = note?.color.getColor()
         setupView()
         setupNavBar()
+        
+        //remove multiline input icon
+        keyboardToolbar.items?.remove(at: 0)
+        //remove save note icon
+        keyboardToolbar.items?.removeLast()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -47,11 +52,6 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
         field.frame = CGRect(x: 0, y: 15, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         
         view.addSubview(field)
-        
-        //remove multiline input icon
-        keyboardToolbar.items?.remove(at: 0)
-        //remove save note icon
-        keyboardToolbar.items?.removeLast()
         
         setStatusBarStyle(style: noteColor?.isDarkColor ?? false ? .lightContent : .darkContent)
     }
