@@ -71,10 +71,12 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
             isMultiline = false
             SPIndicator.present(title: "Multiline Input Disabled", preset: .error)
             UserDefaults.standard.setValue(false, forKey: "multilineInputEnabled")
+            DataManager.updateUserSettings(setting: "multilineInputEnabled", value: false) { (success) in }
         } else {
             isMultiline = true
             SPIndicator.present(title: "Multiline Input Enabled", preset: .done)
             UserDefaults.standard.setValue(true, forKey: "multilineInputEnabled")
+            DataManager.updateUserSettings(setting: "multilineInputEnabled", value: true) { (success) in }
         }
     }
     

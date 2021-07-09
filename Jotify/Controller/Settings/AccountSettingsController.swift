@@ -14,7 +14,7 @@ class AccountSettingsController: SettingsController {
         super.viewDidLoad()
         super.sections = [AuthManager().email, "Data"]
         super.section1 = ["Reset Password", "Change Email", "Logout"]
-        super.section2 = ["Delete All Notes", "Delete Jotify Account"]
+        super.section2 = ["Reset Settings", "Delete All Notes", "Delete Jotify Account"]
         navigationItem.title = "Account"
     }
     
@@ -87,6 +87,31 @@ class AccountSettingsController: SettingsController {
         case 1:
             switch indexPath.row {
             case 0:
+                let alertController = UIAlertController(title: "Reset User Settings", message: "Are you sure? This will reset settings to default.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: {(action) in
+                    DataManager.deleteUserSettings { success in
+                        if success! {
+                            DataManager.createUserSettings { success in
+                                if success! {
+                                    let alertController = UIAlertController(title: "Success", message: "Settings reset successfully.", preferredStyle: .alert)
+                                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                                    self.present(alertController, animated: true, completion: nil)
+                                } else {
+                                    let alertController = UIAlertController(title: "Error", message: "There was an error resetting settings. Please try again later.", preferredStyle: .alert)
+                                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                                    self.present(alertController, animated: true, completion: nil)
+                                }
+                            }
+                        } else {
+                            let alertController = UIAlertController(title: "Error", message: "There was an error resetting settings. Please try again later.", preferredStyle: .alert)
+                            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self.present(alertController, animated: true, completion: nil)
+                        }
+                    }
+                }))
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+            case 1:
                 let alertController = UIAlertController(title: "Delete All Notes", message: "Do you really want to delete ALL of your notes? This action CANNOT be undone.", preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: {(action) in
                     let alertController = UIAlertController(title: nil, message: "Are you sure? This is the final check.", preferredStyle: .alert)
@@ -108,7 +133,7 @@ class AccountSettingsController: SettingsController {
                 }))
                 alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
-            case 1:
+            case 2:
                 let alertController = UIAlertController(title: "Delete Jotify Account", message: "Do you really want to delete your Jotify account? This action cannot be undone under any circumstance.", preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: {(action) in
                     let alertController = UIAlertController(title: nil, message: "This action will remove your account, all notes, and settings current saved in Jotify's servers. This is the FINAL check.", preferredStyle: .alert)

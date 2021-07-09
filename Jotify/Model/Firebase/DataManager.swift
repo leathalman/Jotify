@@ -38,8 +38,8 @@ class DataManager {
                 print("Error retrieving document: \(error.localizedDescription)")
                 completionHandler(nil, false)
             } else {
-                print("User settings retrieved successfully")
-                let settings = Settings(multilineInputEnabled: ((snapshot?.get("multilineInputEnabled")) != nil), hasMigrated: ((snapshot?.get("hasMigrated")) != nil), deleteOldNotes: ((snapshot?.get("deleteOldNotes")) != nil), useHaptics: ((snapshot?.get("useHaptics")) != nil))
+                print("Firebase settings retrieved")
+                let settings = Settings(multilineInputEnabled: snapshot?.get("multilineInputEnabled") as? Bool ?? false, hasMigrated: snapshot?.get("hasMigrated") as? Bool ?? false, deleteOldNotes: snapshot?.get("deleteOldNotes") as? Bool ?? false, useHaptics: snapshot?.get("useHaptics") as? Bool ?? true)
                 completionHandler(settings, true)
             }
         }
