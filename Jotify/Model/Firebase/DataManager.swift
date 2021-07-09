@@ -28,23 +28,23 @@ class DataManager {
     }
     
     //reads the user settings in users -> user uid (fields)
-    static func retrieveUserSettings(completetionHandler: @escaping (Settings?, Bool?) -> Void) {
+    static func retrieveUserSettings(completionHandler: @escaping (Settings?, Bool?) -> Void) {
         if AuthManager().uid.isEmpty { return }
         let db = Firestore.firestore()
         db.collection("users").document(AuthManager().uid).getDocument { (snapshot, error) in
             if let error = error {
                 print("Error retrieving document: \(error.localizedDescription)")
-                completetionHandler(nil, false)
+                completionHandler(nil, false)
             } else {
 //                print("User settings retrieved successfully")
                 let settings = Settings(theme: snapshot?.get("theme") as? String ?? "Default", hasMigrated: snapshot?.get("hasMigrated") as? Bool ?? true)
-                completetionHandler(settings, true)
+                completionHandler(settings, true)
             }
         }
     }
     
     //update the given setting with a value
-    static func updateUserSettings(setting: String, value: Any, completetionHandler: @escaping (Bool?) -> Void) {
+    static func updateUserSettings(setting: String, value: Any, completionHandler: @escaping (Bool?) -> Void) {
         if AuthManager().uid.isEmpty { return }
         let db = Firestore.firestore()
         db.collection("users").document(AuthManager().uid).updateData([
@@ -52,9 +52,23 @@ class DataManager {
         ]) { error in
             if let error = error {
                 print("Error adding document: \(error)")
-                completetionHandler(false)
+                completionHandler(false)
             }
-            completetionHandler(true)
+            completionHandler(true)
+        }
+    }
+    
+    //delete setting document attributed to currently logged in user
+    static func deleteUserSettings(completionHandler: @escaping (Bool?) -> Void) {
+        if AuthManager().uid.isEmpty { return }
+        let db = Firestore.firestore()
+        db.collection("users").document(AuthManager().uid).delete { (error) in
+            if let error = error {
+                print("Error deleting document: \(error.localizedDescription)")
+                completionHandler(false)
+            } else {
+                completionHandler(true)
+            }
         }
     }
     
@@ -156,7 +170,7 @@ class DataManager {
         let db = Firestore.firestore()
         db.collection("notes").document(AuthManager().uid).collection("userNotes").document(docID).delete { (error) in
             if let error = error {
-                print("Error deleting document: \(error)")
+                print("Error deleting document: \(error.localizedDescription)")
                 completionHandler(false)
             } else {
                 completionHandler(true)

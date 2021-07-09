@@ -89,4 +89,38 @@ class AuthManager {
             }
         }
     }
+    
+    //changes firebase email tied to account
+    static func changeEmail(email: String, completionHandler: @escaping (Bool?, String?) -> Void) {
+        //check if user is signed in with Apple
+        if let providerId = Auth.auth().currentUser?.providerData.first?.providerID, providerId == "apple.com" {
+            // Clear saved user ID from Sign In with Apple
+            UserDefaults.standard.set(nil, forKey: "appleAuthorizedUserIdKey")
+            completionHandler(false, "Your account is connected to Sign In with Apple, so there is no email to be changed. Jotify does not have access to a real email address.")
+        } else {
+            Auth.auth().currentUser?.updateEmail(to: email) { error in
+                if let error = error, let _ = AuthErrorCode(rawValue: error._code) {
+                    print("Email change failed: \(error.localizedDescription)")
+                    completionHandler(false, error.localizedDescription)
+                } else {
+                    print("Email address successfully changed")
+                    completionHandler(true, "Email address successfully changed")
+                }
+            }
+        }
+    }
+    
+    //delete a user account + all notes and settings tied to account
+    static func deleteUser(completionHandler: @escaping (Bool?, String?) -> Void) {
+        let user = Auth.auth().currentUser
+        user?.delete { error in
+          if let error = error {
+            // An error happened.
+            completionHandler(false, error.localizedDescription)
+          } else {
+            completionHandler(true, "Account successfully deleted.")
+          }
+        }
+    }
+    
 }

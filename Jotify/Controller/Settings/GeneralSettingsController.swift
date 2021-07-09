@@ -11,9 +11,10 @@ class GeneralSettingsController: SettingsController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.sections = ["About", "Miscellaneous"]
-        super.section1 = ["Version: \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String)", "Build: \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)", "Number of Notes: \(noteCollection?.FBNotes.count ?? 0)", "Need Support?"]
+        super.sections = ["About", "Miscellaneous", "Beta"]
+        super.section1 = ["Version: \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String)", "Build: \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)", "Number of Notes: \(noteCollection?.FBNotes.count ?? 0)", "Jotify Support"]
         super.section2 = ["Use Haptics", "Automatically Delete Old Notes"]
+        super.section3 = ["Reset Note Colors"]
         navigationItem.title = "General"
     }
     
@@ -22,14 +23,23 @@ class GeneralSettingsController: SettingsController {
         case 0:
             if indexPath.row == 3 {
                 let alertController = UIAlertController(title: "Support", message: "If you have any frustrations or concerns, email me here.", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 alertController.addAction(UIAlertAction(title: "Email", style: .default, handler: { (action) in
                     let email = "jotifysupport@leathalenterprises.com"
                     let url = URL(string: "mailto:\(email)")!
                     UIApplication.shared.open(url)
                 }))
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
             }
+        case 2:
+            for note in self.noteCollection!.FBNotes {
+                DataManager.updateNoteColor(color: ColorManager.noteColor.getString(), uid: note.id) { success in }
+                ColorManager.setNoteColor()
+            }
+            
+            let alertController = UIAlertController(title: "Sucesss!", message: "The color of your notes has been reset.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
         default:
             print("default")
         }
@@ -41,6 +51,9 @@ class GeneralSettingsController: SettingsController {
             let genericCell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
             genericCell.textLabel?.text = "\(super.section1[indexPath.row])"
             genericCell.selectionStyle = .none
+            if indexPath.row == 3 {
+                genericCell.textLabel?.textColor = .systemBlue
+            }
             return genericCell
         case 1:
             let switchCell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
@@ -68,7 +81,14 @@ class GeneralSettingsController: SettingsController {
                 let genericCell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
                 return genericCell
             }
-            
+        case 2:
+            let genericCell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+            genericCell.textLabel?.text = "\(super.section3[indexPath.row])"
+            genericCell.selectionStyle = .none
+            if indexPath.row == 0 {
+                genericCell.textLabel?.textColor = .systemBlue
+            }
+            return genericCell
         default:
             let genericCell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
             return genericCell

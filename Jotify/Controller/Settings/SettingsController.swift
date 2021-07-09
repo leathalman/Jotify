@@ -13,6 +13,7 @@ class SettingsController: UITableViewController {
     var sections: [String] = []
     var section1: [String] = []
     var section2: [String] = []
+    var section3: [String] = []
     
     var noteCollection: NoteCollection?
     
@@ -39,12 +40,16 @@ class SettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
+        switch section {
+        case 0:
             return section1.count
-        } else if section == 1 {
+        case 1:
             return section2.count
+        case 2:
+            return section3.count
+        default:
+            return 0
         }
-        return 0
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
