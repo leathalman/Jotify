@@ -10,6 +10,7 @@
 		D468660ACBD45E5CD1B0E4CD /* Pods_Jotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7077D1FD53AC3A2DF5B8A96 /* Pods_Jotify.framework */; };
 		F6048A012697662100C7B566 /* ColorGalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6048A002697662100C7B566 /* ColorGalleryController.swift */; };
 		F611D0DE25D841FA00E6D860 /* EmptyNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F611D0DD25D841FA00E6D860 /* EmptyNoteView.swift */; };
+		F61580182697D3BA00ABB6F6 /* GeneralSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61580172697D3BA00ABB6F6 /* GeneralSettingsController.swift */; };
 		F618793C2696583800D825DA /* AdvancedSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F618793B2696583800D825DA /* AdvancedSettingsController.swift */; };
 		F620BD2625B338C7005BE77B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F620BD2525B338C7005BE77B /* GoogleService-Info.plist */; };
 		F622093D2602B00E001DFAC1 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F622093B2602B00E001DFAC1 /* LogInView.swift */; };
@@ -57,7 +58,7 @@
 		F6DFF0CC25C90617004D6468 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DFF0CB25C90617004D6468 /* ColorManager.swift */; };
 		F6F185A625C85F98001FD5FA /* UITextView+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185A525C85F98001FD5FA /* UITextView+Padding.swift */; };
 		F6F185AE25C86AB4001FD5FA /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185AD25C86AB4001FD5FA /* SettingsController.swift */; };
-		F6F185B225C86ABF001FD5FA /* GeneralSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185B125C86ABF001FD5FA /* GeneralSettingsController.swift */; };
+		F6F185B225C86ABF001FD5FA /* MasterSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185B125C86ABF001FD5FA /* MasterSettingsController.swift */; };
 		F6FFCE732638E71E0012307E /* PassableUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FFCE722638E71E0012307E /* PassableUIButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		AF4FA6AF11CB6D0F6E0E14F3 /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.debug.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
 		F6048A002697662100C7B566 /* ColorGalleryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGalleryController.swift; sourceTree = "<group>"; };
 		F611D0DD25D841FA00E6D860 /* EmptyNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNoteView.swift; sourceTree = "<group>"; };
+		F61580172697D3BA00ABB6F6 /* GeneralSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsController.swift; sourceTree = "<group>"; };
 		F618793B2696583800D825DA /* AdvancedSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedSettingsController.swift; sourceTree = "<group>"; };
 		F620BD2525B338C7005BE77B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F622093B2602B00E001DFAC1 /* LogInView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
@@ -117,7 +119,7 @@
 		F6DFF0CB25C90617004D6468 /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 		F6F185A525C85F98001FD5FA /* UITextView+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Padding.swift"; sourceTree = "<group>"; };
 		F6F185AD25C86AB4001FD5FA /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
-		F6F185B125C86ABF001FD5FA /* GeneralSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsController.swift; sourceTree = "<group>"; };
+		F6F185B125C86ABF001FD5FA /* MasterSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterSettingsController.swift; sourceTree = "<group>"; };
 		F6FFCE722638E71E0012307E /* PassableUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassableUIButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -332,7 +334,8 @@
 			isa = PBXGroup;
 			children = (
 				F6F185AD25C86AB4001FD5FA /* SettingsController.swift */,
-				F6F185B125C86ABF001FD5FA /* GeneralSettingsController.swift */,
+				F6F185B125C86ABF001FD5FA /* MasterSettingsController.swift */,
+				F61580172697D3BA00ABB6F6 /* GeneralSettingsController.swift */,
 				F6DFF0C525C8FF9D004D6468 /* AccountSettingsController.swift */,
 				F638E64925CEEFC7005FA371 /* AppearanceSettingsController.swift */,
 				F618793B2696583800D825DA /* AdvancedSettingsController.swift */,
@@ -480,7 +483,7 @@
 				F66F5C50267FE48C004CB9F1 /* GradientThemes.swift in Sources */,
 				F6CF5DF325DAF38D006E576E /* Jotify.xcdatamodeld in Sources */,
 				F622093D2602B00E001DFAC1 /* LogInView.swift in Sources */,
-				F6F185B225C86ABF001FD5FA /* GeneralSettingsController.swift in Sources */,
+				F6F185B225C86ABF001FD5FA /* MasterSettingsController.swift in Sources */,
 				F66F5C4B267FE3BD004CB9F1 /* GradientAnimator.swift in Sources */,
 				F6425CC12680D286008C03A2 /* UIColor+StringInterpretor.swift in Sources */,
 				F67F002425B32EE600313D61 /* AuthManager.swift in Sources */,
@@ -504,6 +507,7 @@
 				F6F185A625C85F98001FD5FA /* UITextView+Padding.swift in Sources */,
 				F6B9AE0C25DCC871008467C6 /* MigrationHandler.swift in Sources */,
 				F67FFFF325B32E1F00313D61 /* SceneDelegate.swift in Sources */,
+				F61580182697D3BA00ABB6F6 /* GeneralSettingsController.swift in Sources */,
 				F618793C2696583800D825DA /* AdvancedSettingsController.swift in Sources */,
 				F611D0DE25D841FA00E6D860 /* EmptyNoteView.swift in Sources */,
 				F638E65225CEF36B005FA371 /* UserManager.swift in Sources */,
@@ -592,7 +596,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 99;
+				CURRENT_PROJECT_VERSION = 100;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -619,7 +623,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 99;
+				CURRENT_PROJECT_VERSION = 100;
 				DEVELOPMENT_TEAM = G69P7XTUQ3;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = Jotify/Info.plist;

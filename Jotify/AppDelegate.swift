@@ -39,11 +39,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
+    //default Userdefaults
     func setupDefaults() {
         UserDefaults.standard.register(defaults: [
-            "hasMigrated": "false",
-            "theme": "Default",
-            "multilineInputEnabled": "false"
+            "hasMigrated": false,
+//            "theme": "Default",
+            "multilineInputEnabled": false,
+            "useHaptics": true,
+            "deleteOldNotes": false
         ])
     }
     

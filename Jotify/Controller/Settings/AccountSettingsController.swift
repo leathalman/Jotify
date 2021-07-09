@@ -12,8 +12,9 @@ class AccountSettingsController: SettingsController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.sections = [AuthManager().email]
+        super.sections = [AuthManager().email, "Data"]
         super.section1 = ["Reset Password", "Logout"]
+        super.section2 = ["Delete All Data"]
         navigationItem.title = "Account"
     }
     
@@ -60,6 +61,19 @@ class AccountSettingsController: SettingsController {
             default:
                 print("")
             }
+        case 1:
+            let alertController = UIAlertController(title: "Are you sure?", message: "Do you really want to delete ALL of your notes? This action CANNOT be undone.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: {(action) in
+                let alertController = UIAlertController(title: nil, message: "Are you sure? This is the final check.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { (action) in
+                    print("HELLO")
+                    self.deleteAllNotes()
+                }))
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+            }))
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
         default:
             print("")
         }
@@ -67,12 +81,40 @@ class AccountSettingsController: SettingsController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-        cell.textLabel?.text = "\(super.section1[indexPath.row])"
-
-        if indexPath.row == 1 {
-            cell.textLabel?.textColor = .systemRed
-        }
         
+        switch indexPath.section {
+        case 0:
+            cell.textLabel?.text = "\(super.section1[indexPath.row])"
+            if indexPath.row == 1 {
+                cell.textLabel?.textColor = .systemRed
+            }
+        case 1:
+            cell.textLabel?.text = "\(super.section2[indexPath.row])"
+            cell.textLabel?.textColor = .systemRed
+        default:
+            return cell
+        }
         return cell
     }
+    
+    func deleteAllNotes() {
+        for note in self.noteCollection!.FBNotes {
+            DataManager.deleteNote(docID: note.id) { success in
+                if !success! {
+                    print("Failed to delete note: \(note.id)")
+                }
+            }
+            
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        switch section {
+        case 1:
+            return "Delete all data from Jotify's servers. Your notes are permanently deleted, so they cannot be recovered under any situation."
+        default:
+            return ""
+        }
+    }
+    
 }

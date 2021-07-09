@@ -11,9 +11,11 @@ import AudioToolbox
 extension UIViewController {
     //play haptic feedback from any viewcontroller
     func playHapticFeedback() {
-        // iPhone 7 and newer
-        let generator = UIImpactFeedbackGenerator(style: .medium)
-        generator.impactOccurred()
+        if UserDefaults.standard.bool(forKey: "useHaptics") {
+            // iPhone 7 and newer
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
+        }
     }
     
     //add gesture recognizer to hide keyboard when view is tapped

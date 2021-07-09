@@ -18,6 +18,7 @@ class SettingsController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         enableAutomaticStatusBarStyle()
+        navigationController?.configure(bgColor: ColorManager.bgColor)
     }
     
     override func viewDidLoad() {
@@ -28,9 +29,7 @@ class SettingsController: UITableViewController {
         tableView.isScrollEnabled = true
         
         view.backgroundColor = ColorManager.bgColor
-        
-        navigationController?.configure(bgColor: ColorManager.bgColor)
-        
+                
         tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
     }
@@ -60,5 +59,9 @@ class SettingsController: UITableViewController {
         enableAutomaticStatusBarStyle()
         view.backgroundColor = ColorManager.bgColor
         navigationController?.configure(bgColor: ColorManager.bgColor)
+        
+        var color = UIColor.white
+        if traitCollection.userInterfaceStyle == .light || traitCollection.userInterfaceStyle == .unspecified { color = .black }
+        navigationController?.navigationBar.standardAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor : color]
     }
 }

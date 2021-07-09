@@ -58,6 +58,7 @@ class NoteCollectionController: UICollectionViewController {
         super.viewDidLoad()
         setupViewElements()
         animateVisibleCells()
+        cleanupOldNotes()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -154,7 +155,7 @@ class NoteCollectionController: UICollectionViewController {
     
     @objc func handleLeftNavButton() {
         //initialize settings controller and pass note collection for theme changing
-        let vc = GeneralSettingsController(style: .insetGrouped)
+        let vc = MasterSettingsController(style: .insetGrouped)
         vc.noteCollection = noteCollection
         
         if UIDevice.current.userInterfaceIdiom == .pad {
@@ -163,11 +164,14 @@ class NoteCollectionController: UICollectionViewController {
         } else if UIDevice.current.userInterfaceIdiom == .phone {
             navigationController?.pushViewController(vc, animated: true)
         }
+        
+        self.playHapticFeedback()
     }
     
     @objc func handleRightNavButton() {
         let rootVC = self.getRootViewController() as! PageBoyController
         rootVC.scrollToWriteNoteController()
+        self.playHapticFeedback()
     }
     
     //NoteOptionMenu Actions
@@ -321,6 +325,21 @@ class NoteCollectionController: UICollectionViewController {
                 controller.note = filteredNotes[indexPath.row]
             }
             navigationController?.pushViewController(controller, animated: true)
+        }
+    }
+    
+    func cleanupOldNotes() {
+        if UserDefaults.standard.bool(forKey: "deleteOldNotes") {
+            for note in noteCollection!.FBNotes {
+                let today = Date.timeIntervalSinceReferenceDate
+                let timeBetweenDates = today - note.timestamp
+                if timeBetweenDates > 2592000 {
+                    print("Deleting note because of old date.")
+                    DataManager.deleteNote(docID: note.id) { success in
+                        //handle success
+                    }
+                }
+            }
         }
     }
     
