@@ -43,7 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setupDefaults() {
         UserDefaults.standard.register(defaults: [
             "hasMigrated": false,
-//            "theme": "Default",
             "multilineInputEnabled": false,
             "useHaptics": true,
             "deleteOldNotes": false

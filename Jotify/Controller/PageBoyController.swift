@@ -58,14 +58,7 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
         //if local settings hasn't migrated check too, then initialize CloudKit and start migration process
         DataManager.retrieveUserSettings { (settings, success) in
             if success! {
-                User.settings = settings!
-//                if UserDefaults.standard.string(forKey: "theme") ?? "" != settings?.theme {
-//                    //setup the color system for notes
-//                    ColorManager.theme = settings?.theme.getColorArray() ?? UIColor.defaultTheme
-//                    ColorManager.setNoteColor(theme: ColorManager.theme)
-//                    //set the theme in userdefaults, so theme is available before network request is finished
-//                    UserDefaults.standard.setValue(settings!.theme, forKey: "theme")
-//                }
+                User.settings = settings
                 
                 if !(settings!.hasMigrated) && !UserDefaults.standard.bool(forKey: "hasMigrated") {
                     print("Has migrated?: \(UserDefaults.standard.bool(forKey: "hasMigrated"))")

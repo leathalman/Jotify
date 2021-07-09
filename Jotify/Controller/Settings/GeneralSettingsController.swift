@@ -99,10 +99,11 @@ class GeneralSettingsController: SettingsController {
         if sender.isOn {
             print("useHaptics enabled")
             UserDefaults.standard.set(true, forKey: "useHaptics")
-            
+            DataManager.updateUserSettings(setting: "useHaptics", value: true) { (success) in }
         } else {
             print("useHaptics disabled")
             UserDefaults.standard.set(false, forKey: "useHaptics")
+            DataManager.updateUserSettings(setting: "useHaptics", value: false) { (success) in }
         }
     }
     
@@ -110,10 +111,11 @@ class GeneralSettingsController: SettingsController {
         if sender.isOn {
             print("deleteOldNotes enabled")
             UserDefaults.standard.set(true, forKey: "deleteOldNotes")
-            
+            DataManager.updateUserSettings(setting: "deleteOldNotes", value: true) { (success) in }
         } else {
             print("deleteOldNotes disabled")
             UserDefaults.standard.set(false, forKey: "deleteOldNotes")
+            DataManager.updateUserSettings(setting: "deleteOldNotes", value: false) { (success) in }
         }
     }
     

@@ -14,8 +14,10 @@ class DataManager {
         if AuthManager().uid.isEmpty { return }
         let db = Firestore.firestore()
         db.collection("users").document(AuthManager().uid).setData([
-            "theme": "Default",
+            "multilineInputEnabled": false,
             "hasMigrated": false,
+            "deleteOldNotes": false,
+            "useHaptics": true
         ]) { (error) in
             if let error = error {
                 print("Error deleting document: \(error.localizedDescription)")
@@ -36,8 +38,8 @@ class DataManager {
                 print("Error retrieving document: \(error.localizedDescription)")
                 completionHandler(nil, false)
             } else {
-//                print("User settings retrieved successfully")
-                let settings = Settings(theme: snapshot?.get("theme") as? String ?? "Default", hasMigrated: snapshot?.get("hasMigrated") as? Bool ?? true)
+                print("User settings retrieved successfully")
+                let settings = Settings(multilineInputEnabled: ((snapshot?.get("multilineInputEnabled")) != nil), hasMigrated: ((snapshot?.get("hasMigrated")) != nil), deleteOldNotes: ((snapshot?.get("deleteOldNotes")) != nil), useHaptics: ((snapshot?.get("useHaptics")) != nil))
                 completionHandler(settings, true)
             }
         }
