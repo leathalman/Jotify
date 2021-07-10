@@ -42,6 +42,19 @@
 		F67FFFF325B32E1F00313D61 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67FFFF225B32E1F00313D61 /* SceneDelegate.swift */; };
 		F67FFFFA25B32E2000313D61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F67FFFF925B32E2000313D61 /* Assets.xcassets */; };
 		F67FFFFD25B32E2000313D61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F67FFFFB25B32E2000313D61 /* LaunchScreen.storyboard */; };
+		F69389C92699158500EF3EED /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F69389C82699158500EF3EED /* WidgetKit.framework */; };
+		F69389CB2699158500EF3EED /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F69389CA2699158500EF3EED /* SwiftUI.framework */; };
+		F69389CE2699158500EF3EED /* RecentNoteWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69389CD2699158500EF3EED /* RecentNoteWidget.swift */; };
+		F69389D12699158A00EF3EED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F69389D02699158A00EF3EED /* Assets.xcassets */; };
+		F69389D32699158A00EF3EED /* RecentNoteWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F69389CF2699158500EF3EED /* RecentNoteWidget.intentdefinition */; };
+		F69389D42699158A00EF3EED /* RecentNoteWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F69389CF2699158500EF3EED /* RecentNoteWidget.intentdefinition */; };
+		F69389D72699158A00EF3EED /* RecentNoteWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F69389C72699158500EF3EED /* RecentNoteWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F69389DD2699161200EF3EED /* GroupDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69389DC2699161200EF3EED /* GroupDataManager.swift */; };
+		F69389DE2699168900EF3EED /* GroupDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69389DC2699161200EF3EED /* GroupDataManager.swift */; };
+		F69389E32699183E00EF3EED /* InitialSetupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69389E22699183E00EF3EED /* InitialSetupController.swift */; };
+		F69389E52699353B00EF3EED /* UIColor+StringInterpretor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6425CC02680D286008C03A2 /* UIColor+StringInterpretor.swift */; };
+		F69389E62699354E00EF3EED /* GradientThemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66F5C4F267FE48C004CB9F1 /* GradientThemes.swift */; };
+		F69389E72699356000EF3EED /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D1B6925BF7A1100B28071 /* UIColor+Extensions.swift */; };
 		F6A5F9462604E5F200E46105 /* DismissKeyboardSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A5F9452604E5F200E46105 /* DismissKeyboardSwiftUI.swift */; };
 		F6AA650325F5AFD3002362A4 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA650225F5AFD3002362A4 /* AnalyticsManager.swift */; };
 		F6B9AE0C25DCC871008467C6 /* MigrationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9AE0B25DCC871008467C6 /* MigrationHandler.swift */; };
@@ -59,6 +72,30 @@
 		F6F185B225C86ABF001FD5FA /* MasterSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185B125C86ABF001FD5FA /* MasterSettingsController.swift */; };
 		F6FFCE732638E71E0012307E /* PassableUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FFCE722638E71E0012307E /* PassableUIButton.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F69389D52699158A00EF3EED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F67FFFE525B32E1F00313D61 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F69389C62699158500EF3EED;
+			remoteInfo = RecentNoteWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F69389D82699158A00EF3EED /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F69389D72699158A00EF3EED /* RecentNoteWidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1129B93197342E6D106D25C2 /* Pods-Jotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.release.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.release.xcconfig"; sourceTree = "<group>"; };
@@ -100,6 +137,16 @@
 		F67FFFF925B32E2000313D61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F67FFFFC25B32E2000313D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F67FFFFE25B32E2000313D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F69389C72699158500EF3EED /* RecentNoteWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RecentNoteWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F69389C82699158500EF3EED /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		F69389CA2699158500EF3EED /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		F69389CD2699158500EF3EED /* RecentNoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentNoteWidget.swift; sourceTree = "<group>"; };
+		F69389CF2699158500EF3EED /* RecentNoteWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = RecentNoteWidget.intentdefinition; sourceTree = "<group>"; };
+		F69389D02699158A00EF3EED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F69389D22699158A00EF3EED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F69389DC2699161200EF3EED /* GroupDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDataManager.swift; sourceTree = "<group>"; };
+		F69389E22699183E00EF3EED /* InitialSetupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSetupController.swift; sourceTree = "<group>"; };
+		F69389E42699227400EF3EED /* RecentNoteWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RecentNoteWidgetExtension.entitlements; sourceTree = "<group>"; };
 		F6A5F9452604E5F200E46105 /* DismissKeyboardSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissKeyboardSwiftUI.swift; sourceTree = "<group>"; };
 		F6AA650225F5AFD3002362A4 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		F6B9AE0B25DCC871008467C6 /* MigrationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationHandler.swift; sourceTree = "<group>"; };
@@ -129,6 +176,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F69389C42699158500EF3EED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F69389CB2699158500EF3EED /* SwiftUI.framework in Frameworks */,
+				F69389C92699158500EF3EED /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -146,6 +202,8 @@
 			children = (
 				F6CF5DDE25DAEF2F006E576E /* CloudKit.framework */,
 				A7077D1FD53AC3A2DF5B8A96 /* Pods_Jotify.framework */,
+				F69389C82699158500EF3EED /* WidgetKit.framework */,
+				F69389CA2699158500EF3EED /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -185,6 +243,7 @@
 			children = (
 				F638E65125CEF36B005FA371 /* UserManager.swift */,
 				F6AA650225F5AFD3002362A4 /* AnalyticsManager.swift */,
+				F69389DC2699161200EF3EED /* GroupDataManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -224,6 +283,7 @@
 				F67F003F25B32F8700313D61 /* WriteNoteController.swift */,
 				F670E014268123D9002960FE /* ToolbarViewController.swift */,
 				F6048A002697662100C7B566 /* ColorGalleryController.swift */,
+				F69389E22699183E00EF3EED /* InitialSetupController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -231,7 +291,9 @@
 		F67FFFE425B32E1F00313D61 = {
 			isa = PBXGroup;
 			children = (
+				F69389E42699227400EF3EED /* RecentNoteWidgetExtension.entitlements */,
 				F67FFFEF25B32E1F00313D61 /* Jotify */,
+				F69389CC2699158500EF3EED /* RecentNoteWidget */,
 				F67FFFEE25B32E1F00313D61 /* Products */,
 				6F5C812E31E5B77289E9442B /* Pods */,
 				C642498CF2E465CD8F066A65 /* Frameworks */,
@@ -242,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				F67FFFED25B32E1F00313D61 /* Jotify.app */,
+				F69389C72699158500EF3EED /* RecentNoteWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -274,6 +337,17 @@
 				F62209432602B07A001DFAC1 /* SceneDelegate+Gestures.swift */,
 			);
 			path = Gestures;
+			sourceTree = "<group>";
+		};
+		F69389CC2699158500EF3EED /* RecentNoteWidget */ = {
+			isa = PBXGroup;
+			children = (
+				F69389CD2699158500EF3EED /* RecentNoteWidget.swift */,
+				F69389CF2699158500EF3EED /* RecentNoteWidget.intentdefinition */,
+				F69389D02699158A00EF3EED /* Assets.xcassets */,
+				F69389D22699158A00EF3EED /* Info.plist */,
+			);
+			path = RecentNoteWidget;
 			sourceTree = "<group>";
 		};
 		F6B9D4B125B6160700A0446C /* Authentication */ = {
@@ -358,15 +432,34 @@
 				F67FFFEA25B32E1F00313D61 /* Frameworks */,
 				F67FFFEB25B32E1F00313D61 /* Resources */,
 				0B3B063E829521FDFCFFCDC2 /* [CP] Embed Pods Frameworks */,
+				F69389D82699158A00EF3EED /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F69389D62699158A00EF3EED /* PBXTargetDependency */,
 			);
 			name = Jotify;
 			productName = Jotify;
 			productReference = F67FFFED25B32E1F00313D61 /* Jotify.app */;
 			productType = "com.apple.product-type.application";
+		};
+		F69389C62699158500EF3EED /* RecentNoteWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F69389DB2699158A00EF3EED /* Build configuration list for PBXNativeTarget "RecentNoteWidgetExtension" */;
+			buildPhases = (
+				F69389C32699158500EF3EED /* Sources */,
+				F69389C42699158500EF3EED /* Frameworks */,
+				F69389C52699158500EF3EED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RecentNoteWidgetExtension;
+			productName = RecentNoteWidgetExtension;
+			productReference = F69389C72699158500EF3EED /* RecentNoteWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -374,11 +467,14 @@
 		F67FFFE525B32E1F00313D61 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1230;
+				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
 					F67FFFEC25B32E1F00313D61 = {
 						CreatedOnToolsVersion = 12.3;
+					};
+					F69389C62699158500EF3EED = {
+						CreatedOnToolsVersion = 12.5.1;
 					};
 				};
 			};
@@ -396,6 +492,7 @@
 			projectRoot = "";
 			targets = (
 				F67FFFEC25B32E1F00313D61 /* Jotify */,
+				F69389C62699158500EF3EED /* RecentNoteWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -409,6 +506,14 @@
 				F67FFFFA25B32E2000313D61 /* Assets.xcassets in Resources */,
 				F6703A1B2638DD1E009863E3 /* NoteOptionMenu.xib in Resources */,
 				F620BD2625B338C7005BE77B /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F69389C52699158500EF3EED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F69389D12699158A00EF3EED /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,13 +572,16 @@
 				F67F004025B32F8700313D61 /* WriteNoteController.swift in Sources */,
 				F67F002725B32EEC00313D61 /* DataManager.swift in Sources */,
 				F62209442602B07A001DFAC1 /* SceneDelegate+Gestures.swift in Sources */,
+				F69389E32699183E00EF3EED /* InitialSetupController.swift in Sources */,
 				F67F003825B32F7900313D61 /* NoteCollectionController.swift in Sources */,
 				F6A5F9462604E5F200E46105 /* DismissKeyboardSwiftUI.swift in Sources */,
 				F678330E2640F4D6005429FF /* NoteCollectionController+Search.swift in Sources */,
 				F652AB6525B87CF2006D7747 /* EditingController.swift in Sources */,
+				F69389DD2699161200EF3EED /* GroupDataManager.swift in Sources */,
 				F6DFF0CC25C90617004D6468 /* ColorManager.swift in Sources */,
 				F6048A012697662100C7B566 /* ColorGalleryController.swift in Sources */,
 				F66F5C50267FE48C004CB9F1 /* GradientThemes.swift in Sources */,
+				F69389D42699158A00EF3EED /* RecentNoteWidget.intentdefinition in Sources */,
 				F6CF5DF325DAF38D006E576E /* Jotify.xcdatamodeld in Sources */,
 				F622093D2602B00E001DFAC1 /* LogInView.swift in Sources */,
 				F6F185B225C86ABF001FD5FA /* MasterSettingsController.swift in Sources */,
@@ -509,7 +617,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F69389C32699158500EF3EED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F69389CE2699158500EF3EED /* RecentNoteWidget.swift in Sources */,
+				F69389E72699356000EF3EED /* UIColor+Extensions.swift in Sources */,
+				F69389D32699158A00EF3EED /* RecentNoteWidget.intentdefinition in Sources */,
+				F69389DE2699168900EF3EED /* GroupDataManager.swift in Sources */,
+				F69389E62699354E00EF3EED /* GradientThemes.swift in Sources */,
+				F69389E52699353B00EF3EED /* UIColor+StringInterpretor.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F69389D62699158A00EF3EED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F69389C62699158500EF3EED /* RecentNoteWidgetExtension */;
+			targetProxy = F69389D52699158A00EF3EED /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F67FFFFB25B32E2000313D61 /* LaunchScreen.storyboard */ = {
@@ -583,6 +712,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AF4FA6AF11CB6D0F6E0E14F3 /* Pods-Jotify.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
@@ -610,6 +740,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1129B93197342E6D106D25C2 /* Pods-Jotify.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
@@ -694,6 +825,58 @@
 			};
 			name = Debug;
 		};
+		F69389D92699158A00EF3EED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = RecentNoteWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 100;
+				DEVELOPMENT_TEAM = G69P7XTUQ3;
+				INFOPLIST_FILE = RecentNoteWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 2.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify.RecentNoteWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F69389DA2699158A00EF3EED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = RecentNoteWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 100;
+				DEVELOPMENT_TEAM = G69P7XTUQ3;
+				INFOPLIST_FILE = RecentNoteWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 2.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.austinleath.Jotify.RecentNoteWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -711,6 +894,15 @@
 			buildConfigurations = (
 				F67FFFFF25B32E2000313D61 /* Debug */,
 				F67F000025B32E2000313D61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F69389DB2699158A00EF3EED /* Build configuration list for PBXNativeTarget "RecentNoteWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F69389D92699158A00EF3EED /* Debug */,
+				F69389DA2699158A00EF3EED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

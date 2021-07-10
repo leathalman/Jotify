@@ -16,8 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
-        //register defaults with set values
-        setupDefaults()
+        //handle initial setup from dedicated controller
+        InitialSetupController().handleApplicationSetup()
         
         //check to see if Apple credential revoked since last launch
         didAppleIDStateRevokeWhileTerminated()
@@ -37,16 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-    }
-    
-    //default Userdefaults
-    func setupDefaults() {
-        UserDefaults.standard.register(defaults: [
-            "hasMigrated": false,
-            "multilineInputEnabled": false,
-            "useHaptics": true,
-            "deleteOldNotes": false
-        ])
     }
     
     //check to see if Apple credential revoked since last launch

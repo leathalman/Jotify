@@ -9,6 +9,7 @@ import UIKit
 import Blueprints
 import SwiftMessages
 import ViewAnimator
+import WidgetKit
 
 class NoteCollectionController: UICollectionViewController {
     //update collection view when model changes
@@ -52,6 +53,11 @@ class NoteCollectionController: UICollectionViewController {
         setupNavigationBar()
         setupSearchBar()
         enableAutomaticStatusBarStyle()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        updateWidget()
     }
     
     override func viewDidLoad() {
@@ -341,6 +347,19 @@ class NoteCollectionController: UICollectionViewController {
                 }
             }
         }
+    }
+    
+    //update widget whenever the most recent note changes
+    func updateWidget() {
+        let note = noteCollection?.FBNotes.first
+        GroupDataManager.writeData(path: "recentNoteDate", content: note?.timestamp.getDate() ?? "July 3, 2004")
+        GroupDataManager.writeData(path: "recentNoteContent", content: note?.content ?? "Example note.")
+        GroupDataManager.writeData(path: "recentNoteColor", content: note?.color ?? "systemRed")
+//        if GroupDataManager.readData(path: "recentNoteContent") != note?.content ?? "Example note." {
+            if #available(iOS 14.0, *) {
+                WidgetCenter.shared.reloadAllTimelines()
+            }
+//        }
     }
     
     //traitcollection: dynamic iPad layout and light/dark mode support
