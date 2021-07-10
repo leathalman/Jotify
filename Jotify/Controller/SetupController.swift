@@ -7,13 +7,13 @@
 
 import WidgetKit
 
-class InitialSetupController {
+class SetupController {
     
     //setup URL for widgets
     private func setupWidget() {
-        GroupDataManager.writeData(path: GroupDataPaths.color, content: "systemBlue")
-        GroupDataManager.writeData(path: GroupDataPaths.content, content: "This is a placeholder note until you start writing.")
-        GroupDataManager.writeData(path: GroupDataPaths.date, content: "July 2, 2002")
+        GroupDataManager.writeData(path: "recentNoteColor", content: "systemBlue")
+        GroupDataManager.writeData(path: "recentNoteContent", content: "This is a placeholder note until you start writing.")
+        GroupDataManager.writeData(path: "recentNoteDate", content: "July 2, 2002")
         print("Setting up widgets...")
         if #available(iOS 14.0, *) {
             WidgetCenter.shared.reloadAllTimelines()
@@ -30,7 +30,22 @@ class InitialSetupController {
         ])
     }
     
-    func handleApplicationSetup() {
+    //update widget whenever the most recent note changes
+    //but do not force refresh the widget if the most recent note has not changed
+    public static func updateWidget(note: FBNote) {
+        let content = GroupDataManager.readData(path: "recentNoteContent")
+        if content != note.content {
+            print("they are not same")
+            GroupDataManager.writeData(path: "recentNoteDate", content: note.timestamp.getDate())
+            GroupDataManager.writeData(path: "recentNoteContent", content: note.content)
+            GroupDataManager.writeData(path: "recentNoteColor", content: note.color)
+            if #available(iOS 14.0, *) {
+                WidgetCenter.shared.reloadAllTimelines()
+            }
+        }
+    }
+    
+    public func handleApplicationSetup() {
         let defaults = UserDefaults.standard
         let shortVersionKey = "CFBundleShortVersionString"
         guard let currentVersion = Bundle.main.infoDictionary![shortVersionKey] as? String else {

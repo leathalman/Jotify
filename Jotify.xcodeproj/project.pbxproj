@@ -51,7 +51,7 @@
 		F69389D72699158A00EF3EED /* RecentNoteWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F69389C72699158500EF3EED /* RecentNoteWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F69389DD2699161200EF3EED /* GroupDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69389DC2699161200EF3EED /* GroupDataManager.swift */; };
 		F69389DE2699168900EF3EED /* GroupDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69389DC2699161200EF3EED /* GroupDataManager.swift */; };
-		F69389E32699183E00EF3EED /* InitialSetupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69389E22699183E00EF3EED /* InitialSetupController.swift */; };
+		F69389E32699183E00EF3EED /* SetupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69389E22699183E00EF3EED /* SetupController.swift */; };
 		F69389E52699353B00EF3EED /* UIColor+StringInterpretor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6425CC02680D286008C03A2 /* UIColor+StringInterpretor.swift */; };
 		F69389E62699354E00EF3EED /* GradientThemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66F5C4F267FE48C004CB9F1 /* GradientThemes.swift */; };
 		F69389E72699356000EF3EED /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D1B6925BF7A1100B28071 /* UIColor+Extensions.swift */; };
@@ -145,7 +145,7 @@
 		F69389D02699158A00EF3EED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F69389D22699158A00EF3EED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F69389DC2699161200EF3EED /* GroupDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDataManager.swift; sourceTree = "<group>"; };
-		F69389E22699183E00EF3EED /* InitialSetupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSetupController.swift; sourceTree = "<group>"; };
+		F69389E22699183E00EF3EED /* SetupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupController.swift; sourceTree = "<group>"; };
 		F69389E42699227400EF3EED /* RecentNoteWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RecentNoteWidgetExtension.entitlements; sourceTree = "<group>"; };
 		F6A5F9452604E5F200E46105 /* DismissKeyboardSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissKeyboardSwiftUI.swift; sourceTree = "<group>"; };
 		F6AA650225F5AFD3002362A4 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
@@ -283,7 +283,7 @@
 				F67F003F25B32F8700313D61 /* WriteNoteController.swift */,
 				F670E014268123D9002960FE /* ToolbarViewController.swift */,
 				F6048A002697662100C7B566 /* ColorGalleryController.swift */,
-				F69389E22699183E00EF3EED /* InitialSetupController.swift */,
+				F69389E22699183E00EF3EED /* SetupController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -572,7 +572,7 @@
 				F67F004025B32F8700313D61 /* WriteNoteController.swift in Sources */,
 				F67F002725B32EEC00313D61 /* DataManager.swift in Sources */,
 				F62209442602B07A001DFAC1 /* SceneDelegate+Gestures.swift in Sources */,
-				F69389E32699183E00EF3EED /* InitialSetupController.swift in Sources */,
+				F69389E32699183E00EF3EED /* SetupController.swift in Sources */,
 				F67F003825B32F7900313D61 /* NoteCollectionController.swift in Sources */,
 				F6A5F9462604E5F200E46105 /* DismissKeyboardSwiftUI.swift in Sources */,
 				F678330E2640F4D6005429FF /* NoteCollectionController+Search.swift in Sources */,

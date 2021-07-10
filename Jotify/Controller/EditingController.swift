@@ -95,7 +95,7 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     //timer functions for "automatically" saving once a user stops typing
     func resetTimer() {
         timer?.invalidate()
-        let nextTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(handleIdleEvent), userInfo: nil, repeats: false)
+        let nextTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(handleIdleEvent), userInfo: nil, repeats: false)
         timer = nextTimer
     }
     

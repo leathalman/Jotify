@@ -7,15 +7,9 @@
 
 import WidgetKit
 
-struct GroupDataPaths {
-    static let date = "widgetDate"
-    static let content = "widgetContent"
-    static let color = "widgetColor"
-}
-
 //used to store data on-device to be read by the widget
 class GroupDataManager {
-    static let group: String = "group.austinleath.Jotify.contents"
+    static private let group: String = "group.austinleath.Jotify.contents"
     
     //where path = "recentNoteContent" or "recentNoteColor" or "recentNoteDate"
     static func readData(path: String) -> String {

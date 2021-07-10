@@ -41,14 +41,18 @@ struct RecentNoteEntry: TimelineEntry {
 struct ContentView: View {
     var widgetColor: Color = Color(GroupDataManager.readData(path: "recentNoteColor").getColor())
     
+    var textColor = GroupDataManager.readData(path: "recentNoteColor").getColor().isDarkColor ? UIColor.white : UIColor.black
+    
     var entry: Provider.Entry
     
     var body: some View {
         widgetColor.overlay(
             VStack(alignment: .center, spacing: 6) {
                 Text(entry.content).font(.system(size: 15, weight: .bold, design: .default)).multilineTextAlignment(.leading)
+                    .foregroundColor(Color(textColor))
                 Spacer()
                 Text(entry.dateString).font(.system(size: 13, weight: .medium, design: .default)).multilineTextAlignment(.center)
+                    .foregroundColor(Color(textColor))
             }
             .padding(.all, 12)
         )

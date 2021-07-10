@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         //handle initial setup from dedicated controller
-        InitialSetupController().handleApplicationSetup()
+        SetupController().handleApplicationSetup()
         
         //check to see if Apple credential revoked since last launch
         didAppleIDStateRevokeWhileTerminated()

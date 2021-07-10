@@ -57,7 +57,7 @@ class NoteCollectionController: UICollectionViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        updateWidget()
+        SetupController.updateWidget(note: noteCollection?.FBNotes.first ?? FBNote(content: "There was an error updating your widget.", timestamp: 609708829.690949, id: "nil", color: "systemRed"))
     }
     
     override func viewDidLoad() {
@@ -347,19 +347,6 @@ class NoteCollectionController: UICollectionViewController {
                 }
             }
         }
-    }
-    
-    //update widget whenever the most recent note changes
-    func updateWidget() {
-        let note = noteCollection?.FBNotes.first
-        GroupDataManager.writeData(path: "recentNoteDate", content: note?.timestamp.getDate() ?? "July 3, 2004")
-        GroupDataManager.writeData(path: "recentNoteContent", content: note?.content ?? "Example note.")
-        GroupDataManager.writeData(path: "recentNoteColor", content: note?.color ?? "systemRed")
-//        if GroupDataManager.readData(path: "recentNoteContent") != note?.content ?? "Example note." {
-            if #available(iOS 14.0, *) {
-                WidgetCenter.shared.reloadAllTimelines()
-            }
-//        }
     }
     
     //traitcollection: dynamic iPad layout and light/dark mode support
