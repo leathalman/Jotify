@@ -80,7 +80,12 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     //action handlers
     @objc func handleCancel() {
         self.playHapticFeedback()
-        navigationController?.popViewController(animated: true)
+        //dismiss view differently based on presentation style
+        if isModal {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     //datamanager interface

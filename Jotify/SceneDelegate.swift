@@ -25,6 +25,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             print("not logged in")
             setupWindows(scene: scene, vc: UIHostingController(rootView: SignUpView()))
         }
+        
+        //pull up recent note widget launched app
+        maybePressedRecentNoteWidget(urlContexts: connectionOptions.urlContexts)
                 
         guard let _ = (scene as? UIWindowScene) else { return }
     }
@@ -56,9 +59,34 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-    
+
+    //App opened from background - used partially for widgets
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        print("URL opened")
+        maybePressedRecentNoteWidget(urlContexts: URLContexts)
+    }
+
+    //collect data and present EditingController if widget pressed
+    private func maybePressedRecentNoteWidget(urlContexts: Set<UIOpenURLContext>) {
+        guard let _: UIOpenURLContext = urlContexts.first(where: { $0.url.scheme == "recentnotewidget-link" }) else { return }
+        print("🚀 Launched from widget")
+        
+        //scroll to NoteCollectionController before presenting
+//        let root = window?.rootViewController as! PageBoyController
+//        root.scrollToPage(.first, animated: false)
+        
+        //read data from GroupDataManager then create FBNote object
+        let content = GroupDataManager.readData(path: "recentNoteContent")
+        let color = GroupDataManager.readData(path: "recentNoteColor")
+        let date = GroupDataManager.readData(path: "recentNoteDate")
+        let id = GroupDataManager.readData(path: "recentNoteID")
+        
+        let controller = EditingController()
+        controller.note = FBNote(content: content, timestamp: date.getTimestamp(), id: id, color: color)
+        
+        let presentable = UINavigationController(rootViewController: controller)
+        presentable.modalPresentationStyle = .fullScreen
+        
+        window?.rootViewController?.present(presentable, animated: true, completion: nil)
     }
     
     func setupWindows(scene: UIScene, vc: UIViewController) {

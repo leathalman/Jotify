@@ -18,6 +18,17 @@ extension Double {
     }
 }
 
+extension String {
+    //change formatted date string into timestamp
+    func getTimestamp() -> Double {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.long
+        let dateString = dateFormatter.date(from: self)
+        let dateTimestamp = dateString!.timeIntervalSinceReferenceDate
+        return dateTimestamp
+    }
+}
+
 extension Date {
     // Returns the amount of days from another date
     func days(from date: Date) -> Int {
