@@ -58,7 +58,7 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
         let multiline = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.2.decrease.circle"), style: .plain, target: self, action: #selector(toggleMultilineInput))
         let colorpicker = UIBarButtonItem(image: UIImage(systemName: "eyedropper"), style: .plain, target: self, action: #selector(showColorGalleryController))
         let list = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), style: .plain, target: self, action: #selector(addBullet))
-        let timer = UIBarButtonItem(image: UIImage(systemName: "timer"), style: .plain, target: self, action: nil)
+        let timer = UIBarButtonItem(image: UIImage(systemName: "timer"), style: .plain, target: self, action: #selector(showReminderController))
         let help = UIBarButtonItem(image: UIImage(systemName: "arrow.down.app"), style: .plain, target: self, action: #selector(keyboardSaveNote))
         keyboardToolbar.items = [multiline, spacer, list, spacer, timer, spacer, colorpicker, spacer, help]
         keyboardToolbar.sizeToFit()
@@ -92,13 +92,18 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
         }
     }
     
-    @objc func keyboardSaveNote () { return }
+    @objc func showReminderController() {
+        let reminder = ReminderController(style: .insetGrouped)
+        present(reminder, animated: true, completion: nil)
+    }
     
     @objc func showColorGalleryController() {
         let gallery = ColorGalleryController(style: .insetGrouped)
         gallery.delegate = self
         present(gallery, animated: true, completion: nil)
     }
+    
+    @objc func keyboardSaveNote () { return }
     
     //empty method because it is designed to be overriden by child class
     func updateColorOverride(color: String) { }
