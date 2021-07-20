@@ -36,7 +36,6 @@ class SetupController {
     public static func updateWidget(note: FBNote) {
         let content = GroupDataManager.readData(path: "recentNoteContent")
         if content != note.content {
-            print("they are not same")
             GroupDataManager.writeData(path: "recentNoteDate", content: note.timestamp.getDate())
             GroupDataManager.writeData(path: "recentNoteContent", content: note.content)
             GroupDataManager.writeData(path: "recentNoteColor", content: note.color)
@@ -62,6 +61,8 @@ class SetupController {
             if previousVersion != nil {
                 // new version
                 print("new version")
+                setupWidget()
+                setupDefaults()
                 
             } else {
                 // first launch
