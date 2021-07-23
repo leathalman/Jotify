@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D468660ACBD45E5CD1B0E4CD /* Pods_Jotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7077D1FD53AC3A2DF5B8A96 /* Pods_Jotify.framework */; };
 		F6048A012697662100C7B566 /* ColorGalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6048A002697662100C7B566 /* ColorGalleryController.swift */; };
+		F6051B7126A7522F007F9695 /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6051B7026A7522F007F9695 /* DatePickerCell.swift */; };
 		F611D0DE25D841FA00E6D860 /* EmptyNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F611D0DD25D841FA00E6D860 /* EmptyNoteView.swift */; };
 		F61580182697D3BA00ABB6F6 /* GeneralSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61580172697D3BA00ABB6F6 /* GeneralSettingsController.swift */; };
 		F620BD2625B338C7005BE77B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F620BD2525B338C7005BE77B /* GoogleService-Info.plist */; };
@@ -71,6 +72,7 @@
 		F6F185A625C85F98001FD5FA /* UITextView+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185A525C85F98001FD5FA /* UITextView+Padding.swift */; };
 		F6F185AE25C86AB4001FD5FA /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185AD25C86AB4001FD5FA /* SettingsController.swift */; };
 		F6F185B225C86ABF001FD5FA /* MasterSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185B125C86ABF001FD5FA /* MasterSettingsController.swift */; };
+		F6F392E226A75C5C007E8C9D /* TimePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F392E126A75C5C007E8C9D /* TimePickerCell.swift */; };
 		F6FFCE732638E71E0012307E /* PassableUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FFCE722638E71E0012307E /* PassableUIButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +105,7 @@
 		A7077D1FD53AC3A2DF5B8A96 /* Pods_Jotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF4FA6AF11CB6D0F6E0E14F3 /* Pods-Jotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jotify.debug.xcconfig"; path = "Target Support Files/Pods-Jotify/Pods-Jotify.debug.xcconfig"; sourceTree = "<group>"; };
 		F6048A002697662100C7B566 /* ColorGalleryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGalleryController.swift; sourceTree = "<group>"; };
+		F6051B7026A7522F007F9695 /* DatePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerCell.swift; sourceTree = "<group>"; };
 		F611D0DD25D841FA00E6D860 /* EmptyNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNoteView.swift; sourceTree = "<group>"; };
 		F61580172697D3BA00ABB6F6 /* GeneralSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsController.swift; sourceTree = "<group>"; };
 		F620BD2525B338C7005BE77B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -165,6 +168,7 @@
 		F6F185A525C85F98001FD5FA /* UITextView+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Padding.swift"; sourceTree = "<group>"; };
 		F6F185AD25C86AB4001FD5FA /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		F6F185B125C86ABF001FD5FA /* MasterSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterSettingsController.swift; sourceTree = "<group>"; };
+		F6F392E126A75C5C007E8C9D /* TimePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerCell.swift; sourceTree = "<group>"; };
 		F6FFCE722638E71E0012307E /* PassableUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassableUIButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -399,6 +403,8 @@
 			children = (
 				F6D2771125C8C00E00ECFCCC /* SettingsCell.swift */,
 				F6D2771525C8C01C00ECFCCC /* SettingsSwitchCell.swift */,
+				F6051B7026A7522F007F9695 /* DatePickerCell.swift */,
+				F6F392E126A75C5C007E8C9D /* TimePickerCell.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -572,6 +578,7 @@
 				F6AA650325F5AFD3002362A4 /* AnalyticsManager.swift in Sources */,
 				F62209472602F252001DFAC1 /* AuthenticationController.swift in Sources */,
 				F6B9D4CA25B629C800A0446C /* Double+Date.swift in Sources */,
+				F6F392E226A75C5C007E8C9D /* TimePickerCell.swift in Sources */,
 				F67F004025B32F8700313D61 /* WriteNoteController.swift in Sources */,
 				F67F002725B32EEC00313D61 /* DataManager.swift in Sources */,
 				F62209442602B07A001DFAC1 /* SceneDelegate+Gestures.swift in Sources */,
@@ -598,6 +605,7 @@
 				F66D7C6B261BB99200E3405C /* SignInWithApple+Firebase.swift in Sources */,
 				F6D2771925C8C37C00ECFCCC /* UINavigationController+Extensions.swift in Sources */,
 				F6FFCE732638E71E0012307E /* PassableUIButton.swift in Sources */,
+				F6051B7126A7522F007F9695 /* DatePickerCell.swift in Sources */,
 				F67F002A25B32F5B00313D61 /* NoteCollection.swift in Sources */,
 				F66F5C4D267FE3D3004CB9F1 /* UIView+Gradient.swift in Sources */,
 				F6D2771225C8C00E00ECFCCC /* SettingsCell.swift in Sources */,

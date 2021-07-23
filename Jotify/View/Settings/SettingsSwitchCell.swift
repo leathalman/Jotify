@@ -8,21 +8,15 @@
 import UIKit
 
 class SettingsSwitchCell: UITableViewCell {
-    let detailText = UILabel()
     let switchButton = UISwitch()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        //set style to subtitle to allow for customization when selecting dates in ReminderController
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         
-        contentView.addSubview(detailText)
         contentView.addSubview(switchButton)
         
-        detailText.translatesAutoresizingMaskIntoConstraints = false
         switchButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        detailText.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        detailText.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -10).isActive = true
-        detailText.heightAnchor.constraint(equalTo: contentView.heightAnchor, constant: -10).isActive = true
         
         switchButton.leftAnchor.constraint(equalTo: contentView.rightAnchor, constant: -70).isActive = true
         switchButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
