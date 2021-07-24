@@ -234,12 +234,13 @@ class NoteCollectionController: UICollectionViewController {
     @objc func hideToolbar() {
         navigationController?.setToolbarHidden(true, animated: true)
         
-        for item in selectedCells {
-            collectionView.deselectItem(at: item, animated: true)
+        for path in selectedCells {
+            if selectedCells.contains(path) {
+                let index = selectedCells.firstIndex(of: path)!
+                selectedCells.remove(at: index)
+                collectionView.reloadItems(at: [path])
+            }
         }
-        
-        //reload the entire array, fixes issue where second deletion fails to update UI
-        collectionView.reloadData()
         
         CellState.shouldSelectMultiple = false
         collectionView.allowsMultipleSelection = false
