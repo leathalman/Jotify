@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCenterDelegate {
     
     var window: UIWindow?
     
@@ -16,6 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
+        UNUserNotificationCenter.current().delegate = self
         
         //check if user is logged in
         if !AuthManager().uid.isEmpty {
@@ -70,20 +72,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _: UIOpenURLContext = urlContexts.first(where: { $0.url.scheme == "recentnotewidget-link" }) else { return }
         print("🚀 Launched from widget")
         
-        //scroll to NoteCollectionController before presenting
-//        let root = window?.rootViewController as! PageBoyController
-//        root.scrollToPage(.first, animated: false)
-        
         //read data from GroupDataManager then create FBNote object
         let content = GroupDataManager.readData(path: "recentNoteContent")
         let color = GroupDataManager.readData(path: "recentNoteColor")
         let date = GroupDataManager.readData(path: "recentNoteDate")
         let id = GroupDataManager.readData(path: "recentNoteID")
         
-        let controller = EditingController()
-        controller.note = FBNote(content: content, timestamp: date.getTimestamp(), id: id, color: color)
+        EditingData.currentNote = FBNote(content: content, timestamp: date.getTimestamp(), id: id, color: color)
         
-        let presentable = UINavigationController(rootViewController: controller)
+        let presentable = UINavigationController(rootViewController: EditingController())
         presentable.modalPresentationStyle = .fullScreen
         
         window?.rootViewController?.present(presentable, animated: true, completion: nil)
@@ -96,6 +93,51 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = window
             window.makeKeyAndVisible()
         }
+    }
+    
+    //app terminated when user interacts with notification
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        openNoteFromNotification(userInfo: userInfo)
+        completionHandler(UIBackgroundFetchResult.noData)
+    }
+    
+    //app in background when user interacts with notification
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        let userInfo = response.notification.request.content.userInfo
+        
+        if response.notification.request.content.categoryIdentifier ==
+            "NOTE_REMINDER" {
+            openNoteFromNotification(userInfo: userInfo)
+        }
+        else {
+            // Handle other notification types...
+        }
+        completionHandler()
+    }
+    
+    //app in foreground when user interacts with notification
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+//        openNoteFromNotification(userInfo: notification.request.content.userInfo)
+        
+        completionHandler(UNNotificationPresentationOptions.alert)
+    }
+    
+    func openNoteFromNotification(userInfo: [AnyHashable : Any]) {
+        let noteID = userInfo["noteID"] as! String
+        let color = userInfo["color"] as! String
+        let timestamp = userInfo["timestamp"] as! Double
+        let content = userInfo["content"] as! String
+
+        print("NoteID from reminder: \(noteID)")
+
+        EditingData.currentNote = FBNote(content: content, timestamp: timestamp, id: noteID, color: color)
+        
+        let presentable = UINavigationController(rootViewController: EditingController())
+        presentable.modalPresentationStyle = .fullScreen
+        window?.rootViewController?.present(presentable, animated: true)
     }
 }
 

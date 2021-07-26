@@ -22,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //check to see if Apple credential revoked since last launch
         didAppleIDStateRevokeWhileTerminated()
         
+        //register notification types to be handled when interacted with
+        registerNotificationActions()
+                
         return true
     }
     
@@ -53,8 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     print("Signed In with Apple, valid credential")
                     break
                 case .notFound,
-                     .transferred,
-                     .revoked:
+                        .transferred,
+                        .revoked:
                     // Credential no longer authorized...
                     // Perform sign out
                     AuthManager.signOut()
@@ -64,6 +67,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             })
         }
+    }
+    
+    func registerNotificationActions() {
+        // Define the notification type
+        let noteReminderCategory =
+        UNNotificationCategory(identifier: "NOTE_REMINDER", actions: [], intentIdentifiers: [], hiddenPreviewsBodyPlaceholder: "", options: .customDismissAction)
+        // Register the notification type.
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.setNotificationCategories([noteReminderCategory])
     }
     
     //Temporary implementation of CoreData+CloudKit for transition process

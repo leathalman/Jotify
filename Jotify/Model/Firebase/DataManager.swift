@@ -125,6 +125,38 @@ class DataManager {
         }
     }
     
+    //update the value of reminder for note with uid
+    static func updateNoteReminder(reminder: String, reminderTimestamp: Double, uid: String, completionHandler: @escaping (Bool?) -> Void) {
+        if AuthManager().uid.isEmpty { return }
+        let db = Firestore.firestore()
+        db.collection("notes").document(AuthManager().uid).collection("userNotes").document(uid).updateData([
+            "reminder": reminder,
+            "reminderTimestamp": reminderTimestamp
+        ]) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+                completionHandler(false)
+            }
+            completionHandler(true)
+        }
+    }
+    
+    static func removeReminder(uid: String, completionHandler: @escaping (Bool?) -> Void) {
+        if AuthManager().uid.isEmpty { return }
+        let db = Firestore.firestore()
+        db.collection("notes").document(AuthManager().uid).collection("userNotes").document(uid).updateData([
+            "reminder": FieldValue.delete(),
+            "reminderTimestamp": FieldValue.delete()
+        ]) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+                completionHandler(false)
+            }
+            completionHandler(true)
+        }
+    }
+
+    
     //observe data change in notes -> user uid -> collection userNotes, and retrieve all notes in userNotes
     static func observeNoteChange(completionHandler: @escaping (NoteCollection?, Bool?) -> Void) {
         if AuthManager().uid.isEmpty { return }
@@ -141,7 +173,9 @@ class DataManager {
                 let timestamp = diff.document.get("timestamp") as? Double ?? 0
                 let id = diff.document.documentID
                 let color = diff.document.get("color") as? String ?? ""
-                let note = FBNote(content: content, timestamp: timestamp, id: id, color: color)
+                let reminder = diff.document.get("reminder") as? String ?? ""
+                let reminderTimestamp = diff.document.get("reminderTimestamp") as? Double ?? 0
+                let note = FBNote(content: content, timestamp: timestamp, id: id, color: color, reminder: reminder, reminderTimestamp: reminderTimestamp)
                 
                 if (diff.type == .added) {
 //                    print("New note: \(diff.document.data())")

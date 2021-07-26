@@ -147,8 +147,10 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         if !hasCreatedDocument {
             documentID = DataManager.createNote(content: field.text, timestamp: Date.timeIntervalSinceReferenceDate, color: noteColor.getString())
+            EditingData.currentNote = FBNote(content: field.text, timestamp: Date.timeIntervalSinceReferenceDate, id: documentID ?? "", color: noteColor.getString(), reminder: nil, reminderTimestamp: nil)
             hasCreatedDocument = true
         } else if !field.text.isEmpty && field.textColor == .white {
+            updateEditingData()
             resetTimer()
         }
     }
@@ -166,6 +168,10 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
         field.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         field.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         field.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+    }
+    
+    func updateEditingData() {
+        EditingData.currentNote.content = field.text
     }
     
     override func keyboardSaveNote() {

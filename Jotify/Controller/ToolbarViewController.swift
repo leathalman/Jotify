@@ -12,6 +12,11 @@ protocol ColorGalleryDelegate {
     func updateColorOverride(color: String)
 }
 
+//handles data sharing between ToolbarViewController and ReminderController
+struct EditingData {
+    static var currentNote = FBNote(content: "", timestamp: 0, id: "", color: "")
+}
+
 class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     
     lazy var field: UITextView = {

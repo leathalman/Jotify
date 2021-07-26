@@ -327,9 +327,9 @@ class NoteCollectionController: UICollectionViewController {
         } else {
             let controller = EditingController()
             controller.noteCollection = noteCollection
-            controller.note = (noteCollection?.FBNotes[indexPath.row])!
+            EditingData.currentNote = (noteCollection?.FBNotes[indexPath.row])!
             if isFiltering {
-                controller.note = filteredNotes[indexPath.row]
+                EditingData.currentNote = filteredNotes[indexPath.row]
             }
             navigationController?.pushViewController(controller, animated: true)
         }

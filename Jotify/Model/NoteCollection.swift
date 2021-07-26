@@ -19,5 +19,7 @@ struct FBNote {
     var timestamp: Double
     var id: String
     var color: String
+    var reminder: String?
+    var reminderTimestamp: Double?
 }
 

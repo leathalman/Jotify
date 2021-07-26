@@ -6,23 +6,45 @@
 //
 
 import UIKit
+import UserNotifications
 
 class ReminderController: UITableViewController, DatePickerDelegate, TimePickerDelegate {
     
-    var sections: [String] = ["Select Date And Time"]
-    var section1: [String] = ["Date", "Time"]
+    private var sections: [String] = ["Select Date And Time"]
+    private var section1: [String] = ["Date", "Time"]
     
-    var isReminderOnDate: Bool = false
-    var isReminderOnTime: Bool = false
+    //used to handle UI refreshing to the proper state
+    private var isReminderOnDate: Bool = false
+    private var isReminderOnTime: Bool = false
     
-    var dateValue: String?
-    var timeValue: String?
+    //strings to be displayed by cells
+    private var dateString: String?
+    private var timeString: String?
+    
+    //actual date values to be used when creating notifications
+    private var dateValue: Date?
+    private var timeValue: Date?
+    
+    private var reminderExistsAtDate: Date?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dateValue = formatDate(date: Date())
-        timeValue = formatTime(date: Date())
+        //if reminder already exists, customize the view to dispaly existing reminder
+        if EditingData.currentNote.reminderTimestamp ?? 0 > 1 {
+            section1.insert("", at: 1)
+            section1.insert("", at: 3)
+            isReminderOnDate = true
+            isReminderOnTime = true
+            let tempDate = Date(timeIntervalSinceReferenceDate: EditingData.currentNote.reminderTimestamp ?? 0)
+            dateString = formatDate(date: tempDate)
+            timeString = formatTime(date: tempDate)
+            
+            reminderExistsAtDate = Date(timeIntervalSinceReferenceDate: EditingData.currentNote.reminderTimestamp ?? 0)
+        } else {
+            dateString = formatDate(date: Date())
+            timeString = formatTime(date: Date())
+        }
         
         view.backgroundColor = ColorManager.bgColor
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "ReminderSwitchCell")
@@ -139,30 +161,113 @@ class ReminderController: UITableViewController, DatePickerDelegate, TimePickerD
         }
     }
     
+    func createReminder() {
+        // add category for custom buttons
+        let center = UNUserNotificationCenter.current()
+        
+        if EditingData.currentNote.reminder != nil {
+            center.removePendingNotificationRequests(withIdentifiers: [EditingData.currentNote.reminder!])
+        }
+        
+        //need custom stuff here for UUID
+        EditingData.currentNote.reminder = UUID().uuidString
+        
+        let content = UNMutableNotificationContent()
+        content.body = EditingData.currentNote.content
+        content.userInfo = ["noteID": EditingData.currentNote.id as Any, "color": EditingData.currentNote.color as Any, "timestamp": EditingData.currentNote.timestamp as Any, "content": EditingData.currentNote.content as Any]
+        content.sound = UNNotificationSound.default
+        content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
+        content.categoryIdentifier = "NOTE_REMINDER"
+        
+        var components = DateComponents()
+        components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: dateValue ?? Date())
+        
+        if timeValue == nil {
+            components.setValue(0, for: .hour)
+            components.setValue(0, for: .minute)
+        } else {
+            components.setValue(Calendar.current.component(.hour, from: timeValue!), for: .hour)
+            components.setValue(Calendar.current.component(.minute, from: timeValue!), for: .minute)
+        }
+        
+        EditingData.currentNote.reminderTimestamp = Double(Calendar.current.date(from: components)!.timeIntervalSinceReferenceDate)
+
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+        let request = UNNotificationRequest(identifier: EditingData.currentNote.reminder ?? "", content: content, trigger: trigger)
+        center.add(request)
+        
+        //give Firebase UUID of reminder and timestamp
+        DataManager.updateNoteReminder(reminder: EditingData.currentNote.reminder ?? "", reminderTimestamp: EditingData.currentNote.reminderTimestamp ?? 0, uid: EditingData.currentNote.id) { success in
+            if !success! {
+                print("There was an error creating the reminder")
+            } else {
+                print("Reminder was succesfully created and uploaded to backend")
+            }
+        }
+    }
+    
+    //removes reminder and resets all relevant variables
+    func removeReminder() {
+        // add category for custom buttons
+        let center = UNUserNotificationCenter.current()
+        
+        if (EditingData.currentNote.reminderTimestamp)! > 0 {
+            center.removePendingNotificationRequests(withIdentifiers: [EditingData.currentNote.reminder!])
+            EditingData.currentNote.reminderTimestamp = 0
+            EditingData.currentNote.reminder = ""
+            dateValue = nil
+            timeValue = nil
+            dateString = nil
+            timeString = nil
+            print("Reminder removed from queue")
+            
+            //remove reminder from Firebase
+            DataManager.removeReminder(uid: EditingData.currentNote.id) { success in
+                if !success! {
+                    print("There was an error deleting the reminder")
+                } else {
+                    print("Reminder was succesfully deleted and removed from backend")
+                }
+            }
+        }
+    }
+    
     @objc func setDate(sender: UISwitch) {
         if sender.isOn {
             print("show date selector")
             isReminderOnDate = true
+            //add item to array
             section1.insert("", at: 1)
-            tableView.insertRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+            //insert item as row into tableview
+            tableView.insertRows(at: [IndexPath(row: 1, section: 0)], with: .fade)
+            //reload row above inserted row to account for detail text
             tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
-            
+                        
         } else {
             print("hide date selector")
+            //if both date and time are displayed
             if isReminderOnTime {
                 section1.remove(at: 3)
                 section1.remove(at: 1)
-                tableView.deleteRows(at: [IndexPath(row: 1, section: 0), IndexPath(row: 3, section: 0)], with: .automatic)
+                tableView.deleteRows(at: [IndexPath(row: 1, section: 0), IndexPath(row: 3, section: 0)], with: .fade)
                 let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! SettingsSwitchCell
                 cell.switchButton.isOn = false
                 cell.detailTextLabel?.text = nil
+                //if only date is displayed
             } else {
+                //remove item from array
                 section1.remove(at: 1)
-                tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+                //delete row from tableview
+                tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .fade)
             }
             isReminderOnDate = false
             isReminderOnTime = false
+            dateValue = nil
+            timeValue = nil
+            //reload row above inserted row to account for detail text
             tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+            
+            removeReminder()
         }
     }
     
@@ -176,24 +281,27 @@ class ReminderController: UITableViewController, DatePickerDelegate, TimePickerD
                 cell.switchButton.isOn = true
                 section1.insert("", at: 1)
                 section1.insert("", at: 3)
-                tableView.insertRows(at: [IndexPath(row: 1, section: 0), IndexPath(row: 3, section: 0)], with: .automatic)
-                tableView.reloadRows(at: [IndexPath(row: 0, section: 0), IndexPath(row: 2, section: 0)], with: .none)
+                tableView.insertRows(at: [IndexPath(row: 1, section: 0), IndexPath(row: 3, section: 0)], with: .fade)
+                tableView.reloadRows(at: [IndexPath(row: 2, section: 0), IndexPath(row: 0, section: 0)], with: .none)
             } else {
                 section1.insert("", at: 3)
-                tableView.insertRows(at: [IndexPath(row: 3, section: 0)], with: .automatic)
-                tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .none)
+                tableView.insertRows(at: [IndexPath(row: 3, section: 0)], with: .fade)
             }
+            
+            tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .none)
             
         } else {
             print("hide time selector")
-            isReminderOnTime = false
             section1.remove(at: 3)
-            tableView.deleteRows(at: [IndexPath(row: 3, section: 0)], with: .automatic)
+            tableView.deleteRows(at: [IndexPath(row: 3, section: 0)], with: .fade)
             if section1.count != 3 {
                 let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SettingsSwitchCell
                 cell.switchButton.isOn = false
             }
+            isReminderOnTime = false
             tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .none)
+            dateValue = nil
+            timeValue = nil
         }
     }
     
@@ -206,14 +314,14 @@ class ReminderController: UITableViewController, DatePickerDelegate, TimePickerD
         if isDatePicker {
             cell.switchButton.addTarget(self, action: #selector(setDate(sender:)), for: .valueChanged)
             if isReminderOnDate {
-                cell.detailTextLabel?.text = dateValue
+                cell.detailTextLabel?.text = dateString
             } else {
                 cell.detailTextLabel?.text = nil
             }
         } else {
             cell.switchButton.addTarget(self, action: #selector(setTime(sender:)), for: .valueChanged)
             if isReminderOnTime {
-                cell.detailTextLabel?.text = timeValue
+                cell.detailTextLabel?.text = timeString
             } else {
                 cell.detailTextLabel?.text = nil
             }
@@ -227,6 +335,11 @@ class ReminderController: UITableViewController, DatePickerDelegate, TimePickerD
         cell.selectionStyle = .none
         cell.textLabel?.text = section1[indexPath.row]
         cell.delegate = self
+        
+        if reminderExistsAtDate != nil {
+            cell.picker.date = reminderExistsAtDate ?? Date()
+        }
+        
         return cell
     }
     
@@ -235,22 +348,32 @@ class ReminderController: UITableViewController, DatePickerDelegate, TimePickerD
         cell.selectionStyle = .none
         cell.textLabel?.text = section1[indexPath.row]
         cell.delegate = self
+        
+        if reminderExistsAtDate != nil {
+            cell.picker.date = reminderExistsAtDate ?? Date()
+        }
         return cell
     }
     
     func didChangeDate(date: Date) {
-        dateValue = formatDate(date: date)
+        dateString = formatDate(date: date)
+        dateValue = date
         tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+        
+        createReminder()
     }
     
     func didChangeTime(date: Date) {
-        timeValue = formatTime(date: date)
+        timeString = formatTime(date: date)
+        timeValue = date
         tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .none)
+        
+        createReminder()
     }
     
     func formatDate(date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateStyle = .long
+        formatter.dateStyle = .full
         formatter.timeZone = .current
         return formatter.string(from: date)
     }

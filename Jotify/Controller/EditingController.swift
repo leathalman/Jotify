@@ -9,8 +9,6 @@ import UIKit
 
 class EditingController: ToolbarViewController, UITextViewDelegate {
     
-    var note: FBNote?
-    var noteColor: UIColor?
     var noteCollection: NoteCollection?
     
     var timer: Timer?
@@ -18,13 +16,13 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         //change status bar style to white
-        setStatusBarStyle(style: noteColor?.isDarkColor ?? false ? .lightContent : .darkContent)
+        setStatusBarStyle(style: EditingData.currentNote.color.getColor().isDarkColor ? .lightContent : .darkContent)
+        checkIfReminderExpired()
     }
     
     //life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        noteColor = note?.color.getColor()
         setupView()
         setupNavBar()
         
@@ -37,43 +35,43 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         updateContent(content: field.text)
+        //reset EditingData's current note for reuse
+        EditingData.currentNote = FBNote(content: field.text, timestamp: EditingData.currentNote.timestamp, id: EditingData.currentNote.id, color: EditingData.currentNote.color, reminder: nil, reminderTimestamp: nil)
     }
     
     //view configuration
     func setupView() {
         //color customization to support white/black dynamic type
-        field.backgroundColor = noteColor
-        field.textColor = noteColor?.isDarkColor ?? false ? .white : .black
-        field.tintColor = noteColor?.isDarkColor ?? false ? .white : .black
+        field.backgroundColor = EditingData.currentNote.color.getColor()
+        field.textColor = EditingData.currentNote.color.getColor().isDarkColor ? .white : .black
+        field.tintColor = EditingData.currentNote.color.getColor().isDarkColor ? .white : .black
         
-        field.text = note?.content
+        field.text = EditingData.currentNote.content
         field.delegate = self
         field.font = UIFont.boldSystemFont(ofSize: 18)
         field.frame = CGRect(x: 0, y: 15, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         
         view.addSubview(field)
         
-        setStatusBarStyle(style: noteColor?.isDarkColor ?? false ? .lightContent : .darkContent)
+        setStatusBarStyle(style: EditingData.currentNote.color.getColor().isDarkColor ? .lightContent : .darkContent)
     }
     
     func setupNavBar() {
         //setup navigationbar elements
-        navigationItem.title = note?.timestamp.getDate()
-        navigationController?.configure(bgColor: noteColor ?? .systemBlue)
-        navigationController?.navigationBar.standardAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor : noteColor?.isDarkColor ?? false ? UIColor.white : .black]
+        navigationItem.title = EditingData.currentNote.timestamp.getDate()
+        navigationController?.configure(bgColor: EditingData.currentNote.color.getColor())
+        navigationController?.navigationBar.standardAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor : EditingData.currentNote.color.getColor().isDarkColor ? UIColor.white : .black]
         navigationItem.setHidesBackButton(true, animated: true)
         
         //define image and action for each navigation button
-        let timer = UIBarButtonItem(image: UIImage(systemName: "timer"), style: .plain, target: self, action: #selector(handleCancel))
         let ellipsis = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: self, action: #selector(handleCancel))
         let cancel = UIBarButtonItem(image: UIImage(systemName: "xmark.circle"), style: .plain, target: self, action: #selector(handleCancel))
 
         //handle tint color of each button based on view background color
-        timer.tintColor = noteColor?.isDarkColor ?? false ? .white : .black
-        ellipsis.tintColor = noteColor?.isDarkColor ?? false ? .white : .black
-        cancel.tintColor = noteColor?.isDarkColor ?? false ? .white : .black
+        ellipsis.tintColor = EditingData.currentNote.color.getColor().isDarkColor ? .white : .black
+        cancel.tintColor = EditingData.currentNote.color.getColor().isDarkColor ? .white : .black
         
-        navigationItem.leftBarButtonItems = [timer, ellipsis]
+        navigationItem.leftBarButtonItems = [ellipsis]
         navigationItem.rightBarButtonItem = cancel
     }
    
@@ -90,9 +88,25 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     
     //datamanager interface
     func updateContent(content: String) {
-        if field.text != note?.content {
-            DataManager.updateNoteContent(content: field.text, uid: note?.id ?? "") { (success) in
-                //display error in UI
+        
+        if field.text != EditingData.currentNote.content {
+            DataManager.updateNoteContent(content: field.text, uid: EditingData.currentNote.id) { success in
+                //handle success
+            }
+        }
+    }
+    
+    func checkIfReminderExpired() {
+        if EditingData.currentNote.reminderTimestamp != nil {
+            if EditingData.currentNote.reminderTimestamp ?? 0 < Date().timeIntervalSinceReferenceDate {
+                DataManager.removeReminder(uid: EditingData.currentNote.id) { success in
+                    if success! {
+                        print("Reminder outdated, removed successfully")
+                        UIApplication.shared.applicationIconBadgeNumber -= 1
+                    } else {
+                        print("Reminder outdated, removed unsuccessfully")
+                    }
+                }
             }
         }
     }
@@ -110,6 +124,7 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         resetTimer()
+        EditingData.currentNote.content = field.text
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -130,11 +145,11 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     //handle color selection from ColorGallery
     override func updateColorOverride(color: String) {
         colorOverride = color
-        noteColor = color.getColor()
+        EditingData.currentNote.color = color
         setupView()
         setupNavBar()
         
-        DataManager.updateNoteColor(color: color, uid: note!.id) { success in
+        DataManager.updateNoteColor(color: color, uid: EditingData.currentNote.id) { success in
             //handle success here
         }
         

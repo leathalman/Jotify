@@ -26,6 +26,8 @@ class DatePickerCell: UITableViewCell {
         }
         
         picker.datePickerMode = .date
+        //don't let user select date in the past for reminder
+        picker.minimumDate = Date()
         
         contentView.addSubview(picker)
         
