@@ -135,6 +135,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
 
         EditingData.currentNote = FBNote(content: content, timestamp: timestamp, id: noteID, color: color)
         
+        DataManager.removeReminder(uid: noteID) { success in
+            if !success! {
+                print("There was an error deleting the reminder")
+            } else {
+                print("Reminder was succesfully deleted and removed from backend")
+                UIApplication.shared.applicationIconBadgeNumber -= 1
+            }
+        }
+        
         let presentable = UINavigationController(rootViewController: EditingController())
         presentable.modalPresentationStyle = .fullScreen
         window?.rootViewController?.present(presentable, animated: true)

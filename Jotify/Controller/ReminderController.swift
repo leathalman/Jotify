@@ -227,6 +227,7 @@ class ReminderController: UITableViewController, DatePickerDelegate, TimePickerD
                     print("There was an error deleting the reminder")
                 } else {
                     print("Reminder was succesfully deleted and removed from backend")
+                    UIApplication.shared.applicationIconBadgeNumber -= 1
                 }
             }
         }

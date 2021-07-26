@@ -37,6 +37,14 @@ class SavedNoteCell: UICollectionViewCell {
         return label
     }()
     
+    let reminderIcon: UIImageView = {
+        let view = UIImageView ()
+        view.image = UIImage(systemName: "timer")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.alpha = 0
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addViews()
@@ -50,6 +58,7 @@ class SavedNoteCell: UICollectionViewCell {
         
         contentView.addSubview(textLabel)
         contentView.addSubview(dateLabel)
+        contentView.addSubview(reminderIcon)
         
         textLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
         textLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
@@ -59,7 +68,12 @@ class SavedNoteCell: UICollectionViewCell {
         dateLabel.leftAnchor.constraint(equalTo: textLabel.leftAnchor).isActive = true
         dateLabel.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 5).isActive = true
         dateLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        dateLabel.widthAnchor.constraint(equalTo: textLabel.widthAnchor).isActive = true
+        dateLabel.widthAnchor.constraint(equalTo: textLabel.widthAnchor, constant: -30).isActive = true
+        
+        reminderIcon.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
+        reminderIcon.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 5).isActive = true
+        reminderIcon.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        reminderIcon.widthAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     func shake() {

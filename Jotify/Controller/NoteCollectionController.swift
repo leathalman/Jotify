@@ -301,6 +301,14 @@ class NoteCollectionController: UICollectionViewController {
             cell.stopShaking()
         }
         
+        //show timer icon if note is a reminder
+        if note?.reminderTimestamp ?? 0 > 0 {
+            cell.reminderIcon.tintColor = note?.color.getColor().isDarkColor ?? true ? .white : .black
+            cell.reminderIcon.alpha = 1
+        } else {
+            cell.reminderIcon.alpha = 0
+        }
+        
         cell.contentView.layer.cornerRadius = 5
         cell.contentView.layer.shouldRasterize = true
         cell.contentView.layer.rasterizationScale = UIScreen.main.scale

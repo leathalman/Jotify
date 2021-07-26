@@ -48,4 +48,15 @@ extension UIColor {
         return  lum < 0.50
     }
     
+    //get complementary color to current
+    var complementary: UIColor {
+        let ciColor = CIColor(color: self)
+        // get the current values and make the difference from white:
+        let compRed: CGFloat = 1.0 - ciColor.red
+        let compGreen: CGFloat = 1.0 - ciColor.green
+        let compBlue: CGFloat = 1.0 - ciColor.blue
+        
+        return UIColor(red: compRed, green: compGreen, blue: compBlue, alpha: ciColor.alpha)
+    }
+    
 }

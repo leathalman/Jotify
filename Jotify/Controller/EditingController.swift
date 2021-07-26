@@ -70,7 +70,7 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
         //define image and action for each navigation button
         let ellipsis = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: self, action: #selector(handleCancel))
         let cancel = UIBarButtonItem(image: UIImage(systemName: "xmark.circle"), style: .plain, target: self, action: #selector(handleCancel))
-
+        
         //handle tint color of each button based on view background color
         ellipsis.tintColor = EditingData.currentNote.color.getColor().isDarkColor ? .white : .black
         cancel.tintColor = EditingData.currentNote.color.getColor().isDarkColor ? .white : .black
@@ -78,7 +78,7 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
         navigationItem.leftBarButtonItems = [ellipsis]
         navigationItem.rightBarButtonItem = cancel
     }
-   
+    
     //action handlers
     @objc func handleCancel() {
         self.playHapticFeedback()
@@ -101,18 +101,23 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     }
     
     func checkIfReminderExpired() {
-        if EditingData.currentNote.reminderTimestamp != nil {
+        if EditingData.currentNote.reminderTimestamp ?? 0 > 0 {
             if EditingData.currentNote.reminderTimestamp ?? 0 < Date().timeIntervalSinceReferenceDate {
                 DataManager.removeReminder(uid: EditingData.currentNote.id) { success in
                     if success! {
                         print("Reminder outdated, removed successfully")
+                        EditingData.currentNote.reminderTimestamp = nil
+                        EditingData.currentNote.reminder = nil
                         UIApplication.shared.applicationIconBadgeNumber -= 1
                     } else {
                         print("Reminder outdated, removed unsuccessfully")
                     }
                 }
             }
+        } else {
+            print("No reminder to delete")
         }
+        
     }
     
     //timer functions for "automatically" saving once a user stops typing
