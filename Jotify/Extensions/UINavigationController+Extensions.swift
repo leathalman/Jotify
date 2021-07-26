@@ -14,6 +14,7 @@ extension UINavigationController {
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = bgColor
         appearance.shadowColor = .clear
+        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor : bgColor.isDarkColor ? UIColor.white : .black]
         navigationBar.standardAppearance = appearance
         navigationBar.scrollEdgeAppearance = navigationBar.standardAppearance
     }

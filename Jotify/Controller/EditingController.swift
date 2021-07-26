@@ -11,6 +11,9 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     
     var noteCollection: NoteCollection?
     
+    //store the content value before note is edited
+    var initialContent: String?
+    
     var timer: Timer?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +50,7 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
         field.tintColor = EditingData.currentNote.color.getColor().isDarkColor ? .white : .black
         
         field.text = EditingData.currentNote.content
+        initialContent = EditingData.currentNote.content
         field.delegate = self
         field.font = UIFont.boldSystemFont(ofSize: 18)
         field.frame = CGRect(x: 0, y: 15, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
@@ -60,7 +64,7 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
         //setup navigationbar elements
         navigationItem.title = EditingData.currentNote.timestamp.getDate()
         navigationController?.configure(bgColor: EditingData.currentNote.color.getColor())
-        navigationController?.navigationBar.standardAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor : EditingData.currentNote.color.getColor().isDarkColor ? UIColor.white : .black]
+        
         navigationItem.setHidesBackButton(true, animated: true)
         
         //define image and action for each navigation button
@@ -89,7 +93,7 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     //datamanager interface
     func updateContent(content: String) {
         
-        if field.text != EditingData.currentNote.content {
+        if field.text != initialContent {
             DataManager.updateNoteContent(content: field.text, uid: EditingData.currentNote.id) { success in
                 //handle success
             }
