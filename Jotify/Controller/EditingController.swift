@@ -100,18 +100,23 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     }
     
     func checkIfReminderExpired() {
-        if EditingData.currentNote.reminderTimestamp != nil {
+        if EditingData.currentNote.reminderTimestamp ?? 0 > 0 {
             if EditingData.currentNote.reminderTimestamp ?? 0 < Date().timeIntervalSinceReferenceDate {
                 DataManager.removeReminder(uid: EditingData.currentNote.id) { success in
                     if success! {
                         print("Reminder outdated, removed successfully")
+                        EditingData.currentNote.reminderTimestamp = nil
+                        EditingData.currentNote.reminder = nil
                         UIApplication.shared.applicationIconBadgeNumber -= 1
                     } else {
                         print("Reminder outdated, removed unsuccessfully")
                     }
                 }
             }
+        } else {
+            print("No reminder to delete")
         }
+        
     }
     
     //timer functions for "automatically" saving once a user stops typing
