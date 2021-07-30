@@ -65,12 +65,12 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
         navigationItem.title = EditingData.currentNote.timestamp.getDate()
         navigationController?.configure(bgColor: EditingData.currentNote.color.getColor())
         
-        navigationItem.setHidesBackButton(true, animated: true)
+        navigationItem.setHidesBackButton(true, animated: false)
         
         //define image and action for each navigation button
         let ellipsis = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: self, action: #selector(handleCancel))
         let cancel = UIBarButtonItem(image: UIImage(systemName: "xmark.circle"), style: .plain, target: self, action: #selector(handleCancel))
-
+        
         //handle tint color of each button based on view background color
         ellipsis.tintColor = EditingData.currentNote.color.getColor().isDarkColor ? .white : .black
         cancel.tintColor = EditingData.currentNote.color.getColor().isDarkColor ? .white : .black
@@ -78,7 +78,7 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
         navigationItem.leftBarButtonItems = [ellipsis]
         navigationItem.rightBarButtonItem = cancel
     }
-   
+    
     //action handlers
     @objc func handleCancel() {
         self.playHapticFeedback()
@@ -92,7 +92,6 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     
     //datamanager interface
     func updateContent(content: String) {
-        
         if field.text != initialContent {
             DataManager.updateNoteContent(content: field.text, uid: EditingData.currentNote.id) { success in
                 //handle success
@@ -150,8 +149,13 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     override func updateColorOverride(color: String) {
         colorOverride = color
         EditingData.currentNote.color = color
+        
         setupView()
         setupNavBar()
+        
+        //force navigation bar to redraw since color change does not take effect otherwise
+        self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = false
         
         DataManager.updateNoteColor(color: color, uid: EditingData.currentNote.id) { success in
             //handle success here
