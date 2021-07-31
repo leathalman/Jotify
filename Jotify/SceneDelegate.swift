@@ -80,7 +80,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
         
         EditingData.currentNote = FBNote(content: content, timestamp: date.getTimestamp(), id: id, color: color)
         
-        let presentable = UINavigationController(rootViewController: EditingController())
+        let presentable = StatusBarResponsiveNavigationController(rootViewController: EditingController())
         presentable.modalPresentationStyle = .fullScreen
         
         window?.rootViewController?.present(presentable, animated: true, completion: nil)
@@ -144,7 +144,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
             }
         }
         
-        let presentable = UINavigationController(rootViewController: EditingController())
+        let presentable = StatusBarResponsiveNavigationController(rootViewController: EditingController())
         presentable.modalPresentationStyle = .fullScreen
         window?.rootViewController?.present(presentable, animated: true)
     }

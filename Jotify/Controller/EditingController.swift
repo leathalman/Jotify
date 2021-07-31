@@ -18,7 +18,7 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        //change status bar style to white
+        //change status bar style to white when PageBoyController is present
         setStatusBarStyle(style: EditingData.currentNote.color.getColor().isDarkColor ? .lightContent : .darkContent)
         checkIfReminderExpired()
     }
@@ -167,5 +167,10 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
         }
         
         colorOverride = ""
+    }
+    
+    //needed for status bar customization when presenting from widget or notification
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return EditingData.currentNote.color.getColor().isDarkColor ? .lightContent : .darkContent
     }
 }
