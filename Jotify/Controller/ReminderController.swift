@@ -211,7 +211,7 @@ class ReminderController: UITableViewController, DatePickerDelegate, TimePickerD
         // add category for custom buttons
         let center = UNUserNotificationCenter.current()
         
-        if (EditingData.currentNote.reminderTimestamp)! > 0 {
+        if EditingData.currentNote.reminderTimestamp ?? 0 > 0 {
             center.removePendingNotificationRequests(withIdentifiers: [EditingData.currentNote.reminder!])
             EditingData.currentNote.reminderTimestamp = 0
             EditingData.currentNote.reminder = ""

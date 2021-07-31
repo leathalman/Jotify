@@ -7,6 +7,7 @@
 
 import UIKit
 import SPIndicator
+import SPPermissions
 
 protocol ColorGalleryDelegate {
     func updateColorOverride(color: String)
@@ -98,8 +99,19 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     }
     
     @objc func showReminderController() {
-        let reminder = ReminderController(style: .insetGrouped)
-        present(reminder, animated: true, completion: nil)
+        let setup = SetupController()
+        if setup.isNotificationAuthorized {
+            let reminder = ReminderController(style: .insetGrouped)
+            present(reminder, animated: true, completion: nil)
+        } else {
+            //if notifications are not setup, do not let user create reminders
+            let controller = SPPermissions.dialog([.notification])
+            controller.dismissCondition = .allPermissionsAuthorized
+            controller.showCloseButton = true
+            controller.allowSwipeDismiss = false
+            controller.footerText = "Notification permission is required for Jotify to deliver your reminders."
+            controller.present(on: self)
+        }
     }
     
     @objc func showColorGalleryController() {

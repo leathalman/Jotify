@@ -724,7 +724,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AF4FA6AF11CB6D0F6E0E14F3 /* Pods-Jotify.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;
@@ -752,7 +751,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1129B93197342E6D106D25C2 /* Pods-Jotify.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Jotify/Jotify.entitlements;

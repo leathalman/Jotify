@@ -22,7 +22,7 @@ class AuthenticationController: UIViewController {
             if !success! {
                 let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                self.getRootViewController().present(alertController, animated: true, completion: nil)
+                self.rootViewController.present(alertController, animated: true, completion: nil)
             } else {
                 AnalyticsManager.logEvent(named: "sign_up", description: "sign_up")
                 DataManager.createUserSettings { (success) in }
@@ -37,7 +37,7 @@ class AuthenticationController: UIViewController {
             if !success! {
                 let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                self.getRootViewController().present(alertController, animated: true, completion: nil)
+                self.rootViewController.present(alertController, animated: true, completion: nil)
             } else {
                 AnalyticsManager.logEvent(named: "log_in", description: "log_in")
                 User.updateSettings()
@@ -59,17 +59,17 @@ class AuthenticationController: UIViewController {
                     let alertController = UIAlertController(title: nil, message: "Password recovery email successfully sent to \(alertController.textFields?.first?.text ?? "")", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     AnalyticsManager.logEvent(named: "password_reset", description: "password_reset")
-                    self.getRootViewController().present(alertController, animated: true, completion: nil)
+                    self.rootViewController.present(alertController, animated: true, completion: nil)
                 } else {
                     print("recovery email was unable to be sent")
                     let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self.getRootViewController().present(alertController, animated: true, completion: nil)
+                    self.rootViewController.present(alertController, animated: true, completion: nil)
                 }
             }
         }))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
-        self.getRootViewController().present(alertController, animated: true, completion: nil)
+        self.rootViewController.present(alertController, animated: true, completion: nil)
     }
     
     func presentSignUp() {

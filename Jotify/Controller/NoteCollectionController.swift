@@ -175,7 +175,7 @@ class NoteCollectionController: UICollectionViewController {
     }
     
     @objc func handleRightNavButton() {
-        let rootVC = self.getRootViewController() as! PageBoyController
+        let rootVC = self.rootViewController as! PageBoyController
         rootVC.scrollToWriteNoteController()
         self.playHapticFeedback()
     }

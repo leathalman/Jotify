@@ -6,8 +6,14 @@
 //
 
 import WidgetKit
+import UIKit
+import SPPermissions
 
 class SetupController {
+    
+    public var isNotificationAuthorized: Bool {
+        return SPPermissions.Permission.notification.authorized
+    }
     
     //setup URL for widgets
     private func setupWidget() {
@@ -57,6 +63,7 @@ class SetupController {
         if previousVersion == currentVersion {
             // same version, no update
             print("same version")
+            
         } else {
             if previousVersion != nil {
                 // new version

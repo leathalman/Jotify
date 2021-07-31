@@ -9,6 +9,17 @@ import UIKit
 import AudioToolbox
 
 extension UIViewController {
+    
+    //returns the current rootViewController from connected scenes
+    var rootViewController: UIViewController {
+        return (UIApplication.shared.connectedScenes
+            .filter({$0.activationState == .foregroundActive})
+            .map({$0 as? UIWindowScene})
+            .compactMap({$0})
+            .first?.windows
+            .filter({$0.isKeyWindow}).first?.rootViewController)!
+    }
+    
     //play haptic feedback from any viewcontroller
     func playHapticFeedback() {
         if UserDefaults.standard.bool(forKey: "useHaptics") {
@@ -36,16 +47,6 @@ extension UIViewController {
         UIView.transition(with: UIApplication.shared.windows.first!, duration: duration, options: .transitionCrossDissolve, animations: nil, completion: nil)
     }
     
-    //gets the current rootViewController from connected scenes
-    func getRootViewController() -> UIViewController {
-        return (UIApplication.shared.connectedScenes
-                    .filter({$0.activationState == .foregroundActive})
-                    .map({$0 as? UIWindowScene})
-                    .compactMap({$0})
-                    .first?.windows
-                    .filter({$0.isKeyWindow}).first?.rootViewController)!
-    }
-    
     //change StatusBarStyle in parent, PageViewController
     //override and set a given status bar style
     //**only call this method when PageViewController is present**
@@ -66,16 +67,16 @@ extension UIViewController {
     
     //tell is viewcontroller was presented modally or was pushed by navigation stack
     var isModal: Bool {
-            if let index = navigationController?.viewControllers.firstIndex(of: self), index > 0 {
-                return false
-            } else if presentingViewController != nil {
-                return true
-            } else if navigationController?.presentingViewController?.presentedViewController == navigationController {
-                return true
-            } else if tabBarController?.presentingViewController is UITabBarController {
-                return true
-            } else {
-                return false
-            }
+        if let index = navigationController?.viewControllers.firstIndex(of: self), index > 0 {
+            return false
+        } else if presentingViewController != nil {
+            return true
+        } else if navigationController?.presentingViewController?.presentedViewController == navigationController {
+            return true
+        } else if tabBarController?.presentingViewController is UITabBarController {
+            return true
+        } else {
+            return false
         }
+    }
 }

@@ -1,0 +1,6 @@
+framework module SPPermissions {
+  umbrella header "SPPermissions-umbrella.h"
+
+  export *
+  module * { export * }
+}
