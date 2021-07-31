@@ -81,7 +81,7 @@ class SavedNoteCell: UICollectionViewCell {
         shakeAnimation.duration = 0.05
         shakeAnimation.repeatCount = 2
         shakeAnimation.autoreverses = true
-        let startAngle: Float = (-2) * 3.14159/180
+        let startAngle: Float = (-2) * 3.14159/360
         let stopAngle = -startAngle
         shakeAnimation.fromValue = NSNumber(value: startAngle as Float)
         shakeAnimation.toValue = NSNumber(value: 3 * stopAngle as Float)
