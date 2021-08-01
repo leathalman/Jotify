@@ -125,6 +125,32 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     //empty method because it is designed to be overriden by child class
     func updateColorOverride(color: String) { }
     
+    //takes text string and seperates it into array based on num of lines
+    //checks line where cursor is for bullet point and changes editing var respectedly
+    func checkForBulletList() {
+        if !field.text.isEmpty {
+            if let selectedRange = field.selectedTextRange {
+                let cursorPosition = field.offset(from: field.beginningOfDocument, to: selectedRange.start)
+                
+                let lines = field.text.split(whereSeparator: \.isNewline)
+                
+                var charCount = 0
+                var sectionCount = 0
+                
+                while charCount < cursorPosition && sectionCount < lines.count {
+                    charCount += lines[sectionCount].count + 1
+                    sectionCount += 1
+                }
+                
+                if lines[sectionCount - 1].contains("\u{2022}") {
+                    isBulletedList = true
+                } else {
+                    isBulletedList = false
+                }
+            }
+        }
+    }
+    
     //handle keyboard interaction with view
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {

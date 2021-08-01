@@ -129,6 +129,8 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     
     //remove the placeholder when user begins to edit the TextView
     func textViewDidBeginEditing(_ textView: UITextView) {
+        checkForBulletList()
+
         if field.textColor == .almostWhite {
             field.text = ""
             field.textColor = .white
@@ -145,6 +147,8 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     
     //whenever user types, update the document and reset the timer
     func textViewDidChange(_ textView: UITextView) {
+        checkForBulletList()
+
         if !hasCreatedDocument {
             documentID = DataManager.createNote(content: field.text, timestamp: Date.timeIntervalSinceReferenceDate, color: noteColor.getString())
             EditingData.currentNote = FBNote(content: field.text, timestamp: Date.timeIntervalSinceReferenceDate, id: documentID ?? "", color: noteColor.getString(), reminder: nil, reminderTimestamp: nil)

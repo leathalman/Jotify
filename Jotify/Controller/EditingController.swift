@@ -130,7 +130,12 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
         updateContent(content: field.text)
     }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        checkForBulletList()
+    }
+    
     func textViewDidChange(_ textView: UITextView) {
+        checkForBulletList()
         resetTimer()
         EditingData.currentNote.content = field.text
     }

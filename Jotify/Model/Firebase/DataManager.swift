@@ -183,7 +183,7 @@ class DataManager {
                     
                 }
                 if (diff.type == .modified) {
-                    print("Modified note: \(diff.document.data())")
+//                    print("Modified note: \(diff.document.data())")
                     if let noteIndex = collection.FBNotes.firstIndex(where: { $0.id == id}) {
                         collection.FBNotes.remove(at: noteIndex)
                         //could also just append to array normally since array is sorted below
@@ -192,7 +192,7 @@ class DataManager {
                     collection.FBNotes.sort { ($0.timestamp) > ($1.timestamp) }
                 }
                 if (diff.type == .removed) {
-                    print("Removed note: \(diff.document.data())")
+//                    print("Removed note: \(diff.document.data())")
                     collection.FBNotes = collection.FBNotes.filter {$0.id != diff.document.documentID }
                 }
                 completionHandler(collection, true)
