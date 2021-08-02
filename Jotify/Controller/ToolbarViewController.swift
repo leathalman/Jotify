@@ -154,9 +154,10 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     //handle keyboard interaction with view
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            let insets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+            let insets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height + keyboardToolbar.frame.height, right: 0)
             field.contentInset = insets
             field.scrollIndicatorInsets = insets
+            view.layoutIfNeeded()
         }
     }
 
@@ -164,5 +165,6 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
         let insets = UIEdgeInsets.zero
         field.contentInset = insets
         field.scrollIndicatorInsets = insets
+        view.layoutIfNeeded()
     }
 }
