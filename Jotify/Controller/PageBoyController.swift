@@ -73,6 +73,8 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
             if success! {
                 let controller = self.noteCollectionController.viewControllers.first as! NoteCollectionController
                 controller.noteCollection = collection
+                
+                SetupController.updateRecentWidget(note: collection?.FBNotes.first ?? FBNote(content: "There was an error retrieving your note.", timestamp: 0, id: "", color: "systemBlue"))
             } else {
                 print("Error retrieving note collection")
             }

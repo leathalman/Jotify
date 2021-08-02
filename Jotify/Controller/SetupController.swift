@@ -39,16 +39,13 @@ class SetupController {
     
     //update widget whenever the most recent note changes
     //but do not force refresh the widget if the most recent note has not changed
-    public static func updateWidget(note: FBNote) {
-        let content = GroupDataManager.readData(path: "recentNoteContent")
-        if content != note.content {
-            GroupDataManager.writeData(path: "recentNoteDate", content: note.timestamp.getDate())
-            GroupDataManager.writeData(path: "recentNoteContent", content: note.content)
-            GroupDataManager.writeData(path: "recentNoteColor", content: note.color)
-            GroupDataManager.writeData(path: "recentNoteID", content: note.id)
-            if #available(iOS 14.0, *) {
-                WidgetCenter.shared.reloadAllTimelines()
-            }
+    public static func updateRecentWidget(note: FBNote) {
+        GroupDataManager.writeData(path: "recentNoteDate", content: note.timestamp.getDate())
+        GroupDataManager.writeData(path: "recentNoteContent", content: note.content)
+        GroupDataManager.writeData(path: "recentNoteColor", content: note.color)
+        GroupDataManager.writeData(path: "recentNoteID", content: note.id)
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
     

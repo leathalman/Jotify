@@ -55,11 +55,6 @@ class NoteCollectionController: UICollectionViewController {
         enableAutomaticStatusBarStyle()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        SetupController.updateWidget(note: noteCollection?.FBNotes.first ?? FBNote(content: "There was an error updating your widget.", timestamp: 609708829.690949, id: "nil", color: "systemRed"))
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewElements()
