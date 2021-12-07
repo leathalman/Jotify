@@ -142,10 +142,13 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
                     sectionCount += 1
                 }
                 
-                if lines[sectionCount - 1].contains("\u{2022}") {
-                    isBulletedList = true
-                } else {
-                    isBulletedList = false
+                //**throws index out of bounds error when pasting sometimes**
+                if sectionCount > 0 {
+                    if lines[sectionCount - 1].contains("\u{2022}") {
+                        isBulletedList = true
+                    } else {
+                        isBulletedList = false
+                    }
                 }
             }
         }
