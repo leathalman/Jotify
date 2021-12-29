@@ -134,7 +134,7 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
             if let selectedRange = field.selectedTextRange {
                 let cursorPosition = field.offset(from: field.beginningOfDocument, to: selectedRange.start)
                 
-                let lines = field.text.split(whereSeparator: \.isNewline)
+                let lines = field.text.components(separatedBy: "\n")
                 
                 var charCount = 0
                 var sectionCount = 0
@@ -146,10 +146,25 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
                 
                 //**throws index out of bounds error when pasting sometimes**
                 if sectionCount > 0 {
-                    if lines[sectionCount - 1].contains("\u{2022}") {
-                        isBulletedList = true
-                    } else {
+//                    print("Checking this line: " + "\(sectionCount)" + ": " + lines[sectionCount - 1])
+//                    print("All lines look like this: ")
+//                    print(lines)
+                    
+                    //only true if cursor is on new "empty" line
+                    //meaning either bullet is not enabled **or**
+                    //bullet was deleted on current line, so user does not bullets to be enabled
+                    if lines.indices.contains(sectionCount) {
+                        print("Yes")
                         isBulletedList = false
+                        
+                    } else {
+                        //there is text on the current line
+                        print("No")
+                        if lines[sectionCount - 1].contains("\u{2022}") {
+                            isBulletedList = true
+                        } else {
+                            isBulletedList = false
+                        }
                     }
                 }
             }
