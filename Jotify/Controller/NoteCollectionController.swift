@@ -314,6 +314,13 @@ class NoteCollectionController: UICollectionViewController {
         
         cell.contentView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTouchHandler(sender:))))
         
+        //when creating a note on first launch, server cannot update client fast enough for UI to show correct note content
+        //instead, display the text stored locally for the first note created after launch
+        if indexPath == IndexPath(row: 0, section: 0) && EditingData.firstNote {
+            cell.textLabel.text = EditingData.currentNote.content
+            EditingData.firstNote = false
+        }
+        
         return cell
     }
     

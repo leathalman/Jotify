@@ -16,6 +16,8 @@ protocol ColorGalleryDelegate {
 //handles data sharing between ToolbarViewController and ReminderController
 struct EditingData {
     static var currentNote = FBNote(content: "", timestamp: 0, id: "", color: "")
+    //used to set the text of the most recent note on first launch from client instead of server
+    static var firstNote = false
 }
 
 class ToolbarViewController: UIViewController, ColorGalleryDelegate {

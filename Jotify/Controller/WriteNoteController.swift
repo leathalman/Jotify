@@ -60,12 +60,11 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
                 //handle success here
             }
             
-            print("Color override is \(colorOverride)")
-            
             if colorOverride != "" {
                 DataManager.updateNoteColor(color: colorOverride, uid: documentID ?? "") { success in
                     //handle success here
                     print("color overriden from selection")
+                    print("Color override is \(self.colorOverride)")
                 }
                 colorOverride = ""
             }
@@ -152,6 +151,8 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
         if !hasCreatedDocument {
             documentID = DataManager.createNote(content: field.text, timestamp: Date.timeIntervalSinceReferenceDate, color: noteColor.getString())
             EditingData.currentNote = FBNote(content: field.text, timestamp: Date.timeIntervalSinceReferenceDate, id: documentID ?? "", color: noteColor.getString(), reminder: nil, reminderTimestamp: nil)
+            //used to dictate whether NoteCollection should use client or server version of most recent note
+            EditingData.firstNote = true
             hasCreatedDocument = true
         } else if !field.text.isEmpty && field.textColor == .white {
             updateEditingData()
