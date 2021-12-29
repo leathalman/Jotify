@@ -141,9 +141,17 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        //allow user to copy and paste
+        //putting "return false" instead of "return true" disables this functionality to some extent
+        if text.count > 1 {
+            //User did copy & paste because character input is greater than 1
+            return true
+        }
+        
         if (text as NSString).rangeOfCharacter(from: CharacterSet.newlines).location == NSNotFound {
             return true
         }
+        
         if isBulletedList {
             //make new line and add bullet where cursor is
             field.addBulletOnReturn()
