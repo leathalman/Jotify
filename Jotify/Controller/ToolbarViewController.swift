@@ -34,7 +34,8 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
         return f
     }()
     
-    var keyboardToolbar = UIToolbar()
+    //must define size for toolbar otherwise constraints get messy in console
+    var keyboardToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     
     var isBulletedList: Bool = false  
     var isMultiline: Bool = false
