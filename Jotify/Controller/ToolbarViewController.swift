@@ -45,8 +45,6 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     var colorOverride = ""
     
     override func viewDidLoad() {
-        SPIndicatorConfiguration.duration = 1
-
         setupToolbar()
         
         if UserDefaults.standard.bool(forKey: "multilineInputEnabled") {
@@ -77,12 +75,14 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     @objc func toggleMultilineInput() {
         if isMultiline {
             isMultiline = false
-            SPIndicator.present(title: "Multiline Input Disabled", preset: .error)
+            let indicatorView = SPIndicatorView(title: "Multiline Input Disabled", preset: .error)
+            indicatorView.present(duration: 1)
             UserDefaults.standard.setValue(false, forKey: "multilineInputEnabled")
             DataManager.updateUserSettings(setting: "multilineInputEnabled", value: false) { (success) in }
         } else {
             isMultiline = true
-            SPIndicator.present(title: "Multiline Input Enabled", preset: .done)
+            let indicatorView = SPIndicatorView(title: "Multiline Input Enabled", preset: .done)
+            indicatorView.present(duration: 1)
             UserDefaults.standard.setValue(true, forKey: "multilineInputEnabled")
             DataManager.updateUserSettings(setting: "multilineInputEnabled", value: true) { (success) in }
         }
@@ -91,11 +91,13 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     @objc func addBullet() {
         if isBulletedList {
             isBulletedList = false
-            SPIndicator.present(title: "Bulleted List Disabled", preset: .error)
+            let indicatorView = SPIndicatorView(title: "Bulleted List Disabled", preset: .error)
+            indicatorView.present(duration: 1)
         } else {
             isBulletedList = true
             isMultiline = true
-            SPIndicator.present(title: "Bulleted List Enabled", preset: .done)
+            let indicatorView = SPIndicatorView(title: "Bulleted List Enabled", preset: .done)
+            indicatorView.present(duration: 1)
             field.addBullet()
         }
     }
@@ -154,12 +156,11 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
                     //meaning either bullet is not enabled **or**
                     //bullet was deleted on current line, so user does not bullets to be enabled
                     if lines.indices.contains(sectionCount) {
-                        print("Yes")
+//                        print("Yes")
                         isBulletedList = false
-                        
                     } else {
                         //there is text on the current line
-                        print("No")
+//                        print("No")
                         if lines[sectionCount - 1].contains("\u{2022}") {
                             isBulletedList = true
                         } else {

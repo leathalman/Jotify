@@ -47,7 +47,7 @@ class NoteOptionMenu: MessageView {
         return components.joined(separator: ", ")
     }
 
-    open override var additonalAccessibilityElements: [NSObject]? {
+    open var additonalAccessibilityElements: [NSObject]? {
         var elements: [NSObject] = []
         func getAccessibleSubviews(view: UIView) {
             for subview in view.subviews {

@@ -79,12 +79,18 @@ public class SPPermissionsListController: UITableViewController, SPPermissionsCo
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-        
         if showCloseButton {
-            if #available(iOS 13.0, *) {
-                navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(dismissAnimated))
+            let closeBarButtonItem: UIBarButtonItem = {
+                if #available(iOS 13.0, *) {
+                    return UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(dismissAnimated))
+                } else {
+                    return UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissAnimated))
+                }
+            }()
+            if view.effectiveUserInterfaceLayoutDirection == .leftToRight {
+                navigationItem.rightBarButtonItem = closeBarButtonItem
             } else {
-                navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissAnimated))
+                navigationItem.leftBarButtonItem = closeBarButtonItem
             }
         }
         
@@ -126,7 +132,7 @@ public class SPPermissionsListController: UITableViewController, SPPermissionsCo
             }
             
             let authorized = permission.authorized
-            if authorized { Haptic.impact(.light) }
+            if authorized { HapticService.impact(.light) }
             
             // Update `.locationWhenInUse` if allowed `.locationAlwaysAndWhenInUse`
             
@@ -145,7 +151,7 @@ public class SPPermissionsListController: UITableViewController, SPPermissionsCo
                 case .allPermissionsAuthorized:
                     let allowedPermissions = self.permissions.filter { $0.authorized }
                     if allowedPermissions.count == self.permissions.count {
-                        Delay.wait(0.2, closure: {
+                        DelayService.wait(0.2, closure: {
                             self.dismiss(animated: true)
                         })
                         return true
@@ -154,7 +160,7 @@ public class SPPermissionsListController: UITableViewController, SPPermissionsCo
                 case .allPermissionsDeterminated:
                     let determiatedPermissions = self.permissions.filter { !$0.notDetermined }
                     if determiatedPermissions.count == self.permissions.count {
-                        Delay.wait(0.2, closure: {
+                        DelayService.wait(0.2, closure: {
                             self.dismiss(animated: true)
                         })
                         return true
@@ -173,9 +179,9 @@ public class SPPermissionsListController: UITableViewController, SPPermissionsCo
                     let _ = dismissByCondition()
                 } else {
                     // Delay using for fix animation freeze.
-                    Delay.wait(0.3, closure: { [weak self] in
+                    DelayService.wait(0.3, closure: { [weak self] in
                         guard let self = self else { return }
-                        Presenter.presentAlertAboutDeniedPermission(permission, dataSource: self.dataSource, on: self)
+                        PresenterService.presentAlertAboutDeniedPermission(permission, dataSource: self.dataSource, on: self)
                     })
                 }
             }

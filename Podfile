@@ -18,7 +18,6 @@ target 'Jotify' do
   pod 'SwiftMessages'
   pod 'ViewAnimator'
   pod 'SPIndicator'
-  
   pod 'SPPermissions/Notification'
   
   post_install do |installer|

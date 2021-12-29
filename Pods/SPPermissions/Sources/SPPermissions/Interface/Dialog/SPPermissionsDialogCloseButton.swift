@@ -56,7 +56,7 @@ class SPPermissionsDialogCloseButton: UIButton {
         var areaColor: UIColor = UIColor.Compability.secondarySystemBackground
         
         override func draw(_ rect: CGRect) {
-            Draw.drawClose(frame: rect, resizing: .aspectFit, background: areaColor, element: elementColor)
+            DrawService.drawClose(frame: rect, resizing: .aspectFit, background: areaColor, element: elementColor)
         }
     }
 }

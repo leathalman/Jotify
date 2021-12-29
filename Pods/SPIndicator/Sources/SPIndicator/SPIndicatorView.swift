@@ -35,7 +35,12 @@ import UIKit
  
  Recomended call `SPIndicator` and choose style func.
  */
+@available(iOSApplicationExtension, unavailable)
 open class SPIndicatorView: UIView {
+    
+    // MARK: - UIAppearance
+
+    @objc dynamic open var duration: TimeInterval = 1.5
     
     // MARK: - Properties
     
@@ -196,7 +201,12 @@ open class SPIndicatorView: UIView {
         return false
     }
     
-    open func present(duration: TimeInterval = SPIndicatorConfiguration.duration, haptic: SPIndicatorHaptic = .success, completion: (() -> Void)? = nil) {
+    open func present(haptic: SPIndicatorHaptic = .success, completion: (() -> Void)? = nil) {
+        present(duration: self.duration, haptic: haptic, completion: completion)
+    }
+    
+    
+    open func present(duration: TimeInterval, haptic: SPIndicatorHaptic = .success, completion: (() -> Void)? = nil) {
         
         if self.presentWindow == nil {
             self.presentWindow = UIApplication.shared.keyWindow
@@ -241,9 +251,16 @@ open class SPIndicatorView: UIView {
                 iconView.animate()
             }
         }
+        
+        safeAreaInsetsObserver = window.observe(\.safeAreaInsets, changeHandler: { [weak self] window, _ in
+            guard let self = self else { return }
+            self.center.x = window.frame.midX
+            self.toPresentPosition(.visible(self.presentSide))
+        })
     }
     
     @objc open func dismiss() {
+        safeAreaInsetsObserver?.invalidate()
         UIView.animate(withDuration: presentAndDismissDuration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [.beginFromCurrentState, .curveEaseIn], animations: {
             self.toPresentPosition(.prepare(self.presentSide))
             if self.presentWithOpacity { self.alpha = 0 }
@@ -263,7 +280,6 @@ open class SPIndicatorView: UIView {
     private var whenGesterEndShoudHide: Bool = false
     
     @objc func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
-        
         if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
             self.gesterIsDragging = true
             let translation = gestureRecognizer.translation(in: self)
@@ -386,6 +402,8 @@ open class SPIndicatorView: UIView {
     private var spaceBetweenTitles: CGFloat = 1
     private var spaceBetweenTitlesAndImage: CGFloat = 16
     
+    private var safeAreaInsetsObserver: NSKeyValueObservation?
+    
     private var titlesCompactWidth: CGFloat {
         if let iconView = self.iconView {
             let space = iconView.frame.maxY + spaceBetweenTitlesAndImage
@@ -505,7 +523,8 @@ open class SPIndicatorView: UIView {
             guard let self = self else { return }
             guard let titleLabel = self.titleLabel else { return }
             guard let iconView = self.iconView else { return }
-            titleLabel.textAlignment = UIApplication.shared.userInterfaceRightToLeft ? .right : .left
+            let rtl = self.effectiveUserInterfaceLayoutDirection == .rightToLeft
+            titleLabel.textAlignment = rtl ? .right : .left
             titleLabel.layoutDynamicHeight(width: self.titlesFullWidth)
             titleLabel.frame.origin.x = self.layoutMargins.left + iconView.frame.width + self.spaceBetweenTitlesAndImage
         }

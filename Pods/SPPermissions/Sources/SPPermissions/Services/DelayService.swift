@@ -20,30 +20,13 @@
 // SOFTWARE.
 
 import UIKit
-@available(iOSApplicationExtension, unavailable)
-public class SPPermissionsNativeController: NSObject, SPPermissionsControllerInterface {
+
+enum DelayService {
     
-    public weak var delegate: SPPermissionsDelegate?
-    public weak var dataSource: SPPermissionsDataSource?
-    
-    private var permissions: [SPPermissions.Permission]
-    
-    init(_ permissions: [SPPermissions.Permission]) {
-        self.permissions = permissions
-        super.init()
-    }
-    
-    public func present(on controller: UIViewController) {
-        for permission in permissions {
-            permission.request(completion: { [weak self] in
-                guard let self = self else { return }
-                if permission.authorized {
-                    self.delegate?.didAllowPermission(permission)
-                } else {
-                    self.delegate?.didDeniedPermission(permission)
-                    Presenter.presentAlertAboutDeniedPermission(permission, dataSource: self.dataSource, on: controller)
-                }
-            })
+    public static func wait(_ delay: Double, closure: @escaping ()->()) {
+        let when = DispatchTime.now() + delay
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            closure()
         }
     }
 }

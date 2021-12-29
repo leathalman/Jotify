@@ -113,6 +113,25 @@ public class SPPermissionsDialogController: UIViewController, SPPermissionsContr
         NotificationCenter.default.addObserver(self, selector: #selector(self.applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        /**
+         Special layout call becouse table hasn't valid content size before appear for early ios 12 and lower.
+         Happen only if `bounceAnimationEnabled` set to false.
+         Related issue on github: https://github.com/ivanvorobei/SPPermissions/issues/262
+         */
+        if !bounceAnimationEnabled {
+            if #available(iOS 13, *) {
+                // All good for iOS 13+
+            } else {
+                DelayService.wait(0.2, closure: {
+                    self.dialogView.layout(in: self.view)
+                })
+            }
+        }
+    }
+    
     @objc func applicationDidBecomeActive() {
         dialogView.tableView.reloadData()
     }
@@ -152,7 +171,7 @@ public class SPPermissionsDialogController: UIViewController, SPPermissionsContr
             UIView.animate(withDuration: 0.3, delay: 0.21, animations: {
                 self.dialogView.alpha = 1
             }, completion: nil)
-            Delay.wait(0.21, closure: { [weak self] in
+            DelayService.wait(0.21, closure: { [weak self] in
                 guard let self = self else { return }
                 if self.bounceAnimationEnabled {
                     self.animator.addBehavior(self.snapBehavior)
@@ -172,7 +191,7 @@ public class SPPermissionsDialogController: UIViewController, SPPermissionsContr
             }
             
             let authorized = permission.authorized
-            if authorized { Haptic.impact(.light) }
+            if authorized { HapticService.impact(.light) }
             
             // Update `.locationWhenInUse` if allowed `.locationAlwaysAndWhenInUse`
             
@@ -191,7 +210,7 @@ public class SPPermissionsDialogController: UIViewController, SPPermissionsContr
                 case .allPermissionsAuthorized:
                     let allowedPermissions = self.permissions.filter { $0.authorized }
                     if allowedPermissions.count == self.permissions.count {
-                        Delay.wait(0.2, closure: {
+                        DelayService.wait(0.2, closure: {
                             self.dismiss(withDialog: true)
                         })
                         return true
@@ -199,7 +218,7 @@ public class SPPermissionsDialogController: UIViewController, SPPermissionsContr
                 case .allPermissionsDeterminated:
                     let determiatedPermissions = self.permissions.filter { !$0.notDetermined }
                     if determiatedPermissions.count == self.permissions.count {
-                        Delay.wait(0.2, closure: {
+                        DelayService.wait(0.2, closure: {
                             self.dismiss(withDialog: true)
                         })
                         return true
@@ -219,9 +238,9 @@ public class SPPermissionsDialogController: UIViewController, SPPermissionsContr
                     let _ = dismissByCondition()
                 } else {
                     // Delay using for fix animation freeze.
-                    Delay.wait(0.3, closure: { [weak self] in
+                    DelayService.wait(0.3, closure: { [weak self] in
                         guard let self = self else { return }
-                        Presenter.presentAlertAboutDeniedPermission(permission, dataSource: self.dataSource, on: self)
+                        PresenterService.presentAlertAboutDeniedPermission(permission, dataSource: self.dataSource, on: self)
                     })
                 }
             }
@@ -305,6 +324,7 @@ public class SPPermissionsDialogController: UIViewController, SPPermissionsContr
 }
 
 // MARK: - Table Data Source & Delegate
+
 @available(iOSApplicationExtension, unavailable)
 extension SPPermissionsDialogController: UITableViewDataSource, UITableViewDelegate {
     
@@ -316,7 +336,7 @@ extension SPPermissionsDialogController: UITableViewDataSource, UITableViewDeleg
         let cell = tableView.dequeueReusableCell(withIdentifier: SPPermissionsTableViewCell.id, for: indexPath) as! SPPermissionsTableViewCell
         let permission = permissions[indexPath.row]
         cell.defaultConfigure(for: permission)
-        cell.permissionDescriptionLabel.font = UIFont.preferredFont(forTextStyle: .body, weight: .regular, addPoints: -1)
+        cell.permissionDescriptionLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         dataSource?.configure(cell, for: permission)
         cell.permissionButton.addTarget(self, action: #selector(self.process(button:)), for: .touchUpInside)
         cell.updateInterface(animated: false)

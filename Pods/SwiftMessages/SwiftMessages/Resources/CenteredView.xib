@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -32,7 +32,7 @@
                                     <rect key="frame" x="160.5" y="55.5" width="33" height="0.0"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="700" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="[Title]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggW-gB-SWF">
-                                    <rect key="frame" x="153" y="65.5" width="48" height="20.5"/>
+                                    <rect key="frame" x="153" y="65.5" width="48.5" height="20.5"/>
                                     <accessibility key="accessibilityConfiguration">
                                         <bool key="isElement" value="NO"/>
                                     </accessibility>
@@ -144,7 +144,7 @@
                 <outlet property="iconLabel" destination="elb-HW-olH" id="JXQ-xt-3t7"/>
                 <outlet property="titleLabel" destination="ggW-gB-SWF" id="Coi-Gy-uPh"/>
             </connections>
-            <point key="canvasLocation" x="346" y="302"/>
+            <point key="canvasLocation" x="368.5546875" y="347.4377745241581"/>
         </view>
     </objects>
     <resources>

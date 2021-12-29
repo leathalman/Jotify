@@ -21,20 +21,26 @@
 
 import UIKit
 
-enum OpenService {
+enum PresenterService {
     
     @available(iOSApplicationExtension, unavailable)
-    static func openSettings() {
+    static func presentAlertAboutDeniedPermission(_ permission: SPPermissions.Permission, dataSource: SPPermissionsDataSource?, on controller: UIViewController) {
         
-        DispatchQueue.main.async {
-            
-            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-                return
-            }
-            
-            if UIApplication.shared.canOpenURL(settingsUrl) {
-                UIApplication.shared.open(settingsUrl, completionHandler: nil)
-            }
-        }
+        let data = dataSource?.deniedAlertTexts(for: permission)
+        
+        /*
+         Text is nil and data sources was set.
+         So developer special return nil for alert texts.
+         In this case developer don't want show alert.
+         */
+        if (data == nil) && (dataSource != nil) { return }
+        let texts = data ?? SPPermissionsDeniedAlertTexts.default
+        
+        let alertController = UIAlertController(title: texts.titleText, message: texts.descriptionText, preferredStyle: .alert)
+        alertController.addAction(.init(title: texts.cancelText, style: .cancel))
+        alertController.addAction(.init(title: texts.actionText, style: .default, handler: { _ in
+            permission.openSettingPage()
+        }))
+        controller.present(alertController, animated: true, completion: nil)
     }
 }

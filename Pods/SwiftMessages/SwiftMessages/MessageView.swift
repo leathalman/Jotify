@@ -88,7 +88,7 @@ open class MessageView: BaseView, Identifiable, AccessibleMessage {
 
     /**
      An optional prefix for the `accessibilityMessage` that can
-     be used to futher clarify the message for VoiceOver. For example, 
+     be used to further clarify the message for VoiceOver. For example,
      the view's background color or icon might convey that a message is
      a warning, in which case one may specify the value "warning".
      */
@@ -108,7 +108,7 @@ open class MessageView: BaseView, Identifiable, AccessibleMessage {
         return backgroundView
     }
 
-    open var additonalAccessibilityElements: [NSObject]? {
+    open var additionalAccessibilityElements: [NSObject]? {
         var elements: [NSObject] = []
         func getAccessibleSubviews(view: UIView) {
             for subview in view.subviews {
@@ -206,7 +206,7 @@ extension MessageView {
 /*
  MARK: - Layout adjustments
 
- This extention provides a few convenience functions for adjusting the layout.
+ This extension provides a few convenience functions for adjusting the layout.
  */
 
 extension MessageView {
@@ -236,7 +236,7 @@ extension MessageView {
 /*
  MARK: - Theming
  
- This extention provides a few convenience functions for setting styles,
+ This extension provides a few convenience functions for setting styles,
  colors and icons. You are encouraged to write your own such functions
  if these don't exactly meet your needs.
  */
@@ -251,24 +251,72 @@ extension MessageView {
      */
     public func configureTheme(_ theme: Theme, iconStyle: IconStyle = .default) {
         let iconImage = iconStyle.image(theme: theme)
+        let backgroundColor: UIColor
+        let foregroundColor: UIColor
+        let defaultBackgroundColor: UIColor
+        let defaultForegroundColor: UIColor
         switch theme {
         case .info:
-            let backgroundColor = UIColor(red: 225.0/255.0, green: 225.0/255.0, blue: 225.0/255.0, alpha: 1.0)
-            let foregroundColor = UIColor.darkText
-            configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: iconImage)
+            defaultBackgroundColor = UIColor(red: 225.0/255.0, green: 225.0/255.0, blue: 225.0/255.0, alpha: 1.0)
+            defaultForegroundColor = UIColor.darkText
         case .success:
-            let backgroundColor = UIColor(red: 97.0/255.0, green: 161.0/255.0, blue: 23.0/255.0, alpha: 1.0)
-            let foregroundColor = UIColor.white
-            configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: iconImage)
+            defaultBackgroundColor = UIColor(red: 97.0/255.0, green: 161.0/255.0, blue: 23.0/255.0, alpha: 1.0)
+            defaultForegroundColor = UIColor.white
         case .warning:
-            let backgroundColor = UIColor(red: 238.0/255.0, green: 189.0/255.0, blue: 34.0/255.0, alpha: 1.0)
-            let foregroundColor = UIColor.white
-            configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: iconImage)
+            defaultBackgroundColor = UIColor(red: 246.0/255.0, green: 197.0/255.0, blue: 44.0/255.0, alpha: 1.0)
+            defaultForegroundColor = UIColor.white
         case .error:
-            let backgroundColor = UIColor(red: 249.0/255.0, green: 66.0/255.0, blue: 47.0/255.0, alpha: 1.0)
-            let foregroundColor = UIColor.white
-            configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: iconImage)
+            defaultBackgroundColor = UIColor(red: 249.0/255.0, green: 66.0/255.0, blue: 47.0/255.0, alpha: 1.0)
+            defaultForegroundColor = UIColor.white
         }
+        if #available(iOS 13.0, *) {
+            switch theme {
+            case .info:
+                backgroundColor = UIColor {
+                    switch $0.userInterfaceStyle {
+                    case .dark, .unspecified: return UIColor(red: 125/255.0, green: 125/255.0, blue: 125/255.0, alpha: 1.0)
+                    case .light: fallthrough
+                    @unknown default:
+                        return defaultBackgroundColor
+                    }
+                }
+                foregroundColor = .label
+            case .success:
+                backgroundColor = UIColor {
+                    switch $0.userInterfaceStyle {
+                    case .dark, .unspecified: return UIColor(red: 55/255.0, green: 122/255.0, blue: 0/255.0, alpha: 1.0)
+                    case .light: fallthrough
+                    @unknown default:
+                        return defaultBackgroundColor
+                    }
+                }
+                foregroundColor = .white
+            case .warning:
+                backgroundColor = UIColor {
+                    switch $0.userInterfaceStyle {
+                    case .dark, .unspecified: return UIColor(red: 239/255.0, green: 184/255.0, blue: 10/255.0, alpha: 1.0)
+                    case .light: fallthrough
+                    @unknown default:
+                        return defaultBackgroundColor
+                    }
+                }
+                foregroundColor = .white
+            case .error:
+                backgroundColor = UIColor {
+                    switch $0.userInterfaceStyle {
+                    case .dark, .unspecified: return UIColor(red: 195/255.0, green: 12/255.0, blue: 12/255.0, alpha: 1.0)
+                    case .light: fallthrough
+                    @unknown default:
+                        return defaultBackgroundColor
+                    }
+                }
+                foregroundColor = .white
+            }
+        } else {
+            backgroundColor = defaultBackgroundColor
+            foregroundColor = defaultForegroundColor
+        }
+        configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: iconImage)
     }
     
     /**

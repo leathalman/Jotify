@@ -55,8 +55,8 @@ open class SwiftMessages {
          appropriate one is found. Otherwise, it is displayed in a new window
          at level `UIWindow.Level.normal`. Use this option to automatically display
          under bars, where applicable. Because this option involves a top-down
-         search, an approrpiate context might not be found when the view controller
-         heirarchy incorporates custom containers. If this is the case, the
+         search, an appropriate context might not be found when the view controller
+         hierarchy incorporates custom containers. If this is the case, the
          .ViewController option can provide a more targeted context.
         */
         case automatic
@@ -77,17 +77,17 @@ open class SwiftMessages {
          of any message view that adopts the `MarginInsetting` protocol (as `MessageView` does)
          to account for the status bar. As of iOS 13, windows can no longer cover the
          status bar. The only alternative is to set `Config.prefersStatusBarHidden = true`
-         to hide it.
+         to hide it. The `WindowScene` protocol works around the change in Xcode 13 that prevents
+         using `@availability` attribute with `enum` cases containing associated values.
         */
-        @available(iOS 13.0, *)
-        case windowScene(_: UIWindowScene, windowLevel: UIWindow.Level)
+        case windowScene(_: WindowScene, windowLevel: UIWindow.Level)
 
         /**
          Displays the message view under navigation bars and tab bars if an
          appropriate one is found using the given view controller as a starting
          point and searching up the parent view controller chain. Otherwise, it
          is displayed in the given view controller's view. This option can be used
-         for targeted placement in a view controller heirarchy.
+         for targeted placement in a view controller hierarchy.
         */
         case viewController(_: UIViewController)
 
@@ -248,7 +248,16 @@ open class SwiftMessages {
          Specifies how the container for presenting the message view
          is selected. The default is `.Automatic`.
          */
-        public var presentationContext = PresentationContext.automatic
+        public var presentationContext = PresentationContext.automatic {
+            didSet {
+                if case .windowScene = presentationContext {
+                    guard #available(iOS 13.0, *) else {
+                        assertionFailure("windowScene is not supported below iOS 13.0.")
+                        return
+                    }
+                }
+            }
+        }
 
         /**
          Specifies the duration of the message view's time on screen before it is
