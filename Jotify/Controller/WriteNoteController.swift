@@ -129,7 +129,6 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     //remove the placeholder when user begins to edit the TextView
     func textViewDidBeginEditing(_ textView: UITextView) {
         checkForBulletList()
-
         if field.textColor == .almostWhite {
             field.text = ""
             field.textColor = .white
@@ -147,7 +146,6 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     //whenever user types, update the document and reset the timer
     func textViewDidChange(_ textView: UITextView) {
         checkForBulletList()
-
         if !hasCreatedDocument {
             documentID = DataManager.createNote(content: field.text, timestamp: Date.timeIntervalSinceReferenceDate, color: noteColor.getString())
             EditingData.currentNote = FBNote(content: field.text, timestamp: Date.timeIntervalSinceReferenceDate, id: documentID ?? "", color: noteColor.getString(), reminder: nil, reminderTimestamp: nil)
@@ -169,10 +167,10 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     
     //setup constraints for multiline textfield
     func setupConstraints() {
-        field.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100).isActive = true
-        field.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        field.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        field.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        field.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        field.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        field.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        field.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     func updateEditingData() {
@@ -186,5 +184,11 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     //traitcollection: light/dark mode support with status bar
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         setStatusBarStyle(style: .lightContent)
+    }
+    
+    //detect when orientation of view will change -> iPad, not enabled on iPhone
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        view.viewWithTag(007)?.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
     }
 }

@@ -14,7 +14,6 @@ extension UIView {
         gradientView.tag = 007
         self.insertSubview(gradientView, at: 0)
         gradientView.startAnimate()
-        
     }
     
     func removeGradient() {

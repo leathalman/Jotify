@@ -186,4 +186,10 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return EditingData.currentNote.color.getColor().isDarkColor ? .lightContent : .darkContent
     }
+    
+    //detect when orientation of view will change -> iPad, not enabled on iPhone
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        field.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
+    }
 }
