@@ -83,7 +83,7 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
             timer.tintColor = UIColor.gray
         }
         
-        let help = UIBarButtonItem(image: UIImage(systemName: "arrow.down.app"), style: .plain, target: self, action: #selector(keyboardSaveNote))
+        let help = UIBarButtonItem(image: UIImage(systemName: "arrow.down.to.line.circle"), style: .plain, target: self, action: #selector(keyboardSaveNote))
         keyboardToolbar.items = [multiline, spacer, list, spacer, timer, spacer, colorpicker, spacer, help]
         keyboardToolbar.sizeToFit()
         field.inputAccessoryView = keyboardToolbar
