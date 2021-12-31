@@ -138,7 +138,7 @@ class NoteCollectionController: UICollectionViewController {
         menu.button1.addTarget(self, action: #selector(shareNoteFromMenu(_:)), for: .touchUpInside)
         menu.button1.params["content"] = note?.content
         menu.button2.addTarget(self, action: #selector(deleteNoteFromMenu(_:)), for: .touchUpInside)
-        menu.button2.params["id"] = note?.id
+        menu.button2.params["note"] = note
         menu.button3.addTarget(self, action: #selector(showToolbar), for: .touchUpInside)
         menu.button4.addTarget(self, action: #selector(cancelOptionFromMenu), for: .touchUpInside)
         
@@ -177,9 +177,31 @@ class NoteCollectionController: UICollectionViewController {
     
     //NoteOptionMenu Actions
     @objc func deleteNoteFromMenu(_ sender: PassableUIButton) {
-        DataManager.deleteNote(docID: sender.params["id"] as! String) { (success) in
+        let note = sender.params["note"] as! FBNote
+        let id = note.id
+        
+        DataManager.deleteNote(docID: id) { (success) in
+            //if note is successfully deleted from server, remove it from local notification and badge number
             if success! {
                 AnalyticsManager.logEvent(named: "note_deleted", description: "note_deleted")
+                
+                //remove pending reminder since note has been deleted
+                if note.reminderTimestamp ?? 0 > 0 {
+                    //is reminder
+                    let notificationUUID = note.reminder ?? "nil"
+                    let center = UNUserNotificationCenter.current()
+                    center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
+                    
+                    //remove badge if notification is already delivered but not opened
+                    if note.reminderTimestamp ?? 0 < Date.timeIntervalSinceReferenceDate {
+                        //reminder is already delivered
+                        //Retreive the value from User Defaults and decrease it by 1
+                        let badgeCount = UserDefaults.standard.value(forKey: "notificationBadgeCount") as! Int - 1
+                        //Save the new value to User Defaults
+                        UserDefaults.standard.set(badgeCount, forKey: "notificationBadgeCount")
+                        UIApplication.shared.applicationIconBadgeNumber -= 1
+                    }
+                }
             }
         }
         SwiftMessages.hide()
@@ -243,8 +265,27 @@ class NoteCollectionController: UICollectionViewController {
     
     @objc func deleteSelectedCells() {
         for indexPath in selectedCells {
+            //remove pending reminder since note has been deleted
+            if self.noteCollection?.FBNotes[indexPath.row].reminderTimestamp ?? 0 > 0 {
+                //is reminder
+                let notificationUUID = self.noteCollection?.FBNotes[indexPath.row].reminder ?? "nil"
+                let center = UNUserNotificationCenter.current()
+                center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
+                
+                //remove badge if notification is already delivered but not opened
+                if self.noteCollection?.FBNotes[indexPath.row].reminderTimestamp ?? 0 < Date.timeIntervalSinceReferenceDate {
+                    //reminder is already delivered
+                    //Retreive the value from User Defaults and decrease it by 1
+                    let badgeCount = UserDefaults.standard.value(forKey: "notificationBadgeCount") as! Int - 1
+                    //Save the new value to User Defaults
+                    UserDefaults.standard.set(badgeCount, forKey: "notificationBadgeCount")
+                    UIApplication.shared.applicationIconBadgeNumber -= 1
+                }
+            }
+            
             DataManager.deleteNote(docID: noteCollection?.FBNotes[indexPath.row].id ?? "") { success in
                 //handle success here
+                AnalyticsManager.logEvent(named: "note_deleted", description: "note_deleted")
             }
         }
         selectedCells = []

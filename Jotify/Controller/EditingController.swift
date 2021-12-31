@@ -107,6 +107,10 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
                         print("Reminder outdated, removed successfully")
                         EditingData.currentNote.reminderTimestamp = nil
                         EditingData.currentNote.reminder = nil
+                        //Retreive the value from User Defaults and decrease it by 1
+                        let badgeCount = UserDefaults.standard.value(forKey: "notificationBadgeCount") as! Int - 1
+                        //Save the new value to User Defaults
+                        UserDefaults.standard.set(badgeCount, forKey: "notificationBadgeCount")
                         UIApplication.shared.applicationIconBadgeNumber -= 1
                     } else {
                         print("Reminder outdated, removed unsuccessfully")

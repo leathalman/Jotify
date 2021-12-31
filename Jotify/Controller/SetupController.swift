@@ -33,7 +33,8 @@ class SetupController {
             "hasMigrated": false,
             "multilineInputEnabled": false,
             "useHaptics": true,
-            "deleteOldNotes": false
+            "deleteOldNotes": false,
+            "notificationBadgeCount": 0,
         ])
     }
     

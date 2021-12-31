@@ -140,6 +140,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
                 print("There was an error deleting the reminder")
             } else {
                 print("Reminder was succesfully deleted and removed from backend")
+                //Retreive the value from User Defaults and increase it by 1
+                let badgeCount = UserDefaults.standard.value(forKey: "notificationBadgeCount") as! Int - 1
+                //Save the new value to User Defaults
+                UserDefaults.standard.set(badgeCount, forKey: "notificationBadgeCount")
                 UIApplication.shared.applicationIconBadgeNumber -= 1
             }
         }

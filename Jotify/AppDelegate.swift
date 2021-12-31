@@ -24,7 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //register notification types to be handled when interacted with
         registerNotificationActions()
-                
+        
+        //TEMP:: DELETE FOR LAUNCH, should be handled by SetupController
+        UserDefaults.standard.register(defaults: [
+            "notificationBadgeCount": 0,
+        ])
+        
         return true
     }
     

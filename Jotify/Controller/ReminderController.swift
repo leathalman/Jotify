@@ -176,8 +176,15 @@ class ReminderController: UITableViewController, DatePickerDelegate, TimePickerD
         content.body = EditingData.currentNote.content
         content.userInfo = ["noteID": EditingData.currentNote.id as Any, "color": EditingData.currentNote.color as Any, "timestamp": EditingData.currentNote.timestamp as Any, "content": EditingData.currentNote.content as Any]
         content.sound = UNNotificationSound.default
-        content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
         content.categoryIdentifier = "NOTE_REMINDER"
+        
+        //Make sure app is increased properly
+        //Retreive the value from User Defaults and increase it by 1
+        let badgeCount = UserDefaults.standard.value(forKey: "notificationBadgeCount") as! Int + 1
+        //Save the new value to User Defaults
+        UserDefaults.standard.set(badgeCount, forKey: "notificationBadgeCount")
+        //Set the value as the current badge count
+        content.badge = badgeCount as NSNumber
         
         var components = DateComponents()
         components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: dateValue ?? Date())
