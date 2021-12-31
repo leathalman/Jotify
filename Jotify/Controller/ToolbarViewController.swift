@@ -64,7 +64,14 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     //toolbar UI setup
     func setupToolbar() {
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        let multiline = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.2.decrease.circle"), style: .plain, target: self, action: #selector(toggleMultilineInput))
+        //customize multiline appearance if its used
+        var img = UIImage(systemName: "line.horizontal.2.decrease.circle")
+        
+        if isMultiline {
+            img = UIImage(systemName: "line.horizontal.2.decrease.circle.fill")
+        }
+        
+        let multiline = UIBarButtonItem(image: img, style: .plain, target: self, action: #selector(toggleMultilineInput))
         let colorpicker = UIBarButtonItem(image: UIImage(systemName: "eyedropper"), style: .plain, target: self, action: #selector(showColorGalleryController))
         let list = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), style: .plain, target: self, action: #selector(addBullet))
         let timer = UIBarButtonItem(image: UIImage(systemName: "timer"), style: .plain, target: self, action: #selector(showReminderController))
@@ -86,12 +93,14 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     @objc func toggleMultilineInput() {
         if isMultiline {
             isMultiline = false
+            setupToolbar()
             let indicatorView = SPIndicatorView(title: "Multiline Input Disabled", preset: .error)
             indicatorView.present(duration: 1)
             UserDefaults.standard.setValue(false, forKey: "multilineInputEnabled")
             DataManager.updateUserSettings(setting: "multilineInputEnabled", value: false) { (success) in }
         } else {
             isMultiline = true
+            setupToolbar()
             let indicatorView = SPIndicatorView(title: "Multiline Input Enabled", preset: .done)
             indicatorView.present(duration: 1)
             UserDefaults.standard.setValue(true, forKey: "multilineInputEnabled")

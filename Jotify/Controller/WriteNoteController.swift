@@ -142,7 +142,6 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
         if field.text == "" {
             reminderButtonEnabled = false
             setupToolbar()
-            print("should be false")
         }
     }
     
