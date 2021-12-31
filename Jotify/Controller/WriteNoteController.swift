@@ -90,9 +90,6 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
             self.noteColor = newTheme?.colors().randomElement() ?? .olympia1
             self.view.setGradient(theme: newTheme ?? .olympia)
             
-            //reset editing data when a note is created to setup for reminders and other interactions
-            EditingData.currentNote = FBNote(content: "", timestamp: 0, id: "", color: "", reminder: "", reminderTimestamp: 0)
-            
             AnalyticsManager.logEvent(named: "note_created", description: "note_created")
         }
         field.resignFirstResponder()
@@ -103,7 +100,7 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
             return true
         }
         
-        if isBulletedList {
+        if isBulletedList && isMultiline {
             field.addBulletOnReturn()
         } else if isMultiline {
             field.addNewLineOnReturn()

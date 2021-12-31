@@ -37,7 +37,7 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     //must define size for toolbar otherwise constraints get messy in console
     var keyboardToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     
-    var isBulletedList: Bool = false  
+    var isBulletedList: Bool = false
     var isMultiline: Bool = false
     
     let placeholder: String = "Start typing or swipe right for saved notes..."
@@ -109,15 +109,12 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     }
     
     @objc func addBullet() {
+        checkForBulletList()
         if isBulletedList {
-            isBulletedList = false
-            let indicatorView = SPIndicatorView(title: "Bulleted List Disabled", preset: .error)
+            let indicatorView = SPIndicatorView(title: "Bullet Already Exists", preset: .error)
             indicatorView.present(duration: 1)
         } else {
-            isBulletedList = true
             isMultiline = true
-            let indicatorView = SPIndicatorView(title: "Bulleted List Enabled", preset: .done)
-            indicatorView.present(duration: 1)
             field.addBullet()
         }
     }
@@ -166,21 +163,14 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
                     sectionCount += 1
                 }
                 
-                //**throws index out of bounds error when pasting sometimes**
                 if sectionCount > 0 {
-//                    print("Checking this line: " + "\(sectionCount)" + ": " + lines[sectionCount - 1])
-//                    print("All lines look like this: ")
-//                    print(lines)
-                    
                     //only true if cursor is on new "empty" line
                     //meaning either bullet is not enabled **or**
                     //bullet was deleted on current line, so user does not bullets to be enabled
                     if lines.indices.contains(sectionCount) {
-//                        print("Yes")
                         isBulletedList = false
                     } else {
                         //there is text on the current line
-//                        print("No")
                         if lines[sectionCount - 1].contains("\u{2022}") {
                             isBulletedList = true
                         } else {
