@@ -90,6 +90,9 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
             self.noteColor = newTheme?.colors().randomElement() ?? .olympia1
             self.view.setGradient(theme: newTheme ?? .olympia)
             
+            //reset editing data when a note is created to setup for reminders and other interactions
+            EditingData.currentNote = FBNote(content: "", timestamp: 0, id: "", color: "", reminder: "", reminderTimestamp: 0)
+            
             AnalyticsManager.logEvent(named: "note_created", description: "note_created")
         }
         field.resignFirstResponder()
@@ -133,6 +136,14 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
             field.text = ""
             field.textColor = .white
         }
+        
+        //disable reminder button when first editing field
+        //field should be empty since user input hasn't happened yet
+        if field.text == "" {
+            reminderButtonEnabled = false
+            setupToolbar()
+            print("should be false")
+        }
     }
     
     //add placeholder back when user is done editing
@@ -155,6 +166,12 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
         } else if !field.text.isEmpty && field.textColor == .white {
             updateEditingData()
             resetTimer()
+        }
+        
+        //re-enable reminder button now that user is typing
+        if field.text != "" {
+            reminderButtonEnabled = true
+            setupToolbar()
         }
     }
     

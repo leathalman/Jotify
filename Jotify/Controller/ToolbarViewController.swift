@@ -45,6 +45,8 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     //observe a color chosen through ColorGallery
     var colorOverride = ""
     
+    var reminderButtonEnabled = true
+    
     override func viewDidLoad() {
         setupToolbar()
         
@@ -66,6 +68,14 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
         let colorpicker = UIBarButtonItem(image: UIImage(systemName: "eyedropper"), style: .plain, target: self, action: #selector(showColorGalleryController))
         let list = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), style: .plain, target: self, action: #selector(addBullet))
         let timer = UIBarButtonItem(image: UIImage(systemName: "timer"), style: .plain, target: self, action: #selector(showReminderController))
+        timer.isEnabled = reminderButtonEnabled
+
+        if reminderButtonEnabled {
+            timer.tintColor = nil
+        } else {
+            timer.tintColor = UIColor.gray
+        }
+        
         let help = UIBarButtonItem(image: UIImage(systemName: "arrow.down.app"), style: .plain, target: self, action: #selector(keyboardSaveNote))
         keyboardToolbar.items = [multiline, spacer, list, spacer, timer, spacer, colorpicker, spacer, help]
         keyboardToolbar.sizeToFit()
