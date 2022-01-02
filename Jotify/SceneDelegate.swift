@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
         
         //pull up recent note widget launched app
         maybePressedRecentNoteWidget(urlContexts: connectionOptions.urlContexts)
-                
+        
         guard let _ = (scene as? UIWindowScene) else { return }
     }
     
@@ -54,6 +54,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+        //check if user is logged in
+        if !AuthManager().uid.isEmpty {
+            print("logged in")
+            if UserDefaults.standard.bool(forKey: "useBiometrics") {
+                let poc = PrivacyOverlayController()
+                poc.modalPresentationStyle = .fullScreen
+                window?.rootViewController?.present(poc, animated: false, completion: nil)
+            }
+        }
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
@@ -61,12 +70,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
+    
     //App opened from background - used partially for widgets
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         maybePressedRecentNoteWidget(urlContexts: URLContexts)
     }
-
+    
     //collect data and present EditingController if widget pressed
     private func maybePressedRecentNoteWidget(urlContexts: Set<UIOpenURLContext>) {
         guard let _: UIOpenURLContext = urlContexts.first(where: { $0.url.scheme == "recentnotewidget-link" }) else { return }
@@ -119,9 +128,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
     
     //app in foreground when user interacts with notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        
-//        openNoteFromNotification(userInfo: notification.request.content.userInfo)
-        
+        //show an alert at top of screen while application is open
         completionHandler(UNNotificationPresentationOptions.alert)
     }
     
@@ -130,9 +137,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
         let color = userInfo["color"] as! String
         let timestamp = userInfo["timestamp"] as! Double
         let content = userInfo["content"] as! String
-
+        
         print("NoteID from reminder: \(noteID)")
-
+        
         EditingData.currentNote = FBNote(content: content, timestamp: timestamp, id: noteID, color: color)
         
         DataManager.removeReminder(uid: noteID) { success in

@@ -382,6 +382,7 @@ class NoteCollectionController: UICollectionViewController {
             if isFiltering {
                 EditingData.currentNote = filteredNotes[indexPath.row]
             }
+            AnalyticsManager.logEvent(named: "note_opened", description: "note_opened")
             navigationController?.pushViewController(controller, animated: true)
         }
     }

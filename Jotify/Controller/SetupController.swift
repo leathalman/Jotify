@@ -11,10 +11,6 @@ import SPPermissions
 
 class SetupController {
     
-    public var isNotificationAuthorized: Bool {
-        return SPPermissions.Permission.notification.authorized
-    }
-    
     //setup URL for widgets
     private func setupWidget() {
         GroupDataManager.writeData(path: "recentNoteColor", content: "systemBlue")
@@ -29,12 +25,19 @@ class SetupController {
     
     //default Userdefaults
     private func setupDefaults() {
+        //remove all old UserDefaults from v1.x.x before establishing new ones
+        let domain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: domain)
+        UserDefaults.standard.synchronize()
+        print(Array(UserDefaults.standard.dictionaryRepresentation().keys).count)
+        
         UserDefaults.standard.register(defaults: [
             "hasMigrated": false,
             "multilineInputEnabled": false,
             "useHaptics": true,
             "deleteOldNotes": false,
             "notificationBadgeCount": 0,
+            "useBiometrics": false,
         ])
     }
     

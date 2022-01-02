@@ -48,7 +48,10 @@ class AuthManager {
             // Clear saved user ID from Sign In with Apple
             UserDefaults.standard.set(nil, forKey: "appleAuthorizedUserIdKey")
         }
-        do { try Auth.auth().signOut() }
+        do {
+            try Auth.auth().signOut()
+            UserDefaults.standard.set(false, forKey: "useBiometrics")
+        }
         catch { print("User already logged out") }
     }
     

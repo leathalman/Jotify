@@ -39,7 +39,7 @@ class DataManager {
                 completionHandler(nil, false)
             } else {
                 print("Firebase settings retrieved")
-                let settings = Settings(multilineInputEnabled: snapshot?.get("multilineInputEnabled") as? Bool ?? false, hasMigrated: snapshot?.get("hasMigrated") as? Bool ?? false, deleteOldNotes: snapshot?.get("deleteOldNotes") as? Bool ?? false, useHaptics: snapshot?.get("useHaptics") as? Bool ?? true)
+                let settings = Settings(multilineInputEnabled: snapshot?.get("multilineInputEnabled") as? Bool ?? false, deleteOldNotes: snapshot?.get("deleteOldNotes") as? Bool ?? false, useHaptics: snapshot?.get("useHaptics") as? Bool ?? true, useBiometrics: snapshot?.get("useBiometrics") as? Bool ?? false, hasMigrated: snapshot?.get("hasMigrated") as? Bool ?? false)
                 completionHandler(settings, true)
             }
         }

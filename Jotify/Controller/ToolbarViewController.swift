@@ -120,8 +120,7 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     }
     
     @objc func showReminderController() {
-        let setup = SetupController()
-        if setup.isNotificationAuthorized {
+        if SPPermissions.Permission.notification.authorized {
             let reminder = ReminderController(style: .insetGrouped)
             present(reminder, animated: true, completion: nil)
         } else {

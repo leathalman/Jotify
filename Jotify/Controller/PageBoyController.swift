@@ -28,6 +28,12 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if UserDefaults.standard.bool(forKey: "useBiometrics") {
+            let poc = PrivacyOverlayController()
+            poc.modalPresentationStyle = .fullScreen
+            present(poc, animated: true, completion: nil)
+        }
+        
         //set PageboyViewControllerDataSource dataSource to configure page view controller
         dataSource = self
         

@@ -12,7 +12,7 @@ class MasterSettingsController: SettingsController {
     override func viewDidLoad() {
         super.viewDidLoad()
         super.sections = ["General"]
-        super.section1 = ["General", "Account"]
+        super.section1 = ["General", "Account", "Privacy"]
         navigationItem.title = "Settings"
     }
     
@@ -33,6 +33,14 @@ class MasterSettingsController: SettingsController {
         case 1:
             let vc = AccountSettingsController(style: .insetGrouped)
             vc.noteCollection = self.noteCollection
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                vc.modalPresentationStyle = .formSheet
+                present(vc, animated: true, completion: nil)
+            } else if UIDevice.current.userInterfaceIdiom == .phone {
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        case 2:
+            let vc = PrivacySettingsController(style: .insetGrouped)
             if UIDevice.current.userInterfaceIdiom == .pad {
                 vc.modalPresentationStyle = .formSheet
                 present(vc, animated: true, completion: nil)

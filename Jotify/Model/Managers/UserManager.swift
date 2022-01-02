@@ -8,10 +8,14 @@
 import UIKit
 
 struct Settings {
+    //visible to user
     var multilineInputEnabled: Bool
-    var hasMigrated: Bool
     var deleteOldNotes: Bool
     var useHaptics: Bool
+    var useBiometrics: Bool
+    
+    //invisible to user
+    var hasMigrated: Bool
 }
 
 class User {
@@ -22,6 +26,7 @@ class User {
             defaults.setValue(settings?.hasMigrated, forKey: "hasMigrated")
             defaults.setValue(settings?.deleteOldNotes, forKey: "deleteOldNotes")
             defaults.setValue(settings?.useHaptics, forKey: "useHaptics")
+            defaults.setValue(settings?.useBiometrics, forKey: "useBiometrics")
             print("Userdefaults settings updated")
         }
     }

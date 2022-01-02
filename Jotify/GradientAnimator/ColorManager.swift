@@ -15,7 +15,7 @@ class ColorManager {
     static var noteColor = UIColor()
     static var indexes = [Int]()
     static var bgColor = UIColor()
-
+    
     //a static instance of ColorManager must be created to persist the value of indexes
     //fill an array of indexes that correspond to the array as a parameter
     //remove elements from indexes array as they are selected from parameter array
