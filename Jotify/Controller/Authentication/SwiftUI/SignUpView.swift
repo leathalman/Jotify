@@ -77,7 +77,7 @@ struct SignUpButtonContent: View {
             .foregroundColor(.white)
             .padding()
             .frame(width: 280, height: 60)
-            .background(Color.blue)
+            .background(Color(UIColor.jotifyBlue))
             .cornerRadius(10)
     }
 }
@@ -87,6 +87,6 @@ struct LogInContent: View {
         Text("Log In.")
             .font(.subheadline)
             .fontWeight(.bold)
-            .foregroundColor(.blue)
+            .foregroundColor(Color(UIColor.jotifyBlue))
     }
 }

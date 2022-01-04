@@ -53,6 +53,7 @@ class NoteCollectionController: UICollectionViewController {
         setupNavigationBar()
         setupSearchBar()
         enableAutomaticStatusBarStyle()
+        resetAppBadgeIfAllRemindersCleared()
     }
     
     override func viewDidLoad() {
@@ -107,6 +108,22 @@ class NoteCollectionController: UICollectionViewController {
     func animateVisibleCells() {
         let animation = AnimationType.from(direction: .top, offset: 30.0)
         collectionView?.performBatchUpdates({UIView.animate(views: self.collectionView.orderedVisibleCells, animations: [animation], completion: {})}, completion: nil)
+    }
+    
+    func resetAppBadgeIfAllRemindersCleared() {
+        var numOfReminders = 0
+        let notes = noteCollection!.FBNotes
+        
+        for note in notes {
+            if note.reminderTimestamp ?? 0 > 0 {
+                //reminder has not been delivered
+                numOfReminders += 1
+            }
+        }
+        
+        if numOfReminders == 0 {
+            UIApplication.shared.applicationIconBadgeNumber = 0
+        }
     }
     
     //action handlers
@@ -195,10 +212,6 @@ class NoteCollectionController: UICollectionViewController {
                     //remove badge if notification is already delivered but not opened
                     if note.reminderTimestamp ?? 0 < Date.timeIntervalSinceReferenceDate {
                         //reminder is already delivered
-                        //Retreive the value from User Defaults and decrease it by 1
-                        let badgeCount = UserDefaults.standard.value(forKey: "notificationBadgeCount") as! Int - 1
-                        //Save the new value to User Defaults
-                        UserDefaults.standard.set(badgeCount, forKey: "notificationBadgeCount")
                         UIApplication.shared.applicationIconBadgeNumber -= 1
                     }
                 }
@@ -275,10 +288,6 @@ class NoteCollectionController: UICollectionViewController {
                 //remove badge if notification is already delivered but not opened
                 if self.noteCollection?.FBNotes[indexPath.row].reminderTimestamp ?? 0 < Date.timeIntervalSinceReferenceDate {
                     //reminder is already delivered
-                    //Retreive the value from User Defaults and decrease it by 1
-                    let badgeCount = UserDefaults.standard.value(forKey: "notificationBadgeCount") as! Int - 1
-                    //Save the new value to User Defaults
-                    UserDefaults.standard.set(badgeCount, forKey: "notificationBadgeCount")
                     UIApplication.shared.applicationIconBadgeNumber -= 1
                 }
             }

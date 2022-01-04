@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //TEMP:: DELETE FOR LAUNCH, should be handled by SetupController
         UserDefaults.standard.register(defaults: [
-            "notificationBadgeCount": 0,
             "useBiometrics": false,
         ])
         

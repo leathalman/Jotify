@@ -177,14 +177,7 @@ class ReminderController: UITableViewController, DatePickerDelegate, TimePickerD
         content.userInfo = ["noteID": EditingData.currentNote.id as Any, "color": EditingData.currentNote.color as Any, "timestamp": EditingData.currentNote.timestamp as Any, "content": EditingData.currentNote.content as Any]
         content.sound = UNNotificationSound.default
         content.categoryIdentifier = "NOTE_REMINDER"
-        
-        //Make sure app is increased properly
-        //Retreive the value from User Defaults and increase it by 1
-        let badgeCount = UserDefaults.standard.value(forKey: "notificationBadgeCount") as! Int + 1
-        //Save the new value to User Defaults
-        UserDefaults.standard.set(badgeCount, forKey: "notificationBadgeCount")
-        //Set the value as the current badge count
-        content.badge = badgeCount as NSNumber
+        content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
         
         var components = DateComponents()
         components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: dateValue ?? Date())
@@ -393,5 +386,42 @@ class ReminderController: UITableViewController, DatePickerDelegate, TimePickerD
         formatter.amSymbol = "AM"
         formatter.pmSymbol = "PM"
         return formatter.string(from: date)
+    }
+    
+    //needed to make sure badge increments correctly
+    //called from SceneDelegate
+    func renumberBadgesOfPendingNotifications() {
+        // once reminders are delivered it will override the badge number
+        // so it will increment correctly as long as the notifications have been delivered
+        // but a new reminder scheduled after the others have been delivered will still be badge = 1
+        UNUserNotificationCenter.current().getPendingNotificationRequests { pendingNotificationRequests in
+            if pendingNotificationRequests.count > 0 {
+                let notificationRequests = pendingNotificationRequests
+                    .filter { $0.trigger is UNCalendarNotificationTrigger }
+                    .sorted(by: { (r1, r2) -> Bool in
+                        let r1Trigger = r1.trigger as! UNCalendarNotificationTrigger
+                        let r2Trigger = r2.trigger as! UNCalendarNotificationTrigger
+                        let r1Date = r1Trigger.nextTriggerDate()!
+                        let r2Date = r2Trigger.nextTriggerDate()!
+                        
+                        return r1Date.compare(r2Date) == .orderedAscending
+                    })
+                
+                let identifiers = notificationRequests.map { $0.identifier }
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+                
+                notificationRequests.enumerated().forEach { index, request in
+                    if let trigger = request.trigger {
+                        let content = UNMutableNotificationContent()
+                        content.body = request.content.body
+                        content.sound = .default
+                        content.badge = (index + 1) as NSNumber
+                        
+                        let request = UNNotificationRequest(identifier: request.identifier, content: content, trigger: trigger)
+                        UNUserNotificationCenter.current().add(request)
+                    }
+                }
+            }
+        }
     }
 }

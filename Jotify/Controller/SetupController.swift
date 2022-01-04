@@ -36,7 +36,6 @@ class SetupController {
             "multilineInputEnabled": false,
             "useHaptics": true,
             "deleteOldNotes": false,
-            "notificationBadgeCount": 0,
             "useBiometrics": false,
         ])
     }

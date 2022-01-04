@@ -96,7 +96,7 @@ struct JotifyText: View {
         Text("Jotify.")
             .font(.system(size: 52))
             .fontWeight(.bold)
-            .foregroundColor(.blue)
+            .foregroundColor(Color(UIColor.jotifyBlue))
             .padding(.init(top: 0, leading: 20, bottom: 40, trailing: 20))
     }
 }
@@ -167,7 +167,7 @@ struct LoginButtonContent: View {
             .foregroundColor(.white)
             .padding()
             .frame(width: 280, height: 60)
-            .background(Color.blue)
+            .background(Color(UIColor.jotifyBlue))
             .cornerRadius(10)
     }
 }
@@ -177,6 +177,6 @@ struct SignUpContent: View {
         Text("Sign Up.")
             .font(.subheadline)
             .fontWeight(.bold)
-            .foregroundColor(.blue)
+            .foregroundColor(Color(UIColor.jotifyBlue))
     }
 }

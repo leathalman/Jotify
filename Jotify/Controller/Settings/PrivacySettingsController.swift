@@ -50,6 +50,8 @@ class PrivacySettingsController: SettingsController {
         }
     }
     
+    //can change for PIN to work and not just biometric
+    //change "deviceOwnerAuthenticationWithBiometrics" to "deviceOwnerAuthentication"
     @objc func useBiometricsSwitchPressed(sender: UISwitch) {
         if sender.isOn {
             //enable biometrics
