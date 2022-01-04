@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //TEMP:: DELETE FOR LAUNCH, should be handled by SetupController
         UserDefaults.standard.register(defaults: [
             "useBiometrics": false,
+            "placeholder": "Tap to start typing or swipe left to right for saved notes...",
         ])
         
         return true

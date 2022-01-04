@@ -37,6 +37,7 @@ class SetupController {
             "useHaptics": true,
             "deleteOldNotes": false,
             "useBiometrics": false,
+            "placeholder": "Tap to start typing or swipe left to right for saved notes...",
         ])
     }
     

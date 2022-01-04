@@ -24,6 +24,9 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
         super.viewWillAppear(true)
         //change status bar style to white
         setStatusBarStyle(style: .lightContent)
+        
+        //show the most recent placeholder
+        field.text = UserDefaults.standard.string(forKey: "placeholder")
     }
     
     //life cycle
@@ -46,7 +49,6 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
         view.addSubview(field)
         
         //manually handle placeholder
-        field.text = "Start typing or swipe right for saved notes..."
         field.textColor = .almostWhite
         
         setupConstraints()

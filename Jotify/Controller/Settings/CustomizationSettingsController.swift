@@ -13,9 +13,9 @@ class CustomizationSettingsController: SettingsController {
     override func viewDidLoad() {
         super.viewDidLoad()
         super.sections = ["Privacy", "Visual", "Miscellaneous"]
-        super.section1 = ["Use Biometric Unlock"]
+        super.section1 = ["Enable Biometric Unlock"]
         super.section2 = ["Custom Placeholder", "App Icon"]
-        super.section3 = ["View on Launch", "Use Haptics", "Delete Expired Notes"]
+        super.section3 = ["Default View", "Use Haptics", "Delete Expired Notes"]
         navigationItem.title = "Customization"
     }
     
@@ -84,6 +84,50 @@ class CustomizationSettingsController: SettingsController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 1:
+            switch indexPath.row {
+            case 0:
+                let alert = UIAlertController(title: "Custom Placeholder", message: "Change the placeholder text when creating a new note.", preferredStyle: .alert)
+                
+                let cell = tableView.cellForRow(at: indexPath)
+                cell?.isSelected = false
+                
+                alert.addTextField { textField in
+                    let placeholder = UserDefaults.standard.string(forKey: "placeholder")
+                    textField.placeholder = placeholder
+                    textField.autocorrectionType = .yes
+                    textField.autocapitalizationType = .sentences
+                }
+                
+                alert.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak alert] _ in
+                    let textField = alert?.textFields![0]
+                    let text = textField?.text
+                    
+                    if !(text?.isEmpty ?? true) {
+                        UserDefaults.standard.set(text, forKey: "placeholder")
+                        DataManager.updateUserSettings(setting: "placeholder", value: text!) { (success) in }
+                        AnalyticsManager.logEvent(named: "placeholder_enabled", description: "placeholder_enabled")
+                    } else {
+                        print("Error updating note...")
+                    }
+                }))
+                
+                alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { [weak alert] _ in
+                    print(alert?.message ?? "cancel")
+                    print("cancel")
+                }))
+                
+                present(alert, animated: true, completion: nil)
+            default:
+                print("tapped")
+            }
+        default:
+            print("tapped")
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0:
@@ -149,7 +193,7 @@ class CustomizationSettingsController: SettingsController {
             UserDefaults.standard.set(true, forKey: "deleteOldNotes")
             DataManager.updateUserSettings(setting: "deleteOldNotes", value: true) { (success) in }
             AnalyticsManager.logEvent(named: "deleteOldNotes_enabled", description: "deleteOldNotes_enabled")
-
+            
         } else {
             print("deleteOldNotes disabled")
             UserDefaults.standard.set(false, forKey: "deleteOldNotes")

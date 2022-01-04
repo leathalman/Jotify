@@ -13,6 +13,7 @@ struct Settings {
     var deleteOldNotes: Bool
     var useHaptics: Bool
     var useBiometrics: Bool
+    var placeholder: String
     
     //invisible to user
     var hasMigrated: Bool
@@ -27,6 +28,7 @@ class User {
             defaults.setValue(settings?.deleteOldNotes, forKey: "deleteOldNotes")
             defaults.setValue(settings?.useHaptics, forKey: "useHaptics")
             defaults.setValue(settings?.useBiometrics, forKey: "useBiometrics")
+            defaults.setValue(settings?.placeholder, forKey: "placeholder")
             print("Userdefaults settings updated")
         }
     }
