@@ -93,7 +93,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
         let presentable = StatusBarResponsiveNavigationController(rootViewController: EditingController())
         presentable.modalPresentationStyle = .fullScreen
         
-        window?.rootViewController?.present(presentable, animated: true, completion: nil)
+        if !AuthManager().uid.isEmpty {
+            print("logged in")
+            if !UserDefaults.standard.bool(forKey: "useBiometrics") {
+                window?.rootViewController?.present(presentable, animated: true, completion: nil)
+            }
+        }
     }
     
     func setupWindows(scene: UIScene, vc: UIViewController) {
