@@ -80,7 +80,6 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
             
             //removed bulleted list from next note
             if isBulletedList {
-                isMultiline = false
                 isBulletedList = false
             }
             
