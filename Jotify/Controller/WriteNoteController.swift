@@ -179,10 +179,17 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     
     //setup constraints for multiline textfield
     func setupConstraints() {
-        field.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-        field.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        field.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        field.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            field.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            field.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+            field.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+            field.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
+        } else if UIDevice.current.userInterfaceIdiom == .phone {
+            field.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+            field.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            field.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            field.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        }
     }
     
     func updateEditingData() {
@@ -201,6 +208,7 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     //detect when orientation of view will change -> iPad, not enabled on iPhone
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
+        //make sure gradient view resizes properly
         view.viewWithTag(007)?.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
     }
 }

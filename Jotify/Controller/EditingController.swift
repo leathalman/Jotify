@@ -45,6 +45,7 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     //view configuration
     func setupView() {
         //color customization to support white/black dynamic type
+        view.backgroundColor = EditingData.currentNote.color.getColor()
         field.backgroundColor = EditingData.currentNote.color.getColor()
         field.textColor = EditingData.currentNote.color.getColor().isDarkColor ? .white : .black
         field.tintColor = EditingData.currentNote.color.getColor().isDarkColor ? .white : .black
@@ -53,11 +54,27 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
         initialContent = EditingData.currentNote.content
         field.delegate = self
         field.font = UIFont.boldSystemFont(ofSize: 18)
-        field.frame = CGRect(x: 0, y: 15, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        
+
         view.addSubview(field)
         
+        setupConstraints()
+        
         setStatusBarStyle(style: EditingData.currentNote.color.getColor().isDarkColor ? .lightContent : .darkContent)
+    }
+    
+    //setup constraints for multiline textfield
+    func setupConstraints() {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            field.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            field.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+            field.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+            field.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
+        } else if UIDevice.current.userInterfaceIdiom == .phone {
+            field.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+            field.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            field.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            field.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        }
     }
     
     func setupNavBar() {
@@ -186,11 +203,5 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     //needed for status bar customization when presenting from widget or notification
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return EditingData.currentNote.color.getColor().isDarkColor ? .lightContent : .darkContent
-    }
-    
-    //detect when orientation of view will change -> iPad, not enabled on iPhone
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        field.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
     }
 }

@@ -15,7 +15,7 @@ class CustomizationSettingsController: SettingsController {
         super.sections = ["Privacy", "Visual", "Miscellaneous"]
         super.section1 = ["Use Biometric Unlock"]
         super.section2 = ["Custom Placeholder", "App Icon"]
-        super.section3 = ["Use Haptics", "Delete Expired Notes"]
+        super.section3 = ["View on Launch", "Use Haptics", "Delete Expired Notes"]
         navigationItem.title = "Customization"
     }
     
@@ -45,11 +45,17 @@ class CustomizationSettingsController: SettingsController {
             genericCell.accessoryView = UIImageView(image: UIImage(systemName: "chevron.right.circle.fill"))
             return genericCell
         case 2:
-            let switchCell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
-            switchCell.textLabel?.text = "\(super.section3[indexPath.row])"
-            switchCell.selectionStyle = .none
             switch indexPath.row {
             case 0:
+                let genericCell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+                genericCell.textLabel?.text = "\(super.section3[indexPath.row])"
+                genericCell.accessoryType = .disclosureIndicator
+                genericCell.accessoryView = UIImageView(image: UIImage(systemName: "chevron.right.circle.fill"))
+                return genericCell
+            case 1:
+                let switchCell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
+                switchCell.textLabel?.text = "\(super.section3[indexPath.row])"
+                switchCell.selectionStyle = .none
                 switchCell.switchButton.addTarget(self, action: #selector(useHapticsSwitchPressed(sender:)), for: .valueChanged)
                 if UserDefaults.standard.bool(forKey: "useHaptics") {
                     switchCell.switchButton.isOn = true
@@ -57,7 +63,10 @@ class CustomizationSettingsController: SettingsController {
                     switchCell.switchButton.isOn = false
                 }
                 return switchCell
-            case 1:
+            case 2:
+                let switchCell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
+                switchCell.textLabel?.text = "\(super.section3[indexPath.row])"
+                switchCell.selectionStyle = .none
                 switchCell.switchButton.addTarget(self, action: #selector(deleteOldNotesPressed(sender:)), for: .valueChanged)
                 if UserDefaults.standard.bool(forKey: "deleteOldNotes") {
                     switchCell.switchButton.isOn = true

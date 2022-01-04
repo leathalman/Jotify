@@ -40,7 +40,7 @@ class NoteCollectionController: UICollectionViewController {
         stickyFooters: false)
     
     let iPadOSLayout = VerticalBlueprintLayout(
-        itemsPerRow: 3.0,
+        itemsPerRow: 4.0,
         minimumInteritemSpacing: 10,
         minimumLineSpacing: 15,
         sectionInset: EdgeInsets(top: 10, left: 10, bottom: 10, right: 10),
@@ -414,9 +414,9 @@ class NoteCollectionController: UICollectionViewController {
     //traitcollection: dynamic iPad layout and light/dark mode support
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if traitCollection.horizontalSizeClass == .compact {
-            iPadOSLayout.itemsPerRow = 1.0
+            iPadOSLayout.itemsPerRow = 2.0
         } else if traitCollection.horizontalSizeClass == .regular {
-            iPadOSLayout.itemsPerRow = 3.0
+            iPadOSLayout.itemsPerRow = 4.0
         }
         collectionView.collectionViewLayout.invalidateLayout()
         collectionView.backgroundColor = ColorManager.bgColor
