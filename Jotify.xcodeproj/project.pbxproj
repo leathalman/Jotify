@@ -18,7 +18,6 @@
 		F62209442602B07A001DFAC1 /* SceneDelegate+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62209432602B07A001DFAC1 /* SceneDelegate+Gestures.swift */; };
 		F62209472602F252001DFAC1 /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62209462602F252001DFAC1 /* AuthenticationController.swift */; };
 		F62A02F826974A200020A89B /* UITextView+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62A02F726974A200020A89B /* UITextView+Toolbar.swift */; };
-		F634707E277FB57A0005314F /* PrivacySettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F634707D277FB57A0005314F /* PrivacySettingsController.swift */; };
 		F638E65225CEF36B005FA371 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F638E65125CEF36B005FA371 /* UserManager.swift */; };
 		F6425CC12680D286008C03A2 /* UIColor+StringInterpretor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6425CC02680D286008C03A2 /* UIColor+StringInterpretor.swift */; };
 		F642C42227821F8B00C29852 /* PrivacyOverlayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F642C42127821F8B00C29852 /* PrivacyOverlayController.swift */; };
@@ -33,6 +32,7 @@
 		F670E015268123D9002960FE /* ToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F670E014268123D9002960FE /* ToolbarViewController.swift */; };
 		F6720AFD26364CF80071183C /* PageBoyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6720AFC26364CF80071183C /* PageBoyController.swift */; };
 		F678330E2640F4D6005429FF /* NoteCollectionController+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = F678330D2640F4D6005429FF /* NoteCollectionController+Search.swift */; };
+		F67AA6D02783E6FB004BD86E /* CustomizationSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67AA6CF2783E6FB004BD86E /* CustomizationSettingsController.swift */; };
 		F67D1B6A25BF7A1100B28071 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D1B6925BF7A1100B28071 /* UIColor+Extensions.swift */; };
 		F67F002425B32EE600313D61 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002325B32EE600313D61 /* AuthManager.swift */; };
 		F67F002725B32EEC00313D61 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002625B32EEC00313D61 /* DataManager.swift */; };
@@ -117,7 +117,6 @@
 		F62209432602B07A001DFAC1 /* SceneDelegate+Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+Gestures.swift"; sourceTree = "<group>"; };
 		F62209462602F252001DFAC1 /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
 		F62A02F726974A200020A89B /* UITextView+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Toolbar.swift"; sourceTree = "<group>"; };
-		F634707D277FB57A0005314F /* PrivacySettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySettingsController.swift; sourceTree = "<group>"; };
 		F638E65125CEF36B005FA371 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		F6425CC02680D286008C03A2 /* UIColor+StringInterpretor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+StringInterpretor.swift"; sourceTree = "<group>"; };
 		F642C42127821F8B00C29852 /* PrivacyOverlayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyOverlayController.swift; sourceTree = "<group>"; };
@@ -132,6 +131,7 @@
 		F670E014268123D9002960FE /* ToolbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarViewController.swift; sourceTree = "<group>"; };
 		F6720AFC26364CF80071183C /* PageBoyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageBoyController.swift; sourceTree = "<group>"; };
 		F678330D2640F4D6005429FF /* NoteCollectionController+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteCollectionController+Search.swift"; sourceTree = "<group>"; };
+		F67AA6CF2783E6FB004BD86E /* CustomizationSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizationSettingsController.swift; sourceTree = "<group>"; };
 		F67D1B6925BF7A1100B28071 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		F67F002325B32EE600313D61 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		F67F002625B32EEC00313D61 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -423,8 +423,8 @@
 				F6F185AD25C86AB4001FD5FA /* SettingsController.swift */,
 				F6F185B125C86ABF001FD5FA /* MasterSettingsController.swift */,
 				F61580172697D3BA00ABB6F6 /* GeneralSettingsController.swift */,
+				F67AA6CF2783E6FB004BD86E /* CustomizationSettingsController.swift */,
 				F6DFF0C525C8FF9D004D6468 /* AccountSettingsController.swift */,
-				F634707D277FB57A0005314F /* PrivacySettingsController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -587,8 +587,8 @@
 				F6AA650325F5AFD3002362A4 /* AnalyticsManager.swift in Sources */,
 				F62209472602F252001DFAC1 /* AuthenticationController.swift in Sources */,
 				F6B9D4CA25B629C800A0446C /* Double+Date.swift in Sources */,
+				F67AA6D02783E6FB004BD86E /* CustomizationSettingsController.swift in Sources */,
 				F6F392E226A75C5C007E8C9D /* TimePickerCell.swift in Sources */,
-				F634707E277FB57A0005314F /* PrivacySettingsController.swift in Sources */,
 				F67F004025B32F8700313D61 /* WriteNoteController.swift in Sources */,
 				F67F002725B32EEC00313D61 /* DataManager.swift in Sources */,
 				F62209442602B07A001DFAC1 /* SceneDelegate+Gestures.swift in Sources */,

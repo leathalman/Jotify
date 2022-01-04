@@ -45,7 +45,7 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
         
         //setup the color system for background with light/dark mode
         if traitCollection.userInterfaceStyle == .light {
-            ColorManager.bgColor = UIColor.white.adjust(by: -4) ?? .white
+            ColorManager.bgColor = .jotifyGray
         } else if traitCollection.userInterfaceStyle == .dark {
             ColorManager.bgColor = .mineShaft
         }
@@ -136,7 +136,7 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if traitCollection.userInterfaceStyle == .light {
-            ColorManager.bgColor = UIColor.white.adjust(by: -4) ?? .white
+            ColorManager.bgColor = .jotifyGray
         } else if traitCollection.userInterfaceStyle == .dark {
             ColorManager.bgColor = .mineShaft
         }
