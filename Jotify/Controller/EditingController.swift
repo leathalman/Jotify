@@ -33,6 +33,9 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
         keyboardToolbar.items?.remove(at: 0)
         //remove save note icon
         keyboardToolbar.items?.removeLast()
+        
+        //disable swiping to create a new note when editing
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

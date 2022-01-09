@@ -123,6 +123,41 @@ class CustomizationSettingsController: SettingsController {
             default:
                 print("tapped")
             }
+        case 2:
+            switch indexPath.row {
+            case 0:
+                let alertController = UIAlertController(title: "Default View", message: "Choose which screen you want to see when Jotify opens. Changing this setting will take effect on next restart.", preferredStyle: .actionSheet)
+
+                let createNoteAction = UIAlertAction(title: "Create Note", style: .default) { (action) in
+                    print("Create note chosen")
+                    UserDefaults.standard.set(0, forKey: "defaultView")
+                    DataManager.updateUserSettings(setting: "defaultView", value: 0) { (success) in }
+                    AnalyticsManager.logEvent(named: "noteCreation_enabled", description: "noteCreation_enabled")
+                }
+                alertController.addAction(createNoteAction)
+
+                let noteGalleryAction = UIAlertAction(title: "Note Gallery", style: .default) { (action) in
+                    print("Note gallery chosen")
+                    UserDefaults.standard.set(1, forKey: "defaultView")
+                    DataManager.updateUserSettings(setting: "defaultView", value: 1) { (success) in }
+                    AnalyticsManager.logEvent(named: "noteGallery_enabled", description: "noteGallery_enabled")
+                }
+                alertController.addAction(noteGalleryAction)
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action) in
+                   //...
+                }
+                alertController.addAction(cancelAction)
+                
+                //tell alertcontroller where to present from
+                let cell = tableView.cellForRow(at: indexPath)
+                cell?.isSelected = false
+                alertController.popoverPresentationController?.sourceView = cell
+
+                self.present(alertController, animated: true)
+            default:
+                print("tapped")
+            }
         default:
             print("tapped")
         }

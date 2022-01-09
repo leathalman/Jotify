@@ -38,6 +38,7 @@ class SetupController {
             "deleteOldNotes": false,
             "useBiometrics": false,
             "placeholder": "Tap to start typing or swipe left to right for saved notes...",
+            "defaultView": 0,
         ])
     }
     

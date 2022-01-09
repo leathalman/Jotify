@@ -14,6 +14,8 @@ struct Settings {
     var useHaptics: Bool
     var useBiometrics: Bool
     var placeholder: String
+    //0 is note creation, 1 is note gallery
+    var defaultView: Int
     
     //invisible to user
     var hasMigrated: Bool
@@ -29,6 +31,7 @@ class User {
             defaults.setValue(settings?.useHaptics, forKey: "useHaptics")
             defaults.setValue(settings?.useBiometrics, forKey: "useBiometrics")
             defaults.setValue(settings?.placeholder, forKey: "placeholder")
+            defaults.setValue(settings?.defaultView, forKey: "defaultView")
             print("Userdefaults settings updated")
         }
     }

@@ -20,6 +20,7 @@ class DataManager {
             "useBiometrics": false,
             "placeholder": "Tap to start typing or swipe left to right for saved notes...",
             "hasMigrated": true,
+            "defaultView": 0,
         ]) { (error) in
             if let error = error {
                 print("Error deleting document: \(error.localizedDescription)")
@@ -41,7 +42,7 @@ class DataManager {
                 completionHandler(nil, false)
             } else {
                 print("Firebase settings retrieved")
-                let settings = Settings(multilineInputEnabled: snapshot?.get("multilineInputEnabled") as? Bool ?? false, deleteOldNotes: snapshot?.get("deleteOldNotes") as? Bool ?? false, useHaptics: snapshot?.get("useHaptics") as? Bool ?? true, useBiometrics: snapshot?.get("useBiometrics") as? Bool ?? false, placeholder: snapshot?.get("placeholder") as? String ?? "Tap to start typing or swipe left to right for saved notes...", hasMigrated: snapshot?.get("hasMigrated") as? Bool ?? false)
+                let settings = Settings(multilineInputEnabled: snapshot?.get("multilineInputEnabled") as? Bool ?? false, deleteOldNotes: snapshot?.get("deleteOldNotes") as? Bool ?? false, useHaptics: snapshot?.get("useHaptics") as? Bool ?? true, useBiometrics: snapshot?.get("useBiometrics") as? Bool ?? false, placeholder: snapshot?.get("placeholder") as? String ?? "Tap to start typing or swipe left to right for saved notes...", defaultView: snapshot?.get("defaultView") as? Int ?? 0, hasMigrated: snapshot?.get("hasMigrated") as? Bool ?? false)
                 completionHandler(settings, true)
             }
         }

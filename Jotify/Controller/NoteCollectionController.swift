@@ -51,9 +51,23 @@ class NoteCollectionController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setupNavigationBar()
-        setupSearchBar()
         enableAutomaticStatusBarStyle()
         resetAppBadgeIfAllRemindersCleared()
+        setupSearchBar()
+        
+        //when opening from notecollection, there is no data present
+        //TEMP fix for making loading less horrible
+        if noteCollection == nil {
+            print("Note is empty!!!")
+            noteCollection = NoteCollection()
+            noteCollection?.FBNotes = [FBNote(content: "Loading...", timestamp: 0, id: "", color: "caeruleum1", reminder: "", reminderTimestamp: 0)]
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        //reenable swipe if it was disabled from other controllers
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
     }
     
     override func viewDidLoad() {
@@ -112,17 +126,19 @@ class NoteCollectionController: UICollectionViewController {
     
     func resetAppBadgeIfAllRemindersCleared() {
         var numOfReminders = 0
-        let notes = noteCollection!.FBNotes
-        
-        for note in notes {
-            if note.reminderTimestamp ?? 0 > 0 {
-                //reminder has not been delivered
-                numOfReminders += 1
+        if noteCollection?.FBNotes != nil {
+            let notes = noteCollection!.FBNotes
+            
+            for note in notes {
+                if note.reminderTimestamp ?? 0 > 0 {
+                    //reminder has not been delivered
+                    numOfReminders += 1
+                }
             }
-        }
-        
-        if numOfReminders == 0 {
-            UIApplication.shared.applicationIconBadgeNumber = 0
+            
+            if numOfReminders == 0 {
+                UIApplication.shared.applicationIconBadgeNumber = 0
+            }
         }
     }
     

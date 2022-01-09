@@ -55,6 +55,20 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
         setupNoteRetrieval()
         
         NotificationCenter.default.addObserver(self, selector: #selector(appleIDStateDidRevoked(_:)), name: ASAuthorizationAppleIDProvider.credentialRevokedNotification, object: nil)
+        
+        //enable and disable swipe via notification from child view controllers
+        NotificationCenter.default.addObserver(self, selector: #selector(enableSwipe(notification:)), name:NSNotification.Name(rawValue: "enableSwipe"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(disableSwipe(notification:)), name:NSNotification.Name(rawValue: "disableSwipe"), object: nil)
+    }
+    
+    @objc func disableSwipe(notification: Notification){
+        print("Swipe is disabled")
+        self.isScrollEnabled = false
+    }
+    
+    @objc func enableSwipe(notification: Notification){
+        print("Swipe is enabled")
+        self.isScrollEnabled = true
     }
     
     func setupNoteRetrieval() {
@@ -111,7 +125,13 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
     }
     
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
-        return .last //default page to display in the page view controller (nil equals default/first index).
+        if UserDefaults.standard.integer(forKey: "defaultView") == 0 {
+            return .last
+        } else if UserDefaults.standard.integer(forKey: "defaultView") == 1{
+            return .first
+        } else {
+            return .last //default page to display in the page view controller (nil equals default/first index).
+        }
     }
     
     // MARK: Actions

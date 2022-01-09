@@ -14,6 +14,9 @@ class MasterSettingsController: SettingsController {
         super.sections = ["General"]
         super.section1 = ["General", "Customization", "Account"]
         navigationItem.title = "Settings"
+        
+        //disable swiping to create a new note when changing settings
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
     }
     
     //tableView logic
