@@ -45,6 +45,12 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
         EditingData.currentNote = FBNote(content: field.text, timestamp: EditingData.currentNote.timestamp, id: EditingData.currentNote.id, color: EditingData.currentNote.color, reminder: nil, reminderTimestamp: nil)
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        //reenable swipe if it was disabled from other controllers
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
+    }
+    
     //view configuration
     func setupView() {
         //color customization to support white/black dynamic type

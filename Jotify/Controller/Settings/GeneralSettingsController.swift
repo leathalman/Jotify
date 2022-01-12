@@ -22,7 +22,7 @@ class GeneralSettingsController: SettingsController {
             if indexPath.row == 3 {
                 let alertController = UIAlertController(title: "Support", message: "If you have any frustrations or feedback, email me here.", preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "Email", style: .default, handler: { (action) in
-                    let email = "jotifysupport@leathalenterprises.com"
+                    let email = "hello@leathalenterprises.com"
                     let url = URL(string: "mailto:\(email)")!
                     UIApplication.shared.open(url)
                 }))

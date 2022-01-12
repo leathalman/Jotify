@@ -58,16 +58,9 @@ class NoteCollectionController: UICollectionViewController {
         //when opening from notecollection, there is no data present
         //TEMP fix for making loading less horrible
         if noteCollection == nil {
-            print("Note is empty!!!")
             noteCollection = NoteCollection()
             noteCollection?.FBNotes = [FBNote(content: "Loading...", timestamp: 0, id: "", color: "caeruleum1", reminder: "", reminderTimestamp: 0)]
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        //reenable swipe if it was disabled from other controllers
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
     }
     
     override func viewDidLoad() {
