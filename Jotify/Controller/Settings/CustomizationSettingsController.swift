@@ -144,9 +144,7 @@ class CustomizationSettingsController: SettingsController {
                 }
                 alertController.addAction(noteGalleryAction)
                 
-                let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action) in
-                   //...
-                }
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in }
                 alertController.addAction(cancelAction)
                 
                 //tell alertcontroller where to present from
