@@ -34,6 +34,8 @@
 		F678330E2640F4D6005429FF /* NoteCollectionController+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = F678330D2640F4D6005429FF /* NoteCollectionController+Search.swift */; };
 		F67AA6D02783E6FB004BD86E /* CustomizationSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67AA6CF2783E6FB004BD86E /* CustomizationSettingsController.swift */; };
 		F67D1B6A25BF7A1100B28071 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D1B6925BF7A1100B28071 /* UIColor+Extensions.swift */; };
+		F67E10052790FEB4007C7643 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67E10042790FEB4007C7643 /* OnboardingController.swift */; };
+		F67E100727910029007C7643 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67E100627910029007C7643 /* WelcomeViewController.swift */; };
 		F67F002425B32EE600313D61 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002325B32EE600313D61 /* AuthManager.swift */; };
 		F67F002725B32EEC00313D61 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002625B32EEC00313D61 /* DataManager.swift */; };
 		F67F002A25B32F5B00313D61 /* NoteCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002925B32F5B00313D61 /* NoteCollection.swift */; };
@@ -133,6 +135,8 @@
 		F678330D2640F4D6005429FF /* NoteCollectionController+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteCollectionController+Search.swift"; sourceTree = "<group>"; };
 		F67AA6CF2783E6FB004BD86E /* CustomizationSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizationSettingsController.swift; sourceTree = "<group>"; };
 		F67D1B6925BF7A1100B28071 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		F67E10042790FEB4007C7643 /* OnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
+		F67E100627910029007C7643 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		F67F002325B32EE600313D61 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		F67F002625B32EEC00313D61 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		F67F002925B32F5B00313D61 /* NoteCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteCollection.swift; sourceTree = "<group>"; };
@@ -261,6 +265,15 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		F67E10032790FE99007C7643 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				F67E10042790FEB4007C7643 /* OnboardingController.swift */,
+				F67E100627910029007C7643 /* WelcomeViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		F67F001F25B32EC100313D61 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,6 +300,7 @@
 		F67F002125B32ECC00313D61 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				F67E10032790FE99007C7643 /* Onboarding */,
 				F6F185AC25C86A77001FD5FA /* Settings */,
 				F6B9D4B125B6160700A0446C /* Authentication */,
 				F6720AFC26364CF80071183C /* PageBoyController.swift */,
@@ -597,6 +611,7 @@
 				F680C9CD269A957000D86EF3 /* ReminderController.swift in Sources */,
 				F6A5F9462604E5F200E46105 /* DismissKeyboardSwiftUI.swift in Sources */,
 				F678330E2640F4D6005429FF /* NoteCollectionController+Search.swift in Sources */,
+				F67E10052790FEB4007C7643 /* OnboardingController.swift in Sources */,
 				F652AB6525B87CF2006D7747 /* EditingController.swift in Sources */,
 				F69389DD2699161200EF3EED /* GroupDataManager.swift in Sources */,
 				F6DFF0CC25C90617004D6468 /* ColorManager.swift in Sources */,
@@ -624,6 +639,7 @@
 				F6720AFD26364CF80071183C /* PageBoyController.swift in Sources */,
 				F670E015268123D9002960FE /* ToolbarViewController.swift in Sources */,
 				F6703A1E2638DE29009863E3 /* NoteOptionMenu.swift in Sources */,
+				F67E100727910029007C7643 /* WelcomeViewController.swift in Sources */,
 				F6F185AE25C86AB4001FD5FA /* SettingsController.swift in Sources */,
 				F62A02F826974A200020A89B /* UITextView+Toolbar.swift in Sources */,
 				F67FFFF125B32E1F00313D61 /* AppDelegate.swift in Sources */,
