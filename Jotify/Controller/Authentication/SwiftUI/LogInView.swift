@@ -15,58 +15,70 @@ struct LogInView: View {
     @State var password: String = ""
     
     var body: some View {
-        VStack {
-            Spacer()
-            HStack {
-                VStack {
-                    HStack {
-                        WelcomeText()
-                        Spacer()
+        ZStack {
+            if #available(iOS 14.0, *) {
+                if (colorScheme == .light) {
+                    Color(UIColor.jotifyGray).ignoresSafeArea()
+                } else {
+                    //dark
+                    Color(UIColor.mineShaft).ignoresSafeArea()
+                }
+            } else {
+                // Fallback on earlier versions
+            }
+            VStack {
+                Spacer()
+                HStack {
+                    VStack {
+                        HStack {
+                            LoginText()
+                            Spacer()
+                        }
+                        HStack {
+                            JotifyText()
+                            Spacer()
+                        }
                     }
-                    HStack {
-                        JotifyText()
-                        Spacer()
+                    Spacer()
+                }
+                EmailTextField(email: $email)
+                PasswordTextField(password: $password)
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        authController.userDidForgetPassword()
+                    }) {
+                        ForgotPasswordContent()
                     }
                 }
                 Spacer()
-            }
-            EmailTextField(email: $email)
-            PasswordTextField(password: $password)
-            HStack {
-                Spacer()
+                DynamicSignInWithApple()
+                    .frame(width: 280, height: 60)
+                    .onTapGesture(perform: authController.presentSignInWithApple)
+                OrTextView()
                 Button(action: {
-                    authController.userDidForgetPassword()
+                    authController.userDidSubmitLogIn(email: email, password: password)
                 }) {
-                    ForgotPasswordContent()
+                    LoginButtonContent()
                 }
-            }
-            Spacer()
-            DynamicSignInWithApple()
-                .frame(width: 280, height: 60)
-                .onTapGesture(perform: authController.presentSignInWithApple)
-            OrTextView()
-            Button(action: {
-                authController.userDidSubmitLogIn(email: email, password: password)
-            }) {
-                LoginButtonContent()
-            }
-            .padding(.bottom)
-            HStack {
-                Text("Don't have an account?")
-                    .font(.subheadline)
-                    .fontWeight(.bold)
-                Button(action: {
-                    authController.presentSignUp()
-                }) {
-                    SignUpContent()
+                .padding(.bottom)
+                HStack {
+                    Text("Don't have an account?")
+                        .font(.subheadline)
+                        .fontWeight(.bold)
+                    Button(action: {
+                        authController.presentSignUp()
+                    }) {
+                        SignUpContent()
+                    }
                 }
+                .opacity(colorScheme == .light ? 0.75 : 1.00)
+                .padding(.init(top: 20, leading: 0, bottom: 5, trailing: 0))
+                
             }
-            .opacity(colorScheme == .light ? 0.75 : 1.00)
-            .padding(.init(top: 20, leading: 0, bottom: 5, trailing: 0))
-            
+            .padding()
+            .dismissKeyboardOnTap()
         }
-        .padding()
-        .dismissKeyboardOnTap()
     }
 }
 
@@ -82,9 +94,9 @@ struct LogInView_Previews: PreviewProvider {
     }
 }
 
-struct WelcomeText: View {
+struct LoginText: View {
     var body: some View {
-        Text("Welcome to")
+        Text("Login to")
             .font(.system(size: 52))
             .fontWeight(.bold)
             .padding(.init(top: 0, leading: 20, bottom: 0, trailing: 20))
@@ -107,7 +119,7 @@ struct EmailTextField: View {
     var body: some View {
         return TextField("Email", text: $email)
             .padding()
-            .background(colorScheme == .light ? Color(.lightTrail) : Color(.mineShaft))
+            .background(colorScheme == .light ? Color.white : Color.black)
             .cornerRadius(5.0)
             .padding(.init(top: 0, leading: 20, bottom: 15, trailing: 20))
     }
@@ -119,7 +131,7 @@ struct PasswordTextField: View {
     var body: some View {
         return SecureField("Password", text: $password)
             .padding()
-            .background(colorScheme == .light ? Color(.lightTrail) : Color(.mineShaft))
+            .background(colorScheme == .light ? Color.white : Color.black)
             .cornerRadius(5.0)
             .padding(.init(top: 0, leading: 20, bottom: 15, trailing: 20))
     }

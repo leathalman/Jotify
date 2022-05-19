@@ -8,6 +8,7 @@
 import UIKit
 
 class EmptyNoteView: UIView {
+    
     lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [imageContainer, titleLabel, descriptionLabel])
         stackView.translatesAutoresizingMaskIntoConstraints = false

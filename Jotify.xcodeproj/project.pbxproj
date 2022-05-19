@@ -19,6 +19,7 @@
 		F62209472602F252001DFAC1 /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62209462602F252001DFAC1 /* AuthenticationController.swift */; };
 		F62A02F826974A200020A89B /* UITextView+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62A02F726974A200020A89B /* UITextView+Toolbar.swift */; };
 		F638E65225CEF36B005FA371 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F638E65125CEF36B005FA371 /* UserManager.swift */; };
+		F639C4552836D3C4001140E6 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F639C4542836D3C4001140E6 /* WelcomeViewController.swift */; };
 		F6425CC12680D286008C03A2 /* UIColor+StringInterpretor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6425CC02680D286008C03A2 /* UIColor+StringInterpretor.swift */; };
 		F642C42227821F8B00C29852 /* PrivacyOverlayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F642C42127821F8B00C29852 /* PrivacyOverlayController.swift */; };
 		F652AB6525B87CF2006D7747 /* EditingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652AB6425B87CF2006D7747 /* EditingController.swift */; };
@@ -35,7 +36,6 @@
 		F67AA6D02783E6FB004BD86E /* CustomizationSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67AA6CF2783E6FB004BD86E /* CustomizationSettingsController.swift */; };
 		F67D1B6A25BF7A1100B28071 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D1B6925BF7A1100B28071 /* UIColor+Extensions.swift */; };
 		F67E10052790FEB4007C7643 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67E10042790FEB4007C7643 /* OnboardingController.swift */; };
-		F67E100727910029007C7643 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67E100627910029007C7643 /* WelcomeViewController.swift */; };
 		F67F002425B32EE600313D61 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002325B32EE600313D61 /* AuthManager.swift */; };
 		F67F002725B32EEC00313D61 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002625B32EEC00313D61 /* DataManager.swift */; };
 		F67F002A25B32F5B00313D61 /* NoteCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67F002925B32F5B00313D61 /* NoteCollection.swift */; };
@@ -120,6 +120,7 @@
 		F62209462602F252001DFAC1 /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
 		F62A02F726974A200020A89B /* UITextView+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Toolbar.swift"; sourceTree = "<group>"; };
 		F638E65125CEF36B005FA371 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		F639C4542836D3C4001140E6 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		F6425CC02680D286008C03A2 /* UIColor+StringInterpretor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+StringInterpretor.swift"; sourceTree = "<group>"; };
 		F642C42127821F8B00C29852 /* PrivacyOverlayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyOverlayController.swift; sourceTree = "<group>"; };
 		F652AB6425B87CF2006D7747 /* EditingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingController.swift; sourceTree = "<group>"; };
@@ -136,7 +137,6 @@
 		F67AA6CF2783E6FB004BD86E /* CustomizationSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizationSettingsController.swift; sourceTree = "<group>"; };
 		F67D1B6925BF7A1100B28071 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		F67E10042790FEB4007C7643 /* OnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
-		F67E100627910029007C7643 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		F67F002325B32EE600313D61 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		F67F002625B32EEC00313D61 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		F67F002925B32F5B00313D61 /* NoteCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteCollection.swift; sourceTree = "<group>"; };
@@ -269,7 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				F67E10042790FEB4007C7643 /* OnboardingController.swift */,
-				F67E100627910029007C7643 /* WelcomeViewController.swift */,
+				F639C4542836D3C4001140E6 /* WelcomeViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -639,7 +639,7 @@
 				F6720AFD26364CF80071183C /* PageBoyController.swift in Sources */,
 				F670E015268123D9002960FE /* ToolbarViewController.swift in Sources */,
 				F6703A1E2638DE29009863E3 /* NoteOptionMenu.swift in Sources */,
-				F67E100727910029007C7643 /* WelcomeViewController.swift in Sources */,
+				F639C4552836D3C4001140E6 /* WelcomeViewController.swift in Sources */,
 				F6F185AE25C86AB4001FD5FA /* SettingsController.swift in Sources */,
 				F62A02F826974A200020A89B /* UITextView+Toolbar.swift in Sources */,
 				F67FFFF125B32E1F00313D61 /* AppDelegate.swift in Sources */,

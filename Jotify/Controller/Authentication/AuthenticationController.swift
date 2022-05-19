@@ -73,11 +73,11 @@ class AuthenticationController: UIViewController {
     }
     
     func presentSignUp() {
-        self.setRootViewController(duration: 0.4, vc: signUp)
+        self.setRootViewController(duration: 0.2, vc: signUp)
     }
     
     func presentLogIn() {
-        self.setRootViewController(duration: 0.4, vc: logIn)
+        self.setRootViewController(duration: 0.2, vc: logIn)
     }
     
 }

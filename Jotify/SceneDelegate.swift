@@ -25,8 +25,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
             setupWindows(scene: scene, vc: PageBoyController())
         } else {
             print("not logged in")
-            setupWindows(scene: scene, vc: UIHostingController(rootView: SignUpView()))
-//            setupWindows(scene: scene, vc: OnboardingController())
+//            setupWindows(scene: scene, vc: UIHostingController(rootView: SignUpView()))
+            setupWindows(scene: scene, vc: OnboardingController())
         }
         
         //pull up recent note widget launched app
