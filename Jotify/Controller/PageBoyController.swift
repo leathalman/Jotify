@@ -10,7 +10,7 @@ import Pageboy
 import AuthenticationServices
 
 class PageBoyController: PageboyViewController, PageboyViewControllerDataSource {
-
+    
     // MARK: Properties
     
     var statusBarStyle: UIStatusBarStyle = .lightContent
@@ -22,6 +22,14 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
     private lazy var viewControllers: [UIViewController] = {
         return [self.noteCollectionController, self.writeNotesController]
     }()
+    
+    var noteCollection: NoteCollection? {
+        didSet {
+            if isViewLoaded {
+                SetupController.updateRecentWidget(note: self.noteCollection?.FBNotes.first ?? FBNote(content: "There was an error retrieving your note.", timestamp: 0, id: "", color: "systemBlue"))
+            }
+        }
+    }
     
     // MARK: Lifecycle
     
@@ -93,8 +101,7 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
             if success! {
                 let controller = self.noteCollectionController.viewControllers.first as! NoteCollectionController
                 controller.noteCollection = collection
-                
-                SetupController.updateRecentWidget(note: collection?.FBNotes.first ?? FBNote(content: "There was an error retrieving your note.", timestamp: 0, id: "", color: "systemBlue"))
+                self.noteCollection = collection
             } else {
                 print("Error retrieving note collection")
             }
@@ -113,7 +120,7 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
             DataManager.updateUserSettings(setting: "hasMigrated", value: true) { (success) in }
         }
     }
-
+    
     // MARK: PageboyViewControllerDataSource
     
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
