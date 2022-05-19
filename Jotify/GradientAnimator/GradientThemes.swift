@@ -96,7 +96,7 @@ extension UIColor {
     static let caeruleum4 = UIColor(hex: "#00d4ff")
     
     //MISC Colors
-    static let jotifyGray = UIColor(red: 219 / 255, green: 220 / 255, blue: 221 / 255, alpha: 1)
+    static let jotifyGray = UIColor(red: 239 / 255, green: 240 / 255, blue: 241 / 255, alpha: 1)
     static let jotifyBlue = UIColor(red: 70 / 255, green: 108 / 255, blue: 139 / 255, alpha: 1)
 
 }
