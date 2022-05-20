@@ -101,6 +101,11 @@ class CustomizationSettingsController: SettingsController {
                     textField.autocapitalizationType = .sentences
                 }
                 
+                alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { [weak alert] _ in
+                    print(alert?.message ?? "cancel")
+                    print("cancel")
+                }))
+                
                 alert.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak alert] _ in
                     let textField = alert?.textFields![0]
                     let text = textField?.text
@@ -112,11 +117,6 @@ class CustomizationSettingsController: SettingsController {
                     } else {
                         print("Error updating note...")
                     }
-                }))
-                
-                alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { [weak alert] _ in
-                    print(alert?.message ?? "cancel")
-                    print("cancel")
                 }))
                 
                 present(alert, animated: true, completion: nil)

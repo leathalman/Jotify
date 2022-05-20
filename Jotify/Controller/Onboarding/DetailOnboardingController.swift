@@ -36,7 +36,7 @@ class DetailOnboardingController: UIViewController {
     
     let detailText: UITextView = {
         let tv = UITextView()
-        tv.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        tv.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         tv.textAlignment = .center
         tv.backgroundColor = .clear
         tv.isUserInteractionEnabled = false
@@ -154,7 +154,14 @@ class DetailOnboardingController: UIViewController {
     }
     
     @objc func displaySignUp() {
-        setRootViewController(duration: 0.4, vc: UIHostingController(rootView: SignUpView()))
+        self.playHapticFeedback()
+        if (AuthManager().uid == "") {
+            //not logged in or hasn't made an account before
+            setRootViewController(duration: 0.4, vc: UIHostingController(rootView: SignUpView()))
+        } else {
+            //already logged in and already has an account
+            setRootViewController(duration: 0.4, vc: PageBoyController())
+        }
     }
     
     //traitcollection: dynamic iPad layout and light/dark mode support

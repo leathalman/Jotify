@@ -21,12 +21,12 @@ class GeneralSettingsController: SettingsController {
         case 0:
             if indexPath.row == 3 {
                 let alertController = UIAlertController(title: "Support", message: "If you have any frustrations or feedback, email me here.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 alertController.addAction(UIAlertAction(title: "Email", style: .default, handler: { (action) in
                     let email = "hello@leathalenterprises.com"
                     let url = URL(string: "mailto:\(email)")!
                     UIApplication.shared.open(url)
                 }))
-                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
             }
         default:

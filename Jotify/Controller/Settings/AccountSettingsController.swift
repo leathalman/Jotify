@@ -26,6 +26,7 @@ class AccountSettingsController: SettingsController {
             switch indexPath.row {
             case 0:
                 let alertController = UIAlertController(title: "Reset Password", message: "Are you sure you want to reset your password?", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 alertController.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: {(action) in
                     //ask firebase to send password recovery email and alert user if successful or error
                     //deselect row once action is completed
@@ -43,7 +44,6 @@ class AccountSettingsController: SettingsController {
                         }
                     }
                 }))
-                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
             case 1:
                 let alertController = UIAlertController(title: "Change Email", message: "Enter your new email address below.", preferredStyle: .alert)
@@ -53,6 +53,7 @@ class AccountSettingsController: SettingsController {
                     textField.autocorrectionType = .no
                     textField.autocapitalizationType = .sentences
                 }
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 alertController.addAction(UIAlertAction(title: "Submit", style: .default, handler: { [weak alertController] _ in
                     let textField = alertController?.textFields![0]
                     let email = textField?.text
@@ -66,10 +67,10 @@ class AccountSettingsController: SettingsController {
                         }
                     }
                 }))
-                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
             case 2:
                 let alertController = UIAlertController(title: "Logout", message: "Are you sure you want to logout?", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 alertController.addAction(UIAlertAction(title: "Logout", style: .destructive, handler: {(action) in
                     //sign out user and set the rootViewController back to loginController
                     AuthManager.signOut()
@@ -79,7 +80,6 @@ class AccountSettingsController: SettingsController {
                     }))
                     self.present(alertController, animated: true, completion: nil)
                 }))
-                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
             default:
                 print("")
@@ -88,6 +88,7 @@ class AccountSettingsController: SettingsController {
             switch indexPath.row {
             case 0:
                 let alertController = UIAlertController(title: "Reset User Settings", message: "Are you sure? This will reset settings to default.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 alertController.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: {(action) in
                     DataManager.deleteUserSettings { success in
                         if success! {
@@ -109,12 +110,12 @@ class AccountSettingsController: SettingsController {
                         }
                     }
                 }))
-                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
             case 1:
                 let alertController = UIAlertController(title: "Delete All Notes", message: "Do you really want to delete ALL of your notes? This action CANNOT be undone.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 alertController.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: {(action) in
-                    let alertController = UIAlertController(title: nil, message: "Are you sure? This is the final check.", preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "Final Confirmation", message: "Are you sure? This is the last check.", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "Delete My Notes", style: .destructive, handler: { (action) in
                         self.deleteAllNotes { success in
                             if success! {
@@ -131,10 +132,10 @@ class AccountSettingsController: SettingsController {
                     alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                     self.present(alertController, animated: true, completion: nil)
                 }))
-                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
             case 2:
                 let alertController = UIAlertController(title: "Delete Jotify Account", message: "Do you really want to delete your Jotify account? This action cannot be undone under any circumstance.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 alertController.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: {(action) in
                     let alertController = UIAlertController(title: nil, message: "This action will remove your account, all notes, and settings current saved in Jotify's servers. This is the FINAL check.", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "Delete My Account", style: .destructive, handler: { (action) in
@@ -163,7 +164,6 @@ class AccountSettingsController: SettingsController {
                     alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                     self.present(alertController, animated: true, completion: nil)
                 }))
-                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
             default:
                 break
