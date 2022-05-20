@@ -18,6 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
         UNUserNotificationCenter.current().delegate = self
+                
+        //handle initial setup from dedicated controller
+        SetupController().handleApplicationSetup()
         
         //check if user is logged in
         if !AuthManager().uid.isEmpty {
@@ -25,8 +28,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
             setupWindows(scene: scene, vc: PageBoyController())
         } else {
             print("not logged in")
-//            setupWindows(scene: scene, vc: UIHostingController(rootView: SignUpView()))
-            setupWindows(scene: scene, vc: OnboardingController())
+            if SetupController.firstLauch ?? false {
+                setupWindows(scene: scene, vc: OnboardingController())
+            } else {
+                setupWindows(scene: scene, vc: UIHostingController(rootView: SignUpView()))
+            }
         }
         
         //pull up recent note widget launched app

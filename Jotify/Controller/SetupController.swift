@@ -11,6 +11,8 @@ import SPPermissions
 
 class SetupController {
     
+    static var firstLauch: Bool?
+    
     //setup URL for widgets
     private func setupWidget() {
         GroupDataManager.writeData(path: "recentNoteColor", content: "systemBlue")
@@ -76,6 +78,7 @@ class SetupController {
             } else {
                 // first launch
                 print("first launch")
+                SetupController.firstLauch = true
                 setupWidget()
                 setupDefaults()
             }

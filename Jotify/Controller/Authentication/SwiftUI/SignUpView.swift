@@ -69,6 +69,9 @@ struct SignUpView: View {
             }
             .padding()
             .dismissKeyboardOnTap()
+            .frame(
+                maxWidth: 500
+            )
         }
     }
 }

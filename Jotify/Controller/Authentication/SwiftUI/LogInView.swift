@@ -78,6 +78,9 @@ struct LogInView: View {
             }
             .padding()
             .dismissKeyboardOnTap()
+            .frame(
+                maxWidth: 500
+            )
         }
     }
 }

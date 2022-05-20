@@ -16,9 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
-        //handle initial setup from dedicated controller
-        SetupController().handleApplicationSetup()
-        
         //check to see if Apple credential revoked since last launch
         didAppleIDStateRevokeWhileTerminated()
         
