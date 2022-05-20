@@ -31,11 +31,11 @@ struct SignUpView: View {
                 HStack {
                     VStack {
                         HStack {
-                            WelcomeText()
+                            Text1()
                             Spacer()
                         }
                         HStack {
-                            JotifyText()
+                            Text2()
                             Spacer()
                         }
                     }
@@ -104,11 +104,21 @@ struct LogInContent: View {
     }
 }
 
-struct WelcomeText: View {
+struct Text1: View {
     var body: some View {
-        Text("Welcome to")
+        Text("Start taking")
             .font(.system(size: 52))
             .fontWeight(.bold)
             .padding(.init(top: 0, leading: 20, bottom: 0, trailing: 20))
+    }
+}
+
+struct Text2: View {
+    var body: some View {
+        Text("notes today.")
+            .font(.system(size: 52))
+            .fontWeight(.bold)
+            .foregroundColor(Color(UIColor.jotifyBlue))
+            .padding(.init(top: 0, leading: 20, bottom: 40, trailing: 20))
     }
 }

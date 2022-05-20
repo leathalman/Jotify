@@ -15,11 +15,13 @@ class OnboardingController: PageboyViewController, PageboyViewControllerDataSour
     var statusBarStyle: UIStatusBarStyle = .lightContent
     
     //view controllers that will be displayed in page view controller.
-    let vc1 = WelcomeViewController()
-    let vc2 = WelcomeViewController()
+    let vc1 = WelcomeViewOnboardingController()
+    let vc2 = DetailOnboardingController(tText: "Improved UI", dText: "Jotify features visual improvements when writing notes, setting reminders, and much more. You can now customize the launch screen, placeholder text, and note color.", imgName: "Customization", finalVC: false)
+    let vc3 = DetailOnboardingController(tText: "Instant Syncing", dText: "Jotify now syncs in real time. To accommodate this change, Jotify now requires an account for all users, and you can use Sign in with Apple to keep your information private.", imgName: "Transfer", finalVC: false)
+    let vc4 = DetailOnboardingController(tText: "Premium", dText: "To support the development of Jotify, you can purchase premium. Or, you can refer three friends to get it for free! You are limited to 5 notes on the free version. Thank you for your support!", imgName: "Referral", finalVC: true)
     
     private lazy var viewControllers: [UIViewController] = {
-        return [self.vc1, self.vc2]
+        return [self.vc1, self.vc2, self.vc3, self.vc4]
     }()
     
     // MARK: Lifecycle
@@ -60,12 +62,7 @@ class OnboardingController: PageboyViewController, PageboyViewControllerDataSour
     // MARK: Actions
     
     func scrollToNextPage() {
-        scrollToPage(.next, animated: true) { (vc, result, result2) in
-//            if result && result2 {
-//                let writeNoteController = vc as! WriteNoteController
-//                writeNoteController.field.becomeFirstResponder()
-//            }
-        }
+        scrollToPage(.next, animated: true)
     }
     
     // MARK: TraitCollection

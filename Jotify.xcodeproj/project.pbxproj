@@ -19,7 +19,6 @@
 		F62209472602F252001DFAC1 /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62209462602F252001DFAC1 /* AuthenticationController.swift */; };
 		F62A02F826974A200020A89B /* UITextView+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62A02F726974A200020A89B /* UITextView+Toolbar.swift */; };
 		F638E65225CEF36B005FA371 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F638E65125CEF36B005FA371 /* UserManager.swift */; };
-		F639C4552836D3C4001140E6 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F639C4542836D3C4001140E6 /* WelcomeViewController.swift */; };
 		F6425CC12680D286008C03A2 /* UIColor+StringInterpretor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6425CC02680D286008C03A2 /* UIColor+StringInterpretor.swift */; };
 		F642C42227821F8B00C29852 /* PrivacyOverlayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F642C42127821F8B00C29852 /* PrivacyOverlayController.swift */; };
 		F652AB6525B87CF2006D7747 /* EditingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652AB6425B87CF2006D7747 /* EditingController.swift */; };
@@ -66,6 +65,8 @@
 		F6B9AE0C25DCC871008467C6 /* MigrationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9AE0B25DCC871008467C6 /* MigrationHandler.swift */; };
 		F6B9D4B825B6175D00A0446C /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9D4B725B6175D00A0446C /* UIViewController+Extensions.swift */; };
 		F6B9D4CA25B629C800A0446C /* Double+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B9D4C925B629C800A0446C /* Double+Date.swift */; };
+		F6C06D542837108B005AED28 /* DetailOnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C06D532837108B005AED28 /* DetailOnboardingController.swift */; };
+		F6C06D5628371416005AED28 /* WelcomeViewOnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C06D5528371416005AED28 /* WelcomeViewOnboardingController.swift */; };
 		F6CF5DDF25DAEF2F006E576E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CF5DDE25DAEF2F006E576E /* CloudKit.framework */; };
 		F6CF5DF325DAF38D006E576E /* Jotify.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F6CF5DF125DAF38D006E576E /* Jotify.xcdatamodeld */; };
 		F6D2771225C8C00E00ECFCCC /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D2771125C8C00E00ECFCCC /* SettingsCell.swift */; };
@@ -120,7 +121,6 @@
 		F62209462602F252001DFAC1 /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
 		F62A02F726974A200020A89B /* UITextView+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Toolbar.swift"; sourceTree = "<group>"; };
 		F638E65125CEF36B005FA371 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
-		F639C4542836D3C4001140E6 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		F6425CC02680D286008C03A2 /* UIColor+StringInterpretor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+StringInterpretor.swift"; sourceTree = "<group>"; };
 		F642C42127821F8B00C29852 /* PrivacyOverlayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyOverlayController.swift; sourceTree = "<group>"; };
 		F652AB6425B87CF2006D7747 /* EditingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingController.swift; sourceTree = "<group>"; };
@@ -166,6 +166,8 @@
 		F6B9AE0B25DCC871008467C6 /* MigrationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationHandler.swift; sourceTree = "<group>"; };
 		F6B9D4B725B6175D00A0446C /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		F6B9D4C925B629C800A0446C /* Double+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Date.swift"; sourceTree = "<group>"; };
+		F6C06D532837108B005AED28 /* DetailOnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOnboardingController.swift; sourceTree = "<group>"; };
+		F6C06D5528371416005AED28 /* WelcomeViewOnboardingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewOnboardingController.swift; sourceTree = "<group>"; };
 		F6CF5DDC25DAEF2B006E576E /* Jotify.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jotify.entitlements; sourceTree = "<group>"; };
 		F6CF5DDE25DAEF2F006E576E /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		F6CF5DF225DAF38D006E576E /* Jotify.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Jotify.xcdatamodel; sourceTree = "<group>"; };
@@ -269,7 +271,8 @@
 			isa = PBXGroup;
 			children = (
 				F67E10042790FEB4007C7643 /* OnboardingController.swift */,
-				F639C4542836D3C4001140E6 /* WelcomeViewController.swift */,
+				F6C06D5528371416005AED28 /* WelcomeViewOnboardingController.swift */,
+				F6C06D532837108B005AED28 /* DetailOnboardingController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -616,6 +619,7 @@
 				F69389DD2699161200EF3EED /* GroupDataManager.swift in Sources */,
 				F6DFF0CC25C90617004D6468 /* ColorManager.swift in Sources */,
 				F6048A012697662100C7B566 /* ColorGalleryController.swift in Sources */,
+				F6C06D542837108B005AED28 /* DetailOnboardingController.swift in Sources */,
 				F66F5C50267FE48C004CB9F1 /* GradientThemes.swift in Sources */,
 				F69389D42699158A00EF3EED /* RecentNoteWidget.intentdefinition in Sources */,
 				F6CF5DF325DAF38D006E576E /* Jotify.xcdatamodeld in Sources */,
@@ -639,10 +643,10 @@
 				F6720AFD26364CF80071183C /* PageBoyController.swift in Sources */,
 				F670E015268123D9002960FE /* ToolbarViewController.swift in Sources */,
 				F6703A1E2638DE29009863E3 /* NoteOptionMenu.swift in Sources */,
-				F639C4552836D3C4001140E6 /* WelcomeViewController.swift in Sources */,
 				F6F185AE25C86AB4001FD5FA /* SettingsController.swift in Sources */,
 				F62A02F826974A200020A89B /* UITextView+Toolbar.swift in Sources */,
 				F67FFFF125B32E1F00313D61 /* AppDelegate.swift in Sources */,
+				F6C06D5628371416005AED28 /* WelcomeViewOnboardingController.swift in Sources */,
 				F6E85EAD26B6000400F27BB5 /* StatusBarResponsiveNavigationController.swift in Sources */,
 				F6F185A625C85F98001FD5FA /* UITextView+Padding.swift in Sources */,
 				F6B9AE0C25DCC871008467C6 /* MigrationHandler.swift in Sources */,

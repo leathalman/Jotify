@@ -7,28 +7,27 @@
 
 import UIKit
 
-class WelcomeViewController: UIViewController {
+class WelcomeViewOnboardingController: UIViewController {
     
     lazy var welcomeImg: UIImageView = {
         let welcome = UIImage(named: "Welcome")
         let image = UIImageView(image: welcome)
-        image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         image.backgroundColor = .clear
+        image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
     lazy var titleView: UITextView = {
         let view = UITextView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
         view.isScrollEnabled = false
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     let detailText: UITextView = {
         let tv = UITextView()
-        tv.translatesAutoresizingMaskIntoConstraints = false
         tv.text = "Welcome to the latest version of Jotify! Packed with new features and visual improvements. Follow along for a brief overview of the changes."
         tv.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         tv.textAlignment = .center
@@ -43,19 +42,18 @@ class WelcomeViewController: UIViewController {
         button.setTitle("Next", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(scrollToNextPage), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = UIColor.jotifyBlue
         button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     let wrapper: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,7 +90,7 @@ class WelcomeViewController: UIViewController {
         ]
         let attributed = NSMutableAttributedString(string: text, attributes: attributes)
         
-        let text2 = "Jotify v2"
+        let text2 = "Jotify."
         let attributes2: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 50, weight: .bold),
             .foregroundColor: UIColor.jotifyBlue,
@@ -117,9 +115,7 @@ class WelcomeViewController: UIViewController {
         wrapper.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         wrapper.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.90).isActive = true
         wrapper.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.80).isActive = true
-        
-        // x, y, height, width
-        
+                
         welcomeImg.centerXAnchor.constraint(equalTo: wrapper.centerXAnchor).isActive = true
         welcomeImg.centerYAnchor.constraint(equalTo: wrapper.centerYAnchor, constant: 25).isActive = true
         welcomeImg.heightAnchor.constraint(equalTo: wrapper.heightAnchor, multiplier: 0.50).isActive = true
@@ -130,17 +126,10 @@ class WelcomeViewController: UIViewController {
         titleView.bottomAnchor.constraint(equalTo: welcomeImg.topAnchor, constant: 0).isActive = true
         titleView.widthAnchor.constraint(equalTo: wrapper.widthAnchor).isActive = true
         
-        //        detailText.centerXAnchor.constraint(equalTo: wrapper.centerXAnchor).isActive = true
-        //        detailText.topAnchor.constraint(equalTo: welcomeImg.bottomAnchor, constant: 25).isActive = true
-        //        detailText.heightAnchor.constraint(equalToConstant: 125).isActive = true
-        //        detailText.widthAnchor.constraint(equalTo: wrapper.widthAnchor).isActive = true
-        
         nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75).isActive = true
         nextButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         nextButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        
-        titleView.sizeToFit()
     }
     
     @objc func scrollToNextPage() {

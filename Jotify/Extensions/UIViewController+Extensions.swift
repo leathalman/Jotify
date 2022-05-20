@@ -10,6 +10,7 @@ import AudioToolbox
 
 extension UIViewController {
     
+    // TODO: Causes crash when changing from light/dark mode
     //returns the current rootViewController from connected scenes
     var rootViewController: UIViewController {
         return (UIApplication.shared.connectedScenes
