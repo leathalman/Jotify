@@ -57,10 +57,10 @@ class NoteCollectionController: UICollectionViewController {
         
         //when opening from notecollection, there is no data present
         //TEMP fix for making loading less horrible
-        if noteCollection == nil {
-            noteCollection = NoteCollection()
-            noteCollection?.FBNotes = [FBNote(content: "Loading...", timestamp: 0, id: "", color: "caeruleum1", reminder: "", reminderTimestamp: 0)]
-        }
+//        if noteCollection == nil {
+//            noteCollection = NoteCollection()
+//            noteCollection?.FBNotes = [FBNote(content: "Loading...", timestamp: 0, id: "", color: "caeruleum1", reminder: "", reminderTimestamp: 0)]
+//        }
     }
     
     override func viewDidLoad() {

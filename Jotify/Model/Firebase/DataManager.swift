@@ -19,7 +19,7 @@ class DataManager {
             "useHaptics": true,
             "useBiometrics": false,
             "placeholder": "Tap to start typing or swipe left to right for saved notes...",
-            "hasMigrated": true,
+            "hasMigrated": false,
             "defaultView": 0,
         ]) { (error) in
             if let error = error {

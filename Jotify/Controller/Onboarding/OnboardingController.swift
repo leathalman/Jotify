@@ -16,7 +16,7 @@ class OnboardingController: PageboyViewController, PageboyViewControllerDataSour
     
     //view controllers that will be displayed in page view controller.
     let vc1 = WelcomeViewOnboardingController()
-    let vc2 = DetailOnboardingController(tText: "Improved UI", dText: "Jotify features visual improvements when writing notes, setting reminders, and much more. You can now customize the launch screen, placeholder text, and note color.", imgName: "Customization", finalVC: false)
+    let vc2 = DetailOnboardingController(tText: "Improved UI", dText: "Jotify features visual improvements when writing notes, setting reminders, and much more. You can now create widgets and customize placeholder text, and note color.", imgName: "Customization", finalVC: false)
     let vc3 = DetailOnboardingController(tText: "Instant Syncing", dText: "Jotify now syncs in real time. To accommodate this change, Jotify now requires an account for all users, and you can use Sign in with Apple to keep your information private.", imgName: "Transfer", finalVC: false)
     let vc4 = DetailOnboardingController(tText: "Premium", dText: "To support the development of Jotify, you can purchase premium. Or, you can refer three friends to get it for free! You are limited to 5 notes on the free version. Thank you for your support!", imgName: "Referral", finalVC: true)
     

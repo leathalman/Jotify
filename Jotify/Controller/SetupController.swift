@@ -72,6 +72,8 @@ class SetupController {
             if previousVersion != nil {
                 // new version
                 print("new version")
+                //show onboarding when user updates to 2.0.0
+                SetupController.firstLauch = true
                 setupWidget()
                 setupDefaults()
                 

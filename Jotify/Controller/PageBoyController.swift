@@ -87,9 +87,8 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
         DataManager.retrieveUserSettings { (settings, success) in
             if success! {
                 User.settings = settings
-                
+                print("Has migrated: \(String(describing: User.settings?.hasMigrated))")
                 if !(settings!.hasMigrated) && !UserDefaults.standard.bool(forKey: "hasMigrated") {
-                    print("Has migrated?: \(UserDefaults.standard.bool(forKey: "hasMigrated"))")
                     //notify when notes are fetched from context, CloudKit
                     NotificationCenter.default.addObserver(self, selector: #selector(self.migrateDataFromCloudKit), name: .NSManagedObjectContextObjectsDidChange, object: MigrationHandler().context)
                 }
