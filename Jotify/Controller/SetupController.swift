@@ -31,7 +31,6 @@ class SetupController {
         let domain = Bundle.main.bundleIdentifier!
         UserDefaults.standard.removePersistentDomain(forName: domain)
         UserDefaults.standard.synchronize()
-        print(Array(UserDefaults.standard.dictionaryRepresentation().keys).count)
         
         UserDefaults.standard.register(defaults: [
             "hasMigrated": false,
@@ -41,6 +40,8 @@ class SetupController {
             "useBiometrics": false,
             "placeholder": "Tap to start typing or swipe left to right for saved notes...",
             "defaultView": 0,
+            "referrals": 0,
+            "referralLink": "",
         ])
     }
     
@@ -67,16 +68,18 @@ class SetupController {
         if previousVersion == currentVersion {
             // same version, no update
             print("same version")
+            //TODO: Before launching the beta enable this to wipe all settings and start over...
+            setupDefaults()
             
         } else {
             if previousVersion != nil {
                 // new version
                 print("new version")
                 //show onboarding when user updates to 2.0.0
+                //TODO: Change this for any version after 2.0.0
                 SetupController.firstLauch = true
                 setupWidget()
                 setupDefaults()
-                
             } else {
                 // first launch
                 print("first launch")

@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import FirebaseDynamicLinks
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCenterDelegate {
     
@@ -21,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
                 
         //handle initial setup from dedicated controller
         SetupController().handleApplicationSetup()
-        
+                
         //check if user is logged in
         if !AuthManager().uid.isEmpty {
             print("logged in")
@@ -79,9 +80,46 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
         ReminderController().renumberBadgesOfPendingNotifications()
     }
     
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        if let incomingUrl = userActivity.webpageURL {
+            print("Incoming URL is \(incomingUrl)")
+            DynamicLinks.dynamicLinks().handleUniversalLink(incomingUrl) { dynamicLink, error in
+                guard error == nil else {
+                    print("Found an error with dynamic link: \(error!.localizedDescription)")
+                    return
+                }
+                if let dynamicLink = dynamicLink {
+                    self.handleIncomingDynamicLink(dynamicLink)
+                }
+            }
+        }
+    }
+    
     //App opened from background - used partially for widgets
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        maybePressedRecentNoteWidget(urlContexts: URLContexts)
+        print("Received a URL through a custom scheme...")
+        guard let urlinfo = URLContexts.first?.url else { return }
+        if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: urlinfo) {
+            self.handleIncomingDynamicLink(dynamicLink)
+        } else {
+            maybePressedRecentNoteWidget(urlContexts: URLContexts)
+        }
+    }
+    
+    func handleIncomingDynamicLink(_ dynamicLink: DynamicLink) {
+        guard let url = dynamicLink.url else {
+            print("The dynamic link object has no url")
+            return
+        }
+        
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+              let queryItems = components.queryItems else { return }
+        for queryItem in queryItems {
+            print("Parameter \(queryItem.name) has a value of \(queryItem.value ?? "")")
+            
+            //queryItem.value is the UID of the person who referral this person
+            UserDefaults.standard.set(queryItem.value, forKey: "referralId")
+        }
     }
     
     //collect data and present EditingController if widget pressed

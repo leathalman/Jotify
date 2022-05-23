@@ -26,7 +26,13 @@ class AuthenticationController: UIViewController {
             } else {
                 AnalyticsManager.logEvent(named: "sign_up", description: "sign_up")
                 DataManager.createUserSettings { (success) in }
-                //change rootViewController to PageViewController w/ animation
+                //check if there was a referral
+                if let id = UserDefaults.standard.string(forKey: "referralId") {
+                    //there was a referral, id != nil
+                    ReferralManager().grantReferralCredit(referrerId: id)
+                }
+                //create referral link and upload it to settings doc in Firestore
+                ReferralManager().createReferralLink()
                 self.setRootViewController(duration: 0.2, vc: PageBoyController())
             }
         }

@@ -12,7 +12,7 @@ class MasterSettingsController: SettingsController {
     override func viewDidLoad() {
         super.viewDidLoad()
         super.sections = ["General"]
-        super.section1 = ["General", "Customization", "Account"]
+        super.section1 = ["General", "Customization", "Account", "Referrals"]
         navigationItem.title = "Settings"
         
         //disable swiping to create a new note when changing settings
@@ -50,6 +50,14 @@ class MasterSettingsController: SettingsController {
         case 2:
             let vc = AccountSettingsController(style: .insetGrouped)
             vc.noteCollection = self.noteCollection
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                vc.modalPresentationStyle = .formSheet
+                present(vc, animated: true, completion: nil)
+            } else if UIDevice.current.userInterfaceIdiom == .phone {
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        case 3:
+            let vc = ReferralSettingsController()
             if UIDevice.current.userInterfaceIdiom == .pad {
                 vc.modalPresentationStyle = .formSheet
                 present(vc, animated: true, completion: nil)

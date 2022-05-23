@@ -19,6 +19,8 @@ struct Settings {
     
     //invisible to user
     var hasMigrated: Bool
+    var referrals: Int
+    var referralLink: String
 }
 
 class User {
@@ -32,6 +34,8 @@ class User {
             defaults.setValue(settings?.useBiometrics, forKey: "useBiometrics")
             defaults.setValue(settings?.placeholder, forKey: "placeholder")
             defaults.setValue(settings?.defaultView, forKey: "defaultView")
+            defaults.setValue(settings?.referrals, forKey: "referrals")
+            defaults.setValue(settings?.referralLink, forKey: "referralLink")
             print("Userdefaults settings updated")
         }
     }

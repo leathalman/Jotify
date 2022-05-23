@@ -21,6 +21,8 @@ class DataManager {
             "placeholder": "Tap to start typing or swipe left to right for saved notes...",
             "hasMigrated": false,
             "defaultView": 0,
+            "referrals": 0,
+            "referralLink": "",
         ]) { (error) in
             if let error = error {
                 print("Error deleting document: \(error.localizedDescription)")
@@ -42,7 +44,7 @@ class DataManager {
                 completionHandler(nil, false)
             } else {
                 print("Firebase settings retrieved")
-                let settings = Settings(multilineInputEnabled: snapshot?.get("multilineInputEnabled") as? Bool ?? false, deleteOldNotes: snapshot?.get("deleteOldNotes") as? Bool ?? false, useHaptics: snapshot?.get("useHaptics") as? Bool ?? true, useBiometrics: snapshot?.get("useBiometrics") as? Bool ?? false, placeholder: snapshot?.get("placeholder") as? String ?? "Tap to start typing or swipe left to right for saved notes...", defaultView: snapshot?.get("defaultView") as? Int ?? 0, hasMigrated: snapshot?.get("hasMigrated") as? Bool ?? false)
+                let settings = Settings(multilineInputEnabled: snapshot?.get("multilineInputEnabled") as? Bool ?? false, deleteOldNotes: snapshot?.get("deleteOldNotes") as? Bool ?? false, useHaptics: snapshot?.get("useHaptics") as? Bool ?? true, useBiometrics: snapshot?.get("useBiometrics") as? Bool ?? false, placeholder: snapshot?.get("placeholder") as? String ?? "Tap to start typing or swipe left to right for saved notes...", defaultView: snapshot?.get("defaultView") as? Int ?? 0, hasMigrated: snapshot?.get("hasMigrated") as? Bool ?? false, referrals: snapshot?.get("referrals") as? Int ?? 0, referralLink: snapshot?.get("referralLink") as? String ?? "")
                 completionHandler(settings, true)
             }
         }

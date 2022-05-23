@@ -70,12 +70,12 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
     }
     
     @objc func disableSwipe(notification: Notification){
-        print("Swipe is disabled")
+//        print("Swipe is disabled")
         self.isScrollEnabled = false
     }
     
     @objc func enableSwipe(notification: Notification){
-        print("Swipe is enabled")
+//        print("Swipe is enabled")
         self.isScrollEnabled = true
     }
     
@@ -89,8 +89,18 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
                 User.settings = settings
                 print("Has migrated: \(String(describing: User.settings?.hasMigrated))")
                 if !(settings!.hasMigrated) && !UserDefaults.standard.bool(forKey: "hasMigrated") {
-                    //notify when notes are fetched from context, CloudKit
-                    NotificationCenter.default.addObserver(self, selector: #selector(self.migrateDataFromCloudKit), name: .NSManagedObjectContextObjectsDidChange, object: MigrationHandler().context)
+                    //ask user if they want to migrate notes
+                    let alertController = UIAlertController(title: "Migrate Notes", message: "Jotify found notes from a previous version. Would you like to migrate your notes, so you can continue to access them?", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "No", style: .destructive, handler: {(action) in
+                        //set these values, so this prompt does not appear on every launch
+                        UserDefaults.standard.setValue(true, forKey: "hasMigrated")
+                        DataManager.updateUserSettings(setting: "hasMigrated", value: true) { (success) in }
+                    }))
+                    alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: {(action) in
+                        //notify when notes are fetched from context, CloudKit
+                        NotificationCenter.default.addObserver(self, selector: #selector(self.migrateDataFromCloudKit), name: .NSManagedObjectContextObjectsDidChange, object: MigrationHandler().context)
+                    }))
+                    self.present(alertController, animated: true, completion: nil)
                 }
             }
         }

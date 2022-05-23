@@ -12,6 +12,7 @@ target 'Jotify' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
+  pod 'Firebase/DynamicLinks'
   
   pod 'Blueprints'
   pod 'Pageboy', '~> 3.6'
