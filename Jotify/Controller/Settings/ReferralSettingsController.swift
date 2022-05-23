@@ -10,9 +10,18 @@ import MessageUI
 
 class ReferralSettingsController: UIViewController, MFMessageComposeViewControllerDelegate {
     
+    lazy var customImg: UIImageView = {
+        let customization = UIImage(named: "Referral")
+        let image = UIImageView(image: customization)
+        image.contentMode = .scaleAspectFit
+        image.backgroundColor = .clear
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
     let detailText: UITextView = {
         let tv = UITextView()
-        tv.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        tv.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         tv.textAlignment = .center
         tv.backgroundColor = .clear
         tv.isUserInteractionEnabled = false
@@ -46,12 +55,21 @@ class ReferralSettingsController: UIViewController, MFMessageComposeViewControll
         view.backgroundColor = ColorManager.bgColor
         
         let referrals = User.settings?.referrals ?? 0
-
-        detailText.text = "You have \(referrals) referrals. Once you reach 3 referrals, Jotify premium is given automatically!"
         
+        if referrals >= 3 {
+            detailText.text = "You already have \(referrals) referrals. Congratulations, you have Jotify premium! Thank you for your support :)"
+        } else if referrals == 2 {
+            detailText.text = "You have \(referrals) referrals. You only need \(3 - referrals) more referral to get Jotify premium. Share Jotify and get rewarded!"
+        } else if referrals == 1 {
+            detailText.text = "You have \(referrals) referral. You only need \(3 - referrals) more referrals to get Jotify premium. Share Jotify and get rewarded!"
+        } else {
+            detailText.text = "You have \(referrals) referrals. You only need \(3 - referrals) more referrals to get Jotify premium. Share Jotify and get rewarded!"
+        }
+
         view.addSubview(wrapper)
         view.addSubview(nextButton)
         
+        wrapper.addSubview(customImg)
         wrapper.addSubview(detailText)
         
         wrapper.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -59,10 +77,14 @@ class ReferralSettingsController: UIViewController, MFMessageComposeViewControll
         wrapper.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85).isActive = true
         wrapper.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.80).isActive = true
                 
+        customImg.centerXAnchor.constraint(equalTo: wrapper.centerXAnchor).isActive = true
+        customImg.topAnchor.constraint(equalTo: wrapper.topAnchor, constant: 25).isActive = true
+        customImg.heightAnchor.constraint(equalTo: wrapper.heightAnchor, multiplier: 0.50).isActive = true
+        customImg.widthAnchor.constraint(equalTo: wrapper.widthAnchor).isActive = true
         
         detailText.centerXAnchor.constraint(equalTo: wrapper.centerXAnchor).isActive = true
-        detailText.topAnchor.constraint(equalTo: wrapper.centerYAnchor).isActive = true
-        detailText.heightAnchor.constraint(equalToConstant: 400).isActive = true
+        detailText.topAnchor.constraint(equalTo: customImg.bottomAnchor, constant: 50).isActive = true
+        detailText.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
         //to make the text fit relatively ok on iPad
         if view.bounds.width * 0.85 > 500 {
@@ -85,6 +107,8 @@ class ReferralSettingsController: UIViewController, MFMessageComposeViewControll
         messageComposer.messageComposeDelegate = self
         messageComposer.body = subject
         
+        self.playHapticFeedback()
+        
         if MFMessageComposeViewController.canSendText() {
             present(messageComposer, animated: true)
         } else {
@@ -94,8 +118,6 @@ class ReferralSettingsController: UIViewController, MFMessageComposeViewControll
             alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action) in }))
             self.present(alertController, animated: true, completion: nil)
         }
-
-        self.playHapticFeedback()
     }
     
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
