@@ -76,8 +76,8 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
         if UIDevice.current.userInterfaceIdiom == .pad {
             field.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             field.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-            field.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
             field.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
+            field.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -35).isActive = true
         } else if UIDevice.current.userInterfaceIdiom == .phone {
             field.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
             field.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true

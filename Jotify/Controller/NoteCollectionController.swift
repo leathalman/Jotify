@@ -307,7 +307,9 @@ class NoteCollectionController: UICollectionViewController {
         //noteCollection.notes.count will return nil if no notes exist on launch, will return 0 if user deletes a note
         //and num of objs in array go to 0
         if (noteCollection?.FBNotes.count == nil) || (noteCollection?.FBNotes.count == 0) {
-            collectionView.backgroundView = EmptyNoteView()
+            if User.settings?.defaultView == 0 {
+                collectionView.backgroundView = EmptyNoteView()
+            }
         } else {
             //remove backgroundView if array of notes isn't empty
             collectionView.backgroundView = nil
