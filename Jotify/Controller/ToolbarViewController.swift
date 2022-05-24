@@ -120,24 +120,36 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     }
     
     @objc func showReminderController() {
-        if SPPermissions.Permission.notification.authorized {
-            let reminder = ReminderController(style: .insetGrouped)
-            present(reminder, animated: true, completion: nil)
+        if (User.settings?.hasPremium ?? false) {
+            if SPPermissions.Permission.notification.authorized {
+                let reminder = ReminderController(style: .insetGrouped)
+                present(reminder, animated: true, completion: nil)
+            } else {
+                //if notifications are not setup, do not let user create reminders
+                let controller = SPPermissions.dialog([.notification])
+                controller.dismissCondition = .allPermissionsAuthorized
+                controller.showCloseButton = true
+                controller.allowSwipeDismiss = false
+                controller.footerText = "Notification permission is required for Jotify to deliver your reminders."
+                controller.present(on: self)
+            }
         } else {
-            //if notifications are not setup, do not let user create reminders
-            let controller = SPPermissions.dialog([.notification])
-            controller.dismissCondition = .allPermissionsAuthorized
-            controller.showCloseButton = true
-            controller.allowSwipeDismiss = false
-            controller.footerText = "Notification permission is required for Jotify to deliver your reminders."
-            controller.present(on: self)
+            let premiumVC = BuyPremiumController()
+            premiumVC.titleText.text = "Reminders are essential."
+            present(premiumVC, animated: true)
         }
     }
     
     @objc func showColorGalleryController() {
-        let gallery = ColorGalleryController(style: .insetGrouped)
-        gallery.delegate = self
-        present(gallery, animated: true, completion: nil)
+        if (User.settings?.hasPremium ?? false) {
+            let gallery = ColorGalleryController(style: .insetGrouped)
+            gallery.delegate = self
+            present(gallery, animated: true, completion: nil)
+        } else {
+            let premiumVC = BuyPremiumController()
+            premiumVC.titleText.text = "Want to Change Color?"
+            present(premiumVC, animated: true)
+        }
     }
     
     @objc func keyboardSaveNote () { return }

@@ -89,37 +89,45 @@ class CustomizationSettingsController: SettingsController {
         case 1:
             switch indexPath.row {
             case 0:
-                let alert = UIAlertController(title: "Custom Placeholder", message: "Change the placeholder text when creating a new note.", preferredStyle: .alert)
-                
-                let cell = tableView.cellForRow(at: indexPath)
-                cell?.isSelected = false
-                
-                alert.addTextField { textField in
-                    let placeholder = UserDefaults.standard.string(forKey: "placeholder")
-                    textField.placeholder = placeholder
-                    textField.autocorrectionType = .yes
-                    textField.autocapitalizationType = .sentences
+                if User.settings?.hasPremium ?? false {
+                    let alert = UIAlertController(title: "Custom Placeholder", message: "Change the placeholder text when creating a new note.", preferredStyle: .alert)
+                    
+                    let cell = tableView.cellForRow(at: indexPath)
+                    cell?.isSelected = false
+                    
+                    alert.addTextField { textField in
+                        let placeholder = UserDefaults.standard.string(forKey: "placeholder")
+                        textField.placeholder = placeholder
+                        textField.autocorrectionType = .yes
+                        textField.autocapitalizationType = .sentences
+                    }
+                    
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { [weak alert] _ in
+                        print(alert?.message ?? "cancel")
+                        print("cancel")
+                    }))
+                    
+                    alert.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak alert] _ in
+                        let textField = alert?.textFields![0]
+                        let text = textField?.text
+                        
+                        if !(text?.isEmpty ?? true) {
+                            UserDefaults.standard.set(text, forKey: "placeholder")
+                            DataManager.updateUserSettings(setting: "placeholder", value: text!) { (success) in }
+                            AnalyticsManager.logEvent(named: "placeholder_enabled", description: "placeholder_enabled")
+                        } else {
+                            print("Error updating note...")
+                        }
+                    }))
+                    
+                    present(alert, animated: true, completion: nil)
+                } else {
+                    let premiumVC = BuyPremiumController()
+                    premiumVC.titleText.text = "Customization is a must."
+                    present(premiumVC, animated: true)
+                    tableView.deselectRow(at: indexPath, animated: true)
                 }
                 
-                alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { [weak alert] _ in
-                    print(alert?.message ?? "cancel")
-                    print("cancel")
-                }))
-                
-                alert.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak alert] _ in
-                    let textField = alert?.textFields![0]
-                    let text = textField?.text
-                    
-                    if !(text?.isEmpty ?? true) {
-                        UserDefaults.standard.set(text, forKey: "placeholder")
-                        DataManager.updateUserSettings(setting: "placeholder", value: text!) { (success) in }
-                        AnalyticsManager.logEvent(named: "placeholder_enabled", description: "placeholder_enabled")
-                    } else {
-                        print("Error updating note...")
-                    }
-                }))
-                
-                present(alert, animated: true, completion: nil)
             default:
                 print("tapped")
             }
@@ -175,34 +183,41 @@ class CustomizationSettingsController: SettingsController {
     //can change for PIN to work and not just biometric
     //change "deviceOwnerAuthenticationWithBiometrics" to "deviceOwnerAuthentication"
     @objc func useBiometricsSwitchPressed(sender: UISwitch) {
-        if sender.isOn {
-            //enable biometrics
-            let context = LAContext()
-            var error: NSError?
-            
-            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-                //Permission granted for biometrics
-                UserDefaults.standard.set(true, forKey: "useBiometrics")
-                DataManager.updateUserSettings(setting: "useBiometrics", value: true) { (success) in }
-                print("useBiometrics enabled")
-                AnalyticsManager.logEvent(named: "useBiometrics_enabled", description: "useBiometrics_enabled")
+        if User.settings?.hasPremium ?? false {
+            if sender.isOn {
+                //enable biometrics
+                let context = LAContext()
+                var error: NSError?
+                
+                if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+                    //Permission granted for biometrics
+                    UserDefaults.standard.set(true, forKey: "useBiometrics")
+                    DataManager.updateUserSettings(setting: "useBiometrics", value: true) { (success) in }
+                    print("useBiometrics enabled")
+                    AnalyticsManager.logEvent(named: "useBiometrics_enabled", description: "useBiometrics_enabled")
+                } else {
+                    //No biometrics avaliable
+                    print("Biometrics may not be enabled")
+                    DataManager.updateUserSettings(setting: "useBiometrics", value: false) { (success) in }
+                    AnalyticsManager.logEvent(named: "useBiometrics_disabled", description: "useBiometrics_disabled")
+                    
+                    let alertController = UIAlertController(title: "Error Enabling Biometrics", message: "Face ID or Touch ID are not available. Please enable biometrics in Settings for Jotify.", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                        sender.setOn(false, animated: true)
+                    }))
+                    self.present(alertController, animated: true, completion: nil)
+                }
             } else {
-                //No biometrics avaliable
-                print("Biometrics may not be enabled")
+                print("useBiometrics disabled")
+                UserDefaults.standard.set(false, forKey: "useBiometrics")
                 DataManager.updateUserSettings(setting: "useBiometrics", value: false) { (success) in }
                 AnalyticsManager.logEvent(named: "useBiometrics_disabled", description: "useBiometrics_disabled")
-                
-                let alertController = UIAlertController(title: "Error Enabling Biometrics", message: "Face ID or Touch ID are not available. Please enable biometrics in Settings for Jotify.", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                    sender.setOn(false, animated: true)
-                }))
-                self.present(alertController, animated: true, completion: nil)
             }
         } else {
-            print("useBiometrics disabled")
-            UserDefaults.standard.set(false, forKey: "useBiometrics")
-            DataManager.updateUserSettings(setting: "useBiometrics", value: false) { (success) in }
-            AnalyticsManager.logEvent(named: "useBiometrics_disabled", description: "useBiometrics_disabled")
+            let premiumVC = BuyPremiumController()
+            premiumVC.titleText.text = "Secure Your Notes."
+            present(premiumVC, animated: true)
+            sender.setOn(false, animated: true)
         }
     }
     

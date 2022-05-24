@@ -36,7 +36,7 @@ class BuyPremiumController: UIViewController {
         tv.backgroundColor = .clear
         tv.isUserInteractionEnabled = false
         tv.translatesAutoresizingMaskIntoConstraints = false
-        tv.text = "Unlock unlimited notes with instant syncing, a brilliantly fast interface, reminders, customization, and so much more. Or refer 3 friends and get premium for free! Already have premium? Restore your purchase in settings."
+        tv.text = "Get unlimited notes with instant syncing, reminders, customization, biometric unlocking, and so much more. Or refer 3 friends and get premium for free! Already have premium? Restore your purchase in settings."
         return tv
     }()
     
