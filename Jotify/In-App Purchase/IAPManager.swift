@@ -224,11 +224,10 @@ extension IAPManager {
     
     func grantHasPremium() {
         DataManager.updateUserSettings(setting: "hasPremium", value: true) { success in
-            if success! {
-                User.updateSettings()
-            } else {
+            if !success! {
                 print("Error updating Firestore when enabling premium")
             }
+            User.settings?.hasPremium = true
         }
     }
 }

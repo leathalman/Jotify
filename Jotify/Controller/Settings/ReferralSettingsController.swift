@@ -110,16 +110,22 @@ class ReferralSettingsController: UIViewController, MFMessageComposeViewControll
         detailText.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
         //to make the text fit relatively ok on iPad
-        if view.bounds.width * 0.85 > 500 {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             detailText.widthAnchor.constraint(equalToConstant: 500).isActive = true
         } else {
             detailText.widthAnchor.constraint(equalTo: wrapper.widthAnchor).isActive = true
         }
         
         nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75).isActive = true
         nextButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         nextButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        //to make the text fit relatively ok on iPad
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -45).isActive = true
+        } else {
+            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75).isActive = true
+        }
     }
     
     @objc func shareReferral() {
