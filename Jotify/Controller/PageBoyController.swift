@@ -109,8 +109,8 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
                 print("Has migrated: \(User.settings?.hasMigrated ?? false)")
                 if !(settings!.hasMigrated) && !UserDefaults.standard.bool(forKey: "hasMigrated") {
                     //ask user if they want to migrate notes
-                    let alertController = UIAlertController(title: "Migrate Notes", message: "Jotify found notes from a previous version. Would you like to migrate your notes, so you can continue to access them?", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "No", style: .destructive, handler: {(action) in
+                    let alertController = UIAlertController(title: "Have you used Jotify before?", message: "If you have, Jotify can automatically import your notes from previous verions. Do you want to import your old notes?", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "No", style: .default, handler: {(action) in
                         //set these values, so this prompt does not appear on every launch
                         UserDefaults.standard.setValue(true, forKey: "hasMigrated")
                         DataManager.updateUserSettings(setting: "hasMigrated", value: true) { (success) in }

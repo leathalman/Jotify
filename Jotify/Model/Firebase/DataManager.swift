@@ -195,8 +195,8 @@ class DataManager {
                 if (diff.type == .added) {
 //                    print("New note: \(diff.document.data())")
                     collection.FBNotes.insert(note, at: 0)
-                    
                 }
+                
                 if (diff.type == .modified) {
 //                    print("Modified note: \(diff.document.data())")
                     if let noteIndex = collection.FBNotes.firstIndex(where: { $0.id == id}) {
@@ -206,10 +206,12 @@ class DataManager {
                     }
                     collection.FBNotes.sort { ($0.timestamp) > ($1.timestamp) }
                 }
+                
                 if (diff.type == .removed) {
 //                    print("Removed note: \(diff.document.data())")
                     collection.FBNotes = collection.FBNotes.filter {$0.id != diff.document.documentID }
                 }
+                
                 completionHandler(collection, true)
             }
         }

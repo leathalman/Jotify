@@ -14,7 +14,7 @@ class CustomizationSettingsController: SettingsController {
         super.viewDidLoad()
         super.sections = ["Privacy", "Visual", "Miscellaneous"]
         super.section1 = ["Enable Biometric Unlock"]
-        super.section2 = ["Custom Placeholder", "App Icon"]
+        super.section2 = ["Custom Placeholder"]
         super.section3 = ["Default View", "Use Haptics", "Delete Expired Notes"]
         navigationItem.title = "Customization"
     }

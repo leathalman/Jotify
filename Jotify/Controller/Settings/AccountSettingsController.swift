@@ -14,7 +14,7 @@ class AccountSettingsController: SettingsController {
         super.viewDidLoad()
         super.sections = [AuthManager().email, "Data"]
         super.section1 = ["Reset Password", "Change Email", "Logout"]
-        super.section2 = ["Reset Settings", "Delete All Notes", "Delete Jotify Account"]
+        super.section2 = ["Migrate Data from Old Versions", "Reset Settings", "Delete All Notes", "Delete Jotify Account"]
         navigationItem.title = "Account"
     }
     
@@ -87,6 +87,15 @@ class AccountSettingsController: SettingsController {
         case 1:
             switch indexPath.row {
             case 0:
+                let alertController = UIAlertController(title: "Migrate Notes", message: "If you have notes from a previous version of Jotify, you can import them here! Would you like to begin the transfer process? You can continue to use Jotify, and you will be prompted to restore your notes the next time you launch the app.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
+                alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: {(action) in
+                    DataManager.updateUserSettings(setting: "hasMigrated", value: false) { success in
+                        //
+                    }
+                }))
+                self.present(alertController, animated: true, completion: nil)
+            case 1:
                 let alertController = UIAlertController(title: "Reset User Settings", message: "Are you sure? This will reset settings to default.", preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 alertController.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: {(action) in
@@ -111,7 +120,7 @@ class AccountSettingsController: SettingsController {
                     }
                 }))
                 self.present(alertController, animated: true, completion: nil)
-            case 1:
+            case 2:
                 let alertController = UIAlertController(title: "Delete All Notes", message: "Do you really want to delete ALL of your notes? This action CANNOT be undone.", preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 alertController.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: {(action) in
@@ -133,7 +142,7 @@ class AccountSettingsController: SettingsController {
                     self.present(alertController, animated: true, completion: nil)
                 }))
                 self.present(alertController, animated: true, completion: nil)
-            case 2:
+            case 3:
                 let alertController = UIAlertController(title: "Delete Jotify Account", message: "Do you really want to delete your Jotify account? This action cannot be undone under any circumstance.", preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 alertController.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: {(action) in
@@ -187,6 +196,9 @@ class AccountSettingsController: SettingsController {
         case 1:
             cell.textLabel?.text = "\(super.section2[indexPath.row])"
             cell.textLabel?.textColor = .systemRed
+            if indexPath.row == 0 {
+                cell.textLabel?.textColor = .systemBlue
+            }
         default:
             return cell
         }
@@ -213,12 +225,11 @@ class AccountSettingsController: SettingsController {
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Changing account credentials maybe require you to logout and sign back into Jotify for security purposes."
+            return "Changing account credentials may require you to logout and sign back into Jotify for security purposes."
         case 1:
             return "Delete all data from Jotify's servers. Your notes are permanently deleted, so they cannot be recovered under any circumstance."
         default:
             return ""
         }
     }
-    
 }
