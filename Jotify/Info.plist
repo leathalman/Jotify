@@ -35,6 +35,10 @@
 	<true/>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Jotify wants to use FaceID to keep your notes private.</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>ConfigurationIntent</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
