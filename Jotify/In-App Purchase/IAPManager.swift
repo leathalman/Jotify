@@ -213,7 +213,7 @@ extension IAPManager {
             IAPManager.shared.buy(product: product) { (result) in
                 DispatchQueue.main.async {
                     switch result {
-                    case .success(_): print("\(product) was successfully purchased!")
+                    case .success(_): self.grantHasPremium()
                     case .failure(let error): self.showIAPError(error: error)
                     }
                 }
@@ -222,24 +222,12 @@ extension IAPManager {
         return true
     }
     
-    //TODO: This has no user feedback...
-    func restorePurchases() {
-        IAPManager.shared.restorePurchases { (result) in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let success):
-                    if success {
-                        DataManager.updateUserSettings(setting: "hasPremium", value: true) { success in
-                            if !success! {
-                                print("Error updating hasPremium setting from IAPManager")
-                            }
-                        }
-                    } else {
-                        print("Restore found no eligible products")
-                    }
-
-                case .failure(let error): self.showIAPError(error: error)
-                }
+    func grantHasPremium() {
+        DataManager.updateUserSettings(setting: "hasPremium", value: true) { success in
+            if success! {
+                User.updateSettings()
+            } else {
+                print("Error updating Firestore when enabling premium")
             }
         }
     }

@@ -36,7 +36,7 @@ class BuyPremiumController: UIViewController {
         tv.backgroundColor = .clear
         tv.isUserInteractionEnabled = false
         tv.translatesAutoresizingMaskIntoConstraints = false
-        tv.text = "Get unlimited notes with instant syncing, reminders, customization, biometric unlocking, and so much more. Or refer 3 friends and get premium for free! Already have premium? Restore your purchase in settings."
+        tv.text = "Get Jotify premium and unlock unlimited notes with instant syncing, reminders, customization, biometric unlocking, and so much more. Or refer 3 friends and get premium for free! Already have premium? Restore your purchase in settings."
         return tv
     }()
     
@@ -104,7 +104,7 @@ class BuyPremiumController: UIViewController {
         customImg.widthAnchor.constraint(equalTo: wrapper.widthAnchor).isActive = true
         
         titleText.centerXAnchor.constraint(equalTo: wrapper.centerXAnchor).isActive = true
-        titleText.topAnchor.constraint(equalTo: customImg.bottomAnchor, constant: 50).isActive = true
+        titleText.topAnchor.constraint(equalTo: customImg.bottomAnchor, constant: 30).isActive = true
         titleText.heightAnchor.constraint(equalToConstant: 50).isActive = true
         titleText.widthAnchor.constraint(equalTo: wrapper.widthAnchor).isActive = true
         
@@ -128,15 +128,6 @@ class BuyPremiumController: UIViewController {
     @objc func initiatePurchase() {
         self.playHapticFeedback()
         if IAPManager.shared.purchase(product: IAPManager.products[0]) {
-            //TODO: Give the user feedback and tell them how much you appreciate it
-            //and also change hasPremium to true
-            DataManager.updateUserSettings(setting: "hasPremium", value: true) { success in
-                if success! {
-                    User.updateSettings()
-                } else {
-                    print("Error updating Firestore when enabling premium")
-                }
-            }
             self.dismiss(animated: true)
         } else {
             print("error purchasing IAP")

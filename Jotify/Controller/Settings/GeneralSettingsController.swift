@@ -12,7 +12,7 @@ class GeneralSettingsController: SettingsController {
     override func viewDidLoad() {
         super.viewDidLoad()
         super.sections = ["About"]
-        super.section1 = ["Version: \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String)", "Build: \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)", "Number of Notes: \(noteCollection?.FBNotes.count ?? 0)", "Jotify Support"]
+        super.section1 = ["Version: \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String)", "Build: \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)", "Number of Notes: \(noteCollection?.FBNotes.count ?? 0)", "Jotify Support", "Restore Purchases"]
         navigationItem.title = "General"
     }
     
@@ -27,7 +27,36 @@ class GeneralSettingsController: SettingsController {
                     let url = URL(string: "mailto:\(email)")!
                     UIApplication.shared.open(url)
                 }))
+                tableView.deselectRow(at: indexPath, animated: true)
                 self.present(alertController, animated: true, completion: nil)
+            } else if indexPath.row == 4 {
+                //TODO: Add UI for these interactions
+                IAPManager.shared.restorePurchases { (result) in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success(let success):
+                            if success {
+                                let alertController = UIAlertController(title: "Success!", message: "Your purchase was restored. Thank you so much for supporting Jotify!", preferredStyle: .alert)
+                                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                                tableView.deselectRow(at: indexPath, animated: true)
+                                self.present(alertController, animated: true, completion: nil)
+                            
+                                DataManager.updateUserSettings(setting: "hasPremium", value: true) { success in
+                                    if !success! {
+                                        print("Error updating hasPremium setting from IAPManager")
+                                    }
+                                }
+                            }
+                        case .failure(let error):
+                            print("Error restoring purchase: \(error)")
+                            let alertController = UIAlertController(title: "Failure?", message: "Jotify couldn't find any purchases to restore. If you believe this is an error, contact us using the button above.", preferredStyle: .alert)
+                            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            tableView.deselectRow(at: indexPath, animated: true)
+                            self.present(alertController, animated: true, completion: nil)
+                            print("Restore found no eligible products")
+                        }
+                    }
+                }
             }
         default:
             print("default")
@@ -40,8 +69,9 @@ class GeneralSettingsController: SettingsController {
             let genericCell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
             genericCell.textLabel?.text = "\(super.section1[indexPath.row])"
             genericCell.selectionStyle = .none
-            if indexPath.row == 3 {
+            if indexPath.row == 3 || indexPath.row == 4 {
                 genericCell.textLabel?.textColor = .systemBlue
+                genericCell.selectionStyle = .default
             }
             return genericCell
         default:
