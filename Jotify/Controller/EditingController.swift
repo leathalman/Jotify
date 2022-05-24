@@ -101,7 +101,7 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
         ellipsis.tintColor = EditingData.currentNote.color.getColor().isDarkColor ? .white : .black
         cancel.tintColor = EditingData.currentNote.color.getColor().isDarkColor ? .white : .black
         
-        navigationItem.leftBarButtonItems = [ellipsis]
+//        navigationItem.leftBarButtonItems = [ellipsis]
         navigationItem.rightBarButtonItem = cancel
     }
     

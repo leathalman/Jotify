@@ -42,6 +42,11 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
             present(poc, animated: true, completion: nil)
         }
         
+        if (!(User.settings?.hasPremium ?? false)) {
+            //if they don't already have premium fetch the records from Apple
+            IAPManager.shared.requestIAP()
+        }
+        
         //set PageboyViewControllerDataSource dataSource to configure page view controller
         dataSource = self
         
@@ -70,12 +75,12 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
     }
     
     @objc func disableSwipe(notification: Notification){
-//        print("Swipe is disabled")
+        //        print("Swipe is disabled")
         self.isScrollEnabled = false
     }
     
     @objc func enableSwipe(notification: Notification){
-//        print("Swipe is enabled")
+        //        print("Swipe is enabled")
         self.isScrollEnabled = true
     }
     
@@ -87,7 +92,21 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
         DataManager.retrieveUserSettings { (settings, success) in
             if success! {
                 User.settings = settings
-                print("Has migrated: \(String(describing: User.settings?.hasMigrated))")
+                
+                //check to see if they should get premium from referrals
+                if !(settings?.hasPremium ?? false) {
+                    if settings?.referrals ?? 0 >= 3 {
+                        print("Awarding premium from referrals")
+                        //TODO: LET USER KNOW THEY GOT PREMIUM!
+                        DataManager.updateUserSettings(setting: "hasPremium", value: true) { success in
+                            if !success! {
+                                print("Error awarding premium from referral")
+                            }
+                        }
+                    }
+                }
+                
+                print("Has migrated: \(User.settings?.hasMigrated ?? false)")
                 if !(settings!.hasMigrated) && !UserDefaults.standard.bool(forKey: "hasMigrated") {
                     //ask user if they want to migrate notes
                     let alertController = UIAlertController(title: "Migrate Notes", message: "Jotify found notes from a previous version. Would you like to migrate your notes, so you can continue to access them?", preferredStyle: .alert)

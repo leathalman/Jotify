@@ -78,6 +78,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
         ReminderController().renumberBadgesOfPendingNotifications()
+        
+        //Stop observing payment transaction updates
+        IAPManager.shared.stopObserving()
     }
     
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {

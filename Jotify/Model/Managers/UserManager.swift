@@ -21,6 +21,7 @@ struct Settings {
     var hasMigrated: Bool
     var referrals: Int
     var referralLink: String
+    var hasPremium: Bool
 }
 
 class User {
@@ -36,6 +37,7 @@ class User {
             defaults.setValue(settings?.defaultView, forKey: "defaultView")
             defaults.setValue(settings?.referrals, forKey: "referrals")
             defaults.setValue(settings?.referralLink, forKey: "referralLink")
+            defaults.setValue(settings?.hasPremium, forKey: "hasPremium")
             print("Userdefaults settings updated")
         }
     }

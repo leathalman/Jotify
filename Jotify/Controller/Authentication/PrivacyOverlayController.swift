@@ -19,7 +19,7 @@ class PrivacyOverlayController: UIViewController {
     }
     
     func setupView() {
-        view.backgroundColor = .jotifyGray
+        view.backgroundColor = UIColor(hex: "DBDCDD")
         
         jotifyIconView = UIImageView(image: UIImage(named: "icon"))
         jotifyIconView.translatesAutoresizingMaskIntoConstraints = false

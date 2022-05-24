@@ -19,9 +19,20 @@ class ReferralSettingsController: UIViewController, MFMessageComposeViewControll
         return image
     }()
     
+    let titleText: UITextView = {
+        let tv = UITextView()
+        tv.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        tv.textAlignment = .center
+        tv.backgroundColor = .clear
+        tv.isUserInteractionEnabled = false
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        tv.text = "Let's Talk Rewards"
+        return tv
+    }()
+    
     let detailText: UITextView = {
         let tv = UITextView()
-        tv.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        tv.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         tv.textAlignment = .center
         tv.backgroundColor = .clear
         tv.isUserInteractionEnabled = false
@@ -36,7 +47,7 @@ class ReferralSettingsController: UIViewController, MFMessageComposeViewControll
         button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(shareReferral), for: .touchUpInside)
-        button.setTitle("Invite Someone", for: .normal)
+        button.setTitle("Invite a friend", for: .normal)
         return button
     }()
     
@@ -54,6 +65,8 @@ class ReferralSettingsController: UIViewController, MFMessageComposeViewControll
         
         view.backgroundColor = ColorManager.bgColor
         
+        navigationItem.title = "Referrals"
+        
         let referrals = User.settings?.referrals ?? 0
         
         if referrals >= 3 {
@@ -65,11 +78,16 @@ class ReferralSettingsController: UIViewController, MFMessageComposeViewControll
         } else {
             detailText.text = "You have \(referrals) referrals. You only need \(3 - referrals) more referrals to get Jotify premium. Share Jotify and get rewarded!"
         }
-
+        
+        if User.settings?.hasPremium ?? false {
+            detailText.text = "It looks like you already have premium! Feel free to still share Jotify below. Thank you for your support :)"
+        }
+        
         view.addSubview(wrapper)
         view.addSubview(nextButton)
         
         wrapper.addSubview(customImg)
+        wrapper.addSubview(titleText)
         wrapper.addSubview(detailText)
         
         wrapper.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -82,8 +100,13 @@ class ReferralSettingsController: UIViewController, MFMessageComposeViewControll
         customImg.heightAnchor.constraint(equalTo: wrapper.heightAnchor, multiplier: 0.50).isActive = true
         customImg.widthAnchor.constraint(equalTo: wrapper.widthAnchor).isActive = true
         
+        titleText.centerXAnchor.constraint(equalTo: wrapper.centerXAnchor).isActive = true
+        titleText.topAnchor.constraint(equalTo: customImg.bottomAnchor, constant: 50).isActive = true
+        titleText.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        titleText.widthAnchor.constraint(equalTo: wrapper.widthAnchor).isActive = true
+        
         detailText.centerXAnchor.constraint(equalTo: wrapper.centerXAnchor).isActive = true
-        detailText.topAnchor.constraint(equalTo: customImg.bottomAnchor, constant: 50).isActive = true
+        detailText.topAnchor.constraint(equalTo: titleText.bottomAnchor).isActive = true
         detailText.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
         //to make the text fit relatively ok on iPad
@@ -112,7 +135,6 @@ class ReferralSettingsController: UIViewController, MFMessageComposeViewControll
         if MFMessageComposeViewController.canSendText() {
             present(messageComposer, animated: true)
         } else {
-            //TODO: Copy the link to the clipboard and present alert to user telling them this.
             UIPasteboard.general.string = subject
             let alertController = UIAlertController(title: "Unable to Send", message: "You cannot message from this device, so Jotify copied the referral link to your clipboard.", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action) in }))
@@ -122,6 +144,7 @@ class ReferralSettingsController: UIViewController, MFMessageComposeViewControll
     
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         if result == .sent {
+            AnalyticsManager.logEvent(named: "referral_sent", description: "referral_sent")
             dismiss(animated: true)
         } else if result == .cancelled {
             dismiss(animated: true)
@@ -134,5 +157,15 @@ class ReferralSettingsController: UIViewController, MFMessageComposeViewControll
             alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action) in }))
             self.present(alertController, animated: true, completion: nil)
         }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        enableAutomaticStatusBarStyle()
+        view.backgroundColor = ColorManager.bgColor
+        navigationController?.configure(bgColor: ColorManager.bgColor)
+        
+        var color = UIColor.white
+        if traitCollection.userInterfaceStyle == .light || traitCollection.userInterfaceStyle == .unspecified { color = .black }
+        navigationController?.navigationBar.standardAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor : color]
     }
 }

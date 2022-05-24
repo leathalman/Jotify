@@ -42,6 +42,7 @@ class SetupController {
             "defaultView": 0,
             "referrals": 0,
             "referralLink": "",
+            "hasPremium": false,
         ])
     }
     
@@ -68,9 +69,6 @@ class SetupController {
         if previousVersion == currentVersion {
             // same version, no update
             print("same version")
-            //TODO: Before launching the beta enable this to wipe all settings and start over...
-            setupDefaults()
-            
         } else {
             if previousVersion != nil {
                 // new version

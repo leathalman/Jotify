@@ -22,6 +22,10 @@
 		F6425CC12680D286008C03A2 /* UIColor+StringInterpretor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6425CC02680D286008C03A2 /* UIColor+StringInterpretor.swift */; };
 		F642C42227821F8B00C29852 /* PrivacyOverlayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F642C42127821F8B00C29852 /* PrivacyOverlayController.swift */; };
 		F652AB6525B87CF2006D7747 /* EditingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652AB6425B87CF2006D7747 /* EditingController.swift */; };
+		F65AA4F1283B2982004D3750 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F65AA4F0283B2982004D3750 /* StoreKit.framework */; };
+		F65AA4F4283BF67B004D3750 /* IAP_ProductIDs.plist in Resources */ = {isa = PBXBuildFile; fileRef = F65AA4F3283BF67B004D3750 /* IAP_ProductIDs.plist */; };
+		F65AA4F6283BF6BA004D3750 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65AA4F5283BF6BA004D3750 /* IAPManager.swift */; };
+		F65AA4F8283C1897004D3750 /* BuyPremiumController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65AA4F7283C1897004D3750 /* BuyPremiumController.swift */; };
 		F66D7C6B261BB99200E3405C /* SignInWithApple+Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66D7C6A261BB99200E3405C /* SignInWithApple+Firebase.swift */; };
 		F66E580F261B96E60045D0F3 /* SignInWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66E580E261B96E60045D0F3 /* SignInWithApple.swift */; };
 		F66F5C4B267FE3BD004CB9F1 /* GradientAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66F5C4A267FE3BD004CB9F1 /* GradientAnimator.swift */; };
@@ -126,6 +130,10 @@
 		F6425CC02680D286008C03A2 /* UIColor+StringInterpretor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+StringInterpretor.swift"; sourceTree = "<group>"; };
 		F642C42127821F8B00C29852 /* PrivacyOverlayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyOverlayController.swift; sourceTree = "<group>"; };
 		F652AB6425B87CF2006D7747 /* EditingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingController.swift; sourceTree = "<group>"; };
+		F65AA4F0283B2982004D3750 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		F65AA4F3283BF67B004D3750 /* IAP_ProductIDs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = IAP_ProductIDs.plist; sourceTree = "<group>"; };
+		F65AA4F5283BF6BA004D3750 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
+		F65AA4F7283C1897004D3750 /* BuyPremiumController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyPremiumController.swift; sourceTree = "<group>"; };
 		F66D7C6A261BB99200E3405C /* SignInWithApple+Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignInWithApple+Firebase.swift"; sourceTree = "<group>"; };
 		F66E580E261B96E60045D0F3 /* SignInWithApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithApple.swift; sourceTree = "<group>"; };
 		F66F5C4A267FE3BD004CB9F1 /* GradientAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientAnimator.swift; sourceTree = "<group>"; };
@@ -193,6 +201,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F65AA4F1283B2982004D3750 /* StoreKit.framework in Frameworks */,
 				D468660ACBD45E5CD1B0E4CD /* Pods_Jotify.framework in Frameworks */,
 				F6CF5DDF25DAEF2F006E576E /* CloudKit.framework in Frameworks */,
 			);
@@ -222,6 +231,7 @@
 		C642498CF2E465CD8F066A65 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F65AA4F0283B2982004D3750 /* StoreKit.framework */,
 				F6CF5DDE25DAEF2F006E576E /* CloudKit.framework */,
 				A7077D1FD53AC3A2DF5B8A96 /* Pods_Jotify.framework */,
 				F69389C82699158500EF3EED /* WidgetKit.framework */,
@@ -248,6 +258,16 @@
 				F6C06D57283833A8005AED28 /* ReferralManager.swift */,
 			);
 			path = Firebase;
+			sourceTree = "<group>";
+		};
+		F65AA4F2283BF661004D3750 /* In-App Purchase */ = {
+			isa = PBXGroup;
+			children = (
+				F65AA4F3283BF67B004D3750 /* IAP_ProductIDs.plist */,
+				F65AA4F5283BF6BA004D3750 /* IAPManager.swift */,
+				F65AA4F7283C1897004D3750 /* BuyPremiumController.swift */,
+			);
+			path = "In-App Purchase";
 			sourceTree = "<group>";
 		};
 		F66F5C4E267FE3F4004CB9F1 /* GradientAnimator */ = {
@@ -347,6 +367,7 @@
 		F67FFFEF25B32E1F00313D61 /* Jotify */ = {
 			isa = PBXGroup;
 			children = (
+				F65AA4F2283BF661004D3750 /* In-App Purchase */,
 				F66F5C4E267FE3F4004CB9F1 /* GradientAnimator */,
 				F6C2EBB525BA726B00EC6582 /* Keyboard */,
 				F68FBF7E26039DD700144D7A /* Gestures */,
@@ -544,6 +565,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F67FFFFD25B32E2000313D61 /* LaunchScreen.storyboard in Resources */,
+				F65AA4F4283BF67B004D3750 /* IAP_ProductIDs.plist in Resources */,
 				F67FFFFA25B32E2000313D61 /* Assets.xcassets in Resources */,
 				F6703A1B2638DD1E009863E3 /* NoteOptionMenu.xib in Resources */,
 				F620BD2625B338C7005BE77B /* GoogleService-Info.plist in Resources */,
@@ -630,6 +652,7 @@
 				F66F5C50267FE48C004CB9F1 /* GradientThemes.swift in Sources */,
 				F69389D42699158A00EF3EED /* RecentNoteWidget.intentdefinition in Sources */,
 				F6CF5DF325DAF38D006E576E /* Jotify.xcdatamodeld in Sources */,
+				F65AA4F8283C1897004D3750 /* BuyPremiumController.swift in Sources */,
 				F622093D2602B00E001DFAC1 /* LogInView.swift in Sources */,
 				F6C06D5A283B0E23005AED28 /* ReferralSettingsController.swift in Sources */,
 				F6F185B225C86ABF001FD5FA /* MasterSettingsController.swift in Sources */,
@@ -643,6 +666,7 @@
 				F6D2771925C8C37C00ECFCCC /* UINavigationController+Extensions.swift in Sources */,
 				F6FFCE732638E71E0012307E /* PassableUIButton.swift in Sources */,
 				F6051B7126A7522F007F9695 /* DatePickerCell.swift in Sources */,
+				F65AA4F6283BF6BA004D3750 /* IAPManager.swift in Sources */,
 				F67F002A25B32F5B00313D61 /* NoteCollection.swift in Sources */,
 				F66F5C4D267FE3D3004CB9F1 /* UIView+Gradient.swift in Sources */,
 				F6D2771225C8C00E00ECFCCC /* SettingsCell.swift in Sources */,

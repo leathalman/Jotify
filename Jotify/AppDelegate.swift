@@ -22,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //register notification types to be handled when interacted with
         registerNotificationActions()
         
+        //Start observing payment transaction updates
+        IAPManager.shared.startObserving()
+        
         return true
     }
     

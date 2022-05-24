@@ -44,7 +44,17 @@ class DataManager {
                 completionHandler(nil, false)
             } else {
                 print("Firebase settings retrieved")
-                let settings = Settings(multilineInputEnabled: snapshot?.get("multilineInputEnabled") as? Bool ?? false, deleteOldNotes: snapshot?.get("deleteOldNotes") as? Bool ?? false, useHaptics: snapshot?.get("useHaptics") as? Bool ?? true, useBiometrics: snapshot?.get("useBiometrics") as? Bool ?? false, placeholder: snapshot?.get("placeholder") as? String ?? "Tap to start typing or swipe left to right for saved notes...", defaultView: snapshot?.get("defaultView") as? Int ?? 0, hasMigrated: snapshot?.get("hasMigrated") as? Bool ?? false, referrals: snapshot?.get("referrals") as? Int ?? 0, referralLink: snapshot?.get("referralLink") as? String ?? "")
+                let settings = Settings(
+                    multilineInputEnabled: snapshot?.get("multilineInputEnabled") as? Bool ?? false,
+                    deleteOldNotes: snapshot?.get("deleteOldNotes") as? Bool ?? false,
+                    useHaptics: snapshot?.get("useHaptics") as? Bool ?? true,
+                    useBiometrics: snapshot?.get("useBiometrics") as? Bool ?? false,
+                    placeholder: snapshot?.get("placeholder") as? String ?? "Tap to start typing or swipe left to right for saved notes...",
+                    defaultView: snapshot?.get("defaultView") as? Int ?? 0,
+                    hasMigrated: snapshot?.get("hasMigrated") as? Bool ?? false,
+                    referrals: snapshot?.get("referrals") as? Int ?? 0,
+                    referralLink: snapshot?.get("referralLink") as? String ?? "",
+                    hasPremium: snapshot?.get("hasPremium") as? Bool ?? false)
                 completionHandler(settings, true)
             }
         }

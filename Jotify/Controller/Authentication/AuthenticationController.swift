@@ -30,6 +30,7 @@ class AuthenticationController: UIViewController {
                 if let id = UserDefaults.standard.string(forKey: "referralId") {
                     //there was a referral, id != nil
                     ReferralManager().grantReferralCredit(referrerId: id)
+                    AnalyticsManager.logEvent(named: "referral_conversion", description: "referral_conversion")
                 }
                 //create referral link and upload it to settings doc in Firestore
                 ReferralManager().createReferralLink()
