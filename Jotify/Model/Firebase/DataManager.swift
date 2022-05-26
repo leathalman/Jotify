@@ -23,6 +23,7 @@ class DataManager {
             "defaultView": 0,
             "referrals": 0,
             "referralLink": "",
+            "hasPremium": false
         ]) { (error) in
             if let error = error {
                 print("Error deleting document: \(error.localizedDescription)")

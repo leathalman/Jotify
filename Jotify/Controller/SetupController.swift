@@ -78,15 +78,43 @@ class SetupController {
                 SetupController.firstLauch = true
                 setupWidget()
                 setupDefaults()
+                checkForRestorePurchase()
             } else {
                 // first launch
                 print("first launch")
                 SetupController.firstLauch = true
                 setupWidget()
                 setupDefaults()
+                checkForRestorePurchase()
             }
             defaults.set(currentVersion, forKey: shortVersionKey)
         }
     }
     
+    func checkForRestorePurchase() {
+        IAPManager.shared.restorePurchases { (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let success):
+                    if success {
+                        //unlock premium
+                        DataManager.updateUserSettings(setting: "hasPremium", value: true) { success in
+                            if !success! {
+                                print("Error granting premium from restore")
+                            }
+                            print("User settings updated...")
+                            User.settings?.hasPremium = true
+                        }
+                    } else {
+                        //no products were found
+                        print("Nothing to automatically restore...")
+                    }
+                    
+                case .failure(let error):
+                    //there was an error
+                    print("\(error) restoring IAP")
+                }
+            }
+        }
+    }
 }

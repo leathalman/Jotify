@@ -111,6 +111,7 @@ class AccountSettingsController: SettingsController {
                                     alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                                     self.present(alertController, animated: true, completion: nil)
                                 }
+                                User.updateSettings()
                             }
                         } else {
                             let alertController = UIAlertController(title: "Error", message: "There was an error resetting settings. Please try again later.", preferredStyle: .alert)
