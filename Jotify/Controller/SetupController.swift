@@ -27,6 +27,13 @@ class SetupController {
     
     //default Userdefaults
     private func setupDefaults() {
+        //check to see if the user already had premium
+        if UserDefaults.standard.bool(forKey: "com.austinleath.Jotify.Premium") {
+            UserDefaults.standard.setValue(true, forKey: "hasPremium")
+        } else {
+            UserDefaults.standard.setValue(false, forKey: "hasPremium")
+        }
+        
         //remove all old UserDefaults from v1.x.x before establishing new ones
         let domain = Bundle.main.bundleIdentifier!
         UserDefaults.standard.removePersistentDomain(forName: domain)
@@ -42,7 +49,6 @@ class SetupController {
             "defaultView": 0,
             "referrals": 0,
             "referralLink": "",
-            "hasPremium": false,
         ])
     }
     
