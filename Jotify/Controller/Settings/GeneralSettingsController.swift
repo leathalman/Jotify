@@ -103,7 +103,7 @@ class GeneralSettingsController: SettingsController, MFMailComposeViewController
         composeVC.mailComposeDelegate = self
         composeVC.setToRecipients(["hello@leathalenterprises.com"])
         composeVC.setSubject("Jotify Support")
-        composeVC.setMessageBody("The following information is required for the best support experience. Please do not delete this. User ID: \(AuthManager().uid) \n", isHTML: false)
+        composeVC.setMessageBody("The following information is required for the best support experience. Please do not delete this. User ID: \(AuthManager().uid) \nVersion: \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) \nBuild: \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)", isHTML: false)
         self.present(composeVC, animated: true, completion: nil)
     }
     
