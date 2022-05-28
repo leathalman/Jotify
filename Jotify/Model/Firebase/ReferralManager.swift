@@ -30,10 +30,13 @@ class ReferralManager {
                 return
             }
             
+            User.settings?.referralLink = shortURL?.absoluteString ?? ""
+            
             DataManager.updateUserSettings(setting: "referralLink", value: shortURL?.absoluteString ?? "") { success in
                 if !success! {
                     print("Error creating and uploading referralLink to firestore")
                 }
+                
             }
         }
     }
