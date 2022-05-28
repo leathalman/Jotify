@@ -73,16 +73,10 @@ class GeneralSettingsController: SettingsController, MFMailComposeViewController
                         tableView.deselectRow(at: indexPath, animated: true)
                         self.present(alertController, animated: true, completion: nil)
                     }
-                    //                    }
                 }
             }
         default:
             print("default")
-            let alertController = UIAlertController(title: "Failure?", message: "Jotify couldn't find any purchases to restore. If you believe this is an error, contact us using the button above.", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            tableView.deselectRow(at: indexPath, animated: true)
-            self.present(alertController, animated: true, completion: nil)
-            print("Restore found no eligible products")
         }
     }
     
