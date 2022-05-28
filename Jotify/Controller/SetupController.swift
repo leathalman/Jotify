@@ -67,54 +67,27 @@ class SetupController {
         }
         let previousVersion = defaults.object(forKey: shortVersionKey) as? String
         if previousVersion == currentVersion {
-            // same version, no update
+            //same version, no update
             print("same version")
         } else {
-            if previousVersion != nil {
-                // new version
+            if previousVersion == "2.0.0" {
+                //new version
+                print("updated from 2.0.0")
+                SetupController.firstLauch = false
+            } else if previousVersion != nil {
                 print("new version")
-                //show onboarding when user updates to 2.0.0
-                //TODO: Change this for any version after 2.0.0
+                //show onboarding
                 SetupController.firstLauch = true
                 setupWidget()
                 setupDefaults()
-                checkForRestorePurchase()
             } else {
                 // first launch
                 print("first launch")
                 SetupController.firstLauch = true
                 setupWidget()
                 setupDefaults()
-                checkForRestorePurchase()
             }
             defaults.set(currentVersion, forKey: shortVersionKey)
-        }
-    }
-    
-    func checkForRestorePurchase() {
-        IAPManager.shared.restorePurchases { (result) in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let success):
-                    if success {
-                        //unlock premium
-                        DataManager.updateUserSettings(setting: "hasPremium", value: true) { success in
-                            if !success! {
-                                print("Error granting premium from restore")
-                            }
-                            print("User settings updated...")
-                            User.settings?.hasPremium = true
-                        }
-                    } else {
-                        //no products were found
-                        print("Nothing to automatically restore...")
-                    }
-                    
-                case .failure(let error):
-                    //there was an error
-                    print("\(error) restoring IAP")
-                }
-            }
         }
     }
 }

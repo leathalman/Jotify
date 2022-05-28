@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import MessageUI
 
-class GeneralSettingsController: SettingsController {
+class GeneralSettingsController: SettingsController, MFMailComposeViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,62 +25,55 @@ class GeneralSettingsController: SettingsController {
                 let alertController = UIAlertController(title: "Support", message: "If you have any frustrations or feedback, email us here.", preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 alertController.addAction(UIAlertAction(title: "Email", style: .default, handler: { (action) in
-                    let email = "hello@leathalenterprises.com"
-                    let url = URL(string: "mailto:\(email)")!
-                    UIApplication.shared.open(url)
+                    self.openSupportEmail()
                 }))
                 tableView.deselectRow(at: indexPath, animated: true)
                 self.present(alertController, animated: true, completion: nil)
             } else if indexPath.row == 1 {
-                //TODO: Add UI for these interactions
+                tableView.deselectRow(at: indexPath, animated: true)
                 IAPManager.shared.restorePurchases { (result) in
-                    DispatchQueue.main.async {
-                        switch result {
-                        case .success(let success):
-                            if success {
-                                //unlock premium
-                                print("they should get premium")
-                                DataManager.updateUserSettings(setting: "hasPremium", value: true) { success in
-                                    if !success! {
-                                        print("Error granting premium from restore")
-                                    }
-                                    print("User settings updated...")
-                                    //force this value and on the next restart, Jotify will
-                                    //get the new value from updateSettings()
-                                    User.settings?.hasPremium = true
-                                    
-                                    let alertController = UIAlertController(title: "Success!", message: "Jotify successfully restored your purchase! Thank you so much for your support :)", preferredStyle: .alert)
-                                    alertController.addAction(UIAlertAction(title: "Yay!", style: .default, handler: nil))
-                                    self.present(alertController, animated: true)
+                    //                    DispatchQueue.main.async {
+                    switch result {
+                    case .success(let success):
+                        if success {
+                            //unlock premium
+                            DataManager.updateUserSettings(setting: "hasPremium", value: true) { success in
+                                if !success! {
+                                    print("Error granting premium from restore")
                                 }
-                            } else {
-                                //no products were found
-                                print("Nothing to restore...")
-                                tableView.deselectRow(at: indexPath, animated: true)
-                                let alertController = UIAlertController(title: "Failure?", message: "Jotify didn't find any purchases to restore. If you believe this is an error, contact us using the \"Email\" button below!", preferredStyle: .alert)
-                                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                                alertController.addAction(UIAlertAction(title: "Email", style: .default, handler: { (action) in
-                                    let email = "hello@leathalenterprises.com"
-                                    let url = URL(string: "mailto:\(email)")!
-                                    UIApplication.shared.open(url)
-                                }))
+                                print("Premium unlocked")
+                                //force this value and on the next restart, Jotify will
+                                //get the new value from updateSettings()
+                                User.settings?.hasPremium = true
+                                
+                                let alertController = UIAlertController(title: "Success!", message: "Jotify successfully restored your purchase! Thank you so much for your support :)", preferredStyle: .alert)
+                                alertController.addAction(UIAlertAction(title: "Yay!", style: .default, handler: nil))
                                 self.present(alertController, animated: true)
                             }
-                            
-                        case .failure(let error):
-                            //there was an error
-                            print("\(error) restoring IAP")
-                            let alertController = UIAlertController(title: "Failure?", message: "\(error) If you continue to experience this issue, contact us below.", preferredStyle: .alert)
+                        } else {
+                            //no products were found
+                            print("Nothing to restore...")
+                            tableView.deselectRow(at: indexPath, animated: true)
+                            let alertController = UIAlertController(title: "Failure?", message: "Jotify didn't find any purchases to restore. If you believe this is an error, contact us using the \"Email\" button below!", preferredStyle: .alert)
                             alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                             alertController.addAction(UIAlertAction(title: "Email", style: .default, handler: { (action) in
-                                let email = "hello@leathalenterprises.com"
-                                let url = URL(string: "mailto:\(email)")!
-                                UIApplication.shared.open(url)
+                                self.openSupportEmail()
                             }))
-                            tableView.deselectRow(at: indexPath, animated: true)
-                            self.present(alertController, animated: true, completion: nil)
+                            self.present(alertController, animated: true)
                         }
+                        
+                    case .failure(let error):
+                        //there was an error
+                        print("\(error) restoring IAP")
+                        let alertController = UIAlertController(title: "Failure?", message: "\(error) If you continue to experience this issue, contact us below.", preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        alertController.addAction(UIAlertAction(title: "Email", style: .default, handler: { (action) in
+                            self.openSupportEmail()
+                        }))
+                        tableView.deselectRow(at: indexPath, animated: true)
+                        self.present(alertController, animated: true, completion: nil)
                     }
+                    //                    }
                 }
             }
         default:
@@ -108,6 +102,20 @@ class GeneralSettingsController: SettingsController {
             let genericCell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
             return genericCell
         }
+    }
+    
+    func openSupportEmail() {
+        let composeVC = MFMailComposeViewController()
+        composeVC.mailComposeDelegate = self
+        composeVC.setToRecipients(["hello@leathalenterprises.com"])
+        composeVC.setSubject("Jotify Support")
+        composeVC.setMessageBody("The following information is required for the best support experience. Please do not delete this. User ID: \(AuthManager().uid) \n", isHTML: false)
+        self.present(composeVC, animated: true, completion: nil)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        // Check the result or perform other tasks.
+        controller.dismiss(animated: true, completion: nil)
     }
 }
 

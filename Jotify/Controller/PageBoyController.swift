@@ -35,7 +35,7 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         if UserDefaults.standard.bool(forKey: "useBiometrics") {
             let poc = PrivacyOverlayController()
             poc.modalPresentationStyle = .fullScreen
@@ -72,6 +72,10 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
         //enable and disable swipe via notification from child view controllers
         NotificationCenter.default.addObserver(self, selector: #selector(enableSwipe(notification:)), name:NSNotification.Name(rawValue: "enableSwipe"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(disableSwipe(notification:)), name:NSNotification.Name(rawValue: "disableSwipe"), object: nil)
+        
+        if User.settings?.hasPremium == false {
+            checkForRestorePurchase()
+        }
     }
     
     @objc func disableSwipe(notification: Notification){
@@ -92,6 +96,11 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
         DataManager.retrieveUserSettings { (settings, success) in
             if success! {
                 User.settings = settings
+                
+                if User.settings?.referralLink == "" {
+                    print("created new referral link")
+                    ReferralManager().createReferralLink()
+                }
                 
                 //check to see if they should get premium from referrals
                 if !(settings?.hasPremium ?? false) {
@@ -199,5 +208,32 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return statusBarStyle
+    }
+    
+    func checkForRestorePurchase() {
+        IAPManager.shared.restorePurchases { (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let success):
+                    if success {
+                        //unlock premium
+                        DataManager.updateUserSettings(setting: "hasPremium", value: true) { success in
+                            if !success! {
+                                print("Error granting premium from restore")
+                            }
+                            print("Restored automatically")
+                            User.settings?.hasPremium = true
+                        }
+                    } else {
+                        //no products were found
+                        print("Nothing to automatically restore...")
+                    }
+                    
+                case .failure(let error):
+                    //there was an error
+                    print("\(error) restoring IAP")
+                }
+            }
+        }
     }
 }
