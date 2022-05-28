@@ -72,10 +72,6 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
         //enable and disable swipe via notification from child view controllers
         NotificationCenter.default.addObserver(self, selector: #selector(enableSwipe(notification:)), name:NSNotification.Name(rawValue: "enableSwipe"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(disableSwipe(notification:)), name:NSNotification.Name(rawValue: "disableSwipe"), object: nil)
-        
-        if User.settings?.hasPremium == false {
-            checkForRestorePurchase()
-        }
     }
     
     @objc func disableSwipe(notification: Notification){
@@ -97,9 +93,13 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
             if success! {
                 User.settings = settings
                 
-                if User.settings?.referralLink == "" {
+                if settings?.referralLink == "" {
                     print("created new referral link")
                     ReferralManager().createReferralLink()
+                }
+                
+                if !(settings?.hasPremium ?? false) {
+                    self.checkForRestorePurchase()
                 }
                 
                 //check to see if they should get premium from referrals
