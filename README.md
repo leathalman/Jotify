@@ -1,6 +1,6 @@
-# Jotify | Sticky Notes Reimagined
+# Jotify
 
-<img src="docs/1.png" width="20%"> <img src="docs/2.png" width="20%"> <img src="docs/3.png" width="20%"> <img src="docs/4.png" width="20%">
+<img src="docs/1.png" width="18%"> <img src="docs/2.png" width="18%"> <img src="docs/3.png" width="18%"> <img src="docs/4.png" width="18%">
 
 ## About
 
