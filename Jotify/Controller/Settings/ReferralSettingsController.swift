@@ -21,7 +21,7 @@ class ReferralSettingsController: UIViewController, MFMessageComposeViewControll
     
     let titleText: UITextView = {
         let tv = UITextView()
-        tv.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        tv.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         tv.textAlignment = .center
         tv.backgroundColor = .clear
         tv.isUserInteractionEnabled = false
@@ -32,7 +32,7 @@ class ReferralSettingsController: UIViewController, MFMessageComposeViewControll
     
     let detailText: UITextView = {
         let tv = UITextView()
-        tv.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        tv.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         tv.textAlignment = .center
         tv.backgroundColor = .clear
         tv.isUserInteractionEnabled = false
@@ -124,7 +124,7 @@ class ReferralSettingsController: UIViewController, MFMessageComposeViewControll
         if UIDevice.current.userInterfaceIdiom == .pad {
             nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -45).isActive = true
         } else {
-            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75).isActive = true
+            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
         }
     }
     
