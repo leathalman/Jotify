@@ -91,6 +91,8 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
             self.noteColor = newTheme?.colors().randomElement() ?? .olympia1
             self.view.setGradient(theme: newTheme ?? .olympia)
             
+            field.text = UserDefaults.standard.string(forKey: "placeholder")
+            
             AnalyticsManager.logEvent(named: "note_created", description: "note_created")
         }
         field.resignFirstResponder()
