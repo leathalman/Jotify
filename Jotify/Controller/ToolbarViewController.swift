@@ -28,6 +28,7 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
         f.textColor = .white
         f.tintColor = .white
         f.isEditable = true
+        f.text = "Tap to start typing or swipe left to right for saved notes..."
         f.font = UIFont.boldSystemFont(ofSize: 32)
         f.textContainerInset = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
         f.translatesAutoresizingMaskIntoConstraints = false

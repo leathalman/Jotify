@@ -20,7 +20,7 @@ class BuyPremiumController: UIViewController {
     
     let titleText: UITextView = {
         let tv = UITextView()
-        tv.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        tv.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         tv.textAlignment = .center
         tv.backgroundColor = .clear
         tv.isUserInteractionEnabled = false
@@ -100,7 +100,7 @@ class BuyPremiumController: UIViewController {
         
         customImg.centerXAnchor.constraint(equalTo: wrapper.centerXAnchor).isActive = true
         customImg.topAnchor.constraint(equalTo: wrapper.topAnchor).isActive = true
-        customImg.heightAnchor.constraint(equalTo: wrapper.heightAnchor, multiplier: 0.50).isActive = true
+        customImg.heightAnchor.constraint(equalTo: wrapper.heightAnchor, multiplier: 0.35).isActive = true
         customImg.widthAnchor.constraint(equalTo: wrapper.widthAnchor).isActive = true
         
         titleText.centerXAnchor.constraint(equalTo: wrapper.centerXAnchor).isActive = true
@@ -120,7 +120,7 @@ class BuyPremiumController: UIViewController {
         }
         
         nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75).isActive = true
+        nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
         nextButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         nextButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
     }
