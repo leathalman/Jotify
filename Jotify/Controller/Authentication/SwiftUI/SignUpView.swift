@@ -110,7 +110,7 @@ struct LogInContent: View {
 struct Text1: View {
     var body: some View {
         Text("Start taking")
-            .font(.system(size: 52))
+            .font(.system(size: 48))
             .fontWeight(.bold)
             .padding(.init(top: 0, leading: 20, bottom: 0, trailing: 20))
     }
@@ -119,7 +119,7 @@ struct Text1: View {
 struct Text2: View {
     var body: some View {
         Text("notes today.")
-            .font(.system(size: 52))
+            .font(.system(size: 48))
             .fontWeight(.bold)
             .foregroundColor(Color(UIColor.jotifyBlue))
             .padding(.init(top: 0, leading: 20, bottom: 40, trailing: 20))

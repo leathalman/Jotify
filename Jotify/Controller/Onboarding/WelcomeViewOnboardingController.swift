@@ -118,7 +118,7 @@ class WelcomeViewOnboardingController: UIViewController {
                 
         welcomeImg.centerXAnchor.constraint(equalTo: wrapper.centerXAnchor).isActive = true
         welcomeImg.centerYAnchor.constraint(equalTo: wrapper.centerYAnchor, constant: 25).isActive = true
-        welcomeImg.heightAnchor.constraint(equalTo: wrapper.heightAnchor, multiplier: 0.50).isActive = true
+        welcomeImg.heightAnchor.constraint(equalTo: wrapper.heightAnchor, multiplier: 0.40).isActive = true
         welcomeImg.widthAnchor.constraint(equalTo: wrapper.widthAnchor).isActive = true
         
         titleView.centerXAnchor.constraint(equalTo: wrapper.centerXAnchor).isActive = true
@@ -127,7 +127,7 @@ class WelcomeViewOnboardingController: UIViewController {
         titleView.widthAnchor.constraint(equalTo: wrapper.widthAnchor).isActive = true
         
         nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75).isActive = true
+        nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
         nextButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         nextButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
     }

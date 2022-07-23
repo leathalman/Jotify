@@ -31,7 +31,7 @@ class BuyPremiumController: UIViewController {
     
     let detailText: UITextView = {
         let tv = UITextView()
-        tv.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        tv.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         tv.textAlignment = .center
         tv.backgroundColor = .clear
         tv.isUserInteractionEnabled = false

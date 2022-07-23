@@ -122,7 +122,7 @@ class DetailOnboardingController: UIViewController {
                 
         customImg.centerXAnchor.constraint(equalTo: wrapper.centerXAnchor).isActive = true
         customImg.topAnchor.constraint(equalTo: wrapper.topAnchor, constant: 25).isActive = true
-        customImg.heightAnchor.constraint(equalTo: wrapper.heightAnchor, multiplier: 0.50).isActive = true
+        customImg.heightAnchor.constraint(equalTo: wrapper.heightAnchor, multiplier: 0.35).isActive = true
         customImg.widthAnchor.constraint(equalTo: wrapper.widthAnchor).isActive = true
         
         titleText.centerXAnchor.constraint(equalTo: wrapper.centerXAnchor).isActive = true
@@ -142,7 +142,7 @@ class DetailOnboardingController: UIViewController {
         }
         
         nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75).isActive = true
+        nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
         nextButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         nextButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
     }
