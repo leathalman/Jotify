@@ -14,7 +14,7 @@ class CustomizationSettingsController: SettingsController {
         super.viewDidLoad()
         super.sections = ["Privacy", "Visual", "Miscellaneous"]
         super.section1 = ["Enable Biometric Unlock"]
-        super.section2 = ["Custom Placeholder"]
+        super.section2 = ["Pure Black Dark Mode", "Custom Placeholder"]
         super.section3 = ["Default View", "Use Haptics", "Delete Expired Notes"]
         navigationItem.title = "Customization"
     }
@@ -39,11 +39,29 @@ class CustomizationSettingsController: SettingsController {
                 return genericCell
             }
         case 1:
-            let genericCell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-            genericCell.textLabel?.text = "\(super.section2[indexPath.row])"
-            genericCell.accessoryType = .disclosureIndicator
-            genericCell.accessoryView = UIImageView(image: UIImage(systemName: "chevron.right.circle.fill"))
-            return genericCell
+            switch indexPath.row {
+            case 0:
+                let switchCell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
+                switchCell.textLabel?.text = "\(super.section2[indexPath.row])"
+                switchCell.selectionStyle = .none
+                switchCell.switchButton.addTarget(self, action: #selector(usePureBlackModeSwitchPressed(sender:)), for: .valueChanged)
+                if UserDefaults.standard.bool(forKey: "usePureDarkMode") {
+                    switchCell.switchButton.isOn = true
+                } else {
+                    switchCell.switchButton.isOn = false
+                }
+                return switchCell
+            case 1:
+                let genericCell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+                genericCell.textLabel?.text = "\(super.section2[indexPath.row])"
+                genericCell.accessoryType = .disclosureIndicator
+                genericCell.accessoryView = UIImageView(image: UIImage(systemName: "chevron.right.circle.fill"))
+                return genericCell
+            default:
+                let genericCell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+                return genericCell
+            }
+            
         case 2:
             switch indexPath.row {
             case 0:
@@ -88,7 +106,7 @@ class CustomizationSettingsController: SettingsController {
         switch indexPath.section {
         case 1:
             switch indexPath.row {
-            case 0:
+            case 1:
                 if User.settings?.hasPremium ?? false {
                     let alert = UIAlertController(title: "Custom Placeholder", message: "Change the placeholder text when creating a new note.", preferredStyle: .alert)
                     
@@ -135,7 +153,7 @@ class CustomizationSettingsController: SettingsController {
             switch indexPath.row {
             case 0:
                 let alertController = UIAlertController(title: "Default View", message: "Choose which screen you want to see when Jotify opens. Changing this setting will take effect on next restart.", preferredStyle: .actionSheet)
-
+                
                 let createNoteAction = UIAlertAction(title: "Create Note", style: .default) { (action) in
                     print("Create note chosen")
                     UserDefaults.standard.set(0, forKey: "defaultView")
@@ -143,7 +161,7 @@ class CustomizationSettingsController: SettingsController {
                     AnalyticsManager.logEvent(named: "noteCreation_enabled", description: "noteCreation_enabled")
                 }
                 alertController.addAction(createNoteAction)
-
+                
                 let noteGalleryAction = UIAlertAction(title: "Note Gallery", style: .default) { (action) in
                     print("Note gallery chosen")
                     UserDefaults.standard.set(1, forKey: "defaultView")
@@ -159,7 +177,7 @@ class CustomizationSettingsController: SettingsController {
                 let cell = tableView.cellForRow(at: indexPath)
                 cell?.isSelected = false
                 alertController.popoverPresentationController?.sourceView = cell
-
+                
                 self.present(alertController, animated: true)
             default:
                 print("tapped")
@@ -219,6 +237,37 @@ class CustomizationSettingsController: SettingsController {
             present(premiumVC, animated: true)
             sender.setOn(false, animated: true)
         }
+    }
+    
+    @objc func usePureBlackModeSwitchPressed(sender: UISwitch) {
+        if sender.isOn {
+            print("usePureBlackMode enabled")
+            UserDefaults.standard.set(true, forKey: "usePureDarkMode")
+            DataManager.updateUserSettings(setting: "usePureDarkMode", value: true) { (success) in }
+            AnalyticsManager.logEvent(named: "usePureDarkMode_enabled", description: "usePureDarkMode_enabled")
+            
+            if traitCollection.userInterfaceStyle == .light {
+                ColorManager.bgColor = .jotifyGray
+            } else if traitCollection.userInterfaceStyle == .dark {
+                ColorManager.bgColor = .black
+            }
+        } else {
+            print("usePureBlackMode disabled")
+            UserDefaults.standard.set(false, forKey: "usePureDarkMode")
+            DataManager.updateUserSettings(setting: "usePureDarkMode", value: false) { (success) in }
+            AnalyticsManager.logEvent(named: "usePureDarkMode_disabled", description: "usePureDarkMode_disabled")
+            
+            if traitCollection.userInterfaceStyle == .light {
+                ColorManager.bgColor = .jotifyGray
+            } else if traitCollection.userInterfaceStyle == .dark {
+                ColorManager.bgColor = .mineShaft
+            }
+        }
+        
+        view.backgroundColor = ColorManager.bgColor
+        navigationController?.configure(bgColor: ColorManager.bgColor)
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatePureDarkMode"), object: nil)
     }
     
     @objc func useHapticsSwitchPressed(sender: UISwitch) {

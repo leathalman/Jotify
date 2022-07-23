@@ -16,6 +16,7 @@ struct Settings {
     var placeholder: String
     //0 is note creation, 1 is note gallery
     var defaultView: Int
+    var usePureDarkMode: Bool
     
     //invisible to user
     var hasMigrated: Bool
@@ -38,6 +39,7 @@ class User {
             defaults.setValue(settings?.referrals, forKey: "referrals")
             defaults.setValue(settings?.referralLink, forKey: "referralLink")
             defaults.setValue(settings?.hasPremium, forKey: "hasPremium")
+            defaults.setValue(settings?.usePureDarkMode, forKey: "usePureDarkMode")
             print("Userdefaults settings updated")
         }
     }

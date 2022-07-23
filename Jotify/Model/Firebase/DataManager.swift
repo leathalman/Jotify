@@ -51,7 +51,7 @@ class DataManager {
                     useHaptics: snapshot?.get("useHaptics") as? Bool ?? true,
                     useBiometrics: snapshot?.get("useBiometrics") as? Bool ?? false,
                     placeholder: snapshot?.get("placeholder") as? String ?? "Tap to start typing or swipe left to right for saved notes...",
-                    defaultView: snapshot?.get("defaultView") as? Int ?? 0,
+                    defaultView: snapshot?.get("defaultView") as? Int ?? 0, usePureDarkMode: snapshot?.get("usePureDarkMode") as? Bool ?? false,
                     hasMigrated: snapshot?.get("hasMigrated") as? Bool ?? false,
                     referrals: snapshot?.get("referrals") as? Int ?? 0,
                     referralLink: snapshot?.get("referralLink") as? String ?? "",

@@ -15,14 +15,7 @@ class MasterSettingsController: SettingsController {
         super.section1 = ["General", "Customization", "Account", "Referrals"]
         navigationItem.title = "Settings"
         
-        //disable swiping to create a new note when changing settings
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(true)
-        //reenable swipe if it was disabled from other controllers
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(pureDarkModeChanged(notification:)), name:NSNotification.Name(rawValue: "updatePureDarkMode"), object: nil)
     }
     
     //tableView logic
@@ -75,5 +68,10 @@ class MasterSettingsController: SettingsController {
         cell.accessoryType = .disclosureIndicator
         cell.accessoryView = UIImageView(image: UIImage(systemName: "chevron.right.circle.fill"))
         return cell
+    }
+    
+    @objc func pureDarkModeChanged(notification: Notification) {
+        print("Pure dark mode changed.")
+        view.backgroundColor = ColorManager.bgColor
     }
 }

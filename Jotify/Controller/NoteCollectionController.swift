@@ -61,6 +61,8 @@ class NoteCollectionController: UICollectionViewController {
         setupViewElements()
         animateVisibleCells()
         cleanupOldNotes()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(pureDarkModeChanged(notification:)), name:NSNotification.Name(rawValue: "updatePureDarkMode"), object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -413,6 +415,11 @@ class NoteCollectionController: UICollectionViewController {
                 }
             }
         }
+    }
+    
+    @objc func pureDarkModeChanged(notification: Notification) {
+        print("Pure dark mode changed.")
+        collectionView.backgroundColor = ColorManager.bgColor
     }
     
     //traitcollection: dynamic iPad layout and light/dark mode support

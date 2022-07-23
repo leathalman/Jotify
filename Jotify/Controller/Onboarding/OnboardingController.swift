@@ -39,7 +39,11 @@ class OnboardingController: PageboyViewController, PageboyViewControllerDataSour
         if traitCollection.userInterfaceStyle == .light {
             ColorManager.bgColor = .jotifyGray
         } else if traitCollection.userInterfaceStyle == .dark {
-            ColorManager.bgColor = .mineShaft
+            if UserDefaults.standard.bool(forKey: "usePureDarkMode") {
+                ColorManager.bgColor = .black
+            } else {
+                ColorManager.bgColor = .mineShaft
+            }
         }
         
         view.backgroundColor = .clear
@@ -71,7 +75,11 @@ class OnboardingController: PageboyViewController, PageboyViewControllerDataSour
         if traitCollection.userInterfaceStyle == .light {
             ColorManager.bgColor = .jotifyGray
         } else if traitCollection.userInterfaceStyle == .dark {
-            ColorManager.bgColor = .mineShaft
+            if UserDefaults.standard.bool(forKey: "usePureDarkMode") {
+                ColorManager.bgColor = .black
+            } else {
+                ColorManager.bgColor = .mineShaft
+            }
         }
     }
     
