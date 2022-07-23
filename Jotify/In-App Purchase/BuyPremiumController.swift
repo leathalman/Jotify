@@ -80,7 +80,11 @@ class BuyPremiumController: UIViewController {
             updateStatusBar(style: .darkContent)
         } else {
             //dark
-            view.backgroundColor = .mineShaft
+            if UserDefaults.standard.bool(forKey: "usePureDarkMode") {
+                view.backgroundColor = .black
+            } else {
+                view.backgroundColor = .mineShaft
+            }
             updateStatusBar(style: .lightContent)
         }
     }
