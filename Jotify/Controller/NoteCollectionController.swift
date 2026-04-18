@@ -23,12 +23,34 @@ class NoteCollectionController: UICollectionViewController {
     
     //used to hold notes filtered by the search bar
     var filteredNotes: [FBNote] = []
-    
+
     //used to track the cells selected while multi-selection is enabled
     var selectedCells: [IndexPath] = []
-    
+
     //global instance of searchController for NoteCollectionController
     let searchController = UISearchController(searchResultsController: nil)
+
+    enum SearchScope: CaseIterable {
+        case all, content, date
+        var title: String {
+            switch self {
+            case .all: return "All"
+            case .content: return "Content"
+            case .date: return "Date"
+            }
+        }
+    }
+
+    var searchScope: SearchScope = .all {
+        didSet {
+            updateFilterMenu()
+            if searchController.isActive {
+                filterContentForSearchText(searchController.searchBar.text ?? "")
+            }
+        }
+    }
+
+    var filterBarButton: UIBarButtonItem?
     
     //layouts for collectionView
     let iOSLayout = VerticalBlueprintLayout(
@@ -92,19 +114,23 @@ class NoteCollectionController: UICollectionViewController {
         navigationItem.setHidesBackButton(true, animated: true)
         
         let rightItem = UIBarButtonItem(image: UIImage(systemName: "doc.badge.plus"), style: .plain, target: self, action: #selector(handleRightNavButton))
-        navigationItem.rightBarButtonItem = rightItem
+        let filterItem = UIBarButtonItem(
+            image: UIImage(systemName: "line.3.horizontal.decrease.circle"),
+            menu: makeFilterMenu()
+        )
+        filterBarButton = filterItem
+        navigationItem.rightBarButtonItems = [rightItem, filterItem]
         
         collectionView.backgroundColor = ColorManager.bgColor
         collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
     }
     
     func setupNavigationBar() {
-        navigationItem.title = "Saved Notes"
-        navigationController?.configure(bgColor: ColorManager.bgColor)
-        
-        var color = UIColor.white
-        if traitCollection.userInterfaceStyle == .light || traitCollection.userInterfaceStyle == .unspecified { color = .black }
-        navigationController?.navigationBar.standardAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor : color]
+        navigationItem.title = "Notes"
+        // Don't override the nav bar background on this screen. iOS 26's
+        // adaptive chrome animates smoothly between the idle search bar
+        // pill and the active state; forcing an opaque `ColorManager.bgColor`
+        // prevents that animation and produces a visible color jump.
     }
     
     func animateVisibleCells() {
@@ -195,7 +221,7 @@ class NoteCollectionController: UICollectionViewController {
         rootVC.scrollToWriteNoteController()
         self.playHapticFeedback()
     }
-    
+
     //NoteOptionMenu Actions
     @objc func deleteNoteFromMenu(_ sender: PassableUIButton) {
         let note = sender.params["note"] as! FBNote

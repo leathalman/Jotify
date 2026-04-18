@@ -52,21 +52,23 @@ class PrivacyOverlayController: UIViewController {
     
     //add buttons to view when user authenication fails the first time
     func addOptionalButtons() {
-        let unlockButton = UIButton()
-        unlockButton.setTitle("Unlock", for: .normal)
-        unlockButton.setTitleColor(.white, for: .normal)
+        var unlockConfig = UIButton.Configuration.filled()
+        unlockConfig.baseBackgroundColor = .jotifyBlue
+        unlockConfig.baseForegroundColor = .white
+        unlockConfig.cornerStyle = .large
+        unlockConfig.buttonSize = .large
+        unlockConfig.title = "Unlock"
+        let unlockButton = UIButton(configuration: unlockConfig)
         unlockButton.addTarget(self, action: #selector(unlock), for: .touchUpInside)
         unlockButton.translatesAutoresizingMaskIntoConstraints = false
-        unlockButton.backgroundColor = UIColor.jotifyBlue
-        unlockButton.layer.cornerRadius = 10
         unlockButton.alpha = 0
-        
-        let logoutLabel = UIButton()
-        logoutLabel.setTitle("Log Out", for: .normal)
-        logoutLabel.setTitleColor(.jotifyBlue, for: .normal)
+
+        var logoutConfig = UIButton.Configuration.plain()
+        logoutConfig.baseForegroundColor = .jotifyBlue
+        logoutConfig.title = "Log Out"
+        let logoutLabel = UIButton(configuration: logoutConfig)
         logoutLabel.addTarget(self, action: #selector(logout), for: .touchUpInside)
         logoutLabel.translatesAutoresizingMaskIntoConstraints = false
-        logoutLabel.backgroundColor = .clear
         logoutLabel.alpha = 0
         
         view.addSubview(unlockButton)

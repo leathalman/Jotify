@@ -186,22 +186,16 @@ class AccountSettingsController: SettingsController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-        
+
         switch indexPath.section {
         case 0:
-            cell.textLabel?.text = "\(super.section1[indexPath.row])"
-            cell.textLabel?.textColor = .systemBlue
-            if indexPath.row == 2 {
-                cell.textLabel?.textColor = .systemRed
-            }
+            let color: UIColor = indexPath.row == 2 ? .systemRed : .systemBlue
+            cell.setTitle(super.section1[indexPath.row], color: color)
         case 1:
-            cell.textLabel?.text = "\(super.section2[indexPath.row])"
-            cell.textLabel?.textColor = .systemRed
-            if indexPath.row == 0 {
-                cell.textLabel?.textColor = .systemBlue
-            }
+            let color: UIColor = indexPath.row == 0 ? .systemBlue : .systemRed
+            cell.setTitle(super.section2[indexPath.row], color: color)
         default:
-            return cell
+            break
         }
         return cell
     }

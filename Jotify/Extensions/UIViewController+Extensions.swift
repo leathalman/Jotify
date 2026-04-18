@@ -8,17 +8,24 @@
 import UIKit
 import AudioToolbox
 
+extension UIApplication {
+    /// iOS 15+ replacement for the deprecated `UIApplication.shared.windows.first`.
+    var firstKeyWindow: UIWindow? {
+        let windows = connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap { $0.windows }
+        return windows.first { $0.isKeyWindow } ?? windows.first
+    }
+}
+
 extension UIViewController {
     
-    // TODO: LATER Causes crash when changing from light/dark mode
-    //returns the current rootViewController from connected scenes
+    /// The current root view controller. Falls back to `self` if no key
+    /// window is available — previously this chain force-unwrapped and
+    /// crashed during light/dark mode transitions when scenes momentarily
+    /// had no key window.
     var rootViewController: UIViewController {
-        return (UIApplication.shared.connectedScenes
-            .filter({$0.activationState == .foregroundActive})
-            .map({$0 as? UIWindowScene})
-            .compactMap({$0})
-            .first?.windows
-            .filter({$0.isKeyWindow}).first?.rootViewController)!
+        UIApplication.shared.firstKeyWindow?.rootViewController ?? self
     }
     
     //play haptic feedback from any viewcontroller
@@ -43,25 +50,26 @@ extension UIViewController {
     
     //set a new rootViewController with animation
     func setRootViewController(duration: Double, vc: UIViewController) {
-        UIApplication.shared.windows.first?.rootViewController = vc
-        UIApplication.shared.windows.first?.makeKeyAndVisible()
-        UIView.transition(with: UIApplication.shared.windows.first!, duration: duration, options: .transitionCrossDissolve, animations: nil, completion: nil)
+        guard let window = UIApplication.shared.firstKeyWindow else { return }
+        window.rootViewController = vc
+        window.makeKeyAndVisible()
+        UIView.transition(with: window, duration: duration, options: .transitionCrossDissolve, animations: nil, completion: nil)
     }
-    
+
     //change StatusBarStyle in parent, PageViewController
     //override and set a given status bar style
     //**only call this method when PageViewController is present**
     func setStatusBarStyle(style: UIStatusBarStyle) {
-        let rootVC = UIApplication.shared.windows.first!.rootViewController as! PageBoyController
+        guard let rootVC = UIApplication.shared.firstKeyWindow?.rootViewController as? PageBoyController else { return }
         rootVC.statusBarStyle = style
         rootVC.setNeedsStatusBarAppearanceUpdate()
     }
-    
+
     //change StatusBarStyle in parent, PageViewController
     //override any previous customization and just use default style
     //**only call this method when PageViewController is present**
     func enableAutomaticStatusBarStyle() {
-        let rootVC = UIApplication.shared.windows.first!.rootViewController as! PageBoyController
+        guard let rootVC = UIApplication.shared.firstKeyWindow?.rootViewController as? PageBoyController else { return }
         rootVC.statusBarStyle = .default
         rootVC.setNeedsStatusBarAppearanceUpdate()
     }

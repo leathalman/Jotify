@@ -81,21 +81,17 @@ class GeneralSettingsController: SettingsController, MFMailComposeViewController
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
         switch indexPath.section {
         case 0:
-            let genericCell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-            genericCell.textLabel?.text = "\(super.section1[indexPath.row])"
-            genericCell.selectionStyle = .none
-            return genericCell
+            cell.setTitle(super.section1[indexPath.row])
+            cell.selectionStyle = .none
         case 1:
-            let genericCell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-            genericCell.textLabel?.text = "\(super.section2[indexPath.row])"
-            genericCell.textLabel?.textColor = .systemBlue
-            return genericCell
+            cell.setTitle(super.section2[indexPath.row], color: .systemBlue)
         default:
-            let genericCell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-            return genericCell
+            break
         }
+        return cell
     }
     
     func openSupportEmail() {

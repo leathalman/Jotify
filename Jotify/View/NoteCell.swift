@@ -16,21 +16,23 @@ class SavedNoteCell: UICollectionViewCell {
     var textLabel: VerticalAlignLabel = {
         let label = VerticalAlignLabel()
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        label.font = UIFontMetrics(forTextStyle: .subheadline)
+            .scaledFont(for: .systemFont(ofSize: 15, weight: .bold))
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .white
         label.text = "Loading..."
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = UIColor.clear
         label.numberOfLines = 3
         label.lineBreakMode = .byTruncatingTail
-        label.sizeToFit()
         label.verticalAlignment = .top
         return label
     }()
-    
+
     let dateLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.preferredFont(forTextStyle: .footnote)
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .white
         label.text = "January 1, 2020"
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +55,6 @@ class SavedNoteCell: UICollectionViewCell {
     func addViews() {
         if UIDevice.current.userInterfaceIdiom == .pad {
             textLabel.numberOfLines = 4
-            textLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         }
         
         contentView.addSubview(textLabel)

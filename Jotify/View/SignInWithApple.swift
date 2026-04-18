@@ -8,24 +8,24 @@
 import SwiftUI
 import AuthenticationServices
 
-final class SignInWithAppleBlack: UIViewRepresentable {
-  
+struct SignInWithAppleBlack: UIViewRepresentable {
+
   func makeUIView(context: Context) -> ASAuthorizationAppleIDButton {
     let button = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
     button.cornerRadius = 10
     return button
   }
-  
+
   func updateUIView(_ uiView: ASAuthorizationAppleIDButton, context: Context) {}
 }
 
-final class SignInWithAppleWhite: UIViewRepresentable {
-  
+struct SignInWithAppleWhite: UIViewRepresentable {
+
   func makeUIView(context: Context) -> ASAuthorizationAppleIDButton {
     let button = ASAuthorizationAppleIDButton(type: .signIn, style: .white)
     button.cornerRadius = 10
     return button
   }
-  
+
   func updateUIView(_ uiView: ASAuthorizationAppleIDButton, context: Context) {}
 }

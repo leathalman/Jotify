@@ -20,9 +20,7 @@ class SetupController {
         GroupDataManager.writeData(path: "recentNoteDate", content: "July 2, 2002")
         GroupDataManager.writeData(path: "recentNoteID", content: "no id")
         print("Setting up widgets...")
-        if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadAllTimelines()
-        }
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
     //default Userdefaults
@@ -59,9 +57,7 @@ class SetupController {
         GroupDataManager.writeData(path: "recentNoteContent", content: note.content)
         GroupDataManager.writeData(path: "recentNoteColor", content: note.color)
         GroupDataManager.writeData(path: "recentNoteID", content: note.id)
-        if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadAllTimelines()
-        }
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
     public func handleApplicationSetup() {

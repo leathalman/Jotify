@@ -19,12 +19,7 @@ class TimePickerCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        if #available(iOS 14.0, *) {
-            picker.preferredDatePickerStyle = .wheels
-        } else {
-            // Fallback on earlier versions
-        }
-        
+        picker.preferredDatePickerStyle = .wheels
         picker.datePickerMode = .time
         
         contentView.addSubview(picker)

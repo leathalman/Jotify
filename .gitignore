@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+
+# Xcode — user-specific
+xcuserdata/
+*.xcuserstate
+*.xcuserdatad/
+
+# Xcode — build artifacts
+build.log
+DerivedData/
+build/
+
+# CocoaPods (we're on SPM now, but defensive)
+Pods/
+Podfile.lock
+
+# Swift Package Manager — local caches only; keep Package.resolved tracked
+.swiftpm/
+.build/

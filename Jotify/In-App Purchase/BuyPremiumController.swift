@@ -20,7 +20,9 @@ class BuyPremiumController: UIViewController {
     
     let titleText: UITextView = {
         let tv = UITextView()
-        tv.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        tv.font = UIFontMetrics(forTextStyle: .title2)
+            .scaledFont(for: .systemFont(ofSize: 24, weight: .bold))
+        tv.adjustsFontForContentSizeCategory = true
         tv.textAlignment = .center
         tv.backgroundColor = .clear
         tv.isUserInteractionEnabled = false
@@ -28,10 +30,11 @@ class BuyPremiumController: UIViewController {
         tv.text = "Get Premium Today!"
         return tv
     }()
-    
+
     let detailText: UITextView = {
         let tv = UITextView()
-        tv.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        tv.font = .preferredFont(forTextStyle: .subheadline)
+        tv.adjustsFontForContentSizeCategory = true
         tv.textAlignment = .center
         tv.backgroundColor = .clear
         tv.isUserInteractionEnabled = false
@@ -41,13 +44,15 @@ class BuyPremiumController: UIViewController {
     }()
     
     lazy var nextButton: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = UIColor.jotifyBlue
-        button.layer.cornerRadius = 10
+        var config = UIButton.Configuration.filled()
+        config.baseBackgroundColor = .jotifyBlue
+        config.baseForegroundColor = .white
+        config.cornerStyle = .large
+        config.buttonSize = .large
+        config.title = "Buy"
+        let button = UIButton(configuration: config)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(initiatePurchase), for: .touchUpInside)
-        button.setTitle("Buy", for: .normal)
         return button
     }()
     
@@ -62,14 +67,14 @@ class BuyPremiumController: UIViewController {
         super.viewDidLoad()
         
         guard let price = IAPManager.shared.getPriceFormatted(for: IAPManager.products[0]) else { return }
-        nextButton.setTitle("Buy for \(price)", for: .normal)
+        nextButton.configuration?.title = "Buy for \(price)"
         
         setStyle()
         setupContraints()
     }
     
     func updateStatusBar(style: UIStatusBarStyle) {
-        let rootVC = UIApplication.shared.windows.first!.rootViewController as! PageBoyController
+        guard let rootVC = UIApplication.shared.firstKeyWindow?.rootViewController as? PageBoyController else { return }
         rootVC.statusBarStyle = style
         rootVC.setNeedsStatusBarAppearanceUpdate()
     }

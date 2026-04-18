@@ -11,7 +11,9 @@ class MasterSettingsController: SettingsController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.sections = ["General"]
+        // Single section, no header — matches iOS Settings app top level where
+        // the nav title alone labels the group.
+        super.sections = [""]
         super.section1 = ["General", "Customization", "Account", "Referrals"]
         navigationItem.title = "Settings"
         
@@ -64,9 +66,8 @@ class MasterSettingsController: SettingsController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-        cell.textLabel?.text = "\(super.section1[indexPath.row])"
+        cell.setTitle(super.section1[indexPath.row])
         cell.accessoryType = .disclosureIndicator
-        cell.accessoryView = UIImageView(image: UIImage(systemName: "chevron.right.circle.fill"))
         return cell
     }
     

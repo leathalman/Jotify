@@ -8,6 +8,7 @@
 import UIKit
 import SPIndicator
 import SPPermissions
+import SPPermissionsNotification
 
 protocol ColorGalleryDelegate {
     func updateColorOverride(color: String)
@@ -21,7 +22,15 @@ struct EditingData {
 }
 
 class ToolbarViewController: UIViewController, ColorGalleryDelegate {
-    
+
+    // Identifiers for the keyboard accessory items, so subclasses can
+    // hide/enable a specific button without poking at array indices.
+    static let multilineItemID = "multiline"
+    static let listItemID = "list"
+    static let timerItemID = "timer"
+    static let colorPickerItemID = "colorpicker"
+    static let saveItemID = "save"
+
     lazy var field: UITextView = {
         let f = UITextView()
         f.backgroundColor = .clear
@@ -34,9 +43,8 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
         f.translatesAutoresizingMaskIntoConstraints = false
         return f
     }()
-    
-    //must define size for toolbar otherwise constraints get messy in console
-    var keyboardToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+
+    let keyboardAccessory = KeyboardAccessoryView()
     
     var isBulletedList: Bool = false
     var isMultiline: Bool = false
@@ -47,47 +55,77 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     var colorOverride = ""
     
     var reminderButtonEnabled = true
+
+    /// Subclasses override to contrast against the note's background color.
+    /// Defaults to `.label` which adapts to light/dark mode.
+    var accessoryTintColor: UIColor { .label }
     
     override func viewDidLoad() {
         setupToolbar()
-        
+        installKeyboardAccessory()
+
         if UserDefaults.standard.bool(forKey: "multilineInputEnabled") {
             isMultiline = true
         } else {
             isMultiline = false
         }
-        
+
         //setup notifications for keyboard
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Subclasses add their `field` after super.viewDidLoad, so the
+        // accessory bar ends up below the field in z-order. Bring it forward
+        // here so it stays visible once everything is laid out.
+        view.bringSubviewToFront(keyboardAccessory)
+    }
+
+    /// Pin the accessory bar to the view's keyboard layout guide. The guide
+    /// tracks the keyboard's top edge and animates in lockstep, so the bar
+    /// slides up with the keyboard without manual frame math. When the
+    /// keyboard is dismissed the guide collapses to the bottom safe area,
+    /// at which point `keyboardWillHide` fades the bar out.
+    private func installKeyboardAccessory() {
+        guard keyboardAccessory.superview == nil else { return }
+        view.addSubview(keyboardAccessory)
+        NSLayoutConstraint.activate([
+            keyboardAccessory.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            keyboardAccessory.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            keyboardAccessory.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor)
+        ])
+        keyboardAccessory.alpha = 0
+    }
     
     //toolbar UI setup
     func setupToolbar() {
-        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        //customize multiline appearance if its used
-        var img = UIImage(systemName: "line.horizontal.2.decrease.circle")
-        
-        if isMultiline {
-            img = UIImage(systemName: "line.horizontal.2.decrease.circle.fill")
-        }
-        
-        let multiline = UIBarButtonItem(image: img, style: .plain, target: self, action: #selector(toggleMultilineInput))
-        let colorpicker = UIBarButtonItem(image: UIImage(systemName: "eyedropper"), style: .plain, target: self, action: #selector(showColorGalleryController))
-        let list = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), style: .plain, target: self, action: #selector(addBullet))
-        let timer = UIBarButtonItem(image: UIImage(systemName: "timer"), style: .plain, target: self, action: #selector(showReminderController))
-        timer.isEnabled = reminderButtonEnabled
+        let multilineImage = isMultiline
+            ? UIImage(systemName: "line.horizontal.2.decrease.circle.fill")
+            : UIImage(systemName: "line.horizontal.2.decrease.circle")
 
-        if reminderButtonEnabled {
-            timer.tintColor = nil
-        } else {
-            timer.tintColor = UIColor.gray
-        }
-        
-        let help = UIBarButtonItem(image: UIImage(systemName: "arrow.down.to.line.circle"), style: .plain, target: self, action: #selector(keyboardSaveNote))
-        keyboardToolbar.items = [multiline, spacer, list, spacer, timer, spacer, colorpicker, spacer, help]
-        keyboardToolbar.sizeToFit()
-        field.inputAccessoryView = keyboardToolbar
+        keyboardAccessory.setItems([
+            .init(identifier: Self.multilineItemID, image: multilineImage,
+                  action: { [weak self] in self?.toggleMultilineInput() }),
+            .init(identifier: Self.listItemID,
+                  image: UIImage(systemName: "list.bullet"),
+                  action: { [weak self] in self?.addBullet() }),
+            .init(identifier: Self.timerItemID,
+                  image: UIImage(systemName: "timer"),
+                  action: { [weak self] in self?.showReminderController() }),
+            .init(identifier: Self.colorPickerItemID,
+                  image: UIImage(systemName: "eyedropper"),
+                  action: { [weak self] in self?.showColorGalleryController() }),
+            .init(identifier: Self.saveItemID,
+                  image: UIImage(systemName: "arrow.down.to.line.circle"),
+                  action: { [weak self] in self?.keyboardSaveNote() })
+        ])
+
+        keyboardAccessory.setEnabled(Self.timerItemID, reminderButtonEnabled)
+        keyboardAccessory.setTintColor(Self.timerItemID,
+                                       reminderButtonEnabled ? nil : .gray)
+        keyboardAccessory.tintColor = accessoryTintColor
     }
     
     //toolbar action cofiguration
@@ -196,18 +234,36 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     
     //handle keyboard interaction with view
     @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            let insets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height + keyboardToolbar.frame.height, right: 0)
-            field.contentInset = insets
-            field.scrollIndicatorInsets = insets
-            view.layoutIfNeeded()
+        guard let info = notification.userInfo,
+              let keyboardSize = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        else { return }
+
+        let duration = (info[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double) ?? 0.25
+        let rawCurve = (info[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt) ?? 0
+        let options = UIView.AnimationOptions(rawValue: rawCurve << 16)
+
+        let insets = UIEdgeInsets(top: 0, left: 0,
+                                  bottom: keyboardSize.height + keyboardAccessory.frame.height,
+                                  right: 0)
+        field.contentInset = insets
+        field.scrollIndicatorInsets = insets
+
+        UIView.animate(withDuration: duration, delay: 0, options: options) {
+            self.keyboardAccessory.alpha = 1
         }
     }
 
     @objc func keyboardWillHide(notification: NSNotification) {
-        let insets = UIEdgeInsets.zero
-        field.contentInset = insets
-        field.scrollIndicatorInsets = insets
-        view.layoutIfNeeded()
+        let info = notification.userInfo
+        let duration = (info?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double) ?? 0.25
+        let rawCurve = (info?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt) ?? 0
+        let options = UIView.AnimationOptions(rawValue: rawCurve << 16)
+
+        field.contentInset = .zero
+        field.scrollIndicatorInsets = .zero
+
+        UIView.animate(withDuration: duration, delay: 0, options: options) {
+            self.keyboardAccessory.alpha = 0
+        }
     }
 }

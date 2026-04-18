@@ -19,12 +19,7 @@ class DatePickerCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        if #available(iOS 14.0, *) {
-            picker.preferredDatePickerStyle = .inline
-        } else {
-            // Fallback on earlier versions
-        }
-        
+        picker.preferredDatePickerStyle = .inline
         picker.datePickerMode = .date
         //don't let user select date in the past for reminder
         picker.minimumDate = Date()

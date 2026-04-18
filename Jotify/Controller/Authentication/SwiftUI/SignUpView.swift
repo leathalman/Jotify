@@ -16,15 +16,10 @@ struct SignUpView: View {
     
     var body: some View {
         ZStack {
-            if #available(iOS 14.0, *) {
-                if (colorScheme == .light) {
-                    Color(UIColor.jotifyGray).ignoresSafeArea()
-                } else {
-                    //dark
-                    Color(UIColor.mineShaft).ignoresSafeArea()
-                }
+            if colorScheme == .light {
+                Color(UIColor.jotifyGray).ignoresSafeArea()
             } else {
-                // Fallback on earlier versions
+                Color(UIColor.mineShaft).ignoresSafeArea()
             }
             VStack {
                 Spacer()
