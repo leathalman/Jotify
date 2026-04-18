@@ -6,6 +6,8 @@
 //
 
 import FirebaseAuth
+import UIKit
+import UserNotifications
 
 class AuthManager {
     
@@ -106,13 +108,13 @@ class AuthManager {
             UserDefaults.standard.set(nil, forKey: "appleAuthorizedUserIdKey")
             completionHandler(false, "Your account is connected to Sign In with Apple, so there is no email to be changed. Jotify does not have access to a real email address.")
         } else {
-            Auth.auth().currentUser?.updateEmail(to: email) { error in
+            Auth.auth().currentUser?.sendEmailVerification(beforeUpdatingEmail: email) { error in
                 if let error = error, let _ = AuthErrorCode(rawValue: error._code) {
                     print("Email change failed: \(error.localizedDescription)")
                     completionHandler(false, error.localizedDescription)
                 } else {
-                    print("Email address successfully changed")
-                    completionHandler(true, "Email address successfully changed")
+                    print("Verification email sent to new address")
+                    completionHandler(true, "A verification link was sent to \(email). Your account email will update after you confirm it.")
                 }
             }
         }

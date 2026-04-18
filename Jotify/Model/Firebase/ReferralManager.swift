@@ -6,37 +6,20 @@
 //
 
 import FirebaseAuth
-import FirebaseDynamicLinks
 import FirebaseFirestore
 
 class ReferralManager {
-    
+
     //should be created when a user's account is created
     func createReferralLink() {
         let uid = AuthManager().uid
-        let link = URL(string: "https://jotifyapp.com/?invitedby=\(uid)")
-        let referralLink = DynamicLinkComponents(link: link!, domainURIPrefix: "https://jotify.page.link")
-        
-        referralLink?.iOSParameters = DynamicLinkIOSParameters(bundleID: "com.austinleath.Jotify")
-        referralLink?.iOSParameters?.minimumAppVersion = "2.0.0"
-        referralLink?.iOSParameters?.appStoreID = "1469983730"
-        
-        referralLink?.androidParameters = DynamicLinkAndroidParameters(packageName: "com.austinleath.Jotify")
-        referralLink?.androidParameters?.minimumVersion = 1
-                
-        referralLink?.shorten { (shortURL, warnings, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            
-            User.settings?.referralLink = shortURL?.absoluteString ?? ""
-            
-            DataManager.updateUserSettings(setting: "referralLink", value: shortURL?.absoluteString ?? "") { success in
-                if !success! {
-                    print("Error creating and uploading referralLink to firestore")
-                }
-                
+        let referralURLString = "https://jotifyapp.com/?invitedby=\(uid)"
+
+        User.settings?.referralLink = referralURLString
+
+        DataManager.updateUserSettings(setting: "referralLink", value: referralURLString) { success in
+            if !(success ?? false) {
+                print("Error creating and uploading referralLink to firestore")
             }
         }
     }

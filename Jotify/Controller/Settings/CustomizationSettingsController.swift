@@ -23,7 +23,7 @@ class CustomizationSettingsController: SettingsController {
         switch indexPath.section {
         case 0:
             let switchCell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
-            switchCell.textLabel?.text = "\(super.section1[indexPath.row])"
+            switchCell.setTitle(super.section1[indexPath.row])
             switchCell.selectionStyle = .none
             switch indexPath.row {
             case 0:
@@ -42,20 +42,15 @@ class CustomizationSettingsController: SettingsController {
             switch indexPath.row {
             case 0:
                 let switchCell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
-                switchCell.textLabel?.text = "\(super.section2[indexPath.row])"
+                switchCell.setTitle(super.section2[indexPath.row])
                 switchCell.selectionStyle = .none
                 switchCell.switchButton.addTarget(self, action: #selector(usePureBlackModeSwitchPressed(sender:)), for: .valueChanged)
-                if UserDefaults.standard.bool(forKey: "usePureDarkMode") {
-                    switchCell.switchButton.isOn = true
-                } else {
-                    switchCell.switchButton.isOn = false
-                }
+                switchCell.switchButton.isOn = UserDefaults.standard.bool(forKey: "usePureDarkMode")
                 return switchCell
             case 1:
                 let genericCell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-                genericCell.textLabel?.text = "\(super.section2[indexPath.row])"
+                genericCell.setTitle(super.section2[indexPath.row])
                 genericCell.accessoryType = .disclosureIndicator
-                genericCell.accessoryView = UIImageView(image: UIImage(systemName: "chevron.right.circle.fill"))
                 return genericCell
             default:
                 let genericCell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
@@ -66,31 +61,22 @@ class CustomizationSettingsController: SettingsController {
             switch indexPath.row {
             case 0:
                 let genericCell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-                genericCell.textLabel?.text = "\(super.section3[indexPath.row])"
+                genericCell.setTitle(super.section3[indexPath.row])
                 genericCell.accessoryType = .disclosureIndicator
-                genericCell.accessoryView = UIImageView(image: UIImage(systemName: "chevron.right.circle.fill"))
                 return genericCell
             case 1:
                 let switchCell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
-                switchCell.textLabel?.text = "\(super.section3[indexPath.row])"
+                switchCell.setTitle(super.section3[indexPath.row])
                 switchCell.selectionStyle = .none
                 switchCell.switchButton.addTarget(self, action: #selector(useHapticsSwitchPressed(sender:)), for: .valueChanged)
-                if UserDefaults.standard.bool(forKey: "useHaptics") {
-                    switchCell.switchButton.isOn = true
-                } else {
-                    switchCell.switchButton.isOn = false
-                }
+                switchCell.switchButton.isOn = UserDefaults.standard.bool(forKey: "useHaptics")
                 return switchCell
             case 2:
                 let switchCell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
-                switchCell.textLabel?.text = "\(super.section3[indexPath.row])"
+                switchCell.setTitle(super.section3[indexPath.row])
                 switchCell.selectionStyle = .none
                 switchCell.switchButton.addTarget(self, action: #selector(deleteOldNotesPressed(sender:)), for: .valueChanged)
-                if UserDefaults.standard.bool(forKey: "deleteOldNotes") {
-                    switchCell.switchButton.isOn = true
-                } else {
-                    switchCell.switchButton.isOn = false
-                }
+                switchCell.switchButton.isOn = UserDefaults.standard.bool(forKey: "deleteOldNotes")
                 return switchCell
             default:
                 let genericCell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
@@ -265,7 +251,7 @@ class CustomizationSettingsController: SettingsController {
         }
         
         view.backgroundColor = ColorManager.bgColor
-        navigationController?.configure(bgColor: ColorManager.bgColor)
+        configureNavigationBar(bgColor: ColorManager.bgColor)
         
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatePureDarkMode"), object: nil)
     }

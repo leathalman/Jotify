@@ -7,7 +7,6 @@
 
 import UIKit
 import SwiftUI
-import FirebaseDynamicLinks
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCenterDelegate {
     
@@ -86,43 +85,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
         if let incomingUrl = userActivity.webpageURL {
             print("Incoming URL is \(incomingUrl)")
-            DynamicLinks.dynamicLinks().handleUniversalLink(incomingUrl) { dynamicLink, error in
-                guard error == nil else {
-                    print("Found an error with dynamic link: \(error!.localizedDescription)")
-                    return
-                }
-                if let dynamicLink = dynamicLink {
-                    self.handleIncomingDynamicLink(dynamicLink)
-                }
-            }
+            handleIncomingReferralURL(incomingUrl)
         }
     }
-    
+
     //App opened from background - used partially for widgets
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         print("Received a URL through a custom scheme...")
         guard let urlinfo = URLContexts.first?.url else { return }
-        if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: urlinfo) {
-            self.handleIncomingDynamicLink(dynamicLink)
-        } else {
-            maybePressedRecentNoteWidget(urlContexts: URLContexts)
-        }
-    }
-    
-    func handleIncomingDynamicLink(_ dynamicLink: DynamicLink) {
-        guard let url = dynamicLink.url else {
-            print("The dynamic link object has no url")
+        if handleIncomingReferralURL(urlinfo) {
             return
         }
-        
+        maybePressedRecentNoteWidget(urlContexts: URLContexts)
+    }
+
+    @discardableResult
+    func handleIncomingReferralURL(_ url: URL) -> Bool {
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-              let queryItems = components.queryItems else { return }
-        for queryItem in queryItems {
+              let queryItems = components.queryItems else { return false }
+        var matched = false
+        for queryItem in queryItems where queryItem.name == "invitedby" {
             print("Parameter \(queryItem.name) has a value of \(queryItem.value ?? "")")
-            
-            //queryItem.value is the UID of the person who referral this person
             UserDefaults.standard.set(queryItem.value, forKey: "referralId")
+            matched = true
         }
+        return matched
     }
     
     //collect data and present EditingController if widget pressed
@@ -183,7 +170,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
     //app in foreground when user interacts with notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         //show an alert at top of screen while application is open
-        completionHandler(UNNotificationPresentationOptions.alert)
+        completionHandler([.banner, .list, .sound])
     }
     
     func openNoteFromNotification(userInfo: [AnyHashable : Any]) {

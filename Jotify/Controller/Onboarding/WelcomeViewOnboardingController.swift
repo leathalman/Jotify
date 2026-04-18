@@ -62,7 +62,7 @@ class WelcomeViewOnboardingController: UIViewController {
     }
     
     func updateStatusBar(style: UIStatusBarStyle) {
-        let rootVC = UIApplication.shared.windows.first!.rootViewController as! OnboardingController
+        guard let rootVC = UIApplication.shared.firstKeyWindow?.rootViewController as? OnboardingController else { return }
         rootVC.statusBarStyle = style
         rootVC.setNeedsStatusBarAppearanceUpdate()
     }

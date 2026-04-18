@@ -168,7 +168,7 @@ class ReferralSettingsController: UIViewController, MFMessageComposeViewControll
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         enableAutomaticStatusBarStyle()
         view.backgroundColor = ColorManager.bgColor
-        navigationController?.configure(bgColor: ColorManager.bgColor)
+        configureNavigationBar(bgColor: ColorManager.bgColor)
         
         var color = UIColor.white
         if traitCollection.userInterfaceStyle == .light || traitCollection.userInterfaceStyle == .unspecified { color = .black }

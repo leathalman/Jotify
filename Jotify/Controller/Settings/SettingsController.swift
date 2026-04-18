@@ -19,7 +19,7 @@ class SettingsController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         enableAutomaticStatusBarStyle()
-        navigationController?.configure(bgColor: ColorManager.bgColor)
+        configureNavigationBar(bgColor: ColorManager.bgColor)
     }
     
     override func viewDidLoad() {
@@ -53,20 +53,13 @@ class SettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section]
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        let title = sections[section]
+        return title.isEmpty ? nil : title
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         enableAutomaticStatusBarStyle()
         view.backgroundColor = ColorManager.bgColor
-        navigationController?.configure(bgColor: ColorManager.bgColor)
-        
-        var color = UIColor.white
-        if traitCollection.userInterfaceStyle == .light || traitCollection.userInterfaceStyle == .unspecified { color = .black }
-        navigationController?.navigationBar.standardAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor : color]
+        configureNavigationBar(bgColor: ColorManager.bgColor)
     }
 }

@@ -26,17 +26,20 @@ class DetailOnboardingController: UIViewController {
     
     let titleText: UITextView = {
         let tv = UITextView()
-        tv.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        tv.font = UIFontMetrics(forTextStyle: .title1)
+            .scaledFont(for: .systemFont(ofSize: 28, weight: .bold))
+        tv.adjustsFontForContentSizeCategory = true
         tv.textAlignment = .center
         tv.backgroundColor = .clear
         tv.isUserInteractionEnabled = false
         tv.translatesAutoresizingMaskIntoConstraints = false
         return tv
     }()
-    
+
     let detailText: UITextView = {
         let tv = UITextView()
-        tv.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        tv.font = .preferredFont(forTextStyle: .body)
+        tv.adjustsFontForContentSizeCategory = true
         tv.textAlignment = .center
         tv.backgroundColor = .clear
         tv.isUserInteractionEnabled = false
@@ -45,18 +48,16 @@ class DetailOnboardingController: UIViewController {
     }()
     
     lazy var nextButton: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = UIColor.jotifyBlue
-        button.layer.cornerRadius = 10
+        var config = UIButton.Configuration.filled()
+        config.baseBackgroundColor = .jotifyBlue
+        config.baseForegroundColor = .white
+        config.cornerStyle = .large
+        config.buttonSize = .large
+        config.title = finalVC ? "Get Started" : "Next"
+        let button = UIButton(configuration: config)
         button.translatesAutoresizingMaskIntoConstraints = false
-        if finalVC {
-            button.addTarget(self, action: #selector(displaySignUp), for: .touchUpInside)
-            button.setTitle("Get Started", for: .normal)
-        } else {
-            button.addTarget(self, action: #selector(scrollToNextPage), for: .touchUpInside)
-            button.setTitle("Next", for: .normal)
-        }
+        let action: Selector = finalVC ? #selector(displaySignUp) : #selector(scrollToNextPage)
+        button.addTarget(self, action: action, for: .touchUpInside)
         return button
     }()
     
@@ -91,7 +92,7 @@ class DetailOnboardingController: UIViewController {
     }
     
     func updateStatusBar(style: UIStatusBarStyle) {
-        let rootVC = UIApplication.shared.windows.first!.rootViewController as! OnboardingController
+        guard let rootVC = UIApplication.shared.firstKeyWindow?.rootViewController as? OnboardingController else { return }
         rootVC.statusBarStyle = style
         rootVC.setNeedsStatusBarAppearanceUpdate()
     }

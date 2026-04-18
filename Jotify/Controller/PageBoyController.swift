@@ -52,9 +52,12 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
         
         //remove bounce effect when overscrolling from page to page
         bounces = false
-        
-        //set custom transition to allow time for keyboard to pop up when programmatically scrolling
-        transition = Transition(style: .push, duration: 0.15)
+
+        // No custom `transition` here: in Pageboy 4+ a non-nil `transition`
+        // replaces the native UIPageViewController animator for swipes too,
+        // which felt laggy after the upgrade. iOS 26's keyboard animation
+        // happens in parallel with the page change, so the old "slow the
+        // push so the keyboard can catch up" trick is no longer needed.
         
         //setup the color system for background with light/dark mode
         if traitCollection.userInterfaceStyle == .light {

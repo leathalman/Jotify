@@ -8,7 +8,6 @@
 import UIKit
 import Blueprints
 import SwiftMessages
-import ViewAnimator
 import WidgetKit
 
 class NoteCollectionController: UICollectionViewController {
@@ -23,13 +22,14 @@ class NoteCollectionController: UICollectionViewController {
     
     //used to hold notes filtered by the search bar
     var filteredNotes: [FBNote] = []
-    
+
     //used to track the cells selected while multi-selection is enabled
     var selectedCells: [IndexPath] = []
-    
+
     //global instance of searchController for NoteCollectionController
     let searchController = UISearchController(searchResultsController: nil)
-    
+
+
     //layouts for collectionView
     let iOSLayout = VerticalBlueprintLayout(
         itemsPerRow: 2.0,
@@ -49,26 +49,29 @@ class NoteCollectionController: UICollectionViewController {
     
     //life cycle
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        setupNavigationBar()
+        super.viewWillAppear(animated)
         enableAutomaticStatusBarStyle()
         resetAppBadgeIfAllRemindersCleared()
-        setupSearchBar()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewElements()
-        animateVisibleCells()
+        setupNavigationBar()
+        setupSearchBar()
         cleanupOldNotes()
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(pureDarkModeChanged(notification:)), name:NSNotification.Name(rawValue: "updatePureDarkMode"), object: nil)
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(false)
+        super.viewDidDisappear(animated)
         hideToolbar()
-        navigationItem.searchController = nil
+        // Previously we tore down `navigationItem.searchController` here and
+        // reinstalled it on every `viewWillAppear`. On iOS 26's stacked
+        // search bar that churn forces a nav bar relayout during every
+        // push/pop, which manifests as a stagger on every transition out of
+        // this screen. Leave the search controller installed.
     }
     
     //view configuration
@@ -96,23 +99,24 @@ class NoteCollectionController: UICollectionViewController {
         
         collectionView.backgroundColor = ColorManager.bgColor
         collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
+
+        // Single long-press recognizer for the whole collection view.
+        // Previously we added one per cell inside `cellForItemAt`, which
+        // meant reused cells accumulated dozens of recognizers and every
+        // touch had to consult all of them — the main cause of scroll lag.
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longTouchHandler(sender:)))
+        collectionView.addGestureRecognizer(longPress)
     }
     
     func setupNavigationBar() {
-        navigationItem.title = "Saved Notes"
-        navigationController?.configure(bgColor: ColorManager.bgColor)
-        
-        var color = UIColor.white
-        if traitCollection.userInterfaceStyle == .light || traitCollection.userInterfaceStyle == .unspecified { color = .black }
-        navigationController?.navigationBar.standardAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor : color]
+        navigationItem.title = "Notes"
+        // Don't override the nav bar background on this screen. iOS 26's
+        // adaptive chrome animates smoothly between the idle search bar
+        // pill and the active state; forcing an opaque `ColorManager.bgColor`
+        // prevents that animation and produces a visible color jump.
     }
     
-    func animateVisibleCells() {
-        let animation = AnimationType.from(direction: .top, offset: 30.0)
-        collectionView?.performBatchUpdates({UIView.animate(views: self.collectionView.orderedVisibleCells, animations: [animation], completion: {})}, completion: nil)
-    }
-    
-    func resetAppBadgeIfAllRemindersCleared() {
+func resetAppBadgeIfAllRemindersCleared() {
         var numOfReminders = 0
         if noteCollection?.FBNotes != nil {
             let notes = noteCollection!.FBNotes
@@ -195,7 +199,7 @@ class NoteCollectionController: UICollectionViewController {
         rootVC.scrollToWriteNoteController()
         self.playHapticFeedback()
     }
-    
+
     //NoteOptionMenu Actions
     @objc func deleteNoteFromMenu(_ sender: PassableUIButton) {
         let note = sender.params["note"] as! FBNote
@@ -325,58 +329,42 @@ class NoteCollectionController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedNoteCell", for: indexPath) as? SavedNoteCell else { fatalError("Wrong cell class dequeued") }
-        
-        var note = noteCollection?.FBNotes[indexPath.row]
-        
-        if isFiltering {
-            note = filteredNotes[indexPath.row]
-        }
-        
+
+        let note = isFiltering ? filteredNotes[indexPath.row] : noteCollection?.FBNotes[indexPath.row]
+
+        // Cache derived values so we don't re-parse the color string or
+        // recompute luminance on every property we set.
+        let noteColor = note?.color.getColor()
+        let contrastingColor: UIColor = (noteColor?.isDarkColor ?? true) ? .white : .black
+
         cell.textLabel.text = note?.content
         cell.dateLabel.text = note?.timestamp.getDate()
-        let noteColor = note?.color.getColor()
-        
-        //handle dynamic text color based on background color of cell
-        cell.textLabel.textColor = note?.color.getColor().isDarkColor ?? true ? .white : .black
-        cell.dateLabel.textColor = note?.color.getColor().isDarkColor ?? true ? .white : .black
-        
+        cell.textLabel.textColor = contrastingColor
+        cell.dateLabel.textColor = contrastingColor
+
         if selectedCells.contains(indexPath) {
-            cell.backgroundColor = .darkGray
             cell.contentView.backgroundColor = .darkGray
-            cell.layer.backgroundColor = UIColor.darkGray.cgColor
             cell.shake()
         } else {
-            cell.backgroundColor = noteColor
             cell.contentView.backgroundColor = noteColor
-            cell.layer.backgroundColor = noteColor?.cgColor
             cell.stopShaking()
         }
-        
+
         //show timer icon if note is a reminder
-        if note?.reminderTimestamp ?? 0 > 0 {
-            cell.reminderIcon.tintColor = note?.color.getColor().isDarkColor ?? true ? .white : .black
+        if (note?.reminderTimestamp ?? 0) > 0 {
+            cell.reminderIcon.tintColor = contrastingColor
             cell.reminderIcon.alpha = 1
         } else {
             cell.reminderIcon.alpha = 0
         }
-        
-        cell.contentView.layer.cornerRadius = 5
-        cell.contentView.layer.shouldRasterize = true
-        cell.contentView.layer.rasterizationScale = UIScreen.main.scale
-        
-        cell.layer.cornerRadius = 5
-        cell.layer.shouldRasterize = true
-        cell.layer.rasterizationScale = UIScreen.main.scale
-        
-        cell.contentView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTouchHandler(sender:))))
-        
+
         //when creating a note on first launch, server cannot update client fast enough for UI to show correct note content
         //instead, display the text stored locally for the first note created after launch
         if indexPath == IndexPath(row: 0, section: 0) && EditingData.firstNote {
             cell.textLabel.text = EditingData.currentNote.content
             EditingData.firstNote = false
         }
-        
+
         return cell
     }
     
