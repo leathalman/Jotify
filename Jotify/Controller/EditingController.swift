@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Combine
 
 class EditingController: ToolbarViewController, UITextViewDelegate {
 
@@ -18,41 +17,28 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     
     //store the content value before note is edited
     var initialContent: String?
-
-    private let textChanges = PassthroughSubject<String, Never>()
-    private var autoSaveCancellable: AnyCancellable?
-
+    
+    var timer: Timer?
+    
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillAppear(true)
         //change status bar style to white when PageBoyController is present
         setStatusBarStyle(style: EditingData.currentNote.color.getColor().isDarkColor ? .lightContent : .darkContent)
         checkIfReminderExpired()
     }
-
+    
     //life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupNavBar()
-
-        // Combine debounce replaces the old Timer-based idle auto-save.
-        // Each keystroke pushes into `textChanges`; if 1s passes with no
-        // further input, sink fires and we persist the note. Much cleaner
-        // than manually invalidating + rescheduling a Timer on every tap.
-        autoSaveCancellable = textChanges
-            .debounce(for: .seconds(1), scheduler: RunLoop.main)
-            .sink { [weak self] content in
-                self?.updateContent(content: content)
-            }
-    }
-
-    override func configureAccessoryForFirstAppearance() {
-        // Applied once `ToolbarViewController` has installed the accessory
-        // on first `viewDidAppear`. Hiding items here means the SwiftUI
-        // host's initial render already has the right set of buttons —
-        // no second pass after the user sees the view.
+        
+        //hide multiline input and save-note icons while editing an existing note
         keyboardAccessory.setHidden(Self.multilineItemID, true)
         keyboardAccessory.setHidden(Self.saveItemID, true)
+        
+        //disable swiping to create a new note when editing
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -63,7 +49,9 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+        super.viewDidDisappear(true)
+        //reenable swipe if it was disabled from other controllers
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
     }
     
     //view configuration
@@ -89,21 +77,16 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     //setup constraints for multiline textfield
     func setupConstraints() {
         let safeArea = view.safeAreaLayoutGuide
-        // Pin the field's bottom to the keyboard accessory's top, not the
-        // view bottom. The accessory is pinned to keyboardLayoutGuide.top,
-        // so the field automatically resizes as the keyboard slides in and
-        // out — no keyboardWillShow/Hide observer or contentInset math
-        // required.
         if UIDevice.current.userInterfaceIdiom == .pad {
             field.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             field.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
             field.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
-            field.bottomAnchor.constraint(equalTo: keyboardAccessory.topAnchor).isActive = true
+            field.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -35).isActive = true
         } else if UIDevice.current.userInterfaceIdiom == .phone {
             field.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
             field.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             field.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-            field.bottomAnchor.constraint(equalTo: keyboardAccessory.topAnchor).isActive = true
+            field.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         }
     }
     
@@ -171,14 +154,25 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
         
     }
     
+    //timer functions for "automatically" saving once a user stops typing
+    func resetTimer() {
+        timer?.invalidate()
+        let nextTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(handleIdleEvent), userInfo: nil, repeats: false)
+        timer = nextTimer
+    }
+    
+    @objc func handleIdleEvent() {
+        updateContent(content: field.text)
+    }
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         checkForBulletList()
     }
-
+    
     func textViewDidChange(_ textView: UITextView) {
         checkForBulletList()
+        resetTimer()
         EditingData.currentNote.content = field.text
-        textChanges.send(field.text)
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

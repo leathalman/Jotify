@@ -52,10 +52,6 @@ class NoteCollectionController: UICollectionViewController {
         super.viewWillAppear(animated)
         enableAutomaticStatusBarStyle()
         resetAppBadgeIfAllRemindersCleared()
-        // Re-apply the current `ColorManager.bgColor` every time this VC
-        // becomes visible, so the Pure Dark Mode setting change flows back
-        // through the nav stack naturally on pop. No notification needed.
-        collectionView.backgroundColor = ColorManager.bgColor
     }
 
     override func viewDidLoad() {
@@ -64,6 +60,8 @@ class NoteCollectionController: UICollectionViewController {
         setupNavigationBar()
         setupSearchBar()
         cleanupOldNotes()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(pureDarkModeChanged(notification:)), name:NSNotification.Name(rawValue: "updatePureDarkMode"), object: nil)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -87,12 +85,7 @@ class NoteCollectionController: UICollectionViewController {
         extendedLayoutIncludesOpaqueBars = true
         collectionView.frame = view.frame
         collectionView.alwaysBounceVertical = true
-
-        // UIScrollView's default 150ms touch delay makes every cell tap feel
-        // laggy on the way to `didSelectItemAt`. We're fine letting a tap
-        // register immediately — scroll still wins if the finger moves.
-        collectionView.delaysContentTouches = false
-
+        
         CellState.shouldSelectMultiple = false
         collectionView.allowsMultipleSelection = false
         
@@ -112,10 +105,6 @@ class NoteCollectionController: UICollectionViewController {
         // meant reused cells accumulated dozens of recognizers and every
         // touch had to consult all of them — the main cause of scroll lag.
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longTouchHandler(sender:)))
-        // Don't swallow the touch when the long-press recognizes — the
-        // option menu is a separate presentation, and letting the touch
-        // pass through keeps short taps snappy.
-        longPress.cancelsTouchesInView = false
         collectionView.addGestureRecognizer(longPress)
     }
     
@@ -147,22 +136,15 @@ func resetAppBadgeIfAllRemindersCleared() {
     
     //action handlers
     @objc func longTouchHandler(sender: UILongPressGestureRecognizer) {
-        guard !searchController.isActive else { return }
-
-        let location = sender.location(in: collectionView)
-        guard let indexPath = collectionView.indexPathForItem(at: location),
-              let notes = noteCollection?.FBNotes,
-              indexPath.row < notes.count
-        else { return }
-        let note = notes[indexPath.row]
-
-        let menu: NoteOptionMenu
-        do {
-            menu = try SwiftMessages.viewFromNib(named: "NoteOptionMenu")
-        } catch {
-            print("Failed to load NoteOptionMenu NIB: \(error)")
+        if searchController.isActive {
             return
         }
+        
+        let location = sender.location(in: collectionView)
+        let indexPath = collectionView.indexPathForItem(at: location)
+        let note = noteCollection?.FBNotes[indexPath!.row]
+        
+        let menu: NoteOptionMenu = try! SwiftMessages.viewFromNib(named: "NoteOptionMenu")
         menu.configureBackgroundView(width: 250)
         
         //configure title and actions
@@ -179,7 +161,7 @@ func resetAppBadgeIfAllRemindersCleared() {
         menu.button4.titleLabel?.font = .boldSystemFont(ofSize: 16)
         
         menu.button1.addTarget(self, action: #selector(shareNoteFromMenu(_:)), for: .touchUpInside)
-        menu.button1.params["content"] = note.content
+        menu.button1.params["content"] = note?.content
         menu.button2.addTarget(self, action: #selector(deleteNoteFromMenu(_:)), for: .touchUpInside)
         menu.button2.params["note"] = note
         menu.button3.addTarget(self, action: #selector(showToolbar), for: .touchUpInside)
@@ -423,7 +405,12 @@ func resetAppBadgeIfAllRemindersCleared() {
         }
     }
     
-//traitcollection: dynamic iPad layout and light/dark mode support
+    @objc func pureDarkModeChanged(notification: Notification) {
+        print("Pure dark mode changed.")
+        collectionView.backgroundColor = ColorManager.bgColor
+    }
+    
+    //traitcollection: dynamic iPad layout and light/dark mode support
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if traitCollection.horizontalSizeClass == .compact {
             iPadOSLayout.itemsPerRow = 2.0

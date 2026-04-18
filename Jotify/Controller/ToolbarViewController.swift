@@ -59,38 +59,21 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     /// Subclasses override to contrast against the note's background color.
     /// Defaults to `.label` which adapts to light/dark mode.
     var accessoryTintColor: UIColor { .label }
-
-    /// Guard so the accessory's item model is only built once.
-    private var didPopulateAccessory = false
-
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
-        isMultiline = UserDefaults.standard.bool(forKey: "multilineInputEnabled")
-        // Add the accessory view to the hierarchy now so subclasses can
-        // anchor their text field to `keyboardAccessory.topAnchor` in
-        // `setupConstraints`. This only creates a plain UIView — the
-        // expensive SwiftUI `UIHostingController` inside it isn't spun up
-        // until the first `setItems` call.
-        installKeyboardAccessory()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        // First `setItems` triggers the SwiftUI host instantiation +
-        // render — ~20–80ms on the main thread on iOS 26. Running that in
-        // `viewDidLoad` landed it between the tap and the push animation,
-        // producing the visible lag before the detail view appeared. The
-        // bar isn't visible until the keyboard rises anyway, so populate
-        // it after the transition completes.
-        guard !didPopulateAccessory else { return }
-        didPopulateAccessory = true
         setupToolbar()
-        configureAccessoryForFirstAppearance()
-    }
+        installKeyboardAccessory()
 
-    /// Subclasses override to tweak the accessory (hide items, etc.) after
-    /// the bar has been populated. Runs once, on first `viewDidAppear`.
-    func configureAccessoryForFirstAppearance() { }
+        if UserDefaults.standard.bool(forKey: "multilineInputEnabled") {
+            isMultiline = true
+        } else {
+            isMultiline = false
+        }
+
+        //setup notifications for keyboard
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -101,11 +84,10 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     }
 
     /// Pin the accessory bar to the view's keyboard layout guide. The guide
-    /// tracks the keyboard's top edge automatically and animates in lockstep
-    /// with the system keyboard — no manual frame math, no
-    /// keyboardWillShow/Hide observers, no contentInset calculations.
-    /// Subclasses should pin their text field's `bottomAnchor` to
-    /// `keyboardAccessory.topAnchor` to get the text view sized correctly.
+    /// tracks the keyboard's top edge and animates in lockstep, so the bar
+    /// slides up with the keyboard without manual frame math. When the
+    /// keyboard is dismissed the guide collapses to the bottom safe area,
+    /// at which point `keyboardWillHide` fades the bar out.
     private func installKeyboardAccessory() {
         guard keyboardAccessory.superview == nil else { return }
         view.addSubview(keyboardAccessory)
@@ -114,6 +96,7 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
             keyboardAccessory.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             keyboardAccessory.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor)
         ])
+        keyboardAccessory.alpha = 0
     }
     
     //toolbar UI setup
@@ -249,4 +232,38 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
         }
     }
     
+    //handle keyboard interaction with view
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let info = notification.userInfo,
+              let keyboardSize = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        else { return }
+
+        let duration = (info[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double) ?? 0.25
+        let rawCurve = (info[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt) ?? 0
+        let options = UIView.AnimationOptions(rawValue: rawCurve << 16)
+
+        let insets = UIEdgeInsets(top: 0, left: 0,
+                                  bottom: keyboardSize.height + keyboardAccessory.frame.height,
+                                  right: 0)
+        field.contentInset = insets
+        field.scrollIndicatorInsets = insets
+
+        UIView.animate(withDuration: duration, delay: 0, options: options) {
+            self.keyboardAccessory.alpha = 1
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        let info = notification.userInfo
+        let duration = (info?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double) ?? 0.25
+        let rawCurve = (info?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt) ?? 0
+        let options = UIView.AnimationOptions(rawValue: rawCurve << 16)
+
+        field.contentInset = .zero
+        field.scrollIndicatorInsets = .zero
+
+        UIView.animate(withDuration: duration, delay: 0, options: options) {
+            self.keyboardAccessory.alpha = 0
+        }
+    }
 }

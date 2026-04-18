@@ -16,6 +16,8 @@ class MasterSettingsController: SettingsController {
         super.sections = [""]
         super.section1 = ["General", "Customization", "Account", "Referrals"]
         navigationItem.title = "Settings"
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(pureDarkModeChanged(notification:)), name:NSNotification.Name(rawValue: "updatePureDarkMode"), object: nil)
     }
     
     //tableView logic

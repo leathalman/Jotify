@@ -67,14 +67,9 @@ final class KeyboardAccessoryView: UIView {
         backgroundColor = .clear
         tintColor = .label
 
-        // Deliberately DON'T install the SwiftUI host here. First
-        // instantiation of `UIHostingController` is ~20–80ms on the main
-        // thread, and callers create this view inside the enclosing
-        // controller's `init` — i.e. synchronously between the tap in the
-        // notes list and the push animation beginning. Defer host setup
-        // until the first `rebuild()` call (or addition to a window, for
-        // the UIKit fallback path which is cheap).
-        if !useSwiftUI {
+        if useSwiftUI, #available(iOS 26.0, *) {
+            installSwiftUIHost()
+        } else {
             installUIKitStack()
         }
     }
@@ -127,9 +122,6 @@ final class KeyboardAccessoryView: UIView {
 
     private func rebuild() {
         if useSwiftUI, #available(iOS 26.0, *) {
-            if hostingController == nil {
-                installSwiftUIHost()
-            }
             rebuildSwiftUI()
         } else {
             rebuildUIKit()
