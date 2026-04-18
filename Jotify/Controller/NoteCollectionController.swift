@@ -8,7 +8,6 @@
 import UIKit
 import Blueprints
 import SwiftMessages
-import ViewAnimator
 import WidgetKit
 
 class NoteCollectionController: UICollectionViewController {
@@ -50,26 +49,29 @@ class NoteCollectionController: UICollectionViewController {
     
     //life cycle
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        setupNavigationBar()
+        super.viewWillAppear(animated)
         enableAutomaticStatusBarStyle()
         resetAppBadgeIfAllRemindersCleared()
-        setupSearchBar()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewElements()
-        animateVisibleCells()
+        setupNavigationBar()
+        setupSearchBar()
         cleanupOldNotes()
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(pureDarkModeChanged(notification:)), name:NSNotification.Name(rawValue: "updatePureDarkMode"), object: nil)
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(false)
+        super.viewDidDisappear(animated)
         hideToolbar()
-        navigationItem.searchController = nil
+        // Previously we tore down `navigationItem.searchController` here and
+        // reinstalled it on every `viewWillAppear`. On iOS 26's stacked
+        // search bar that churn forces a nav bar relayout during every
+        // push/pop, which manifests as a stagger on every transition out of
+        // this screen. Leave the search controller installed.
     }
     
     //view configuration
@@ -114,12 +116,7 @@ class NoteCollectionController: UICollectionViewController {
         // prevents that animation and produces a visible color jump.
     }
     
-    func animateVisibleCells() {
-        let animation = AnimationType.from(direction: .top, offset: 30.0)
-        collectionView?.performBatchUpdates({UIView.animate(views: self.collectionView.orderedVisibleCells, animations: [animation], completion: {})}, completion: nil)
-    }
-    
-    func resetAppBadgeIfAllRemindersCleared() {
+func resetAppBadgeIfAllRemindersCleared() {
         var numOfReminders = 0
         if noteCollection?.FBNotes != nil {
             let notes = noteCollection!.FBNotes

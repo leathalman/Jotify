@@ -16,7 +16,6 @@
 		8FD451DBDA1971ACD832FE06 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = DDB032505F884034FD0CBDE6 /* FirebaseFirestore */; };
 		A03C52A3E1D950BFB4CACCC3 /* SPPermissionsNotification in Frameworks */ = {isa = PBXBuildFile; productRef = A56C2A4A7FC79CC577A43655 /* SPPermissionsNotification */; };
 		D3AE8EE3AF15A33A8C457977 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 183F3FFEE550615963A0DAE0 /* FirebaseAnalytics */; };
-		E6A21C4B873FD310EAA30333 /* ViewAnimator in Frameworks */ = {isa = PBXBuildFile; productRef = 187C57024F5C258799C3740D /* ViewAnimator */; };
 		F6048A012697662100C7B566 /* ColorGalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6048A002697662100C7B566 /* ColorGalleryController.swift */; };
 		F6051B7126A7522F007F9695 /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6051B7026A7522F007F9695 /* DatePickerCell.swift */; };
 		F611D0DE25D841FA00E6D860 /* EmptyNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F611D0DD25D841FA00E6D860 /* EmptyNoteView.swift */; };
@@ -215,7 +214,6 @@
 				8FD451DBDA1971ACD832FE06 /* FirebaseFirestore in Frameworks */,
 				8CEF1DECA676F17BFA208E24 /* Pageboy in Frameworks */,
 				0ED69644514496DEF7F57CAB /* SwiftMessages in Frameworks */,
-				E6A21C4B873FD310EAA30333 /* ViewAnimator in Frameworks */,
 				84819E5ACCD22A4D59980154 /* SPIndicator in Frameworks */,
 				A03C52A3E1D950BFB4CACCC3 /* SPPermissionsNotification in Frameworks */,
 				1115771F89CC31AFF39D6ADC /* Blueprints in Frameworks */,
@@ -511,7 +509,6 @@
 				DDB032505F884034FD0CBDE6 /* FirebaseFirestore */,
 				3BF443B9A976378E13BE36C3 /* Pageboy */,
 				D3985D6F7DDA6FD47F5FF443 /* SwiftMessages */,
-				187C57024F5C258799C3740D /* ViewAnimator */,
 				CCF08BA577294E27A48EA1C6 /* SPIndicator */,
 				A56C2A4A7FC79CC577A43655 /* SPPermissionsNotification */,
 				2486DAD4BB768AED5BBF6CD6 /* Blueprints */,
@@ -567,7 +564,6 @@
 				868A6F07D4F637EA887B3018 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				E536E13C284498B31D516302 /* XCRemoteSwiftPackageReference "Pageboy" */,
 				BF67B3F48D446C9FCD90D969 /* XCRemoteSwiftPackageReference "SwiftMessages" */,
-				DE878F96AF779C97DF3D1DEA /* XCRemoteSwiftPackageReference "ViewAnimator" */,
 				59782629E514E958861F83E3 /* XCRemoteSwiftPackageReference "SPIndicator" */,
 				3950EE273E359944FE82F11D /* XCRemoteSwiftPackageReference "SPPermissions" */,
 				3D7968192261DAB2D97C6697 /* XCRemoteSwiftPackageReference "Blueprints" */,
@@ -1002,14 +998,6 @@
 				minimumVersion = 9.0.0;
 			};
 		};
-		DE878F96AF779C97DF3D1DEA /* XCRemoteSwiftPackageReference "ViewAnimator" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/marcosgriselli/ViewAnimator";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
 		E536E13C284498B31D516302 /* XCRemoteSwiftPackageReference "Pageboy" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/uias/Pageboy";
@@ -1025,11 +1013,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 868A6F07D4F637EA887B3018 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalytics;
-		};
-		187C57024F5C258799C3740D /* ViewAnimator */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DE878F96AF779C97DF3D1DEA /* XCRemoteSwiftPackageReference "ViewAnimator" */;
-			productName = ViewAnimator;
 		};
 		2486DAD4BB768AED5BBF6CD6 /* Blueprints */ = {
 			isa = XCSwiftPackageProductDependency;
