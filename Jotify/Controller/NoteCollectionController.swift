@@ -97,6 +97,13 @@ class NoteCollectionController: UICollectionViewController {
         
         collectionView.backgroundColor = ColorManager.bgColor
         collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
+
+        // Single long-press recognizer for the whole collection view.
+        // Previously we added one per cell inside `cellForItemAt`, which
+        // meant reused cells accumulated dozens of recognizers and every
+        // touch had to consult all of them — the main cause of scroll lag.
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longTouchHandler(sender:)))
+        collectionView.addGestureRecognizer(longPress)
     }
     
     func setupNavigationBar() {
@@ -325,58 +332,42 @@ class NoteCollectionController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedNoteCell", for: indexPath) as? SavedNoteCell else { fatalError("Wrong cell class dequeued") }
-        
-        var note = noteCollection?.FBNotes[indexPath.row]
-        
-        if isFiltering {
-            note = filteredNotes[indexPath.row]
-        }
-        
+
+        let note = isFiltering ? filteredNotes[indexPath.row] : noteCollection?.FBNotes[indexPath.row]
+
+        // Cache derived values so we don't re-parse the color string or
+        // recompute luminance on every property we set.
+        let noteColor = note?.color.getColor()
+        let contrastingColor: UIColor = (noteColor?.isDarkColor ?? true) ? .white : .black
+
         cell.textLabel.text = note?.content
         cell.dateLabel.text = note?.timestamp.getDate()
-        let noteColor = note?.color.getColor()
-        
-        //handle dynamic text color based on background color of cell
-        cell.textLabel.textColor = note?.color.getColor().isDarkColor ?? true ? .white : .black
-        cell.dateLabel.textColor = note?.color.getColor().isDarkColor ?? true ? .white : .black
-        
+        cell.textLabel.textColor = contrastingColor
+        cell.dateLabel.textColor = contrastingColor
+
         if selectedCells.contains(indexPath) {
-            cell.backgroundColor = .darkGray
             cell.contentView.backgroundColor = .darkGray
-            cell.layer.backgroundColor = UIColor.darkGray.cgColor
             cell.shake()
         } else {
-            cell.backgroundColor = noteColor
             cell.contentView.backgroundColor = noteColor
-            cell.layer.backgroundColor = noteColor?.cgColor
             cell.stopShaking()
         }
-        
+
         //show timer icon if note is a reminder
-        if note?.reminderTimestamp ?? 0 > 0 {
-            cell.reminderIcon.tintColor = note?.color.getColor().isDarkColor ?? true ? .white : .black
+        if (note?.reminderTimestamp ?? 0) > 0 {
+            cell.reminderIcon.tintColor = contrastingColor
             cell.reminderIcon.alpha = 1
         } else {
             cell.reminderIcon.alpha = 0
         }
-        
-        cell.contentView.layer.cornerRadius = 5
-        cell.contentView.layer.shouldRasterize = true
-        cell.contentView.layer.rasterizationScale = UIScreen.main.scale
-        
-        cell.layer.cornerRadius = 5
-        cell.layer.shouldRasterize = true
-        cell.layer.rasterizationScale = UIScreen.main.scale
-        
-        cell.contentView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTouchHandler(sender:))))
-        
+
         //when creating a note on first launch, server cannot update client fast enough for UI to show correct note content
         //instead, display the text stored locally for the first note created after launch
         if indexPath == IndexPath(row: 0, section: 0) && EditingData.firstNote {
             cell.textLabel.text = EditingData.currentNote.content
             EditingData.firstNote = false
         }
-        
+
         return cell
     }
     

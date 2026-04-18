@@ -49,6 +49,11 @@ class SavedNoteCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        // Corner radius stays the same for every note, so set once here
+        // instead of re-setting on every `cellForItemAt`. Clipping on
+        // contentView lets subviews stay square without extra masks.
+        contentView.layer.cornerRadius = 5
+        contentView.clipsToBounds = true
         addViews()
     }
     
