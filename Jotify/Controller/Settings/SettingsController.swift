@@ -18,8 +18,12 @@ class SettingsController: UITableViewController {
     var noteCollection: NoteCollection?
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         enableAutomaticStatusBarStyle()
         configureNavigationBar(bgColor: ColorManager.bgColor)
+        // Pick up Pure Dark Mode changes when the user pops back from
+        // CustomizationSettingsController.
+        view.backgroundColor = ColorManager.bgColor
     }
     
     override func viewDidLoad() {

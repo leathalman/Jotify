@@ -252,8 +252,10 @@ class CustomizationSettingsController: SettingsController {
         
         view.backgroundColor = ColorManager.bgColor
         configureNavigationBar(bgColor: ColorManager.bgColor)
-        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatePureDarkMode"), object: nil)
+        // Ancestor VCs (MasterSettingsController, NoteCollectionController)
+        // refresh their background in `viewWillAppear`, so no broadcast is
+        // needed — the user navigates back through them, and each picks up
+        // the new `ColorManager.bgColor` naturally.
     }
     
     @objc func useHapticsSwitchPressed(sender: UISwitch) {

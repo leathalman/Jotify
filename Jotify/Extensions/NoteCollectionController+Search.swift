@@ -21,11 +21,13 @@ extension NoteCollectionController: UISearchBarDelegate {
         searchController.isActive = false
         searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
-        // Pin the search bar to the stacked position (below the title). iOS 26
-        // otherwise places the bar near the bottom of the screen for no-tab-bar
-        // apps, where the keyboard hides it.
+        // Inline placement keeps the search bar as a pill next to the title
+        // instead of a separate stacked row. The nav bar's height stays
+        // constant across push/pop, so UIKit doesn't have to synchronously
+        // collapse a row when transitioning out (gear → settings, note →
+        // detail) — which was the visible lag before the push animation.
         if #available(iOS 16.0, *) {
-            navigationItem.preferredSearchBarPlacement = .stacked
+            navigationItem.preferredSearchBarPlacement = .inline
         }
     }
 

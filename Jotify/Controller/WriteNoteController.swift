@@ -6,33 +6,54 @@
 //
 
 import UIKit
+import Combine
 
 class WriteNoteController: ToolbarViewController, UITextViewDelegate {
-    
+
     //generate random theme
     var theme = ColorManager.themes.randomElement()
-    
-    //used within timer logic to determine and save current note dynamically
+
     var hasCreatedDocument = false
-    var timer: Timer?
     var documentID: String?
-    
+
     //color assigned to note from gradient
     var noteColor: UIColor = UIColor.black
-    
+
+    private let textChanges = PassthroughSubject<String, Never>()
+    private var autoSaveCancellable: AnyCancellable?
+
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         //change status bar style to white
         setStatusBarStyle(style: .lightContent)
-        
+
         //show the most recent placeholder
         field.text = UserDefaults.standard.string(forKey: "placeholder")
     }
-    
+
     //life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        resetAutoSave()
+    }
+
+    /// (Re)install the 1-second idle auto-save pipeline. Called in
+    /// `viewDidLoad` and again inside `handleSend` — reassigning
+    /// `autoSaveCancellable` cancels the previous subscription, dropping
+    /// any pending debounced value so a late save can't write old text to
+    /// the fresh note that replaces the just-sent one.
+    private func resetAutoSave() {
+        autoSaveCancellable = textChanges
+            .debounce(for: .seconds(1), scheduler: RunLoop.main)
+            .sink { [weak self] content in
+                self?.saveIfReady(content: content)
+            }
+    }
+
+    private func saveIfReady(content: String) {
+        guard !content.isEmpty, field.textColor == .white else { return }
+        DataManager.updateNoteContent(content: content, uid: documentID ?? "") { _ in }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -71,8 +92,10 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
                 colorOverride = ""
             }
             
-            //stop timer so notes doesn't update outside of this view (WriteNoteController)
-            timer?.invalidate()
+            //reset the idle auto-save pipeline so any debounced value
+            //pending from the just-sent note doesn't fire against the new
+            //(blank) note we're about to create.
+            resetAutoSave()
             //reset hasCreatedDocument so view will be prepared to create another note
             hasCreatedDocument = false
             
@@ -114,21 +137,6 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
         return false
     }
     
-    //timer functions for "automatically" saving once a user stops typing
-    func resetTimer() {
-        timer?.invalidate()
-        let nextTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(handleIdleEvent), userInfo: nil, repeats: false)
-        timer = nextTimer
-    }
-    
-    @objc func handleIdleEvent() {
-        if !field.text.isEmpty && field.textColor == .white {
-            DataManager.updateNoteContent(content: field.text, uid: documentID ?? "") { (success) in
-                //handle success here
-            }
-        }
-    }
-    
     //remove the placeholder when user begins to edit the TextView
     func textViewDidBeginEditing(_ textView: UITextView) {
         checkForBulletList()
@@ -164,7 +172,7 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
             hasCreatedDocument = true
         } else if !field.text.isEmpty && field.textColor == .white {
             updateEditingData()
-            resetTimer()
+            textChanges.send(field.text)
         }
         
         //re-enable reminder button now that user is typing
@@ -183,16 +191,19 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     
     //setup constraints for multiline textfield
     func setupConstraints() {
+        let safeArea = view.safeAreaLayoutGuide
+        // Same pattern as EditingController: pin field.bottom to the keyboard
+        // accessory's top so the text view auto-resizes with the keyboard.
         if UIDevice.current.userInterfaceIdiom == .pad {
             field.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            field.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-            field.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+            field.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
             field.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
+            field.bottomAnchor.constraint(equalTo: keyboardAccessory.topAnchor).isActive = true
         } else if UIDevice.current.userInterfaceIdiom == .phone {
-            field.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+            field.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
             field.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             field.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-            field.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+            field.bottomAnchor.constraint(equalTo: keyboardAccessory.topAnchor).isActive = true
         }
     }
     
@@ -213,6 +224,6 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         //make sure gradient view resizes properly
-        view.viewWithTag(007)?.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
+        view.gradientAnimator?.frame = CGRect(origin: .zero, size: size)
     }
 }

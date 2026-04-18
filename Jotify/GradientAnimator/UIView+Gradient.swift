@@ -8,17 +8,20 @@
 import UIKit
 
 extension UIView {
+    /// Returns the first `GradientAnimator` subview, if any. Replaces the
+    /// previous `viewWithTag(007)` lookup — type-based, no magic number.
+    var gradientAnimator: GradientAnimator? {
+        subviews.compactMap { $0 as? GradientAnimator }.first
+    }
+
     func setGradient(theme: GradientThemes) {
-        self.removeGradient()
+        removeGradient()
         let gradientView = GradientAnimator(frame: self.frame, theme: theme, _startPoint: GradientPoints.topRight, _endPoint: GradientPoints.bottomLeft, _animationDuration: 3.0)
-        gradientView.tag = 007
-        self.insertSubview(gradientView, at: 0)
+        insertSubview(gradientView, at: 0)
         gradientView.startAnimate()
     }
-    
+
     func removeGradient() {
-        if let gradView : GradientAnimator = self.subviews.filter({$0.tag == 007}).first as? GradientAnimator{
-            gradView.removeFromSuperview()
-        }
+        gradientAnimator?.removeFromSuperview()
     }
 }
