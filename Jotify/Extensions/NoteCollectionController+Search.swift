@@ -30,47 +30,19 @@ extension NoteCollectionController: UISearchBarDelegate {
     }
 
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        // Unified search — match either the note body or its displayed date.
         let query = searchText.lowercased()
         let errorNote: [FBNote] = [FBNote(content: "", timestamp: 0, id: "", color: "blue")]
 
         filteredNotes = (noteCollection?.FBNotes.filter { note in
-            let matchesContent = note.content.lowercased().contains(query)
-            let matchesDate = note.timestamp.getDate().lowercased().contains(query)
-            switch searchScope {
-            case .all: return matchesContent || matchesDate
-            case .content: return matchesContent
-            case .date: return matchesDate
-            }
+            note.content.lowercased().contains(query) ||
+            note.timestamp.getDate().lowercased().contains(query)
         }) ?? errorNote
 
         collectionView.reloadData()
     }
 
-    // MARK: - Filter menu (iOS 26 UIMenu pattern)
 
-    func makeFilterMenu() -> UIMenu {
-        let actions = SearchScope.allCases.map { scope in
-            UIAction(
-                title: scope.title,
-                state: searchScope == scope ? .on : .off
-            ) { [weak self] _ in
-                self?.searchScope = scope
-            }
-        }
-        return UIMenu(title: "Search in", options: .singleSelection, children: actions)
-    }
-
-    func updateFilterMenu() {
-        // Rebuild the menu so the checkmark (`.on` state) reflects the new
-        // selection, and swap the icon to its filled variant when the filter
-        // is narrower than "All".
-        filterBarButton?.menu = makeFilterMenu()
-        let icon = searchScope == .all
-            ? "line.3.horizontal.decrease.circle"
-            : "line.3.horizontal.decrease.circle.fill"
-        filterBarButton?.image = UIImage(systemName: icon)
-    }
-    
     //true if the search bar is active and has search parameters (not empty)
     var isFiltering: Bool {
         return searchController.isActive && !isSearchBarEmpty

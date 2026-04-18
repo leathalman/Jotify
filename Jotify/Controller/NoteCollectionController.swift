@@ -30,28 +30,7 @@ class NoteCollectionController: UICollectionViewController {
     //global instance of searchController for NoteCollectionController
     let searchController = UISearchController(searchResultsController: nil)
 
-    enum SearchScope: CaseIterable {
-        case all, content, date
-        var title: String {
-            switch self {
-            case .all: return "All"
-            case .content: return "Content"
-            case .date: return "Date"
-            }
-        }
-    }
 
-    var searchScope: SearchScope = .all {
-        didSet {
-            updateFilterMenu()
-            if searchController.isActive {
-                filterContentForSearchText(searchController.searchBar.text ?? "")
-            }
-        }
-    }
-
-    var filterBarButton: UIBarButtonItem?
-    
     //layouts for collectionView
     let iOSLayout = VerticalBlueprintLayout(
         itemsPerRow: 2.0,
@@ -114,12 +93,7 @@ class NoteCollectionController: UICollectionViewController {
         navigationItem.setHidesBackButton(true, animated: true)
         
         let rightItem = UIBarButtonItem(image: UIImage(systemName: "doc.badge.plus"), style: .plain, target: self, action: #selector(handleRightNavButton))
-        let filterItem = UIBarButtonItem(
-            image: UIImage(systemName: "line.3.horizontal.decrease.circle"),
-            menu: makeFilterMenu()
-        )
-        filterBarButton = filterItem
-        navigationItem.rightBarButtonItems = [rightItem, filterItem]
+        navigationItem.rightBarButtonItem = rightItem
         
         collectionView.backgroundColor = ColorManager.bgColor
         collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
