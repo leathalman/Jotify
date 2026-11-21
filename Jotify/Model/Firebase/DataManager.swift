@@ -18,8 +18,7 @@ class DataManager {
             "deleteOldNotes": false,
             "useHaptics": true,
             "useBiometrics": false,
-            "placeholder": "Tap to start typing or swipe left to right for saved notes...",
-            "hasMigrated": false,
+            "placeholder": "Start typing, or swipe right for your notes…",
             "defaultView": 0,
             "referrals": 0,
             "referralLink": "",
@@ -50,9 +49,8 @@ class DataManager {
                     deleteOldNotes: snapshot?.get("deleteOldNotes") as? Bool ?? false,
                     useHaptics: snapshot?.get("useHaptics") as? Bool ?? true,
                     useBiometrics: snapshot?.get("useBiometrics") as? Bool ?? false,
-                    placeholder: snapshot?.get("placeholder") as? String ?? "Tap to start typing or swipe left to right for saved notes...",
+                    placeholder: migratedPlaceholder(snapshot?.get("placeholder") as? String),
                     defaultView: snapshot?.get("defaultView") as? Int ?? 0, usePureDarkMode: snapshot?.get("usePureDarkMode") as? Bool ?? false,
-                    hasMigrated: snapshot?.get("hasMigrated") as? Bool ?? false,
                     referrals: snapshot?.get("referrals") as? Int ?? 0,
                     referralLink: snapshot?.get("referralLink") as? String ?? "",
                     hasPremium: snapshot?.get("hasPremium") as? Bool ?? false)
@@ -61,6 +59,15 @@ class DataManager {
         }
     }
     
+    /// The old default prompt pointed the wrong way and read awkwardly;
+    /// swap it for the new default, but keep anything the user wrote.
+    private static func migratedPlaceholder(_ stored: String?) -> String {
+        let newDefault = "Start typing, or swipe right for your notes…"
+        guard let stored, !stored.isEmpty,
+              stored != "Tap to start typing or swipe left to right for saved notes..." else { return newDefault }
+        return stored
+    }
+
     //update the given setting with a value
     static func updateUserSettings(setting: String, value: Any, completionHandler: @escaping (Bool?) -> Void) {
         if AuthManager().uid.isEmpty { completionHandler(false); return }

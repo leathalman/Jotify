@@ -49,17 +49,19 @@ class PrivacyOverlayController: UIViewController {
     }
     
     func setupView() {
-        view.backgroundColor = UIColor(hex: "DBDCDD")
-        
-        jotifyIconView = UIImageView(image: UIImage(named: "icon"))
+        //same look as the launch screen, so locking/unlocking feels like one surface
+        view.backgroundColor = UIColor(named: "LaunchBackground")
+
+        jotifyIconView = UIImageView(image: UIImage(named: "BrandIcon"))
+        jotifyIconView.contentMode = .scaleAspectFit
         jotifyIconView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         view.addSubview(jotifyIconView)
-        
+
         jotifyIconView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        jotifyIconView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -175).isActive = true
-        jotifyIconView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        jotifyIconView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        jotifyIconView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        jotifyIconView.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        jotifyIconView.heightAnchor.constraint(equalToConstant: 120).isActive = true
     }
     
     func authenticate() {
@@ -86,7 +88,7 @@ class PrivacyOverlayController: UIViewController {
     //add buttons to view when user authenication fails the first time
     func addOptionalButtons() {
         var unlockConfig = UIButton.Configuration.filled()
-        unlockConfig.baseBackgroundColor = .jotifyBlue
+        unlockConfig.baseBackgroundColor = .brandCoral
         unlockConfig.baseForegroundColor = .white
         unlockConfig.cornerStyle = .large
         unlockConfig.buttonSize = .large
@@ -97,7 +99,7 @@ class PrivacyOverlayController: UIViewController {
         unlockButton.alpha = 0
 
         var logoutConfig = UIButton.Configuration.plain()
-        logoutConfig.baseForegroundColor = .jotifyBlue
+        logoutConfig.baseForegroundColor = .brandCoral
         logoutConfig.title = "Log Out"
         let logoutLabel = UIButton(configuration: logoutConfig)
         logoutLabel.addTarget(self, action: #selector(logout), for: .touchUpInside)

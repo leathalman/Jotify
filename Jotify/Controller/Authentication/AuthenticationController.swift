@@ -15,7 +15,6 @@ class AuthenticationController: UIViewController {
 
     let signUp = UIHostingController(rootView: SignUpView())
     let logIn = UIHostingController(rootView: LogInView())
-    let noteCollectionController = UINavigationController(rootViewController: NoteCollectionController(collectionViewLayout: UICollectionViewFlowLayout()))
     
     func userDidSubmitSignUp(email: String, password: String) {
         AuthManager.createUser(email: email, password: password) { (success, message) in
@@ -24,13 +23,11 @@ class AuthenticationController: UIViewController {
                 alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 self.rootViewController.present(alertController, animated: true, completion: nil)
             } else {
-                AnalyticsManager.logEvent(named: "sign_up", description: "sign_up")
                 DataManager.createUserSettings { (success) in }
                 //check if there was a referral
                 if let id = UserDefaults.standard.string(forKey: "referralId") {
                     //there was a referral, id != nil
                     ReferralManager().grantReferralCredit(referrerId: id)
-                    AnalyticsManager.logEvent(named: "referral_conversion", description: "referral_conversion")
                 }
                 //create referral link and upload it to settings doc in Firestore
                 ReferralManager().createReferralLink()
@@ -46,7 +43,6 @@ class AuthenticationController: UIViewController {
                 alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 self.rootViewController.present(alertController, animated: true, completion: nil)
             } else {
-                AnalyticsManager.logEvent(named: "log_in", description: "log_in")
                 User.updateSettings()
                 //change rootViewController to PageViewController w/ animation
                 self.setRootViewController(duration: 0.2, vc: PageBoyController())
@@ -69,7 +65,6 @@ class AuthenticationController: UIViewController {
                     print("recovery email sent")
                     let alertController = UIAlertController(title: nil, message: "Password recovery email successfully sent to \(alertController.textFields?.first?.text ?? "")", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    AnalyticsManager.logEvent(named: "password_reset", description: "password_reset")
                     self.rootViewController.present(alertController, animated: true, completion: nil)
                 } else {
                     print("recovery email was unable to be sent")

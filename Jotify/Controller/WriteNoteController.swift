@@ -40,7 +40,7 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
         Signposts.measure("WriteNote.setupView") { setupView() }
     }
     
-    // Save in viewDidDisappear, not viewWillDisappear: Pageboy calls
+    // Save in viewDidDisappear, not viewWillDisappear: the pager calls
     // viewWillDisappear as soon as an interactive swipe *starts*, so a swipe
     // the user cancels used to send the draft, clear the field, swap the
     // gradient and drop the keyboard. viewDidDisappear only fires once the
@@ -103,7 +103,6 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
             
             field.text = UserDefaults.standard.string(forKey: "placeholder")
             
-            AnalyticsManager.logEvent(named: "note_created", description: "note_created")
         }
         field.resignFirstResponder()
     }
@@ -168,8 +167,6 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
         if !hasCreatedDocument {
             documentID = DataManager.createNote(content: field.text, timestamp: Date.timeIntervalSinceReferenceDate, color: noteColor.getString())
             EditingData.currentNote = FBNote(content: field.text, timestamp: Date.timeIntervalSinceReferenceDate, id: documentID ?? "", color: noteColor.getString(), reminder: nil, reminderTimestamp: nil)
-            //used to dictate whether NoteCollection should use client or server version of most recent note
-            EditingData.firstNote = true
             hasCreatedDocument = true
         } else if !field.text.isEmpty && field.textColor == .white {
             updateEditingData()

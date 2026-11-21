@@ -98,5 +98,7 @@ extension UIColor {
     //MISC Colors
     //not actually Jotify Gray anymore, modified to better suit background use
     static let jotifyGray = UIColor(red: 242 / 255, green: 241 / 255, blue: 246 / 255, alpha: 1)
-    static let jotifyBlue = UIColor(red: 70 / 255, green: 108 / 255, blue: 139 / 255, alpha: 1)
+    //brand: coral accent (matches AccentColor) and the app icon's navy
+    static let brandCoral = UIColor(red: 255 / 255, green: 90 / 255, blue: 95 / 255, alpha: 1)
+    static let brandNavy = UIColor(red: 36 / 255, green: 64 / 255, blue: 110 / 255, alpha: 1)
 }

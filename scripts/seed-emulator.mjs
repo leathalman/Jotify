@@ -84,16 +84,14 @@ async function main() {
     { "Content-Type": "application/json" },
   );
 
-  // Mirrors DataManager.createUserSettings, with hasMigrated = true so the
-  // app doesn't try to migrate legacy Core Data notes on first sign-in.
+  // Mirrors DataManager.createUserSettings.
   await req("PATCH", `${DOCS}/users/${uid}`, {
     fields: {
       multilineInputEnabled: { booleanValue: false },
       deleteOldNotes: { booleanValue: false },
       useHaptics: { booleanValue: true },
       useBiometrics: { booleanValue: false },
-      placeholder: { stringValue: "Tap to start typing or swipe left to right for saved notes..." },
-      hasMigrated: { booleanValue: true },
+      placeholder: { stringValue: "Start typing, or swipe right for your notes…" },
       defaultView: { integerValue: "0" },
       referrals: { integerValue: "0" },
       referralLink: { stringValue: "" },

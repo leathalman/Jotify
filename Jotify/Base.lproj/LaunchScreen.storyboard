@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Lg0-Lo-g01">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BrandIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Lg0-Lo-g01">
                                 <rect key="frame" x="127.5" y="273.5" width="120" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="Lg0-Wd-001"/>
@@ -37,9 +37,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LaunchLogo" width="120" height="120"/>
+        <image name="BrandIcon" width="120" height="120"/>
         <namedColor name="LaunchBackground">
-            <color red="0.85882352941176465" green="0.86274509803921573" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94509803921568625" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

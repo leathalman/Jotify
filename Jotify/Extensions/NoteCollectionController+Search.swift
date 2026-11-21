@@ -7,61 +7,42 @@
 
 import UIKit
 
-extension NoteCollectionController: UISearchBarDelegate {
+extension NoteCollectionController: UISearchResultsUpdating, UISearchControllerDelegate {
 
-    func setupSearchBar() {
-        // Plain UISearchBar instead of UISearchController. UISearchController
-        // paid a noticeable first-tap cost on cold launch while UIKit built
-        // out its private results/dimming/animator hierarchy. A bare search
-        // bar has none of that — `becomeFirstResponder` is cheap from cold.
-        searchBar.placeholder = "Search Notes"
-        searchBar.searchBarStyle = .minimal
-        searchBar.searchTextField.clearButtonMode = .never
-        searchBar.autocapitalizationType = .none
-        searchBar.autocorrectionType = .no
-        searchBar.returnKeyType = .search
-        searchBar.delegate = self
+    func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.delegate = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Notes"
+        searchController.searchBar.autocapitalizationType = .none
+        searchController.searchBar.autocorrectionType = .no
+        definesPresentationContext = true
     }
 
-    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        // Unified search — match either the note body or its displayed date.
+    /// Notes whose text or displayed date contains the query.
+    func matches(for searchText: String) -> [FBNote] {
         let query = searchText.lowercased()
-        let errorNote: [FBNote] = [FBNote(content: "", timestamp: 0, id: "", color: "blue")]
-
-        filteredNotes = (noteCollection?.FBNotes.filter { note in
+        return (noteCollection?.FBNotes ?? []).filter { note in
             note.content.lowercased().contains(query) ||
-            note.timestamp.getDate().lowercased().contains(query)
-        }) ?? errorNote
+            note.timestamp.getDate().lowercased().contains(query) ||
+            SavedNoteCell.shortDate(note.timestamp).lowercased().contains(query)
+        }
+    }
 
-        collectionView.reloadData()
+    var searchText: String {
+        searchController.searchBar.text ?? ""
     }
 
     var isFiltering: Bool {
-        return !isSearchBarEmpty
+        !searchText.isEmpty
     }
 
-    var isSearchBarEmpty: Bool {
-        return searchBar.text?.isEmpty ?? true
+    func updateSearchResults(for searchController: UISearchController) {
+        filteredNotes = matches(for: searchText)
+        applySnapshot(animated: false)
     }
 
-    // MARK: UISearchBarDelegate
-
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filterContentForSearchText(searchText)
-    }
-
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(true, animated: true)
-    }
-
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = ""
-        searchBar.setShowsCancelButton(false, animated: true)
-        searchBar.resignFirstResponder()
-        filterContentForSearchText("")
-    }
-
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
+    func willPresentSearchController(_ searchController: UISearchController) {
+        setSelecting(false)
     }
 }

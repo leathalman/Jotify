@@ -50,10 +50,7 @@ extension UIViewController {
     
     //set a new rootViewController with animation
     func setRootViewController(duration: Double, vc: UIViewController) {
-        guard let window = UIApplication.shared.firstKeyWindow else { return }
-        window.rootViewController = vc
-        window.makeKeyAndVisible()
-        UIView.transition(with: window, duration: duration, options: .transitionCrossDissolve, animations: nil, completion: nil)
+        UIApplication.shared.setRootViewController(vc, duration: duration)
     }
 
     //change StatusBarStyle in parent, PageViewController
@@ -100,5 +97,22 @@ extension UIApplication {
     /// Decrements the app icon badge without letting it go negative.
     func decrementBadge() {
         applicationIconBadgeNumber = max(0, applicationIconBadgeNumber - 1)
+    }
+
+    /// Swaps the window's root view controller with a cross-fade. Anything
+    /// presented on the old root (a settings sheet, say) is dismissed first
+    /// so it doesn't outlive the screen it was shown from.
+    func setRootViewController(_ vc: UIViewController, duration: Double = 0.4) {
+        guard let window = firstKeyWindow else { return }
+        let swap = {
+            window.rootViewController = vc
+            window.makeKeyAndVisible()
+            UIView.transition(with: window, duration: duration, options: .transitionCrossDissolve, animations: nil, completion: nil)
+        }
+        if let presented = window.rootViewController?.presentedViewController {
+            presented.dismiss(animated: true, completion: swap)
+        } else {
+            swap()
+        }
     }
 }

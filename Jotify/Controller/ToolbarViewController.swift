@@ -6,9 +6,7 @@
 //
 
 import UIKit
-import SPIndicator
-import SPPermissions
-import SPPermissionsNotification
+import UserNotifications
 
 protocol ColorGalleryDelegate: AnyObject {
     func updateColorOverride(color: String)
@@ -17,8 +15,6 @@ protocol ColorGalleryDelegate: AnyObject {
 //handles data sharing between ToolbarViewController and ReminderController
 struct EditingData {
     static var currentNote = FBNote(content: "", timestamp: 0, id: "", color: "")
-    //used to set the text of the most recent note on first launch from client instead of server
-    static var firstNote = false
 }
 
 class ToolbarViewController: UIViewController, ColorGalleryDelegate {
@@ -37,7 +33,7 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
         f.textColor = .white
         f.tintColor = .white
         f.isEditable = true
-        f.text = "Tap to start typing or swipe left to right for saved notes..."
+        f.text = "Start typing, or swipe right for your notes…"
         f.font = UIFont.boldSystemFont(ofSize: 32)
         f.textContainerInset = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
         f.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +45,7 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     var isBulletedList: Bool = false
     var isMultiline: Bool = false
     
-    let placeholder: String = "Start typing or swipe right for saved notes..."
+    let placeholder: String = "Start typing, or swipe right for your notes…"
     
     //observe a color chosen through ColorGallery
     var colorOverride = ""
@@ -101,9 +97,9 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     
     //toolbar UI setup
     func setupToolbar() {
-        let multilineImage = isMultiline
-            ? UIImage(systemName: "line.horizontal.2.decrease.circle.fill")
-            : UIImage(systemName: "line.horizontal.2.decrease.circle")
+        // Multiline input: Return adds a line instead of saving. The icon is
+        // dimmed while it's off, so the button shows its own state.
+        let multilineImage = UIImage(systemName: "return")
 
         keyboardAccessory.setItems([
             .init(identifier: Self.multilineItemID, image: multilineImage,
@@ -112,16 +108,18 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
                   image: UIImage(systemName: "list.bullet"),
                   action: { [weak self] in self?.addBullet() }),
             .init(identifier: Self.timerItemID,
-                  image: UIImage(systemName: "timer"),
+                  image: UIImage(systemName: "bell"),
                   action: { [weak self] in self?.showReminderController() }),
             .init(identifier: Self.colorPickerItemID,
-                  image: UIImage(systemName: "eyedropper"),
+                  image: UIImage(systemName: "paintpalette"),
                   action: { [weak self] in self?.showColorGalleryController() }),
             .init(identifier: Self.saveItemID,
-                  image: UIImage(systemName: "arrow.down.to.line.circle"),
+                  image: UIImage(systemName: "checkmark"),
                   action: { [weak self] in self?.keyboardSaveNote() })
         ])
 
+        keyboardAccessory.setTintColor(Self.multilineItemID,
+                                       isMultiline ? nil : accessoryTintColor.withAlphaComponent(0.4))
         keyboardAccessory.setEnabled(Self.timerItemID, reminderButtonEnabled)
         keyboardAccessory.setTintColor(Self.timerItemID,
                                        reminderButtonEnabled ? nil : .gray)
@@ -130,28 +128,18 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     
     //toolbar action cofiguration
     @objc func toggleMultilineInput() {
-        if isMultiline {
-            isMultiline = false
-            setupToolbar()
-            let indicatorView = SPIndicatorView(title: "Multiline Input Disabled", preset: .error)
-            indicatorView.present(duration: 1)
-            UserDefaults.standard.setValue(false, forKey: "multilineInputEnabled")
-            DataManager.updateUserSettings(setting: "multilineInputEnabled", value: false) { (success) in }
-        } else {
-            isMultiline = true
-            setupToolbar()
-            let indicatorView = SPIndicatorView(title: "Multiline Input Enabled", preset: .done)
-            indicatorView.present(duration: 1)
-            UserDefaults.standard.setValue(true, forKey: "multilineInputEnabled")
-            DataManager.updateUserSettings(setting: "multilineInputEnabled", value: true) { (success) in }
-        }
+        isMultiline.toggle()
+        setupToolbar()
+        playHapticFeedback()
+        UserDefaults.standard.setValue(isMultiline, forKey: "multilineInputEnabled")
+        DataManager.updateUserSettings(setting: "multilineInputEnabled", value: isMultiline) { (success) in }
     }
     
     @objc func addBullet() {
         checkForBulletList()
         if isBulletedList {
-            let indicatorView = SPIndicatorView(title: "Bullet Already Exists", preset: .error)
-            indicatorView.present(duration: 1)
+            //the line already has a bullet: a light "nope" tap is enough
+            UINotificationFeedbackGenerator().notificationOccurred(.warning)
         } else {
             isMultiline = true
             field.addBullet()
@@ -159,24 +147,43 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     }
     
     @objc func showReminderController() {
-        if (User.settings?.hasPremium ?? false) {
-            if SPPermissions.Permission.notification.authorized {
-                let reminder = ReminderController(style: .insetGrouped)
-                present(reminder, animated: true, completion: nil)
-            } else {
-                //if notifications are not setup, do not let user create reminders
-                let controller = SPPermissions.dialog([.notification])
-                controller.dismissCondition = .allPermissionsAuthorized
-                controller.showCloseButton = true
-                controller.allowSwipeDismiss = false
-                controller.footerText = "Notification permission is required for Jotify to deliver your reminders."
-                controller.present(on: self)
-            }
-        } else {
-            let premiumVC = BuyPremiumController()
-            premiumVC.titleText.text = "Reminders are essential."
-            present(premiumVC, animated: true)
+        guard User.settings?.hasPremium ?? false else {
+            present(PaywallView.makeController(reason: .reminders), animated: true)
+            return
         }
+
+        let center = UNUserNotificationCenter.current()
+        center.getNotificationSettings { settings in
+            DispatchQueue.main.async {
+                switch settings.authorizationStatus {
+                case .authorized, .provisional, .ephemeral:
+                    self.present(ReminderView.makeController(), animated: true)
+                case .notDetermined:
+                    center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
+                        guard granted else { return }
+                        DispatchQueue.main.async {
+                            self.present(ReminderView.makeController(), animated: true)
+                        }
+                    }
+                default:
+                    self.showNotificationsDeniedAlert()
+                }
+            }
+        }
+    }
+
+    private func showNotificationsDeniedAlert() {
+        let alert = UIAlertController(title: "Notifications Are Off",
+                                      message: "Turn on notifications for Jotify in Settings to get reminders.",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Not Now", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Open Settings", style: .default) { _ in
+            if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
+                UIApplication.shared.open(url)
+            }
+        })
+        alert.preferredAction = alert.actions.last
+        present(alert, animated: true)
     }
     
     @objc func showColorGalleryController() {
@@ -185,9 +192,7 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
             gallery.delegate = self
             present(gallery, animated: true, completion: nil)
         } else {
-            let premiumVC = BuyPremiumController()
-            premiumVC.titleText.text = "Want to Change Color?"
-            present(premiumVC, animated: true)
+            present(PaywallView.makeController(reason: .colors), animated: true)
         }
     }
     

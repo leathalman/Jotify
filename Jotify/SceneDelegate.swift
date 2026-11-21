@@ -95,7 +95,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
         // snapshot uncovered.)
         showPrivacyOverlayIfNeeded()
 
-        ReminderController.renumberBadgesOfPendingNotifications()
+        ReminderScheduler.renumberBadgesOfPendingNotifications()
 
         // Keep observing the payment queue for the app's whole lifetime (as
         // Apple recommends). This used to call stopObserving() here, but

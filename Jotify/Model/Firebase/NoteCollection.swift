@@ -14,7 +14,7 @@ class NoteCollection {
 
 //model for a firebase note
 //"note" is reserved for deprecated implementation of CloudKit notes
-struct FBNote {
+struct FBNote: Equatable {
     var content: String
     var timestamp: Double
     var id: String

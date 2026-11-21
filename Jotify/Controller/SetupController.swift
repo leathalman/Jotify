@@ -7,7 +7,6 @@
 
 import WidgetKit
 import UIKit
-import SPPermissions
 
 class SetupController {
     
@@ -15,9 +14,9 @@ class SetupController {
     
     //setup URL for widgets
     private func setupWidget() {
-        GroupDataManager.writeData(path: "recentNoteColor", content: "systemBlue")
-        GroupDataManager.writeData(path: "recentNoteContent", content: "This is a placeholder note until you start writing.")
-        GroupDataManager.writeData(path: "recentNoteDate", content: "July 2, 2002")
+        GroupDataManager.writeData(path: "recentNoteColor", content: "")
+        GroupDataManager.writeData(path: "recentNoteContent", content: "")
+        GroupDataManager.writeData(path: "recentNoteDate", content: "")
         GroupDataManager.writeData(path: "recentNoteID", content: "no id")
         print("Setting up widgets...")
         WidgetCenter.shared.reloadAllTimelines()
@@ -38,12 +37,11 @@ class SetupController {
         UserDefaults.standard.synchronize()
         
         UserDefaults.standard.register(defaults: [
-            "hasMigrated": false,
             "multilineInputEnabled": false,
             "useHaptics": true,
             "deleteOldNotes": false,
             "useBiometrics": false,
-            "placeholder": "Tap to start typing or swipe left to right for saved notes...",
+            "placeholder": "Start typing, or swipe right for your notes…",
             "defaultView": 0,
             "referrals": 0,
             "referralLink": "",

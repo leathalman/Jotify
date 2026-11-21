@@ -230,26 +230,35 @@ private struct KeyboardGlassBar: View {
     let buttons: [Button]
 
     var body: some View {
-        HStack(spacing: 16) {
-            ForEach(buttons) { button in
-                if !button.isHidden {
-                    SwiftUI.Button {
-                        button.action()
-                    } label: {
-                        if let image = button.image {
-                            Image(uiImage: image)
-                                .renderingMode(.template)
+        // One container so every pill is rendered as the same glass, and a
+        // fixed glyph box so symbol shapes can't change the button size.
+        GlassEffectContainer(spacing: 16) {
+            HStack(spacing: 16) {
+                ForEach(buttons) { button in
+                    if !button.isHidden {
+                        SwiftUI.Button {
+                            button.action()
+                        } label: {
+                            Group {
+                                if let image = button.image {
+                                    Image(uiImage: image)
+                                        .renderingMode(.template)
+                                        .resizable()
+                                        .scaledToFit()
+                                }
+                            }
+                            .frame(width: 22, height: 22)
+                            .frame(width: 30, height: 30)
                         }
+                        .disabled(button.isDisabled)
+                        .tint(button.tint ?? .primary)
                     }
-                    .disabled(button.isDisabled)
-                    .tint(button.tint ?? .primary)
                 }
             }
         }
         .buttonStyle(.glass)
         .buttonBorderShape(.circle)
         .controlSize(.large)
-        .font(.title3)
         .frame(maxWidth: .infinity)
         .padding(.vertical, 10)
     }

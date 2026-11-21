@@ -1,79 +1,46 @@
 //
 //  NoteCollectionController.swift
-//  Zurich
+//  Jotify
 //
 //  Created by Harrison Leath on 1/12/21.
 //
 
 import UIKit
-import Blueprints
-import SwiftMessages
-import WidgetKit
-import os
+import SwiftUI
+import UserNotifications
 
-class NoteCollectionController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-    // Was a `UICollectionViewController`, which made `self.view` the
-    // collection view and blocked pinning a sibling search bar above the
-    // keyboard. Plain `UIViewController` with a child collection view lets
-    // the search bar live as a real sibling that auto-layout can lift.
+/// The Notes grid: a compositional layout fed by a diffable data source,
+/// native context menus, and the collection view's own multi-select.
+class NoteCollectionController: UIViewController, UICollectionViewDelegate {
     var collectionView: UICollectionView!
-    let searchBar = UISearchBar()
-    private var searchBarBottomConstraint: NSLayoutConstraint!
+    let searchController = UISearchController(searchResultsController: nil)
+    private var dataSource: UICollectionViewDiffableDataSource<Int, String>!
 
-    //update collection view when model changes
+    /// Latest version of every note, keyed by Firestore document ID.
+    private var notesByID: [String: FBNote] = [:]
+
+    /// Update the grid when the model changes.
     var noteCollection: NoteCollection? {
-        didSet {
-            if isViewLoaded {
-                collectionView.reloadData()
-            }
-            // Run the "delete notes older than 30 days" pass once, when the
-            // first snapshot arrives. It used to run in viewDidLoad, before
-            // any notes had loaded, where it force-unwrapped a nil collection.
-            if !hasCleanedUpOldNotes, noteCollection != nil {
-                hasCleanedUpOldNotes = true
-                cleanupOldNotes()
-            }
-        }
+        didSet { notesDidChange() }
     }
     private var hasCleanedUpOldNotes = false
 
-    //used to hold notes filtered by the search bar
+    /// Notes matching the search bar text.
     var filteredNotes: [FBNote] = []
 
-    //used to track the cells selected while multi-selection is enabled
-    var selectedCells: [IndexPath] = []
-
-    init(collectionViewLayout: UICollectionViewLayout) {
-        // The layout argument is ignored — `setupViewElements` swaps in the
-        // device-specific Blueprints layout — but the signature is kept so
-        // existing call sites don't need to change.
-        super.init(nibName: nil, bundle: nil)
+    /// What the grid shows right now: search results or every note.
+    var displayedNotes: [FBNote] {
+        isFiltering ? filteredNotes : (noteCollection?.FBNotes ?? [])
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    // MARK: Life cycle
 
-    //layouts for collectionView
-    let iOSLayout = VerticalBlueprintLayout(
-        itemsPerRow: 2.0,
-        minimumInteritemSpacing: 10,
-        minimumLineSpacing: 15,
-        sectionInset: EdgeInsets(top: 10, left: 10, bottom: 10, right: 10),
-        stickyHeaders: false,
-        stickyFooters: false)
-    
-    let iPadOSLayout = VerticalBlueprintLayout(
-        itemsPerRow: 4.0,
-        minimumInteritemSpacing: 10,
-        minimumLineSpacing: 15,
-        sectionInset: EdgeInsets(top: 10, left: 10, bottom: 10, right: 10),
-        stickyHeaders: false,
-        stickyFooters: false)
-    
-    //life cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // iOS 26: search and compose live in the bottom toolbar.
+        if #available(iOS 26.0, *) {
+            navigationController?.setToolbarHidden(false, animated: animated)
+        }
         enableAutomaticStatusBarStyle()
         resetAppBadgeIfAllRemindersCleared()
     }
@@ -82,477 +49,346 @@ class NoteCollectionController: UIViewController, UICollectionViewDataSource, UI
         let vdlID = Signposts.begin("NoteCollection.viewDidLoad")
         defer { Signposts.end("NoteCollection.viewDidLoad", id: vdlID) }
         super.viewDidLoad()
-        Signposts.measure("NoteCollection.buildViewHierarchy") { buildViewHierarchy() }
-        Signposts.measure("NoteCollection.setupViewElements") { setupViewElements() }
-        Signposts.measure("NoteCollection.setupNavigationBar") { setupNavigationBar() }
-        Signposts.measure("NoteCollection.setupSearchBar") { setupSearchBar() }
+        buildViewHierarchy()
+        configureDataSource()
+        setupSearchController()
+        setupNavigationBar()
+        applySnapshot(animated: false)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(pureDarkModeChanged(notification:)), name: NSNotification.Name(rawValue: "updatePureDarkMode"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(pureDarkModeChanged), name: NSNotification.Name(rawValue: "updatePureDarkMode"), object: nil)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        hideToolbar()
+        setSelecting(false)
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        // Keep the last row visible above the docked search bar. Only rewrite
-        // when the height actually changes — otherwise this triggers an
-        // infinite layout loop.
-        let inset = searchBar.bounds.height
-        if collectionView.contentInset.bottom != inset {
-            collectionView.contentInset.bottom = inset
-            collectionView.verticalScrollIndicatorInsets.bottom = inset
-        }
-    }
+    // MARK: Views
 
     private func buildViewHierarchy() {
         view.backgroundColor = ColorManager.bgColor
 
-        let initialLayout = UIDevice.current.userInterfaceIdiom == .pad ? iPadOSLayout : iOSLayout
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: initialLayout)
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: Self.makeLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.dataSource = self
+        collectionView.backgroundColor = ColorManager.bgColor
+        collectionView.alwaysBounceVertical = true
         collectionView.delegate = self
+        collectionView.allowsSelectionDuringEditing = true
+        collectionView.allowsMultipleSelectionDuringEditing = true
+        collectionView.keyboardDismissMode = .interactive
         view.addSubview(collectionView)
-
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(searchBar)
-
-        searchBarBottomConstraint = searchBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
 
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-
-            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            searchBarBottomConstraint,
         ])
     }
 
-    @objc private func keyboardWillChangeFrame(_ notification: Notification) {
-        guard let info = notification.userInfo,
-              let endFrame = info[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
-              let duration = info[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
-              let curveRaw = info[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt else { return }
+    /// Adaptive grid: as many ~170pt columns as fit (at least two), with
+    /// card height scaled for the user's text size.
+    private static func makeLayout() -> UICollectionViewLayout {
+        UICollectionViewCompositionalLayout { _, environment in
+            let spacing: CGFloat = 12
+            let width = environment.container.effectiveContentSize.width
+            let columns = max(2, Int((width - spacing) / (170 + spacing)))
+            let height = UIFontMetrics(forTextStyle: .body)
+                .scaledValue(for: 132, compatibleWith: environment.traitCollection)
 
-        let localFrame = view.convert(endFrame, from: nil)
-        let overlap = max(0, view.bounds.maxY - localFrame.minY)
-        // `bottomAnchor` is already anchored to the safe area, so subtract the
-        // safe-area inset from the keyboard overlap to avoid double-counting
-        // the home indicator region.
-        searchBarBottomConstraint.constant = -max(0, overlap - view.safeAreaInsets.bottom)
+            let itemWidth = floor((width - spacing * CGFloat(columns + 1)) / CGFloat(columns))
 
-        UIView.animate(withDuration: duration,
-                       delay: 0,
-                       options: UIView.AnimationOptions(rawValue: curveRaw << 16)) {
-            self.view.layoutIfNeeded()
+            let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .absolute(itemWidth),
+                                                                heightDimension: .fractionalHeight(1)))
+            let group = NSCollectionLayoutGroup.horizontal(
+                layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(height)),
+                subitems: [item])
+            group.interItemSpacing = .fixed(spacing)
+
+            let section = NSCollectionLayoutSection(group: group)
+            section.interGroupSpacing = spacing
+            section.contentInsets = .init(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
+            return section
         }
     }
-    
-    //view configuration
-    func setupViewElements() {
-        extendedLayoutIncludesOpaqueBars = true
-        collectionView.alwaysBounceVertical = true
-        
-        CellState.shouldSelectMultiple = false
-        collectionView.allowsMultipleSelection = false
-        
-        //navigation bar item customization
-        let leftItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(handleLeftNavButton))
-        navigationItem.leftBarButtonItem = leftItem
-        navigationItem.setHidesBackButton(true, animated: true)
-        
-        let rightItem = UIBarButtonItem(image: UIImage(systemName: "doc.badge.plus"), style: .plain, target: self, action: #selector(handleRightNavButton))
-        navigationItem.rightBarButtonItem = rightItem
-        
-        collectionView.backgroundColor = ColorManager.bgColor
-        collectionView.register(SavedNoteCell.self, forCellWithReuseIdentifier: "SavedNoteCell")
 
-        // Single long-press recognizer for the whole collection view.
-        // Previously we added one per cell inside `cellForItemAt`, which
-        // meant reused cells accumulated dozens of recognizers and every
-        // touch had to consult all of them — the main cause of scroll lag.
-        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longTouchHandler(sender:)))
-        collectionView.addGestureRecognizer(longPress)
+    private func configureDataSource() {
+        let registration = UICollectionView.CellRegistration<SavedNoteCell, String> { [weak self] cell, _, id in
+            guard let note = self?.notesByID[id] else { return }
+            cell.configure(with: note)
+        }
+        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, id in
+            collectionView.dequeueConfiguredReusableCell(using: registration, for: indexPath, item: id)
+        }
     }
-    
+
     func setupNavigationBar() {
         navigationItem.title = "Notes"
-        // Opaque appearance. The old comment here warned against overriding
-        // it because iOS 26's Liquid Glass material animated nicely around
-        // the embedded search-bar pill — but the search bar no longer lives
-        // in the nav bar, so the glass material is pure cost: it re-samples
-        // the content behind it every frame during scroll, which is what
-        // stutters the overscroll bounce at the top of the collection view.
-        configureNavigationBar(bgColor: ColorManager.bgColor)
-    }
-    
-func resetAppBadgeIfAllRemindersCleared() {
-        var numOfReminders = 0
-        if noteCollection?.FBNotes != nil {
-            let notes = noteCollection!.FBNotes
-            
-            for note in notes {
-                if note.reminderTimestamp ?? 0 > 0 {
-                    //reminder has not been delivered
-                    numOfReminders += 1
-                }
-            }
-            
-            if numOfReminders == 0 {
-                UIApplication.shared.applicationIconBadgeNumber = 0
-            }
-        }
-    }
-    
-    //action handlers
-    @objc func longTouchHandler(sender: UILongPressGestureRecognizer) {
-        // A long press reports .began, then .changed/.ended as the finger
-        // moves and lifts; only open the menu once, at the start.
-        guard sender.state == .began else { return }
+        navigationItem.setHidesBackButton(true, animated: false)
 
-        if searchBar.isFirstResponder || isFiltering || CellState.shouldSelectMultiple {
-            return
+        let settings = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(handleLeftNavButton))
+        settings.accessibilityLabel = "Settings"
+        navigationItem.leftBarButtonItem = settings
+
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+
+        if #available(iOS 26.0, *) {
+            // Search field and compose button share the bottom toolbar, as
+            // in Notes and Mail; the search field expands when tapped.
+            navigationItem.searchBarPlacementAllowsToolbarIntegration = true
+            navigationItem.preferredSearchBarPlacement = .integrated
+        } else {
+            navigationItem.rightBarButtonItem = composeItem
+        }
+        toolbarItems = defaultToolbarItems
+    }
+
+    private lazy var composeItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(handleRightNavButton))
+        item.accessibilityLabel = "New Note"
+        return item
+    }()
+
+    /// Bottom toolbar outside selection mode (iOS 26): search, then compose.
+    private var defaultToolbarItems: [UIBarButtonItem]? {
+        guard #available(iOS 26.0, *) else { return nil }
+        return [navigationItem.searchBarPlacementBarButtonItem, .flexibleSpace(), composeItem]
+    }
+
+    // MARK: Data
+
+    private func notesDidChange() {
+        let notes = noteCollection?.FBNotes ?? []
+        let previous = notesByID
+        notesByID = Dictionary(notes.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
+
+        if isFiltering {
+            filteredNotes = matches(for: searchText)
         }
 
-        // Pressing in the gap between cards hits no item.
-        let location = sender.location(in: collectionView)
-        guard let indexPath = collectionView.indexPathForItem(at: location),
-              let notes = noteCollection?.FBNotes,
-              notes.indices.contains(indexPath.row) else { return }
-        let note = notes[indexPath.row]
-        
-        let menu: NoteOptionMenu = try! SwiftMessages.viewFromNib(named: "NoteOptionMenu")
-        menu.configureBackgroundView(width: 250)
-        
-        //configure title and actions
-        menu.titleLabel?.text = "Options"
-        menu.button1.setTitle("Share Note", for: .normal)
-        menu.button2.setTitle("Delete Note", for: .normal)
-        menu.button3.setTitle("Select Multiple", for: .normal)
-        menu.button4.setTitle("Cancel", for: .normal)
-        
-        menu.titleLabel?.font = .boldSystemFont(ofSize: 24)
-        menu.button1.titleLabel?.font = .boldSystemFont(ofSize: 16)
-        menu.button2.titleLabel?.font = .boldSystemFont(ofSize: 16)
-        menu.button3.titleLabel?.font = .boldSystemFont(ofSize: 16)
-        menu.button4.titleLabel?.font = .boldSystemFont(ofSize: 16)
-        
-        menu.button1.addTarget(self, action: #selector(shareNoteFromMenu(_:)), for: .touchUpInside)
-        menu.button1.params["content"] = note.content
-        menu.button2.addTarget(self, action: #selector(deleteNoteFromMenu(_:)), for: .touchUpInside)
-        menu.button2.params["note"] = note
-        menu.button3.addTarget(self, action: #selector(showToolbar), for: .touchUpInside)
-        menu.button4.addTarget(self, action: #selector(cancelOptionFromMenu), for: .touchUpInside)
-        
-        menu.backgroundView.backgroundColor = ColorManager.bgColor
-        menu.backgroundView.layer.cornerRadius = 10
-        
-        var config = SwiftMessages.defaultConfig
-        config.presentationStyle = .center
-        config.duration = .forever
-        config.interactiveHide = false
-        config.dimMode = .blur(style: .dark, alpha: 1, interactive: true)
-        config.presentationContext  = .window(windowLevel: UIWindow.Level.statusBar)
-        // The menu's window sits above the status bar with a dark blur, so it
-        // takes over the status bar style. Nothing hands it back when the
-        // window goes away, which left white status bar text on the light
-        // Notes list. Light text over the blur, then restore on hide.
-        config.preferredStatusBarStyle = .lightContent
-        config.eventListeners.append { [weak self] event in
-            if case .didHide = event {
-                self?.rootViewController.animateStatusBarAppearanceUpdate()
-            }
+        if isViewLoaded {
+            // Rebind cells whose note changed in place (edited text, new
+            // color, reminder set) without reloading the whole grid.
+            let changed = notes.filter { previous[$0.id] != nil && previous[$0.id] != $0 }.map(\.id)
+            applySnapshot(reconfiguring: changed)
         }
-        SwiftMessages.show(config: config, view: menu)
+
+        // Run the "delete notes older than 30 days" pass once, when the
+        // first snapshot arrives.
+        if !hasCleanedUpOldNotes, noteCollection != nil {
+            hasCleanedUpOldNotes = true
+            cleanupOldNotes()
+        }
     }
-    
+
+    func applySnapshot(reconfiguring changed: [String] = [], animated: Bool = true) {
+        guard let dataSource else { return }
+        var seen = Set<String>()
+        let ids = displayedNotes.map(\.id).filter { seen.insert($0).inserted }
+
+        var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
+        snapshot.appendSections([0])
+        snapshot.appendItems(ids)
+        let present = Set(ids)
+        snapshot.reconfigureItems(changed.filter { present.contains($0) })
+        dataSource.apply(snapshot, animatingDifferences: animated && view.window != nil)
+
+        updateEmptyState()
+        updateToolbar()
+    }
+
+    /// Loading, empty and no-results states, as the collection view's
+    /// background so the docked search bar stays usable on top of them.
+    private func updateEmptyState() {
+        var config: UIContentUnavailableConfiguration?
+        if noteCollection == nil {
+            config = .loading()
+        } else if isFiltering, filteredNotes.isEmpty {
+            config = .search()
+        } else if !isFiltering, noteCollection?.FBNotes.isEmpty ?? true {
+            var empty = UIContentUnavailableConfiguration.empty()
+            empty.image = UIImage(systemName: "square.and.pencil")
+            empty.imageProperties.tintColor = .brandCoral
+            empty.text = "No Notes Yet"
+            config = empty
+        }
+
+        if let config {
+            if let existing = collectionView.backgroundView as? UIContentUnavailableView {
+                existing.configuration = config
+            } else {
+                collectionView.backgroundView = UIContentUnavailableView(configuration: config)
+            }
+        } else {
+            collectionView.backgroundView = nil
+        }
+    }
+
+    func note(at indexPath: IndexPath) -> FBNote? {
+        dataSource.itemIdentifier(for: indexPath).flatMap { notesByID[$0] }
+    }
+
+    // MARK: Actions
+
     @objc func handleLeftNavButton() {
-        //initialize settings controller and pass note collection for theme changing
-        let vc = MasterSettingsController(style: .insetGrouped)
-        vc.noteCollection = noteCollection
-        
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            vc.modalPresentationStyle = .formSheet
-            navigationController?.present(vc, animated: true, completion: nil)
-        } else if UIDevice.current.userInterfaceIdiom == .phone {
-            navigationController?.pushViewController(vc, animated: true)
-        }
-        
-        self.playHapticFeedback()
+        playHapticFeedback()
+        present(SettingsView.makeController(noteCount: noteCollection?.FBNotes.count ?? 0), animated: true)
     }
-    
+
     @objc func handleRightNavButton() {
-        let rootVC = self.rootViewController as! PageBoyController
-        rootVC.scrollToWriteNoteController()
-        self.playHapticFeedback()
+        (rootViewController as? PageBoyController)?.scrollToWriteNoteController()
+        playHapticFeedback()
     }
 
-    //NoteOptionMenu Actions
-    @objc func deleteNoteFromMenu(_ sender: PassableUIButton) {
-        let note = sender.params["note"] as! FBNote
-        let id = note.id
-        
-        DataManager.deleteNote(docID: id) { (success) in
-            //if note is successfully deleted from server, remove it from local notification and badge number
-            if success! {
-                AnalyticsManager.logEvent(named: "note_deleted", description: "note_deleted")
-                
-                //remove pending reminder since note has been deleted
-                if note.reminderTimestamp ?? 0 > 0 {
-                    //is reminder
-                    let notificationUUID = note.reminder ?? "nil"
-                    let center = UNUserNotificationCenter.current()
-                    center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
-                    
-                    //remove badge if notification is already delivered but not opened
-                    if note.reminderTimestamp ?? 0 < Date.timeIntervalSinceReferenceDate {
-                        //reminder is already delivered
-                        UIApplication.shared.decrementBadge()
-                    }
+    private func open(_ note: FBNote) {
+        let controller = EditingController()
+        controller.noteCollection = noteCollection
+        controller.hidesBottomBarWhenPushed = true
+        EditingData.currentNote = note
+        navigationController?.pushViewController(controller, animated: true)
+    }
+
+    private func share(_ note: FBNote, from indexPath: IndexPath) {
+        let activityVC = UIActivityViewController(activityItems: [note.content], applicationActivities: nil)
+        activityVC.excludedActivityTypes = [.addToReadingList]
+        // iPad shows the share sheet as a popover anchored on the card.
+        if let popover = activityVC.popoverPresentationController {
+            popover.sourceView = collectionView.cellForItem(at: indexPath) ?? view
+        }
+        present(activityVC, animated: true)
+    }
+
+    /// Deletes notes on the server and clears any reminders they had.
+    private func delete(_ notes: [FBNote]) {
+        let center = UNUserNotificationCenter.current()
+        for note in notes {
+            if (note.reminderTimestamp ?? 0) > 0 {
+                if let reminder = note.reminder, !reminder.isEmpty {
+                    center.removePendingNotificationRequests(withIdentifiers: [reminder])
                 }
-            }
-        }
-        SwiftMessages.hide()
-    }
-    
-    @objc func shareNoteFromMenu(_ sender: PassableUIButton) {
-        let objectsToShare = [sender.params["content"]]
-        let activityVC = UIActivityViewController(activityItems: objectsToShare as [Any], applicationActivities: nil)
-        activityVC.excludedActivityTypes = [UIActivity.ActivityType.addToReadingList]
-        
-        //required properties for iPad's popoverPresentationController, otherwise crash
-        if let popoverController = activityVC.popoverPresentationController {
-            popoverController.sourceRect = CGRect(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2, width: 0, height: 0)
-            popoverController.sourceView = self.view
-            popoverController.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
-        }
-        
-        self.present(activityVC, animated: true, completion: nil)
-        AnalyticsManager.logEvent(named: "share_note", description: "share_note")
-        SwiftMessages.hide()
-    }
-    
-    @objc func showToolbar() {
-        SwiftMessages.hide()
-        CellState.shouldSelectMultiple = true
-        
-        collectionView.allowsMultipleSelection = true
-
-        // Style and populate the toolbar before showing it, so it slides in
-        // already looking right instead of changing color mid-animation.
-        let appearance = UIToolbarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = ColorManager.bgColor
-        navigationController?.toolbar.standardAppearance = appearance
-        navigationController?.toolbar.compactAppearance = appearance
-
-        var items = [UIBarButtonItem]()
-        items.append(UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(hideToolbar)))
-        items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil))
-        items.append(UIBarButtonItem(title: "Delete", style: .done, target: self, action: #selector(deleteSelectedCells)))
-        toolbarItems = items
-
-        navigationController?.setToolbarHidden(false, animated: true)
-    }
-    
-    @objc func cancelOptionFromMenu() {
-        SwiftMessages.hide()
-    }
-    
-    @objc func hideToolbar() {
-        navigationController?.setToolbarHidden(true, animated: true)
-
-        let previouslySelected = selectedCells
-        selectedCells.removeAll()
-        previouslySelected.forEach(updateSelectionStyle(at:))
-
-        CellState.shouldSelectMultiple = false
-        collectionView.allowsMultipleSelection = false
-    }
-    
-    @objc func deleteSelectedCells() {
-        for indexPath in selectedCells {
-            //remove pending reminder since note has been deleted
-            if self.noteCollection?.FBNotes[indexPath.row].reminderTimestamp ?? 0 > 0 {
-                //is reminder
-                let notificationUUID = self.noteCollection?.FBNotes[indexPath.row].reminder ?? "nil"
-                let center = UNUserNotificationCenter.current()
-                center.removePendingNotificationRequests(withIdentifiers: [notificationUUID])
-                
-                //remove badge if notification is already delivered but not opened
-                if self.noteCollection?.FBNotes[indexPath.row].reminderTimestamp ?? 0 < Date.timeIntervalSinceReferenceDate {
-                    //reminder is already delivered
+                //already delivered but not opened: it counted toward the badge
+                if (note.reminderTimestamp ?? 0) < Date.timeIntervalSinceReferenceDate {
                     UIApplication.shared.decrementBadge()
                 }
             }
-            
-            DataManager.deleteNote(docID: noteCollection?.FBNotes[indexPath.row].id ?? "") { success in
-                //handle success here
-                AnalyticsManager.logEvent(named: "note_deleted", description: "note_deleted")
-            }
+            DataManager.deleteNote(docID: note.id) { _ in }
         }
-        selectedCells = []
     }
-    
-    //collectionView Logic
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //noteCollection.notes.count will return nil if no notes exist on launch, will return 0 if user deletes a note
-        //and num of objs in array go to 0
-        if (noteCollection?.FBNotes.count == nil) || (noteCollection?.FBNotes.count == 0) {
-            if User.settings?.defaultView == 0 {
-                collectionView.backgroundView = EmptyNoteView()
-            }
+
+    // MARK: Multi-select
+
+    /// Enters or leaves selection mode, optionally pre-selecting a card.
+    func setSelecting(_ selecting: Bool, startingWith indexPath: IndexPath? = nil) {
+        guard collectionView != nil else { return }
+        if selecting == collectionView.isEditing {
+            if let indexPath { collectionView.selectItem(at: indexPath, animated: true, scrollPosition: []) }
+            return
+        }
+        collectionView.isEditing = selecting
+        if selecting, let indexPath {
+            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
+        }
+        if selecting {
+            updateToolbar()
         } else {
-            //remove backgroundView if array of notes isn't empty
-            collectionView.backgroundView = nil
-            if isFiltering {
-                return filteredNotes.count
-            }
+            setToolbarItems(defaultToolbarItems, animated: true)
         }
-        
-        return noteCollection?.FBNotes.count ?? 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedNoteCell", for: indexPath) as? SavedNoteCell else { fatalError("Wrong cell class dequeued") }
-
-        let note = isFiltering ? filteredNotes[indexPath.row] : noteCollection?.FBNotes[indexPath.row]
-
-        cell.textLabel.text = note?.content
-        cell.dateLabel.text = note?.timestamp.getDate()
-
-        //show timer icon if note is a reminder
-        cell.reminderIcon.alpha = (note?.reminderTimestamp ?? 0) > 0 ? 1 : 0
-
-        applySelectionStyle(to: cell, noteColor: note?.color.getColor(), isSelected: selectedCells.contains(indexPath))
-
-        //when creating a note on first launch, server cannot update client fast enough for UI to show correct note content
-        //instead, display the text stored locally for the first note created after launch
-        if indexPath == IndexPath(row: 0, section: 0) && EditingData.firstNote {
-            cell.textLabel.text = EditingData.currentNote.content
-            EditingData.firstNote = false
+        // Before iOS 26 the toolbar only exists for selection mode.
+        if #unavailable(iOS 26.0) {
+            navigationController?.setToolbarHidden(!selecting, animated: true)
         }
-
-        return cell
     }
-    
+
+    private func updateToolbar() {
+        guard collectionView?.isEditing == true else { return }
+        let count = collectionView.indexPathsForSelectedItems?.count ?? 0
+        let delete = UIBarButtonItem(title: count > 0 ? "Delete (\(count))" : "Delete", style: .plain, target: self, action: #selector(deleteSelectedNotes))
+        delete.tintColor = .systemRed
+        delete.isEnabled = count > 0
+        setToolbarItems([
+            UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(endSelecting)),
+            .flexibleSpace(),
+            delete,
+        ], animated: true)
+    }
+
+    @objc private func endSelecting() {
+        setSelecting(false)
+    }
+
+    @objc func deleteSelectedNotes() {
+        let notes = (collectionView.indexPathsForSelectedItems ?? []).compactMap(note(at:))
+        delete(notes)
+        setSelecting(false)
+    }
+
+    // MARK: UICollectionViewDelegate
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.playHapticFeedback()
-        
-        if CellState.shouldSelectMultiple {
-            if !selectedCells.contains(indexPath) {
-                selectedCells.append(indexPath)
-            } else if let index = selectedCells.firstIndex(of: indexPath) {
-                selectedCells.remove(at: index)
-            }
-            // `selectedCells` is the source of truth. Clear UIKit's own
-            // selection so the next tap on this card is another didSelect
-            // (to toggle it off) rather than an unhandled didDeselect.
-            collectionView.deselectItem(at: indexPath, animated: false)
-            updateSelectionStyle(at: indexPath)
+        playHapticFeedback()
+        if collectionView.isEditing {
+            updateToolbar()
         } else {
-            let controller = EditingController()
-            controller.noteCollection = noteCollection
-            EditingData.currentNote = (noteCollection?.FBNotes[indexPath.row])!
-            if isFiltering {
-                EditingData.currentNote = filteredNotes[indexPath.row]
-            }
-            AnalyticsManager.logEvent(named: "note_opened", description: "note_opened")
-            navigationController?.pushViewController(controller, animated: true)
-        }
-    }
-    
-    // MARK: Multi-select styling
-
-    /// Colors a card for its note, or dark gray with a jiggle when selected.
-    /// Text and icons follow whichever background is showing, so selected
-    /// light-colored notes don't end up with black text on dark gray.
-    private func applySelectionStyle(to cell: SavedNoteCell, noteColor: UIColor?, isSelected: Bool) {
-        let background = isSelected ? UIColor.darkGray : noteColor
-        let foreground: UIColor = isSelected || (noteColor?.isDarkColor ?? true) ? .white : .black
-
-        cell.contentView.backgroundColor = background
-        cell.textLabel.textColor = foreground
-        cell.dateLabel.textColor = foreground
-        cell.reminderIcon.tintColor = foreground
-
-        if isSelected {
-            cell.shake()
-        } else {
-            cell.stopShaking()
+            collectionView.deselectItem(at: indexPath, animated: true)
+            if let note = note(at: indexPath) { open(note) }
         }
     }
 
-    /// Restyles a visible card in place. `reloadItems` used to do this, but
-    /// it crossfades a fresh cell in and restarts the jiggle, which made the
-    /// card jump on every tap.
-    private func updateSelectionStyle(at indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? SavedNoteCell else { return }
-        let notes = isFiltering ? filteredNotes : (noteCollection?.FBNotes ?? [])
-        guard notes.indices.contains(indexPath.row) else { return }
-        let noteColor = notes[indexPath.row].color.getColor()
-        let isSelected = selectedCells.contains(indexPath)
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if collectionView.isEditing { updateToolbar() }
+    }
 
-        UIView.transition(with: cell.contentView, duration: 0.2, options: [.transitionCrossDissolve, .allowUserInteraction]) {
-            self.applySelectionStyle(to: cell, noteColor: noteColor, isSelected: isSelected)
+    // Two-finger pan across cards selects them, as in Mail and Files.
+    func collectionView(_ collectionView: UICollectionView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {
+        true
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didBeginMultipleSelectionInteractionAt indexPath: IndexPath) {
+        setSelecting(true)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
+        guard !collectionView.isEditing,
+              indexPaths.count == 1,
+              let indexPath = indexPaths.first,
+              let note = note(at: indexPath) else { return nil }
+
+        return UIContextMenuConfiguration(identifier: note.id as NSString, previewProvider: nil) { [weak self] _ in
+            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { _ in
+                self?.share(note, from: indexPath)
+            }
+            let select = UIAction(title: "Select", image: UIImage(systemName: "checkmark.circle")) { _ in
+                self?.setSelecting(true, startingWith: indexPath)
+            }
+            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
+                self?.delete([note])
+            }
+            return UIMenu(children: [share, select, UIMenu(options: .displayInline, children: [delete])])
+        }
+    }
+
+    // MARK: Housekeeping
+
+    func resetAppBadgeIfAllRemindersCleared() {
+        guard let notes = noteCollection?.FBNotes else { return }
+        if !notes.contains(where: { ($0.reminderTimestamp ?? 0) > 0 }) {
+            UNUserNotificationCenter.current().setBadgeCount(0)
         }
     }
 
     func cleanupOldNotes() {
         guard UserDefaults.standard.bool(forKey: "deleteOldNotes"),
               let notes = noteCollection?.FBNotes else { return }
-        do {
-            for note in notes {
-                let today = Date.timeIntervalSinceReferenceDate
-                let timeBetweenDates = today - note.timestamp
-                if timeBetweenDates > 2592000 {
-                    print("Deleting note because of old date.")
-                    DataManager.deleteNote(docID: note.id) { success in
-                        //handle success
-                    }
-                }
-            }
+        let thirtyDays: TimeInterval = 30 * 24 * 60 * 60
+        let now = Date.timeIntervalSinceReferenceDate
+        for note in notes where now - note.timestamp > thirtyDays {
+            DataManager.deleteNote(docID: note.id) { _ in }
         }
     }
-    
-    @objc func pureDarkModeChanged(notification: Notification) {
-        print("Pure dark mode changed.")
-        collectionView.backgroundColor = ColorManager.bgColor
-    }
-    
-    //traitcollection: dynamic iPad layout and light/dark mode support
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        if traitCollection.horizontalSizeClass == .compact {
-            iPadOSLayout.itemsPerRow = 2.0
-        } else if traitCollection.horizontalSizeClass == .regular {
-            iPadOSLayout.itemsPerRow = 4.0
-        }
-        collectionView.collectionViewLayout.invalidateLayout()
-        collectionView.backgroundColor = ColorManager.bgColor
-        setupNavigationBar()
-        // Let the page controller pick the style for whichever page is on
-        // screen; forcing .default here darkened the status bar over the
-        // write screen's gradient whenever the appearance changed.
-        (rootViewController as? PageBoyController)?.refreshStatusBarStyle()
-    }
-}
 
-extension NoteCollectionController: CollectionViewFlowLayoutDelegate {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var height: CGFloat = 0
-        
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            height = 120
-        } else {
-            height = 110
-        }
-        return CGSize(width: UIScreen.main.bounds.width, height: height)
+    @objc func pureDarkModeChanged() {
+        view.backgroundColor = ColorManager.bgColor
+        collectionView.backgroundColor = ColorManager.bgColor
     }
 }
