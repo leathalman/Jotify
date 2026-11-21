@@ -13,7 +13,9 @@ import UserNotifications
 /// native context menus, and the collection view's own multi-select.
 class NoteCollectionController: UIViewController, UICollectionViewDelegate {
     var collectionView: UICollectionView!
-    let searchController = UISearchController(searchResultsController: nil)
+    /// Search field + compose button floating above the keyboard.
+    let searchModel = NotesSearchModel()
+    private var bottomBar: UIHostingController<NotesBottomBar>!
     private var dataSource: UICollectionViewDiffableDataSource<Int, String>!
 
     /// Latest version of every note, keyed by Firestore document ID.
@@ -37,10 +39,6 @@ class NoteCollectionController: UIViewController, UICollectionViewDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // iOS 26: search and compose live in the bottom toolbar.
-        if #available(iOS 26.0, *) {
-            navigationController?.setToolbarHidden(false, animated: animated)
-        }
         enableAutomaticStatusBarStyle()
         resetAppBadgeIfAllRemindersCleared()
     }
@@ -51,7 +49,7 @@ class NoteCollectionController: UIViewController, UICollectionViewDelegate {
         super.viewDidLoad()
         buildViewHierarchy()
         configureDataSource()
-        setupSearchController()
+        installBottomBar()
         setupNavigationBar()
         applySnapshot(animated: false)
 
@@ -130,30 +128,48 @@ class NoteCollectionController: UIViewController, UICollectionViewDelegate {
         settings.accessibilityLabel = "Settings"
         navigationItem.leftBarButtonItem = settings
 
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-
-        if #available(iOS 26.0, *) {
-            // Search field and compose button share the bottom toolbar, as
-            // in Notes and Mail; the search field expands when tapped.
-            navigationItem.searchBarPlacementAllowsToolbarIntegration = true
-            navigationItem.preferredSearchBarPlacement = .integrated
-        } else {
-            navigationItem.rightBarButtonItem = composeItem
-        }
-        toolbarItems = defaultToolbarItems
     }
 
-    private lazy var composeItem: UIBarButtonItem = {
-        let item = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(handleRightNavButton))
-        item.accessibilityLabel = "New Note"
-        return item
-    }()
+    /// The bottom search + compose bar. It's our own view rather than
+    /// UISearchController's toolbar search: inside the page view controller
+    /// UIKit never lifted that field above the keyboard. Pinning to the
+    /// keyboard layout guide does.
+    private func installBottomBar() {
+        let bar = UIHostingController(rootView: NotesBottomBar(
+            model: searchModel,
+            onCompose: { [weak self] in self?.handleRightNavButton() },
+            onBeginSearch: { [weak self] in self?.setSelecting(false) }))
+        bar.view.backgroundColor = .clear
+        bar.sizingOptions = .intrinsicContentSize
+        bar.view.translatesAutoresizingMaskIntoConstraints = false
+        addChild(bar)
+        view.addSubview(bar.view)
+        NSLayoutConstraint.activate([
+            bar.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bar.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bar.view.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor),
+        ])
+        bar.didMove(toParent: self)
+        bottomBar = bar
 
-    /// Bottom toolbar outside selection mode (iOS 26): search, then compose.
-    private var defaultToolbarItems: [UIBarButtonItem]? {
-        guard #available(iOS 26.0, *) else { return nil }
-        return [navigationItem.searchBarPlacementBarButtonItem, .flexibleSpace(), composeItem]
+        searchModel.onChange = { [weak self] text in
+            guard let self else { return }
+            self.filteredNotes = self.matches(for: text)
+            self.applySnapshot(animated: false)
+        }
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Keep the last row reachable above the bar (and the keyboard, when
+        // the bar is lifted). The safe area is already added by the scroll
+        // view. Only write on change, or this loops layout.
+        guard let barView = bottomBar?.view else { return }
+        let inset = max(0, view.bounds.height - barView.frame.minY - view.safeAreaInsets.bottom)
+        if collectionView.contentInset.bottom != inset {
+            collectionView.contentInset.bottom = inset
+            collectionView.verticalScrollIndicatorInsets.bottom = inset
+        }
     }
 
     // MARK: Data
@@ -291,13 +307,13 @@ class NoteCollectionController: UIViewController, UICollectionViewDelegate {
         }
         if selecting {
             updateToolbar()
-        } else {
-            setToolbarItems(defaultToolbarItems, animated: true)
         }
-        // Before iOS 26 the toolbar only exists for selection mode.
-        if #unavailable(iOS 26.0) {
-            navigationController?.setToolbarHidden(!selecting, animated: true)
+        // Selection swaps the search bar for the Done / Delete toolbar.
+        navigationController?.setToolbarHidden(!selecting, animated: true)
+        UIView.animate(withDuration: 0.2) {
+            self.bottomBar?.view.alpha = selecting ? 0 : 1
         }
+        bottomBar?.view.isUserInteractionEnabled = !selecting
     }
 
     private func updateToolbar() {
