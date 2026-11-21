@@ -146,10 +146,9 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
                 DataManager.removeReminder(uid: EditingData.currentNote.id) { success in
                     if success! {
                         print("Reminder outdated, removed successfully")
+                        UIApplication.shared.refreshReminderBadge(clearing: EditingData.currentNote.reminder)
                         EditingData.currentNote.reminderTimestamp = nil
                         EditingData.currentNote.reminder = nil
-                        //Retreive the value from User Defaults and decrease it by 1
-                        UIApplication.shared.decrementBadge()
                     } else {
                         print("Reminder outdated, removed unsuccessfully")
                     }

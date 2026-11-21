@@ -269,7 +269,7 @@ class NoteCollectionController: UIViewController, UICollectionViewDelegate {
                 }
                 //already delivered but not opened: it counted toward the badge
                 if (note.reminderTimestamp ?? 0) < Date.timeIntervalSinceReferenceDate {
-                    UIApplication.shared.decrementBadge()
+                    UIApplication.shared.refreshReminderBadge(clearing: note.reminder)
                 }
             }
             DataManager.deleteNote(docID: note.id) { _ in }

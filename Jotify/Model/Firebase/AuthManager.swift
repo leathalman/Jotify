@@ -55,9 +55,11 @@ class AuthManager {
             //remove biometrics
             UserDefaults.standard.set(false, forKey: "useBiometrics")
             //reset app notification badge since no account is logged in
-            UIApplication.shared.applicationIconBadgeNumber = 0
-            //remove all pending reminders, when user logs out
-            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+            //remove all reminders, pending and delivered, when user logs out
+            let center = UNUserNotificationCenter.current()
+            center.removeAllPendingNotificationRequests()
+            center.removeAllDeliveredNotifications()
+            center.setBadgeCount(0)
         }
         catch { print("User already logged out") }
     }

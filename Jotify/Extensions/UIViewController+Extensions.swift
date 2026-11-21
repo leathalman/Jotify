@@ -7,6 +7,7 @@
 
 import UIKit
 import AudioToolbox
+import UserNotifications
 
 extension UIApplication {
     /// iOS 15+ replacement for the deprecated `UIApplication.shared.windows.first`.
@@ -94,9 +95,20 @@ extension UIViewController {
 }
 
 extension UIApplication {
-    /// Decrements the app icon badge without letting it go negative.
-    func decrementBadge() {
-        applicationIconBadgeNumber = max(0, applicationIconBadgeNumber - 1)
+    /// Sets the app icon badge to the number of reminders that have fired
+    /// and are still in Notification Center, after optionally clearing one.
+    /// (Replaces decrementing `applicationIconBadgeNumber`, deprecated in
+    /// iOS 17; there's no public getter for the badge any more, so it's
+    /// derived from the delivered notifications instead.)
+    func refreshReminderBadge(clearing reminderID: String? = nil) {
+        let center = UNUserNotificationCenter.current()
+        if let reminderID, !reminderID.isEmpty {
+            center.removeDeliveredNotifications(withIdentifiers: [reminderID])
+        }
+        center.getDeliveredNotifications { delivered in
+            let count = delivered.filter { $0.request.content.categoryIdentifier == "NOTE_REMINDER" }.count
+            center.setBadgeCount(count)
+        }
     }
 
     /// Swaps the window's root view controller with a cross-fade. Anything

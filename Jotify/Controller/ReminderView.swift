@@ -128,7 +128,8 @@ enum ReminderScheduler {
         guard timestamp > 0 else { return }
         //only a reminder that already fired has added to the badge
         let wasDelivered = timestamp < Date.timeIntervalSinceReferenceDate
-        if let identifier = EditingData.currentNote.reminder, !identifier.isEmpty {
+        let identifier = EditingData.currentNote.reminder
+        if let identifier, !identifier.isEmpty {
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
         }
         EditingData.currentNote.reminderTimestamp = 0
@@ -136,7 +137,7 @@ enum ReminderScheduler {
 
         DataManager.removeReminder(uid: EditingData.currentNote.id) { success in
             if success == true, wasDelivered {
-                UIApplication.shared.decrementBadge()
+                UIApplication.shared.refreshReminderBadge(clearing: identifier)
             }
         }
     }
