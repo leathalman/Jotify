@@ -66,11 +66,19 @@ class BuyPremiumController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let price = IAPManager.shared.getPriceFormatted(for: IAPManager.products[0]) else { return }
-        nextButton.configuration?.title = "Buy for \(price)"
-        
         setStyle()
         setupContraints()
+
+        // Products load asynchronously and may have failed; indexing [0]
+        // crashed here, and the early return left the screen unstyled.
+        if let product = IAPManager.products.first,
+           let price = IAPManager.shared.getPriceFormatted(for: product) {
+            nextButton.configuration?.title = "Buy for \(price)"
+        } else {
+            nextButton.configuration?.title = "Unavailable"
+            nextButton.isEnabled = false
+            IAPManager.shared.requestIAP()
+        }
     }
     
     func updateStatusBar(style: UIStatusBarStyle) {
@@ -136,7 +144,8 @@ class BuyPremiumController: UIViewController {
     
     @objc func initiatePurchase() {
         self.playHapticFeedback()
-        if IAPManager.shared.purchase(product: IAPManager.products[0]) {
+        guard let product = IAPManager.products.first else { return }
+        if IAPManager.shared.purchase(product: product) {
             self.dismiss(animated: true)
         } else {
             print("error purchasing IAP")

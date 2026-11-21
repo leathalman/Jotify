@@ -26,8 +26,16 @@ class NoteCollectionController: UIViewController, UICollectionViewDataSource, UI
             if isViewLoaded {
                 collectionView.reloadData()
             }
+            // Run the "delete notes older than 30 days" pass once, when the
+            // first snapshot arrives. It used to run in viewDidLoad, before
+            // any notes had loaded, where it force-unwrapped a nil collection.
+            if !hasCleanedUpOldNotes, noteCollection != nil {
+                hasCleanedUpOldNotes = true
+                cleanupOldNotes()
+            }
         }
     }
+    private var hasCleanedUpOldNotes = false
 
     //used to hold notes filtered by the search bar
     var filteredNotes: [FBNote] = []
@@ -78,7 +86,6 @@ class NoteCollectionController: UIViewController, UICollectionViewDataSource, UI
         Signposts.measure("NoteCollection.setupViewElements") { setupViewElements() }
         Signposts.measure("NoteCollection.setupNavigationBar") { setupNavigationBar() }
         Signposts.measure("NoteCollection.setupSearchBar") { setupSearchBar() }
-        Signposts.measure("NoteCollection.cleanupOldNotes") { cleanupOldNotes() }
 
         NotificationCenter.default.addObserver(self, selector: #selector(pureDarkModeChanged(notification:)), name: NSNotification.Name(rawValue: "updatePureDarkMode"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
@@ -206,13 +213,20 @@ func resetAppBadgeIfAllRemindersCleared() {
     
     //action handlers
     @objc func longTouchHandler(sender: UILongPressGestureRecognizer) {
-        if searchBar.isFirstResponder || isFiltering {
+        // A long press reports .began, then .changed/.ended as the finger
+        // moves and lifts; only open the menu once, at the start.
+        guard sender.state == .began else { return }
+
+        if searchBar.isFirstResponder || isFiltering || CellState.shouldSelectMultiple {
             return
         }
-        
+
+        // Pressing in the gap between cards hits no item.
         let location = sender.location(in: collectionView)
-        let indexPath = collectionView.indexPathForItem(at: location)
-        let note = noteCollection?.FBNotes[indexPath!.row]
+        guard let indexPath = collectionView.indexPathForItem(at: location),
+              let notes = noteCollection?.FBNotes,
+              notes.indices.contains(indexPath.row) else { return }
+        let note = notes[indexPath.row]
         
         let menu: NoteOptionMenu = try! SwiftMessages.viewFromNib(named: "NoteOptionMenu")
         menu.configureBackgroundView(width: 250)
@@ -231,7 +245,7 @@ func resetAppBadgeIfAllRemindersCleared() {
         menu.button4.titleLabel?.font = .boldSystemFont(ofSize: 16)
         
         menu.button1.addTarget(self, action: #selector(shareNoteFromMenu(_:)), for: .touchUpInside)
-        menu.button1.params["content"] = note?.content
+        menu.button1.params["content"] = note.content
         menu.button2.addTarget(self, action: #selector(deleteNoteFromMenu(_:)), for: .touchUpInside)
         menu.button2.params["note"] = note
         menu.button3.addTarget(self, action: #selector(showToolbar), for: .touchUpInside)
@@ -246,6 +260,16 @@ func resetAppBadgeIfAllRemindersCleared() {
         config.interactiveHide = false
         config.dimMode = .blur(style: .dark, alpha: 1, interactive: true)
         config.presentationContext  = .window(windowLevel: UIWindow.Level.statusBar)
+        // The menu's window sits above the status bar with a dark blur, so it
+        // takes over the status bar style. Nothing hands it back when the
+        // window goes away, which left white status bar text on the light
+        // Notes list. Light text over the blur, then restore on hide.
+        config.preferredStatusBarStyle = .lightContent
+        config.eventListeners.append { [weak self] event in
+            if case .didHide = event {
+                self?.rootViewController.animateStatusBarAppearanceUpdate()
+            }
+        }
         SwiftMessages.show(config: config, view: menu)
     }
     
@@ -290,7 +314,7 @@ func resetAppBadgeIfAllRemindersCleared() {
                     //remove badge if notification is already delivered but not opened
                     if note.reminderTimestamp ?? 0 < Date.timeIntervalSinceReferenceDate {
                         //reminder is already delivered
-                        UIApplication.shared.applicationIconBadgeNumber -= 1
+                        UIApplication.shared.decrementBadge()
                     }
                 }
             }
@@ -320,19 +344,22 @@ func resetAppBadgeIfAllRemindersCleared() {
         CellState.shouldSelectMultiple = true
         
         collectionView.allowsMultipleSelection = true
-        navigationController?.setToolbarHidden(false, animated: true)
-        
+
+        // Style and populate the toolbar before showing it, so it slides in
+        // already looking right instead of changing color mid-animation.
         let appearance = UIToolbarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = ColorManager.bgColor
         navigationController?.toolbar.standardAppearance = appearance
         navigationController?.toolbar.compactAppearance = appearance
-        
+
         var items = [UIBarButtonItem]()
         items.append(UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(hideToolbar)))
         items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil))
         items.append(UIBarButtonItem(title: "Delete", style: .done, target: self, action: #selector(deleteSelectedCells)))
         toolbarItems = items
+
+        navigationController?.setToolbarHidden(false, animated: true)
     }
     
     @objc func cancelOptionFromMenu() {
@@ -341,15 +368,11 @@ func resetAppBadgeIfAllRemindersCleared() {
     
     @objc func hideToolbar() {
         navigationController?.setToolbarHidden(true, animated: true)
-        
-        for path in selectedCells {
-            if selectedCells.contains(path) {
-                let index = selectedCells.firstIndex(of: path)!
-                selectedCells.remove(at: index)
-                collectionView.reloadItems(at: [path])
-            }
-        }
-        
+
+        let previouslySelected = selectedCells
+        selectedCells.removeAll()
+        previouslySelected.forEach(updateSelectionStyle(at:))
+
         CellState.shouldSelectMultiple = false
         collectionView.allowsMultipleSelection = false
     }
@@ -366,7 +389,7 @@ func resetAppBadgeIfAllRemindersCleared() {
                 //remove badge if notification is already delivered but not opened
                 if self.noteCollection?.FBNotes[indexPath.row].reminderTimestamp ?? 0 < Date.timeIntervalSinceReferenceDate {
                     //reminder is already delivered
-                    UIApplication.shared.applicationIconBadgeNumber -= 1
+                    UIApplication.shared.decrementBadge()
                 }
             }
             
@@ -402,31 +425,13 @@ func resetAppBadgeIfAllRemindersCleared() {
 
         let note = isFiltering ? filteredNotes[indexPath.row] : noteCollection?.FBNotes[indexPath.row]
 
-        // Cache derived values so we don't re-parse the color string or
-        // recompute luminance on every property we set.
-        let noteColor = note?.color.getColor()
-        let contrastingColor: UIColor = (noteColor?.isDarkColor ?? true) ? .white : .black
-
         cell.textLabel.text = note?.content
         cell.dateLabel.text = note?.timestamp.getDate()
-        cell.textLabel.textColor = contrastingColor
-        cell.dateLabel.textColor = contrastingColor
-
-        if selectedCells.contains(indexPath) {
-            cell.contentView.backgroundColor = .darkGray
-            cell.shake()
-        } else {
-            cell.contentView.backgroundColor = noteColor
-            cell.stopShaking()
-        }
 
         //show timer icon if note is a reminder
-        if (note?.reminderTimestamp ?? 0) > 0 {
-            cell.reminderIcon.tintColor = contrastingColor
-            cell.reminderIcon.alpha = 1
-        } else {
-            cell.reminderIcon.alpha = 0
-        }
+        cell.reminderIcon.alpha = (note?.reminderTimestamp ?? 0) > 0 ? 1 : 0
+
+        applySelectionStyle(to: cell, noteColor: note?.color.getColor(), isSelected: selectedCells.contains(indexPath))
 
         //when creating a note on first launch, server cannot update client fast enough for UI to show correct note content
         //instead, display the text stored locally for the first note created after launch
@@ -447,7 +452,11 @@ func resetAppBadgeIfAllRemindersCleared() {
             } else if let index = selectedCells.firstIndex(of: indexPath) {
                 selectedCells.remove(at: index)
             }
-            collectionView.reloadItems(at: [indexPath])
+            // `selectedCells` is the source of truth. Clear UIKit's own
+            // selection so the next tap on this card is another didSelect
+            // (to toggle it off) rather than an unhandled didDeselect.
+            collectionView.deselectItem(at: indexPath, animated: false)
+            updateSelectionStyle(at: indexPath)
         } else {
             let controller = EditingController()
             controller.noteCollection = noteCollection
@@ -460,9 +469,47 @@ func resetAppBadgeIfAllRemindersCleared() {
         }
     }
     
+    // MARK: Multi-select styling
+
+    /// Colors a card for its note, or dark gray with a jiggle when selected.
+    /// Text and icons follow whichever background is showing, so selected
+    /// light-colored notes don't end up with black text on dark gray.
+    private func applySelectionStyle(to cell: SavedNoteCell, noteColor: UIColor?, isSelected: Bool) {
+        let background = isSelected ? UIColor.darkGray : noteColor
+        let foreground: UIColor = isSelected || (noteColor?.isDarkColor ?? true) ? .white : .black
+
+        cell.contentView.backgroundColor = background
+        cell.textLabel.textColor = foreground
+        cell.dateLabel.textColor = foreground
+        cell.reminderIcon.tintColor = foreground
+
+        if isSelected {
+            cell.shake()
+        } else {
+            cell.stopShaking()
+        }
+    }
+
+    /// Restyles a visible card in place. `reloadItems` used to do this, but
+    /// it crossfades a fresh cell in and restarts the jiggle, which made the
+    /// card jump on every tap.
+    private func updateSelectionStyle(at indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? SavedNoteCell else { return }
+        let notes = isFiltering ? filteredNotes : (noteCollection?.FBNotes ?? [])
+        guard notes.indices.contains(indexPath.row) else { return }
+        let noteColor = notes[indexPath.row].color.getColor()
+        let isSelected = selectedCells.contains(indexPath)
+
+        UIView.transition(with: cell.contentView, duration: 0.2, options: [.transitionCrossDissolve, .allowUserInteraction]) {
+            self.applySelectionStyle(to: cell, noteColor: noteColor, isSelected: isSelected)
+        }
+    }
+
     func cleanupOldNotes() {
-        if UserDefaults.standard.bool(forKey: "deleteOldNotes") {
-            for note in noteCollection!.FBNotes {
+        guard UserDefaults.standard.bool(forKey: "deleteOldNotes"),
+              let notes = noteCollection?.FBNotes else { return }
+        do {
+            for note in notes {
                 let today = Date.timeIntervalSinceReferenceDate
                 let timeBetweenDates = today - note.timestamp
                 if timeBetweenDates > 2592000 {
@@ -490,7 +537,10 @@ func resetAppBadgeIfAllRemindersCleared() {
         collectionView.collectionViewLayout.invalidateLayout()
         collectionView.backgroundColor = ColorManager.bgColor
         setupNavigationBar()
-        enableAutomaticStatusBarStyle()
+        // Let the page controller pick the style for whichever page is on
+        // screen; forcing .default here darkened the status bar over the
+        // write screen's gradient whenever the appearance changed.
+        (rootViewController as? PageBoyController)?.refreshStatusBarStyle()
     }
 }
 

@@ -165,8 +165,8 @@ class ReminderController: UITableViewController, DatePickerDelegate, TimePickerD
         // add category for custom buttons
         let center = UNUserNotificationCenter.current()
         
-        if EditingData.currentNote.reminder != nil {
-            center.removePendingNotificationRequests(withIdentifiers: [EditingData.currentNote.reminder!])
+        if let existing = EditingData.currentNote.reminder, !existing.isEmpty {
+            center.removePendingNotificationRequests(withIdentifiers: [existing])
         }
         
         //need custom stuff here for UUID
@@ -212,7 +212,11 @@ class ReminderController: UITableViewController, DatePickerDelegate, TimePickerD
         let center = UNUserNotificationCenter.current()
         
         if EditingData.currentNote.reminderTimestamp ?? 0 > 0 {
-            center.removePendingNotificationRequests(withIdentifiers: [EditingData.currentNote.reminder!])
+            //only a reminder that already fired has added to the badge
+            let wasDelivered = (EditingData.currentNote.reminderTimestamp ?? 0) < Date.timeIntervalSinceReferenceDate
+            if let identifier = EditingData.currentNote.reminder, !identifier.isEmpty {
+                center.removePendingNotificationRequests(withIdentifiers: [identifier])
+            }
             EditingData.currentNote.reminderTimestamp = 0
             EditingData.currentNote.reminder = ""
             dateValue = nil
@@ -227,7 +231,9 @@ class ReminderController: UITableViewController, DatePickerDelegate, TimePickerD
                     print("There was an error deleting the reminder")
                 } else {
                     print("Reminder was succesfully deleted and removed from backend")
-                    UIApplication.shared.applicationIconBadgeNumber -= 1
+                    if wasDelivered {
+                        UIApplication.shared.decrementBadge()
+                    }
                 }
             }
         }
@@ -389,38 +395,31 @@ class ReminderController: UITableViewController, DatePickerDelegate, TimePickerD
     }
     
     //needed to make sure badge increments correctly
-    //called from SceneDelegate
-    func renumberBadgesOfPendingNotifications() {
-        // once reminders are delivered it will override the badge number
-        // so it will increment correctly as long as the notifications have been delivered
-        // but a new reminder scheduled after the others have been delivered will still be badge = 1
-        UNUserNotificationCenter.current().getPendingNotificationRequests { pendingNotificationRequests in
-            if pendingNotificationRequests.count > 0 {
-                let notificationRequests = pendingNotificationRequests
-                    .filter { $0.trigger is UNCalendarNotificationTrigger }
-                    .sorted(by: { (r1, r2) -> Bool in
-                        let r1Trigger = r1.trigger as! UNCalendarNotificationTrigger
-                        let r2Trigger = r2.trigger as! UNCalendarNotificationTrigger
-                        let r1Date = r1Trigger.nextTriggerDate()!
-                        let r2Date = r2Trigger.nextTriggerDate()!
-                        
-                        return r1Date.compare(r2Date) == .orderedAscending
-                    })
-                
-                let identifiers = notificationRequests.map { $0.identifier }
-                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
-                
-                notificationRequests.enumerated().forEach { index, request in
-                    if let trigger = request.trigger {
-                        let content = UNMutableNotificationContent()
-                        content.body = request.content.body
-                        content.sound = .default
-                        content.badge = (index + 1) as NSNumber
-                        
-                        let request = UNNotificationRequest(identifier: request.identifier, content: content, trigger: trigger)
-                        UNUserNotificationCenter.current().add(request)
-                    }
+    //called from SceneDelegate when the app goes to the background
+    /// Renumbers the badge on pending reminders so they count up in delivery
+    /// order. Copies each request's existing content and only changes the
+    /// badge: the old version rebuilt the content from scratch and dropped
+    /// `userInfo` and the NOTE_REMINDER category, so tapping any reminder
+    /// scheduled before a trip to the background no longer opened its note.
+    static func renumberBadgesOfPendingNotifications() {
+        let center = UNUserNotificationCenter.current()
+        center.getPendingNotificationRequests { pendingNotificationRequests in
+            let notificationRequests = pendingNotificationRequests
+                .compactMap { request -> (UNNotificationRequest, Date)? in
+                    guard let trigger = request.trigger as? UNCalendarNotificationTrigger,
+                          let date = trigger.nextTriggerDate() else { return nil }
+                    return (request, date)
                 }
+                .sorted { $0.1 < $1.1 }
+                .map { $0.0 }
+            guard !notificationRequests.isEmpty else { return }
+
+            center.removePendingNotificationRequests(withIdentifiers: notificationRequests.map { $0.identifier })
+
+            notificationRequests.enumerated().forEach { index, request in
+                guard let content = request.content.mutableCopy() as? UNMutableNotificationContent else { return }
+                content.badge = (index + 1) as NSNumber
+                center.add(UNNotificationRequest(identifier: request.identifier, content: content, trigger: request.trigger))
             }
         }
     }

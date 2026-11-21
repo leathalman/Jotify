@@ -120,6 +120,13 @@ class AuthManager {
         }
     }
     
+    /// Firebase rejects account deletion (`requiresRecentLogin`) unless the
+    /// user signed in within roughly the last five minutes.
+    static var hasRecentLogin: Bool {
+        guard let lastSignIn = Auth.auth().currentUser?.metadata.lastSignInDate else { return false }
+        return Date().timeIntervalSince(lastSignIn) < 5 * 60
+    }
+
     //delete a user account + all notes and settings tied to account
     static func deleteUser(completionHandler: @escaping (Bool?, String?) -> Void) {
         let user = Auth.auth().currentUser

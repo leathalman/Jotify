@@ -10,7 +10,7 @@ import SPIndicator
 import SPPermissions
 import SPPermissionsNotification
 
-protocol ColorGalleryDelegate {
+protocol ColorGalleryDelegate: AnyObject {
     func updateColorOverride(color: String)
 }
 
@@ -234,36 +234,43 @@ class ToolbarViewController: UIViewController, ColorGalleryDelegate {
     
     //handle keyboard interaction with view
     @objc func keyboardWillShow(notification: NSNotification) {
-        guard let info = notification.userInfo,
-              let keyboardSize = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        // These are app-wide notifications. The write screen stays alive
+        // next to the Notes list, so without this it also reacted to the
+        // Notes search keyboard.
+        guard field.isFirstResponder,
+              let info = notification.userInfo,
+              let keyboardFrame = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
         else { return }
 
-        let duration = (info[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double) ?? 0.25
-        let rawCurve = (info[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt) ?? 0
-        let options = UIView.AnimationOptions(rawValue: rawCurve << 16)
-
+        // Only the part of the keyboard that actually covers the text view,
+        // plus the accessory bar sitting on top of it.
+        let keyboardInView = view.convert(keyboardFrame, from: nil)
+        let overlap = max(0, field.frame.maxY - keyboardInView.minY)
         let insets = UIEdgeInsets(top: 0, left: 0,
-                                  bottom: keyboardSize.height + keyboardAccessory.frame.height,
+                                  bottom: overlap + keyboardAccessory.frame.height,
                                   right: 0)
-        field.contentInset = insets
-        field.scrollIndicatorInsets = insets
 
-        UIView.animate(withDuration: duration, delay: 0, options: options) {
+        // Inside the keyboard's own animation, so the text moves with the
+        // keyboard instead of jumping ahead of it.
+        animateAlongsideKeyboard(info) {
+            self.field.contentInset = insets
+            self.field.verticalScrollIndicatorInsets = insets
             self.keyboardAccessory.alpha = 1
         }
     }
 
     @objc func keyboardWillHide(notification: NSNotification) {
-        let info = notification.userInfo
-        let duration = (info?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double) ?? 0.25
-        let rawCurve = (info?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt) ?? 0
-        let options = UIView.AnimationOptions(rawValue: rawCurve << 16)
-
-        field.contentInset = .zero
-        field.scrollIndicatorInsets = .zero
-
-        UIView.animate(withDuration: duration, delay: 0, options: options) {
+        animateAlongsideKeyboard(notification.userInfo) {
+            self.field.contentInset = .zero
+            self.field.verticalScrollIndicatorInsets = .zero
             self.keyboardAccessory.alpha = 0
         }
+    }
+
+    private func animateAlongsideKeyboard(_ info: [AnyHashable: Any]?, animations: @escaping () -> Void) {
+        let duration = (info?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double) ?? 0.25
+        let rawCurve = (info?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt) ?? 0
+        let options = UIView.AnimationOptions(rawValue: rawCurve << 16).union(.beginFromCurrentState)
+        UIView.animate(withDuration: duration, delay: 0, options: options, animations: animations)
     }
 }

@@ -25,6 +25,10 @@ class IAPManager: NSObject {
     var onReceiveProductsHandler: ((Result<[SKProduct], IAPManagerError>) -> Void)?
     
     var onBuyProductHandler: ((Result<Bool, Error>) -> Void)?
+
+    // Separate from the buy handler so a restore can't swallow the result of
+    // an in-flight purchase (or vice versa).
+    var onRestoreHandler: ((Result<Bool, Error>) -> Void)?
     
     var totalRestoredPurchases = 0
     
@@ -94,7 +98,7 @@ class IAPManager: NSObject {
     }
     
     func restorePurchases(withHandler handler: @escaping ((_ result: Result<Bool, Error>) -> Void)) {
-        onBuyProductHandler = handler
+        onRestoreHandler = handler
         totalRestoredPurchases = 0
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
@@ -145,7 +149,14 @@ extension IAPManager: SKPaymentTransactionObserver {
         transactions.forEach { (transaction) in
             switch transaction.transactionState {
             case .purchased:
-                onBuyProductHandler?(.success(true))
+                if let handler = onBuyProductHandler {
+                    handler(.success(true))
+                    onBuyProductHandler = nil
+                } else {
+                    // Completed with nobody waiting: Ask to Buy approval, or a
+                    // purchase that finished after the app was relaunched.
+                    DispatchQueue.main.async { self.grantHasPremium() }
+                }
                 SKPaymentQueue.default().finishTransaction(transaction)
                 print("purchase was successful")
             case .restored:
@@ -161,6 +172,7 @@ extension IAPManager: SKPaymentTransactionObserver {
                     }
                     print("IAP Error:", error.localizedDescription)
                 }
+                onBuyProductHandler = nil
                 SKPaymentQueue.default().finishTransaction(transaction)
                 
             case .deferred, .purchasing: break
@@ -171,21 +183,23 @@ extension IAPManager: SKPaymentTransactionObserver {
     
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
         if totalRestoredPurchases != 0 {
-            onBuyProductHandler?(.success(true))
+            onRestoreHandler?(.success(true))
         } else {
             print("IAP: No purchases to restore!")
-            onBuyProductHandler?(.success(false))
+            onRestoreHandler?(.success(false))
         }
+        onRestoreHandler = nil
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
         if let error = error as? SKError {
             if error.code != .paymentCancelled {
                 print("IAP Restore Error:", error.localizedDescription)
-                onBuyProductHandler?(.failure(error))
+                onRestoreHandler?(.failure(error))
             } else {
-                onBuyProductHandler?(.failure(IAPManagerError.paymentWasCancelled))
+                onRestoreHandler?(.failure(IAPManagerError.paymentWasCancelled))
             }
+            onRestoreHandler = nil
         }
     }
 }

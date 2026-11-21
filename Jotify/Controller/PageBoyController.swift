@@ -7,6 +7,7 @@
 
 import UIKit
 import Pageboy
+import FirebaseFirestore
 import AuthenticationServices
 import os
 
@@ -15,6 +16,9 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource,
     // MARK: Properties
     
     var statusBarStyle: UIStatusBarStyle = .lightContent
+
+    /// Live Firestore listener for the signed-in user's notes.
+    private var notesListener: ListenerRegistration?
     
     //view controllers that will be displayed in page view controller.
     let noteCollectionController = UINavigationController(rootViewController: NoteCollectionController(collectionViewLayout: UICollectionViewFlowLayout()))
@@ -33,18 +37,21 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource,
     }
     
     // MARK: Lifecycle
+
+    deinit {
+        notesListener?.remove()
+    }
     
     override func viewDidLoad() {
         let vdlID = Signposts.begin("PageBoy.viewDidLoad")
         defer { Signposts.end("PageBoy.viewDidLoad", id: vdlID) }
         super.viewDidLoad()
 
-        if UserDefaults.standard.bool(forKey: "useBiometrics") {
-            let poc = PrivacyOverlayController()
-            poc.modalPresentationStyle = .fullScreen
-            present(poc, animated: true, completion: nil)
-        }
-        
+        // The biometric lock is shown by SceneDelegate (on launch, foreground
+        // and background). Presenting it here as well, from viewDidLoad before
+        // the view is in a window, only produced "not in the window hierarchy"
+        // warnings and a competing presentation.
+
         if (!(User.settings?.hasPremium ?? false)) {
             //if they don't already have premium fetch the records from Apple
             IAPManager.shared.requestIAP()
@@ -80,11 +87,13 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource,
 
         // Pre-warm the notes list view hierarchy so the first swipe from the
         // write screen doesn't pay for `NoteCollectionController.viewDidLoad`
-        // (layout swap, cell registration, UISearchController install) on top
-        // of the Pageboy transition. Touching `.view` on the nav controller
-        // forces its root VC's view to load too.
+        // (collection view, cell registration, search bar setup) on top of
+        // the Pageboy transition.
         Signposts.measure("PageBoy.prewarmNoteCollection") {
+            // Touching the nav controller's view alone doesn't load its root
+            // view controller's view, so load the Notes list explicitly.
             _ = noteCollectionController.view
+            noteCollectionController.viewControllers.first?.loadViewIfNeeded()
         }
     }
 
@@ -107,6 +116,7 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource,
             Signposts.end("Pageboy.scroll", id: id)
             pageScrollSignpostID = nil
         }
+        refreshStatusBarStyle(forPageAt: index)
     }
 
     func pageboyViewController(_ pageboyViewController: PageboyViewController,
@@ -121,6 +131,33 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource,
             Signposts.end("Pageboy.scroll", id: id)
             pageScrollSignpostID = nil
         }
+        // Child appearance callbacks fire when a swipe starts, so the page
+        // being swiped toward has already restyled the status bar. Put it
+        // back for the page we actually stayed on.
+        refreshStatusBarStyle(forPageAt: previousIndex)
+    }
+
+    // MARK: Status bar
+
+    /// Recomputes the status bar style for whichever page is showing. Pages
+    /// set it from their appearance callbacks too, but those also fire for
+    /// swipes that get cancelled and for trait changes on off-screen pages.
+    func refreshStatusBarStyle(forPageAt index: PageboyViewController.PageIndex? = nil) {
+        guard let index = index ?? currentIndex, viewControllers.indices.contains(index) else { return }
+        let page = viewControllers[index]
+
+        let style: UIStatusBarStyle
+        if page === writeNotesController {
+            style = .lightContent
+        } else if noteCollectionController.topViewController is EditingController {
+            style = EditingData.currentNote.color.getColor().isDarkColor ? .lightContent : .darkContent
+        } else {
+            style = .default
+        }
+
+        guard style != statusBarStyle else { return }
+        statusBarStyle = style
+        animateStatusBarAppearanceUpdate()
     }
 
     func pageboyViewController(_ pageboyViewController: PageboyViewController,
@@ -141,10 +178,12 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource,
                     ReferralManager().createReferralLink()
                 }
                 
-                if !(settings?.hasPremium ?? false) {
-                    self.checkForRestorePurchase()
-                }
-                
+                // No automatic restoreCompletedTransactions() here: it runs on
+                // every launch for non-premium users and makes iOS prompt for
+                // their Apple Account password. Restoring is user-initiated
+                // from General settings; new purchases arrive through the
+                // payment-queue observer.
+
                 //check to see if they should get premium from referrals
                 if !(settings?.hasPremium ?? false) {
                     if settings?.referrals ?? 0 >= 3 {
@@ -159,7 +198,7 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource,
                 }
                 
                 print("Has migrated: \(User.settings?.hasMigrated ?? false)")
-                if !(settings!.hasMigrated) && !UserDefaults.standard.bool(forKey: "hasMigrated") {
+                if !(settings?.hasMigrated ?? true) && !UserDefaults.standard.bool(forKey: "hasMigrated") {
                     //ask user if they want to migrate notes
                     let alertController = UIAlertController(title: "Have you used Jotify before?", message: "If you have, Jotify can automatically import your notes from previous verions. Do you want to import your old notes?", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "No", style: .default, handler: {(action) in
@@ -176,11 +215,16 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource,
             }
         }
         
-        //get notes from Firebase
-        DataManager.observeNoteChange { (collection, success) in
-            if success! {
-                let controller = self.noteCollectionController.viewControllers.first as! NoteCollectionController
-                controller.noteCollection = collection
+        //get notes from Firebase. Keep the registration and capture self
+        //weakly: Firestore holds the listener until it's removed, so the old
+        //strong capture kept every PageBoyController (and its whole page
+        //hierarchy) alive after sign-out.
+        notesListener?.remove()
+        notesListener = DataManager.observeNoteChange { [weak self] (collection, success) in
+            guard let self else { return }
+            if success == true {
+                let controller = self.noteCollectionController.viewControllers.first as? NoteCollectionController
+                controller?.noteCollection = collection
                 self.noteCollection = collection
             } else {
                 print("Error retrieving note collection")
@@ -242,6 +286,8 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource,
     // MARK: TraitCollection
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        defer { refreshStatusBarStyle() }
         if traitCollection.userInterfaceStyle == .light {
             ColorManager.bgColor = .jotifyGray
         } else if traitCollection.userInterfaceStyle == .dark {
@@ -256,31 +302,5 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource,
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return statusBarStyle
     }
-    
-    func checkForRestorePurchase() {
-        IAPManager.shared.restorePurchases { (result) in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let success):
-                    if success {
-                        //unlock premium
-                        DataManager.updateUserSettings(setting: "hasPremium", value: true) { success in
-                            if !success! {
-                                print("Error granting premium from restore")
-                            }
-                            print("Restored automatically")
-                            User.settings?.hasPremium = true
-                        }
-                    } else {
-                        //no products were found
-                        print("Nothing to automatically restore...")
-                    }
-                    
-                case .failure(let error):
-                    //there was an error
-                    print("\(error) restoring IAP")
-                }
-            }
-        }
-    }
+
 }

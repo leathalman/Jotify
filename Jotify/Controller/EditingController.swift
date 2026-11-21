@@ -55,23 +55,30 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     }
     
     //view configuration
+    //one-time view setup; call applyNoteColor() to restyle afterwards
     func setupView() {
-        //color customization to support white/black dynamic type
-        view.backgroundColor = EditingData.currentNote.color.getColor()
-        field.backgroundColor = EditingData.currentNote.color.getColor()
-        field.textColor = EditingData.currentNote.color.getColor().isDarkColor ? .white : .black
-        field.tintColor = EditingData.currentNote.color.getColor().isDarkColor ? .white : .black
-        
         field.text = EditingData.currentNote.content
         initialContent = EditingData.currentNote.content
         field.delegate = self
         field.font = UIFont.boldSystemFont(ofSize: 18)
 
         view.addSubview(field)
-        
         setupConstraints()
-        
-        setStatusBarStyle(style: EditingData.currentNote.color.getColor().isDarkColor ? .lightContent : .darkContent)
+
+        applyNoteColor()
+    }
+
+    //color customization to support white/black dynamic type. Safe to call
+    //repeatedly: updateColorOverride used to re-run all of setupView, which
+    //stacked another full set of text-field constraints on every color change.
+    func applyNoteColor() {
+        let color = EditingData.currentNote.color.getColor()
+        view.backgroundColor = color
+        field.backgroundColor = color
+        field.textColor = color.isDarkColor ? .white : .black
+        field.tintColor = color.isDarkColor ? .white : .black
+
+        setStatusBarStyle(style: color.isDarkColor ? .lightContent : .darkContent)
     }
     
     //setup constraints for multiline textfield
@@ -142,7 +149,7 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
                         EditingData.currentNote.reminderTimestamp = nil
                         EditingData.currentNote.reminder = nil
                         //Retreive the value from User Defaults and decrease it by 1
-                        UIApplication.shared.applicationIconBadgeNumber -= 1
+                        UIApplication.shared.decrementBadge()
                     } else {
                         print("Reminder outdated, removed unsuccessfully")
                     }
@@ -202,8 +209,8 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     override func updateColorOverride(color: String) {
         colorOverride = color
         EditingData.currentNote.color = color
-        
-        setupView()
+
+        applyNoteColor()
         setupNavBar()
         setupToolbar()
         

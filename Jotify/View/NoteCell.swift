@@ -82,26 +82,25 @@ class SavedNoteCell: UICollectionViewCell {
         reminderIcon.widthAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
+    /// Home-screen-style jiggle for cells selected in multi-select mode.
+    /// Symmetric (±1.5°) so the card rocks in place instead of leaning, and
+    /// a no-op if already running so re-configuring a cell doesn't restart it
+    /// from a new phase.
     func shake() {
+        guard layer.animation(forKey: "shaking") == nil else { return }
+        let angle = 1.5 * Double.pi / 180
         let shakeAnimation = CABasicAnimation(keyPath: "transform.rotation")
-        shakeAnimation.duration = 0.05
-        shakeAnimation.repeatCount = 2
+        shakeAnimation.fromValue = -angle
+        shakeAnimation.toValue = angle
+        shakeAnimation.duration = 0.12
         shakeAnimation.autoreverses = true
-        let startAngle: Float = (-2) * 3.14159/360
-        let stopAngle = -startAngle
-        shakeAnimation.fromValue = NSNumber(value: startAngle as Float)
-        shakeAnimation.toValue = NSNumber(value: 3 * stopAngle as Float)
-        shakeAnimation.autoreverses = true
-        shakeAnimation.duration = 0.2
-        shakeAnimation.repeatCount = 10000
-        shakeAnimation.timeOffset = 290 * drand48()
-        
-        let layer: CALayer = self.layer
-        layer.add(shakeAnimation, forKey:"shaking")
-   }
-    
+        shakeAnimation.repeatCount = .infinity
+        // Random phase so neighbouring cards don't move in lockstep.
+        shakeAnimation.timeOffset = Double.random(in: 0..<shakeAnimation.duration * 2)
+        layer.add(shakeAnimation, forKey: "shaking")
+    }
+
     func stopShaking() {
-        let layer: CALayer = self.layer
         layer.removeAnimation(forKey: "shaking")
     }
     

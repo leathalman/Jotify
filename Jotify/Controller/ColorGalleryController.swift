@@ -9,7 +9,7 @@ import UIKit
 
 class ColorGalleryController: UITableViewController {
     
-    var delegate: ColorGalleryDelegate?
+    weak var delegate: ColorGalleryDelegate?
     
     var lastIndexPath: NSIndexPath = NSIndexPath(row: 0, section: 0)
     

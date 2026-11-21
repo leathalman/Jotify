@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 import SwiftUI
 
 class AccountSettingsController: SettingsController {
@@ -151,27 +152,7 @@ class AccountSettingsController: SettingsController {
                 alertController.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: {(action) in
                     let alertController = UIAlertController(title: nil, message: "This action will remove your account, all notes, and settings current saved in Jotify's servers. This is the FINAL check.", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "Delete My Account", style: .destructive, handler: { (action) in
-                        AuthManager.deleteUser { success, message in
-                            if success! {
-                                self.deleteAllNotes { success in
-                                    print("All notes deleted: \(String(describing: success))")
-                                }
-                                
-                                DataManager.deleteUserSettings { success in
-                                    print("Settings deleted: \(String(describing: success))")
-                                }
-                                
-                                let alertController = UIAlertController(title: "Success", message: "User account and relevant data deleted.", preferredStyle: .alert)
-                                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                                    self.setRootViewController(duration: 0.4, vc: UIHostingController(rootView: LogInView()))
-                                }))
-                                self.present(alertController, animated: true, completion: nil)
-                            } else {
-                                let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-                                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                                self.present(alertController, animated: true, completion: nil)
-                            }
-                        }
+                        self.deleteAccountAndData()
                     }))
                     alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                     self.present(alertController, animated: true, completion: nil)
@@ -202,20 +183,60 @@ class AccountSettingsController: SettingsController {
         return cell
     }
     
+    //deletes every note on the server and calls back once, after it's done
     func deleteAllNotes(completionHandler: @escaping (Bool?) -> Void) {
-        if self.noteCollection?.FBNotes.count ?? 0 < 1 {
-            completionHandler(false)
+        DataManager.deleteAllNotes { success in
+            if success {
+                //notes are gone, so are their reminders
+                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                UIApplication.shared.applicationIconBadgeNumber = 0
+            }
+            completionHandler(success)
+        }
+    }
+
+    /// Deletes the user's notes and settings *while still signed in*, then
+    /// the Firebase Auth account. The old order deleted the account first,
+    /// after which every DataManager call bailed out on the empty uid, so all
+    /// notes and settings stayed on the server despite the "deleted" message.
+    func deleteAccountAndData() {
+        let showError: (String) -> Void = { message in
+            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+
+        // Firebase only lets an account be deleted shortly after signing in.
+        // Check that up front so we never wipe the data and then fail to
+        // delete the account itself.
+        guard AuthManager.hasRecentLogin else {
+            showError("For your security, please log out and sign back in, then delete your account.")
             return
         }
-        
-        for note in self.noteCollection!.FBNotes {
-            DataManager.deleteNote(docID: note.id) { success in
-                if !success! {
-                    print("Failed to delete note: \(note.id)")
-                    completionHandler(false)
+
+        deleteAllNotes { notesDeleted in
+            guard notesDeleted == true else {
+                showError("There was an error deleting your notes, so your account was not deleted. Please try again later.")
+                return
+            }
+            DataManager.deleteUserSettings { settingsDeleted in
+                guard settingsDeleted == true else {
+                    showError("There was an error deleting your settings, so your account was not deleted. Please try again later.")
+                    return
+                }
+                AuthManager.deleteUser { success, message in
+                    guard success == true else {
+                        showError(message ?? "There was an error deleting your account.")
+                        return
+                    }
+                    AuthManager.signOut()
+                    let alert = UIAlertController(title: "Success", message: "User account and relevant data deleted.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                        self.setRootViewController(duration: 0.4, vc: UIHostingController(rootView: LogInView()))
+                    }))
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
-            completionHandler(true)
         }
     }
     

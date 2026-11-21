@@ -59,27 +59,48 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
     }
     
     func sceneWillEnterForeground(_ scene: UIScene) {
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
-        //check if user is logged in
-        if !AuthManager().uid.isEmpty {
-            print("logged in")
-            if UserDefaults.standard.bool(forKey: "useBiometrics") {
-                let poc = PrivacyOverlayController()
-                poc.modalPresentationStyle = .fullScreen
-                window?.rootViewController?.present(poc, animated: false, completion: nil)
-            }
+        // Called as the scene transitions from the background to the foreground,
+        // including on cold launch.
+        showPrivacyOverlayIfNeeded()
+    }
+
+    /// Covers the app with the biometric lock when it's enabled.
+    ///
+    /// Presents from the top-most view controller: presenting from the root
+    /// silently failed whenever something else was already up (a note opened
+    /// from the widget or a reminder, a share sheet, an alert), skipping the
+    /// lock entirely. No-op if the lock is already showing.
+    func showPrivacyOverlayIfNeeded() {
+        guard !AuthManager().uid.isEmpty,
+              UserDefaults.standard.bool(forKey: "useBiometrics"),
+              var top = window?.rootViewController else { return }
+        while let presented = top.presentedViewController {
+            if presented is PrivacyOverlayController { return }
+            top = presented
         }
+        if top is PrivacyOverlayController { return }
+
+        let poc = PrivacyOverlayController()
+        poc.modalPresentationStyle = .fullScreen
+        poc.isModalInPresentation = true
+        top.present(poc, animated: false, completion: nil)
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
-        ReminderController().renumberBadgesOfPendingNotifications()
-        
-        //Stop observing payment transaction updates
-        IAPManager.shared.stopObserving()
+        // Lock before iOS takes the app-switcher snapshot, so notes aren't
+        // visible there. (Showing the lock only on foreground left the
+        // snapshot uncovered.)
+        showPrivacyOverlayIfNeeded()
+
+        ReminderController.renumberBadgesOfPendingNotifications()
+
+        // Keep observing the payment queue for the app's whole lifetime (as
+        // Apple recommends). This used to call stopObserving() here, but
+        // startObserving() only runs at launch, so after the first trip to
+        // the background purchases and restores never completed.
     }
     
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
@@ -145,13 +166,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
         }
     }
     
-    //app terminated when user interacts with notification
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        
-        openNoteFromNotification(userInfo: userInfo)
-        completionHandler(UIBackgroundFetchResult.noData)
-    }
-    
     //app in background when user interacts with notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
@@ -174,11 +188,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
     }
     
     func openNoteFromNotification(userInfo: [AnyHashable : Any]) {
-        let noteID = userInfo["noteID"] as! String
-        let color = userInfo["color"] as! String
-        let timestamp = userInfo["timestamp"] as! Double
-        let content = userInfo["content"] as! String
-        
+        // Reminders scheduled by older builds (or rebuilt by the old badge
+        // renumbering) may be missing fields; don't crash on them.
+        guard let noteID = userInfo["noteID"] as? String,
+              let color = userInfo["color"] as? String,
+              let timestamp = userInfo["timestamp"] as? Double,
+              let content = userInfo["content"] as? String else {
+            print("Reminder notification is missing note info: \(userInfo)")
+            return
+        }
+
         print("NoteID from reminder: \(noteID)")
         
         EditingData.currentNote = FBNote(content: content, timestamp: timestamp, id: noteID, color: color)
@@ -188,13 +207,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
                 print("There was an error deleting the reminder")
             } else {
                 print("Reminder was succesfully deleted and removed from backend")
-                UIApplication.shared.applicationIconBadgeNumber -= 1
+                UIApplication.shared.decrementBadge()
             }
         }
         
         let presentable = StatusBarResponsiveNavigationController(rootViewController: EditingController())
         presentable.modalPresentationStyle = .fullScreen
-        window?.rootViewController?.present(presentable, animated: true)
+        // Present under the privacy lock if it's up, so the note is only
+        // revealed once the user unlocks.
+        guard var top = window?.rootViewController else { return }
+        while let presented = top.presentedViewController, !(presented is PrivacyOverlayController) {
+            top = presented
+        }
+        top.present(presentable, animated: true)
     }
 }
 

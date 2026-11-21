@@ -24,39 +24,31 @@ class ReferralManager {
         }
     }
     
+    /// Credits both the new user and the person who referred them.
+    ///
+    /// Uses `FieldValue.increment` so the server does the arithmetic. The old
+    /// version read the referrer's count with an async `getDocument` but wrote
+    /// `referrerValue + 1` before that read came back, so it always wrote 1
+    /// and nobody could ever reach the 3 referrals needed for premium.
     func grantReferralCredit(referrerId: String) {
+        guard !referrerId.isEmpty, referrerId != AuthManager().uid else { return }
         print("Adding referral credits")
-        
-        //update referral count for current user
-        DataManager.updateUserSettings(setting: "referrals", value: (User.settings?.referrals ?? 0) + 1) { success in
-            if !success! {
+
+        DataManager.updateUserSettings(setting: "referrals", value: FieldValue.increment(Int64(1))) { success in
+            if success == true {
+                User.settings?.referrals += 1
+            } else {
                 print("Error granting referral credit")
             }
         }
-        
-        var referrerValue: Int = 0
-        
-        //get the value of the other user's setting
-        let db = Firestore.firestore()
-        let docRef = db.collection("users").document(referrerId)
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                referrerValue = document.get("referrals") as? Int ?? 0
-                print("Document data: \(dataDescription)")
-            } else {
-                print("Document does not exist")
-            }
-        }
-        
-        //set the value of the other users' setting
-        db.collection("users").document(referrerId).updateData([
-            "referrals": referrerValue + 1,
+
+        Firestore.firestore().collection("users").document(referrerId).updateData([
+            "referrals": FieldValue.increment(Int64(1)),
         ]) { error in
             if let error = error {
-                print("Error adding document: \(error)")
+                print("Error crediting referrer: \(error)")
             }
         }
     }
-    
+
 }

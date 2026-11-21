@@ -12,10 +12,40 @@ import LocalAuthentication
 class PrivacyOverlayController: UIViewController {
     
     var jotifyIconView = UIImageView()
-    
+    private var activeObserver: NSObjectProtocol?
+    private var isAuthenticating = false
+
     override func viewDidLoad() {
+        super.viewDidLoad()
         setupView()
-        authenticate()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        authenticateWhenActive()
+    }
+
+    deinit {
+        if let activeObserver { NotificationCenter.default.removeObserver(activeObserver) }
+    }
+
+    /// The lock is now also put up as the app goes to the background (to hide
+    /// the app-switcher snapshot). Face ID can't run then, so wait until the
+    /// app is active again before prompting.
+    private func authenticateWhenActive() {
+        if UIApplication.shared.applicationState == .active {
+            authenticate()
+            return
+        }
+        guard activeObserver == nil else { return }
+        activeObserver = NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: .main) { [weak self] _ in
+            guard let self else { return }
+            if let observer = self.activeObserver {
+                NotificationCenter.default.removeObserver(observer)
+                self.activeObserver = nil
+            }
+            self.authenticate()
+        }
     }
     
     func setupView() {
@@ -33,11 +63,14 @@ class PrivacyOverlayController: UIViewController {
     }
     
     func authenticate() {
+        guard !isAuthenticating else { return }
+        isAuthenticating = true
         let context = LAContext()
         let reason = "Unlock Jotify to access your notes."
-        
+
         context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, _ in
             DispatchQueue.main.async {
+                self.isAuthenticating = false
                 if success {
                     print("successful auth")
                     self.dismiss(animated: true, completion: nil)

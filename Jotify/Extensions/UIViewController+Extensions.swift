@@ -62,7 +62,7 @@ extension UIViewController {
     func setStatusBarStyle(style: UIStatusBarStyle) {
         guard let rootVC = UIApplication.shared.firstKeyWindow?.rootViewController as? PageBoyController else { return }
         rootVC.statusBarStyle = style
-        rootVC.setNeedsStatusBarAppearanceUpdate()
+        rootVC.animateStatusBarAppearanceUpdate()
     }
 
     //change StatusBarStyle in parent, PageViewController
@@ -71,7 +71,13 @@ extension UIViewController {
     func enableAutomaticStatusBarStyle() {
         guard let rootVC = UIApplication.shared.firstKeyWindow?.rootViewController as? PageBoyController else { return }
         rootVC.statusBarStyle = .default
-        rootVC.setNeedsStatusBarAppearanceUpdate()
+        rootVC.animateStatusBarAppearanceUpdate()
+    }
+
+    //fade the status bar between styles instead of snapping, matching the
+    //length of the push/pop and page transitions it usually accompanies
+    func animateStatusBarAppearanceUpdate() {
+        UIView.animate(withDuration: 0.2) { self.setNeedsStatusBarAppearanceUpdate() }
     }
     
     //tell is viewcontroller was presented modally or was pushed by navigation stack
@@ -87,5 +93,12 @@ extension UIViewController {
         } else {
             return false
         }
+    }
+}
+
+extension UIApplication {
+    /// Decrements the app icon badge without letting it go negative.
+    func decrementBadge() {
+        applicationIconBadgeNumber = max(0, applicationIconBadgeNumber - 1)
     }
 }
