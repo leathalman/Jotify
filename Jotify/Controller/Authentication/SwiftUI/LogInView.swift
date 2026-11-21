@@ -116,6 +116,10 @@ struct EmailTextField: View {
     @Binding var email: String
     var body: some View {
         return TextField("Email", text: $email)
+            .keyboardType(.emailAddress)
+            .textContentType(.emailAddress)
+            .textInputAutocapitalization(.never)
+            .disableAutocorrection(true)
             .padding()
             .background(colorScheme == .light ? Color.white : Color.black)
             .cornerRadius(5.0)

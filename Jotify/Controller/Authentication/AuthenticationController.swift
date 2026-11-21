@@ -58,6 +58,10 @@ class AuthenticationController: UIViewController {
         let alertController = UIAlertController(title: nil, message: "What email is your account under?", preferredStyle: .alert)
         alertController.addTextField { (textField) in
             textField.placeholder = "Enter an email."
+            textField.keyboardType = .emailAddress
+            textField.textContentType = .emailAddress
+            textField.autocapitalizationType = .none
+            textField.autocorrectionType = .no
         }
         alertController.addAction(UIAlertAction(title: "Send", style: .default, handler: { (action) in
             AuthManager.forgotPassword(email: (alertController.textFields?.first?.text)!) { (success, message) in

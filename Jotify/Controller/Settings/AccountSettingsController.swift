@@ -50,8 +50,10 @@ class AccountSettingsController: SettingsController {
                 alertController.addTextField { textField in
                     let placeholder = "Enter an email address."
                     textField.placeholder = placeholder
+                    textField.keyboardType = .emailAddress
+                    textField.textContentType = .emailAddress
                     textField.autocorrectionType = .no
-                    textField.autocapitalizationType = .sentences
+                    textField.autocapitalizationType = .none
                 }
                 alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 alertController.addAction(UIAlertAction(title: "Submit", style: .default, handler: { [weak alertController] _ in
