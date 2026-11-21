@@ -31,8 +31,10 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     
     //life cycle
     override func viewDidLoad() {
+        let vdlID = Signposts.begin("WriteNote.viewDidLoad")
+        defer { Signposts.end("WriteNote.viewDidLoad", id: vdlID) }
         super.viewDidLoad()
-        setupView()
+        Signposts.measure("WriteNote.setupView") { setupView() }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

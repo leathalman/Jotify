@@ -8,8 +8,9 @@
 import UIKit
 import Pageboy
 import AuthenticationServices
+import os
 
-class PageBoyController: PageboyViewController, PageboyViewControllerDataSource {
+class PageBoyController: PageboyViewController, PageboyViewControllerDataSource, PageboyViewControllerDelegate {
     
     // MARK: Properties
     
@@ -34,8 +35,10 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
     // MARK: Lifecycle
     
     override func viewDidLoad() {
+        let vdlID = Signposts.begin("PageBoy.viewDidLoad")
+        defer { Signposts.end("PageBoy.viewDidLoad", id: vdlID) }
         super.viewDidLoad()
-                
+
         if UserDefaults.standard.bool(forKey: "useBiometrics") {
             let poc = PrivacyOverlayController()
             poc.modalPresentationStyle = .fullScreen
@@ -49,6 +52,7 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
         
         //set PageboyViewControllerDataSource dataSource to configure page view controller
         dataSource = self
+        delegate = self
         
         //remove bounce effect when overscrolling from page to page
         bounces = false
@@ -71,9 +75,57 @@ class PageBoyController: PageboyViewController, PageboyViewControllerDataSource 
         }
         
         view.backgroundColor = .clear
-        
+
         setupNoteRetrieval()
+
+        // Pre-warm the notes list view hierarchy so the first swipe from the
+        // write screen doesn't pay for `NoteCollectionController.viewDidLoad`
+        // (layout swap, cell registration, UISearchController install) on top
+        // of the Pageboy transition. Touching `.view` on the nav controller
+        // forces its root VC's view to load too.
+        Signposts.measure("PageBoy.prewarmNoteCollection") {
+            _ = noteCollectionController.view
+        }
     }
+
+    // MARK: PageboyViewControllerDelegate (signpost-only, no behavior)
+
+    private var pageScrollSignpostID: OSSignpostID?
+
+    func pageboyViewController(_ pageboyViewController: PageboyViewController,
+                               willScrollToPageAt index: PageboyViewController.PageIndex,
+                               direction: PageboyViewController.NavigationDirection,
+                               animated: Bool) {
+        pageScrollSignpostID = Signposts.begin("Pageboy.scroll")
+    }
+
+    func pageboyViewController(_ pageboyViewController: PageboyViewController,
+                               didScrollToPageAt index: PageboyViewController.PageIndex,
+                               direction: PageboyViewController.NavigationDirection,
+                               animated: Bool) {
+        if let id = pageScrollSignpostID {
+            Signposts.end("Pageboy.scroll", id: id)
+            pageScrollSignpostID = nil
+        }
+    }
+
+    func pageboyViewController(_ pageboyViewController: PageboyViewController,
+                               didScrollTo position: CGPoint,
+                               direction: PageboyViewController.NavigationDirection,
+                               animated: Bool) {}
+
+    func pageboyViewController(_ pageboyViewController: PageboyViewController,
+                               didCancelScrollToPageAt index: PageboyViewController.PageIndex,
+                               returningToPageAt previousIndex: PageboyViewController.PageIndex) {
+        if let id = pageScrollSignpostID {
+            Signposts.end("Pageboy.scroll", id: id)
+            pageScrollSignpostID = nil
+        }
+    }
+
+    func pageboyViewController(_ pageboyViewController: PageboyViewController,
+                               didReloadWith currentViewController: UIViewController,
+                               currentPageIndex: PageboyViewController.PageIndex) {}
     
     func setupNoteRetrieval() {
         //retrieve settings from Firebase here instead of AppDelegate

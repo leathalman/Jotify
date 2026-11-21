@@ -9,8 +9,17 @@ import UIKit
 import Blueprints
 import SwiftMessages
 import WidgetKit
+import os
 
-class NoteCollectionController: UICollectionViewController {
+class NoteCollectionController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+    // Was a `UICollectionViewController`, which made `self.view` the
+    // collection view and blocked pinning a sibling search bar above the
+    // keyboard. Plain `UIViewController` with a child collection view lets
+    // the search bar live as a real sibling that auto-layout can lift.
+    var collectionView: UICollectionView!
+    let searchBar = UISearchBar()
+    private var searchBarBottomConstraint: NSLayoutConstraint!
+
     //update collection view when model changes
     var noteCollection: NoteCollection? {
         didSet {
@@ -19,16 +28,23 @@ class NoteCollectionController: UICollectionViewController {
             }
         }
     }
-    
+
     //used to hold notes filtered by the search bar
     var filteredNotes: [FBNote] = []
 
     //used to track the cells selected while multi-selection is enabled
     var selectedCells: [IndexPath] = []
 
-    //global instance of searchController for NoteCollectionController
-    let searchController = UISearchController(searchResultsController: nil)
+    init(collectionViewLayout: UICollectionViewLayout) {
+        // The layout argument is ignored — `setupViewElements` swaps in the
+        // device-specific Blueprints layout — but the signature is kept so
+        // existing call sites don't need to change.
+        super.init(nibName: nil, bundle: nil)
+    }
 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     //layouts for collectionView
     let iOSLayout = VerticalBlueprintLayout(
@@ -55,35 +71,86 @@ class NoteCollectionController: UICollectionViewController {
     }
 
     override func viewDidLoad() {
+        let vdlID = Signposts.begin("NoteCollection.viewDidLoad")
+        defer { Signposts.end("NoteCollection.viewDidLoad", id: vdlID) }
         super.viewDidLoad()
-        setupViewElements()
-        setupNavigationBar()
-        setupSearchBar()
-        cleanupOldNotes()
+        Signposts.measure("NoteCollection.buildViewHierarchy") { buildViewHierarchy() }
+        Signposts.measure("NoteCollection.setupViewElements") { setupViewElements() }
+        Signposts.measure("NoteCollection.setupNavigationBar") { setupNavigationBar() }
+        Signposts.measure("NoteCollection.setupSearchBar") { setupSearchBar() }
+        Signposts.measure("NoteCollection.cleanupOldNotes") { cleanupOldNotes() }
 
-        NotificationCenter.default.addObserver(self, selector: #selector(pureDarkModeChanged(notification:)), name:NSNotification.Name(rawValue: "updatePureDarkMode"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(pureDarkModeChanged(notification:)), name: NSNotification.Name(rawValue: "updatePureDarkMode"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         hideToolbar()
-        // Previously we tore down `navigationItem.searchController` here and
-        // reinstalled it on every `viewWillAppear`. On iOS 26's stacked
-        // search bar that churn forces a nav bar relayout during every
-        // push/pop, which manifests as a stagger on every transition out of
-        // this screen. Leave the search controller installed.
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Keep the last row visible above the docked search bar. Only rewrite
+        // when the height actually changes — otherwise this triggers an
+        // infinite layout loop.
+        let inset = searchBar.bounds.height
+        if collectionView.contentInset.bottom != inset {
+            collectionView.contentInset.bottom = inset
+            collectionView.verticalScrollIndicatorInsets.bottom = inset
+        }
+    }
+
+    private func buildViewHierarchy() {
+        view.backgroundColor = ColorManager.bgColor
+
+        let initialLayout = UIDevice.current.userInterfaceIdiom == .pad ? iPadOSLayout : iOSLayout
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: initialLayout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        view.addSubview(collectionView)
+
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(searchBar)
+
+        searchBarBottomConstraint = searchBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            searchBarBottomConstraint,
+        ])
+    }
+
+    @objc private func keyboardWillChangeFrame(_ notification: Notification) {
+        guard let info = notification.userInfo,
+              let endFrame = info[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+              let duration = info[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
+              let curveRaw = info[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt else { return }
+
+        let localFrame = view.convert(endFrame, from: nil)
+        let overlap = max(0, view.bounds.maxY - localFrame.minY)
+        // `bottomAnchor` is already anchored to the safe area, so subtract the
+        // safe-area inset from the keyboard overlap to avoid double-counting
+        // the home indicator region.
+        searchBarBottomConstraint.constant = -max(0, overlap - view.safeAreaInsets.bottom)
+
+        UIView.animate(withDuration: duration,
+                       delay: 0,
+                       options: UIView.AnimationOptions(rawValue: curveRaw << 16)) {
+            self.view.layoutIfNeeded()
+        }
     }
     
     //view configuration
     func setupViewElements() {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            collectionView.setCollectionViewLayout(iPadOSLayout, animated: true)
-        } else if UIDevice.current.userInterfaceIdiom == .phone {
-            collectionView.setCollectionViewLayout(iOSLayout, animated: true)
-        }
-        
         extendedLayoutIncludesOpaqueBars = true
-        collectionView.frame = view.frame
         collectionView.alwaysBounceVertical = true
         
         CellState.shouldSelectMultiple = false
@@ -110,10 +177,13 @@ class NoteCollectionController: UICollectionViewController {
     
     func setupNavigationBar() {
         navigationItem.title = "Notes"
-        // Don't override the nav bar background on this screen. iOS 26's
-        // adaptive chrome animates smoothly between the idle search bar
-        // pill and the active state; forcing an opaque `ColorManager.bgColor`
-        // prevents that animation and produces a visible color jump.
+        // Opaque appearance. The old comment here warned against overriding
+        // it because iOS 26's Liquid Glass material animated nicely around
+        // the embedded search-bar pill — but the search bar no longer lives
+        // in the nav bar, so the glass material is pure cost: it re-samples
+        // the content behind it every frame during scroll, which is what
+        // stutters the overscroll bounce at the top of the collection view.
+        configureNavigationBar(bgColor: ColorManager.bgColor)
     }
     
 func resetAppBadgeIfAllRemindersCleared() {
@@ -136,7 +206,7 @@ func resetAppBadgeIfAllRemindersCleared() {
     
     //action handlers
     @objc func longTouchHandler(sender: UILongPressGestureRecognizer) {
-        if searchController.isActive {
+        if searchBar.isFirstResponder || isFiltering {
             return
         }
         
@@ -309,7 +379,7 @@ func resetAppBadgeIfAllRemindersCleared() {
     }
     
     //collectionView Logic
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //noteCollection.notes.count will return nil if no notes exist on launch, will return 0 if user deletes a note
         //and num of objs in array go to 0
         if (noteCollection?.FBNotes.count == nil) || (noteCollection?.FBNotes.count == 0) {
@@ -327,7 +397,7 @@ func resetAppBadgeIfAllRemindersCleared() {
         return noteCollection?.FBNotes.count ?? 0
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedNoteCell", for: indexPath) as? SavedNoteCell else { fatalError("Wrong cell class dequeued") }
 
         let note = isFiltering ? filteredNotes[indexPath.row] : noteCollection?.FBNotes[indexPath.row]
@@ -368,7 +438,7 @@ func resetAppBadgeIfAllRemindersCleared() {
         return cell
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.playHapticFeedback()
         
         if CellState.shouldSelectMultiple {

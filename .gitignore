@@ -18,3 +18,8 @@ Podfile.lock
 # Swift Package Manager — local caches only; keep Package.resolved tracked
 .swiftpm/
 .build/
+
+# Firebase emulator logs
+firebase-debug.log
+firestore-debug.log
+ui-debug.log

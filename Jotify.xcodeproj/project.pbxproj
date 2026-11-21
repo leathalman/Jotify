@@ -94,6 +94,7 @@
 		F6F185B225C86ABF001FD5FA /* MasterSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F185B125C86ABF001FD5FA /* MasterSettingsController.swift */; };
 		F6F392E226A75C5C007E8C9D /* TimePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F392E126A75C5C007E8C9D /* TimePickerCell.swift */; };
 		F6FFCE732638E71E0012307E /* PassableUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FFCE722638E71E0012307E /* PassableUIButton.swift */; };
+		F6511A1A11111111A1A1A1A1 /* Signposts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6511A1A22222222A2A2A2A2 /* Signposts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -200,6 +201,7 @@
 		F6F185B125C86ABF001FD5FA /* MasterSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterSettingsController.swift; sourceTree = "<group>"; };
 		F6F392E126A75C5C007E8C9D /* TimePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerCell.swift; sourceTree = "<group>"; };
 		F6FFCE722638E71E0012307E /* PassableUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassableUIButton.swift; sourceTree = "<group>"; };
+		F6511A1A22222222A2A2A2A2 /* Signposts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signposts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -432,6 +434,7 @@
 				F678330D2640F4D6005429FF /* NoteCollectionController+Search.swift */,
 				F62A02F726974A200020A89B /* UITextView+Toolbar.swift */,
 				F6E85EAC26B6000400F27BB5 /* StatusBarResponsiveNavigationController.swift */,
+				F6511A1A22222222A2A2A2A2 /* Signposts.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 				F6C06D5628371416005AED28 /* WelcomeViewOnboardingController.swift in Sources */,
 				F6E85EAD26B6000400F27BB5 /* StatusBarResponsiveNavigationController.swift in Sources */,
 				F6F185A625C85F98001FD5FA /* UITextView+Padding.swift in Sources */,
+				F6511A1A11111111A1A1A1A1 /* Signposts.swift in Sources */,
 				F6B9AE0C25DCC871008467C6 /* MigrationHandler.swift in Sources */,
 				F67FFFF325B32E1F00313D61 /* SceneDelegate.swift in Sources */,
 				F61580182697D3BA00ABB6F6 /* GeneralSettingsController.swift in Sources */,

@@ -6,6 +6,8 @@
 //
 
 import Firebase
+import FirebaseFirestore
+import FirebaseAuth
 import CoreData
 import AuthenticationServices
 
@@ -15,7 +17,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        
+
+        // Enable Firestore's disk-backed cache so the snapshot listener can
+        // serve notes immediately from local storage on cold launch and
+        // reconcile with the server in the background. Must be set before
+        // any other `Firestore.firestore()` access.
+        let firestoreSettings = FirestoreSettings()
+        firestoreSettings.cacheSettings = PersistentCacheSettings()
+
+        #if DEBUG && targetEnvironment(simulator)
+        // Debug simulator builds talk to the local Firebase Emulator Suite
+        // (`npx firebase-tools emulators:start`, then
+        // `node scripts/seed-emulator.mjs`) instead of production. Set the
+        // `USE_PRODUCTION_FIREBASE` environment variable in the scheme to opt
+        // out. Device builds can't reach the Mac's localhost, so they always
+        // use production.
+        if ProcessInfo.processInfo.environment["USE_PRODUCTION_FIREBASE"] == nil {
+            Auth.auth().useEmulator(withHost: "127.0.0.1", port: 9099)
+            firestoreSettings.host = "127.0.0.1:8080"
+            firestoreSettings.isSSLEnabled = false
+            print("Firebase: using local emulators (auth :9099, firestore :8080)")
+        }
+        #endif
+
+        Firestore.firestore().settings = firestoreSettings
+
         //check to see if Apple credential revoked since last launch
         didAppleIDStateRevokeWhileTerminated()
         

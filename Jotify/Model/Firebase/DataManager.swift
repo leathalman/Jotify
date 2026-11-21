@@ -192,14 +192,12 @@ class DataManager {
                 let reminder = diff.document.get("reminder") as? String ?? ""
                 let reminderTimestamp = diff.document.get("reminderTimestamp") as? Double ?? 0
                 let note = FBNote(content: content, timestamp: timestamp, id: id, color: color, reminder: reminder, reminderTimestamp: reminderTimestamp)
-                
+
                 if (diff.type == .added) {
-//                    print("New note: \(diff.document.data())")
                     collection.FBNotes.insert(note, at: 0)
                 }
-                
+
                 if (diff.type == .modified) {
-//                    print("Modified note: \(diff.document.data())")
                     if let noteIndex = collection.FBNotes.firstIndex(where: { $0.id == id}) {
                         collection.FBNotes.remove(at: noteIndex)
                         //could also just append to array normally since array is sorted below
@@ -207,14 +205,18 @@ class DataManager {
                     }
                     collection.FBNotes.sort { ($0.timestamp) > ($1.timestamp) }
                 }
-                
+
                 if (diff.type == .removed) {
-//                    print("Removed note: \(diff.document.data())")
                     collection.FBNotes = collection.FBNotes.filter {$0.id != diff.document.documentID }
                 }
-                
-                completionHandler(collection, true)
             }
+
+            // Fire the completion once per snapshot, not once per document
+            // change. The old code invoked it inside `forEach`, so the
+            // initial snapshot with N notes produced N `reloadData()` calls
+            // on the main thread — visible as a stagger on first paint and
+            // a spike whenever multiple notes changed at once.
+            completionHandler(collection, true)
         }
     }
     

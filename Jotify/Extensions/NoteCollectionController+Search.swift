@@ -8,25 +8,19 @@
 import UIKit
 
 extension NoteCollectionController: UISearchBarDelegate {
-    
+
     func setupSearchBar() {
-        searchController.searchResultsUpdater = self as UISearchResultsUpdating
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Notes"
-        searchController.hidesNavigationBarDuringPresentation = false
-        // Hide the inner clear-text X. iOS 26's automatic Cancel glass pill
-        // handles dismissal, and users can backspace to clear — two X's in
-        // the same control is visual clutter.
-        searchController.searchBar.searchTextField.clearButtonMode = .never
-        searchController.isActive = false
-        searchController.searchBar.delegate = self
-        navigationItem.searchController = searchController
-        // Pin the search bar to the stacked position (below the title). iOS 26
-        // otherwise places the bar near the bottom of the screen for no-tab-bar
-        // apps, where the keyboard hides it.
-        if #available(iOS 16.0, *) {
-            navigationItem.preferredSearchBarPlacement = .stacked
-        }
+        // Plain UISearchBar instead of UISearchController. UISearchController
+        // paid a noticeable first-tap cost on cold launch while UIKit built
+        // out its private results/dimming/animator hierarchy. A bare search
+        // bar has none of that — `becomeFirstResponder` is cheap from cold.
+        searchBar.placeholder = "Search Notes"
+        searchBar.searchBarStyle = .minimal
+        searchBar.searchTextField.clearButtonMode = .never
+        searchBar.autocapitalizationType = .none
+        searchBar.autocorrectionType = .no
+        searchBar.returnKeyType = .search
+        searchBar.delegate = self
     }
 
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
@@ -42,20 +36,32 @@ extension NoteCollectionController: UISearchBarDelegate {
         collectionView.reloadData()
     }
 
-
-    //true if the search bar is active and has search parameters (not empty)
     var isFiltering: Bool {
-        return searchController.isActive && !isSearchBarEmpty
+        return !isSearchBarEmpty
     }
-    
-    var isSearchBarEmpty: Bool {
-        return searchController.searchBar.text?.isEmpty ?? true
-    }
-    
-}
 
-extension NoteCollectionController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        filterContentForSearchText(searchController.searchBar.text!)
+    var isSearchBarEmpty: Bool {
+        return searchBar.text?.isEmpty ?? true
+    }
+
+    // MARK: UISearchBarDelegate
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filterContentForSearchText(searchText)
+    }
+
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.resignFirstResponder()
+        filterContentForSearchText("")
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }
