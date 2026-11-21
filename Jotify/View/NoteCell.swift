@@ -12,12 +12,14 @@ import UIKit
 /// (driven by the collection view's own multi-select state).
 class SavedNoteCell: UICollectionViewCell {
 
-    // At most three lines, top-pinned: every card's text starts at the same
-    // height and truncates with "…" on the last line. (Letting the label
-    // shrink to whatever fit made truncated cards render lower.)
+    // One size for the whole preview, top-pinned, at most four lines: every
+    // card's text starts at the same height and ends with "…" if cut off.
     private let textLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 3
+        label.font = UIFontMetrics(forTextStyle: .subheadline)
+            .scaledFont(for: .systemFont(ofSize: 15, weight: .medium))
+        label.adjustsFontForContentSizeCategory = true
+        label.numberOfLines = 4
         label.lineBreakMode = .byTruncatingTail
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -93,7 +95,8 @@ class SavedNoteCell: UICollectionViewCell {
         let foreground: UIColor = background.isDarkColor ? .white : .black
 
         contentView.backgroundColor = background
-        textLabel.attributedText = Self.preview(for: note.content, color: foreground)
+        textLabel.text = note.content.trimmingCharacters(in: .whitespacesAndNewlines)
+        textLabel.textColor = foreground
         dateLabel.text = Self.shortDate(note.timestamp)
         dateLabel.textColor = foreground.withAlphaComponent(0.75)
         reminderIcon.tintColor = foreground.withAlphaComponent(0.75)
@@ -120,26 +123,6 @@ class SavedNoteCell: UICollectionViewCell {
         // Dim the unselected cards slightly while picking, like Photos.
         contentView.alpha = state.isEditing && !state.isSelected ? 0.75 : 1
         accessibilityTraits = state.isSelected ? [.button, .selected] : .button
-    }
-
-    /// First line as a headline, the rest as a lighter preview.
-    private static func preview(for content: String, color: UIColor) -> NSAttributedString {
-        let trimmed = content.trimmingCharacters(in: .whitespacesAndNewlines)
-        let parts = trimmed.split(separator: "\n", maxSplits: 1, omittingEmptySubsequences: true)
-        let title = parts.first.map(String.init) ?? ""
-        let body = parts.count > 1 ? String(parts[1]) : ""
-
-        let result = NSMutableAttributedString(string: title, attributes: [
-            .font: UIFont.preferredFont(forTextStyle: .headline),
-            .foregroundColor: color,
-        ])
-        if !body.isEmpty {
-            result.append(NSAttributedString(string: "\n" + body, attributes: [
-                .font: UIFont.preferredFont(forTextStyle: .subheadline),
-                .foregroundColor: color.withAlphaComponent(0.8),
-            ]))
-        }
-        return result
     }
 
     /// "3:41 PM" today, "Yesterday", "Mar 3" this year, "Mar 3, 2024" before.

@@ -38,7 +38,6 @@ class User {
             defaults.setValue(settings?.referralLink, forKey: "referralLink")
             defaults.setValue(settings?.hasPremium, forKey: "hasPremium")
             defaults.setValue(settings?.usePureDarkMode, forKey: "usePureDarkMode")
-            print("Userdefaults settings updated")
         }
     }
         

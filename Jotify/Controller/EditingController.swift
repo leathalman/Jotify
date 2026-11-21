@@ -145,7 +145,6 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
             if EditingData.currentNote.reminderTimestamp ?? 0 < Date().timeIntervalSinceReferenceDate {
                 DataManager.removeReminder(uid: EditingData.currentNote.id) { success in
                     if success! {
-                        print("Reminder outdated, removed successfully")
                         UIApplication.shared.refreshReminderBadge(clearing: EditingData.currentNote.reminder)
                         EditingData.currentNote.reminderTimestamp = nil
                         EditingData.currentNote.reminder = nil
@@ -154,8 +153,6 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
                     }
                 }
             }
-        } else {
-            print("No reminder to delete")
         }
         
     }

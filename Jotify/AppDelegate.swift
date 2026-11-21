@@ -78,7 +78,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 switch(credentialState) {
                 case .authorized:
-                    print("Signed In with Apple, valid credential")
                     break
                 case .notFound,
                         .transferred,

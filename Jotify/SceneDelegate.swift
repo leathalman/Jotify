@@ -24,10 +24,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
                 
         //check if user is logged in
         if !AuthManager().uid.isEmpty {
-            print("logged in")
             setupWindows(scene: scene, vc: PageBoyController())
         } else {
-            print("not logged in")
             if SetupController.firstLauch ?? false {
                 setupWindows(scene: scene, vc: OnboardingController())
             } else {
@@ -150,7 +148,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
         presentable.modalPresentationStyle = .fullScreen
         
         if !AuthManager().uid.isEmpty {
-            print("logged in")
             if !UserDefaults.standard.bool(forKey: "useBiometrics") {
                 window?.rootViewController?.present(presentable, animated: true, completion: nil)
             }

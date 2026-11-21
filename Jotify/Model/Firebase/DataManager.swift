@@ -43,7 +43,6 @@ class DataManager {
                 print("Error retrieving document: \(error.localizedDescription)")
                 completionHandler(nil, false)
             } else {
-                print("Firebase settings retrieved")
                 let settings = Settings(
                     multilineInputEnabled: snapshot?.get("multilineInputEnabled") as? Bool ?? false,
                     deleteOldNotes: snapshot?.get("deleteOldNotes") as? Bool ?? false,
