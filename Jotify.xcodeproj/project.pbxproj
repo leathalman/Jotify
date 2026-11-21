@@ -57,6 +57,7 @@
 		F67FFFF125B32E1F00313D61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67FFFF025B32E1F00313D61 /* AppDelegate.swift */; };
 		F67FFFF325B32E1F00313D61 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67FFFF225B32E1F00313D61 /* SceneDelegate.swift */; };
 		F67FFFFA25B32E2000313D61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F67FFFF925B32E2000313D61 /* Assets.xcassets */; };
+		F6511A1A44444444A4A4A4A4 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = F6511A1A33333333A3A3A3A3 /* AppIcon.icon */; };
 		F67FFFFD25B32E2000313D61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F67FFFFB25B32E2000313D61 /* LaunchScreen.storyboard */; };
 		F680C9CD269A957000D86EF3 /* ReminderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F680C9CC269A957000D86EF3 /* ReminderController.swift */; };
 		F69389C92699158500EF3EED /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F69389C82699158500EF3EED /* WidgetKit.framework */; };
@@ -165,6 +166,7 @@
 		F67FFFF025B32E1F00313D61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F67FFFF225B32E1F00313D61 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F67FFFF925B32E2000313D61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F6511A1A33333333A3A3A3A3 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		F67FFFFC25B32E2000313D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F67FFFFE25B32E2000313D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F680C9CC269A957000D86EF3 /* ReminderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderController.swift; sourceTree = "<group>"; };
@@ -381,6 +383,7 @@
 				F67F002125B32ECC00313D61 /* Controller */,
 				F67F001F25B32EC100313D61 /* Model */,
 				F67FFFF925B32E2000313D61 /* Assets.xcassets */,
+				F6511A1A33333333A3A3A3A3 /* AppIcon.icon */,
 				F6CF5DF125DAF38D006E576E /* Jotify.xcdatamodeld */,
 				F6CF5DDC25DAEF2B006E576E /* Jotify.entitlements */,
 				F67FFFF025B32E1F00313D61 /* AppDelegate.swift */,
@@ -589,6 +592,7 @@
 				F67FFFFD25B32E2000313D61 /* LaunchScreen.storyboard in Resources */,
 				F65AA4F4283BF67B004D3750 /* IAP_ProductIDs.plist in Resources */,
 				F67FFFFA25B32E2000313D61 /* Assets.xcassets in Resources */,
+				F6511A1A44444444A4A4A4A4 /* AppIcon.icon in Resources */,
 				F6703A1B2638DD1E009863E3 /* NoteOptionMenu.xib in Resources */,
 				F620BD2625B338C7005BE77B /* GoogleService-Info.plist in Resources */,
 			);
