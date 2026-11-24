@@ -39,6 +39,11 @@ class NoteCollectionController: UIViewController, UICollectionViewDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // The keyboard may have come or gone while this screen was covered
+        // (by a note, or the other page). Put the search bar where it now
+        // belongs before the screen shows, instead of letting it slide there
+        // after the transition.
+        UIView.performWithoutAnimation { view.layoutIfNeeded() }
         enableAutomaticStatusBarStyle()
         resetAppBadgeIfAllRemindersCleared()
     }
@@ -258,6 +263,9 @@ class NoteCollectionController: UIViewController, UICollectionViewDelegate {
     }
 
     private func open(_ note: FBNote) {
+        // Drop the search keyboard first (keeping the query), so the bar is
+        // already back at the bottom when the note closes, like Notes.
+        view.endEditing(true)
         let controller = EditingController()
         controller.noteCollection = noteCollection
         controller.hidesBottomBarWhenPushed = true

@@ -54,7 +54,7 @@ class SavedNoteCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.layer.cornerRadius = 20
+        contentView.layer.cornerRadius = 5
         contentView.layer.cornerCurve = .continuous
         contentView.clipsToBounds = true
 
