@@ -19,7 +19,6 @@ struct Settings {
     var usePureDarkMode: Bool
     
     //invisible to user
-    var hasMigrated: Bool
     var referrals: Int
     var referralLink: String
     var hasPremium: Bool
@@ -30,7 +29,6 @@ class User {
         didSet {
             let defaults = UserDefaults.standard
             defaults.setValue(settings?.multilineInputEnabled, forKey: "multilineInputEnabled")
-            defaults.setValue(settings?.hasMigrated, forKey: "hasMigrated")
             defaults.setValue(settings?.deleteOldNotes, forKey: "deleteOldNotes")
             defaults.setValue(settings?.useHaptics, forKey: "useHaptics")
             defaults.setValue(settings?.useBiometrics, forKey: "useBiometrics")
@@ -40,7 +38,6 @@ class User {
             defaults.setValue(settings?.referralLink, forKey: "referralLink")
             defaults.setValue(settings?.hasPremium, forKey: "hasPremium")
             defaults.setValue(settings?.usePureDarkMode, forKey: "usePureDarkMode")
-            print("Userdefaults settings updated")
         }
     }
         

@@ -21,22 +21,32 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     var noteColor: UIColor = UIColor.black
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         //change status bar style to white
         setStatusBarStyle(style: .lightContent)
-        
-        //show the most recent placeholder
-        field.text = UserDefaults.standard.string(forKey: "placeholder")
+
+        //show the most recent placeholder, but never over a draft in progress
+        //(a cancelled page swipe can call this while the user is mid-note)
+        if field.textColor != .white {
+            field.text = UserDefaults.standard.string(forKey: "placeholder")
+        }
     }
     
     //life cycle
     override func viewDidLoad() {
+        let vdlID = Signposts.begin("WriteNote.viewDidLoad")
+        defer { Signposts.end("WriteNote.viewDidLoad", id: vdlID) }
         super.viewDidLoad()
-        setupView()
+        Signposts.measure("WriteNote.setupView") { setupView() }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
+    // Save in viewDidDisappear, not viewWillDisappear: the pager calls
+    // viewWillDisappear as soon as an interactive swipe *starts*, so a swipe
+    // the user cancels used to send the draft, clear the field, swap the
+    // gradient and drop the keyboard. viewDidDisappear only fires once the
+    // page has actually changed.
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         handleSend()
     }
     
@@ -93,7 +103,6 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
             
             field.text = UserDefaults.standard.string(forKey: "placeholder")
             
-            AnalyticsManager.logEvent(named: "note_created", description: "note_created")
         }
         field.resignFirstResponder()
     }
@@ -140,8 +149,7 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
         //disable reminder button when first editing field
         //field should be empty since user input hasn't happened yet
         if field.text == "" {
-            reminderButtonEnabled = false
-            setupToolbar()
+            setReminderButtonEnabled(false)
         }
     }
     
@@ -159,8 +167,6 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
         if !hasCreatedDocument {
             documentID = DataManager.createNote(content: field.text, timestamp: Date.timeIntervalSinceReferenceDate, color: noteColor.getString())
             EditingData.currentNote = FBNote(content: field.text, timestamp: Date.timeIntervalSinceReferenceDate, id: documentID ?? "", color: noteColor.getString(), reminder: nil, reminderTimestamp: nil)
-            //used to dictate whether NoteCollection should use client or server version of most recent note
-            EditingData.firstNote = true
             hasCreatedDocument = true
         } else if !field.text.isEmpty && field.textColor == .white {
             updateEditingData()
@@ -169,9 +175,17 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
         
         //re-enable reminder button now that user is typing
         if field.text != "" {
-            reminderButtonEnabled = true
-            setupToolbar()
+            setReminderButtonEnabled(true)
         }
+    }
+
+    //only rebuild the keyboard bar when the state actually flips; this ran
+    //setupToolbar() on every keystroke, rebuilding the SwiftUI bar ~3 times
+    //per character
+    private func setReminderButtonEnabled(_ enabled: Bool) {
+        guard reminderButtonEnabled != enabled else { return }
+        reminderButtonEnabled = enabled
+        setupToolbar()
     }
     
     //update UI to new color chosen from ColorGallery
@@ -202,17 +216,5 @@ class WriteNoteController: ToolbarViewController, UITextViewDelegate {
     
     override func keyboardSaveNote() {
         handleSend()
-    }
-    
-    //traitcollection: light/dark mode support with status bar
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        setStatusBarStyle(style: .lightContent)
-    }
-    
-    //detect when orientation of view will change -> iPad, not enabled on iPhone
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        //make sure gradient view resizes properly
-        view.viewWithTag(007)?.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
     }
 }

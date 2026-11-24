@@ -16,3 +16,16 @@ class SettingsCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+extension UITableViewCell {
+    /// Sets the cell's title using iOS 14+ content configuration API. Replaces
+    /// the deprecated `textLabel?.text` / `textLabel?.textColor` path.
+    func setTitle(_ text: String, color: UIColor? = nil) {
+        var config = defaultContentConfiguration()
+        config.text = text
+        if let color {
+            config.textProperties.color = color
+        }
+        contentConfiguration = config
+    }
+}

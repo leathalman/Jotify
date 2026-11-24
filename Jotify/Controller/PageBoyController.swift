@@ -6,226 +6,221 @@
 //
 
 import UIKit
-import Pageboy
+import FirebaseFirestore
 import AuthenticationServices
+import os
 
-class PageBoyController: PageboyViewController, PageboyViewControllerDataSource {
-    
+/// The app's root: a native horizontal pager with the Notes list on the
+/// left and the write-a-note page on the right. (Name kept from the
+/// Pageboy days so existing call sites don't change.)
+class PageBoyController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+
     // MARK: Properties
-    
+
     var statusBarStyle: UIStatusBarStyle = .lightContent
-    
-    //view controllers that will be displayed in page view controller.
-    let noteCollectionController = UINavigationController(rootViewController: NoteCollectionController(collectionViewLayout: UICollectionViewFlowLayout()))
+
+    /// Live Firestore listener for the signed-in user's notes.
+    private var notesListener: ListenerRegistration?
+
+    let noteCollectionController = UINavigationController(rootViewController: NoteCollectionController())
     let writeNotesController = WriteNoteController()
-    
-    private lazy var viewControllers: [UIViewController] = {
-        return [self.noteCollectionController, self.writeNotesController]
-    }()
-    
+
+    private lazy var pages: [UIViewController] = [noteCollectionController, writeNotesController]
+
+    /// The pager's internal scroll view, for turning swipes on and off.
+    private var pagingScrollView: UIScrollView? {
+        view.subviews.compactMap { $0 as? UIScrollView }.first
+    }
+
+    var currentIndex: Int? {
+        viewControllers?.first.flatMap { pages.firstIndex(of: $0) }
+    }
+
     var noteCollection: NoteCollection? {
         didSet {
             if isViewLoaded {
-                SetupController.updateRecentWidget(note: self.noteCollection?.FBNotes.first ?? FBNote(content: "There was an error retrieving your note.", timestamp: 0, id: "", color: "systemBlue"))
+                SetupController.updateRecentWidget(note: self.noteCollection?.FBNotes.first ?? FBNote(content: "", timestamp: 0, id: "", color: ""))
             }
         }
     }
-    
+
     // MARK: Lifecycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-                
-        if UserDefaults.standard.bool(forKey: "useBiometrics") {
-            let poc = PrivacyOverlayController()
-            poc.modalPresentationStyle = .fullScreen
-            present(poc, animated: true, completion: nil)
-        }
-        
-        if (!(User.settings?.hasPremium ?? false)) {
-            //if they don't already have premium fetch the records from Apple
-            IAPManager.shared.requestIAP()
-        }
-        
-        //set PageboyViewControllerDataSource dataSource to configure page view controller
-        dataSource = self
-        
-        //remove bounce effect when overscrolling from page to page
-        bounces = false
-        
-        //set custom transition to allow time for keyboard to pop up when programmatically scrolling
-        transition = Transition(style: .push, duration: 0.15)
-        
-        //setup the color system for background with light/dark mode
-        if traitCollection.userInterfaceStyle == .light {
-            ColorManager.bgColor = .jotifyGray
-        } else if traitCollection.userInterfaceStyle == .dark {
-            if UserDefaults.standard.bool(forKey: "usePureDarkMode") {
-                ColorManager.bgColor = .black
-            } else {
-                ColorManager.bgColor = .mineShaft
-            }
-        }
-        
-        view.backgroundColor = .clear
-        
-        setupNoteRetrieval()
+
+    init() {
+        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     }
-    
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    deinit {
+        notesListener?.remove()
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    override func viewDidLoad() {
+        let vdlID = Signposts.begin("PageBoy.viewDidLoad")
+        defer { Signposts.end("PageBoy.viewDidLoad", id: vdlID) }
+        super.viewDidLoad()
+
+        // The biometric lock is shown by SceneDelegate (on launch, foreground
+        // and background), not from here.
+
+        dataSource = self
+        delegate = self
+        view.backgroundColor = .clear
+
+        // defaultView 0 opens on the write page, 1 on the Notes list.
+        let startPage = UserDefaults.standard.integer(forKey: "defaultView") == 1 ? noteCollectionController : writeNotesController
+        setViewControllers([startPage], direction: .forward, animated: false)
+
+        // Editing a note pushes onto the Notes navigation stack; paging
+        // sideways from there would strand the editor.
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("disableSwipe"), object: nil, queue: .main) { [weak self] _ in
+            self?.pagingScrollView?.isScrollEnabled = false
+        }
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("enableSwipe"), object: nil, queue: .main) { [weak self] _ in
+            self?.pagingScrollView?.isScrollEnabled = true
+        }
+
+        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { (self: Self, _: UITraitCollection) in
+            self.refreshStatusBarStyle()
+        }
+
+        setupNoteRetrieval()
+
+        // Pre-warm the notes list view hierarchy so the first swipe from the
+        // write screen doesn't pay for `NoteCollectionController.viewDidLoad`.
+        Signposts.measure("PageBoy.prewarmNoteCollection") {
+            _ = noteCollectionController.view
+            noteCollectionController.viewControllers.first?.loadViewIfNeeded()
+        }
+        refreshStatusBarStyle()
+    }
+
+    // MARK: UIPageViewControllerDataSource
+
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        guard let index = pages.firstIndex(of: viewController), index > 0 else { return nil }
+        return pages[index - 1]
+    }
+
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        guard let index = pages.firstIndex(of: viewController), index < pages.count - 1 else { return nil }
+        return pages[index + 1]
+    }
+
+    // MARK: UIPageViewControllerDelegate
+
+    private var pageScrollSignpostID: OSSignpostID?
+
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        pageScrollSignpostID = Signposts.begin("Pager.scroll")
+    }
+
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        if let id = pageScrollSignpostID {
+            Signposts.end("Pager.scroll", id: id)
+            pageScrollSignpostID = nil
+        }
+        // Child appearance callbacks fire when a swipe starts, so the page
+        // being swiped toward may have already restyled the status bar.
+        // Recompute for whichever page is actually showing (this also covers
+        // cancelled swipes).
+        refreshStatusBarStyle()
+    }
+
+    // MARK: Status bar
+
+    /// Recomputes the status bar style for whichever page is showing.
+    func refreshStatusBarStyle() {
+        guard let page = viewControllers?.first else { return }
+
+        let style: UIStatusBarStyle
+        if page === writeNotesController {
+            style = .lightContent
+        } else if noteCollectionController.topViewController is EditingController {
+            style = EditingData.currentNote.color.getColor().isDarkColor ? .lightContent : .darkContent
+        } else {
+            style = .default
+        }
+
+        guard style != statusBarStyle else { return }
+        statusBarStyle = style
+        animateStatusBarAppearanceUpdate()
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        statusBarStyle
+    }
+
+
+    // MARK: Data
+
     func setupNoteRetrieval() {
-        //retrieve settings from Firebase here instead of AppDelegate
-        //cloud settings > local settings
-        //if cloud settings hasn't migrated check with local settings
-        //if local settings hasn't migrated check too, then initialize CloudKit and start migration process
+        //cloud settings win over local settings
         DataManager.retrieveUserSettings { (settings, success) in
-            if success! {
-                User.settings = settings
-                
-                if settings?.referralLink == "" {
-                    print("created new referral link")
-                    ReferralManager().createReferralLink()
-                }
-                
-                if !(settings?.hasPremium ?? false) {
-                    self.checkForRestorePurchase()
-                }
-                
-                //check to see if they should get premium from referrals
-                if !(settings?.hasPremium ?? false) {
-                    if settings?.referrals ?? 0 >= 3 {
-                        print("Awarding premium from referrals")
-                        //TODO: LET USER KNOW THEY GOT PREMIUM!
-                        DataManager.updateUserSettings(setting: "hasPremium", value: true) { success in
-                            if !success! {
-                                print("Error awarding premium from referral")
-                            }
-                        }
+            guard success == true else { return }
+            User.settings = settings
+
+            if settings?.referralLink == "" {
+                ReferralManager().createReferralLink()
+            }
+
+            if !(settings?.hasPremium ?? false) {
+                if settings?.referrals ?? 0 >= 3 {
+                    //three referrals earn premium
+                    DataManager.updateUserSettings(setting: "hasPremium", value: true) { success in
+                        if success != true { print("Error awarding premium from referral") }
                     }
-                }
-                
-                print("Has migrated: \(User.settings?.hasMigrated ?? false)")
-                if !(settings!.hasMigrated) && !UserDefaults.standard.bool(forKey: "hasMigrated") {
-                    //ask user if they want to migrate notes
-                    let alertController = UIAlertController(title: "Have you used Jotify before?", message: "If you have, Jotify can automatically import your notes from previous verions. Do you want to import your old notes?", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "No", style: .default, handler: {(action) in
-                        //set these values, so this prompt does not appear on every launch
-                        UserDefaults.standard.setValue(true, forKey: "hasMigrated")
-                        DataManager.updateUserSettings(setting: "hasMigrated", value: true) { (success) in }
-                    }))
-                    alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: {(action) in
-                        //notify when notes are fetched from context, CloudKit
-                        NotificationCenter.default.addObserver(self, selector: #selector(self.migrateDataFromCloudKit), name: .NSManagedObjectContextObjectsDidChange, object: MigrationHandler().context)
-                    }))
-                    self.present(alertController, animated: true, completion: nil)
+                } else {
+                    // Purchases made on another device or before a reinstall
+                    // show up in StoreKit's entitlements; no password prompt.
+                    Task { await PremiumStore.shared.refreshEntitlement() }
                 }
             }
         }
-        
-        //get notes from Firebase
-        DataManager.observeNoteChange { (collection, success) in
-            if success! {
-                let controller = self.noteCollectionController.viewControllers.first as! NoteCollectionController
-                controller.noteCollection = collection
+
+        // Keep the registration and capture self weakly: Firestore holds the
+        // listener until it's removed.
+        notesListener?.remove()
+        notesListener = DataManager.observeNoteChange { [weak self] (collection, success) in
+            guard let self else { return }
+            if success == true {
+                let controller = self.noteCollectionController.viewControllers.first as? NoteCollectionController
+                controller?.noteCollection = collection
                 self.noteCollection = collection
             } else {
                 print("Error retrieving note collection")
             }
         }
     }
-    
-    //if fetch request from CloudKit returns objects, duplicate each object in Firebase
-    @objc func migrateDataFromCloudKit() {
-        if !MigrationHandler.CDNotes.isEmpty {
-            NotificationCenter.default.removeObserver(self)
-            for note in MigrationHandler.CDNotes {
-                DataManager.createNote(content: note.content ?? "", timestamp: note.modifiedDate, color: ColorManager.noteColor.getString())
-                ColorManager.setNoteColor()
-            }
-            UserDefaults.standard.setValue(true, forKey: "hasMigrated")
-            DataManager.updateUserSettings(setting: "hasMigrated", value: true) { (success) in }
-        }
-    }
-    
-    // MARK: PageboyViewControllerDataSource
-    
-    func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
-        viewControllers.count //how many view controllers to display in the page view controller.
-    }
-    
-    func viewController(for pageboyViewController: PageboyViewController, at index: PageboyViewController.PageIndex) -> UIViewController? {
-        viewControllers[index] //view controller to display at a specific index for the page view controller.
-    }
-    
-    func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
-        if UserDefaults.standard.integer(forKey: "defaultView") == 0 {
-            return .last
-        } else if UserDefaults.standard.integer(forKey: "defaultView") == 1{
-            return .first
-        } else {
-            return .last //default page to display in the page view controller (nil equals default/first index).
-        }
-    }
-    
+
     // MARK: Actions
-    
+
     func scrollToWriteNoteController() {
-        scrollToPage(.last, animated: true) { (vc, result, result2) in
-            if result && result2 {
-                let writeNoteController = vc as! WriteNoteController
-                writeNoteController.field.becomeFirstResponder()
+        guard viewControllers?.first !== writeNotesController else {
+            writeNotesController.field.becomeFirstResponder()
+            return
+        }
+        setViewControllers([writeNotesController], direction: .forward, animated: true) { [weak self] finished in
+            guard let self, finished else { return }
+            // UIPageViewController keeps a stale neighbour cache after an
+            // animated programmatic turn; a second, non-animated set resets it
+            // so swiping back still lands on Notes.
+            DispatchQueue.main.async {
+                self.setViewControllers([self.writeNotesController], direction: .forward, animated: false)
             }
+            self.refreshStatusBarStyle()
+            self.writeNotesController.field.becomeFirstResponder()
         }
     }
-    
+
     //used to handle event when "Apple Credential Revoked" while app is in background
     @objc func appleIDStateDidRevoked(_ notification: Notification) {
         if AuthManager().isSignedInWithApple {
             AuthManager.signOut()
-        }
-    }
-    
-    // MARK: TraitCollection
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        if traitCollection.userInterfaceStyle == .light {
-            ColorManager.bgColor = .jotifyGray
-        } else if traitCollection.userInterfaceStyle == .dark {
-            if UserDefaults.standard.bool(forKey: "usePureDarkMode") {
-                ColorManager.bgColor = .black
-            } else {
-                ColorManager.bgColor = .mineShaft
-            }
-        }
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return statusBarStyle
-    }
-    
-    func checkForRestorePurchase() {
-        IAPManager.shared.restorePurchases { (result) in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let success):
-                    if success {
-                        //unlock premium
-                        DataManager.updateUserSettings(setting: "hasPremium", value: true) { success in
-                            if !success! {
-                                print("Error granting premium from restore")
-                            }
-                            print("Restored automatically")
-                            User.settings?.hasPremium = true
-                        }
-                    } else {
-                        //no products were found
-                        print("Nothing to automatically restore...")
-                    }
-                    
-                case .failure(let error):
-                    //there was an error
-                    print("\(error) restoring IAP")
-                }
-            }
         }
     }
 }

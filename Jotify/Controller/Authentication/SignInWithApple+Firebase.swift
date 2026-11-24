@@ -91,7 +91,7 @@ extension AuthenticationController: ASAuthorizationControllerDelegate {
         }
         
         // Initialize a Firebase credential using secure nonce and Apple identity token
-        let firebaseCredential = OAuthProvider.credential(withProviderID: "apple.com",
+        let firebaseCredential = OAuthProvider.credential(providerID: .apple,
                                                           idToken: idTokenString,
                                                           rawNonce: nonce)
         

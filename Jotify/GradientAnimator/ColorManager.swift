@@ -14,7 +14,13 @@ class ColorManager {
     
     static var noteColor = UIColor()
     static var indexes = [Int]()
-    static var bgColor = UIColor()
+    /// App background: light gray, or charcoal / pure black in dark mode.
+    /// Dynamic, so it follows light/dark changes by itself; views only need
+    /// to re-assign it when the pure-black setting changes.
+    static let bgColor = UIColor { traits in
+        guard traits.userInterfaceStyle == .dark else { return .jotifyGray }
+        return UserDefaults.standard.bool(forKey: "usePureDarkMode") ? .black : .mineShaft
+    }
     
     //a static instance of ColorManager must be created to persist the value of indexes
     //fill an array of indexes that correspond to the array as a parameter

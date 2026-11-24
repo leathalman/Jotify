@@ -13,20 +13,32 @@ class GroupDataManager {
     
     //where path = "recentNoteContent" or "recentNoteColor" or "recentNoteDate"
     static func readData(path: String) -> String {
-        let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: group)?.appendingPathComponent(path)
+        guard let url = FileManager.default
+                .containerURL(forSecurityApplicationGroupIdentifier: group)?
+                .appendingPathComponent(path) else {
+            print("App group container unavailable for \(group); skipping read.")
+            return "Error retrieving data"
+        }
         do {
-            let data = try Data(contentsOf: url!)
-            let string = String(data: data, encoding: .utf8)!
-            return string
+            let data = try Data(contentsOf: url)
+            return String(data: data, encoding: .utf8) ?? "Error retrieving data"
         } catch {
             print("Error retrieving data from local file for widget. Maybe file doesn't exist?")
             return "Error retrieving data"
         }
     }
-    
+
     static func writeData(path: String, content: String) {
-        let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: group)?.appendingPathComponent(path)
-        let data = Data(content.utf8)
-        try! data.write(to: url!)
+        guard let url = FileManager.default
+                .containerURL(forSecurityApplicationGroupIdentifier: group)?
+                .appendingPathComponent(path) else {
+            print("App group container unavailable for \(group); skipping write of \(path).")
+            return
+        }
+        do {
+            try Data(content.utf8).write(to: url)
+        } catch {
+            print("Failed to write \(path) to app group: \(error.localizedDescription)")
+        }
     }
 }

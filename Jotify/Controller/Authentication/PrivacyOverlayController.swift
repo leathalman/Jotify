@@ -12,32 +12,67 @@ import LocalAuthentication
 class PrivacyOverlayController: UIViewController {
     
     var jotifyIconView = UIImageView()
-    
+    private var activeObserver: NSObjectProtocol?
+    private var isAuthenticating = false
+
     override func viewDidLoad() {
+        super.viewDidLoad()
         setupView()
-        authenticate()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        authenticateWhenActive()
+    }
+
+    deinit {
+        if let activeObserver { NotificationCenter.default.removeObserver(activeObserver) }
+    }
+
+    /// The lock is now also put up as the app goes to the background (to hide
+    /// the app-switcher snapshot). Face ID can't run then, so wait until the
+    /// app is active again before prompting.
+    private func authenticateWhenActive() {
+        if UIApplication.shared.applicationState == .active {
+            authenticate()
+            return
+        }
+        guard activeObserver == nil else { return }
+        activeObserver = NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: .main) { [weak self] _ in
+            guard let self else { return }
+            if let observer = self.activeObserver {
+                NotificationCenter.default.removeObserver(observer)
+                self.activeObserver = nil
+            }
+            self.authenticate()
+        }
     }
     
     func setupView() {
-        view.backgroundColor = UIColor(hex: "DBDCDD")
-        
-        jotifyIconView = UIImageView(image: UIImage(named: "icon"))
+        //same look as the launch screen, so locking/unlocking feels like one surface
+        view.backgroundColor = UIColor(named: "LaunchBackground")
+
+        jotifyIconView = UIImageView(image: UIImage(named: "BrandIcon"))
+        jotifyIconView.contentMode = .scaleAspectFit
         jotifyIconView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         view.addSubview(jotifyIconView)
-        
+
         jotifyIconView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        jotifyIconView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -175).isActive = true
-        jotifyIconView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        jotifyIconView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        jotifyIconView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        jotifyIconView.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        jotifyIconView.heightAnchor.constraint(equalToConstant: 120).isActive = true
     }
     
     func authenticate() {
+        guard !isAuthenticating else { return }
+        isAuthenticating = true
         let context = LAContext()
         let reason = "Unlock Jotify to access your notes."
-        
+
         context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, _ in
             DispatchQueue.main.async {
+                self.isAuthenticating = false
                 if success {
                     print("successful auth")
                     self.dismiss(animated: true, completion: nil)
@@ -52,21 +87,23 @@ class PrivacyOverlayController: UIViewController {
     
     //add buttons to view when user authenication fails the first time
     func addOptionalButtons() {
-        let unlockButton = UIButton()
-        unlockButton.setTitle("Unlock", for: .normal)
-        unlockButton.setTitleColor(.white, for: .normal)
+        var unlockConfig = UIButton.Configuration.filled()
+        unlockConfig.baseBackgroundColor = .brandCoral
+        unlockConfig.baseForegroundColor = .white
+        unlockConfig.cornerStyle = .large
+        unlockConfig.buttonSize = .large
+        unlockConfig.title = "Unlock"
+        let unlockButton = UIButton(configuration: unlockConfig)
         unlockButton.addTarget(self, action: #selector(unlock), for: .touchUpInside)
         unlockButton.translatesAutoresizingMaskIntoConstraints = false
-        unlockButton.backgroundColor = UIColor.jotifyBlue
-        unlockButton.layer.cornerRadius = 10
         unlockButton.alpha = 0
-        
-        let logoutLabel = UIButton()
-        logoutLabel.setTitle("Log Out", for: .normal)
-        logoutLabel.setTitleColor(.jotifyBlue, for: .normal)
+
+        var logoutConfig = UIButton.Configuration.plain()
+        logoutConfig.baseForegroundColor = .brandCoral
+        logoutConfig.title = "Log Out"
+        let logoutLabel = UIButton(configuration: logoutConfig)
         logoutLabel.addTarget(self, action: #selector(logout), for: .touchUpInside)
         logoutLabel.translatesAutoresizingMaskIntoConstraints = false
-        logoutLabel.backgroundColor = .clear
         logoutLabel.alpha = 0
         
         view.addSubview(unlockButton)

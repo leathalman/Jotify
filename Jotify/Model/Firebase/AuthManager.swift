@@ -6,6 +6,8 @@
 //
 
 import FirebaseAuth
+import UIKit
+import UserNotifications
 
 class AuthManager {
     
@@ -53,9 +55,11 @@ class AuthManager {
             //remove biometrics
             UserDefaults.standard.set(false, forKey: "useBiometrics")
             //reset app notification badge since no account is logged in
-            UIApplication.shared.applicationIconBadgeNumber = 0
-            //remove all pending reminders, when user logs out
-            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+            //remove all reminders, pending and delivered, when user logs out
+            let center = UNUserNotificationCenter.current()
+            center.removeAllPendingNotificationRequests()
+            center.removeAllDeliveredNotifications()
+            center.setBadgeCount(0)
         }
         catch { print("User already logged out") }
     }
@@ -106,18 +110,25 @@ class AuthManager {
             UserDefaults.standard.set(nil, forKey: "appleAuthorizedUserIdKey")
             completionHandler(false, "Your account is connected to Sign In with Apple, so there is no email to be changed. Jotify does not have access to a real email address.")
         } else {
-            Auth.auth().currentUser?.updateEmail(to: email) { error in
+            Auth.auth().currentUser?.sendEmailVerification(beforeUpdatingEmail: email) { error in
                 if let error = error, let _ = AuthErrorCode(rawValue: error._code) {
                     print("Email change failed: \(error.localizedDescription)")
                     completionHandler(false, error.localizedDescription)
                 } else {
-                    print("Email address successfully changed")
-                    completionHandler(true, "Email address successfully changed")
+                    print("Verification email sent to new address")
+                    completionHandler(true, "A verification link was sent to \(email). Your account email will update after you confirm it.")
                 }
             }
         }
     }
     
+    /// Firebase rejects account deletion (`requiresRecentLogin`) unless the
+    /// user signed in within roughly the last five minutes.
+    static var hasRecentLogin: Bool {
+        guard let lastSignIn = Auth.auth().currentUser?.metadata.lastSignInDate else { return false }
+        return Date().timeIntervalSince(lastSignIn) < 5 * 60
+    }
+
     //delete a user account + all notes and settings tied to account
     static func deleteUser(completionHandler: @escaping (Bool?, String?) -> Void) {
         let user = Auth.auth().currentUser

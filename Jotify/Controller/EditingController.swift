@@ -8,8 +8,12 @@
 import UIKit
 
 class EditingController: ToolbarViewController, UITextViewDelegate {
-    
+
     var noteCollection: NoteCollection?
+
+    override var accessoryTintColor: UIColor {
+        EditingData.currentNote.color.getColor().isDarkColor ? .white : .black
+    }
     
     //store the content value before note is edited
     var initialContent: String?
@@ -29,10 +33,9 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
         setupView()
         setupNavBar()
         
-        //remove multiline input icon
-        keyboardToolbar.items?.remove(at: 0)
-        //remove save note icon
-        keyboardToolbar.items?.removeLast()
+        //hide multiline input and save-note icons while editing an existing note
+        keyboardAccessory.setHidden(Self.multilineItemID, true)
+        keyboardAccessory.setHidden(Self.saveItemID, true)
         
         //disable swiping to create a new note when editing
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
@@ -52,34 +55,42 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     }
     
     //view configuration
+    //one-time view setup; call applyNoteColor() to restyle afterwards
     func setupView() {
-        //color customization to support white/black dynamic type
-        view.backgroundColor = EditingData.currentNote.color.getColor()
-        field.backgroundColor = EditingData.currentNote.color.getColor()
-        field.textColor = EditingData.currentNote.color.getColor().isDarkColor ? .white : .black
-        field.tintColor = EditingData.currentNote.color.getColor().isDarkColor ? .white : .black
-        
         field.text = EditingData.currentNote.content
         initialContent = EditingData.currentNote.content
         field.delegate = self
         field.font = UIFont.boldSystemFont(ofSize: 18)
 
         view.addSubview(field)
-        
         setupConstraints()
-        
-        setStatusBarStyle(style: EditingData.currentNote.color.getColor().isDarkColor ? .lightContent : .darkContent)
+
+        applyNoteColor()
+    }
+
+    //color customization to support white/black dynamic type. Safe to call
+    //repeatedly: updateColorOverride used to re-run all of setupView, which
+    //stacked another full set of text-field constraints on every color change.
+    func applyNoteColor() {
+        let color = EditingData.currentNote.color.getColor()
+        view.backgroundColor = color
+        field.backgroundColor = color
+        field.textColor = color.isDarkColor ? .white : .black
+        field.tintColor = color.isDarkColor ? .white : .black
+
+        setStatusBarStyle(style: color.isDarkColor ? .lightContent : .darkContent)
     }
     
     //setup constraints for multiline textfield
     func setupConstraints() {
+        let safeArea = view.safeAreaLayoutGuide
         if UIDevice.current.userInterfaceIdiom == .pad {
             field.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            field.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+            field.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
             field.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
             field.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -35).isActive = true
         } else if UIDevice.current.userInterfaceIdiom == .phone {
-            field.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+            field.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
             field.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             field.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
             field.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -89,17 +100,21 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     func setupNavBar() {
         //setup navigationbar elements
         navigationItem.title = EditingData.currentNote.timestamp.getDate()
-        navigationController?.configure(bgColor: EditingData.currentNote.color.getColor())
+        configureNavigationBar(bgColor: EditingData.currentNote.color.getColor())
         
         navigationItem.setHidesBackButton(true, animated: false)
         
-        //define image and action for each navigation button
-        let ellipsis = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: self, action: #selector(handleCancel))
-        let cancel = UIBarButtonItem(image: UIImage(systemName: "xmark.circle"), style: .plain, target: self, action: #selector(handleCancel))
+        // iOS 26 already wraps bar-button images in a glass pill, so use the
+        // plain glyph (`xmark`, `ellipsis`) — the system provides the circle.
+        let ellipsis = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(handleCancel))
+        let cancel = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(handleCancel))
         
-        //handle tint color of each button based on view background color
-        ellipsis.tintColor = EditingData.currentNote.color.getColor().isDarkColor ? .white : .black
-        cancel.tintColor = EditingData.currentNote.color.getColor().isDarkColor ? .white : .black
+        // Let the glyphs use the interface style's label color. iOS 26's
+        // Liquid Glass pill wraps the button in a light-ish translucent
+        // material regardless of the nav bar color, so matching tint to the
+        // *note* color would make the glyph vanish inside the pill.
+        ellipsis.tintColor = .label
+        cancel.tintColor = .label
         
 //        navigationItem.leftBarButtonItems = [ellipsis]
         navigationItem.rightBarButtonItem = cancel
@@ -130,18 +145,14 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
             if EditingData.currentNote.reminderTimestamp ?? 0 < Date().timeIntervalSinceReferenceDate {
                 DataManager.removeReminder(uid: EditingData.currentNote.id) { success in
                     if success! {
-                        print("Reminder outdated, removed successfully")
+                        UIApplication.shared.refreshReminderBadge(clearing: EditingData.currentNote.reminder)
                         EditingData.currentNote.reminderTimestamp = nil
                         EditingData.currentNote.reminder = nil
-                        //Retreive the value from User Defaults and decrease it by 1
-                        UIApplication.shared.applicationIconBadgeNumber -= 1
                     } else {
                         print("Reminder outdated, removed unsuccessfully")
                     }
                 }
             }
-        } else {
-            print("No reminder to delete")
         }
         
     }
@@ -194,13 +205,10 @@ class EditingController: ToolbarViewController, UITextViewDelegate {
     override func updateColorOverride(color: String) {
         colorOverride = color
         EditingData.currentNote.color = color
-        
-        setupView()
+
+        applyNoteColor()
         setupNavBar()
-        
-        //force navigation bar to redraw since color change does not take effect otherwise
-        self.navigationController?.isNavigationBarHidden = true
-        self.navigationController?.isNavigationBarHidden = false
+        setupToolbar()
         
         DataManager.updateNoteColor(color: color, uid: EditingData.currentNote.id) { success in
             //handle success here

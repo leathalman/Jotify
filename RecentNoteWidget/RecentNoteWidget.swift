@@ -11,24 +11,23 @@ import UIKit
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> RecentNoteEntry {
-        return RecentNoteEntry(date: Date(), content: String(), dateString: String())
+        RecentNoteEntry(date: Date(), content: "Pick up milk\nand call Sam back", dateString: "Today", color: "")
     }
-    
+
     func getSnapshot(in context: Context, completion: @escaping (RecentNoteEntry) -> ()) {
-        let entry = RecentNoteEntry(date: Date(), content: GroupDataManager.readData(path: "recentNoteContent"), dateString: GroupDataManager.readData(path: "recentNoteDate"))
-        completion(entry)
+        completion(context.isPreview ? placeholder(in: context) : Self.currentEntry())
     }
-    
+
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [RecentNoteEntry] = []
-        
-        let content = GroupDataManager.readData(path: "recentNoteContent")
-        let dateString = GroupDataManager.readData(path: "recentNoteDate")
-        let entry = RecentNoteEntry(date: Date(), content: content, dateString: dateString)
-        entries.append(entry)
-        
-        let timeline = Timeline(entries: entries, policy: .never)
-        completion(timeline)
+        // The app reloads timelines whenever the newest note changes.
+        completion(Timeline(entries: [Self.currentEntry()], policy: .never))
+    }
+
+    private static func currentEntry() -> RecentNoteEntry {
+        RecentNoteEntry(date: Date(),
+                        content: GroupDataManager.readData(path: "recentNoteContent"),
+                        dateString: GroupDataManager.readData(path: "recentNoteDate"),
+                        color: GroupDataManager.readData(path: "recentNoteColor"))
     }
 }
 
@@ -36,70 +35,74 @@ struct RecentNoteEntry: TimelineEntry {
     let date: Date
     let content: String
     let dateString: String
+    /// Theme name of the note (see `String.getColor()`); empty for the brand navy.
+    let color: String
 }
 
-struct ContentView: View {
-    var widgetColor: Color = Color(GroupDataManager.readData(path: "recentNoteColor").getColor())
-    
-    var textColor = GroupDataManager.readData(path: "recentNoteColor").getColor().isDarkColor ? UIColor.white : UIColor.black
-    
+struct RecentNoteEntryView: View {
+    @Environment(\.widgetFamily) private var widgetFamily
+
     var entry: Provider.Entry
-    
-    var body: some View {
-        widgetColor.overlay(
-            VStack(alignment: .center, spacing: 6) {
-                Text(entry.content).font(.system(size: 15, weight: .bold, design: .default)).multilineTextAlignment(.leading)
-                    .foregroundColor(Color(textColor))
-                Spacer()
-                Text(entry.dateString).font(.system(size: 13, weight: .medium, design: .default)).multilineTextAlignment(.center)
-                    .foregroundColor(Color(textColor))
-            }
-            .padding(.all, 12)
-        )
+
+    private var noteColor: UIColor {
+        entry.color.isEmpty ? UIColor(named: "WidgetBackground") ?? .systemBlue : entry.color.getColor()
     }
-    
-}
 
-struct RecentNoteEntryView : View {
-    @Environment(\.widgetFamily) var widgetFamily
-    
-    var entry: Provider.Entry
-    
-    var deeplinkURL: URL {
+    private var textColor: Color {
+        noteColor.isDarkColor ? .white : .black
+    }
+
+    private var deeplinkURL: URL {
         URL(string: "recentnotewidget-link://widgetFamily/\(widgetFamily)")!
     }
-    
+
     var body: some View {
-        if widgetFamily == .systemSmall {
-            ContentView(entry: entry).widgetURL(deeplinkURL)
-        } else {
-            Link(destination: deeplinkURL) {
-                ContentView(entry: entry)
+        VStack(alignment: .leading, spacing: 6) {
+            if entry.content.isEmpty {
+                Label("Jotify", systemImage: "square.and.pencil")
+                    .font(.headline)
+                    .widgetAccentable()
+                Spacer(minLength: 0)
+                Text("Your latest note will appear here.")
+                    .font(.subheadline)
+                    .opacity(0.8)
+            } else {
+                Text(entry.content)
+                    .font(.headline)
+                    .lineLimit(widgetFamily == .systemSmall ? 5 : 4)
+                    .widgetAccentable()
+                Spacer(minLength: 0)
+                Text(entry.dateString)
+                    .font(.caption)
+                    .opacity(0.75)
             }
         }
+        .foregroundStyle(textColor)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .containerBackground(for: .widget) {
+            Color(noteColor)
+        }
+        .widgetURL(deeplinkURL)
     }
 }
 
 @main
 struct RecentNote: Widget {
     let kind: String = "RecentNote"
-    
+
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             RecentNoteEntryView(entry: entry)
         }
         .configurationDisplayName("Recent Note")
-        .description("Updates dynamically to display your most recent note.")
+        .description("Shows your most recent note.")
+        .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
 
-struct RecentNote_Widget_Previews: PreviewProvider {
-    static var previews: some View {
-        RecentNoteEntryView(entry: RecentNoteEntry(date: Date(), content: "Hello, World! This is a much longer string because I want to know what happens when I put a really long string in here does the text know ", dateString: "January 1, 2000"))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
-            .previewDisplayName("Small widget")
-        RecentNoteEntryView(entry: RecentNoteEntry(date: Date(), content: "Hello, World - this an awkward amount of data but honestly I think it looks really good, nice!", dateString: "January 1, 2000"))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
-            .previewDisplayName("Small widget")
-    }
+#Preview(as: .systemSmall) {
+    RecentNote()
+} timeline: {
+    RecentNoteEntry(date: .now, content: "Pick up milk\nand call Sam back", dateString: "Today", color: "")
+    RecentNoteEntry(date: .now, content: "", dateString: "", color: "")
 }

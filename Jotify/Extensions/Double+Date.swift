@@ -8,13 +8,21 @@
 import Foundation
 
 extension Double {
+    // Cached formatter. `DateFormatter.init` is expensive (ICU + locale
+    // lookup, ~1–3ms each), and this is called once per cell on every scroll
+    // pass — enough to drop frames during overscroll bounces. `DateFormatter`
+    // is thread-safe for reading since iOS 7, so a single shared instance is
+    // fine.
+    private static let longDateFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateStyle = .long
+        f.timeZone = .current
+        return f
+    }()
+
     //change double into formatted date, ex: January 1, 2021
     func getDate() -> String {
-        let updateDate = Date(timeIntervalSinceReferenceDate: self)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.long
-        dateFormatter.timeZone = .current
-        return dateFormatter.string(from: updateDate)
+        return Double.longDateFormatter.string(from: Date(timeIntervalSinceReferenceDate: self))
     }
 }
 

@@ -7,7 +7,6 @@
 
 import WidgetKit
 import UIKit
-import SPPermissions
 
 class SetupController {
     
@@ -15,14 +14,12 @@ class SetupController {
     
     //setup URL for widgets
     private func setupWidget() {
-        GroupDataManager.writeData(path: "recentNoteColor", content: "systemBlue")
-        GroupDataManager.writeData(path: "recentNoteContent", content: "This is a placeholder note until you start writing.")
-        GroupDataManager.writeData(path: "recentNoteDate", content: "July 2, 2002")
+        GroupDataManager.writeData(path: "recentNoteColor", content: "")
+        GroupDataManager.writeData(path: "recentNoteContent", content: "")
+        GroupDataManager.writeData(path: "recentNoteDate", content: "")
         GroupDataManager.writeData(path: "recentNoteID", content: "no id")
         print("Setting up widgets...")
-        if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadAllTimelines()
-        }
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
     //default Userdefaults
@@ -39,19 +36,25 @@ class SetupController {
         UserDefaults.standard.removePersistentDomain(forName: domain)
         UserDefaults.standard.synchronize()
         
+    }
+    
+    /// Fallback values for settings that haven't been fetched yet. Registered
+    /// defaults live only in memory, so this has to run on every launch (it
+    /// used to run only on the first one, which left the write page blank on
+    /// later launches until the account's settings arrived).
+    static func registerDefaults() {
         UserDefaults.standard.register(defaults: [
-            "hasMigrated": false,
             "multilineInputEnabled": false,
             "useHaptics": true,
             "deleteOldNotes": false,
             "useBiometrics": false,
-            "placeholder": "Tap to start typing or swipe left to right for saved notes...",
+            "placeholder": "Start typing, or swipe right for your notes…",
             "defaultView": 0,
             "referrals": 0,
             "referralLink": "",
         ])
     }
-    
+
     //update widget whenever the most recent note changes
     //but do not force refresh the widget if the most recent note has not changed
     public static func updateRecentWidget(note: FBNote) {
@@ -59,12 +62,11 @@ class SetupController {
         GroupDataManager.writeData(path: "recentNoteContent", content: note.content)
         GroupDataManager.writeData(path: "recentNoteColor", content: note.color)
         GroupDataManager.writeData(path: "recentNoteID", content: note.id)
-        if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadAllTimelines()
-        }
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
     public func handleApplicationSetup() {
+        SetupController.registerDefaults()
         let defaults = UserDefaults.standard
         let shortVersionKey = "CFBundleShortVersionString"
         guard let currentVersion = Bundle.main.infoDictionary![shortVersionKey] as? String else {
@@ -74,21 +76,17 @@ class SetupController {
         let previousVersion = defaults.object(forKey: shortVersionKey) as? String
         if previousVersion == currentVersion {
             //same version, no update
-            print("same version")
         } else {
             if previousVersion == "2.0.0" {
                 //new version
-                print("updated from 2.0.0")
                 SetupController.firstLauch = false
             } else if previousVersion != nil {
-                print("new version")
                 //show onboarding
                 SetupController.firstLauch = true
                 setupWidget()
                 setupDefaults()
             } else {
                 // first launch
-                print("first launch")
                 SetupController.firstLauch = true
                 setupWidget()
                 setupDefaults()
